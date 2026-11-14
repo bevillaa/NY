@@ -24,14 +24,21 @@ st.set_page_config(
 
 st.markdown("""
 <style>
-  /* ── Toda la letra de la app en Calibri ── */
+  /* ── Tipografía Calibri universal (con Carlito de Google Fonts para Linux / Streamlit Cloud) ── */
+  @import url('https://fonts.googleapis.com/css2?family=Carlito:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
   html, body, [class*="css"], [class*="st-"], .stMarkdown, .stButton, button, input, select, textarea, div, p, span, h1, h2, h3, h4, h5, h6 {
-    font-family: 'Calibri', 'Candara', 'Segoe UI', Segoe, Optima, Arial, sans-serif !important;
+    font-family: 'Calibri', 'Carlito', 'Segoe UI', Candara, -apple-system, BlinkMacSystemFont, Arial, sans-serif !important;
   }
 
+  /* Fijar fondo y texto para evitar alteraciones de tema oscuro en móviles / Streamlit Cloud */
+  .stApp {
+    background-color: #F8F9FA !important;
+    color: #0F172A !important;
+  }
   html, body, [class*="css"] {
-    background-color: #F8F9FA;
-    color: #1E293B;
+    background-color: #F8F9FA !important;
+    color: #0F172A !important;
   }
   .block-container {
     padding-top: 1.2rem;
@@ -411,7 +418,7 @@ def cargar_config_viaje():
             pass
     return {
         "vuelo_ida": {"aerolinea": "Aer Lingus", "fecha": "26 Dic", "hora": "15:30", "vuelo": "Aer Lingus · EI583, EI107", "aeropuerto": "JFK / Nueva York"},
-        "vuelo_vuelta": {"aerolinea": "Aer Lingus", "fecha": "4 Ene", "hora": "20:45", "vuelo": "Aer Lingus", "aeropuerto": "JFK / Nueva York"},
+        "vuelo_vuelta": {"aerolinea": "Aer Lingus", "fecha": "4 Ene", "hora": "20:45", "vuelo": "Aer Lingus · EI104, EI582", "aeropuerto": "JFK / Nueva York"},
         "hotel": {
             "nombre": "Courtyard by Marriott New York Manhattan Upper East Side",
             "direccion": "410 E 92nd St, New York, NY 10128",
@@ -517,6 +524,194 @@ def extraer_lugares_lista_gmaps(url_lista: str, nombre_lista: str = ""):
 
 
 # =============================================================================
+# 6B. HERRAMIENTAS PARA AÑADIR LUGARES (GOOGLE MAPS O INTRODUCCIÓN A MANO)
+# =============================================================================
+def geocodificar_direccion_o_nombre(texto: str) -> tuple:
+    """Geocodifica un nombre o dirección en Nueva York mediante Nominatim."""
+    if not texto:
+        return None, None, ""
+    q = f"{texto}, New York, NY".strip()
+    url = f"https://nominatim.openstreetmap.org/search?q={urllib.parse.quote(q)}&format=json&limit=1"
+    req = urllib.request.Request(url, headers={'User-Agent': 'ny_holiday_planner_app_v2'})
+    try:
+        with urllib.request.urlopen(req, timeout=5) as r:
+            res = json.loads(r.read().decode('utf-8'))
+            if res and len(res) > 0:
+                lat = float(res[0]['lat'])
+                lon = float(res[0]['lon'])
+                nombre_comp = res[0].get('display_name', '')
+                return lat, lon, nombre_comp
+    except Exception:
+        pass
+    return None, None, ""
+
+def agregar_sitio_a_lugares(nombre: str, direccion: str = "", lat: float = None, lon: float = None,
+                            categoria: str = None, tipo: str = None, dia_dest: int = 0) -> tuple:
+    """Añade un lugar manual o geocodificado al itinerario y lo persiste."""
+    nom = (nombre or "").strip()
+    if not nom:
+        return False, "El nombre del lugar no puede estar vacío."
+
+    # Si no se aportaron coordenadas válidas, geocodificar automáticamente en NYC
+    if lat is None or lon is None or (lat == 0 and lon == 0):
+        geo_lat, geo_lon, geo_dir = geocodificar_direccion_o_nombre(f"{nom} {direccion}")
+        lat = geo_lat if geo_lat is not None else 40.7580
+        lon = geo_lon if geo_lon is not None else -73.9855
+        if not direccion and geo_dir:
+            direccion = geo_dir
+
+    if not categoria or categoria == "⚡ Detección Automática":
+        cat_auto, tipo_auto = clasificar_lugar(nom, direccion)
+        categoria = cat_auto
+        if not tipo:
+            tipo = tipo_auto
+
+    if not tipo:
+        tipo = "Interior"
+
+    max_id = max([x.get("id", 0) for x in st.session_state.lugares], default=0) + 1
+    nuevo = {
+        "id": max_id,
+        "nombre": nom,
+        "lat": float(lat),
+        "lon": float(lon),
+        "dia": dia_dest,
+        "direccion": direccion,
+        "categoria": categoria,
+        "tipo": tipo,
+        "visitado": False
+    }
+    st.session_state.lugares.append(nuevo)
+    guardar_itinerario_disco(st.session_state.lugares)
+    return True, f"¡'{nom}' añadido con éxito como {categoria}!"
+
+def importar_sitio_desde_gmaps(url_o_texto: str, dia_dest: int = 0) -> tuple:
+    """Extrae y añade sitios desde cualquier enlace de Google Maps (lugar individual o lista compartida)."""
+    raw = url_o_texto.strip()
+    if not raw:
+        return False, "Introduce un enlace de Google Maps válido."
+
+    # Caso 1: Enlace a lista compartida de Google Maps
+    if "maps" in raw and ("entitylist" in raw or "data=" in raw or "u3WSz" in raw or "gHBnh" in raw):
+        lugares_lst = extraer_lugares_lista_gmaps(raw, "Google Maps")
+        if lugares_lst:
+            existentes = set(x.get("nombre", "").lower() for x in st.session_state.lugares)
+            nuevos = 0
+            max_id = max([x.get("id", 0) for x in st.session_state.lugares], default=0)
+            for s in lugares_lst:
+                if s["nombre"].lower() not in existentes:
+                    max_id += 1
+                    s["id"] = max_id
+                    s["dia"] = dia_dest
+                    s["visitado"] = False
+                    st.session_state.lugares.append(s)
+                    nuevos += 1
+            if nuevos > 0:
+                guardar_itinerario_disco(st.session_state.lugares)
+                return True, f"¡Se importaron {nuevos} lugares desde la lista de Google Maps!"
+
+    # Caso 2: Enlace a lugar individual de Google Maps
+    nombre_extraido = ""
+    lat_ext, lon_ext = None, None
+    dir_ext = ""
+
+    if raw.startswith("http://") or raw.startswith("https://"):
+        headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/120.0.0.0 Safari/537.36'}
+        try:
+            req = urllib.request.Request(raw, headers=headers)
+            with urllib.request.urlopen(req, timeout=6) as r:
+                url_final = r.geturl()
+                html = r.read().decode('utf-8', errors='ignore')
+
+                m_coords = re.search(r'@(-?\d+\.\d+),(-?\d+\.\d+)', url_final)
+                if m_coords:
+                    lat_ext = float(m_coords.group(1))
+                    lon_ext = float(m_coords.group(2))
+
+                m_nom = re.search(r'/place/([^/@?]+)', url_final)
+                if m_nom:
+                    nombre_extraido = urllib.parse.unquote_plus(m_nom.group(1)).replace("+", " ")
+                elif "<title>" in html:
+                    m_tit = re.search(r'<title>([^<]+)</title>', html)
+                    if m_tit:
+                        nombre_extraido = m_tit.group(1).replace("- Google Maps", "").replace("· Google Maps", "").strip()
+        except Exception:
+            pass
+
+    if not nombre_extraido:
+        nombre_extraido = raw.split("/")[-1].replace("+", " ")
+        if len(nombre_extraido) < 3 or nombre_extraido.startswith("http"):
+            nombre_extraido = "Lugar Google Maps"
+
+    return agregar_sitio_a_lugares(nombre_extraido, dir_ext, lat_ext, lon_ext, None, None, dia_dest)
+
+def render_formulario_agregar_lugar(key_sufijo: str = "gen"):
+    """Renderiza el módulo para añadir sitios desde Google Maps o a mano."""
+    with st.expander("➕ Añadir Nuevo Lugar (desde Google Maps o a Mano)", expanded=False):
+        tab_gm, tab_man = st.tabs(["🌐 Enlace de Google Maps", "✏️ Introducir a Mano"])
+
+        with tab_gm:
+            st.caption("Pega el enlace de Google Maps de un sitio o lista para importarlo al viaje:")
+            with st.form(f"form_add_gm_{key_sufijo}"):
+                url_input = st.text_input("Enlace de Google Maps (maps.app.goo.gl/... o google.com/maps/place/...):", placeholder="https://maps.app.goo.gl/...", key=f"inp_gm_{key_sufijo}")
+                dias_asig_opts = ["📌 Bandeja de Guardados"] + [f"Día {d} ({DIAS_VIAJE[d]['fecha']})" for d in range(1, 11)]
+                dia_dest_gm = st.selectbox("Asignar a:", dias_asig_opts, key=f"sel_dia_gm_{key_sufijo}")
+                val_dia_gm = 0 if "Bandeja" in dia_dest_gm else int(re.search(r'Día (\d+)', dia_dest_gm).group(1))
+
+                if st.form_submit_button("📥 Importar desde Google Maps", use_container_width=True):
+                    if url_input:
+                        with st.spinner("Analizando y geolocalizando sitio en Nueva York..."):
+                            ok, msg = importar_sitio_desde_gmaps(url_input, val_dia_gm)
+                            if ok:
+                                st.toast(msg, icon="📍")
+                                st.rerun()
+                            else:
+                                st.error(msg)
+                    else:
+                        st.warning("Por favor introduce una URL de Google Maps.")
+
+        with tab_man:
+            st.caption("Escribe el nombre del lugar. Si dejas las coordenadas vacías, se buscarán automáticamente:")
+            with st.form(f"form_add_man_{key_sufijo}"):
+                c_m1, c_m2 = st.columns(2)
+                with c_m1:
+                    nom_m = st.text_input("Nombre del lugar:", placeholder="Ej: Levain Bakery, Joe's Pizza, Dante...", key=f"nom_m_{key_sufijo}")
+                    dir_m = st.text_input("Dirección o Barrio (opcional):", placeholder="Ej: Upper West Side, West Village...", key=f"dir_m_{key_sufijo}")
+                with c_m2:
+                    cat_m = st.selectbox("Categoría:", ["⚡ Detección Automática"] + CATEGORIAS_CANONICAS, key=f"cat_m_{key_sufijo}")
+                    tipo_m = st.selectbox("Tipo:", ["Interior (🌧️ A cubierto)", "Exterior (☀️ Al aire libre)"], key=f"tipo_m_{key_sufijo}")
+
+                c_m3, c_m4 = st.columns(2)
+                with c_m3:
+                    dia_dest_m = st.selectbox("Asignar a:", dias_asig_opts, key=f"sel_dia_m_{key_sufijo}")
+                    val_dia_m = 0 if "Bandeja" in dia_dest_m else int(re.search(r'Día (\d+)', dia_dest_m).group(1))
+                with c_m4:
+                    coords_man_chk = st.checkbox("Introducir latitud / longitud manuales", key=f"chk_coords_{key_sufijo}")
+
+                lat_man, lon_man = None, None
+                if coords_man_chk:
+                    c_lt, c_ln = st.columns(2)
+                    with c_lt:
+                        lat_man = st.number_input("Latitud:", value=40.7802, format="%.6f", key=f"lat_m_{key_sufijo}")
+                    with c_ln:
+                        lon_man = st.number_input("Longitud:", value=-73.9461, format="%.6f", key=f"lon_m_{key_sufijo}")
+
+                if st.form_submit_button("💾 Guardar Lugar en el Viaje", use_container_width=True):
+                    if nom_m:
+                        with st.spinner("Guardando y geolocalizando..."):
+                            t_val = "Interior" if "Interior" in tipo_m else "Exterior"
+                            c_val = None if cat_m == "⚡ Detección Automática" else cat_m
+                            ok, msg = agregar_sitio_a_lugares(nom_m, dir_m, lat_man, lon_man, c_val, t_val, val_dia_m)
+                            if ok:
+                                st.toast(msg, icon="✨")
+                                st.rerun()
+                            else:
+                                st.error(msg)
+                    else:
+                        st.warning("Introduce al menos el nombre del lugar.")
+
+
+# =============================================================================
 # 7. INICIALIZACIÓN DE ESTADO
 # =============================================================================
 if "config_viaje" not in st.session_state:
@@ -550,7 +745,7 @@ st.markdown(f"""
       <div class="hero-title">Navidad en Nueva York 🗽✨</div>
       <div style="margin-top: 8px;">
         <span class="hero-pill">✈️ {v_ida.get('vuelo','Aer Lingus · EI583, EI107')} · {v_ida.get('fecha','26 Dic')}</span>
-        <span class="hero-pill">🛫 {v_vta.get('vuelo','Aer Lingus')} · {v_vta.get('fecha','4 Ene')}</span>
+        <span class="hero-pill">🛫 {v_vta.get('vuelo','Aer Lingus · EI104, EI582')} · {v_vta.get('fecha','4 Ene')}</span>
         <span class="hero-pill">🏨 {hotel.get('nombre','Courtyard by Marriott Upper East Side')}</span>
       </div>
     </div>
@@ -590,6 +785,8 @@ pestanas = st.tabs([
 # TAB 1: MAPA GOOGLE CON PINES CIRCULARES Y APERTURA DE FICHA REAL
 # ─────────────────────────────────────────────────────────────────────────────
 with pestanas[0]:
+    render_formulario_agregar_lugar("mapa")
+    st.markdown("<div style='height: 4px;'></div>", unsafe_allow_html=True)
     c_m1, c_m2, c_m3 = st.columns([3, 2, 2])
     with c_m1:
         opciones_vista = [
@@ -875,6 +1072,8 @@ with pestanas[1]:
 # TAB 3: BANDEJA DE GUARDADOS (WISHLIST)
 # ─────────────────────────────────────────────────────────────────────────────
 with pestanas[2]:
+    render_formulario_agregar_lugar("guardados")
+    st.markdown("<div style='height: 4px;'></div>", unsafe_allow_html=True)
     st.markdown('<div class="ny-card-header">Lugares Pendientes de Asignar a un Día</div>', unsafe_allow_html=True)
 
     pool_guardados = [l for l in st.session_state.lugares if l.get("dia", 0) == 0]
@@ -1148,7 +1347,7 @@ with pestanas[5]:
             ida_h = st.text_input("Hora Ida:", value=v_ida.get("hora", "15:30"))
             ida_a = st.text_input("Aeropuerto:", value=v_ida.get("aeropuerto", "JFK / Nueva York"))
             st.markdown("---")
-            vta_v = st.text_input("Vuelo Regreso:", value=v_vta.get("vuelo", "Aer Lingus"))
+            vta_v = st.text_input("Vuelo Regreso:", value=v_vta.get("vuelo", "Aer Lingus · EI104, EI582"))
             vta_f = st.text_input("Fecha Regreso:", value=v_vta.get("fecha", "4 Ene"))
             vta_h = st.text_input("Hora Regreso:", value=v_vta.get("hora", "20:45"))
             vta_a = st.text_input("Aeropuerto Regreso:", value=v_vta.get("aeropuerto", "JFK / Nueva York"))
