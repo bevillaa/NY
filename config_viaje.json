@@ -1,0 +1,52 @@
+{
+  "vuelo_ida": {
+    "aerolinea": "Aer Lingus",
+    "vuelo": "Aer Lingus · EI583, EI107",
+    "fecha": "26 Dic",
+    "hora": "15:30",
+    "aeropuerto": "JFK / Nueva York"
+  },
+  "vuelo_vuelta": {
+    "aerolinea": "Aer Lingus",
+    "vuelo": "Aer Lingus",
+    "fecha": "4 Ene",
+    "hora": "20:45",
+    "aeropuerto": "JFK / Nueva York"
+  },
+  "hotel": {
+    "nombre": "Courtyard by Marriott New York Manhattan Upper East Side",
+    "direccion": "410 E 92nd St, New York, NY 10128",
+    "lat": 40.780242,
+    "lon": -73.946123
+  },
+  "listas_gmaps": [
+    {
+      "nombre": "Tiendas & Outlets",
+      "url": "https://maps.app.goo.gl/u3WSzDMVLtHC8CQS8"
+    },
+    {
+      "nombre": "NY Sweets",
+      "url": "https://maps.app.goo.gl/gHBnh1QyyFcJbgcL7"
+    },
+    {
+      "nombre": "Food",
+      "url": "https://maps.app.goo.gl/KxDBF1BYa78x3Jv87"
+    },
+    {
+      "nombre": "Rooftop",
+      "url": "https://maps.app.goo.gl/B1aX8hdjK88i4K6N7"
+    },
+    {
+      "nombre": "Spots",
+      "url": "https://maps.app.goo.gl/wt5cEefiApFvk9ao6"
+    },
+    {
+      "nombre": "NY",
+      "url": "https://maps.app.goo.gl/ZZAp17jsgkcfywEF6"
+    },
+    {
+      "nombre": "Life Out",
+      "url": "https://maps.app.goo.gl/MiKrEc3gj9GoTXJCA"
+    }
+  ]
+}
