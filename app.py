@@ -3231,71 +3231,135 @@ def sincronizar_lugares_desde_disco():
 # 6. SINCRONIZADOR DE LISTAS DE GOOGLE MAPS
 # =============================================================================
 def extraer_lugares_lista_gmaps(url_lista: str, nombre_lista: str = ""):
+    import http.cookiejar
+
     lugares_encontrados = []
-    headers = {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36',
-        'Accept-Language': 'es-ES,es;q=0.9,en;q=0.8'
-    }
-    
+    url_limpia = (url_lista or "").strip()
+    if not url_limpia:
+        return lugares_encontrados
+
+    # Configurar gestor de cookies con consentimiento aceptado para evitar redirección a consent.google.com
+    cj = http.cookiejar.CookieJar()
+    opener = urllib.request.build_opener(urllib.request.HTTPCookieProcessor(cj))
+    opener.addheaders = [
+        ('User-Agent', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36'),
+        ('Accept', 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'),
+        ('Accept-Language', 'es-ES,es;q=0.9,en;q=0.8'),
+        ('Cookie', 'CONSENT=YES+cb.20230531-07-p0.es+FX+999; SOCS=CAESHAgBEhJnd3NfMjAyMzA4MTAtMF9SQzIaAmVzIAEaBgiA_LyaBg')
+    ]
+
     try:
-        url_actual = url_lista.strip()
-        
-        # Resolver enlaces cortos de Google Maps (maps.app.goo.gl)
-        if "app.goo.gl" in url_actual or "goo.gl" in url_actual:
-            req_redir = urllib.request.Request(url_actual, headers=headers)
-            try:
-                with urllib.request.urlopen(req_redir, timeout=8) as resp_redir:
-                    url_actual = resp_redir.geturl()
-            except Exception:
-                pass
-
-        # Si el enlace contiene un lugar específico (/place/NOMBRE)
-        m_place = re.search(r'/place/([^/@?]+)', url_actual)
-        if m_place:
-            nombre_lugar = urllib.parse.unquote_plus(m_place.group(1)).replace("+", " ").strip()
-            if nombre_lugar:
-                lat_g, lon_g, dir_g = geocodificar_direccion_o_nombre(f"{nombre_lugar}, New York")
-                cat, tipo = clasificar_lugar(nombre_lugar, dir_g, nombre_lista)
-                lugares_encontrados.append({
-                    "nombre": nombre_lugar,
-                    "lat": lat_g if lat_g else 40.7580,
-                    "lon": lon_g if lon_g else -73.9855,
-                    "direccion": dir_g if dir_g else "Nueva York",
-                    "nota": f"Importado de: {nombre_lista}",
-                    "categoria": cat,
-                    "tipo": tipo,
-                    "hora": ""
-                })
-                return lugares_encontrados
-
-        # Petición general a la URL de Google Maps
-        req = urllib.request.Request(url_actual, headers=headers)
-        with urllib.request.urlopen(req, timeout=10) as r:
+        # 1. Abrir la URL (resuelve automáticamente maps.app.goo.gl -> google.com/maps/placelists/...)
+        with opener.open(url_limpia, timeout=15) as r:
+            url_final = r.geturl()
             html_content = r.read().decode('utf-8', errors='ignore')
-            
-        # Extracción por metadatos OpenGraph (título y descripción de la lista/lugar)
-        m_tit = re.search(r'<meta property="og:title" content="([^"]+)"', html_content)
-        titulo = m_tit.group(1).replace("- Google Maps", "").strip() if m_tit else "Lugar de Google Maps"
-        
-        if titulo and "Google Maps" not in titulo:
-            lat_g, lon_g, dir_g = geocodificar_direccion_o_nombre(f"{titulo}, New York")
-            cat, tipo = clasificar_lugar(titulo, dir_g, nombre_lista)
-            lugares_encontrados.append({
-                "nombre": titulo,
-                "lat": lat_g if lat_g else 40.7580,
-                "lon": lon_g if lon_g else -73.9855,
-                "direccion": dir_g if dir_g else "Nueva York",
-                "nota": f"Importado de lista: {nombre_lista}",
-                "categoria": cat,
-                "tipo": tipo,
-                "hora": ""
-            })
+
+        # 2. Localizar el endpoint interno entitylist/getlist tanto en etiquetas HTML como en bloques JS escapados
+        patrones_endpoint = [
+            r'href="(/maps/preview/entitylist/getlist\?[^"]+)"',
+            r'((?:https://www\.google\.com)?/maps/preview/entitylist/getlist\?[^"\'\\<>]+)',
+            r'(\\/maps\\/preview\\/entitylist\\/getlist\?[^"\'<>]+)'
+        ]
+
+        entity_path = None
+        for pat in patrones_endpoint:
+            m = re.search(pat, html_content)
+            if m:
+                entity_path = m.group(1)
+                break
+
+        if not entity_path:
+            # Si es un enlace de un único sitio (/place/...) en lugar de una lista completa
+            m_place = re.search(r'/place/([^/@?]+)', url_final)
+            if m_place:
+                nom_lugar = urllib.parse.unquote_plus(m_place.group(1)).replace("+", " ").strip()
+                m_coords = re.search(r'@(-?\d+\.\d+),(-?\d+\.\d+)', url_final)
+                if nom_lugar:
+                    lat_p = float(m_coords.group(1)) if m_coords else None
+                    lon_p = float(m_coords.group(2)) if m_coords else None
+                    if lat_p is None or lon_p is None:
+                        lat_p, lon_p, dir_p = geocodificar_direccion_o_nombre(f"{nom_lugar}, New York")
+                    else:
+                        dir_p = ""
+                    cat, tipo = clasificar_lugar(nom_lugar, dir_p, nombre_lista)
+                    lugares_encontrados.append({
+                        "nombre": nom_lugar,
+                        "lat": lat_p if lat_p is not None else 40.7580,
+                        "lon": lon_p if lon_p is not None else -73.9855,
+                        "direccion": dir_p,
+                        "nota": "",
+                        "categoria": cat,
+                        "tipo": tipo,
+                        "hora": ""
+                    })
+            return lugares_encontrados
+
+        # 3. Desescapar correctamente &, \u0026 y barras invertidas para evitar HTTP 400
+        entity_path = (
+            html.unescape(entity_path)
+            .replace("\\u0026", "&")
+            .replace("\\u003d", "=")
+            .replace("\\/", "/")
+        )
+
+        if entity_path.startswith("http"):
+            entity_url = entity_path
+        else:
+            entity_url = "https://www.google.com" + (entity_path if entity_path.startswith("/") else "/" + entity_path)
+
+        # 4. Descargar el JSON real de la lista de Google Maps
+        with opener.open(entity_url, timeout=15) as r2:
+            raw = r2.read().decode("utf-8", errors="ignore")
+
+        # Limpiar prefijo de seguridad de Google )]}'
+        raw_limpio = re.sub(r"^\)\]\}'\s*", "", raw)
+        data = json.loads(raw_limpio)
+
+        # 5. Recorrer el árbol JSON extrayendo cada lugar guardado, sus coordenadas, dirección y nota
+        def _buscar_entidades(nodo):
+            if isinstance(nodo, list):
+                coords = None
+                for el in nodo:
+                    if (isinstance(el, list) and len(el) >= 4 and el[0] is None and el[1] is None
+                            and isinstance(el[2], (int, float)) and isinstance(el[3], (int, float))):
+                        coords = (float(el[2]), float(el[3]))
+                        break
+                if coords:
+                    strs = [
+                        s.strip() for s in nodo
+                        if isinstance(s, str) and len(s.strip()) > 1
+                        and not s.startswith(("http", "ChIJ", "/g/", "/m/", "0x"))
+                    ]
+                    if strs:
+                        # Google suele poner el nombre en strs[0] o junto con la dirección
+                        nombre_raw = strs[0]
+                        partes = nombre_raw.split(",")
+                        nom_spot = partes[0].strip()
+                        dir_spot = ", ".join(partes[1:]).strip() if len(partes) > 1 else (strs[1] if len(strs) > 1 else "")
+                        cat, tipo = clasificar_lugar(nom_spot, dir_spot, nombre_lista)
+                        lugares_encontrados.append({
+                            "nombre": nom_spot,
+                            "lat": coords[0],
+                            "lon": coords[1],
+                            "direccion": dir_spot,
+                            "nota": "",
+                            "categoria": cat,
+                            "tipo": tipo,
+                            "hora": ""
+                        })
+                    return
+                for hijo in nodo:
+                    _buscar_entidades(hijo)
+            elif isinstance(nodo, dict):
+                for v in nodo.values():
+                    _buscar_entidades(v)
+
+        _buscar_entidades(data)
 
     except Exception as e:
-        st.warning(f"Aviso: No se pudo conectar automáticamente con el enlace.")
-        
-    return lugares_encontrados
+        st.warning(f"Aviso de sincronización ({nombre_lista}): {e}")
 
+    return lugares_encontrados
 # =============================================================================
 # 6B. HERRAMIENTAS PARA AÑADIR Y EDITAR LUGARES
 # =============================================================================
