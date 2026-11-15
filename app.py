@@ -2955,6 +2955,33 @@ st.markdown("""
     }
   }
 
+
+    /* Ajuste intermedio de los cuatro controles de Itinerario y Guardados.
+       Un poco mas altos que la version compacta, sin volver al tamaño grande. */
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(-n+4) [data-testid="stButton"] > button,
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(-n+4) [data-testid="stButton"] > button,
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(-n+4) [data-testid="stLinkButton"] > a,
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(-n+4) [data-testid="stLinkButton"] > a,
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(-n+4) [data-baseweb="input"],
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(-n+4) [data-baseweb="input"],
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(-n+4) [data-baseweb="select"],
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(-n+4) [data-baseweb="select"] {
+      min-height: 40px !important;
+      height: 40px !important;
+      box-sizing: border-box !important;
+    }
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(-n+4) [data-testid="stButton"] > button,
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(-n+4) [data-testid="stButton"] > button,
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(-n+4) [data-testid="stLinkButton"] > a,
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(-n+4) [data-testid="stLinkButton"] > a {
+      max-height: 40px !important;
+      padding-top: 2px !important;
+      padding-bottom: 2px !important;
+    }
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(1) [data-testid="stButton"] > button,
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(1) [data-testid="stButton"] > button {
+      background-size: 23px 23px !important;
+    }
 </style>
 """, unsafe_allow_html=True)
 
