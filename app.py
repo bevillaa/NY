@@ -579,7 +579,7 @@ def obtener_tasa_usd_eur():
     try:
         url = "https://open.er-api.com/v6/latest/USD"
         req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
-        with urllib.request.urlopen(req, timeout=3) as resp:
+        with urllib.request.urlopen(req, timeout=5) as resp:
             data = json.loads(resp.read().decode('utf-8'))
             tasa = float(data.get("rates", {}).get("EUR", 0.91))
             fecha_upd = data.get("time_last_update_utc", "Hoy")[:16]
@@ -598,7 +598,7 @@ def consultar_clima_nyc():
             "timezone=America%2FNew_York"
         )
         req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
-        with urllib.request.urlopen(req, timeout=3) as resp:
+        with urllib.request.urlopen(req, timeout=5) as resp:
             return json.loads(resp.read().decode('utf-8'))
     except Exception:
         return None
@@ -624,7 +624,6 @@ def traducir_codigo_clima(code: int) -> tuple[str, str]:
 # =============================================================================
 # 5. CARGA Y GESTIÓN DE DATOS DEL VIAJE
 # =============================================================================
-@st.cache_data
 def cargar_config_viaje():
     if os.path.exists(ARCH_CONFIG):
         try:
@@ -658,7 +657,7 @@ def _guardar_json_atomico(ruta: str, datos):
             os.fsync(f.fileno())
         os.replace(temporal, ruta)
         return True
-    except Exception:
+    except Exception as exc:
         try:
             if temporal and os.path.exists(temporal):
                 os.remove(temporal)
@@ -668,7 +667,6 @@ def _guardar_json_atomico(ruta: str, datos):
 
 
 def guardar_config_viaje(cfg):
-    cargar_config_viaje.clear()
     return _guardar_json_atomico(ARCH_CONFIG, cfg)
 
 def cargar_itinerario_disco():
@@ -726,12 +724,37 @@ def sincronizar_lugares_desde_disco():
     if _huella_datos(anteriores) == _huella_datos(nuevos):
         return False
 
+    antes_por_id = {str(x.get("id")): x for x in anteriores if isinstance(x, dict) and x.get("id") is not None}
+    nuevos_por_id = {str(x.get("id")): x for x in nuevos if isinstance(x, dict) and x.get("id") is not None}
+    ids_cambiados = set(antes_por_id) | set(nuevos_por_id)
+    ids_cambiados = {
+        pid for pid in ids_cambiados
+        if _huella_datos(antes_por_id.get(pid)) != _huella_datos(nuevos_por_id.get(pid))
+    }
+
+    prefijos_widget_lugar = (
+        "mvd_it_", "asig_dia_pool_", "hora_it_", "hora_pool_",
+        "sel_d_sheet_", "hora_sheet_", "chk_it_"
+    )
+    for clave in list(st.session_state.keys()):
+        nombre_clave = str(clave)
+        if nombre_clave.startswith(prefijos_widget_lugar) and any(
+            nombre_clave.endswith(f"_{pid}") for pid in ids_cambiados
+        ):
+            try:
+                del st.session_state[clave]
+            except Exception:
+                pass
+
     st.session_state.lugares = nuevos
+    ids_actuales = {x.get("id") for x in nuevos if isinstance(x, dict)}
+    if st.session_state.get("lugar_activo_id") not in ids_actuales:
+        st.session_state.lugar_activo_id = None
     return True
 
 
 # =============================================================================
-# 6. SINCRONIZADOR DE LISTAS Y GEOCODIFICACIÓN (CACHEADOS)
+# 6. SINCRONIZADOR DE LISTAS DE GOOGLE MAPS & GEOCODIFICACIÓN (CACHEADOS)
 # =============================================================================
 @st.cache_data(ttl=86400)
 def geocodificar_direccion_o_nombre(texto: str) -> tuple:
@@ -741,7 +764,7 @@ def geocodificar_direccion_o_nombre(texto: str) -> tuple:
     url = f"https://nominatim.openstreetmap.org/search?q={urllib.parse.quote(q)}&format=json&limit=1"
     req = urllib.request.Request(url, headers={'User-Agent': 'ny_holiday_planner_app_v5'})
     try:
-        with urllib.request.urlopen(req, timeout=3) as r:
+        with urllib.request.urlopen(req, timeout=5) as r:
             res = json.loads(r.read().decode('utf-8'))
             if res and len(res) > 0:
                 lat = float(res[0]['lat'])
@@ -771,7 +794,7 @@ def extraer_lugares_lista_gmaps(url_lista: str, nombre_lista: str = ""):
     ]
 
     try:
-        with opener.open(url_limpia, timeout=5) as r:
+        with opener.open(url_limpia, timeout=15) as r:
             url_final = r.geturl()
             html_content = r.read().decode('utf-8', errors='ignore')
 
@@ -825,7 +848,7 @@ def extraer_lugares_lista_gmaps(url_lista: str, nombre_lista: str = ""):
         else:
             entity_url = "https://www.google.com" + (entity_path if entity_path.startswith("/") else "/" + entity_path)
 
-        with opener.open(entity_url, timeout=5) as r2:
+        with opener.open(entity_url, timeout=15) as r2:
             raw = r2.read().decode("utf-8", errors="ignore")
 
         raw_limpio = re.sub(r"^\)\]\}'\s*", "", raw)
@@ -870,15 +893,11 @@ def extraer_lugares_lista_gmaps(url_lista: str, nombre_lista: str = ""):
 
         _buscar_entidades(data)
 
-    except Exception:
-        pass
+    except Exception as e:
+        st.warning(f"Aviso de sincronización ({nombre_lista}): {e}")
 
     return lugares_encontrados
 
-
-# =============================================================================
-# 6B. HERRAMIENTAS PARA AÑADIR Y EDITAR LUGARES
-# =============================================================================
 def agregar_sitio_a_lugares(nombre: str, direccion: str = "", lat: float = None, lon: float = None,
                             categoria: str = None, tipo: str = None, dia_dest: int = 0, hora: str = "", nota: str = "") -> tuple:
     nom = (nombre or "").strip()
@@ -949,10 +968,10 @@ def importar_sitio_desde_gmaps(url_o_texto: str, dia_dest: int = 0, hora: str = 
     dir_ext = ""
 
     if raw.startswith("http://") or raw.startswith("https://"):
-        headers = {'User-Agent': 'Mozilla/5.0'}
+        headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/120.0.0.0 Safari/537.36'}
         try:
             req = urllib.request.Request(raw, headers=headers)
-            with urllib.request.urlopen(req, timeout=3) as r:
+            with urllib.request.urlopen(req, timeout=6) as r:
                 url_final = r.geturl()
                 html = r.read().decode('utf-8', errors='ignore')
 
@@ -964,11 +983,17 @@ def importar_sitio_desde_gmaps(url_o_texto: str, dia_dest: int = 0, hora: str = 
                 m_nom = re.search(r"/place/([^/@?]+)", url_final)
                 if m_nom:
                     nombre_extraido = urllib.parse.unquote_plus(m_nom.group(1)).replace("+", " ")
+                elif "<title>" in html:
+                    m_tit = re.search(r"<title>([^<]+)</title>", html)
+                    if m_tit:
+                        nombre_extraido = m_tit.group(1).replace("- Google Maps", "").replace("· Google Maps", "").strip()
         except Exception:
             pass
 
     if not nombre_extraido:
         nombre_extraido = raw.split("/")[-1].replace("+", " ")
+        if len(nombre_extraido) < 3 or nombre_extraido.startswith("http"):
+            nombre_extraido = "Lugar Google Maps"
 
     return agregar_sitio_a_lugares(nombre_extraido, dir_ext, lat_ext, lon_ext, None, None, dia_dest, hora, nota)
 
@@ -989,12 +1014,12 @@ def render_editor_sitio_panel(spot: dict, idx_real: int, key_ctx: str):
                 ed_nom = st.text_input("Nombre del lugar:", value=spot.get("nombre", ""))
                 ed_dir = st.text_input("Dirección / Barrio:", value=spot.get("direccion", ""))
                 ed_nota = st.text_input(
-                    "Nota manual:",
+                    "Nota manual (aparece debajo de la dirección):",
                     value=spot.get("nota", ""),
-                    placeholder="Ej: Pedir galleta..."
+                    placeholder="Ej: Pedir galleta de chocolate, ir antes de las 18h..."
                 )
             with ce2:
-                ed_hora = st.text_input("Hora (HH:MM):", value=spot.get("hora", ""), placeholder="HH:MM")
+                ed_hora = st.text_input("Hora (HH:MM, ej. 10:30):", value=spot.get("hora", ""), placeholder="HH:MM")
                 cat_act = normalizar_categoria(spot.get("categoria", "📍 Otros"))
                 idx_c = CATEGORIAS_CANONICAS.index(cat_act) if cat_act in CATEGORIAS_CANONICAS else 0
                 ed_cat = selectbox_sin_teclado("Categoría:", CATEGORIAS_CANONICAS, index=idx_c)
@@ -1023,7 +1048,7 @@ def render_editor_sitio_panel(spot: dict, idx_real: int, key_ctx: str):
             if guardar_ed:
                 hora_limpia = ed_hora.strip()
                 if hora_limpia and not re.match(r"^([01]?\d|2[0-3]):[0-5]\d$", hora_limpia):
-                    st.error("Formato de hora inválido. Usa HH:MM.")
+                    st.error("Formato de hora inválido. Usa HH:MM (ej. 09:30) o déjalo vacío.")
                 else:
                     if hora_limpia and len(hora_limpia) == 4:
                         hora_limpia = "0" + hora_limpia
@@ -1041,14 +1066,17 @@ def render_editor_sitio_panel(spot: dict, idx_real: int, key_ctx: str):
                     })
                     guardar_itinerario_disco(st.session_state.lugares)
                     st.session_state.editando_spot_key = None
+                    st.toast(f"¡'{ed_nom}' actualizado!", icon="✅")
                     st.rerun()
 
             if eliminar_ed:
+                nom_borrado = spot["nombre"]
                 st.session_state.lugares.pop(idx_real)
                 if st.session_state.lugar_activo_id == spot["id"]:
                     st.session_state.lugar_activo_id = None
                 st.session_state.editando_spot_key = None
                 guardar_itinerario_disco(st.session_state.lugares)
+                st.toast(f"Sitio '{nom_borrado}' eliminado.", icon="🗑️")
                 st.rerun()
 
             if cerrar_ed:
@@ -1061,6 +1089,7 @@ def render_formulario_agregar_lugar(key_sufijo: str = "gen"):
         dias_asig_opts = ["📌 Bandeja de Guardados"] + [etiqueta_dia(d) for d in range(1, 11)]
 
         with tab_gm:
+            st.caption("Pega el enlace de Google Maps de un sitio o lista:")
             with st.form(f"form_add_gm_{key_sufijo}"):
                 url_input = st.text_input("Enlace de Google Maps:", placeholder="https://maps.app.goo.gl/...", key=f"inp_gm_{key_sufijo}")
                 cg1, cg2 = st.columns(2)
@@ -1068,33 +1097,76 @@ def render_formulario_agregar_lugar(key_sufijo: str = "gen"):
                     dia_dest_gm = selectbox_sin_teclado("Asignar a:", dias_asig_opts, key=f"sel_dia_gm_{key_sufijo}")
                 with cg2:
                     hora_gm = st.text_input("Hora (opcional, HH:MM):", placeholder="11:00", key=f"hora_gm_{key_sufijo}")
-                nota_gm = st.text_input("Nota manual (opcional):", key=f"nota_gm_{key_sufijo}")
+                nota_gm = st.text_input("Nota manual (opcional):", placeholder="Ej: Reserva a las 20:00, probar pastrami...", key=f"nota_gm_{key_sufijo}")
 
                 val_dia_gm = 0 if "Bandeja" in dia_dest_gm else int(re.search(r"Día (\d+)", dia_dest_gm).group(1))
 
                 if st.form_submit_button("📥 Importar", use_container_width=True):
                     if url_input:
-                        ok, msg = importar_sitio_desde_gmaps(url_input, val_dia_gm, hora_gm.strip(), nota_gm)
-                        if ok:
-                            st.rerun()
+                        h_limpia = hora_gm.strip()
+                        if h_limpia and not re.match(r"^([01]?\d|2[0-3]):[0-5]\d$", h_limpia):
+                            st.error("Usa formato HH:MM (ej. 14:30).")
                         else:
-                            st.error(msg)
+                            if h_limpia and len(h_limpia) == 4:
+                                h_limpia = "0" + h_limpia
+                            with st.spinner("Importando lugar..."):
+                                ok, msg = importar_sitio_desde_gmaps(url_input, val_dia_gm, h_limpia, nota_gm)
+                                if ok:
+                                    st.toast(msg, icon="📍")
+                                    st.rerun()
+                                else:
+                                    st.error(msg)
+                    else:
+                        st.warning("Introduce una URL de Google Maps.")
 
         with tab_man:
+            st.caption("Escribe el nombre del lugar (las coordenadas se buscan solas):")
             with st.form(f"form_add_man_{key_sufijo}"):
                 c_m1, c_m2 = st.columns(2)
                 with c_m1:
-                    nom_m = st.text_input("Nombre:", key=f"nom_m_{key_sufijo}")
-                    dir_m = st.text_input("Dirección / Barrio:", key=f"dir_m_{key_sufijo}")
+                    nom_m = st.text_input("Nombre:", placeholder="Ej: Levain Bakery, Joe's Pizza...", key=f"nom_m_{key_sufijo}")
+                    dir_m = st.text_input("Dirección / Barrio:", placeholder="Ej: West Village...", key=f"dir_m_{key_sufijo}")
                 with c_m2:
                     cat_m = selectbox_sin_teclado("Categoría:", ["⚡ Detección Automática"] + CATEGORIAS_CANONICAS, key=f"cat_m_{key_sufijo}")
-                    tipo_m = selectbox_sin_teclado("Tipo:", ["Interior", "Exterior"], key=f"tipo_m_{key_sufijo}")
+                    tipo_m = selectbox_sin_teclado("Tipo:", ["Interior (🌧️ A cubierto)", "Exterior (☀️ Al aire libre)"], key=f"tipo_m_{key_sufijo}")
+
+                c_m3, c_m4 = st.columns(2)
+                with c_m3:
+                    dia_dest_m = selectbox_sin_teclado("Asignar a:", dias_asig_opts, key=f"sel_dia_m_{key_sufijo}")
+                    val_dia_m = 0 if "Bandeja" in dia_dest_m else int(re.search(r"Día (\d+)", dia_dest_m).group(1))
+                with c_m4:
+                    hora_m = st.text_input("Hora (opcional, HH:MM):", placeholder="16:00", key=f"hora_m_{key_sufijo}")
+
+                nota_m = st.text_input("Nota manual (opcional):", placeholder="Ej: Llevar efectivo, entrada gratuita los viernes...", key=f"nota_m_{key_sufijo}")
+
+                coords_man_chk = st.checkbox("Introducir coordenadas manuales", key=f"chk_coords_{key_sufijo}")
+                lat_man, lon_man = None, None
+                if coords_man_chk:
+                    c_lt, c_ln = st.columns(2)
+                    with c_lt:
+                        lat_man = st.number_input("Latitud:", value=40.7802, format="%.6f", key=f"lat_m_{key_sufijo}")
+                    with c_ln:
+                        lon_man = st.number_input("Longitud:", value=-73.9461, format="%.6f", key=f"lon_m_{key_sufijo}")
 
                 if st.form_submit_button("💾 Guardar Lugar", use_container_width=True):
                     if nom_m:
-                        ok, msg = agregar_sitio_a_lugares(nom_m, dir_m, None, None, None if cat_m == "⚡ Detección Automática" else cat_m, tipo_m, 0, "", "")
-                        if ok:
-                            st.rerun()
+                        h_limpia = hora_m.strip()
+                        if h_limpia and not re.match(r"^([01]?\d|2[0-3]):[0-5]\d$", h_limpia):
+                            st.error("Usa formato HH:MM (ej. 16:00).")
+                        else:
+                            if h_limpia and len(h_limpia) == 4:
+                                h_limpia = "0" + h_limpia
+                            with st.spinner("Guardando..."):
+                                t_val = "Interior" if "Interior" in tipo_m else "Exterior"
+                                c_val = None if cat_m == "⚡ Detección Automática" else cat_m
+                                ok, msg = agregar_sitio_a_lugares(nom_m, dir_m, lat_man, lon_man, c_val, t_val, val_dia_m, h_limpia, nota_m)
+                                if ok:
+                                    st.toast(msg, icon="✨")
+                                    st.rerun()
+                                else:
+                                    st.error(msg)
+                    else:
+                        st.warning("Introduce al menos el nombre del lugar.")
 
 
 # =============================================================================
@@ -1113,6 +1185,28 @@ if "lugar_activo_id" not in st.session_state:
 
 if "editando_spot_key" not in st.session_state:
     st.session_state.editando_spot_key = None
+
+
+def _vigilar_cambios_de_otros_dispositivos():
+    datos_compartidos = cargar_itinerario_disco()
+    cambio_lugares = _huella_datos(datos_compartidos) != _huella_datos(st.session_state.get("lugares", []))
+    cambio_config = _huella_datos(cargar_config_viaje()) != _huella_datos(st.session_state.get("config_viaje", {}))
+
+    if cambio_lugares:
+        sincronizar_lugares_desde_disco()
+    if cambio_config:
+        sincronizar_config_desde_disco()
+
+    if cambio_lugares or cambio_config:
+        st.rerun()
+
+
+if hasattr(st, "fragment"):
+    @st.fragment(run_every="5s")
+    def _sincronizador_automatico_dispositivos():
+        _vigilar_cambios_de_otros_dispositivos()
+
+    _sincronizador_automatico_dispositivos()
 
 
 # =============================================================================
@@ -1234,24 +1328,167 @@ with pestanas[0]:
     )
     folium.TileLayer(tiles=tile_url, attr=tile_attr, max_zoom=20).add_to(mapa)
 
+    g_hotel_url = f"https://www.google.com/maps/search/?api=1&query={urllib.parse.quote(h_nom + ' ' + h_dir)}"
+    pop_hotel_html = f"""
+    <div style="font-family: -apple-system, sans-serif; min-width: 200px; padding: 4px;">
+      <span style="background: #FEF3C7; color: #92400E; padding: 2px 8px; border-radius: 10px; font-size: 11px; font-weight: 700;">🏨 TU HOTEL BASE</span>
+      <div style="font-size: 14px; font-weight: 700; color: #0F172A; margin: 6px 0 2px;">{h_nom}</div>
+      <div style="font-size: 12px; color: #0F172A; margin-bottom: 8px;">📍 {h_dir}</div>
+      <a href="{g_hotel_url}" target="_blank" style="display:block; text-align:center; background:#1A73E8; color:white; padding:6px; border-radius:8px; font-size:11px; font-weight:700; text-decoration:none;">Abrir Hotel en Maps →</a>
+    </div>
+    """
     folium.Marker(
         location=[h_lat, h_lon],
+        popup=folium.Popup(pop_hotel_html, max_width=250),
         tooltip=f"🏨 {h_nom}",
         icon=crear_pin_google_maps("🏨 Hotel", h_nom)
     ).add_to(mapa)
 
+    coords_ruta = []
     for s in sitios_mapa:
         pt = (s["lat"], s["lon"])
+        if s.get("dia", 0) > 0:
+            coords_ruta.append(pt)
+
         cat_spot = normalizar_categoria(s.get("categoria", "📍 Otros"))
+        tipo_spot = s.get("tipo", "Interior")
+        dia_spot = s.get("dia", 0)
+        hora_spot = s.get("hora", "")
+        dir_spot = s.get("direccion", "")
+        nota_spot = s.get("nota", "")
         nom_spot = s.get("nombre", "Lugar")
+
+        dia_txt = etiqueta_dia(dia_spot) if dia_spot > 0 else "📌 En Guardados"
+        if hora_spot:
+            dia_txt += f" · 🕒 {hora_spot}"
+        tipo_badge = "🌧️ Interior" if tipo_spot == "Interior" else "☀️ Exterior"
+
+        g_search = f"https://www.google.com/maps/search/?api=1&query={urllib.parse.quote(nom_spot + ' New York')}"
+        g_route  = f"https://www.google.com/maps/dir/?api=1&origin={h_lat},{h_lon}&destination={s['lat']},{s['lon']}"
+
+        popup_html = f"""
+        <div style="font-family: -apple-system, BlinkMacSystemFont, sans-serif; min-width: 220px; padding: 4px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; gap: 4px;">
+            <span style="font-size: 11px; font-weight: 800; color: #2563EB;">{dia_txt}</span>
+            <span style="font-size: 10px; font-weight: 700; background: #F1F5F9; color: #0F172A; padding: 2px 6px; border-radius: 6px;">{tipo_badge}</span>
+          </div>
+          <div style="font-size: 14px; font-weight: 800; color: #0F172A; margin-bottom: 3px;">{obtener_emoji_categoria(cat_spot)} {nom_spot}</div>
+          {f'<div style="font-size: 11px; color: #0F172A; margin-bottom: 3px;">📍 {dir_spot}</div>' if dir_spot else ''}
+          {f'<div style="font-size:10.5px; color:#475569; font-style:italic; line-height:1.3; margin-bottom:6px; overflow-wrap:anywhere;">📝 {linkificar_nota(nota_spot)}</div>' if nota_spot else ''}
+          <div style="font-size: 11px; color: #0F172A; margin-bottom: 8px;"><b>Categoría:</b> {cat_spot}</div>
+          <div style="display: flex; gap: 6px;">
+            <a href="{g_search}" target="_blank" style="flex:1; text-align:center; background:#1A73E8; color:white; padding:6px 4px; border-radius:8px; font-size:11px; font-weight:700; text-decoration:none;">Maps →</a>
+            <a href="{g_route}" target="_blank" style="text-align:center; background:#F8FAFC; border:1px solid #CBD5E1; color:#0F172A; padding:6px 8px; border-radius:8px; font-size:11px; font-weight:700; text-decoration:none;">🧭 Ruta</a>
+          </div>
+        </div>
+        """
 
         folium.Marker(
             location=pt,
-            tooltip=f"{obtener_emoji_categoria(cat_spot)} {nom_spot}",
+            popup=folium.Popup(popup_html, max_width=260),
+            tooltip=f"{obtener_emoji_categoria(cat_spot)} {nom_spot}" + (f" ({hora_spot})" if hora_spot else ""),
             icon=crear_pin_google_maps(cat_spot, nom_spot)
         ).add_to(mapa)
 
-    st_folium(mapa, use_container_width=True, height=470)
+    if len(coords_ruta) > 1 and "Día " in sel_vista:
+        folium.PolyLine(coords_ruta, color="#1A73E8", weight=3.5, opacity=0.8, dash_array="6, 8").add_to(mapa)
+
+    resultado_mapa = st_folium(
+        mapa,
+        use_container_width=True,
+        height=470,
+        returned_objects=["last_object_clicked"]
+    )
+
+    clicked = resultado_mapa.get("last_object_clicked") if resultado_mapa else None
+    if clicked and "lat" in clicked and "lng" in clicked:
+        c_lat, c_lon = clicked["lat"], clicked["lng"]
+        candidato, dist_min = None, float("inf")
+        for s in st.session_state.lugares:
+            d = math.hypot(s["lat"] - c_lat, s["lon"] - c_lon)
+            if d < dist_min:
+                dist_min = d
+                candidato = s
+        if candidato and dist_min < 0.008:
+            st.session_state.lugar_activo_id = candidato["id"]
+
+    if st.session_state.lugar_activo_id is not None:
+        idx_p = next((i for i, x in enumerate(st.session_state.lugares) if x["id"] == st.session_state.lugar_activo_id), None)
+        if idx_p is not None:
+            sp = st.session_state.lugares[idx_p]
+            cat_sp = normalizar_categoria(sp.get("categoria", "📍 Otros"))
+            tipo_sp = sp.get("tipo", "Interior")
+            dir_sp = sp.get("direccion", "")
+            nota_sp = sp.get("nota", "")
+            dia_sp = sp.get("dia", 0)
+            hora_sp = sp.get("hora", "")
+
+            hora_badge_html = f'<span class="badge-hora">🕒 {hora_sp}</span>' if hora_sp else ''
+            st.markdown('<div class="place-sheet">', unsafe_allow_html=True)
+            st.markdown(f"""
+              <div style="display:flex; gap:5px; margin-bottom:5px; flex-wrap:wrap;">
+                <span class="badge-dia">{etiqueta_dia(dia_sp) if dia_sp > 0 else "📌 En Guardados"}</span>
+                {hora_badge_html}
+                <span class="{'badge-indoor' if tipo_sp == 'Interior' else 'badge-outdoor'}">{'🌧️ Interior' if tipo_sp == 'Interior' else '☀️ Exterior'}</span>
+                <span class="badge-cat">{cat_sp}</span>
+              </div>
+            """, unsafe_allow_html=True)
+
+            c_sh_tit, c_sh_ed, c_sh_cl = st.columns([8.5, 0.75, 0.75])
+            with c_sh_tit:
+                st.markdown(
+                    f"<div style='font-size:1.1rem; font-weight:900; color:#0F172A; line-height:1.25;'>{obtener_emoji_categoria(cat_sp)} {sp['nombre']}</div>",
+                    unsafe_allow_html=True
+                )
+            with c_sh_ed:
+                st.markdown('<div class="edit-mini-btn">', unsafe_allow_html=True)
+                if st.button("✏", key=f"btn_ed_map_{sp['id']}", help="Editar sitio"):
+                    ek = f"map_sheet_{sp['id']}"
+                    st.session_state.editando_spot_key = None if st.session_state.editando_spot_key == ek else ek
+                    st.rerun()
+                st.markdown('</div>', unsafe_allow_html=True)
+            with c_sh_cl:
+                st.markdown('<div class="edit-mini-btn">', unsafe_allow_html=True)
+                if st.button("✕", key="close_place_sheet", help="Cerrar ficha"):
+                    st.session_state.lugar_activo_id = None
+                    st.rerun()
+                st.markdown('</div>', unsafe_allow_html=True)
+
+            if dir_sp:
+                st.markdown(f'<div style="font-size:0.82rem; color:#334155; font-weight:600; margin-top:2px;">📍 {dir_sp}</div>', unsafe_allow_html=True)
+            if nota_sp:
+                st.markdown(bloque_nota_html(nota_sp), unsafe_allow_html=True)
+
+            st.markdown("<div style='height:6px;'></div>", unsafe_allow_html=True)
+            c_act_hr, c_act_dia, c_act_maps = st.columns([1.0, 2.0, 1.0], gap="small")
+            with c_act_hr:
+                st.markdown('<span class="mobile-control-marker compact-hora"></span>', unsafe_allow_html=True)
+                nueva_h_sh = st.text_input("Hora", value=hora_sp, placeholder="🕒 HH:MM", key=f"hora_sheet_{sp['id']}", label_visibility="collapsed")
+                if nueva_h_sh.strip() != hora_sp:
+                    hl = nueva_h_sh.strip()
+                    if not hl or re.match(r"^([01]?\d|2[0-3]):[0-5]\d$", hl):
+                        if hl and len(hl) == 4:
+                            hl = "0" + hl
+                        st.session_state.lugares[idx_p]["hora"] = hl
+                        guardar_itinerario_disco(st.session_state.lugares)
+                        st.rerun()
+            with c_act_dia:
+                st.markdown('<span class="mobile-control-marker compact-dia"></span>', unsafe_allow_html=True)
+                opciones_dias = ["Guardados"] + [etiqueta_dia_corta(d) for d in range(1, 11)]
+                idx_dia_act = dia_sp if dia_sp > 0 else 0
+                sel_n_dia = selectbox_sin_teclado("Día:", opciones_dias, index=idx_dia_act, key=f"sel_d_sheet_{sp['id']}", label_visibility="collapsed")
+                n_dia_val = 0 if sel_n_dia == "Guardados" else int(re.search(r"Día (\d+)", sel_n_dia).group(1))
+                if n_dia_val != dia_sp:
+                    st.session_state.lugares[idx_p]["dia"] = n_dia_val
+                    guardar_itinerario_disco(st.session_state.lugares)
+                    st.rerun()
+            with c_act_maps:
+                st.markdown('<span class="mobile-control-marker compact-maps"></span>', unsafe_allow_html=True)
+                g_direct = f"https://www.google.com/maps/search/?api=1&query={urllib.parse.quote(sp['nombre'] + ' New York')}"
+                st.link_button("🗺️", g_direct, use_container_width=True)
+
+            render_editor_sitio_panel(sp, idx_p, "map_sheet")
+            st.markdown('</div>', unsafe_allow_html=True)
 
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -1274,7 +1511,12 @@ with pestanas[1]:
         )
 
     opciones_filtro_it = ["📋 Todos los Días (Días 1 a 10)"] + [etiqueta_dia(d) for d in range(1, 11)]
-    filtro_it_sel = selectbox_sin_teclado("Ver itinerario:", opciones_filtro_it, label_visibility="collapsed")
+    filtro_it_sel = selectbox_sin_teclado(
+        "Ver itinerario:",
+        opciones_filtro_it,
+        key="filtro_itinerario_dia",
+        label_visibility="collapsed"
+    )
 
     if "Todos los Días" in filtro_it_sel:
         dias_a_mostrar = list(range(1, 11))
@@ -1284,28 +1526,106 @@ with pestanas[1]:
 
     for d in dias_a_mostrar:
         paradas_dia = ordenar_por_hora([l for l in st.session_state.lugares if l.get("dia", 0) == d])
-        
+        visitados_dia = [l for l in paradas_dia if l.get("visitado", False)]
+
+        st.markdown(f'<div id="dia-{d}"></div>', unsafe_allow_html=True)
+
         st.markdown(f"""
-        <div style="background:#FFFFFF; border:1.5px solid #CBD5E1; border-left:6px solid #15803D; border-radius:13px; padding:8px 12px; margin-top:10px; margin-bottom:8px;">
-          <div style="font-weight:900; font-size:0.98rem; color:#0F172A;">{etiqueta_dia(d)}</div>
+        <div style="background:#FFFFFF; border:1.5px solid #CBD5E1; border-left:6px solid #15803D; border-radius:13px; padding:8px 12px; margin-top:10px; margin-bottom:8px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:6px;">
+          <div style="font-weight:900; font-size:0.98rem; color:#0F172A;">
+            {etiqueta_dia(d)}
+          </div>
+          <div style="font-weight:800; font-size:0.78rem; color:#0F172A; background:#F8FAFC; border:1.5px solid #CBD5E1; border-radius:20px; padding:2px 9px;">
+            📍 {len(paradas_dia)} lugares ({len(visitados_dia)} visitados)
+          </div>
         </div>
         """, unsafe_allow_html=True)
 
-        for item in paradas_dia:
-            idx_real = next((i for i, x in enumerate(st.session_state.lugares) if x["id"] == item["id"]), None)
-            is_visited = item.get("visitado", False)
-            cat_i = normalizar_categoria(item.get("categoria", "📍 Otros"))
-            
-            c_chk, c_info = st.columns([0.45, 9.55], gap="small")
-            with c_chk:
-                chk_val = st.checkbox("", value=is_visited, key=f"chk_it_{d}_{item['id']}")
-                if chk_val != is_visited and idx_real is not None:
-                    st.session_state.lugares[idx_real]["visitado"] = chk_val
-                    guardar_itinerario_disco(st.session_state.lugares)
-                    st.rerun()
+        if not paradas_dia:
+            st.markdown("""
+            <div style="background:#FFFFFF; border:1.5px dashed #94A3B8; border-radius:11px; padding:10px 12px; color:#0F172A; font-size:0.84rem; font-weight:600; margin-bottom:10px;">
+              ❄️ Sin lugares asignados para este día. Asígnalos desde <b>📍 Guardados</b>.
+            </div>
+            """, unsafe_allow_html=True)
+        else:
+            for seq_idx, item in enumerate(paradas_dia, 1):
+                idx_real = next((i for i, x in enumerate(st.session_state.lugares) if x["id"] == item["id"]), None)
+                is_visited = item.get("visitado", False)
+                cat_i = normalizar_categoria(item.get("categoria", "📍 Otros"))
+                emoji_i = obtener_emoji_categoria(cat_i)
+                dir_i = item.get("direccion", "")
+                nota_i = item.get("nota", "")
+                hora_i = item.get("hora", "")
+                maps_q = urllib.parse.quote(f"{item['nombre']}, New York")
+                gmaps_url = f"https://www.google.com/maps/search/?api=1&query={maps_q}"
 
-            with c_info:
-                st.markdown(f"**{obtener_emoji_categoria(cat_i)} {item['nombre']}** ({item.get('hora','Sin hora')})", unsafe_allow_html=True)
+                with st.container(key=f"it-heading-row-{item['id']}"):
+                    c_chk, c_info = st.columns([0.45, 9.55], gap="small")
+                    with c_chk:
+                        chk_val = st.checkbox("", value=is_visited, key=f"chk_it_{d}_{item['id']}")
+                        if chk_val != is_visited and idx_real is not None:
+                            st.session_state.lugares[idx_real]["visitado"] = chk_val
+                            guardar_itinerario_disco(st.session_state.lugares)
+                            st.rerun()
+
+                    with c_info:
+                        txt_c = "#334155" if is_visited else "#0F172A"
+                        strike = "text-decoration: line-through; opacity: 0.78;" if is_visited else ""
+                        dir_html = f'<div class="place-list-address">📍 {html.escape(str(dir_i))}</div>' if dir_i else ''
+                        nota_html = bloque_nota_html(nota_i)
+                        st.markdown(f"""
+                        <div style="{strike}; min-width:0; overflow-wrap:anywhere;">
+                          <div class="place-list-title" style="color:{txt_c};">{emoji_i} {item['nombre']}</div>
+                          <div style="margin-top:4px; display:flex; flex-wrap:wrap; gap:4px;">
+                          </div>
+                        </div>
+                        {dir_html}
+                        {nota_html}
+                        """, unsafe_allow_html=True)
+
+                with st.container(key=f"it-controls-row-{item['id']}"):
+                    c_edit, c_map, c_hr, c_day = st.columns([0.8, 0.9, 1.7, 1.9], gap="small")
+                    with c_edit:
+                        if st.button("✏️", key=f"btn_ed_it_{d}_{item['id']}", help="Editar sitio", use_container_width=True):
+                            ek = f"it_{d}_{item['id']}"
+                            st.session_state.editando_spot_key = None if st.session_state.editando_spot_key == ek else ek
+                            st.rerun()
+                    with c_map:
+                        st.link_button("🗺️", gmaps_url, use_container_width=True, key=f"map_it_{item['id']}", help="Abrir en Google Maps")
+                    with c_hr:
+                        nueva_h = st.text_input(
+                            "Hora",
+                            value=hora_i,
+                            placeholder="HH:MM",
+                            key=f"hora_it_{d}_{item['id']}",
+                            label_visibility="collapsed"
+                        )
+                        if nueva_h.strip() != hora_i and idx_real is not None:
+                            hl = nueva_h.strip()
+                            if not hl or re.match(r"^([01]?\d|2[0-3]):[0-5]\d$", hl):
+                                if hl and len(hl) == 4:
+                                    hl = "0" + hl
+                                st.session_state.lugares[idx_real]["hora"] = hl
+                                guardar_itinerario_disco(st.session_state.lugares)
+                                st.rerun()
+                    with c_day:
+                        dest_d = selectbox_sin_teclado(
+                            "Día",
+                            ["Guardados"] + [f"Día {x}" for x in range(1, 11)],
+                            index=d - 1,
+                            key=f"mvd_it_{d}_{item['id']}",
+                            label_visibility="collapsed"
+                        )
+                        val_dest = 0 if dest_d == "Guardados" else int(re.search(r"Día (\d+)", dest_d).group(1))
+                        if val_dest != d and idx_real is not None:
+                            st.session_state.lugares[idx_real]["dia"] = val_dest
+                            guardar_itinerario_disco(st.session_state.lugares)
+                            st.rerun()
+
+                if idx_real is not None:
+                    render_editor_sitio_panel(item, idx_real, f"it_{d}")
+
+                st.markdown('<div style="height:1px; background:#CBD5E1; margin:6px 0;"></div>', unsafe_allow_html=True)
 
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -1313,39 +1633,548 @@ with pestanas[1]:
 # ─────────────────────────────────────────────────────────────────────────────
 with pestanas[2]:
     render_formulario_agregar_lugar("guardados")
-    st.markdown('<div class="ny-card-header">Lugares Guardados</div>', unsafe_allow_html=True)
+    st.markdown("<div style='height: 6px;'></div>", unsafe_allow_html=True)
+    st.markdown('<div class="ny-card-header">Lugares Guardados & Gestión de Sitios</div>', unsafe_allow_html=True)
 
-    pool_guardados = [l for l in st.session_state.lugares if l.get("dia", 0) == 0]
-    for p_spot in pool_guardados:
-        st.markdown(f"- **{p_spot['nombre']}** ({p_spot.get('categoria','📍 Otros')})")
+    ver_todos_edicion = st.checkbox("Mostrar también los lugares ya asignados a días", value=False, key="chk_ver_todos_guardados")
+
+    if ver_todos_edicion:
+        pool_guardados = list(st.session_state.lugares)
+    else:
+        pool_guardados = [l for l in st.session_state.lugares if l.get("dia", 0) == 0]
+
+    cats_en_pool = sorted(set(normalizar_categoria(l.get("categoria", "📍 Otros")) for l in pool_guardados))
+
+    col_flt1, col_flt2 = st.columns(2)
+    with col_flt1:
+        flt_cat_g = selectbox_sin_teclado("Categoría:", ["Todas"] + cats_en_pool, key="flt_pool_cat")
+    with col_flt2:
+        busq_g = st.text_input("Buscar:", placeholder="Nombre del sitio...", key="busq_pool_nom")
+
+    visibles_pool = [
+        l for l in pool_guardados
+        if (flt_cat_g == "Todas" or normalizar_categoria(l.get("categoria", "")) == flt_cat_g)
+        and (not busq_g.strip() or busq_g.strip().lower() in l.get("nombre", "").lower())
+    ]
+
+    st.caption(f"Mostrando **{len(visibles_pool)}** sitios")
+
+    for p_spot in visibles_pool:
+        idx_sp_real = next((i for i, x in enumerate(st.session_state.lugares) if x["id"] == p_spot["id"]), None)
+        cat_p = normalizar_categoria(p_spot.get("categoria", "📍 Otros"))
+        dir_p = p_spot.get("direccion", "")
+        nota_p = p_spot.get("nota", "")
+        dia_p = p_spot.get("dia", 0)
+        hora_p = p_spot.get("hora", "")
+
+        nota_p_html = bloque_nota_html(nota_p)
+        dir_p_html = f'<div class="place-list-address">📍 {html.escape(str(dir_p))}</div>' if dir_p else ''
+        tipo_p_html = '<span class="badge-indoor">🌧️ Interior</span>' if p_spot.get("tipo") == "Interior" else '<span class="badge-outdoor">☀️ Exterior</span>'
+
+        with st.container(key=f"saved-heading-row-{p_spot['id']}"):
+            st.markdown(f"""
+            <div class="place-list-title">{obtener_emoji_categoria(cat_p)} {p_spot['nombre']}</div>
+            <div style="margin-top:4px; display:flex; flex-wrap:wrap; gap:4px;">
+              <span class="badge-cat">{cat_p}</span>{tipo_p_html}
+            </div>
+            {dir_p_html}
+            {nota_p_html}
+            """, unsafe_allow_html=True)
+
+        with st.container(key=f"saved-controls-row-{p_spot['id']}"):
+            c_edit, c_map, c_hr, c_day = st.columns([0.8, 0.9, 1.7, 1.9], gap="small")
+            with c_edit:
+                if st.button("✏️", key=f"btn_ed_pool_{p_spot['id']}", help="Editar sitio", use_container_width=True):
+                    ek = f"pool_{p_spot['id']}"
+                    st.session_state.editando_spot_key = None if st.session_state.editando_spot_key == ek else ek
+                    st.rerun()
+            with c_map:
+                g_url_sp = f"https://www.google.com/maps/search/?api=1&query={urllib.parse.quote(p_spot['nombre'] + ' New York')}"
+                st.link_button("🗺️", g_url_sp, use_container_width=True, key=f"map_saved_{p_spot['id']}", help="Abrir en Google Maps")
+            with c_hr:
+                nueva_h_pool = st.text_input(
+                    "Hora",
+                    value=hora_p,
+                    placeholder="HH:MM",
+                    key=f"hora_pool_{p_spot['id']}",
+                    label_visibility="collapsed"
+                )
+                if nueva_h_pool.strip() != hora_p and idx_sp_real is not None:
+                    hl = nueva_h_pool.strip()
+                    if not hl or re.match(r"^([01]?\d|2[0-3]):[0-5]\d$", hl):
+                        if hl and len(hl) == 4:
+                            hl = "0" + hl
+                        st.session_state.lugares[idx_sp_real]["hora"] = hl
+                        guardar_itinerario_disco(st.session_state.lugares)
+                        st.rerun()
+            with c_day:
+                opts_dia_pool = ["- Día -"] + [f"Día {d}" for d in range(1, 11)]
+                idx_sel_pool = dia_p if 1 <= dia_p <= 10 else 0
+                asig_dia = selectbox_sin_teclado(
+                    "Día",
+                    opts_dia_pool,
+                    index=idx_sel_pool,
+                    key=f"asig_dia_pool_{p_spot['id']}",
+                    label_visibility="collapsed"
+                )
+                if asig_dia != "— Día —" and idx_sp_real is not None:
+                    d_num = int(re.search(r"Día (\d+)", asig_dia).group(1))
+                    if d_num != dia_p:
+                        st.session_state.lugares[idx_sp_real]["dia"] = d_num
+                        guardar_itinerario_disco(st.session_state.lugares)
+                        st.rerun()
+
+        if idx_sp_real is not None:
+            render_editor_sitio_panel(p_spot, idx_sp_real, "pool")
+
+        st.markdown('<hr style="margin:6px 0; border-color:#E2E8F0;">', unsafe_allow_html=True)
 
 
 # ─────────────────────────────────────────────────────────────────────────────
-# TAB 4: MODO LLUVIA & CLIMA
+# TAB 4: MODO LLUVIA & CLIMA EN TIEMPO REAL
 # ─────────────────────────────────────────────────────────────────────────────
 with pestanas[5]:
-    st.markdown('<div class="ny-card-header">🌧️ Clima en Tiempo Real</div>', unsafe_allow_html=True)
+    st.markdown('<div class="ny-card-header">🌧️ Clima en Tiempo Real & Plan B a Cubierto</div>', unsafe_allow_html=True)
+
     clima_data = consultar_clima_nyc()
-    if clima_data and "current" in clima_data:
-        cur = clima_data["current"]
-        st.success(f"Temperatura actual en Nueva York: {cur.get('temperature_2m')} °C")
+
+    col_w_curr, col_w_day = st.columns([2.5, 3])
+
+    with col_w_curr:
+        st.markdown("#### 📍 Manhattan Ahora Mismo")
+        if clima_data and "current" in clima_data:
+            cur = clima_data["current"]
+            temp_c = cur.get("temperature_2m", 5.0)
+            sens_c = cur.get("apparent_temperature", 3.0)
+            precip = cur.get("precipitation", 0.0)
+            w_code = cur.get("weather_code", 0)
+            desc_clima, tipo_clima = traducir_codigo_clima(w_code)
+            
+            st.markdown(f"""
+            <div class="ny-card" style="border-left: 5px solid {'#3B82F6' if precip > 0 else '#10B981'};">
+              <div style="font-size:1.7rem; font-weight:800; color:#0F172A;">{temp_c:.1f} °C</div>
+              <div style="font-size:0.9rem; font-weight:600; color:#0F172A;">{desc_clima}</div>
+              <div style="font-size:0.8rem; color:#0F172A; margin-top:6px;">
+                Sensación térmica: <b>{sens_c:.1f} °C</b> · Humedad: <b>{cur.get('relative_humidity_2m', 60)}%</b><br>
+                Precipitación en vivo: <b>{precip:.1f} mm</b>
+              </div>
+            </div>
+            """, unsafe_allow_html=True)
+        else:
+            st.info("Conectando con la estación meteorológica de Nueva York...")
+
+    with col_w_day:
+        st.markdown("#### 🗓️ Pronóstico por Día")
+        dia_sel_clima = selectbox_sin_teclado(
+            "Selecciona el día:",
+            [etiqueta_dia(d) for d in range(1, 11)],
+            key="sel_dia_clima"
+        )
+        num_dia_c = int(re.search(r"Día (\d+):", dia_sel_clima).group(1))
+
+        prob_lluvia = 15
+        precip_mm = 0.0
+        temp_max_est, temp_min_est = 6.0, -1.0
+        desc_dia = "☀️ Día despejado y fresco"
+        alerta_lluvia = False
+
+        if clima_data and "daily" in clima_data:
+            d_time = clima_data["daily"].get("time", [])
+            idx_pronostico = (num_dia_c - 1) if (num_dia_c - 1) < len(d_time) else 0
+            if idx_pronostico < len(d_time):
+                p_code = clima_data["daily"]["weather_code"][idx_pronostico]
+                desc_dia, _ = traducir_codigo_clima(p_code)
+                prob_lluvia = clima_data["daily"]["precipitation_probability_max"][idx_pronostico] or 0
+                precip_mm = clima_data["daily"]["precipitation_sum"][idx_pronostico] or 0.0
+                temp_max_est = clima_data["daily"]["temperature_2m_max"][idx_pronostico] or 5.0
+                temp_min_est = clima_data["daily"]["temperature_2m_min"][idx_pronostico] or -1.0
+                alerta_lluvia = (prob_lluvia >= 40) or (precip_mm > 1.0) or ("Lluvia" in desc_dia) or ("Nieve" in desc_dia)
+
+        color_card = "#FEF2F2" if alerta_lluvia else "#F0FDF4"
+        border_card = "#EF4444" if alerta_lluvia else "#10B981"
+        st.markdown(f"""
+        <div style="background:{color_card}; border: 1.5px solid {border_card}; border-radius:14px; padding:14px 16px;">
+          <div style="font-weight:800; font-size:1.05rem; color:#0F172A;">{etiqueta_dia(num_dia_c)} · {desc_dia}</div>
+          <div style="font-size:0.84rem; color:#0F172A; margin-top:4px;">
+            🌡️ Temperaturas: <b>{temp_min_est:.0f} °C a {temp_max_est:.0f} °C</b><br>
+            🌧️ Probabilidad de Precipitación: <b>{prob_lluvia}%</b> ({precip_mm:.1f} mm)
+          </div>
+          <div style="font-size:0.8rem; font-weight:700; color:{'#B91C1C' if alerta_lluvia else '#047857'}; margin-top:6px;">
+            {'⚠️ ALERTA DE LLUVIA / NIEVE: Recomendable activar sustituciones a cubierto' if alerta_lluvia else '✓ Tiempo favorable para paseos al aire libre'}
+          </div>
+        </div>
+        """, unsafe_allow_html=True)
+
+    st.markdown("---")
+    st.markdown("#### 🔄 Sustituciones Inteligentes por Cercanía")
+    st.caption("Intercambia cualquier plan al aire libre por los sitios a cubierto más cercanos:")
+
+    planes_ext_dia = [l for l in st.session_state.lugares if l.get("dia", 0) == num_dia_c and l.get("tipo") == "Exterior"]
+    lugares_indoor = [l for l in st.session_state.lugares if l.get("tipo") == "Interior"]
+
+    if not planes_ext_dia:
+        st.success(f"🎉 No hay paradas al aire libre programadas en el Día {num_dia_c}.")
     else:
-        st.info("Datos meteorológicos no disponibles temporalmente.")
+        for spot_ext in planes_ext_dia:
+            distancias = []
+            for ind in lugares_indoor:
+                if ind["id"] != spot_ext["id"]:
+                    km = math.hypot(ind["lat"] - spot_ext["lat"], ind["lon"] - spot_ext["lon"]) * 111.0
+                    distancias.append((km, ind))
+            distancias.sort(key=lambda x: x[0])
+            top_cercanos = distancias[:5]
+
+            dir_ext_txt = f" · 📍 {spot_ext['direccion']}" if spot_ext.get("direccion") else ""
+            nota_ext_html = bloque_nota_html(spot_ext.get("nota", ""))
+            st.markdown(f"""
+            <div style="background:#FFF5F5; border-left:4px solid #EF4444; border-radius:12px; padding:10px 14px; margin: 8px 0;">
+              <div style="font-weight:700; color:#991B1B;">{obtener_emoji_categoria(normalizar_categoria(spot_ext.get('categoria','')))} {spot_ext['nombre']}</div>
+              <div style="font-size:0.8rem; color:#7F1D1D;">Plan exterior · Día {num_dia_c}{dir_ext_txt}</div>
+              {nota_ext_html}
+            </div>
+            """, unsafe_allow_html=True)
+
+            c_sust1, c_sust2 = st.columns([3.5, 1.5])
+            with c_sust1:
+                opciones_cercanas = [f"{x['nombre']} (a {d:.1f} km) — {normalizar_categoria(x.get('categoria',''))}" for d, x in top_cercanos]
+                sel_sust = selectbox_sin_teclado("Sustituto a cubierto:", opciones_cercanas, key=f"sel_sust_{spot_ext['id']}", label_visibility="collapsed")
+            with c_sust2:
+                if st.button("🔄 Cambiar", key=f"btn_swap_{spot_ext['id']}", use_container_width=True):
+                    nom_sust = sel_sust.split(" (a ")[0].strip()
+                    elegido = next(x for _, x in top_cercanos if x["nombre"] == nom_sust)
+                    
+                    idx_ext = next(i for i, x in enumerate(st.session_state.lugares) if x["id"] == spot_ext["id"])
+                    idx_ind = next(i for i, x in enumerate(st.session_state.lugares) if x["id"] == elegido["id"])
+                    
+                    hora_heredada = st.session_state.lugares[idx_ext].get("hora", "")
+                    st.session_state.lugares[idx_ext]["dia"] = 0
+                    st.session_state.lugares[idx_ind]["dia"] = num_dia_c
+                    if hora_heredada and not st.session_state.lugares[idx_ind].get("hora"):
+                        st.session_state.lugares[idx_ind]["hora"] = hora_heredada
+                    guardar_itinerario_disco(st.session_state.lugares)
+                    st.toast(f"¡'{elegido['nombre']}' ahora está en el Día {num_dia_c}!", icon="✨")
+                    st.rerun()
 
 
 # ─────────────────────────────────────────────────────────────────────────────
-# TAB 5: DIVISAS & CALCULADORA
+# TAB 5: DIVISAS EN TIEMPO REAL & CALCULADORA TAX Y PROPINAS NY
 # ─────────────────────────────────────────────────────────────────────────────
 with pestanas[3]:
-    st.markdown('<div class="ny-card-header">💵 Divisas & Calculadora de Tax</div>', unsafe_allow_html=True)
-    tasa_eur, _ = obtener_tasa_usd_eur()
-    val_usd = st.number_input("Cantidad en Dólares ($):", value=50.0)
-    st.info(f"Equivalente: **{val_usd * tasa_eur:.2f} €**")
+    st.markdown('<div class="ny-card-header">💵 Calculadora</div>', unsafe_allow_html=True)
+
+    tasa_eur, fecha_tasa = obtener_tasa_usd_eur()
+
+    col_fx, col_tax = st.columns([2.5, 3])
+
+    with col_fx:
+        st.markdown("#### 💱 Conversor de Divisas")
+        st.markdown(f"""
+        <div style="background:#F1F5F9; border-radius:12px; padding:10px 14px; margin-bottom:12px; font-size:0.84rem; color:#0F172A;">
+          Tasa actual: <b>1 USD = {tasa_eur:.4f} EUR</b><br>
+          <span style="font-size:0.74rem; color:#334155;">Actualizado: {fecha_tasa}</span>
+        </div>
+        """, unsafe_allow_html=True)
+
+        modo_fx = st.radio("Convertir:", ["USD a EUR ($ ➔ €)", "EUR a USD (€ ➔ $)"], horizontal=True)
+        if "USD a EUR" in modo_fx:
+            val_usd = st.number_input("Cantidad en Dólares ($):", min_value=0.0, value=50.0, step=5.0)
+            res_eur = val_usd * tasa_eur
+            st.markdown(f"""
+            <div style="background:#FFFFFF; border:1.5px solid #CBD5E1; border-radius:14px; padding:14px; text-align:center; margin-top:8px;">
+              <div style="font-size:0.84rem; color:#0F172A;">Equivalente en Euros:</div>
+              <div style="font-size:1.85rem; font-weight:800; color:#0F172A;">{res_eur:.2f} €</div>
+            </div>
+            """, unsafe_allow_html=True)
+        else:
+            val_eur = st.number_input("Cantidad en Euros (€):", min_value=0.0, value=50.0, step=5.0)
+            res_usd = val_eur / tasa_eur if tasa_eur > 0 else 0
+            st.markdown(f"""
+            <div style="background:#FFFFFF; border:1.5px solid #CBD5E1; border-radius:14px; padding:14px; text-align:center; margin-top:8px;">
+              <div style="font-size:0.84rem; color:#0F172A;">Equivalente en Dólares:</div>
+              <div style="font-size:1.85rem; font-weight:800; color:#0F172A;">${res_usd:.2f} USD</div>
+            </div>
+            """, unsafe_allow_html=True)
+
+    with col_tax:
+        st.markdown("#### 🧾 Calculadora de Cuenta, Tax & Tips")
+
+        subtotal_bill = st.number_input("Subtotal de la cuenta ($ USD):", min_value=0.0, value=65.0, step=5.0)
+        es_ropa_exenta = st.checkbox("👕 Prenda de ropa/calzado < $110 (Exenta de Sales Tax en NYC)")
+
+        col_t1, col_t2 = st.columns(2)
+        with col_t1:
+            pct_propina = st.number_input(
+                "Porcentaje de Propina (%):",
+                min_value=0.0,
+                max_value=100.0,
+                value=18.0,
+                step=1.0,
+                format="%.1f"
+            )
+        with col_t2:
+            base_calc = st.radio("Calcular propina sobre:", ["Subtotal sin tax", "Total con tax"])
+
+        tax_rate = 0.0 if es_ropa_exenta else 0.08875
+        tax_total = subtotal_bill * tax_rate
+        base_tip = subtotal_bill if "Subtotal" in base_calc else (subtotal_bill + tax_total)
+        tip_total = base_tip * (pct_propina / 100.0)
+        gran_total = subtotal_bill + tax_total + tip_total
+        gran_total_eur = gran_total * tasa_eur
+
+        st.markdown(f"""
+        <div class="ny-card" style="margin-top:10px; border: 1.5px solid #E2E8F0;">
+          <div style="display:flex; justify-content:space-between; margin-bottom:6px; font-size:0.88rem;">
+            <span style="color:#0F172A;">Subtotal carta:</span>
+            <b>${subtotal_bill:.2f}</b>
+          </div>
+          <div style="display:flex; justify-content:space-between; margin-bottom:6px; font-size:0.88rem;">
+            <span style="color:#0F172A;">NYC Sales Tax ({'Exenta' if es_ropa_exenta else '8.875%'}):</span>
+            <b>{'Exenta ($0.00)' if es_ropa_exenta else f'${tax_total:.2f}'}</b>
+          </div>
+          <div style="display:flex; justify-content:space-between; margin-bottom:10px; font-size:0.88rem;">
+            <span style="color:#0F172A;">Propina ({pct_propina:.1f}%):</span>
+            <b>${tip_total:.2f}</b>
+          </div>
+          <div style="border-top:1.5px solid #E2E8F0; padding-top:10px; display:flex; justify-content:space-between; align-items:center;">
+            <span style="font-size:1.05rem; font-weight:800; color:#0F172A;">Total a Pagar:</span>
+            <div style="text-align:right;">
+              <span style="font-size:1.35rem; font-weight:800; color:#0F172A;">${gran_total:.2f} USD</span><br>
+              <span style="font-size:0.84rem; color:#0F172A;">≈ {gran_total_eur:.2f} €</span>
+            </div>
+          </div>
+        </div>
+        """, unsafe_allow_html=True)
+
+        num_personas = 3
+        st.markdown("**Dividir entre 3 personas**")
+        per_p_usd = gran_total / num_personas
+        per_p_eur = gran_total_eur / num_personas
+        st.info(f"👉 **Por persona (3 personas):** **${per_p_usd:.2f} USD** (~ {per_p_eur:.2f} €)")
 
 
 # ─────────────────────────────────────────────────────────────────────────────
 # TAB 6: VUELOS, HOTEL & LISTAS
 # ─────────────────────────────────────────────────────────────────────────────
+def extraer_codigos_vuelo(texto_vuelo: str) -> list:
+    return re.findall(r"\b([A-Z]{2}\d{2,4})\b", (texto_vuelo or "").upper())
+
 with pestanas[4]:
-    st.markdown('<div class="ny-card-header">✈️ Vuelos & Hotel</div>', unsafe_allow_html=True)
-    st.write(f"Hotel actual: {hotel.get('nombre')}")
+    c_vl1, c_vl2 = st.columns(2)
+
+    with c_vl1:
+        st.markdown('<div class="ny-card-header">✈️ Vuelos & Estado en Tiempo Real</div>', unsafe_allow_html=True)
+
+        cods_ida = extraer_codigos_vuelo(v_ida.get("vuelo", ""))
+        cods_vta = extraer_codigos_vuelo(v_vta.get("vuelo", ""))
+
+        st.markdown("""
+        <div class="ny-card" style="border-left: 5px solid #2563EB; margin-bottom:10px;">
+          <div style="font-weight:800; font-size:0.92rem; color:#0F172A; margin-bottom:4px;">📡 Seguimiento en Vivo (FlightAware / Flightradar24)</div>
+          <div style="font-size:0.82rem; color:#0F172A;">Pulsa en el código de vuelo para ver terminal, puerta y retrasos:</div>
+        </div>
+        """, unsafe_allow_html=True)
+
+        if cods_ida:
+            st.markdown(f"**🛫 Ida ({v_ida.get('fecha', '26 Dic')} · {v_ida.get('hora', '15:30')}):**")
+            for idx_c, cod in enumerate(cods_ida):
+                fa_url = f"https://es.flightaware.com/live/flight/{cod}"
+                fr_url = f"https://www.flightradar24.com/data/flights/{cod.lower()}"
+                with st.container(key=f"flight-links-ida-{idx_c}-{cod.lower()}"):
+                    st.markdown(f"<div style='font-weight:800; font-size:0.84rem; margin:4px 0;'>✈️ {html.escape(cod)}</div>", unsafe_allow_html=True)
+                    fa_col, fr_col = st.columns(2, gap="small")
+                    with fa_col:
+                        st.link_button("FlightAware ↗", fa_url, use_container_width=True)
+                    with fr_col:
+                        st.link_button("Flightradar24 ↗", fr_url, use_container_width=True)
+
+        if cods_vta:
+            st.markdown(f"**🛬 Regreso ({v_vta.get('fecha', '4 Ene')} · {v_vta.get('hora', '20:45')}):**")
+            for idx_c, cod in enumerate(cods_vta):
+                fa_url = f"https://es.flightaware.com/live/flight/{cod}"
+                fr_url = f"https://www.flightradar24.com/data/flights/{cod.lower()}"
+                with st.container(key=f"flight-links-regreso-{idx_c}-{cod.lower()}"):
+                    st.markdown(f"<div style='font-weight:800; font-size:0.84rem; margin:4px 0;'>✈️ {html.escape(cod)}</div>", unsafe_allow_html=True)
+                    fa_col, fr_col = st.columns(2, gap="small")
+                    with fa_col:
+                        st.link_button("FlightAware ↗", fa_url, use_container_width=True)
+                    with fr_col:
+                        st.link_button("Flightradar24 ↗", fr_url, use_container_width=True)
+
+        st.markdown("<div style='height:8px;'></div>", unsafe_allow_html=True)
+        with st.expander("✏️ Editar datos de vuelos", expanded=False):
+            with st.form("form_editar_vuelos"):
+                ida_v = st.text_input("Vuelo Ida (ej. Aer Lingus · EI583, EI107):", value=v_ida.get("vuelo", "Aer Lingus · EI583, EI107"))
+                ida_f = st.text_input("Fecha Ida:", value=v_ida.get("fecha", "26 Dic"))
+                ida_h = st.text_input("Hora Ida:", value=v_ida.get("hora", "15:30"))
+                ida_a = st.text_input("Aeropuerto:", value=v_ida.get("aeropuerto", "JFK / Nueva York"))
+                st.markdown("---")
+                vta_v = st.text_input("Vuelo Regreso (ej. Aer Lingus · EI104, EI582):", value=v_vta.get("vuelo", "Aer Lingus · EI104, EI582"))
+                vta_f = st.text_input("Fecha Regreso:", value=v_vta.get("fecha", "4 Ene"))
+                vta_h = st.text_input("Hora Regreso:", value=v_vta.get("hora", "20:45"))
+                vta_a = st.text_input("Aeropuerto Regreso:", value=v_vta.get("aeropuerto", "JFK / Nueva York"))
+                if st.form_submit_button("💾 Guardar Vuelos"):
+                    st.session_state.config_viaje["vuelo_ida"] = {"vuelo": ida_v, "fecha": ida_f, "hora": ida_h, "aeropuerto": ida_a}
+                    st.session_state.config_viaje["vuelo_vuelta"] = {"vuelo": vta_v, "fecha": vta_f, "hora": vta_h, "aeropuerto": vta_a}
+                    guardar_config_viaje(st.session_state.config_viaje)
+                    st.toast("Datos de vuelos actualizados.", icon="✈️")
+                    st.rerun()
+
+    with c_vl2:
+        st.markdown('<div class="ny-card-header">🏨 Hotel</div>', unsafe_allow_html=True)
+
+        hotel_nom_act = hotel.get("nombre", "Courtyard by Marriott New York Manhattan Upper East Side")
+        hotel_dir_act = hotel.get("direccion", "410 E 92nd St, New York, NY 10128")
+        hotel_lat_act = hotel.get("lat", 40.780242)
+        hotel_lon_act = hotel.get("lon", -73.946123)
+
+        gmaps_hotel_search = f"https://www.google.com/maps/search/?api=1&query={urllib.parse.quote(hotel_nom_act + ' ' + hotel_dir_act)}"
+        gmaps_hotel_dir = f"https://www.google.com/maps/dir/?api=1&destination={hotel_lat_act},{hotel_lon_act}"
+
+        st.markdown(f"""
+        <div class="ny-card" style="border-left: 5px solid #15803D; margin-bottom:10px;">
+          <div style="font-weight:900; font-size:1.05rem; color:#0F172A; margin-bottom:4px;">🏨 {hotel_nom_act}</div>
+          <div style="font-size:0.88rem; color:#0F172A; margin-bottom:4px;">📍 {hotel_dir_act}</div>
+          <div style="font-size:0.78rem; color:#334155;">Coordenadas: {hotel_lat_act:.6f}, {hotel_lon_act:.6f}</div>
+        </div>
+        """, unsafe_allow_html=True)
+
+        ch_btn1, ch_btn2 = st.columns(2)
+        with ch_btn1:
+            st.link_button("🗺️ Ver en Maps", gmaps_hotel_search, use_container_width=True)
+        with ch_btn2:
+            st.link_button("🧭 Cómo llegar", gmaps_hotel_dir, use_container_width=True)
+
+        st.markdown("<div style='height:8px;'></div>", unsafe_allow_html=True)
+        with st.expander("✏️ Editar datos del hotel", expanded=False):
+            with st.form("form_editar_hotel"):
+                h_n = st.text_input("Nombre Hotel:", value=hotel_nom_act)
+                h_d = st.text_input("Dirección:", value=hotel_dir_act)
+                h_lt = st.number_input("Latitud:", value=float(hotel_lat_act), format="%.6f")
+                h_ln = st.number_input("Longitud:", value=float(hotel_lon_act), format="%.6f")
+                if st.form_submit_button("💾 Guardar Hotel"):
+                    st.session_state.config_viaje["hotel"] = {"nombre": h_n, "direccion": h_d, "lat": h_lt, "lon": h_ln}
+                    guardar_config_viaje(st.session_state.config_viaje)
+                    st.toast("Hotel base actualizado.", icon="🏨")
+                    st.rerun()
+
+    st.markdown("---")
+    st.markdown('<div class="ny-card-header">🔄 Sincronización de Listas de Google Maps</div>', unsafe_allow_html=True)
+    st.caption("Puedes cambiar el nombre o la URL compartida de cualquier lista aquí mismo. Después pulsa sincronizar para importar los lugares nuevos.")
+
+    listas_config = st.session_state.config_viaje.get("listas_gmaps", [])
+    if not listas_config:
+        st.info("Todavía no hay listas de Google Maps guardadas.")
+
+    for idx_lst, lst_data in enumerate(listas_config):
+        nombre_lista = str(lst_data.get("nombre", f"Lista {idx_lst + 1}"))
+        url_lista = str(lst_data.get("url", ""))
+        sufijo_edicion = hashlib.sha1(f"{nombre_lista}\0{url_lista}".encode("utf-8")).hexdigest()[:10]
+        key_ed_nombre = f"gmaps_edit_nombre_{idx_lst}_{sufijo_edicion}"
+        key_ed_url = f"gmaps_edit_url_{idx_lst}_{sufijo_edicion}"
+
+        st.markdown(
+            f"<div style='font-weight:800; color:#0F172A; overflow-wrap:anywhere;'>{idx_lst + 1}. {html.escape(nombre_lista)}</div>"
+            f"<div class='gmaps-list-url' style='font-size:0.76rem; color:#475569; margin-top:2px; margin-bottom:6px;'>{html.escape(url_lista)}</div>",
+            unsafe_allow_html=True
+        )
+        with st.container(key=f"gmaps-actions-{idx_lst}"):
+            col_sync, col_edit = st.columns(2, gap="small")
+            with col_sync:
+                if st.button("🔄 Sincronizar", key=f"btn_sync_list_{idx_lst}", use_container_width=True):
+                    if not url_lista.strip():
+                        st.error("Edita la lista e introduce una URL antes de sincronizar.")
+                    else:
+                        with st.spinner(f"Descargando de {nombre_lista}..."):
+                            descargados = extraer_lugares_lista_gmaps(url_lista, nombre_lista)
+                            if descargados:
+                                existentes = set(x.get("nombre", "").lower() for x in st.session_state.lugares)
+                                agregados = 0
+                                max_id_act = max([x.get("id", 0) for x in st.session_state.lugares], default=0)
+                                for d_item in descargados:
+                                    nombre_importado = d_item.get("nombre", "").strip()
+                                    if nombre_importado and nombre_importado.lower() not in existentes:
+                                        max_id_act += 1
+                                        st.session_state.lugares.append({
+                                            "id": max_id_act,
+                                            "nombre": nombre_importado,
+                                            "lat": d_item["lat"],
+                                            "lon": d_item["lon"],
+                                            "dia": 0,
+                                            "hora": "",
+                                            "direccion": d_item.get("direccion", ""),
+                                            "nota": "",
+                                            "categoria": d_item["categoria"],
+                                            "tipo": d_item["tipo"],
+                                            "visitado": False
+                                        })
+                                        existentes.add(nombre_importado.lower())
+                                        agregados += 1
+                                guardar_itinerario_disco(st.session_state.lugares)
+                                st.success(f"✓ Sincronizado: {agregados} sitios nuevos añadidos a Guardados.")
+                                st.rerun()
+                            else:
+                                st.warning("No se pudieron extraer lugares. Comprueba que el enlace sea una lista compartida de Google Maps y que tenga acceso público.")
+            with col_edit:
+                if st.button("✏️ Editar", key=f"btn_edit_list_{idx_lst}", use_container_width=True):
+                    actual = st.session_state.get("lista_gmaps_editando")
+                    st.session_state.lista_gmaps_editando = None if actual == idx_lst else idx_lst
+                    for clave in (key_ed_nombre, key_ed_url):
+                        st.session_state.pop(clave, None)
+                    st.rerun()
+
+        if st.session_state.get("lista_gmaps_editando") == idx_lst:
+            st.markdown(f"**Editar lista: {html.escape(nombre_lista)}**")
+            with st.form(f"form_editar_lista_gmaps_{idx_lst}"):
+                nuevo_nombre_lista = st.text_input(
+                    "Nombre de la lista:",
+                    value=nombre_lista,
+                    key=key_ed_nombre
+                )
+                nueva_url_lista = st.text_input(
+                    "URL compartida de Google Maps:",
+                    value=url_lista,
+                    placeholder="https://maps.app.goo.gl/...",
+                    key=key_ed_url
+                )
+                guardar_lista = st.form_submit_button("💾 Guardar cambios", use_container_width=True)
+                cancelar_lista = st.form_submit_button("Cancelar", use_container_width=True)
+
+                if guardar_lista:
+                    nombre_limpio = nuevo_nombre_lista.strip()
+                    url_limpia = nueva_url_lista.strip()
+                    partes_url = urllib.parse.urlparse(url_limpia)
+                    if not nombre_limpio:
+                        st.error("El nombre de la lista no puede estar vacío.")
+                    elif partes_url.scheme not in ("http", "https") or not partes_url.netloc:
+                        st.error("Introduce una URL completa que empiece por https:// o http://.")
+                    else:
+                        listas_actualizadas = list(st.session_state.config_viaje.get("listas_gmaps", []))
+                        if idx_lst < len(listas_actualizadas):
+                            listas_actualizadas[idx_lst] = {"nombre": nombre_limpio, "url": url_limpia}
+                            st.session_state.config_viaje["listas_gmaps"] = listas_actualizadas
+                            if guardar_config_viaje(st.session_state.config_viaje):
+                                st.session_state.lista_gmaps_editando = None
+                                st.toast("Lista de Google Maps actualizada.", icon="✅")
+                                st.rerun()
+                elif cancelar_lista:
+                    st.session_state.lista_gmaps_editando = None
+                    st.rerun()
+
+    with st.expander("➕ Añadir nueva lista de Google Maps"):
+        with st.form("form_nueva_lista_gmaps"):
+            n_nombre_l = st.text_input("Nombre de la lista (ej: Rooftops & Bares):")
+            n_url_l = st.text_input("URL compartida de Google Maps (maps.app.goo.gl/...):")
+            if st.form_submit_button("Añadir Lista"):
+                url_nueva = (n_url_l or "").strip()
+                partes_url = urllib.parse.urlparse(url_nueva)
+                if not n_nombre_l.strip():
+                    st.error("Introduce un nombre para la lista.")
+                elif partes_url.scheme not in ("http", "https") or not partes_url.netloc:
+                    st.error("Introduce una URL completa que empiece por https:// o http://.")
+                else:
+                    listas_actualizadas = list(st.session_state.config_viaje.get("listas_gmaps", []))
+                    listas_actualizadas.append({"nombre": n_nombre_l.strip(), "url": url_nueva})
+                    st.session_state.config_viaje["listas_gmaps"] = listas_actualizadas
+                    if guardar_config_viaje(st.session_state.config_viaje):
+                        st.success("Lista guardada.")
+                        st.rerun()
