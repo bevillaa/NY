@@ -3016,6 +3016,7 @@ CATEGORIAS_CANONICAS = [
     "🏛️ Cultura",
     "🏙️ Miradores",
     "☀️ Spots",
+    "📍 Otros",
     "🏨 Hotel"
 ]
 
@@ -3030,9 +3031,8 @@ MAPA_MIGRACION_CAT = {
     "🏙️ Miradores & Observatorios": "🏙️ Miradores",
     "🌲 Parques, Muelles & Puentes": "☀️ Spots",
     "🏨 Hotel Base": "🏨 Hotel",
-    "📍 Otros Lugares": "☀️ Spots",
-    "📍 Otros": "☀️ Spots",
-    "Otros": "☀️ Spots"
+    "📍 Otros Lugares": "📍 Otros",
+    "Otros": "📍 Otros"
 }
 
 def normalizar_categoria(cat: str) -> str:
@@ -3887,11 +3887,6 @@ st.markdown(f"""
     <div>
       <div class="hero-eyebrow">🎄 NAVIDAD & FIN DE AÑO · 26 DIC 2026 - 4 ENE 2027 ❄️</div>
       <div class="hero-title">Navidad en Nueva York 🗽✨</div>
-      <div style="margin-top: 5px;">
-        <span class="hero-pill">✈️ {v_ida.get('vuelo','Aer Lingus · EI583, EI107')} · {v_ida.get('fecha','26 Dic')}</span>
-        <span class="hero-pill">🛫 {v_vta.get('vuelo','Aer Lingus · EI104, EI582')} · {v_vta.get('fecha','4 Ene')}</span>
-        <span class="hero-pill">🏨 {hotel.get('nombre','Courtyard by Marriott Upper East Side')}</span>
-      </div>
     </div>
     <div style="display:flex; gap:8px; flex-wrap:wrap; width:auto;">
       <div class="hero-stat-box">
@@ -4193,8 +4188,8 @@ with pestanas[1]:
         st.markdown(f'<div id="dia-{d}"></div>', unsafe_allow_html=True)
 
         st.markdown(f"""
-        <div style="background:#FFFFFF; border:1.5px solid #CBD5E1; border-left:1.5px solid #CBD5E1; border-radius:13px; padding:8px 12px; margin-top:10px; margin-bottom:8px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:6px;">
-          <div style="font-weight:900; font-size:0.98rem; color:#0F172A;">
+        <div style="background:#FAFAFA; border:1.5px solid #E5E7EB; border-left:1.5px solid #E5E7EB; border-radius:13px; padding:8px 12px; margin-top:10px; margin-bottom:8px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:6px;">
+          <div style="font-weight:900; font-size:1.23rem; color:#0F172A;">
             {etiqueta_dia(d)}
           </div>
           <div style="font-weight:800; font-size:0.78rem; color:#0F172A; background:#F8FAFC; border:1.5px solid #CBD5E1; border-radius:20px; padding:2px 9px;">
