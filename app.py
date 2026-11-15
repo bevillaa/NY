@@ -3288,8 +3288,10 @@ def extraer_lugares_lista_gmaps(url_lista: str, nombre_lista: str = ""):
             return
         if not (-90 <= lat <= 90 and -180 <= lon <= 180):
             return
-        clave = re.sub(r"[^a-z0-9]+", "", nombre.casefold())
-        if not clave or clave in vistos:
+        # Un mismo nombre puede corresponder a dos establecimientos distintos.
+        # Consideramos duplicado solo el mismo nombre en la misma ubicación.
+        clave = (re.sub(r"[^a-z0-9]+", "", nombre.casefold()), round(lat, 5), round(lon, 5))
+        if not clave[0] or clave in vistos:
             return
         vistos.add(clave)
         cat, tipo = clasificar_lugar(nombre, direccion, nombre_lista)
@@ -4632,30 +4634,60 @@ with pestanas[4]:
                         with st.spinner(f"Descargando de {nombre_lista}..."):
                             descargados = extraer_lugares_lista_gmaps(url_lista, nombre_lista)
                             if descargados:
-                                existentes = set(x.get("nombre", "").lower() for x in st.session_state.lugares)
+                                # La clave incluye coordenadas: no descarta sitios distintos
+                                # que casualmente tengan el mismo nombre.
+                                existentes = set()
+                                for lugar_existente in st.session_state.lugares:
+                                    try:
+                                        clave_existente = (
+                                            re.sub(r"[^a-z0-9]+", "", str(lugar_existente.get("nombre", "")).casefold()),
+                                            round(float(lugar_existente.get("lat")), 5),
+                                            round(float(lugar_existente.get("lon")), 5),
+                                        )
+                                        existentes.add(clave_existente)
+                                    except (TypeError, ValueError):
+                                        continue
                                 agregados = 0
+                                ya_guardados = 0
                                 max_id_act = max([x.get("id", 0) for x in st.session_state.lugares], default=0)
                                 for d_item in descargados:
-                                    nombre_importado = d_item.get("nombre", "").strip()
-                                    if nombre_importado and nombre_importado.lower() not in existentes:
-                                        max_id_act += 1
-                                        st.session_state.lugares.append({
-                                            "id": max_id_act,
-                                            "nombre": nombre_importado,
-                                            "lat": d_item["lat"],
-                                            "lon": d_item["lon"],
-                                            "dia": 0,
-                                            "hora": "",
-                                            "direccion": d_item.get("direccion", ""),
-                                            "nota": "",
-                                            "categoria": d_item["categoria"],
-                                            "tipo": d_item["tipo"],
-                                            "visitado": False
-                                        })
-                                        existentes.add(nombre_importado.lower())
-                                        agregados += 1
+                                    nombre_importado = str(d_item.get("nombre", "")).strip()
+                                    try:
+                                        lat_importada = float(d_item["lat"])
+                                        lon_importada = float(d_item["lon"])
+                                    except (KeyError, TypeError, ValueError):
+                                        continue
+                                    clave_importada = (
+                                        re.sub(r"[^a-z0-9]+", "", nombre_importado.casefold()),
+                                        round(lat_importada, 5),
+                                        round(lon_importada, 5),
+                                    )
+                                    if not nombre_importado or not clave_importada[0]:
+                                        continue
+                                    if clave_importada in existentes:
+                                        ya_guardados += 1
+                                        continue
+                                    max_id_act += 1
+                                    st.session_state.lugares.append({
+                                        "id": max_id_act,
+                                        "nombre": nombre_importado,
+                                        "lat": lat_importada,
+                                        "lon": lon_importada,
+                                        "dia": 0,
+                                        "hora": "",
+                                        "direccion": d_item.get("direccion", ""),
+                                        "nota": "",
+                                        "categoria": d_item.get("categoria", "📍 Otros"),
+                                        "tipo": d_item.get("tipo", "Interior"),
+                                        "visitado": False
+                                    })
+                                    existentes.add(clave_importada)
+                                    agregados += 1
                                 guardar_itinerario_disco(st.session_state.lugares)
-                                st.success(f"✓ Sincronizado: {agregados} sitios nuevos añadidos a Guardados.")
+                                st.success(
+                                    f"✓ Sincronización completada: Google entregó {len(descargados)} sitios; "
+                                    f"{agregados} nuevos guardados y {ya_guardados} ya estaban guardados."
+                                )
                                 st.rerun()
                             else:
                                 st.warning("No se pudieron extraer lugares. Comprueba que el enlace sea una lista compartida de Google Maps y que tenga acceso público.")
