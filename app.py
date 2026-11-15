@@ -4152,7 +4152,7 @@ if seccion_principal == "📅 Itinerario":
         st.markdown(f'<div id="dia-{d}"></div>', unsafe_allow_html=True)
 
         st.markdown(f"""
-        <div style="background:#FAFAFA; border:1.5px solid #E5E7EB; border-left:1.5px solid #E5E7EB; border-radius:13px; padding:8px 12px; margin-top:10px; margin-bottom:8px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:6px;">
+        <div style="background:#FFFFFF; border:1.5px solid #E5E7EB; border-left:1.5px solid #E5E7EB; border-radius:13px; padding:8px 12px; margin-top:10px; margin-bottom:8px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:6px;">
           <div style="font-weight:900; font-size:1.23rem; color:#0F172A;">
             {etiqueta_dia(d)}
           </div>
