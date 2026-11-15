@@ -1789,23 +1789,23 @@ st.markdown("""
   @media (max-width: 768px) {
     /* Nombre dominante; categoría, entorno, dirección y nota siempre menores. */
     .place-list-title {
-      font-size: 0.88rem !important;
-      line-height: 1.18 !important;
+      font-size: 0.94rem !important;
+      line-height: 1.2 !important;
       letter-spacing: 0 !important;
     }
     .place-list-address {
-      font-size: 0.68rem !important;
-      line-height: 1.25 !important;
+      font-size: 0.72rem !important;
+      line-height: 1.28 !important;
       margin-top: 2px !important;
     }
     .place-note {
-      font-size: 0.66rem !important;
-      line-height: 1.25 !important;
+      font-size: 0.70rem !important;
+      line-height: 1.28 !important;
       margin-top: 2px !important;
     }
     .badge-cat, .badge-indoor, .badge-outdoor {
-      font-size: 0.63rem !important;
-      line-height: 1.15 !important;
+      font-size: 0.66rem !important;
+      line-height: 1.18 !important;
       padding: 1px 5px !important;
     }
 
@@ -2011,8 +2011,8 @@ st.markdown("""
       grid-template-columns: minmax(34px, 0.72fr) minmax(34px, 0.72fr) minmax(72px, 1fr) minmax(98px, 1.38fr) !important;
       gap: 3px !important;
     }
-    .place-list-title { font-size: 0.86rem !important; }
-    .place-list-address, .place-note { font-size: 0.65rem !important; }
+    .place-list-title { font-size: 0.90rem !important; }
+    .place-list-address, .place-note { font-size: 0.68rem !important; }
   }
 
 
@@ -2642,7 +2642,7 @@ st.markdown("""
     [class*="st-key-saved-controls-row-"] [data-testid="stHorizontalBlock"] {
       display: grid !important;
       grid-template-columns:
-        minmax(36px, 0.85fr)
+        minmax(40px, 0.90fr)
         minmax(36px, 0.85fr)
         minmax(76px, 1.7fr)
         minmax(84px, 1.9fr) !important;
@@ -2702,7 +2702,7 @@ st.markdown("""
       background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%23334155' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m16 4 4 4'/%3E%3Cpath d='M4 20l4-.9L19 8a2.1 2.1 0 0 0-3-3L5 16z'/%3E%3C/svg%3E") !important;
       background-repeat: no-repeat !important;
       background-position: center center !important;
-      background-size: 19px 19px !important;
+      background-size: 21px 21px !important;
       color: transparent !important;
       font-size: 0 !important;
       line-height: 0 !important;
@@ -2842,196 +2842,12 @@ st.markdown("""
     [class*="st-key-it-controls-row-"] [data-testid="stHorizontalBlock"],
     [class*="st-key-saved-controls-row-"] [data-testid="stHorizontalBlock"] {
       grid-template-columns:
-        minmax(34px, 0.82fr)
+        minmax(38px, 0.90fr)
         minmax(34px, 0.82fr)
         minmax(74px, 1.75fr)
         minmax(82px, 1.95fr) !important;
       column-gap: 4px !important;
     }
-  }
-
-  /* ===== AJUSTE FINAL: LÁPIZ SIN RECORTE + INFORMACIÓN MÁS LEGIBLE ===== */
-  @media (max-width: 768px) {
-    [class*="st-key-it-controls-row-"] [data-testid="stHorizontalBlock"],
-    [class*="st-key-saved-controls-row-"] [data-testid="stHorizontalBlock"] {
-      display: grid !important;
-      grid-template-columns: 42px 40px 86px minmax(82px, 1fr) !important;
-      grid-auto-flow: column !important;
-      justify-content: stretch !important;
-      align-items: center !important;
-      column-gap: 3px !important;
-      row-gap: 0 !important;
-      width: 100% !important;
-      min-width: 0 !important;
-      max-width: 100% !important;
-      box-sizing: border-box !important;
-    }
-
-    [class*="st-key-it-controls-row-"] [data-testid="column"],
-    [class*="st-key-saved-controls-row-"] [data-testid="column"] {
-      min-width: 0 !important;
-      max-width: 100% !important;
-      box-sizing: border-box !important;
-      overflow: visible !important;
-    }
-
-    /* Mantiene el contenedor completo de la hora en la anchura de su columna. */
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(3) [data-testid="stTextInput"],
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(3) [data-testid="stTextInput"],
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(3) .stTextInput,
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(3) .stTextInput,
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(3) [data-baseweb="input"],
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(3) [data-baseweb="input"],
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(3) [data-baseweb="base-input"],
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(3) [data-baseweb="base-input"] {
-      box-sizing: border-box !important;
-      width: 86px !important;
-      min-width: 86px !important;
-      max-width: 86px !important;
-    }
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(3) input,
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(3) input {
-      width: 100% !important;
-      min-width: 0 !important;
-      text-align: center !important;
-      font-size: 0.78rem !important;
-      font-weight: 800 !important;
-      font-variant-numeric: tabular-nums !important;
-    }
-
-    /* Editar: 2 px más de anchura y un lápiz SVG algo mayor para que no se recorte. */
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(1) .stButton,
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(1) .stButton,
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(1) [data-testid="stButton"],
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(1) [data-testid="stButton"] {
-      width: 42px !important;
-      min-width: 42px !important;
-      max-width: 42px !important;
-      margin: 0 !important;
-    }
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(1) .stButton > button,
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(1) .stButton > button,
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(1) [data-testid="stButton"] > button,
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(1) [data-testid="stButton"] > button {
-      box-sizing: border-box !important;
-      display: flex !important;
-      align-items: center !important;
-      justify-content: center !important;
-      width: 42px !important;
-      min-width: 42px !important;
-      max-width: 42px !important;
-      height: 38px !important;
-      min-height: 38px !important;
-      max-height: 38px !important;
-      margin: 0 !important;
-      padding: 0 !important;
-      border: 1.5px solid #94A3B8 !important;
-      border-radius: 8px !important;
-      background-color: #FFFFFF !important;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23334155' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m16 4 4 4'/%3E%3Cpath d='M4 20l4-.9L19 8a2.1 2.1 0 0 0-3-3L5 16z'/%3E%3C/svg%3E") !important;
-      background-repeat: no-repeat !important;
-      background-position: center center !important;
-      background-size: 22px 22px !important;
-      color: transparent !important;
-      -webkit-text-fill-color: transparent !important;
-      font-size: 0 !important;
-      line-height: 0 !important;
-      text-indent: -9999px !important;
-      overflow: visible !important;
-      box-shadow: none !important;
-    }
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(1) .stButton > button > *,
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(1) .stButton > button > * {
-      visibility: hidden !important;
-      position: absolute !important;
-      width: 1px !important;
-      height: 1px !important;
-      overflow: hidden !important;
-    }
-
-    /* Mapa: icono SVG centrado, con la misma altura visual que Editar. */
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(2) [data-testid="stLinkButton"],
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(2) [data-testid="stLinkButton"] {
-      display: block !important;
-      width: 40px !important;
-      min-width: 40px !important;
-      max-width: 40px !important;
-      margin: 0 !important;
-    }
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(2) [data-testid="stLinkButton"] > a,
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(2) [data-testid="stLinkButton"] > a {
-      box-sizing: border-box !important;
-      display: flex !important;
-      align-items: center !important;
-      justify-content: center !important;
-      width: 40px !important;
-      min-width: 40px !important;
-      max-width: 40px !important;
-      height: 38px !important;
-      min-height: 38px !important;
-      max-height: 38px !important;
-      margin: 0 !important;
-      padding: 0 !important;
-      border: 1.5px solid #94A3B8 !important;
-      border-radius: 8px !important;
-      background-color: #FFFFFF !important;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231D4ED8' stroke-width='1.9' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m3 6 6-3 6 3 6-3v15l-6 3-6-3-6 3z'/%3E%3Cpath d='M9 3v15'/%3E%3Cpath d='M15 6v15'/%3E%3C/svg%3E") !important;
-      background-repeat: no-repeat !important;
-      background-position: center center !important;
-      background-size: 21px 21px !important;
-      color: transparent !important;
-      -webkit-text-fill-color: transparent !important;
-      font-size: 0 !important;
-      line-height: 0 !important;
-      text-indent: -9999px !important;
-      text-decoration: none !important;
-      overflow: visible !important;
-      box-shadow: none !important;
-    }
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(2) a > *,
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(2) a > * {
-      visibility: hidden !important;
-      position: absolute !important;
-      width: 1px !important;
-      height: 1px !important;
-      overflow: hidden !important;
-    }
-
-    /* El nombre gana presencia; dirección, etiquetas y nota crecen algo,
-       pero siempre mantienen una jerarquía tipográfica inferior al nombre. */
-    .place-list-title {
-      font-size: 1.02rem !important;
-      line-height: 1.22 !important;
-      font-weight: 900 !important;
-      letter-spacing: 0 !important;
-    }
-    .place-list-address {
-      font-size: 0.78rem !important;
-      line-height: 1.3 !important;
-      font-weight: 600 !important;
-      margin-top: 3px !important;
-    }
-    .place-note {
-      font-size: 0.74rem !important;
-      line-height: 1.32 !important;
-      margin-top: 3px !important;
-    }
-    .badge-cat, .badge-indoor, .badge-outdoor {
-      font-size: 0.70rem !important;
-      line-height: 1.2 !important;
-      padding: 2px 6px !important;
-    }
-  }
-
-  @media (max-width: 320px) {
-    [class*="st-key-it-controls-row-"] [data-testid="stHorizontalBlock"],
-    [class*="st-key-saved-controls-row-"] [data-testid="stHorizontalBlock"] {
-      grid-template-columns: 42px 40px 86px minmax(82px, 1fr) !important;
-      column-gap: 3px !important;
-    }
-    .place-list-title { font-size: 0.98rem !important; }
-    .place-list-address { font-size: 0.75rem !important; }
-    .place-note { font-size: 0.72rem !important; }
   }
 
 </style>
