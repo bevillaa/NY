@@ -3059,6 +3059,7 @@ CATEGORIAS_CANONICAS = [
     "🍸 Copas",
     "🎷 Ocio",
     "🛍️ Compras",
+    "🎄 Christmas markets",
     "🏛️ Cultura",
     "🏙️ Miradores",
     "☀️ Spots",
@@ -3099,6 +3100,9 @@ def clasificar_lugar(nombre: str, direccion: str = "", lista_origen: str = "") -
 
     if ('hotel' in nom or 'inn' in nom or 'alojamiento' in nom) and any(k in nom for k in ['riu', 'marriott', 'hilton', 'hyatt', 'sheraton', 'base']):
         return "🏨 Hotel", "Interior"
+
+    if any(k in nom for k in ['christmas market', 'holiday market', 'winter village', 'holiday shops', 'mercadillo navideño', 'mercado navideño']) or 'christmas market' in orig or 'holiday market' in orig:
+        return "🎄 Christmas markets", "Exterior"
 
     if any(k in nom for k in ['summit', 'one vanderbilt', 'empire state', 'top of the rock', 'the edge', 'observatory', 'one world observatory']):
         return "🏙️ Miradores", "Interior"
