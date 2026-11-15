@@ -3069,14 +3069,15 @@ CATEGORIAS_CANONICAS = [
 
 MAPA_MIGRACION_CAT = {
     "🍕 Gastronomía": "🍽️ Gastronomía",
-    "🍕 Gastronomía & Restaurantes": "🍽️ Gastronomía",
+    "🍕 Gastronomía, Food & Restaurantes": "🍽️ Gastronomía",
     "🍪 Cafeterías & Dulces": "🍪 Dulces",
     "🍸 Copas": "🍸 Copas",
     "🎷 Jazz, Música & Ocio": "🎷 Ocio",
-    "🛍️ Compras & Outlets": "🛍️ Compras",
+    "🛍️ Compras, Shopping & Outlets": "🛍️ Compras",
     "🏛️ Museos & Monumentos": "🏛️ Cultura",
-    "🏙️ Miradores & Observatorios": "🏙️ Miradores",
-    "🌲 Parques, Muelles, Rooftops & Puentes": "☀️ Spots",
+    "🎄 Christmas market, Market & Christmas ": "🎄 Christmas markets",
+    "🏙️ Miradores, Edificio & Building": "🏙️ Miradores",
+    "🌲 Parques, Muelles, Rooftops, Spots & Puentes": "☀️ Spots",
     "🏨 Hotel Base": "🏨 Hotel",
     "📍 Otros Lugares": "📍 Otros",
     "Otros": "📍 Otros"
