@@ -22,11 +22,11 @@
   "listas_gmaps": [
     {
       "nombre": "Tiendas & Outlets",
-      "url": "https://maps.app.goo.gl/u3WSzDMVLtHC8CQS8"
+      "url": "https://maps.app.goo.gl/NmjQweAVAAqUnULQ7"
     },
     {
       "nombre": "NY Sweets",
-      "url": "https://maps.app.goo.gl/gHBnh1QyyFcJbgcL7"
+      "url": "https://maps.app.goo.gl/8P25EETKqzyWD3Zx5"
     },
     {
       "nombre": "Food",
@@ -34,11 +34,11 @@
     },
     {
       "nombre": "Rooftop",
-      "url": "https://maps.app.goo.gl/B1aX8hdjK88i4K6N7"
+      "url": "https://maps.app.goo.gl/vytXVvX2LcN2iiJV6"
     },
     {
       "nombre": "Spots",
-      "url": "https://maps.app.goo.gl/wt5cEefiApFvk9ao6"
+      "url": "https://maps.app.goo.gl/Qofzvh5ahKcwXgTD8"
     },
     {
       "nombre": "NY",
@@ -47,6 +47,10 @@
     {
       "nombre": "Life Out",
       "url": "https://maps.app.goo.gl/MiKrEc3gj9GoTXJCA"
+    },
+    {
+      "nombre": "Markets",
+      "url": "https://maps.app.goo.gl/zTDTvGPkTs2fw1jX6"
     }
   ]
 }
