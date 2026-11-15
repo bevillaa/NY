@@ -3970,7 +3970,6 @@ SECCIONES_PRINCIPALES = [
     "📍 Guardados",
     "💵 Divisas & Tip",
     "✈️ Vuelos & Hotel",
-    "🌧️ Clima",
 ]
 seccion_principal = st.radio(
     "Sección del viaje",
