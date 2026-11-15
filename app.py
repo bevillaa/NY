@@ -1818,10 +1818,9 @@ with pestanas[5]:
     listas_config = st.session_state.config_viaje.get("listas_gmaps", [])
 
     for idx_lst, lst_data in enumerate(listas_config):
-        col_l1, col_l2 = st.columns([3.5, 1.5])
-        with col_l1:
-            st.markdown(f"**{idx_lst+1}. {lst_data['nombre']}**  
-`{lst_data['url']}`")
+    col_l1, col_l2 = st.columns([3.5, 1.5])
+    with col_l1:
+        st.markdown(f"**{idx_lst+1}. {lst_data['nombre']}**  \n`{lst_data['url']}`")
         with col_l2:
             if st.button("🔄 Sincronizar", key=f"btn_sync_list_{idx_lst}", use_container_width=True):
                 with st.spinner(f"Descargando de {lst_data['nombre']}..."):
