@@ -130,10 +130,8 @@ st.markdown("""
   }
   .block-container {
     padding-top: 1rem !important;
-    padding-left: 1.5rem !important;
-    padding-right: 1.5rem !important;
     padding-bottom: 2.5rem !important;
-    max-width: 100% !important;
+    max-width: 1180px !important;
   }
 
   .hero-container {
@@ -441,10 +439,8 @@ st.markdown("""
   }
 
   iframe {
-    display: block !important;
-    width: 100% !important;
-    max-width: 100% !important;
-    height: 620px !important;
+    border-radius: 16px !important;
+    border: 1.5px solid #CBD5E1 !important;
   }
 
   .stSelectbox > div > div, .stTextInput > div > div, .stNumberInput > div > div {
@@ -4111,7 +4107,7 @@ if seccion_principal == "🗺️ Mapa":
     resultado_mapa = st_folium(
         mapa,
         use_container_width=True,
-        height=2000,
+        height=920,
         returned_objects=[]
     )
 
