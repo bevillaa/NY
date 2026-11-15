@@ -528,33 +528,34 @@ st.markdown("""
       padding: 0 !important;
     }
 
-    /* Nombre + lápiz (y checkbox en el itinerario): nunca se pisan. */
-    [data-testid="stHorizontalBlock"]:has(.edit-mini-btn) {
-      display: flex !important;
-      flex-wrap: nowrap !important;
-      align-items: flex-start !important;
-      gap: 4px !important;
-    }
-    [data-testid="stHorizontalBlock"]:has(.edit-mini-btn)
-      > [data-testid="column"]:has(.edit-mini-btn) {
-      flex: 0 0 31px !important;
-      width: 31px !important;
-      min-width: 31px !important;
-      max-width: 31px !important;
-    }
-    [data-testid="stHorizontalBlock"]:has(.edit-mini-btn)
-      > [data-testid="column"]:has([data-testid="stCheckbox"]) {
-      flex: 0 0 27px !important;
-      width: 27px !important;
-      min-width: 27px !important;
-      max-width: 27px !important;
-    }
-    [data-testid="stHorizontalBlock"]:has(.edit-mini-btn)
-      > [data-testid="column"]:not(:has(.edit-mini-btn)):not(:has([data-testid="stCheckbox"])) {
-      flex: 1 1 0% !important;
-      width: auto !important;
+    /* Filas de nombre dentro de contenedores con identidad CSS propia. */
+    [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] {
+      display: grid !important;
+      grid-template-columns: 26px minmax(0, 1fr) 28px !important;
+      column-gap: 6px !important;
+      row-gap: 0 !important;
+      align-items: start !important;
+      width: 100% !important;
       min-width: 0 !important;
-      max-width: none !important;
+    }
+    [class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"] {
+      display: grid !important;
+      grid-template-columns: minmax(0, 1fr) 28px !important;
+      column-gap: 6px !important;
+      row-gap: 0 !important;
+      align-items: start !important;
+      width: 100% !important;
+      min-width: 0 !important;
+    }
+    [class*="st-key-it-heading-row-"] [data-testid="column"],
+    [class*="st-key-saved-heading-row-"] [data-testid="column"] {
+      display: block !important;
+      flex: none !important;
+      width: 100% !important;
+      min-width: 0 !important;
+      max-width: 100% !important;
+      margin: 0 !important;
+      padding: 0 !important;
     }
     .edit-mini-btn { display: flex !important; justify-content: flex-end !important; width: 100% !important; }
     .edit-mini-btn button,
@@ -573,37 +574,27 @@ st.markdown("""
       line-height: 1 !important;
     }
 
-    /*
-      Hora | Día | Maps: CSS Grid evita depender de los flex-basis inline que
-      Streamlit calcula para st.columns. Las columnas vacías se han eliminado
-      del código Python, por lo que el grid siempre recibe exactamente 3 celdas.
-    */
-    [data-testid="stHorizontalBlock"]:has(.compact-hora):has(.compact-dia):has(.compact-maps) {
+    /* Hora | Día | Maps: tres columnas reales dentro del ancho móvil. */
+    [class*="st-key-it-controls-row-"] [data-testid="stHorizontalBlock"],
+    [class*="st-key-saved-controls-row-"] [data-testid="stHorizontalBlock"] {
       display: grid !important;
-      grid-template-columns: 70px minmax(0, 1fr) 70px !important;
+      grid-template-columns: minmax(58px, 0.82fr) minmax(0, 2.1fr) minmax(62px, 0.90fr) !important;
       align-items: center !important;
       column-gap: 6px !important;
       row-gap: 0 !important;
-      flex-wrap: initial !important;
       width: 100% !important;
       min-width: 0 !important;
     }
-    [data-testid="stHorizontalBlock"]:has(.compact-hora):has(.compact-dia):has(.compact-maps)
-      > [data-testid="column"] {
+    [class*="st-key-it-controls-row-"] [data-testid="column"],
+    [class*="st-key-saved-controls-row-"] [data-testid="column"] {
       display: block !important;
       flex: none !important;
-      width: auto !important;
+      width: 100% !important;
       min-width: 0 !important;
-      max-width: none !important;
+      max-width: 100% !important;
       margin: 0 !important;
       padding: 0 !important;
     }
-    [data-testid="stHorizontalBlock"]:has(.compact-hora):has(.compact-dia):has(.compact-maps)
-      > [data-testid="column"]:has(.compact-hora) { grid-column: 1 !important; }
-    [data-testid="stHorizontalBlock"]:has(.compact-hora):has(.compact-dia):has(.compact-maps)
-      > [data-testid="column"]:has(.compact-dia) { grid-column: 2 !important; }
-    [data-testid="stHorizontalBlock"]:has(.compact-hora):has(.compact-dia):has(.compact-maps)
-      > [data-testid="column"]:has(.compact-maps) { grid-column: 3 !important; }
 
     /* Marcadores HTML sin altura; solo sirven para identificar cada columna. */
     .mobile-control-marker { display: block !important; width: 0 !important; height: 0 !important; margin: 0 !important; padding: 0 !important; line-height: 0 !important; overflow: hidden !important; }
@@ -732,8 +723,17 @@ st.markdown("""
     .block-container { padding-left: 0.45rem !important; padding-right: 0.45rem !important; }
     .hero-title { font-size: 1.2rem !important; }
     .stTabs [data-baseweb="tab"] { font-size: 0.69rem !important; padding: 6px 2px !important; }
-    [data-testid="stHorizontalBlock"]:has(.compact-hora):has(.compact-dia):has(.compact-maps) {
-      grid-template-columns: 64px minmax(0, 1fr) 64px !important;
+    [class*="st-key-it-controls-row-"] [data-testid="stHorizontalBlock"],
+    [class*="st-key-saved-controls-row-"] [data-testid="stHorizontalBlock"] {
+      grid-template-columns: minmax(54px, 0.82fr) minmax(0, 2.1fr) minmax(58px, 0.90fr) !important;
+      column-gap: 5px !important;
+    }
+    [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] {
+      grid-template-columns: 25px minmax(0, 1fr) 27px !important;
+      column-gap: 5px !important;
+    }
+    [class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"] {
+      grid-template-columns: minmax(0, 1fr) 27px !important;
       column-gap: 5px !important;
     }
   }
@@ -1586,9 +1586,9 @@ pestanas = st.tabs([
     "🗺️ Mapa",
     "📅 Itinerario",
     "📍 Guardados",
-    "🌧️ Clima",
     "💵 Divisas & Tip",
-    "✈️ Vuelos & Hotel"
+    "✈️ Vuelos & Hotel",
+    "🌧️ Clima"
 ])
 
 
@@ -1847,16 +1847,8 @@ with pestanas[1]:
     )
 
     if "Todos los Días" in filtro_it_sel:
+        # El desplegable es el único selector de día; se eliminan los botones rápidos.
         dias_a_mostrar = list(range(1, 11))
-        st.markdown(
-            '<div style="display:flex; flex-wrap:wrap; gap:5px; margin:6px 0 12px 0;">' +
-            "".join([
-                f'<a href="#dia-{d}" style="text-decoration:none; background:#FFFFFF; border:1.5px solid #94A3B8; border-radius:9px; padding:4px 9px; font-size:0.77rem; font-weight:800; color:#0F172A;">Día {d} · {DIAS_VIAJE[d]["fecha"]}</a>'
-                for d in range(1, 11)
-            ]) +
-            '</div>',
-            unsafe_allow_html=True
-        )
     else:
         m_d_it = re.search(r"Día (\d+):", filtro_it_sel)
         dias_a_mostrar = [int(m_d_it.group(1))] if m_d_it else [1]
@@ -1896,79 +1888,82 @@ with pestanas[1]:
                 maps_q = urllib.parse.quote(f"{item['nombre']}, New York")
                 gmaps_url = f"https://www.google.com/maps/search/?api=1&query={maps_q}"
 
-                # Fila 1: Checkbox + Nombre (con botón pequeño ✏️ justo a la derecha del nombre)
-                c_chk, c_info, c_ed = st.columns([0.45, 8.75, 0.8])
-                with c_chk:
-                    chk_val = st.checkbox("", value=is_visited, key=f"chk_it_{d}_{item['id']}")
-                    if chk_val != is_visited and idx_real is not None:
-                        st.session_state.lugares[idx_real]["visitado"] = chk_val
-                        guardar_itinerario_disco(st.session_state.lugares)
-                        st.rerun()
-
-                with c_info:
-                    txt_c = "#334155" if is_visited else "#0F172A"
-                    strike = "text-decoration: line-through; opacity: 0.78;" if is_visited else ""
-                    hora_tag = f'<span class="badge-hora" style="margin-right:5px;">🕒 {hora_i}</span>' if hora_i else ''
-                    tipo_badge = '<span class="badge-indoor">🌧️ Interior</span>' if item.get("tipo") == "Interior" else '<span class="badge-outdoor">☀️ Exterior</span>'
-                    dir_html = f'<div style="font-size:0.78rem; color:#334155; font-weight:600; margin-top:2px;">📍 {dir_i}</div>' if dir_i else ''
-                    nota_html = bloque_nota_html(nota_i)
-
-                    st.markdown(f"""
-                    <div style="{strike}">
-                      {hora_tag}<span style="font-weight:900; font-size:0.94rem; color:{txt_c};">#{seq_idx} · {emoji_i} {item['nombre']}</span>
-                      <div style="margin-top:3px; display:flex; flex-wrap:wrap; gap:4px;">
-                        <span class="badge-cat">{cat_i}</span>
-                        {tipo_badge}
-                      </div>
-                    </div>
-                    {dir_html}
-                    {nota_html}
-                    """, unsafe_allow_html=True)
-
-                with c_ed:
-                    st.markdown('<div class="edit-mini-btn">', unsafe_allow_html=True)
-                    if st.button("✏️", key=f"btn_ed_it_{d}_{item['id']}", help="Editar sitio"):
-                        ek = f"it_{d}_{item['id']}"
-                        st.session_state.editando_spot_key = None if st.session_state.editando_spot_key == ek else ek
-                        st.rerun()
-                    st.markdown('</div>', unsafe_allow_html=True)
-
-                # Fila 2: Controles compactos en línea (Hora cuadrada + Día + Maps)
-                c_hr, c_mv, c_mp = st.columns([1.0, 2.15, 1.0], gap="small")
-                with c_hr:
-                    st.markdown('<span class="mobile-control-marker compact-hora"></span>', unsafe_allow_html=True)
-                    nueva_h = st.text_input(
-                        "Hora",
-                        value=hora_i,
-                        placeholder="🕒 HH:MM",
-                        key=f"hora_it_{d}_{item['id']}",
-                        label_visibility="collapsed"
-                    )
-                    if nueva_h.strip() != hora_i and idx_real is not None:
-                        hl = nueva_h.strip()
-                        if not hl or re.match(r"^([01]?\d|2[0-3]):[0-5]\d$", hl):
-                            if hl and len(hl) == 4:
-                                hl = "0" + hl
-                            st.session_state.lugares[idx_real]["hora"] = hl
+                # Fila 1: completado + información + lápiz. El contenedor permite
+                # controlar los anchos de las tres columnas sin depender del móvil.
+                with st.container(key=f"it-heading-row-{item['id']}"):
+                    c_chk, c_info, c_ed = st.columns([0.45, 8.75, 0.8], gap="small")
+                    with c_chk:
+                        chk_val = st.checkbox("", value=is_visited, key=f"chk_it_{d}_{item['id']}")
+                        if chk_val != is_visited and idx_real is not None:
+                            st.session_state.lugares[idx_real]["visitado"] = chk_val
                             guardar_itinerario_disco(st.session_state.lugares)
                             st.rerun()
-                with c_mv:
-                    st.markdown('<span class="mobile-control-marker compact-dia"></span>', unsafe_allow_html=True)
-                    dest_d = selectbox_sin_teclado(
-                        "",
-                        [etiqueta_dia_corta(x) for x in range(1, 11)] + ["Guardados"],
-                        index=d - 1,
-                        key=f"mvd_it_{d}_{item['id']}",
-                        label_visibility="collapsed"
-                    )
-                    val_dest = 0 if dest_d == "Guardados" else int(re.search(r"Día (\d+)", dest_d).group(1))
-                    if val_dest != d and idx_real is not None:
-                        st.session_state.lugares[idx_real]["dia"] = val_dest
-                        guardar_itinerario_disco(st.session_state.lugares)
-                        st.rerun()
-                with c_mp:
-                    st.markdown('<span class="mobile-control-marker compact-maps"></span>', unsafe_allow_html=True)
-                    st.link_button("🗺️ Maps", gmaps_url, use_container_width=True)
+
+                    with c_info:
+                        txt_c = "#334155" if is_visited else "#0F172A"
+                        strike = "text-decoration: line-through; opacity: 0.78;" if is_visited else ""
+                        hora_tag = f'<span class="badge-hora" style="margin-right:5px;">🕒 {hora_i}</span>' if hora_i else ''
+                        tipo_badge = '<span class="badge-indoor">🌧️ Interior</span>' if item.get("tipo") == "Interior" else '<span class="badge-outdoor">☀️ Exterior</span>'
+                        dir_html = f'<div style="font-size:0.78rem; color:#334155; font-weight:600; margin-top:2px;">📍 {dir_i}</div>' if dir_i else ''
+                        nota_html = bloque_nota_html(nota_i)
+
+                        st.markdown(f"""
+                        <div style="{strike}">
+                          {hora_tag}<span style="font-weight:900; font-size:0.94rem; color:{txt_c};">#{seq_idx} · {emoji_i} {item['nombre']}</span>
+                          <div style="margin-top:3px; display:flex; flex-wrap:wrap; gap:4px;">
+                            <span class="badge-cat">{cat_i}</span>
+                            {tipo_badge}
+                          </div>
+                        </div>
+                        {dir_html}
+                        {nota_html}
+                        """, unsafe_allow_html=True)
+
+                    with c_ed:
+                        st.markdown('<div class="edit-mini-btn">', unsafe_allow_html=True)
+                        if st.button("✏️", key=f"btn_ed_it_{d}_{item['id']}", help="Editar sitio"):
+                            ek = f"it_{d}_{item['id']}"
+                            st.session_state.editando_spot_key = None if st.session_state.editando_spot_key == ek else ek
+                            st.rerun()
+                        st.markdown('</div>', unsafe_allow_html=True)
+
+                # Fila 2: Hora | Día | Maps, agrupados en una cuadrícula móvil.
+                with st.container(key=f"it-controls-row-{item['id']}"):
+                    c_hr, c_mv, c_mp = st.columns([1.0, 2.15, 1.0], gap="small")
+                    with c_hr:
+                        st.markdown('<span class="mobile-control-marker compact-hora"></span>', unsafe_allow_html=True)
+                        nueva_h = st.text_input(
+                            "Hora",
+                            value=hora_i,
+                            placeholder="🕒 HH:MM",
+                            key=f"hora_it_{d}_{item['id']}",
+                            label_visibility="collapsed"
+                        )
+                        if nueva_h.strip() != hora_i and idx_real is not None:
+                            hl = nueva_h.strip()
+                            if not hl or re.match(r"^([01]?\d|2[0-3]):[0-5]\d$", hl):
+                                if hl and len(hl) == 4:
+                                    hl = "0" + hl
+                                st.session_state.lugares[idx_real]["hora"] = hl
+                                guardar_itinerario_disco(st.session_state.lugares)
+                                st.rerun()
+                    with c_mv:
+                        st.markdown('<span class="mobile-control-marker compact-dia"></span>', unsafe_allow_html=True)
+                        dest_d = selectbox_sin_teclado(
+                            "",
+                            [etiqueta_dia_corta(x) for x in range(1, 11)] + ["Guardados"],
+                            index=d - 1,
+                            key=f"mvd_it_{d}_{item['id']}",
+                            label_visibility="collapsed"
+                        )
+                        val_dest = 0 if dest_d == "Guardados" else int(re.search(r"Día (\d+)", dest_d).group(1))
+                        if val_dest != d and idx_real is not None:
+                            st.session_state.lugares[idx_real]["dia"] = val_dest
+                            guardar_itinerario_disco(st.session_state.lugares)
+                            st.rerun()
+                    with c_mp:
+                        st.markdown('<span class="mobile-control-marker compact-maps"></span>', unsafe_allow_html=True)
+                        st.link_button("🗺️ Maps", gmaps_url, use_container_width=True)
 
                 if idx_real is not None:
                     render_editor_sitio_panel(item, idx_real, f"it_{d}")
@@ -2019,62 +2014,64 @@ with pestanas[2]:
         hora_badge_p = f'<span class="badge-hora" style="margin-left:4px;">🕒 {hora_p}</span>' if hora_p else ''
         nota_p_html = bloque_nota_html(nota_p)
 
-        # Fila 1: Nombre + Botón pequeño ✏️ justo a la derecha del nombre
-        c_g_nom, c_g_ed = st.columns([9.2, 0.8])
-        with c_g_nom:
-            st.markdown(f"""
-            <div style="font-size:0.94rem; font-weight:800; color:#0F172A;">{obtener_emoji_categoria(cat_p)} {p_spot['nombre']}{dia_badge_p}{hora_badge_p}</div>
-            <div style="font-size:0.78rem; color:#334155;">{cat_p} · {'🌧️ Interior' if p_spot.get('tipo') == 'Interior' else '☀️ Exterior'} {f'· 📍 {dir_p}' if dir_p else ''}</div>
-            {nota_p_html}
-            """, unsafe_allow_html=True)
-        with c_g_ed:
-            st.markdown('<div class="edit-mini-btn">', unsafe_allow_html=True)
-            if st.button("✏️", key=f"btn_ed_pool_{p_spot['id']}", help="Editar sitio"):
-                ek = f"pool_{p_spot['id']}"
-                st.session_state.editando_spot_key = None if st.session_state.editando_spot_key == ek else ek
-                st.rerun()
-            st.markdown('</div>', unsafe_allow_html=True)
+        # Fila 1: nombre + lápiz, con distribución responsive controlada.
+        with st.container(key=f"saved-heading-row-{p_spot['id']}"):
+            c_g_nom, c_g_ed = st.columns([9.2, 0.8], gap="small")
+            with c_g_nom:
+                st.markdown(f"""
+                <div style="font-size:0.94rem; font-weight:800; color:#0F172A;">{obtener_emoji_categoria(cat_p)} {p_spot['nombre']}{dia_badge_p}{hora_badge_p}</div>
+                <div style="font-size:0.78rem; color:#334155;">{cat_p} · {'🌧️ Interior' if p_spot.get('tipo') == 'Interior' else '☀️ Exterior'} {f'· 📍 {dir_p}' if dir_p else ''}</div>
+                {nota_p_html}
+                """, unsafe_allow_html=True)
+            with c_g_ed:
+                st.markdown('<div class="edit-mini-btn">', unsafe_allow_html=True)
+                if st.button("✏️", key=f"btn_ed_pool_{p_spot['id']}", help="Editar sitio"):
+                    ek = f"pool_{p_spot['id']}"
+                    st.session_state.editando_spot_key = None if st.session_state.editando_spot_key == ek else ek
+                    st.rerun()
+                st.markdown('</div>', unsafe_allow_html=True)
 
-        # Fila 2: Hora cuadrada + Asignar a Día + Maps (compactos y alineados)
-        c_p_hr, c_p_dia, c_p_mp = st.columns([1.0, 2.15, 1.0], gap="small")
-        with c_p_hr:
-            st.markdown('<span class="mobile-control-marker compact-hora"></span>', unsafe_allow_html=True)
-            nueva_h_pool = st.text_input(
-                "Hora",
-                value=hora_p,
-                placeholder="🕒 HH:MM",
-                key=f"hora_pool_{p_spot['id']}",
-                label_visibility="collapsed"
-            )
-            if nueva_h_pool.strip() != hora_p and idx_sp_real is not None:
-                hl = nueva_h_pool.strip()
-                if not hl or re.match(r"^([01]?\d|2[0-3]):[0-5]\d$", hl):
-                    if hl and len(hl) == 4:
-                        hl = "0" + hl
-                    st.session_state.lugares[idx_sp_real]["hora"] = hl
-                    guardar_itinerario_disco(st.session_state.lugares)
-                    st.rerun()
-        with c_p_dia:
-            st.markdown('<span class="mobile-control-marker compact-dia"></span>', unsafe_allow_html=True)
-            opts_dia_pool = ["— Día —"] + [etiqueta_dia_corta(d) for d in range(1, 11)]
-            idx_sel_pool = dia_p if 1 <= dia_p <= 10 else 0
-            asig_dia = selectbox_sin_teclado(
-                "Mover a:",
-                opts_dia_pool,
-                index=idx_sel_pool,
-                key=f"asig_dia_pool_{p_spot['id']}",
-                label_visibility="collapsed"
-            )
-            if asig_dia != "— Día —" and idx_sp_real is not None:
-                d_num = int(re.search(r"Día (\d+)", asig_dia).group(1))
-                if d_num != dia_p:
-                    st.session_state.lugares[idx_sp_real]["dia"] = d_num
-                    guardar_itinerario_disco(st.session_state.lugares)
-                    st.rerun()
-        with c_p_mp:
-            st.markdown('<span class="mobile-control-marker compact-maps"></span>', unsafe_allow_html=True)
-            g_url_sp = f"https://www.google.com/maps/search/?api=1&query={urllib.parse.quote(p_spot['nombre'] + ' New York')}"
-            st.link_button("🗺️ Maps", g_url_sp, use_container_width=True)
+        # Fila 2: Hora | Día | Maps, en la misma cuadrícula que el itinerario.
+        with st.container(key=f"saved-controls-row-{p_spot['id']}"):
+            c_p_hr, c_p_dia, c_p_mp = st.columns([1.0, 2.15, 1.0], gap="small")
+            with c_p_hr:
+                st.markdown('<span class="mobile-control-marker compact-hora"></span>', unsafe_allow_html=True)
+                nueva_h_pool = st.text_input(
+                    "Hora",
+                    value=hora_p,
+                    placeholder="🕒 HH:MM",
+                    key=f"hora_pool_{p_spot['id']}",
+                    label_visibility="collapsed"
+                )
+                if nueva_h_pool.strip() != hora_p and idx_sp_real is not None:
+                    hl = nueva_h_pool.strip()
+                    if not hl or re.match(r"^([01]?\d|2[0-3]):[0-5]\d$", hl):
+                        if hl and len(hl) == 4:
+                            hl = "0" + hl
+                        st.session_state.lugares[idx_sp_real]["hora"] = hl
+                        guardar_itinerario_disco(st.session_state.lugares)
+                        st.rerun()
+            with c_p_dia:
+                st.markdown('<span class="mobile-control-marker compact-dia"></span>', unsafe_allow_html=True)
+                opts_dia_pool = ["— Día —"] + [etiqueta_dia_corta(d) for d in range(1, 11)]
+                idx_sel_pool = dia_p if 1 <= dia_p <= 10 else 0
+                asig_dia = selectbox_sin_teclado(
+                    "Mover a:",
+                    opts_dia_pool,
+                    index=idx_sel_pool,
+                    key=f"asig_dia_pool_{p_spot['id']}",
+                    label_visibility="collapsed"
+                )
+                if asig_dia != "— Día —" and idx_sp_real is not None:
+                    d_num = int(re.search(r"Día (\d+)", asig_dia).group(1))
+                    if d_num != dia_p:
+                        st.session_state.lugares[idx_sp_real]["dia"] = d_num
+                        guardar_itinerario_disco(st.session_state.lugares)
+                        st.rerun()
+            with c_p_mp:
+                st.markdown('<span class="mobile-control-marker compact-maps"></span>', unsafe_allow_html=True)
+                g_url_sp = f"https://www.google.com/maps/search/?api=1&query={urllib.parse.quote(p_spot['nombre'] + ' New York')}"
+                st.link_button("🗺️ Maps", g_url_sp, use_container_width=True)
 
         if idx_sp_real is not None:
             render_editor_sitio_panel(p_spot, idx_sp_real, "pool")
@@ -2085,7 +2082,7 @@ with pestanas[2]:
 # ─────────────────────────────────────────────────────────────────────────────
 # TAB 4: MODO LLUVIA & CLIMA EN TIEMPO REAL
 # ─────────────────────────────────────────────────────────────────────────────
-with pestanas[3]:
+with pestanas[5]:
     st.markdown('<div class="ny-card-header">🌧️ Clima en Tiempo Real & Plan B a Cubierto</div>', unsafe_allow_html=True)
 
     clima_data = consultar_clima_nyc()
@@ -2211,7 +2208,7 @@ with pestanas[3]:
 # ─────────────────────────────────────────────────────────────────────────────
 # TAB 5: DIVISAS EN TIEMPO REAL & CALCULADORA TAX Y PROPINAS NY
 # ─────────────────────────────────────────────────────────────────────────────
-with pestanas[4]:
+with pestanas[3]:
     st.markdown('<div class="ny-card-header">💵 Calculadora</div>', unsafe_allow_html=True)
 
     tasa_eur, fecha_tasa = obtener_tasa_usd_eur()
@@ -2310,7 +2307,7 @@ with pestanas[4]:
 def extraer_codigos_vuelo(texto_vuelo: str) -> list:
     return re.findall(r"\b([A-Z]{2}\d{2,4})\b", (texto_vuelo or "").upper())
 
-with pestanas[5]:
+with pestanas[4]:
     c_vl1, c_vl2 = st.columns(2)
 
     with c_vl1:
