@@ -1771,7 +1771,7 @@ st.markdown("""
 
   /* ===== CORRECCIÓN DEFINITIVA MÓVIL: ICONOS REALES + DÍA LEGIBLE ===== */
   .place-list-title {
-    font-size: 0.94rem !important;
+    font-size: 1.08rem !important;
     font-weight: 900 !important;
     line-height: 1.2 !important;
     overflow-wrap: anywhere !important;
@@ -1789,8 +1789,8 @@ st.markdown("""
   @media (max-width: 768px) {
     /* Nombre dominante; categoría, entorno, dirección y nota siempre menores. */
     .place-list-title {
-      font-size: 0.94rem !important;
-      line-height: 1.2 !important;
+      font-size: 1.08rem !important;
+      line-height: 1.22 !important;
       letter-spacing: 0 !important;
     }
     .place-list-address {
@@ -2011,7 +2011,7 @@ st.markdown("""
       grid-template-columns: minmax(34px, 0.72fr) minmax(34px, 0.72fr) minmax(72px, 1fr) minmax(98px, 1.38fr) !important;
       gap: 3px !important;
     }
-    .place-list-title { font-size: 0.90rem !important; }
+    .place-list-title { font-size: 1.02rem !important; }
     .place-list-address, .place-note { font-size: 0.68rem !important; }
   }
 
@@ -2876,7 +2876,7 @@ st.markdown("""
       min-height: 0 !important;
       max-height: none !important;
       overflow: visible !important;
-      padding-top: max(0.85rem, env(safe-area-inset-top)) !important;
+      padding-top: max(1.4rem, calc(env(safe-area-inset-top) + 0.7rem)) !important;
       padding-bottom: calc(3.5rem + env(safe-area-inset-bottom)) !important;
     }
 
@@ -2886,9 +2886,18 @@ st.markdown("""
       min-height: 0 !important;
       max-height: none !important;
       overflow: visible !important;
-      padding: 12px !important;
-      margin-top: 4px !important;
+      padding: 18px 12px 12px !important;
+      margin-top: 8px !important;
       margin-bottom: 12px !important;
+    }
+
+    .hero-container .hero-eyebrow {
+      display: block !important;
+      height: auto !important;
+      max-height: none !important;
+      overflow: visible !important;
+      line-height: 1.4 !important;
+      padding-top: 2px !important;
     }
 
     .hero-container > div {
@@ -2994,7 +3003,7 @@ CATEGORIAS_CANONICAS = [
     "🛍️ Compras",
     "🏛️ Cultura",
     "🏙️ Miradores",
-    "🌲 Parques",
+    "☀️ Spots",
     "🏨 Hotel",
     "📍 Otros"
 ]
@@ -3007,7 +3016,7 @@ MAPA_MIGRACION_CAT = {
     "🛍️ Compras & Outlets": "🛍️ Compras",
     "🏛️ Museos & Monumentos": "🏛️ Cultura",
     "🏙️ Miradores & Observatorios": "🏙️ Miradores",
-    "🌲 Parques, Muelles & Puentes": "🌲 Parques",
+    "🌲 Parques, Muelles & Puentes": "☀️ Spots",
     "🏨 Hotel Base": "🏨 Hotel",
     "📍 Otros Lugares": "📍 Otros"
 }
@@ -3050,7 +3059,7 @@ def clasificar_lugar(nombre: str, direccion: str = "", lista_origen: str = "") -
         return "🍕 Gastronomía", "Interior"
 
     if any(k in nom for k in ['park', 'central park', 'bridge', 'puente', 'high line', 'little island', 'fulton ferry', 'domino', 'pier 17', 'pier 57', 'pier 35', 'pebble beach', 'tudor city', 'squibb', 'battery', 'waterfront', 'picnic', 'botanic', 'coney island', 'boardwalk']):
-        return "🌲 Parques", "Exterior"
+        return "☀️ Spots", "Exterior"
 
     if any(k in nom for k in ['museum', 'the met', 'moma', 'morgan library', 'tenement', '9/11 memorial', 'oculus', 'grand central', 'library', 'atlas', 'one times square', 'times square', 'memorial', 'statue of liberty', 'trinity church', 'rockefeller center', 'st. patrick']):
         tipo = "Exterior" if any(x in nom for x in ['times square', 'atlas', 'statue']) else "Interior"
@@ -3065,7 +3074,7 @@ def clasificar_lugar(nombre: str, direccion: str = "", lista_origen: str = "") -
     if 'tienda' in orig or 'outlet' in orig:
         return "🛍️ Compras", "Interior"
     if 'spot' in orig:
-        return "🌲 Parques", "Exterior"
+        return "☀️ Spots", "Exterior"
 
     return "📍 Otros", "Interior"
 
@@ -4009,7 +4018,7 @@ with pestanas[0]:
             <span style="font-size: 11px; font-weight: 800; color: #2563EB;">{dia_txt}</span>
             <span style="font-size: 10px; font-weight: 700; background: #F1F5F9; color: #0F172A; padding: 2px 6px; border-radius: 6px;">{tipo_badge}</span>
           </div>
-          <div style="font-size: 14px; font-weight: 800; color: #0F172A; margin-bottom: 3px;">{obtener_emoji_categoria(cat_spot)} {nom_spot}</div>
+          <div style="font-size: 16px; font-weight: 800; color: #0F172A; margin-bottom: 3px;">{obtener_emoji_categoria(cat_spot)} {nom_spot}</div>
           {f'<div style="font-size: 11px; color: #0F172A; margin-bottom: 3px;">📍 {dir_spot}</div>' if dir_spot else ''}
           {f'<div style="font-size:10.5px; color:#475569; font-style:italic; line-height:1.3; margin-bottom:6px; overflow-wrap:anywhere;">📝 {linkificar_nota(nota_spot)}</div>' if nota_spot else ''}
           <div style="font-size: 11px; color: #0F172A; margin-bottom: 8px;"><b>Categoría:</b> {cat_spot}</div>
@@ -4093,7 +4102,7 @@ with pestanas[0]:
                 st.markdown('</div>', unsafe_allow_html=True)
 
             if dir_sp:
-                st.markdown(f'<div style="font-size:0.82rem; color:#334155; font-weight:600; margin-top:2px;">🗒️ {dir_sp}</div>', unsafe_allow_html=True)
+                st.markdown(f'<div style="font-size:0.82rem; color:#334155; font-weight:600; margin-top:2px;">📍 {dir_sp}</div>', unsafe_allow_html=True)
             if nota_sp:
                 st.markdown(bloque_nota_html(nota_sp), unsafe_allow_html=True)
 
@@ -4170,7 +4179,7 @@ with pestanas[1]:
         st.markdown(f'<div id="dia-{d}"></div>', unsafe_allow_html=True)
 
         st.markdown(f"""
-        <div style="background:#FFFFFF; border:1.5px solid #CBD5E1; border-left:6px solid #15803D; border-radius:13px; padding:8px 12px; margin-top:10px; margin-bottom:8px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:6px;">
+        <div style="background:#FFFFFF; border:1.5px solid #CBD5E1; border-left:1.5px solid #CBD5E1; border-radius:13px; padding:8px 12px; margin-top:10px; margin-bottom:8px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:6px;">
           <div style="font-weight:900; font-size:0.98rem; color:#0F172A;">
             {etiqueta_dia(d)}
           </div>
@@ -4706,6 +4715,72 @@ with pestanas[4]:
     listas_config = st.session_state.config_viaje.get("listas_gmaps", [])
     if not listas_config:
         st.info("Todavía no hay listas de Google Maps guardadas.")
+    else:
+        if st.button("🔄 Sincronizar todas las listas", key="btn_sync_all_gmaps", use_container_width=True, type="primary"):
+            total_nuevos = 0
+            total_descargados = 0
+            errores_sync = []
+            # La clave de duplicados combina nombre y coordenadas para no descartar
+            # lugares distintos que tengan nombres iguales.
+            def _clave_lugar_sync(nombre, lat, lon):
+                nombre_n = re.sub(r"\s+", " ", str(nombre or "").strip().casefold())
+                try:
+                    return (nombre_n, round(float(lat), 5), round(float(lon), 5))
+                except (TypeError, ValueError):
+                    return (nombre_n, None, None)
+            existentes_sync = {
+                _clave_lugar_sync(x.get("nombre"), x.get("lat"), x.get("lon"))
+                for x in st.session_state.lugares if isinstance(x, dict)
+            }
+            ids_sync = []
+            for x in st.session_state.lugares:
+                try: ids_sync.append(int(x.get("id", 0)))
+                except (TypeError, ValueError, AttributeError): pass
+            max_id_sync = max(ids_sync, default=0)
+            with st.spinner("Sincronizando todas tus listas de Google Maps..."):
+                for i_lista, datos_lista in enumerate(listas_config):
+                    nom_lista = str(datos_lista.get("nombre", f"Lista {i_lista + 1}"))
+                    url_lista_sync = str(datos_lista.get("url", "")).strip()
+                    if not url_lista_sync:
+                        errores_sync.append(f"{nom_lista}: falta la URL")
+                        continue
+                    try:
+                        descargados_lista = extraer_lugares_lista_gmaps(url_lista_sync, nom_lista)
+                        total_descargados += len(descargados_lista or [])
+                        for item_sync in descargados_lista or []:
+                            nombre_sync = str(item_sync.get("nombre", "")).strip()
+                            if not nombre_sync:
+                                continue
+                            clave_sync = _clave_lugar_sync(nombre_sync, item_sync.get("lat"), item_sync.get("lon"))
+                            if clave_sync in existentes_sync:
+                                continue
+                            max_id_sync += 1
+                            st.session_state.lugares.append({
+                                "id": max_id_sync,
+                                "nombre": nombre_sync,
+                                "lat": float(item_sync.get("lat", 40.7580)),
+                                "lon": float(item_sync.get("lon", -73.9855)),
+                                "dia": 0, "hora": "",
+                                "direccion": item_sync.get("direccion", ""),
+                                "nota": "",
+                                "categoria": normalizar_categoria(item_sync.get("categoria", "📍 Otros")),
+                                "tipo": item_sync.get("tipo", "Interior"),
+                                "visitado": False
+                            })
+                            existentes_sync.add(clave_sync)
+                            total_nuevos += 1
+                    except Exception as exc:
+                        errores_sync.append(f"{nom_lista}: {exc}")
+            if total_nuevos:
+                if guardar_itinerario_disco(st.session_state.lugares):
+                    st.success(f"Sincronización terminada: {total_nuevos} lugares nuevos añadidos. {total_descargados} resultados recibidos en total.")
+                else:
+                    st.error("No se pudieron guardar los lugares sincronizados en el archivo compartido.")
+            else:
+                st.info(f"Sincronización terminada. No había lugares nuevos. {total_descargados} resultados recibidos en total.")
+            for error_sync in errores_sync:
+                st.warning(error_sync)
+            st.rerun()
 
     for idx_lst, lst_data in enumerate(listas_config):
         nombre_lista = str(lst_data.get("nombre", f"Lista {idx_lst + 1}"))
@@ -4714,73 +4789,29 @@ with pestanas[4]:
         key_ed_nombre = f"gmaps_edit_nombre_{idx_lst}_{sufijo_edicion}"
         key_ed_url = f"gmaps_edit_url_{idx_lst}_{sufijo_edicion}"
 
-        st.markdown(
-            f"<div style='font-weight:800; color:#0F172A; overflow-wrap:anywhere;'>{idx_lst + 1}. {html.escape(nombre_lista)}</div>"
-            f"<div class='gmaps-list-url' style='font-size:0.76rem; color:#475569; margin-top:2px; margin-bottom:6px;'>{html.escape(url_lista)}</div>",
-            unsafe_allow_html=True
-        )
-        with st.container(key=f"gmaps-actions-{idx_lst}"):
-            col_sync, col_edit = st.columns(2, gap="small")
-            with col_sync:
-                if st.button("🔄 Sincronizar", key=f"btn_sync_list_{idx_lst}", use_container_width=True):
-                    if not url_lista.strip():
-                        st.error("Edita la lista e introduce una URL antes de sincronizar.")
-                    else:
-                        with st.spinner(f"Descargando de {nombre_lista}..."):
-                            descargados = extraer_lugares_lista_gmaps(url_lista, nombre_lista)
-                            if descargados:
-                                existentes = set(x.get("nombre", "").lower() for x in st.session_state.lugares)
-                                agregados = 0
-                                max_id_act = max([x.get("id", 0) for x in st.session_state.lugares], default=0)
-                                for d_item in descargados:
-                                    nombre_importado = d_item.get("nombre", "").strip()
-                                    if nombre_importado and nombre_importado.lower() not in existentes:
-                                        max_id_act += 1
-                                        st.session_state.lugares.append({
-                                            "id": max_id_act,
-                                            "nombre": nombre_importado,
-                                            "lat": d_item["lat"],
-                                            "lon": d_item["lon"],
-                                            "dia": 0,
-                                            "hora": "",
-                                            "direccion": d_item.get("direccion", ""),
-                                            "nota": "",
-                                            "categoria": d_item["categoria"],
-                                            "tipo": d_item["tipo"],
-                                            "visitado": False
-                                        })
-                                        existentes.add(nombre_importado.lower())
-                                        agregados += 1
-                                guardar_itinerario_disco(st.session_state.lugares)
-                                st.success(f"✓ Sincronizado: {agregados} sitios nuevos añadidos a Guardados.")
-                                st.rerun()
-                            else:
-                                st.warning("No se pudieron extraer lugares. Comprueba que el enlace sea una lista compartida de Google Maps y que tenga acceso público.")
-            with col_edit:
-                if st.button("✏️ Editar", key=f"btn_edit_list_{idx_lst}", use_container_width=True):
-                    actual = st.session_state.get("lista_gmaps_editando")
-                    st.session_state.lista_gmaps_editando = None if actual == idx_lst else idx_lst
-                    for clave in (key_ed_nombre, key_ed_url):
-                        st.session_state.pop(clave, None)
-                    st.rerun()
+        col_edit, col_nombre = st.columns([0.55, 9.45], gap="small", vertical_alignment="center")
+        with col_edit:
+            if st.button("✏️", key=f"btn_edit_list_{idx_lst}", help="Editar lista"):
+                actual = st.session_state.get("lista_gmaps_editando")
+                st.session_state.lista_gmaps_editando = None if actual == idx_lst else idx_lst
+                for clave in (key_ed_nombre, key_ed_url):
+                    st.session_state.pop(clave, None)
+                st.rerun()
+        with col_nombre:
+            st.markdown(
+                f"<div style='font-weight:800; color:#0F172A; overflow-wrap:anywhere;'>{idx_lst + 1}. {html.escape(nombre_lista)}</div>"
+                f"<div class='gmaps-list-url' style='font-size:0.76rem; color:#475569; margin-top:2px; margin-bottom:6px;'>{html.escape(url_lista)}</div>",
+                unsafe_allow_html=True
+            )
 
         if st.session_state.get("lista_gmaps_editando") == idx_lst:
             st.markdown(f"**Editar lista: {html.escape(nombre_lista)}**")
             with st.form(f"form_editar_lista_gmaps_{idx_lst}"):
-                nuevo_nombre_lista = st.text_input(
-                    "Nombre de la lista:",
-                    value=nombre_lista,
-                    key=key_ed_nombre
-                )
-                nueva_url_lista = st.text_input(
-                    "URL compartida de Google Maps:",
-                    value=url_lista,
-                    placeholder="https://maps.app.goo.gl/...",
-                    key=key_ed_url
-                )
+                nuevo_nombre_lista = st.text_input("Nombre de la lista:", value=nombre_lista, key=key_ed_nombre)
+                nueva_url_lista = st.text_input("URL compartida de Google Maps:", value=url_lista,
+                    placeholder="https://maps.app.goo.gl/...", key=key_ed_url)
                 guardar_lista = st.form_submit_button("💾 Guardar cambios", use_container_width=True)
                 cancelar_lista = st.form_submit_button("Cancelar", use_container_width=True)
-
                 if guardar_lista:
                     nombre_limpio = nuevo_nombre_lista.strip()
                     url_limpia = nueva_url_lista.strip()
