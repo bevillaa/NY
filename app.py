@@ -2955,85 +2955,6 @@ st.markdown("""
     }
   }
 
-
-    /* Ajuste intermedio de los cuatro controles de Itinerario y Guardados.
-       Un poco mas altos que la version compacta, sin volver al tamaño grande. */
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(-n+4) [data-testid="stButton"] > button,
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(-n+4) [data-testid="stButton"] > button,
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(-n+4) [data-testid="stLinkButton"] > a,
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(-n+4) [data-testid="stLinkButton"] > a,
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(-n+4) [data-baseweb="input"],
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(-n+4) [data-baseweb="input"],
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(-n+4) [data-baseweb="select"],
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(-n+4) [data-baseweb="select"] {
-      min-height: 40px !important;
-      height: 40px !important;
-      box-sizing: border-box !important;
-    }
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(-n+4) [data-testid="stButton"] > button,
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(-n+4) [data-testid="stButton"] > button,
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(-n+4) [data-testid="stLinkButton"] > a,
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(-n+4) [data-testid="stLinkButton"] > a {
-      max-height: 40px !important;
-      padding-top: 2px !important;
-      padding-bottom: 2px !important;
-    }
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(1) [data-testid="stButton"] > button,
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(1) [data-testid="stButton"] > button {
-      background-size: 23px 23px !important;
-    }
-
-  /* Ajuste definitivo: controles tactiles de tamaño comodo en Itinerario y Guardados.
-     Esta regla va al final para prevalecer sobre los estilos anteriores. */
-  @media (max-width: 768px) {
-    [class*="st-key-it-controls-row-"] [data-testid="stHorizontalBlock"],
-    [class*="st-key-saved-controls-row-"] [data-testid="stHorizontalBlock"] {
-      grid-template-columns: 42px 42px 84px 88px !important;
-      column-gap: 6px !important;
-      align-items: center !important;
-    }
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(1) [data-testid="stButton"] > button,
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(1) [data-testid="stButton"] > button,
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(2) [data-testid="stLinkButton"] > a,
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(2) [data-testid="stLinkButton"] > a {
-      width: 42px !important;
-      min-width: 42px !important;
-      max-width: 42px !important;
-      height: 42px !important;
-      min-height: 42px !important;
-      max-height: 42px !important;
-      padding: 0 !important;
-      font-size: 1.05rem !important;
-      display: flex !important;
-      align-items: center !important;
-      justify-content: center !important;
-    }
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(3) input,
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(3) input,
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(4) [data-baseweb="select"],
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(4) [data-baseweb="select"] {
-      height: 42px !important;
-      min-height: 42px !important;
-      font-size: 0.88rem !important;
-    }
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(4) [data-baseweb="select"] > div,
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(4) [data-baseweb="select"] > div {
-      min-height: 42px !important;
-    }
-  }
-  @media (min-width: 769px) {
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(-n+4) [data-testid="stButton"] > button,
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(-n+4) [data-testid="stButton"] > button,
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(-n+4) [data-testid="stLinkButton"] > a,
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(-n+4) [data-testid="stLinkButton"] > a,
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(-n+4) input,
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(-n+4) input,
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(-n+4) [data-baseweb="select"],
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(-n+4) [data-baseweb="select"] {
-      min-height: 42px !important;
-      height: 42px !important;
-    }
-  }
 </style>
 """, unsafe_allow_html=True)
 
@@ -4314,8 +4235,14 @@ with pestanas[1]:
                 # Información completa del lugar: nombre, categoría, entorno,
                 # dirección y nota. Los cuatro controles van debajo, en una sola fila.
                 with st.container(key=f"it-heading-row-{item['id']}"):
-                    # Nombre a la izquierda y check de visitado a la derecha, en la misma linea.
-                    c_info, c_chk = st.columns([9.55, 0.45], gap="small", vertical_alignment="center")
+                    c_chk, c_info = st.columns([0.45, 9.55], gap="small")
+                    with c_chk:
+                        chk_val = st.checkbox("", value=is_visited, key=f"chk_it_{d}_{item['id']}")
+                        if chk_val != is_visited and idx_real is not None:
+                            st.session_state.lugares[idx_real]["visitado"] = chk_val
+                            guardar_itinerario_disco(st.session_state.lugares)
+                            st.rerun()
+
                     with c_info:
                         txt_c = "#334155" if is_visited else "#0F172A"
                         strike = "text-decoration: line-through; opacity: 0.78;" if is_visited else ""
@@ -4324,16 +4251,12 @@ with pestanas[1]:
                         st.markdown(f"""
                         <div style="{strike}; min-width:0; overflow-wrap:anywhere;">
                           <div class="place-list-title" style="color:{txt_c};">{emoji_i} {item['nombre']}</div>
+                          <div style="margin-top:4px; display:flex; flex-wrap:wrap; gap:4px;">
+                          </div>
                         </div>
                         {dir_html}
                         {nota_html}
                         """, unsafe_allow_html=True)
-                    with c_chk:
-                        chk_val = st.checkbox("", value=is_visited, key=f"chk_it_{d}_{item['id']}")
-                        if chk_val != is_visited and idx_real is not None:
-                            st.session_state.lugares[idx_real]["visitado"] = chk_val
-                            guardar_itinerario_disco(st.session_state.lugares)
-                            st.rerun()
 
                 # Los cuatro controles, siempre en el mismo orden: Editar | Mapa | Hora | Día.
                 with st.container(key=f"it-controls-row-{item['id']}"):
