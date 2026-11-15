@@ -3160,23 +3160,27 @@ def cargar_itinerario_disco():
         try:
             with open(ARCH_ITINERARIO, "r", encoding="utf-8") as f:
                 datos = json.load(f)
+                if not isinstance(datos, list):
+                    datos = []
         except Exception:
             datos = []
 
     modificado = False
 
-    # Al iniciar o reiniciar la app, solo se limpia el itinerario (días 1..10):
-    # los lugares pasan a Guardados (dia = 0) sin perderse.
+    # Al iniciar la sesión por primera vez, solo se vacía el itinerario (días 1..10):
+    # los lugares pasan a Guardados (dia = 0) sin borrarse ni perderse.
     if not st.session_state.get("_app_inicializada", False):
         st.session_state["_app_inicializada"] = True
         for p in datos:
-            if p.get("dia", 0) != 0:
+            if isinstance(p, dict) and p.get("dia", 0) != 0:
                 p["dia"] = 0
                 p["hora"] = ""
                 p["visitado"] = False
                 modificado = True
 
     for p in datos:
+        if not isinstance(p, dict):
+            continue
         cat_norm = normalizar_categoria(p.get("categoria", ""))
         if p.get("categoria") != cat_norm:
             p["categoria"] = cat_norm
@@ -4172,7 +4176,7 @@ with pestanas[1]:
                         dest_d = selectbox_sin_teclado(
                             "Día",
                             ["Guardados"] + [f"Día {x}" for x in range(1, 11)],
-                            index=d - 1,
+                            index=d if 1 <= d <= 10 else 0,
                             key=f"mvd_it_{d}_{item['id']}",
                             label_visibility="collapsed"
                         )
