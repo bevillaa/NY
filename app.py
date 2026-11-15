@@ -2858,21 +2858,21 @@ st.markdown("""
 # 2. DEFINICIÓN DEL VIAJE NAVIDEÑO (26 DIC 2026 - 4 ENE 2027)
 # =============================================================================
 DIAS_VIAJE = {
-    1:  {"fecha": "26 Dic", "dia": "Sábado"},
-    2:  {"fecha": "27 Dic", "dia": "Domingo"},
-    3:  {"fecha": "28 Dic", "dia": "Lunes"},
-    4:  {"fecha": "29 Dic", "dia": "Martes"},
-    5:  {"fecha": "30 Dic", "dia": "Miércoles"},
-    6:  {"fecha": "31 Dic", "dia": "Jueves"},
-    7:  {"fecha": "01 Ene", "dia": "Viernes"},
-    8:  {"fecha": "02 Ene", "dia": "Sábado"},
-    9:  {"fecha": "03 Ene", "dia": "Domingo"},
-    10: {"fecha": "04 Ene", "dia": "Lunes"},
+    1:  {"fecha": "26 Diciembre", "dia": "Sábado"},
+    2:  {"fecha": "27 Diciembre", "dia": "Domingo"},
+    3:  {"fecha": "28 Diciembre", "dia": "Lunes"},
+    4:  {"fecha": "29 Diciembre", "dia": "Martes"},
+    5:  {"fecha": "30 Diciembre", "dia": "Miércoles"},
+    6:  {"fecha": "31 Diciembre", "dia": "Jueves"},
+    7:  {"fecha": "01 Enero", "dia": "Viernes"},
+    8:  {"fecha": "02 Enero", "dia": "Sábado"},
+    9:  {"fecha": "03 Enero", "dia": "Domingo"},
+    10: {"fecha": "04 Enero", "dia": "Lunes"},
 }
 
 def etiqueta_dia(d: int) -> str:
     info = DIAS_VIAJE.get(d, {})
-    return f"Día {d}: {info.get('fecha', '')} {info.get('dia', '')}".strip()
+    return f"Día {d}: {info.get('fecha', '')} - {info.get('dia', '')}".strip()
 
 def etiqueta_dia_corta(d: int) -> str:
     info = DIAS_VIAJE.get(d, {})
