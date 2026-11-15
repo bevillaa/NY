@@ -1186,6 +1186,272 @@ st.markdown("""
     [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(4) [data-baseweb="select"] > div { width: 84px !important; min-width: 84px !important; max-width: 84px !important; }
   }
 
+
+
+  /* =====================================================================
+     AJUSTE FINAL MÓVIL: LOS CUATRO CONTROLES OCUPAN TODO EL ANCHO DISPONIBLE.
+     No se fijan píxeles globales: cada columna crece con el ancho del móvil.
+     En escritorio no se modifica la distribución.
+     ===================================================================== */
+  @media (max-width: 768px) {
+    [class*="st-key-it-controls-row-"],
+    [class*="st-key-saved-controls-row-"] {
+      display: block !important;
+      width: 100% !important;
+      max-width: 100% !important;
+      min-width: 0 !important;
+      margin: 6px 0 2px !important;
+      padding: 0 !important;
+    }
+
+    [class*="st-key-it-controls-row-"] [data-testid="stHorizontalBlock"],
+    [class*="st-key-saved-controls-row-"] [data-testid="stHorizontalBlock"] {
+      display: grid !important;
+      grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+      grid-auto-flow: row !important;
+      justify-content: stretch !important;
+      align-items: center !important;
+      column-gap: 7px !important;
+      row-gap: 0 !important;
+      width: 100% !important;
+      min-width: 0 !important;
+      max-width: 100% !important;
+      margin: 0 !important;
+      padding: 0 !important;
+    }
+
+    [class*="st-key-it-controls-row-"] [data-testid="column"],
+    [class*="st-key-saved-controls-row-"] [data-testid="column"] {
+      display: block !important;
+      flex: none !important;
+      width: 100% !important;
+      min-width: 0 !important;
+      max-width: 100% !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      overflow: visible !important;
+    }
+
+    [class*="st-key-it-controls-row-"] [data-testid="column"] [data-testid="stElementContainer"],
+    [class*="st-key-saved-controls-row-"] [data-testid="column"] [data-testid="stElementContainer"],
+    [class*="st-key-it-controls-row-"] [data-testid="column"] .stButton,
+    [class*="st-key-saved-controls-row-"] [data-testid="column"] .stButton,
+    [class*="st-key-it-controls-row-"] [data-testid="column"] [data-testid="stLinkButton"],
+    [class*="st-key-saved-controls-row-"] [data-testid="column"] [data-testid="stLinkButton"],
+    [class*="st-key-it-controls-row-"] [data-testid="column"] [data-testid="stTextInput"],
+    [class*="st-key-saved-controls-row-"] [data-testid="column"] [data-testid="stTextInput"],
+    [class*="st-key-it-controls-row-"] [data-testid="column"] [data-testid="stSelectbox"],
+    [class*="st-key-saved-controls-row-"] [data-testid="column"] [data-testid="stSelectbox"] {
+      display: block !important;
+      width: 100% !important;
+      min-width: 0 !important;
+      max-width: 100% !important;
+      margin: 0 !important;
+    }
+
+    /* EDITAR: ocupa su cuarta parte de la fila; el lápiz se dibuja como SVG. */
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(1) [data-testid="stButton"] > button,
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(1) [data-testid="stButton"] > button {
+      box-sizing: border-box !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      width: 100% !important;
+      min-width: 0 !important;
+      max-width: 100% !important;
+      height: 40px !important;
+      min-height: 40px !important;
+      max-height: 40px !important;
+      padding: 0 !important;
+      border: 1.5px solid #94A3B8 !important;
+      border-radius: 8px !important;
+      background-color: #F8FAFC !important;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='22' height='22' viewBox='0 0 24 24' fill='none' stroke='%23334155' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m16 4 4 4'/%3E%3Cpath d='M4 20l4-.9L19 8a2.1 2.1 0 0 0-3-3L5 16z'/%3E%3C/svg%3E") !important;
+      background-repeat: no-repeat !important;
+      background-position: center !important;
+      background-size: 21px 21px !important;
+      color: transparent !important;
+      font-size: 0 !important;
+      line-height: 0 !important;
+      overflow: hidden !important;
+    }
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(1) button span,
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(1) button span {
+      display: none !important;
+    }
+
+    /* MAPA: ocupa la misma anchura que los demás controles; icono centrado. */
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(2) [data-testid="stLinkButton"] > a,
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(2) [data-testid="stLinkButton"] > a {
+      box-sizing: border-box !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      width: 100% !important;
+      min-width: 0 !important;
+      max-width: 100% !important;
+      height: 40px !important;
+      min-height: 40px !important;
+      max-height: 40px !important;
+      padding: 0 !important;
+      border: 1.5px solid #94A3B8 !important;
+      border-radius: 8px !important;
+      background-color: #FFFFFF !important;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='23' height='23' viewBox='0 0 24 24' fill='none' stroke='%231D4ED8' stroke-width='1.9' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m3 6 6-3 6 3 6-3v15l-6 3-6-3-6 3z'/%3E%3Cpath d='M9 3v15'/%3E%3Cpath d='M15 6v15'/%3E%3C/svg%3E") !important;
+      background-repeat: no-repeat !important;
+      background-position: center !important;
+      background-size: 22px 22px !important;
+      color: transparent !important;
+      font-size: 0 !important;
+      line-height: 0 !important;
+      overflow: hidden !important;
+    }
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(2) a span,
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(2) a span {
+      display: none !important;
+    }
+
+    /* HORA: el campo se estira con la pantalla y conserva HH:MM completo. */
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(3) [data-baseweb="input"],
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(3) [data-baseweb="input"],
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(3) [data-baseweb="base-input"],
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(3) [data-baseweb="base-input"] {
+      box-sizing: border-box !important;
+      display: flex !important;
+      width: 100% !important;
+      min-width: 0 !important;
+      max-width: 100% !important;
+      height: 40px !important;
+      min-height: 40px !important;
+      max-height: 40px !important;
+      padding: 0 3px !important;
+      border: 1.5px solid #94A3B8 !important;
+      border-radius: 8px !important;
+      background: #FFFFFF !important;
+    }
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(3) input,
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(3) input {
+      box-sizing: border-box !important;
+      display: block !important;
+      width: 100% !important;
+      min-width: 0 !important;
+      height: 38px !important;
+      min-height: 38px !important;
+      padding: 0 1px !important;
+      color: #0F172A !important;
+      -webkit-text-fill-color: #0F172A !important;
+      font-family: 'Calibri', 'Carlito', Arial, sans-serif !important;
+      font-size: clamp(0.68rem, 2.8vw, 0.82rem) !important;
+      font-weight: 800 !important;
+      letter-spacing: 0 !important;
+      text-align: center !important;
+      opacity: 1 !important;
+    }
+
+    /* DÍA: desplegable ancho completo de su columna, sin anchura fija sobrante. */
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(4) [data-baseweb="select"],
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(4) [data-baseweb="select"] {
+      box-sizing: border-box !important;
+      width: 100% !important;
+      min-width: 0 !important;
+      max-width: 100% !important;
+      margin: 0 !important;
+    }
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(4) [data-baseweb="select"] > div,
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(4) [data-baseweb="select"] > div {
+      box-sizing: border-box !important;
+      display: flex !important;
+      align-items: center !important;
+      width: 100% !important;
+      min-width: 0 !important;
+      max-width: 100% !important;
+      height: 40px !important;
+      min-height: 40px !important;
+      max-height: 40px !important;
+      padding: 0 5px !important;
+      border: 1.5px solid #94A3B8 !important;
+      border-radius: 8px !important;
+      background: #FFFFFF !important;
+      overflow: hidden !important;
+    }
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(4) [data-baseweb="select"] span,
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(4) [data-baseweb="select"] span {
+      color: #0F172A !important;
+      -webkit-text-fill-color: #0F172A !important;
+      font-size: clamp(0.63rem, 2.7vw, 0.76rem) !important;
+      font-weight: 800 !important;
+      white-space: nowrap !important;
+    }
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(4) [data-baseweb="select"] svg,
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(4) [data-baseweb="select"] svg {
+      width: 12px !important;
+      min-width: 12px !important;
+      flex: 0 0 12px !important;
+    }
+  }
+
+
+
+  /* Los widgets conservaban anchuras fijas de reglas antiguas. Este bloque,
+     al estar al final, fuerza también sus contenedores internos a ocupar
+     exactamente el ancho de cada una de las cuatro columnas. */
+  @media (max-width: 768px) {
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(1) .stButton,
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(1) .stButton,
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(1) [data-testid="stButton"],
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(1) [data-testid="stButton"] {
+      width: 100% !important;
+      min-width: 0 !important;
+      max-width: 100% !important;
+    }
+
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(2) [data-testid="stLinkButton"],
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(2) [data-testid="stLinkButton"] {
+      display: block !important;
+      width: 100% !important;
+      min-width: 0 !important;
+      max-width: 100% !important;
+    }
+
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(3) .stTextInput,
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(3) .stTextInput,
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(3) [data-testid="stTextInput"],
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(3) [data-testid="stTextInput"],
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(3) [data-baseweb="input"],
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(3) [data-baseweb="input"],
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(3) [data-baseweb="base-input"],
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(3) [data-baseweb="base-input"] {
+      box-sizing: border-box !important;
+      width: 100% !important;
+      min-width: 0 !important;
+      max-width: 100% !important;
+      margin: 0 !important;
+    }
+
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(4) .stSelectbox,
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(4) .stSelectbox,
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(4) [data-testid="stSelectbox"],
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(4) [data-testid="stSelectbox"],
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(4) [data-baseweb="select"],
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(4) [data-baseweb="select"],
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(4) [data-baseweb="select"] > div,
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(4) [data-baseweb="select"] > div {
+      box-sizing: border-box !important;
+      width: 100% !important;
+      min-width: 0 !important;
+      max-width: 100% !important;
+      margin: 0 !important;
+    }
+
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(4) [data-baseweb="select"] span,
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(4) [data-baseweb="select"] span {
+      min-width: 0 !important;
+      overflow: hidden !important;
+      text-overflow: clip !important;
+      font-size: clamp(0.60rem, 2.5vw, 0.74rem) !important;
+    }
+  }
+
 </style>
 """, unsafe_allow_html=True)
 
