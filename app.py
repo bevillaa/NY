@@ -2369,6 +2369,268 @@ st.markdown("""
     }
   }
 
+
+
+  /* ===== AJUSTE FINAL DE LOS CONTROLES EN MÓVIL =====
+     Los botones llevan símbolos Unicode reales (no iconos de fondo ni fuentes
+     externas); el CSS solo controla sus dimensiones y la visibilidad. */
+  @media (max-width: 768px) {
+    [class*="st-key-it-controls-row-"] [data-testid="stHorizontalBlock"],
+    [class*="st-key-saved-controls-row-"] [data-testid="stHorizontalBlock"] {
+      display: grid !important;
+      grid-template-columns: 40px 40px 86px 80px !important;
+      grid-auto-flow: column !important;
+      justify-content: start !important;
+      align-items: center !important;
+      column-gap: 3px !important;
+      row-gap: 0 !important;
+      width: 100% !important;
+      min-width: 0 !important;
+      max-width: 100% !important;
+      box-sizing: border-box !important;
+    }
+
+    [class*="st-key-it-controls-row-"] [data-testid="column"],
+    [class*="st-key-saved-controls-row-"] [data-testid="column"] {
+      display: block !important;
+      width: auto !important;
+      min-width: 0 !important;
+      max-width: none !important;
+      flex: none !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      box-sizing: border-box !important;
+      overflow: visible !important;
+    }
+
+    /* Editar: icono lápiz real como etiqueta del botón. */
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(1) [data-testid="stButton"],
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(1) [data-testid="stButton"],
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(1) .stButton,
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(1) .stButton {
+      width: 40px !important;
+      min-width: 40px !important;
+      max-width: 40px !important;
+      margin: 0 !important;
+    }
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(1) button,
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(1) button,
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(2) [data-testid="stLinkButton"] > a,
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(2) [data-testid="stLinkButton"] > a {
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      box-sizing: border-box !important;
+      width: 40px !important;
+      min-width: 40px !important;
+      max-width: 40px !important;
+      height: 38px !important;
+      min-height: 38px !important;
+      max-height: 38px !important;
+      padding: 0 !important;
+      margin: 0 !important;
+      border: 1px solid #94A3B8 !important;
+      border-radius: 8px !important;
+      background: #FFFFFF !important;
+      color: #334155 !important;
+      -webkit-text-fill-color: #334155 !important;
+      font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif !important;
+      font-size: 21px !important;
+      line-height: 1 !important;
+      letter-spacing: 0 !important;
+      text-indent: 0 !important;
+      text-decoration: none !important;
+      white-space: nowrap !important;
+      overflow: visible !important;
+      visibility: visible !important;
+      opacity: 1 !important;
+    }
+
+    /* Reset reglas antiguas que escondían el texto del botón o dibujaban
+       SVG pseudo-elemento encima. El símbolo de la etiqueta queda visible. */
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(1) button::before,
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(1) button::before,
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(2) a::before,
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(2) a::before {
+      content: none !important;
+      display: none !important;
+      background-image: none !important;
+    }
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(1) button span,
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(1) button span,
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(2) a span,
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(2) a span {
+      display: inline !important;
+      position: static !important;
+      width: auto !important;
+      min-width: 0 !important;
+      height: auto !important;
+      min-height: 0 !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      overflow: visible !important;
+      clip: auto !important;
+      clip-path: none !important;
+      white-space: nowrap !important;
+      visibility: visible !important;
+      opacity: 1 !important;
+      color: #334155 !important;
+      -webkit-text-fill-color: #334155 !important;
+      font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif !important;
+      font-size: 21px !important;
+      line-height: 1 !important;
+    }
+
+    /* Hora: mantiene los cinco caracteres HH:MM legibles. */
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(3) [data-testid="stTextInput"],
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(3) [data-testid="stTextInput"],
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(3) [data-baseweb="input"],
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(3) [data-baseweb="input"],
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(3) [data-baseweb="base-input"],
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(3) [data-baseweb="base-input"] {
+      display: flex !important;
+      box-sizing: border-box !important;
+      width: 86px !important;
+      min-width: 86px !important;
+      max-width: 86px !important;
+      height: 38px !important;
+      min-height: 38px !important;
+      max-height: 38px !important;
+      padding: 0 3px !important;
+      margin: 0 !important;
+    }
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(3) input,
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(3) input {
+      box-sizing: border-box !important;
+      width: 100% !important;
+      min-width: 0 !important;
+      height: 36px !important;
+      padding: 0 2px !important;
+      text-align: center !important;
+      font-size: 0.78rem !important;
+      font-weight: 800 !important;
+      font-variant-numeric: tabular-nums !important;
+      letter-spacing: 0 !important;
+      color: #0F172A !important;
+      -webkit-text-fill-color: #0F172A !important;
+    }
+
+    /* Día: más compacto que antes, pero con espacio para "Día 10" y la flecha. */
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(4) [data-testid="stSelectbox"],
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(4) [data-testid="stSelectbox"],
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(4) [data-baseweb="select"],
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(4) [data-baseweb="select"] {
+      display: block !important;
+      width: 80px !important;
+      min-width: 80px !important;
+      max-width: 80px !important;
+      margin: 0 !important;
+      box-sizing: border-box !important;
+    }
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(4) [data-baseweb="select"] > div,
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(4) [data-baseweb="select"] > div {
+      display: flex !important;
+      align-items: center !important;
+      box-sizing: border-box !important;
+      width: 80px !important;
+      min-width: 80px !important;
+      max-width: 80px !important;
+      height: 38px !important;
+      min-height: 38px !important;
+      max-height: 38px !important;
+      padding: 0 3px 0 5px !important;
+      overflow: hidden !important;
+    }
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(4) [data-baseweb="select"] span,
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(4) [data-baseweb="select"] span {
+      display: inline !important;
+      min-width: 0 !important;
+      font-size: 0.68rem !important;
+      line-height: 1 !important;
+      font-weight: 800 !important;
+      white-space: nowrap !important;
+      color: #0F172A !important;
+      -webkit-text-fill-color: #0F172A !important;
+    }
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(4) [data-baseweb="select"] svg,
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(4) [data-baseweb="select"] svg {
+      flex: 0 0 11px !important;
+      width: 11px !important;
+      min-width: 11px !important;
+      max-width: 11px !important;
+    }
+  }
+
+
+
+  /* Corrección de renderizado: Streamlit envuelve el contenido del botón en
+     un div. Se restablece ese contenedor para que no herede el recorte usado
+     por las reglas antiguas de iconos CSS. */
+  @media (max-width: 768px) {
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(1) [data-testid="stButton"] > button > div,
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(1) [data-testid="stButton"] > button > div {
+      position: static !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      inset: auto !important;
+      width: 100% !important;
+      min-width: 0 !important;
+      max-width: 100% !important;
+      height: 100% !important;
+      min-height: 0 !important;
+      max-height: 100% !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      overflow: visible !important;
+      clip: auto !important;
+      clip-path: none !important;
+      transform: none !important;
+      white-space: nowrap !important;
+      visibility: visible !important;
+      opacity: 1 !important;
+    }
+
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(1) [data-testid="stButton"] > button > div > span,
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(1) [data-testid="stButton"] > button > div > span,
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(2) [data-testid="stLinkButton"] > a > span,
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(2) [data-testid="stLinkButton"] > a > span {
+      position: static !important;
+      display: inline !important;
+      inset: auto !important;
+      width: auto !important;
+      min-width: 0 !important;
+      max-width: none !important;
+      height: auto !important;
+      min-height: 0 !important;
+      max-height: none !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      overflow: visible !important;
+      clip: auto !important;
+      clip-path: none !important;
+      transform: none !important;
+      white-space: nowrap !important;
+      visibility: visible !important;
+      opacity: 1 !important;
+      color: #334155 !important;
+      -webkit-text-fill-color: #334155 !important;
+      font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif !important;
+      font-size: 22px !important;
+      line-height: 1 !important;
+    }
+
+    /* Desactiva las pseudo-imágenes SVG antiguas del enlace; el icono visible
+       es el emoji que forma parte de la propia etiqueta accesible del enlace. */
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(2) [data-testid="stLinkButton"] > a::before,
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(2) [data-testid="stLinkButton"] > a::before {
+      content: none !important;
+      display: none !important;
+      background: none !important;
+      background-image: none !important;
+    }
+  }
+
 </style>
 """, unsafe_allow_html=True)
 
@@ -3552,12 +3814,12 @@ with pestanas[1]:
                 with st.container(key=f"it-controls-row-{item['id']}"):
                     c_edit, c_map, c_hr, c_day = st.columns([0.8, 0.9, 1.7, 1.9], gap="small")
                     with c_edit:
-                        if st.button("Editar", key=f"btn_ed_it_{d}_{item['id']}", help="Editar sitio", use_container_width=True):
+                        if st.button("✏️", key=f"btn_ed_it_{d}_{item['id']}", help="Editar sitio", use_container_width=True):
                             ek = f"it_{d}_{item['id']}"
                             st.session_state.editando_spot_key = None if st.session_state.editando_spot_key == ek else ek
                             st.rerun()
                     with c_map:
-                        st.link_button("Mapa", gmaps_url, use_container_width=True, key=f"map_it_{item['id']}", help="Abrir en Google Maps")
+                        st.link_button("🗺️", gmaps_url, use_container_width=True, key=f"map_it_{item['id']}", help="Abrir en Google Maps")
                     with c_hr:
                         nueva_h = st.text_input(
                             "Hora",
@@ -3652,13 +3914,13 @@ with pestanas[2]:
         with st.container(key=f"saved-controls-row-{p_spot['id']}"):
             c_edit, c_map, c_hr, c_day = st.columns([0.8, 0.9, 1.7, 1.9], gap="small")
             with c_edit:
-                if st.button("Editar", key=f"btn_ed_pool_{p_spot['id']}", help="Editar sitio", use_container_width=True):
+                if st.button("✏️", key=f"btn_ed_pool_{p_spot['id']}", help="Editar sitio", use_container_width=True):
                     ek = f"pool_{p_spot['id']}"
                     st.session_state.editando_spot_key = None if st.session_state.editando_spot_key == ek else ek
                     st.rerun()
             with c_map:
                 g_url_sp = f"https://www.google.com/maps/search/?api=1&query={urllib.parse.quote(p_spot['nombre'] + ' New York')}"
-                st.link_button("Mapa", g_url_sp, use_container_width=True, key=f"map_saved_{p_spot['id']}", help="Abrir en Google Maps")
+                st.link_button("🗺️", g_url_sp, use_container_width=True, key=f"map_saved_{p_spot['id']}", help="Abrir en Google Maps")
             with c_hr:
                 nueva_h_pool = st.text_input(
                     "Hora",
