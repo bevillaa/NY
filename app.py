@@ -674,7 +674,7 @@ def extraer_lugares_lista_gmaps(url_lista: str, nombre_lista: str = ""):
         entity_url = "https://www.google.com" + m.group(1).replace("&amp;", "&")
         req2 = urllib.request.Request(entity_url, headers=headers)
         with urllib.request.urlopen(req2, timeout=10) as r2:
-            raw = r2.read().decode('utf-8', errors='ignore').lstrip(")]}'
+            raw = r2.read().decode("utf-8", errors="ignore").lstrip(")]}'\n")'
  ")
         data = json.loads(raw)
 
