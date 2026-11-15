@@ -344,13 +344,15 @@ st.markdown("""
     justify-content: flex-end !important;
   }
   .edit-mini-btn button {
-    min-height: 26px !important;
-    height: 26px !important;
-    width: 28px !important;
-    min-width: 28px !important;
-    max-width: 28px !important;
+    min-height: 34px !important;
+    height: 34px !important;
+    width: 34px !important;
+    min-width: 34px !important;
+    max-width: 34px !important;
     padding: 0 !important;
-    font-size: 0.74rem !important;
+    font-size: 1.05rem !important;
+    line-height: 1.1 !important;
+    font-family: 'Apple Color Emoji', 'Segoe UI Emoji', 'Noto Color Emoji', sans-serif !important;
     border-radius: 7px !important;
     border: 1px solid #CBD5E1 !important;
     background: #F8FAFC !important;
@@ -531,7 +533,7 @@ st.markdown("""
     /* Filas de nombre dentro de contenedores con identidad CSS propia. */
     [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] {
       display: grid !important;
-      grid-template-columns: 26px minmax(0, 1fr) 28px !important;
+      grid-template-columns: 26px minmax(0, 1fr) 36px !important;
       column-gap: 6px !important;
       row-gap: 0 !important;
       align-items: start !important;
@@ -540,7 +542,7 @@ st.markdown("""
     }
     [class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"] {
       display: grid !important;
-      grid-template-columns: minmax(0, 1fr) 28px !important;
+      grid-template-columns: minmax(0, 1fr) 36px !important;
       column-gap: 6px !important;
       row-gap: 0 !important;
       align-items: start !important;
@@ -574,11 +576,13 @@ st.markdown("""
       line-height: 1 !important;
     }
 
-    /* Hora | Día | Maps: tres columnas reales dentro del ancho móvil. */
+    /* Hora | Día | Maps: la hora tiene anchura suficiente para HH:MM,
+       el día ocupa solo el ancho natural de su opción más larga y Maps es icono. */
     [class*="st-key-it-controls-row-"] [data-testid="stHorizontalBlock"],
     [class*="st-key-saved-controls-row-"] [data-testid="stHorizontalBlock"] {
       display: grid !important;
-      grid-template-columns: minmax(58px, 0.82fr) minmax(0, 2.1fr) minmax(62px, 0.90fr) !important;
+      grid-template-columns: 76px max-content 40px !important;
+      justify-content: start !important;
       align-items: center !important;
       column-gap: 6px !important;
       row-gap: 0 !important;
@@ -610,7 +614,6 @@ st.markdown("""
     [data-testid="column"]:has(.compact-hora) [data-testid="stTextInput"],
     [data-testid="column"]:has(.compact-hora) [data-baseweb="input"],
     [data-testid="column"]:has(.compact-hora) [data-baseweb="base-input"],
-    [data-testid="column"]:has(.compact-dia) [data-baseweb="select"],
     [data-testid="column"]:has(.compact-maps) [data-testid="stLinkButton"] {
       width: 100% !important;
       max-width: 100% !important;
@@ -618,41 +621,107 @@ st.markdown("""
       margin: 0 !important;
       transform: none !important;
     }
+    [data-testid="column"]:has(.compact-dia) [data-testid="stSelectbox"],
+    [data-testid="column"]:has(.compact-dia) [data-baseweb="select"] {
+      width: max-content !important;
+      min-width: 96px !important;
+      max-width: 100% !important;
+      margin: 0 !important;
+      transform: none !important;
+    }
     [data-testid="column"]:has(.compact-hora) [data-baseweb="input"],
     [data-testid="column"]:has(.compact-hora) [data-baseweb="base-input"],
     [data-testid="column"]:has(.compact-dia) [data-baseweb="select"] > div,
     [data-testid="column"]:has(.compact-maps) [data-testid="stLinkButton"] > a {
-      min-height: 33px !important;
-      height: 33px !important;
-      max-height: 33px !important;
+      min-height: 34px !important;
+      height: 34px !important;
+      max-height: 34px !important;
       border-radius: 8px !important;
     }
     [data-testid="column"]:has(.compact-hora) input {
       min-width: 0 !important;
       width: 100% !important;
-      height: 31px !important;
-      min-height: 31px !important;
-      padding: 0 2px !important;
-      font-size: 0.73rem !important;
+      height: 32px !important;
+      min-height: 32px !important;
+      padding: 0 4px !important;
+      font-size: 0.78rem !important;
+      letter-spacing: 0 !important;
       text-align: center !important;
+      font-variant-numeric: tabular-nums !important;
     }
     [data-testid="column"]:has(.compact-dia) [data-baseweb="select"] span,
     [data-testid="column"]:has(.compact-dia) [data-baseweb="select"] div {
-      font-size: 0.70rem !important;
+      font-size: 0.72rem !important;
       line-height: 1.1 !important;
     }
-    [data-testid="column"]:has(.compact-dia) [data-baseweb="select"] > div { padding-left: 4px !important; padding-right: 4px !important; }
+    [data-testid="column"]:has(.compact-dia) [data-baseweb="select"] > div {
+      padding-left: 6px !important;
+      padding-right: 18px !important;
+      width: max-content !important;
+      min-width: 96px !important;
+      max-width: 100% !important;
+    }
     [data-testid="column"]:has(.compact-dia) [data-baseweb="select"] input { caret-color: transparent !important; }
     [data-testid="column"]:has(.compact-maps) [data-testid="stLinkButton"] > a {
       display: flex !important;
       align-items: center !important;
       justify-content: center !important;
-      padding: 0 2px !important;
-      font-size: 0.70rem !important;
+      width: 40px !important;
+      min-width: 40px !important;
+      max-width: 40px !important;
+      padding: 0 !important;
+      font-size: 1rem !important;
       line-height: 1 !important;
       white-space: nowrap !important;
-      overflow: hidden !important;
+      overflow: visible !important;
       text-overflow: clip !important;
+      font-family: 'Apple Color Emoji', 'Segoe UI Emoji', 'Noto Color Emoji', sans-serif !important;
+    }
+
+    /* Botón lápiz: suficiente área táctil y glifo siempre visible. */
+    .edit-mini-btn button,
+    [data-testid="column"]:has(.edit-mini-btn) .stButton > button {
+      width: 34px !important;
+      min-width: 34px !important;
+      max-width: 34px !important;
+      height: 34px !important;
+      min-height: 34px !important;
+      max-height: 34px !important;
+      padding: 0 !important;
+      font-size: 1.05rem !important;
+      line-height: 1.1 !important;
+      overflow: visible !important;
+      font-family: 'Apple Color Emoji', 'Segoe UI Emoji', 'Noto Color Emoji', sans-serif !important;
+    }
+
+    /* Acciones de seguimiento de vuelos y listas Google: dos botones alineados. */
+    [class*="st-key-flight-links-"] [data-testid="stHorizontalBlock"],
+    [class*="st-key-gmaps-actions-"] [data-testid="stHorizontalBlock"] {
+      display: grid !important;
+      grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+      align-items: stretch !important;
+      gap: 7px !important;
+      width: 100% !important;
+    }
+    [class*="st-key-flight-links-"] [data-testid="column"],
+    [class*="st-key-gmaps-actions-"] [data-testid="column"] {
+      display: block !important;
+      flex: none !important;
+      width: 100% !important;
+      min-width: 0 !important;
+      max-width: 100% !important;
+      margin: 0 !important;
+      padding: 0 !important;
+    }
+    [class*="st-key-flight-links-"] .stLinkButton > a,
+    [class*="st-key-gmaps-actions-"] .stButton > button {
+      min-height: 36px !important;
+      height: auto !important;
+      padding: 6px 5px !important;
+      font-size: 0.72rem !important;
+      white-space: normal !important;
+      line-height: 1.15 !important;
+      overflow-wrap: anywhere !important;
     }
 
     /* Pestañas en dos columnas: nada se oculta ni necesita scroll horizontal. */
@@ -725,15 +794,15 @@ st.markdown("""
     .stTabs [data-baseweb="tab"] { font-size: 0.69rem !important; padding: 6px 2px !important; }
     [class*="st-key-it-controls-row-"] [data-testid="stHorizontalBlock"],
     [class*="st-key-saved-controls-row-"] [data-testid="stHorizontalBlock"] {
-      grid-template-columns: minmax(54px, 0.82fr) minmax(0, 2.1fr) minmax(58px, 0.90fr) !important;
+      grid-template-columns: 76px max-content 40px !important;
       column-gap: 5px !important;
     }
     [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] {
-      grid-template-columns: 25px minmax(0, 1fr) 27px !important;
+      grid-template-columns: 25px minmax(0, 1fr) 36px !important;
       column-gap: 5px !important;
     }
     [class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"] {
-      grid-template-columns: minmax(0, 1fr) 27px !important;
+      grid-template-columns: minmax(0, 1fr) 36px !important;
       column-gap: 5px !important;
     }
   }
@@ -1770,7 +1839,7 @@ with pestanas[0]:
                 )
             with c_sh_ed:
                 st.markdown('<div class="edit-mini-btn">', unsafe_allow_html=True)
-                if st.button("✏️", key=f"btn_ed_map_{sp['id']}", help="Editar sitio"):
+                if st.button("✏", key=f"btn_ed_map_{sp['id']}", help="Editar sitio"):
                     ek = f"map_sheet_{sp['id']}"
                     st.session_state.editando_spot_key = None if st.session_state.editando_spot_key == ek else ek
                     st.rerun()
@@ -1813,7 +1882,7 @@ with pestanas[0]:
             with c_act_maps:
                 st.markdown('<span class="mobile-control-marker compact-maps"></span>', unsafe_allow_html=True)
                 g_direct = f"https://www.google.com/maps/search/?api=1&query={urllib.parse.quote(sp['nombre'] + ' New York')}"
-                st.link_button("🗺️ Maps", g_direct, use_container_width=True)
+                st.link_button("🗺️", g_direct, use_container_width=True)
 
             render_editor_sitio_panel(sp, idx_p, "map_sheet")
             st.markdown('</div>', unsafe_allow_html=True)
@@ -1921,7 +1990,7 @@ with pestanas[1]:
 
                     with c_ed:
                         st.markdown('<div class="edit-mini-btn">', unsafe_allow_html=True)
-                        if st.button("✏️", key=f"btn_ed_it_{d}_{item['id']}", help="Editar sitio"):
+                        if st.button("✏", key=f"btn_ed_it_{d}_{item['id']}", help="Editar sitio"):
                             ek = f"it_{d}_{item['id']}"
                             st.session_state.editando_spot_key = None if st.session_state.editando_spot_key == ek else ek
                             st.rerun()
@@ -1963,7 +2032,7 @@ with pestanas[1]:
                             st.rerun()
                     with c_mp:
                         st.markdown('<span class="mobile-control-marker compact-maps"></span>', unsafe_allow_html=True)
-                        st.link_button("🗺️ Maps", gmaps_url, use_container_width=True)
+                        st.link_button("🗺️", gmaps_url, use_container_width=True)
 
                 if idx_real is not None:
                     render_editor_sitio_panel(item, idx_real, f"it_{d}")
@@ -2025,7 +2094,7 @@ with pestanas[2]:
                 """, unsafe_allow_html=True)
             with c_g_ed:
                 st.markdown('<div class="edit-mini-btn">', unsafe_allow_html=True)
-                if st.button("✏️", key=f"btn_ed_pool_{p_spot['id']}", help="Editar sitio"):
+                if st.button("✏", key=f"btn_ed_pool_{p_spot['id']}", help="Editar sitio"):
                     ek = f"pool_{p_spot['id']}"
                     st.session_state.editando_spot_key = None if st.session_state.editando_spot_key == ek else ek
                     st.rerun()
@@ -2071,7 +2140,7 @@ with pestanas[2]:
             with c_p_mp:
                 st.markdown('<span class="mobile-control-marker compact-maps"></span>', unsafe_allow_html=True)
                 g_url_sp = f"https://www.google.com/maps/search/?api=1&query={urllib.parse.quote(p_spot['nombre'] + ' New York')}"
-                st.link_button("🗺️ Maps", g_url_sp, use_container_width=True)
+                st.link_button("🗺️", g_url_sp, use_container_width=True)
 
         if idx_sp_real is not None:
             render_editor_sitio_panel(p_spot, idx_sp_real, "pool")
@@ -2294,11 +2363,11 @@ with pestanas[3]:
         </div>
         """, unsafe_allow_html=True)
 
-        num_personas = st.slider("Dividir entre comensales:", min_value=1, max_value=8, value=2)
-        if num_personas > 1:
-            per_p_usd = gran_total / num_personas
-            per_p_eur = gran_total_eur / num_personas
-            st.info(f"👉 **Por persona ({num_personas} pers):** **${per_p_usd:.2f} USD** (~ {per_p_eur:.2f} €)")
+        num_personas = 3
+        st.markdown("**Dividir entre 3 personas**")
+        per_p_usd = gran_total / num_personas
+        per_p_eur = gran_total_eur / num_personas
+        st.info(f"👉 **Por persona (3 personas):** **${per_p_usd:.2f} USD** (~ {per_p_eur:.2f} €)")
 
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -2325,23 +2394,29 @@ with pestanas[4]:
 
         if cods_ida:
             st.markdown(f"**🛫 Ida ({v_ida.get('fecha', '26 Dic')} · {v_ida.get('hora', '15:30')}):**")
-            cols_ida_btns = st.columns(len(cods_ida))
             for idx_c, cod in enumerate(cods_ida):
-                with cols_ida_btns[idx_c]:
-                    fa_url = f"https://es.flightaware.com/live/flight/{cod}"
-                    fr_url = f"https://www.flightradar24.com/data/flights/{cod.lower()}"
-                    st.link_button(f"✈️ {cod}", fa_url, use_container_width=True)
-                    st.markdown(f"<div style='text-align:center; font-size:0.76rem;'><a href='{fr_url}' target='_blank' style='color:#1D4ED8; font-weight:700;'>Flightradar24 ↗</a></div>", unsafe_allow_html=True)
+                fa_url = f"https://es.flightaware.com/live/flight/{cod}"
+                fr_url = f"https://www.flightradar24.com/data/flights/{cod.lower()}"
+                with st.container(key=f"flight-links-ida-{idx_c}-{cod.lower()}"):
+                    st.markdown(f"<div style='font-weight:800; font-size:0.84rem; margin:4px 0;'>✈️ {html.escape(cod)}</div>", unsafe_allow_html=True)
+                    fa_col, fr_col = st.columns(2, gap="small")
+                    with fa_col:
+                        st.link_button("FlightAware ↗", fa_url, use_container_width=True)
+                    with fr_col:
+                        st.link_button("Flightradar24 ↗", fr_url, use_container_width=True)
 
         if cods_vta:
             st.markdown(f"**🛬 Regreso ({v_vta.get('fecha', '4 Ene')} · {v_vta.get('hora', '20:45')}):**")
-            cols_vta_btns = st.columns(len(cods_vta))
             for idx_c, cod in enumerate(cods_vta):
-                with cols_vta_btns[idx_c]:
-                    fa_url = f"https://es.flightaware.com/live/flight/{cod}"
-                    fr_url = f"https://www.flightradar24.com/data/flights/{cod.lower()}"
-                    st.link_button(f"✈️ {cod}", fa_url, use_container_width=True)
-                    st.markdown(f"<div style='text-align:center; font-size:0.76rem;'><a href='{fr_url}' target='_blank' style='color:#1D4ED8; font-weight:700;'>Flightradar24 ↗</a></div>", unsafe_allow_html=True)
+                fa_url = f"https://es.flightaware.com/live/flight/{cod}"
+                fr_url = f"https://www.flightradar24.com/data/flights/{cod.lower()}"
+                with st.container(key=f"flight-links-regreso-{idx_c}-{cod.lower()}"):
+                    st.markdown(f"<div style='font-weight:800; font-size:0.84rem; margin:4px 0;'>✈️ {html.escape(cod)}</div>", unsafe_allow_html=True)
+                    fa_col, fr_col = st.columns(2, gap="small")
+                    with fa_col:
+                        st.link_button("FlightAware ↗", fa_url, use_container_width=True)
+                    with fr_col:
+                        st.link_button("Flightradar24 ↗", fr_url, use_container_width=True)
 
         st.markdown("<div style='height:8px;'></div>", unsafe_allow_html=True)
         with st.expander("✏️ Editar datos de vuelos", expanded=False):
@@ -2415,15 +2490,14 @@ with pestanas[4]:
         key_ed_nombre = f"gmaps_edit_nombre_{idx_lst}_{sufijo_edicion}"
         key_ed_url = f"gmaps_edit_url_{idx_lst}_{sufijo_edicion}"
 
-        with st.container():
-            col_l1, col_l2, col_l3 = st.columns([3.4, 1.25, 1.0], gap="small")
-            with col_l1:
-                st.markdown(
-                    f"<div style='font-weight:800; color:#0F172A; overflow-wrap:anywhere;'>{idx_lst + 1}. {html.escape(nombre_lista)}</div>"
-                    f"<div class='gmaps-list-url' style='font-size:0.76rem; color:#475569; margin-top:2px;'>{html.escape(url_lista)}</div>",
-                    unsafe_allow_html=True
-                )
-            with col_l2:
+        st.markdown(
+            f"<div style='font-weight:800; color:#0F172A; overflow-wrap:anywhere;'>{idx_lst + 1}. {html.escape(nombre_lista)}</div>"
+            f"<div class='gmaps-list-url' style='font-size:0.76rem; color:#475569; margin-top:2px; margin-bottom:6px;'>{html.escape(url_lista)}</div>",
+            unsafe_allow_html=True
+        )
+        with st.container(key=f"gmaps-actions-{idx_lst}"):
+            col_sync, col_edit = st.columns(2, gap="small")
+            with col_sync:
                 if st.button("🔄 Sincronizar", key=f"btn_sync_list_{idx_lst}", use_container_width=True):
                     if not url_lista.strip():
                         st.error("Edita la lista e introduce una URL antes de sincronizar.")
@@ -2458,7 +2532,7 @@ with pestanas[4]:
                                 st.rerun()
                             else:
                                 st.warning("No se pudieron extraer lugares. Comprueba que el enlace sea una lista compartida de Google Maps y que tenga acceso público.")
-            with col_l3:
+            with col_edit:
                 if st.button("✏️ Editar", key=f"btn_edit_list_{idx_lst}", use_container_width=True):
                     actual = st.session_state.get("lista_gmaps_editando")
                     st.session_state.lista_gmaps_editando = None if actual == idx_lst else idx_lst
