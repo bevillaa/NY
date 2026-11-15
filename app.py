@@ -10,6 +10,7 @@ import tempfile
 import math
 import html
 import hashlib
+import unicodedata
 from datetime import datetime
 
 ARCH_ITINERARIO = "itinerario_actual.json"
@@ -2850,6 +2851,45 @@ st.markdown("""
     }
   }
 
+  /* Ajuste exclusivo de viewport móvil: cabecera visible y documento completo,
+     con desplazamiento vertical natural hasta el último bloque de la página. */
+  @media (max-width: 768px) {
+    html, body {
+      width: 100% !important;
+      min-height: 100% !important;
+      height: auto !important;
+      overflow-x: hidden !important;
+      overflow-y: auto !important;
+      -webkit-overflow-scrolling: touch !important;
+    }
+    .stApp,
+    [data-testid="stAppViewContainer"],
+    [data-testid="stMain"],
+    section.main,
+    [data-testid="stMainBlockContainer"] {
+      height: auto !important;
+      min-height: 100dvh !important;
+      max-height: none !important;
+      overflow-x: hidden !important;
+      overflow-y: visible !important;
+    }
+    [data-testid="stHeader"] {
+      display: flex !important;
+      visibility: visible !important;
+      position: sticky !important;
+      top: 0 !important;
+      z-index: 999 !important;
+    }
+    .block-container {
+      height: auto !important;
+      min-height: calc(100dvh - 2.5rem) !important;
+      max-height: none !important;
+      padding-top: 0.65rem !important;
+      padding-bottom: calc(3.5rem + env(safe-area-inset-bottom)) !important;
+      overflow: visible !important;
+    }
+  }
+
 </style>
 """, unsafe_allow_html=True)
 
@@ -3254,6 +3294,13 @@ def sincronizar_lugares_desde_disco():
 # =============================================================================
 # 6. SINCRONIZADOR DE LISTAS DE GOOGLE MAPS
 # =============================================================================
+def clave_nombre_lugar(nombre: str) -> str:
+    """Clave de comparación tolerante a mayúsculas, tildes y puntuación."""
+    limpio = unicodedata.normalize("NFKD", str(nombre or "").casefold())
+    limpio = "".join(c for c in limpio if not unicodedata.combining(c))
+    return re.sub(r"[^a-z0-9]+", "", limpio)
+
+
 def extraer_lugares_lista_gmaps(url_lista: str, nombre_lista: str = ""):
     """
     Descarga una lista compartida de Google Maps y extrae todos los lugares.
@@ -3288,7 +3335,7 @@ def extraer_lugares_lista_gmaps(url_lista: str, nombre_lista: str = ""):
             return
         if not (-90 <= lat <= 90 and -180 <= lon <= 180):
             return
-        clave = re.sub(r"[^a-z0-9]+", "", nombre.casefold())
+        clave = clave_nombre_lugar(nombre)
         if not clave or clave in vistos:
             return
         vistos.add(clave)
@@ -3321,6 +3368,18 @@ def extraer_lugares_lista_gmaps(url_lista: str, nombre_lista: str = ""):
         # Mantener orden y eliminar endpoints repetidos.
         rutas = list(dict.fromkeys(rutas))
 
+        # Enlaces cortos recientes pueden redirigir directamente a una vista
+        # identificada por token (!2s...!3e3), sin incluir el endpoint getlist
+        # en el HTML. En ese caso consultamos el endpoint público de la lista.
+        if not rutas:
+            token_lista = re.search(r"!2s([A-Za-z0-9_-]{12,})!3e3", url_final + " " + pagina)
+            if token_lista:
+                token = urllib.parse.quote(token_lista.group(1), safe="")
+                rutas.append(
+                    "https://www.google.com/maps/preview/entitylist/getlist"
+                    f"?authuser=0&hl=es&gl=es&pb=!1m2!1s{token}!2e1!3e2"
+                )
+
         if not rutas:
             # Un enlace de un solo lugar también se admite.
             m_lugar = re.search(r"/place/([^/@?]+)", url_final)
@@ -3333,7 +3392,6 @@ def extraer_lugares_lista_gmaps(url_lista: str, nombre_lista: str = ""):
                     lat, lon, direccion = geocodificar_direccion_o_nombre(f"{nombre}, New York")
                     if lat is not None and lon is not None:
                         _agregar(nombre, lat, lon, direccion)
-            return encontrados
 
         for ruta in rutas:
             ruta = (
@@ -3400,6 +3458,74 @@ def extraer_lugares_lista_gmaps(url_lista: str, nombre_lista: str = ""):
                         _recorrer(hijo)
 
             _recorrer(data)
+
+        # Respaldo para el formato nuevo de listas compartidas de Google Maps:
+        # algunos enlaces ya no exponen el endpoint getlist en el HTML, pero sí
+        # incluyen los nombres y coordenadas en los datos embebidos de la página.
+        pagina_plana = (
+            html.unescape(pagina)
+            .replace(r"\\u0026", "&")
+            .replace(r"\\u003d", "=")
+            .replace(r"\\/", "/")
+        )
+
+        # Formatos de coordenadas que Google Maps utiliza en sus datos serializados.
+        patrones_coords = (
+            re.compile(r"!1d(-?\\d+(?:\\.\\d+)?)!2d(-?\\d+(?:\\.\\d+)?)"),
+            re.compile(r"!3d(-?\\d+(?:\\.\\d+)?)!4d(-?\\d+(?:\\.\\d+)?)"),
+            re.compile(r"\\[null,null,(-?\\d+(?:\\.\\d+)?),(-?\\d+(?:\\.\\d+)?)\\]"),
+        )
+        for patron_coords in patrones_coords:
+            for m_coord in patron_coords.finditer(pagina_plana):
+                lat_c, lon_c = float(m_coord.group(1)), float(m_coord.group(2))
+                if not (-90 <= lat_c <= 90 and -180 <= lon_c <= 180):
+                    continue
+                inicio = max(0, m_coord.start() - 1800)
+                fin = min(len(pagina_plana), m_coord.end() + 900)
+                bloque = pagina_plana[inicio:fin]
+
+                # En la serialización de Maps, el nombre suele estar en un campo !2s
+                # cercano al bloque de coordenadas.
+                nombres_cercanos = re.findall(r"!2s([^!<>]{3,180})", bloque)
+                nombres_cercanos = [
+                    urllib.parse.unquote(x).replace(r"\\u0026", "&").strip()
+                    for x in nombres_cercanos
+                    if not x.startswith(("ChIJ", "0x", "/g/", "/m/"))
+                ]
+                if nombres_cercanos:
+                    # Priorizar el campo !2s más próximo a las coordenadas.
+                    campos_nombre = [
+                        (abs(m_coord.start() - m_nombre.start()), m_nombre.group(1))
+                        for m_nombre in re.finditer(r"!2s([^!<>]{3,180})", bloque)
+                        if not m_nombre.group(1).startswith(("ChIJ", "0x", "/g/", "/m/"))
+                    ]
+                    if campos_nombre:
+                        nombre_candidato = min(campos_nombre, key=lambda x: x[0])[1]
+                        nombre_candidato = urllib.parse.unquote(nombre_candidato).strip()
+                        if nombre_candidato and not nombre_candidato.startswith(("http", "https")):
+                            _agregar(nombre_candidato, lat_c, lon_c)
+
+        # Último respaldo: algunas respuestas contienen fichas con nombre y
+        # dirección, pero no coordenadas visibles. Geocodificamos solo los campos
+        # de nombre explícitos de la estructura de lugares para no importar textos
+        # arbitrarios de la interfaz.
+        if not encontrados:
+            nombres_embebidos = re.findall(
+                r'"(?:title|name|displayName|placeName)"\\s*:\\s*"([^"\\\\]{3,160})"',
+                pagina_plana,
+                flags=re.IGNORECASE
+            )
+            for nombre_candidato in nombres_embebidos:
+                nombre_candidato = re.sub(
+                    r"\\\\u([0-9a-fA-F]{4})",
+                    lambda m: chr(int(m.group(1), 16)),
+                    nombre_candidato
+                ).strip()
+                if not nombre_candidato or nombre_candidato.startswith(("http", "Google Maps")):
+                    continue
+                lat_g, lon_g, dir_g = geocodificar_direccion_o_nombre(f"{nombre_candidato}, New York")
+                if lat_g is not None and lon_g is not None:
+                    _agregar(nombre_candidato, lat_g, lon_g, dir_g)
 
     except Exception as exc:
         try:
@@ -3480,11 +3606,11 @@ def importar_sitio_desde_gmaps(url_o_texto: str, dia_dest: int = 0, hora: str = 
     if "maps" in raw.lower():
         lugares_lst = extraer_lugares_lista_gmaps(raw, "Google Maps")
         if lugares_lst:
-            existentes = {str(x.get("nombre", "")).strip().casefold() for x in st.session_state.lugares}
+            existentes = {clave_nombre_lugar(x.get("nombre", "")) for x in st.session_state.lugares}
             nuevos = 0
             max_id = max([x.get("id", 0) for x in st.session_state.lugares], default=0)
             for s in lugares_lst:
-                clave_nombre = str(s.get("nombre", "")).strip().casefold()
+                clave_nombre = clave_nombre_lugar(s.get("nombre", ""))
                 if clave_nombre and clave_nombre not in existentes:
                     max_id += 1
                     s["id"] = max_id
@@ -3493,7 +3619,7 @@ def importar_sitio_desde_gmaps(url_o_texto: str, dia_dest: int = 0, hora: str = 
                     s["nota"] = (nota or "").strip()
                     s["visitado"] = False
                     st.session_state.lugares.append(s)
-                    existentes.add(s["nombre"].strip().casefold())
+                    existentes.add(clave_nombre_lugar(s["nombre"]))
                     nuevos += 1
             if nuevos > 0:
                 guardar_itinerario_disco(st.session_state.lugares)
@@ -4632,12 +4758,13 @@ with pestanas[4]:
                         with st.spinner(f"Descargando de {nombre_lista}..."):
                             descargados = extraer_lugares_lista_gmaps(url_lista, nombre_lista)
                             if descargados:
-                                existentes = set(x.get("nombre", "").lower() for x in st.session_state.lugares)
+                                existentes = {clave_nombre_lugar(x.get("nombre", "")) for x in st.session_state.lugares}
                                 agregados = 0
                                 max_id_act = max([x.get("id", 0) for x in st.session_state.lugares], default=0)
                                 for d_item in descargados:
                                     nombre_importado = d_item.get("nombre", "").strip()
-                                    if nombre_importado and nombre_importado.lower() not in existentes:
+                                    clave_importada = clave_nombre_lugar(nombre_importado)
+                                    if clave_importada and clave_importada not in existentes:
                                         max_id_act += 1
                                         st.session_state.lugares.append({
                                             "id": max_id_act,
@@ -4652,7 +4779,7 @@ with pestanas[4]:
                                             "tipo": d_item["tipo"],
                                             "visitado": False
                                         })
-                                        existentes.add(nombre_importado.lower())
+                                        existentes.add(clave_importada)
                                         agregados += 1
                                 guardar_itinerario_disco(st.session_state.lugares)
                                 st.success(f"✓ Sincronizado: {agregados} sitios nuevos añadidos a Guardados.")
