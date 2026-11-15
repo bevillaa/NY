@@ -6,6 +6,7 @@ import urllib.request
 import urllib.parse
 import os
 import re
+import tempfile
 import math
 import html
 from datetime import datetime
@@ -548,44 +549,79 @@ st.markdown("""
       padding: 0 !important;
     }
 
-    /* Fila de un lugar en el itinerario: checkbox | información | editar. */
-    [data-testid="stHorizontalBlock"]:has([data-testid="stCheckbox"]):has(.edit-mini-btn)
-      > [data-testid="column"]:nth-child(1) {
+    /* Nombre + lápiz a su derecha (y checkbox cuando existe): siempre en una sola línea. */
+    [data-testid="stHorizontalBlock"]:has(.edit-mini-btn) {
+      display: flex !important;
+      flex-wrap: nowrap !important;
+      align-items: flex-start !important;
+      gap: 4px !important;
+    }
+    [data-testid="stHorizontalBlock"]:has(.edit-mini-btn)
+      > [data-testid="column"]:has(.edit-mini-btn) {
       flex: 0 0 30px !important;
       width: 30px !important;
+      min-width: 30px !important;
       max-width: 30px !important;
     }
-    [data-testid="stHorizontalBlock"]:has([data-testid="stCheckbox"]):has(.edit-mini-btn)
-      > [data-testid="column"]:nth-child(2) {
-      flex: 1 1 calc(100% - 76px) !important;
+    [data-testid="stHorizontalBlock"]:has(.edit-mini-btn)
+      > [data-testid="column"]:has([data-testid="stCheckbox"]) {
+      flex: 0 0 26px !important;
+      width: 26px !important;
+      min-width: 26px !important;
+      max-width: 26px !important;
+    }
+    [data-testid="stHorizontalBlock"]:has(.edit-mini-btn)
+      > [data-testid="column"]:not(:has(.edit-mini-btn)):not(:has([data-testid="stCheckbox"])) {
+      flex: 1 1 0% !important;
       width: auto !important;
       min-width: 0 !important;
+      max-width: none !important;
     }
-    [data-testid="stHorizontalBlock"]:has([data-testid="stCheckbox"]):has(.edit-mini-btn)
-      > [data-testid="column"]:nth-child(3) {
-      flex: 0 0 30px !important;
-      width: 30px !important;
-      max-width: 30px !important;
+    .edit-mini-btn { justify-content: flex-end !important; }
+    .edit-mini-btn button {
+      width: 27px !important;
+      min-width: 27px !important;
+      max-width: 27px !important;
+      height: 27px !important;
+      min-height: 27px !important;
+      padding: 0 !important;
+      font-size: 0.72rem !important;
+      line-height: 1 !important;
     }
 
-    /* Barra de hora, día y Maps: elimina columnas vacías y deja controles legibles. */
-    [data-testid="stHorizontalBlock"]:has(.compact-hora):has(.compact-ctrl)
-      > [data-testid="column"]:not(:has(.compact-hora)):not(:has(.compact-ctrl)) {
+    /* Hora | Día | Maps: tres controles alineados y sin columnas vacías. */
+    [data-testid="stHorizontalBlock"]:has(.compact-hora):has(.compact-dia):has(.compact-maps) {
+      display: flex !important;
+      flex-wrap: nowrap !important;
+      align-items: center !important;
+      gap: 6px !important;
+      width: 100% !important;
+      min-width: 0 !important;
+    }
+    [data-testid="stHorizontalBlock"]:has(.compact-hora):has(.compact-dia):has(.compact-maps)
+      > [data-testid="column"]:not(:has(.compact-hora)):not(:has(.compact-dia)):not(:has(.compact-maps)) {
       display: none !important;
     }
-    [data-testid="stHorizontalBlock"]:has(.compact-hora):has(.compact-ctrl)
+    [data-testid="stHorizontalBlock"]:has(.compact-hora):has(.compact-dia):has(.compact-maps)
       > [data-testid="column"]:has(.compact-hora) {
-      flex: 0 1 82px !important;
-      width: 82px !important;
-      min-width: 76px !important;
-      max-width: 94px !important;
+      flex: 0 0 72px !important;
+      width: 72px !important;
+      min-width: 66px !important;
+      max-width: 78px !important;
     }
-    [data-testid="stHorizontalBlock"]:has(.compact-hora):has(.compact-ctrl)
-      > [data-testid="column"]:has(.compact-ctrl) {
-      flex: 1 1 112px !important;
+    [data-testid="stHorizontalBlock"]:has(.compact-hora):has(.compact-dia):has(.compact-maps)
+      > [data-testid="column"]:has(.compact-dia) {
+      flex: 1 1 0% !important;
       width: auto !important;
-      min-width: 105px !important;
-      max-width: 100% !important;
+      min-width: 0 !important;
+      max-width: none !important;
+    }
+    [data-testid="stHorizontalBlock"]:has(.compact-hora):has(.compact-dia):has(.compact-maps)
+      > [data-testid="column"]:has(.compact-maps) {
+      flex: 0 0 72px !important;
+      width: 72px !important;
+      min-width: 66px !important;
+      max-width: 76px !important;
     }
 
     /* Las seis pestañas quedan visibles en dos columnas, sin una tira recortada. */
@@ -630,6 +666,18 @@ st.markdown("""
       overflow-wrap: anywhere !important;
       font-size: 0.76rem !important;
     }
+    /* El lápiz conserva tamaño de icono y no ocupa toda la columna. */
+    .edit-mini-btn .stButton > button,
+    [data-testid="column"]:has(.edit-mini-btn) .stButton > button {
+      width: 27px !important;
+      min-width: 27px !important;
+      max-width: 27px !important;
+      height: 27px !important;
+      min-height: 27px !important;
+      padding: 0 !important;
+      white-space: nowrap !important;
+      font-size: 0.72rem !important;
+    }
 
     .compact-hora [data-testid="stTextInput"] {
       width: 100% !important;
@@ -656,8 +704,65 @@ st.markdown("""
     .compact-ctrl [data-testid="stLinkButton"] > a,
     .compact-ctrl .stButton > button {
       width: 100% !important;
-      font-size: 0.73rem !important;
-      padding: 6px 4px !important;
+      min-height: 32px !important;
+      height: 32px !important;
+      font-size: 0.72rem !important;
+      padding: 0 3px !important;
+      white-space: nowrap !important;
+      line-height: 1 !important;
+    }
+    .compact-hora [data-baseweb="input"],
+    .compact-hora [data-baseweb="base-input"],
+    .compact-hora input {
+      min-height: 32px !important;
+      height: 32px !important;
+      max-height: 32px !important;
+    }
+    .compact-dia [data-baseweb="select"] > div {
+      min-height: 32px !important;
+      height: 32px !important;
+      max-height: 32px !important;
+      padding-left: 6px !important;
+      padding-right: 6px !important;
+    }
+    /* filter_mode=None bloquea la escritura en los desplegables; este estilo
+       evita que un input de búsqueda invisible robe el toque en móviles antiguos. */
+    .compact-dia [data-baseweb="select"] input {
+      caret-color: transparent !important;
+    }
+    /* Los widgets de Streamlit son hermanos del marcador HTML dentro de cada columna. */
+    [data-testid="column"]:has(.compact-hora) [data-testid="stTextInput"],
+    [data-testid="column"]:has(.compact-hora) [data-baseweb="input"],
+    [data-testid="column"]:has(.compact-hora) [data-baseweb="base-input"] {
+      width: 100% !important;
+      min-width: 0 !important;
+      margin-top: -5px !important;
+      margin-bottom: 0 !important;
+      transform: translateY(-1px) !important;
+    }
+    [data-testid="column"]:has(.compact-dia) [data-baseweb="select"] > div {
+      min-height: 32px !important;
+      height: 32px !important;
+      max-height: 32px !important;
+      padding-left: 6px !important;
+      padding-right: 6px !important;
+    }
+    [data-testid="column"]:has(.compact-dia) [data-baseweb="select"] input {
+      caret-color: transparent !important;
+    }
+    [data-testid="column"]:has(.compact-maps) [data-testid="stLinkButton"] {
+      width: 100% !important;
+      margin-top: -8px !important;
+      margin-bottom: 0 !important;
+      transform: translateY(-1px) !important;
+    }
+    [data-testid="column"]:has(.compact-maps) [data-testid="stLinkButton"] > a {
+      width: 100% !important;
+      min-height: 32px !important;
+      height: 32px !important;
+      padding: 0 3px !important;
+      white-space: nowrap !important;
+      line-height: 1 !important;
     }
     .edit-mini-btn button {
       min-height: 28px !important;
@@ -698,16 +803,17 @@ st.markdown("""
     .block-container { padding-left: 0.45rem !important; padding-right: 0.45rem !important; }
     .hero-title { font-size: 1.2rem !important; }
     .stTabs [data-baseweb="tab"] { font-size: 0.69rem !important; padding: 6px 2px !important; }
-    [data-testid="stHorizontalBlock"]:has(.compact-hora):has(.compact-ctrl)
+    [data-testid="stHorizontalBlock"]:has(.compact-hora):has(.compact-dia):has(.compact-maps)
       > [data-testid="column"]:has(.compact-hora) {
-      flex-basis: 72px !important;
-      width: 72px !important;
-      min-width: 70px !important;
+      flex-basis: 66px !important;
+      width: 66px !important;
+      min-width: 62px !important;
     }
-    [data-testid="stHorizontalBlock"]:has(.compact-hora):has(.compact-ctrl)
-      > [data-testid="column"]:has(.compact-ctrl) {
-      flex-basis: 100px !important;
-      min-width: 98px !important;
+    [data-testid="stHorizontalBlock"]:has(.compact-hora):has(.compact-dia):has(.compact-maps)
+      > [data-testid="column"]:has(.compact-maps) {
+      flex-basis: 66px !important;
+      width: 66px !important;
+      min-width: 62px !important;
     }
   }
 
@@ -862,6 +968,23 @@ def clasificar_lugar(nombre: str, direccion: str = "", lista_origen: str = "") -
 
     return "📍 Otros", "Interior"
 
+def selectbox_sin_teclado(*args, **kwargs):
+    """Selectbox sin búsqueda de texto: el móvil solo muestra las opciones.
+
+    Para garantizarlo en el despliegue, usar Streamlit >= 1.67.0
+    (filter_mode=None). La sincronización automática usa st.fragment.
+    """
+    kwargs.setdefault("filter_mode", None)
+    try:
+        return st.selectbox(*args, **kwargs)
+    except TypeError as exc:
+        # Compatibilidad con versiones de Streamlit anteriores a filter_mode.
+        if "filter_mode" not in str(exc):
+            raise
+        kwargs.pop("filter_mode", None)
+        return st.selectbox(*args, **kwargs)
+
+
 def obtener_emoji_categoria(cat: str) -> str:
     for ch in cat:
         if ord(ch) > 127:
@@ -965,12 +1088,38 @@ def cargar_config_viaje():
         "listas_gmaps": []
     }
 
-def guardar_config_viaje(cfg):
+def _guardar_json_atomico(ruta: str, datos):
+    """Escribe JSON atómicamente y con temporal único por escritura/sesión."""
+    temporal = None
     try:
-        with open(ARCH_CONFIG, "w", encoding="utf-8") as f:
-            json.dump(cfg, f, ensure_ascii=False, indent=2)
-    except Exception:
-        pass
+        carpeta = os.path.dirname(os.path.abspath(ruta))
+        prefijo = f".{os.path.basename(ruta)}."
+        with tempfile.NamedTemporaryFile(
+            mode="w", encoding="utf-8", dir=carpeta,
+            prefix=prefijo, suffix=".tmp", delete=False
+        ) as f:
+            temporal = f.name
+            json.dump(datos, f, ensure_ascii=False, indent=2)
+            f.flush()
+            os.fsync(f.fileno())
+        os.replace(temporal, ruta)
+        return True
+    except Exception as exc:
+        try:
+            if temporal and os.path.exists(temporal):
+                os.remove(temporal)
+        except Exception:
+            pass
+        # No ocultamos fallos de escritura: sin esto no habría sincronización real.
+        try:
+            st.error(f"No se pudieron guardar los datos compartidos ({os.path.basename(ruta)}): {exc}")
+        except Exception:
+            pass
+        return False
+
+
+def guardar_config_viaje(cfg):
+    _guardar_json_atomico(ARCH_CONFIG, cfg)
 
 def cargar_itinerario_disco():
     if os.path.exists(ARCH_ITINERARIO):
@@ -997,11 +1146,59 @@ def cargar_itinerario_disco():
     return []
 
 def guardar_itinerario_disco(lugares):
+    """Guarda el itinerario que comparten las sesiones de esta publicación."""
+    return _guardar_json_atomico(ARCH_ITINERARIO, lugares)
+
+
+def _huella_datos(datos) -> str:
+    """Firma estable para detectar cambios escritos desde otro navegador."""
     try:
-        with open(ARCH_ITINERARIO, "w", encoding="utf-8") as f:
-            json.dump(lugares, f, ensure_ascii=False, indent=2)
+        return json.dumps(datos, ensure_ascii=False, sort_keys=True, separators=(",", ":"))
     except Exception:
-        pass
+        return repr(datos)
+
+
+def sincronizar_lugares_desde_disco():
+    """Actualiza la sesión si otro dispositivo ha cambiado el itinerario compartido."""
+    nuevos = cargar_itinerario_disco()
+    anteriores = st.session_state.get("lugares")
+    if anteriores is None:
+        st.session_state.lugares = nuevos
+        return True
+
+    if _huella_datos(anteriores) == _huella_datos(nuevos):
+        return False
+
+    antes_por_id = {str(x.get("id")): x for x in anteriores if isinstance(x, dict) and x.get("id") is not None}
+    nuevos_por_id = {str(x.get("id")): x for x in nuevos if isinstance(x, dict) and x.get("id") is not None}
+    ids_cambiados = set(antes_por_id) | set(nuevos_por_id)
+    ids_cambiados = {
+        pid for pid in ids_cambiados
+        if _huella_datos(antes_por_id.get(pid)) != _huella_datos(nuevos_por_id.get(pid))
+    }
+
+    # Los widgets mantienen su valor dentro de cada sesión. Al cambiar un lugar
+    # desde otro dispositivo, eliminamos solo sus claves para que se reconstruyan
+    # con la hora/día/estado más recientes del archivo compartido.
+    prefijos_widget_lugar = (
+        "mvd_it_", "asig_dia_pool_", "hora_it_", "hora_pool_",
+        "sel_d_sheet_", "hora_sheet_", "chk_it_"
+    )
+    for clave in list(st.session_state.keys()):
+        nombre_clave = str(clave)
+        if nombre_clave.startswith(prefijos_widget_lugar) and any(
+            nombre_clave.endswith(f"_{pid}") for pid in ids_cambiados
+        ):
+            try:
+                del st.session_state[clave]
+            except Exception:
+                pass
+
+    st.session_state.lugares = nuevos
+    ids_actuales = {x.get("id") for x in nuevos if isinstance(x, dict)}
+    if st.session_state.get("lugar_activo_id") not in ids_actuales:
+        st.session_state.lugar_activo_id = None
+    return True
 
 
 # =============================================================================
@@ -1214,14 +1411,14 @@ def render_editor_sitio_panel(spot: dict, idx_real: int, key_ctx: str):
                 ed_hora = st.text_input("Hora (HH:MM, ej. 10:30):", value=spot.get("hora", ""), placeholder="HH:MM")
                 cat_act = normalizar_categoria(spot.get("categoria", "📍 Otros"))
                 idx_c = CATEGORIAS_CANONICAS.index(cat_act) if cat_act in CATEGORIAS_CANONICAS else 0
-                ed_cat = st.selectbox("Categoría:", CATEGORIAS_CANONICAS, index=idx_c)
+                ed_cat = selectbox_sin_teclado("Categoría:", CATEGORIAS_CANONICAS, index=idx_c)
 
                 tipo_act = spot.get("tipo", "Interior")
-                ed_tipo = st.selectbox("Entorno:", ["Interior", "Exterior"], index=0 if tipo_act == "Interior" else 1)
+                ed_tipo = selectbox_sin_teclado("Entorno:", ["Interior", "Exterior"], index=0 if tipo_act == "Interior" else 1)
 
                 dias_opts = ["📌 Bandeja de Guardados"] + [etiqueta_dia(d) for d in range(1, 11)]
                 dia_act = spot.get("dia", 0)
-                ed_dia_str = st.selectbox("Día asignado:", dias_opts, index=dia_act if 0 <= dia_act <= 10 else 0)
+                ed_dia_str = selectbox_sin_teclado("Día asignado:", dias_opts, index=dia_act if 0 <= dia_act <= 10 else 0)
 
             ce3, ce4 = st.columns(2)
             with ce3:
@@ -1287,7 +1484,7 @@ def render_formulario_agregar_lugar(key_sufijo: str = "gen"):
                 url_input = st.text_input("Enlace de Google Maps:", placeholder="https://maps.app.goo.gl/...", key=f"inp_gm_{key_sufijo}")
                 cg1, cg2 = st.columns(2)
                 with cg1:
-                    dia_dest_gm = st.selectbox("Asignar a:", dias_asig_opts, key=f"sel_dia_gm_{key_sufijo}")
+                    dia_dest_gm = selectbox_sin_teclado("Asignar a:", dias_asig_opts, key=f"sel_dia_gm_{key_sufijo}")
                 with cg2:
                     hora_gm = st.text_input("Hora (opcional, HH:MM):", placeholder="11:00", key=f"hora_gm_{key_sufijo}")
                 nota_gm = st.text_input("Nota manual (opcional):", placeholder="Ej: Reserva a las 20:00, probar pastrami...", key=f"nota_gm_{key_sufijo}")
@@ -1320,12 +1517,12 @@ def render_formulario_agregar_lugar(key_sufijo: str = "gen"):
                     nom_m = st.text_input("Nombre:", placeholder="Ej: Levain Bakery, Joe's Pizza...", key=f"nom_m_{key_sufijo}")
                     dir_m = st.text_input("Dirección / Barrio:", placeholder="Ej: West Village...", key=f"dir_m_{key_sufijo}")
                 with c_m2:
-                    cat_m = st.selectbox("Categoría:", ["⚡ Detección Automática"] + CATEGORIAS_CANONICAS, key=f"cat_m_{key_sufijo}")
-                    tipo_m = st.selectbox("Tipo:", ["Interior (🌧️ A cubierto)", "Exterior (☀️ Al aire libre)"], key=f"tipo_m_{key_sufijo}")
+                    cat_m = selectbox_sin_teclado("Categoría:", ["⚡ Detección Automática"] + CATEGORIAS_CANONICAS, key=f"cat_m_{key_sufijo}")
+                    tipo_m = selectbox_sin_teclado("Tipo:", ["Interior (🌧️ A cubierto)", "Exterior (☀️ Al aire libre)"], key=f"tipo_m_{key_sufijo}")
 
                 c_m3, c_m4 = st.columns(2)
                 with c_m3:
-                    dia_dest_m = st.selectbox("Asignar a:", dias_asig_opts, key=f"sel_dia_m_{key_sufijo}")
+                    dia_dest_m = selectbox_sin_teclado("Asignar a:", dias_asig_opts, key=f"sel_dia_m_{key_sufijo}")
                     val_dia_m = 0 if "Bandeja" in dia_dest_m else int(re.search(r"Día (\d+)", dia_dest_m).group(1))
                 with c_m4:
                     hora_m = st.text_input("Hora (opcional, HH:MM):", placeholder="16:00", key=f"hora_m_{key_sufijo}")
@@ -1368,14 +1565,33 @@ def render_formulario_agregar_lugar(key_sufijo: str = "gen"):
 if "config_viaje" not in st.session_state:
     st.session_state.config_viaje = cargar_config_viaje()
 
-if "lugares" not in st.session_state or not st.session_state.lugares:
+if "lugares" not in st.session_state:
     st.session_state.lugares = cargar_itinerario_disco()
+else:
+    sincronizar_lugares_desde_disco()
 
 if "lugar_activo_id" not in st.session_state:
     st.session_state.lugar_activo_id = None
 
 if "editando_spot_key" not in st.session_state:
     st.session_state.editando_spot_key = None
+
+
+def _vigilar_cambios_de_otros_dispositivos():
+    """Comprueba periódicamente si otra sesión ha guardado cambios en el itinerario."""
+    datos_compartidos = cargar_itinerario_disco()
+    if _huella_datos(datos_compartidos) != _huella_datos(st.session_state.get("lugares", [])):
+        sincronizar_lugares_desde_disco()
+        # El rerun completo actualiza mapa, contadores, itinerario y guardados.
+        st.rerun()
+
+
+if hasattr(st, "fragment"):
+    @st.fragment(run_every="5s")
+    def _sincronizador_automatico_dispositivos():
+        _vigilar_cambios_de_otros_dispositivos()
+
+    _sincronizador_automatico_dispositivos()
 
 
 # =============================================================================
@@ -1445,16 +1661,16 @@ with pestanas[0]:
             "📅 Solo Sitios en Itinerario (Días 1 a 10)",
             "🏨 Solo Hotel Base"
         ] + [etiqueta_dia(d) for d in range(1, 11)]
-        sel_vista = st.selectbox("Vista en el mapa:", opciones_vista, label_visibility="collapsed")
+        sel_vista = selectbox_sin_teclado("Vista en el mapa:", opciones_vista, label_visibility="collapsed")
     with c_m2:
-        sel_capa = st.selectbox(
+        sel_capa = selectbox_sin_teclado(
             "Capa:",
             ["Google Maps Callejero", "Google Maps Satélite / Híbrido", "Google Maps Terreno", "OpenStreetMap"],
             label_visibility="collapsed"
         )
     with c_m3:
         cats_actuales = sorted(set(normalizar_categoria(l.get("categoria", "📍 Otros")) for l in st.session_state.lugares))
-        sel_filtro_cat = st.selectbox("Categoría:", ["Todas"] + cats_actuales, label_visibility="collapsed")
+        sel_filtro_cat = selectbox_sin_teclado("Categoría:", ["Todas"] + cats_actuales, label_visibility="collapsed")
 
     if "Todos" in sel_vista:
         sitios_mapa = list(st.session_state.lugares)
@@ -1630,19 +1846,8 @@ with pestanas[0]:
                 st.markdown(bloque_nota_html(nota_sp), unsafe_allow_html=True)
 
             st.markdown("<div style='height:6px;'></div>", unsafe_allow_html=True)
-            c_act1, c_act2, c_act3 = st.columns([2.2, 1.3, 1.5])
-            with c_act1:
-                st.markdown('<div class="compact-ctrl">', unsafe_allow_html=True)
-                opciones_dias = ["Guardados"] + [etiqueta_dia_corta(d) for d in range(1, 11)]
-                idx_dia_act = dia_sp if dia_sp > 0 else 0
-                sel_n_dia = st.selectbox("Día:", opciones_dias, index=idx_dia_act, key=f"sel_d_sheet_{sp['id']}", label_visibility="collapsed")
-                n_dia_val = 0 if sel_n_dia == "Guardados" else int(re.search(r"Día (\d+)", sel_n_dia).group(1))
-                if n_dia_val != dia_sp:
-                    st.session_state.lugares[idx_p]["dia"] = n_dia_val
-                    guardar_itinerario_disco(st.session_state.lugares)
-                    st.rerun()
-                st.markdown('</div>', unsafe_allow_html=True)
-            with c_act2:
+            c_act_hr, c_act_dia, c_act_maps = st.columns([1.0, 1.55, 1.0])
+            with c_act_hr:
                 st.markdown('<div class="compact-hora">', unsafe_allow_html=True)
                 nueva_h_sh = st.text_input("Hora", value=hora_sp, placeholder="🕒 HH:MM", key=f"hora_sheet_{sp['id']}", label_visibility="collapsed")
                 st.markdown('</div>', unsafe_allow_html=True)
@@ -1654,8 +1859,19 @@ with pestanas[0]:
                         st.session_state.lugares[idx_p]["hora"] = hl
                         guardar_itinerario_disco(st.session_state.lugares)
                         st.rerun()
-            with c_act3:
-                st.markdown('<div class="compact-ctrl">', unsafe_allow_html=True)
+            with c_act_dia:
+                st.markdown('<div class="compact-ctrl compact-dia">', unsafe_allow_html=True)
+                opciones_dias = ["Guardados"] + [etiqueta_dia_corta(d) for d in range(1, 11)]
+                idx_dia_act = dia_sp if dia_sp > 0 else 0
+                sel_n_dia = selectbox_sin_teclado("Día:", opciones_dias, index=idx_dia_act, key=f"sel_d_sheet_{sp['id']}", label_visibility="collapsed")
+                n_dia_val = 0 if sel_n_dia == "Guardados" else int(re.search(r"Día (\d+)", sel_n_dia).group(1))
+                if n_dia_val != dia_sp:
+                    st.session_state.lugares[idx_p]["dia"] = n_dia_val
+                    guardar_itinerario_disco(st.session_state.lugares)
+                    st.rerun()
+                st.markdown('</div>', unsafe_allow_html=True)
+            with c_act_maps:
+                st.markdown('<div class="compact-ctrl compact-maps">', unsafe_allow_html=True)
                 g_direct = f"https://www.google.com/maps/search/?api=1&query={urllib.parse.quote(sp['nombre'] + ' New York')}"
                 st.link_button("🗺️ Maps", g_direct, use_container_width=True)
                 st.markdown('</div>', unsafe_allow_html=True)
@@ -1684,7 +1900,7 @@ with pestanas[1]:
         )
 
     opciones_filtro_it = ["📋 Todos los Días (Días 1 a 10)"] + [etiqueta_dia(d) for d in range(1, 11)]
-    filtro_it_sel = st.selectbox(
+    filtro_it_sel = selectbox_sin_teclado(
         "Ver itinerario:",
         opciones_filtro_it,
         key="filtro_itinerario_dia",
@@ -1799,8 +2015,8 @@ with pestanas[1]:
                             guardar_itinerario_disco(st.session_state.lugares)
                             st.rerun()
                 with c_mv:
-                    st.markdown('<div class="compact-ctrl">', unsafe_allow_html=True)
-                    dest_d = st.selectbox(
+                    st.markdown('<div class="compact-ctrl compact-dia">', unsafe_allow_html=True)
+                    dest_d = selectbox_sin_teclado(
                         "",
                         [etiqueta_dia_corta(x) for x in range(1, 11)] + ["Guardados"],
                         index=d - 1,
@@ -1814,7 +2030,7 @@ with pestanas[1]:
                         st.rerun()
                     st.markdown('</div>', unsafe_allow_html=True)
                 with c_mp:
-                    st.markdown('<div class="compact-ctrl">', unsafe_allow_html=True)
+                    st.markdown('<div class="compact-ctrl compact-maps">', unsafe_allow_html=True)
                     st.link_button("🗺️ Maps", gmaps_url, use_container_width=True)
                     st.markdown('</div>', unsafe_allow_html=True)
 
@@ -1843,7 +2059,7 @@ with pestanas[2]:
 
     col_flt1, col_flt2 = st.columns(2)
     with col_flt1:
-        flt_cat_g = st.selectbox("Categoría:", ["Todas"] + cats_en_pool, key="flt_pool_cat")
+        flt_cat_g = selectbox_sin_teclado("Categoría:", ["Todas"] + cats_en_pool, key="flt_pool_cat")
     with col_flt2:
         busq_g = st.text_input("Buscar:", placeholder="Nombre del sitio...", key="busq_pool_nom")
 
@@ -1904,10 +2120,10 @@ with pestanas[2]:
                     guardar_itinerario_disco(st.session_state.lugares)
                     st.rerun()
         with c_p_dia:
-            st.markdown('<div class="compact-ctrl">', unsafe_allow_html=True)
+            st.markdown('<div class="compact-ctrl compact-dia">', unsafe_allow_html=True)
             opts_dia_pool = ["— Día —"] + [etiqueta_dia_corta(d) for d in range(1, 11)]
             idx_sel_pool = dia_p if 1 <= dia_p <= 10 else 0
-            asig_dia = st.selectbox(
+            asig_dia = selectbox_sin_teclado(
                 "Mover a:",
                 opts_dia_pool,
                 index=idx_sel_pool,
@@ -1922,7 +2138,7 @@ with pestanas[2]:
                     st.rerun()
             st.markdown('</div>', unsafe_allow_html=True)
         with c_p_mp:
-            st.markdown('<div class="compact-ctrl">', unsafe_allow_html=True)
+            st.markdown('<div class="compact-ctrl compact-maps">', unsafe_allow_html=True)
             g_url_sp = f"https://www.google.com/maps/search/?api=1&query={urllib.parse.quote(p_spot['nombre'] + ' New York')}"
             st.link_button("🗺️ Maps", g_url_sp, use_container_width=True)
             st.markdown('</div>', unsafe_allow_html=True)
@@ -1968,7 +2184,7 @@ with pestanas[3]:
 
     with col_w_day:
         st.markdown("#### 🗓️ Pronóstico por Día")
-        dia_sel_clima = st.selectbox(
+        dia_sel_clima = selectbox_sin_teclado(
             "Selecciona el día:",
             [etiqueta_dia(d) for d in range(1, 11)],
             key="sel_dia_clima"
@@ -2040,7 +2256,7 @@ with pestanas[3]:
             c_sust1, c_sust2 = st.columns([3.5, 1.5])
             with c_sust1:
                 opciones_cercanas = [f"{x['nombre']} (a {d:.1f} km) — {normalizar_categoria(x.get('categoria',''))}" for d, x in top_cercanos]
-                sel_sust = st.selectbox("Sustituto a cubierto:", opciones_cercanas, key=f"sel_sust_{spot_ext['id']}", label_visibility="collapsed")
+                sel_sust = selectbox_sin_teclado("Sustituto a cubierto:", opciones_cercanas, key=f"sel_sust_{spot_ext['id']}", label_visibility="collapsed")
             with c_sust2:
                 if st.button("🔄 Cambiar", key=f"btn_swap_{spot_ext['id']}", use_container_width=True):
                     nom_sust = sel_sust.split(" (a ")[0].strip()
