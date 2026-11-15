@@ -16,7 +16,7 @@ ARCH_ITINERARIO = "itinerario_actual.json"
 ARCH_CONFIG     = "config_viaje.json"
 
 # =============================================================================
-# 1. CONFIGURACIÓN DE PÁGINA & ESTILO NAVIDEÑO EDITORIAL (MÓVIL + WEB COMPACTO)
+# 1. CONFIGURACIÓN DE PÁGINA & ESTILO NAVIDEÑO EDITORIAL (MÓVIL + WEB) 
 # =============================================================================
 st.set_page_config(
     page_title="Navidad en Nueva York 🎄❄️",
