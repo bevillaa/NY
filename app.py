@@ -4055,7 +4055,7 @@ with pestanas[1]:
                     with c_day:
                         dest_d = selectbox_sin_teclado(
                             "Día",
-                            [f"Día {x}" for x in range(1, 11)] + ["Guardados"],
+                            ["Guardados"] + [f"Día {x}" for x in range(1, 11)],
                             index=d - 1,
                             key=f"mvd_it_{d}_{item['id']}",
                             label_visibility="collapsed"
