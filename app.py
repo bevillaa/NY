@@ -3155,27 +3155,6 @@ def guardar_config_viaje(cfg):
     return _guardar_json_atomico(ARCH_CONFIG, cfg)
 
 def cargar_itinerario_disco():
-    if os.path.exists(ARCH_ITINERARIO):
-        try:
-            with open(ARCH_ITINERARIO, "r", encoding="utf-8") as f:
-                datos = json.load(f)
-                modificado = False
-                for p in datos:
-                    cat_norm = normalizar_categoria(p.get("categoria", ""))
-                    if p.get("categoria") != cat_norm:
-                        p["categoria"] = cat_norm
-                        modificado = True
-                    if "hora" not in p:
-                        p["hora"] = ""
-                        modificado = True
-                    if "nota" not in p:
-                        p["nota"] = ""
-                        modificado = True
-                if modificado:
-                    guardar_itinerario_disco(datos)
-                return datos
-        except Exception:
-            pass
     return []
 
 def guardar_itinerario_disco(lugares):
@@ -3253,21 +3232,15 @@ def sincronizar_lugares_desde_disco():
 # =============================================================================
 def extraer_lugares_lista_gmaps(url_lista: str, nombre_lista: str = ""):
     lugares_encontrados = []
-    
-    # Cabeceras completas de navegador moderno para evitar bloqueos por bot
     headers = {
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36',
-        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8',
-        'Accept-Language': 'es-ES,es;q=0.9,en;q=0.8',
-        'Accept-Encoding': 'gzip, deflate, br',
-        'Connection': 'keep-alive',
-        'Upgrade-Insecure-Requests': '1'
+        'Accept-Language': 'es-ES,es;q=0.9,en;q=0.8'
     }
     
     try:
         url_actual = url_lista.strip()
         
-        # 1. Resolver redirecciones cortas (ej: maps.app.goo.gl)
+        # Resolver enlaces cortos de Google Maps (maps.app.goo.gl)
         if "app.goo.gl" in url_actual or "goo.gl" in url_actual:
             req_redir = urllib.request.Request(url_actual, headers=headers)
             try:
@@ -3276,110 +3249,50 @@ def extraer_lugares_lista_gmaps(url_lista: str, nombre_lista: str = ""):
             except Exception:
                 pass
 
-        # 2. Intentar petición HTTP a la URL de Google Maps
+        # Si el enlace contiene un lugar específico (/place/NOMBRE)
+        m_place = re.search(r'/place/([^/@?]+)', url_actual)
+        if m_place:
+            nombre_lugar = urllib.parse.unquote_plus(m_place.group(1)).replace("+", " ").strip()
+            if nombre_lugar:
+                lat_g, lon_g, dir_g = geocodificar_direccion_o_nombre(f"{nombre_lugar}, New York")
+                cat, tipo = clasificar_lugar(nombre_lugar, dir_g, nombre_lista)
+                lugares_encontrados.append({
+                    "nombre": nombre_lugar,
+                    "lat": lat_g if lat_g else 40.7580,
+                    "lon": lon_g if lon_g else -73.9855,
+                    "direccion": dir_g if dir_g else "Nueva York",
+                    "nota": f"Importado de: {nombre_lista}",
+                    "categoria": cat,
+                    "tipo": tipo,
+                    "hora": ""
+                })
+                return lugares_encontrados
+
+        # Petición general a la URL de Google Maps
         req = urllib.request.Request(url_actual, headers=headers)
-        html_content = ""
-        try:
-            with urllib.request.urlopen(req, timeout=10) as r:
-                html_content = r.read().decode('utf-8', errors='ignore')
-        except Exception as http_err:
-            # Si Google devuelve 400 Bad Request o bloquea la conexión, no detenemos la app:
-            # pasamos directamente al sistema de respaldo basado en metadatos y geocodificación.
-            pass
-
-        # 3. Intentar extraer datos estructurados si la página cargó correctamente
-        if html_content:
-            m = re.search(r'href="(/maps/preview/entitylist/getlist\?[^"]+)"', html_content)
-            if m:
-                entity_url = "https://www.google.com" + m.group(1).replace("&", "&")
-                req2 = urllib.request.Request(entity_url, headers=headers)
-                try:
-                    with urllib.request.urlopen(req2, timeout=8) as r2:
-                        raw = r2.read().decode("utf-8", errors="ignore").lstrip(")]}'\n")
-                    data = json.loads(raw)
-
-                    def _buscar_entidades(nodo):
-                        if isinstance(nodo, list):
-                            coords = None
-                            for el in nodo:
-                                if (isinstance(el, list) and len(el) >= 4 and el[0] is None and el[1] is None
-                                        and isinstance(el[2], (int, float)) and isinstance(el[3], (int, float))):
-                                    coords = (float(el[2]), float(el[3]))
-                                    break
-                            if coords:
-                                strs = [s for s in nodo if isinstance(s, str) and len(s) > 1 
-                                        and not s.startswith("http") and not s.startswith("ChIJ")
-                                        and not s.startswith("/g/") and not s.startswith("/m/")]
-                                if strs:
-                                    nombre_raw = strs[0]
-                                    partes = nombre_raw.split(",")
-                                    nom_spot = partes[0].strip()
-                                    dir_spot = ", ".join(partes[1:]).strip() if len(partes) > 1 else ""
-                                    cat, tipo = clasificar_lugar(nom_spot, dir_spot, nombre_lista)
-                                    lugares_encontrados.append({
-                                        "nombre": nom_spot,
-                                        "lat": coords[0],
-                                        "lon": coords[1],
-                                        "direccion": dir_spot,
-                                        "nota": "",
-                                        "categoria": cat,
-                                        "tipo": tipo,
-                                        "hora": ""
-                                    })
-                                return
-                            for hijo in nodo:
-                                _buscar_entidades(hijo)
-                        elif isinstance(nodo, dict):
-                            for v in nodo.values():
-                                _buscar_entidades(v)
-
-                    _buscar_entidades(data)
-                except Exception:
-                    pass
-
-            # 4. Extracción por OpenGraph / Título si el método anterior no arrojó resultados
-            if not lugares_encontrados:
-                m_tit = re.search(r'<meta property="og:title" content="([^"]+)"', html_content)
-                m_desc = re.search(r'<meta property="og:description" content="([^"]+)"', html_content)
-                
-                titulo_lugar = m_tit.group(1).replace("- Google Maps", "").strip() if m_tit else ""
-                descripcion = m_desc.group(1) if m_desc else ""
-                
-                if titulo_lugar and "Google Maps" not in titulo_lugar:
-                    lat_g, lon_g, dir_g = geocodificar_direccion_o_nombre(f"{titulo_lugar}, New York")
-                    cat, tipo = clasificar_lugar(titulo_lugar, dir_g, nombre_lista)
-                    lugares_encontrados.append({
-                        "nombre": titulo_lugar,
-                        "lat": lat_g if lat_g else 40.7580,
-                        "lon": lon_g if lon_g else -73.9855,
-                        "direccion": dir_g if dir_g else "Nueva York",
-                        "nota": f"Importado de lista: {nombre_lista}",
-                        "categoria": cat,
-                        "tipo": tipo,
-                        "hora": ""
-                    })
-
-        # 5. Fallback final si es un enlace directo de lugar o texto plano
-        if not lugares_encontrados and url_lista:
-            # Si el usuario introdujo un nombre o enlace plano, intentamos geocodificarlo directamente
-            limpio = url_lista.split("/")[-1].replace("+", " ").replace("-", " ")
-            if len(limpio) > 2 and not limpio.startswith("http"):
-                lat_g, lon_g, dir_g = geocodificar_direccion_o_nombre(f"{limpio}, New York")
-                if lat_g:
-                    cat, tipo = clasificar_lugar(limpio, dir_g, nombre_lista)
-                    lugares_encontrados.append({
-                        "nombre": limpio.title(),
-                        "lat": lat_g,
-                        "lon": lon_g,
-                        "direccion": dir_g,
-                        "nota": "",
-                        "categoria": cat,
-                        "tipo": tipo,
-                        "hora": ""
-                    })
+        with urllib.request.urlopen(req, timeout=10) as r:
+            html_content = r.read().decode('utf-8', errors='ignore')
+            
+        # Extracción por metadatos OpenGraph (título y descripción de la lista/lugar)
+        m_tit = re.search(r'<meta property="og:title" content="([^"]+)"', html_content)
+        titulo = m_tit.group(1).replace("- Google Maps", "").strip() if m_tit else "Lugar de Google Maps"
+        
+        if titulo and "Google Maps" not in titulo:
+            lat_g, lon_g, dir_g = geocodificar_direccion_o_nombre(f"{titulo}, New York")
+            cat, tipo = clasificar_lugar(titulo, dir_g, nombre_lista)
+            lugares_encontrados.append({
+                "nombre": titulo,
+                "lat": lat_g if lat_g else 40.7580,
+                "lon": lon_g if lon_g else -73.9855,
+                "direccion": dir_g if dir_g else "Nueva York",
+                "nota": f"Importado de lista: {nombre_lista}",
+                "categoria": cat,
+                "tipo": tipo,
+                "hora": ""
+            })
 
     except Exception as e:
-        st.warning(f"No se pudieron extraer lugares automáticamente de ({nombre_lista}).")
+        st.warning(f"Aviso: No se pudo conectar automáticamente con el enlace.")
         
     return lugares_encontrados
 
