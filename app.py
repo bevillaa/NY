@@ -500,7 +500,7 @@ st.markdown("""
       padding: 4px 8px !important;
     }
     .hero-stat-box { min-width: 0 !important; flex: 1 1 28% !important; padding: 5px 4px !important; }
-    .hero-stat-val { font-size: 1.08rem !important; }
+    .hero-stat-val { font-size: 1.25rem !important; }
     .hero-stat-lbl {
       font-size: 0.58rem !important;
       letter-spacing: 0.35px !important;
@@ -533,7 +533,7 @@ st.markdown("""
     /* Filas de nombre dentro de contenedores con identidad CSS propia. */
     [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] {
       display: grid !important;
-      grid-template-columns: 26px minmax(0, 1fr) 36px !important;
+      grid-template-columns: minmax(0, 1fr) 36px !important;
       column-gap: 6px !important;
       row-gap: 0 !important;
       align-items: start !important;
@@ -793,7 +793,7 @@ st.markdown("""
     .hero-title { font-size: 1.2rem !important; }
     .stTabs [data-baseweb="tab"] { font-size: 0.69rem !important; padding: 6px 2px !important; }
     [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] {
-      grid-template-columns: 25px minmax(0, 1fr) 38px !important;
+      grid-template-columns: minmax(0, 1fr) 38px !important;
       column-gap: 5px !important;
     }
     [class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"] {
@@ -1157,10 +1157,22 @@ st.markdown("""
 
     /* La fila informativa utiliza todo el ancho; la fila de cuatro controles va debajo. */
     [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] {
-      display: grid !important; grid-template-columns: 25px minmax(0, 1fr) !important;
+      display: grid !important; grid-template-columns: minmax(0, 1fr) 36px !important;
       gap: 5px !important; align-items: start !important; width: 100% !important;
     }
     [class*="st-key-it-heading-row-"] [data-testid="column"] { min-width: 0 !important; width: 100% !important; padding: 0 !important; }
+    [class*="st-key-it-heading-row-"] [data-testid="column"]:last-child {
+      display: flex !important;
+      justify-content: flex-end !important;
+      align-items: flex-start !important;
+    }
+    [class*="st-key-it-heading-row-"] [data-testid="column"]:last-child [data-testid="stCheckbox"] {
+      width: 36px !important;
+      min-width: 36px !important;
+      display: flex !important;
+      justify-content: flex-end !important;
+      margin-top: 1px !important;
+    }
     [class*="st-key-saved-heading-row-"] { width: 100% !important; min-width: 0 !important; }
 
     /* No permitir que los estilos globales de Streamlit vuelvan a ensanchar los widgets. */
@@ -1771,7 +1783,7 @@ st.markdown("""
 
   /* ===== CORRECCIÓN DEFINITIVA MÓVIL: ICONOS REALES + DÍA LEGIBLE ===== */
   .place-list-title {
-    font-size: 1.08rem !important;
+    font-size: 1.25rem !important;
     font-weight: 900 !important;
     line-height: 1.2 !important;
     overflow-wrap: anywhere !important;
@@ -1789,7 +1801,7 @@ st.markdown("""
   @media (max-width: 768px) {
     /* Nombre dominante; categoría, entorno, dirección y nota siempre menores. */
     .place-list-title {
-      font-size: 1.08rem !important;
+      font-size: 1.25rem !important;
       line-height: 1.22 !important;
       letter-spacing: 0 !important;
     }
@@ -2011,7 +2023,7 @@ st.markdown("""
       grid-template-columns: minmax(34px, 0.72fr) minmax(34px, 0.72fr) minmax(72px, 1fr) minmax(98px, 1.38fr) !important;
       gap: 3px !important;
     }
-    .place-list-title { font-size: 1.02rem !important; }
+    .place-list-title { font-size: 1.25rem !important; }
     .place-list-address, .place-note { font-size: 0.68rem !important; }
   }
 
@@ -2996,7 +3008,7 @@ def bloque_nota_html(nota: str) -> str:
 # 3. MOTOR INTELIGENTE DE CATEGORÍAS
 # =============================================================================
 CATEGORIAS_CANONICAS = [
-    "🍕 Gastronomía",
+    "🍽️ Gastronomía",
     "🍪 Dulces",
     "🍸 Copas",
     "🎷 Ocio",
@@ -3004,12 +3016,12 @@ CATEGORIAS_CANONICAS = [
     "🏛️ Cultura",
     "🏙️ Miradores",
     "☀️ Spots",
-    "🏨 Hotel",
-    "📍 Otros"
+    "🏨 Hotel"
 ]
 
 MAPA_MIGRACION_CAT = {
-    "🍕 Gastronomía & Restaurantes": "🍕 Gastronomía",
+    "🍕 Gastronomía": "🍽️ Gastronomía",
+    "🍕 Gastronomía & Restaurantes": "🍽️ Gastronomía",
     "🍪 Cafeterías & Dulces": "🍪 Dulces",
     "🍸 Rooftops & Copas": "🍸 Copas",
     "🎷 Jazz, Música & Ocio": "🎷 Ocio",
@@ -3018,12 +3030,14 @@ MAPA_MIGRACION_CAT = {
     "🏙️ Miradores & Observatorios": "🏙️ Miradores",
     "🌲 Parques, Muelles & Puentes": "☀️ Spots",
     "🏨 Hotel Base": "🏨 Hotel",
-    "📍 Otros Lugares": "📍 Otros"
+    "📍 Otros Lugares": "☀️ Spots",
+    "📍 Otros": "☀️ Spots",
+    "Otros": "☀️ Spots"
 }
 
 def normalizar_categoria(cat: str) -> str:
     if not cat:
-        return "📍 Otros"
+        return "☀️ Spots"
     if cat in CATEGORIAS_CANONICAS:
         return cat
     if cat in MAPA_MIGRACION_CAT:
@@ -3031,7 +3045,7 @@ def normalizar_categoria(cat: str) -> str:
     for c in CATEGORIAS_CANONICAS:
         if c.split()[-1].lower() in cat.lower():
             return c
-    return "📍 Otros"
+    return "☀️ Spots"
 
 def clasificar_lugar(nombre: str, direccion: str = "", lista_origen: str = "") -> tuple[str, str]:
     nom = (nombre or "").strip().lower()
@@ -3056,7 +3070,7 @@ def clasificar_lugar(nombre: str, direccion: str = "", lista_origen: str = "") -
         return "🛍️ Compras", "Interior"
 
     if any(k in nom for k in ['pizza', 'pizzeria', 'burger', 'katz', 'dumpling', 'motek', 'piada', 'shake shack', 'chelsea market', 'time out market', 'deli', 'pastrami', 'tacos', 'taco', 'restaurant', 'trader joe', 'eataly', 'food hall', 'bagel', 'ramen', 'sushi', 'diner', 'smokehouse', 'noodle', 'food']):
-        return "🍕 Gastronomía", "Interior"
+        return "🍽️ Gastronomía", "Interior"
 
     if any(k in nom for k in ['park', 'central park', 'bridge', 'puente', 'high line', 'little island', 'fulton ferry', 'domino', 'pier 17', 'pier 57', 'pier 35', 'pebble beach', 'tudor city', 'squibb', 'battery', 'waterfront', 'picnic', 'botanic', 'coney island', 'boardwalk']):
         return "☀️ Spots", "Exterior"
@@ -3068,7 +3082,7 @@ def clasificar_lugar(nombre: str, direccion: str = "", lista_origen: str = "") -
     if 'sweet' in orig:
         return "🍪 Dulces", "Interior"
     if 'food' in orig:
-        return "🍕 Gastronomía", "Interior"
+        return "🍽️ Gastronomía", "Interior"
     if 'rooftop' in orig:
         return "🍸 Copas", "Interior"
     if 'tienda' in orig or 'outlet' in orig:
@@ -3076,7 +3090,7 @@ def clasificar_lugar(nombre: str, direccion: str = "", lista_origen: str = "") -
     if 'spot' in orig:
         return "☀️ Spots", "Exterior"
 
-    return "📍 Otros", "Interior"
+    return "☀️ Spots", "Exterior"
 
 def selectbox_sin_teclado(*args, **kwargs):
     """Selectbox sin búsqueda de texto: el móvil solo muestra las opciones.
@@ -4210,14 +4224,7 @@ with pestanas[1]:
                 # Información completa del lugar: nombre, categoría, entorno,
                 # dirección y nota. Los cuatro controles van debajo, en una sola fila.
                 with st.container(key=f"it-heading-row-{item['id']}"):
-                    c_chk, c_info = st.columns([0.45, 9.55], gap="small")
-                    with c_chk:
-                        chk_val = st.checkbox("", value=is_visited, key=f"chk_it_{d}_{item['id']}")
-                        if chk_val != is_visited and idx_real is not None:
-                            st.session_state.lugares[idx_real]["visitado"] = chk_val
-                            guardar_itinerario_disco(st.session_state.lugares)
-                            st.rerun()
-
+                    c_info, c_chk = st.columns([9.55, 0.45], gap="small")
                     with c_info:
                         txt_c = "#334155" if is_visited else "#0F172A"
                         strike = "text-decoration: line-through; opacity: 0.78;" if is_visited else ""
@@ -4232,6 +4239,13 @@ with pestanas[1]:
                         {dir_html}
                         {nota_html}
                         """, unsafe_allow_html=True)
+
+                    with c_chk:
+                        chk_val = st.checkbox("", value=is_visited, key=f"chk_it_{d}_{item['id']}")
+                        if chk_val != is_visited and idx_real is not None:
+                            st.session_state.lugares[idx_real]["visitado"] = chk_val
+                            guardar_itinerario_disco(st.session_state.lugares)
+                            st.rerun()
 
                 # Los cuatro controles, siempre en el mismo orden: Editar | Mapa | Hora | Día.
                 with st.container(key=f"it-controls-row-{item['id']}"):
