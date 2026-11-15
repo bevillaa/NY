@@ -4014,15 +4014,12 @@ with pestanas[1]:
                     with c_info:
                         txt_c = "#334155" if is_visited else "#0F172A"
                         strike = "text-decoration: line-through; opacity: 0.78;" if is_visited else ""
-                        tipo_badge = '<span class="badge-indoor">🌧️ Interior</span>' if item.get("tipo") == "Interior" else '<span class="badge-outdoor">☀️ Exterior</span>'
                         dir_html = f'<div class="place-list-address">📍 {html.escape(str(dir_i))}</div>' if dir_i else ''
                         nota_html = bloque_nota_html(nota_i)
                         st.markdown(f"""
                         <div style="{strike}; min-width:0; overflow-wrap:anywhere;">
-                          <div class="place-list-title" style="color:{txt_c};">#{seq_idx} · {emoji_i} {item['nombre']}</div>
+                          <div class="place-list-title" style="color:{txt_c};">{emoji_i} {item['nombre']}</div>
                           <div style="margin-top:4px; display:flex; flex-wrap:wrap; gap:4px;">
-                            <span class="badge-cat">{cat_i}</span>
-                            {tipo_badge}
                           </div>
                         </div>
                         {dir_html}
