@@ -3945,7 +3945,7 @@ with pestanas[1]:
     with col_it_head2:
         st.markdown(
             f'<div style="font-weight:800; font-size:0.84rem; color:#0F172A;">'
-            f'Progreso: <b>{len(total_visitados)}</b> / <b>{len(total_itinerario)}</b> paradas ({pct_progreso}%)'
+            f'Progreso: <b>{len(total_visitados)}</b> / <b>{len(total_itinerario)}</b> lugares ({pct_progreso}%)'
             f'</div>',
             unsafe_allow_html=True
         )
@@ -3977,7 +3977,7 @@ with pestanas[1]:
             {etiqueta_dia(d)}
           </div>
           <div style="font-weight:800; font-size:0.78rem; color:#0F172A; background:#F8FAFC; border:1.5px solid #CBD5E1; border-radius:20px; padding:2px 9px;">
-            📍 {len(paradas_dia)} paradas ({len(visitados_dia)} hechas)
+            📍 {len(paradas_dia)} lugares ({len(visitados_dia)} visitados)
           </div>
         </div>
         """, unsafe_allow_html=True)
