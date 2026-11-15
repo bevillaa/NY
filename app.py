@@ -1037,6 +1037,155 @@ st.markdown("""
     }
   }
 
+
+  /* ===== FILA DEFINITIVA: EDITAR | MAPA | HORA | DÍA =====
+     La información del lugar queda encima; estos cuatro controles van
+     inmediatamente debajo y mantienen el mismo orden en Itinerario/Guardados. */
+  @media (max-width: 768px) {
+    [class*="st-key-it-controls-row-"] [data-testid="stHorizontalBlock"],
+    [class*="st-key-saved-controls-row-"] [data-testid="stHorizontalBlock"] {
+      display: grid !important;
+      grid-template-columns: 36px 38px 76px 88px !important;
+      justify-content: start !important;
+      align-items: center !important;
+      gap: 5px !important;
+      width: 100% !important;
+      min-width: 0 !important;
+      margin-top: 5px !important;
+    }
+    [class*="st-key-it-controls-row-"] [data-testid="column"],
+    [class*="st-key-saved-controls-row-"] [data-testid="column"] {
+      display: block !important;
+      flex: none !important;
+      width: 100% !important;
+      min-width: 0 !important;
+      max-width: 100% !important;
+      margin: 0 !important;
+      padding: 0 !important;
+    }
+    /* Editar: 36 px, SVG integrado en CSS, sin depender de fuentes emoji. */
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(1) .stButton,
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(1) .stButton,
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(1) [data-testid="stButton"],
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(1) [data-testid="stButton"] {
+      width: 36px !important; min-width: 36px !important; max-width: 36px !important;
+      margin: 0 !important;
+    }
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(1) button,
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(1) button {
+      box-sizing: border-box !important; display: flex !important;
+      align-items: center !important; justify-content: center !important;
+      width: 36px !important; min-width: 36px !important; max-width: 36px !important;
+      height: 36px !important; min-height: 36px !important; max-height: 36px !important;
+      padding: 0 !important; margin: 0 !important;
+      border: 1.5px solid #94A3B8 !important; border-radius: 8px !important;
+      background: #F8FAFC !important;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%23334155' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m16 4 4 4'/%3E%3Cpath d='M4 20l4-.9L19 8a2.1 2.1 0 0 0-3-3L5 16z'/%3E%3C/svg%3E") !important;
+      background-repeat: no-repeat !important; background-position: center !important; background-size: 19px 19px !important;
+      color: transparent !important; font-size: 0 !important; line-height: 0 !important;
+      overflow: hidden !important;
+    }
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(1) button span,
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(1) button span { display: none !important; }
+
+    /* Mapa: zona de 38 px con icono de mapa dibujado en SVG. */
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(2) [data-testid="stLinkButton"],
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(2) [data-testid="stLinkButton"] {
+      display: block !important; width: 38px !important; min-width: 38px !important; max-width: 38px !important;
+      margin: 0 !important;
+    }
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(2) [data-testid="stLinkButton"] > a,
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(2) [data-testid="stLinkButton"] > a {
+      box-sizing: border-box !important; display: flex !important;
+      align-items: center !important; justify-content: center !important;
+      width: 38px !important; min-width: 38px !important; max-width: 38px !important;
+      height: 36px !important; min-height: 36px !important; max-height: 36px !important;
+      padding: 0 !important; margin: 0 !important;
+      border: 1.5px solid #94A3B8 !important; border-radius: 8px !important;
+      background-color: #FFFFFF !important;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='22' height='22' viewBox='0 0 24 24' fill='none' stroke='%231D4ED8' stroke-width='1.9' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m3 6 6-3 6 3 6-3v15l-6 3-6-3-6 3z'/%3E%3Cpath d='M9 3v15'/%3E%3Cpath d='M15 6v15'/%3E%3C/svg%3E") !important;
+      background-repeat: no-repeat !important; background-position: center !important; background-size: 20px 20px !important;
+      color: transparent !important; font-size: 0 !important; line-height: 0 !important; overflow: hidden !important;
+    }
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(2) a span,
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(2) a span { display: none !important; }
+
+    /* Hora: anchura fija suficiente para mostrar HH:MM completo. */
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(3) [data-testid="stTextInput"],
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(3) [data-testid="stTextInput"],
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(3) .stTextInput,
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(3) .stTextInput { width: 76px !important; min-width: 76px !important; max-width: 76px !important; margin: 0 !important; }
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(3) [data-baseweb="input"],
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(3) [data-baseweb="input"],
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(3) [data-baseweb="base-input"],
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(3) [data-baseweb="base-input"] {
+      box-sizing: border-box !important; width: 76px !important; min-width: 76px !important; max-width: 76px !important;
+      height: 36px !important; min-height: 36px !important; max-height: 36px !important;
+      padding: 0 3px !important; border: 1.5px solid #94A3B8 !important; border-radius: 8px !important;
+      background: #FFFFFF !important;
+    }
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(3) input,
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(3) input {
+      box-sizing: border-box !important; display: block !important; width: 100% !important; min-width: 0 !important;
+      height: 34px !important; min-height: 34px !important; padding: 0 2px !important;
+      color: #0F172A !important; -webkit-text-fill-color: #0F172A !important;
+      font: 700 0.78rem/1 'Calibri', 'Carlito', Arial, sans-serif !important;
+      text-align: center !important; letter-spacing: 0 !important; opacity: 1 !important;
+    }
+
+    /* Día: columna y desplegable del mismo ancho, sin relleno sobrante. */
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(4) [data-testid="stSelectbox"],
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(4) [data-testid="stSelectbox"],
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(4) .stSelectbox,
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(4) .stSelectbox,
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(4) [data-baseweb="select"],
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(4) [data-baseweb="select"] { width: 88px !important; min-width: 88px !important; max-width: 88px !important; margin: 0 !important; }
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(4) [data-baseweb="select"] > div,
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(4) [data-baseweb="select"] > div {
+      box-sizing: border-box !important; width: 88px !important; min-width: 88px !important; max-width: 88px !important;
+      height: 36px !important; min-height: 36px !important; max-height: 36px !important;
+      padding: 0 16px 0 6px !important; border: 1.5px solid #94A3B8 !important; border-radius: 8px !important;
+      background: #FFFFFF !important; overflow: hidden !important;
+    }
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(4) [data-baseweb="select"] span,
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(4) [data-baseweb="select"] span {
+      color: #0F172A !important; -webkit-text-fill-color: #0F172A !important;
+      font-size: 0.70rem !important; font-weight: 800 !important; white-space: nowrap !important;
+    }
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(4) [data-baseweb="select"] svg,
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(4) [data-baseweb="select"] svg { width: 13px !important; min-width: 13px !important; }
+
+    /* La fila informativa utiliza todo el ancho; la fila de cuatro controles va debajo. */
+    [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] {
+      display: grid !important; grid-template-columns: 25px minmax(0, 1fr) !important;
+      gap: 5px !important; align-items: start !important; width: 100% !important;
+    }
+    [class*="st-key-it-heading-row-"] [data-testid="column"] { min-width: 0 !important; width: 100% !important; padding: 0 !important; }
+    [class*="st-key-saved-heading-row-"] { width: 100% !important; min-width: 0 !important; }
+
+    /* No permitir que los estilos globales de Streamlit vuelvan a ensanchar los widgets. */
+    [class*="st-key-it-controls-row-"] .stButton,
+    [class*="st-key-saved-controls-row-"] .stButton,
+    [class*="st-key-it-controls-row-"] [data-testid="stLinkButton"],
+    [class*="st-key-saved-controls-row-"] [data-testid="stLinkButton"] { width: auto !important; min-width: 0 !important; max-width: none !important; }
+  }
+  @media (max-width: 300px) {
+    [class*="st-key-it-controls-row-"] [data-testid="stHorizontalBlock"],
+    [class*="st-key-saved-controls-row-"] [data-testid="stHorizontalBlock"] {
+      grid-template-columns: 34px 36px 72px 84px !important; gap: 3px !important;
+    }
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(3) [data-testid="stTextInput"],
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(3) [data-testid="stTextInput"],
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(3) [data-baseweb="input"],
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(3) [data-baseweb="input"],
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(3) [data-baseweb="base-input"],
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(3) [data-baseweb="base-input"] { width: 72px !important; min-width: 72px !important; max-width: 72px !important; }
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(4) [data-baseweb="select"],
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(4) [data-baseweb="select"],
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(4) [data-baseweb="select"] > div,
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(4) [data-baseweb="select"] > div { width: 84px !important; min-width: 84px !important; max-width: 84px !important; }
+  }
+
 </style>
 """, unsafe_allow_html=True)
 
@@ -2187,10 +2336,10 @@ with pestanas[1]:
                 maps_q = urllib.parse.quote(f"{item['nombre']}, New York")
                 gmaps_url = f"https://www.google.com/maps/search/?api=1&query={maps_q}"
 
-                # Fila 1: completado + información + lápiz. El contenedor permite
-                # controlar los anchos de las tres columnas sin depender del móvil.
+                # Información completa del lugar: nombre, categoría, entorno,
+                # dirección y nota. Los cuatro controles van debajo, en una sola fila.
                 with st.container(key=f"it-heading-row-{item['id']}"):
-                    c_chk, c_info, c_ed = st.columns([0.45, 8.75, 0.8], gap="small")
+                    c_chk, c_info = st.columns([0.45, 9.55], gap="small")
                     with c_chk:
                         chk_val = st.checkbox("", value=is_visited, key=f"chk_it_{d}_{item['id']}")
                         if chk_val != is_visited and idx_real is not None:
@@ -2201,15 +2350,13 @@ with pestanas[1]:
                     with c_info:
                         txt_c = "#334155" if is_visited else "#0F172A"
                         strike = "text-decoration: line-through; opacity: 0.78;" if is_visited else ""
-                        hora_tag = f'<span class="badge-hora" style="margin-right:5px;">🕒 {hora_i}</span>' if hora_i else ''
                         tipo_badge = '<span class="badge-indoor">🌧️ Interior</span>' if item.get("tipo") == "Interior" else '<span class="badge-outdoor">☀️ Exterior</span>'
-                        dir_html = f'<div style="font-size:0.78rem; color:#334155; font-weight:600; margin-top:2px;">📍 {dir_i}</div>' if dir_i else ''
+                        dir_html = f'<div style="font-size:0.78rem; color:#334155; font-weight:600; margin-top:3px;">📍 {dir_i}</div>' if dir_i else ''
                         nota_html = bloque_nota_html(nota_i)
-
                         st.markdown(f"""
-                        <div style="{strike}">
-                          {hora_tag}<span style="font-weight:900; font-size:0.94rem; color:{txt_c};">#{seq_idx} · {emoji_i} {item['nombre']}</span>
-                          <div style="margin-top:3px; display:flex; flex-wrap:wrap; gap:4px;">
+                        <div style="{strike}; min-width:0; overflow-wrap:anywhere;">
+                          <div style="font-weight:900; font-size:0.94rem; line-height:1.25; color:{txt_c};">#{seq_idx} · {emoji_i} {item['nombre']}</div>
+                          <div style="margin-top:4px; display:flex; flex-wrap:wrap; gap:4px;">
                             <span class="badge-cat">{cat_i}</span>
                             {tipo_badge}
                           </div>
@@ -2218,19 +2365,17 @@ with pestanas[1]:
                         {nota_html}
                         """, unsafe_allow_html=True)
 
-                    with c_ed:
-                        st.markdown('<div class="edit-mini-btn">', unsafe_allow_html=True)
-                        if st.button("✏", key=f"btn_ed_it_{d}_{item['id']}", help="Editar sitio"):
+                # Los cuatro controles, siempre en el mismo orden: Editar | Mapa | Hora | Día.
+                with st.container(key=f"it-controls-row-{item['id']}"):
+                    c_edit, c_map, c_hr, c_day = st.columns([0.8, 0.9, 1.7, 1.9], gap="small")
+                    with c_edit:
+                        if st.button("Editar", key=f"btn_ed_it_{d}_{item['id']}", help="Editar sitio", use_container_width=True):
                             ek = f"it_{d}_{item['id']}"
                             st.session_state.editando_spot_key = None if st.session_state.editando_spot_key == ek else ek
                             st.rerun()
-                        st.markdown('</div>', unsafe_allow_html=True)
-
-                # Fila 2: Hora | Día | Maps, agrupados en una cuadrícula móvil.
-                with st.container(key=f"it-controls-row-{item['id']}"):
-                    c_hr, c_mv, c_mp = st.columns([1.0, 2.15, 1.0], gap="small")
+                    with c_map:
+                        st.link_button("Mapa", gmaps_url, use_container_width=True, key=f"map_it_{item['id']}", help="Abrir en Google Maps")
                     with c_hr:
-                        st.markdown('<span class="mobile-control-marker compact-hora"></span>', unsafe_allow_html=True)
                         nueva_h = st.text_input(
                             "Hora",
                             value=hora_i,
@@ -2246,10 +2391,9 @@ with pestanas[1]:
                                 st.session_state.lugares[idx_real]["hora"] = hl
                                 guardar_itinerario_disco(st.session_state.lugares)
                                 st.rerun()
-                    with c_mv:
-                        st.markdown('<span class="mobile-control-marker compact-dia"></span>', unsafe_allow_html=True)
+                    with c_day:
                         dest_d = selectbox_sin_teclado(
-                            "",
+                            "Día",
                             [f"Día {x}" for x in range(1, 11)] + ["Guardados"],
                             index=d - 1,
                             key=f"mvd_it_{d}_{item['id']}",
@@ -2260,9 +2404,6 @@ with pestanas[1]:
                             st.session_state.lugares[idx_real]["dia"] = val_dest
                             guardar_itinerario_disco(st.session_state.lugares)
                             st.rerun()
-                    with c_mp:
-                        st.markdown('<span class="mobile-control-marker compact-maps"></span>', unsafe_allow_html=True)
-                        st.link_button("🗺️", gmaps_url, use_container_width=True, key=f"map_it_{item['id']}", help="Abrir en Google Maps")
 
                 if idx_real is not None:
                     render_editor_sitio_panel(item, idx_real, f"it_{d}")
@@ -2309,32 +2450,33 @@ with pestanas[2]:
         dia_p = p_spot.get("dia", 0)
         hora_p = p_spot.get("hora", "")
 
-        dia_badge_p = f'<span class="badge-dia" style="margin-left:5px;">Día {dia_p}</span>' if dia_p > 0 else ''
-        hora_badge_p = f'<span class="badge-hora" style="margin-left:4px;">🕒 {hora_p}</span>' if hora_p else ''
         nota_p_html = bloque_nota_html(nota_p)
+        dir_p_html = f'<div style="font-size:0.78rem; color:#334155; font-weight:600; margin-top:3px;">📍 {dir_p}</div>' if dir_p else ''
+        tipo_p_html = '<span class="badge-indoor">🌧️ Interior</span>' if p_spot.get("tipo") == "Interior" else '<span class="badge-outdoor">☀️ Exterior</span>'
 
-        # Fila 1: nombre + lápiz, con distribución responsive controlada.
+        # Toda la información se presenta antes de los controles.
         with st.container(key=f"saved-heading-row-{p_spot['id']}"):
-            c_g_nom, c_g_ed = st.columns([9.2, 0.8], gap="small")
-            with c_g_nom:
-                st.markdown(f"""
-                <div style="font-size:0.94rem; font-weight:800; color:#0F172A;">{obtener_emoji_categoria(cat_p)} {p_spot['nombre']}{dia_badge_p}{hora_badge_p}</div>
-                <div style="font-size:0.78rem; color:#334155;">{cat_p} · {'🌧️ Interior' if p_spot.get('tipo') == 'Interior' else '☀️ Exterior'} {f'· 📍 {dir_p}' if dir_p else ''}</div>
-                {nota_p_html}
-                """, unsafe_allow_html=True)
-            with c_g_ed:
-                st.markdown('<div class="edit-mini-btn">', unsafe_allow_html=True)
-                if st.button("✏", key=f"btn_ed_pool_{p_spot['id']}", help="Editar sitio"):
+            st.markdown(f"""
+            <div style="font-size:0.94rem; font-weight:900; line-height:1.25; color:#0F172A; overflow-wrap:anywhere;">{obtener_emoji_categoria(cat_p)} {p_spot['nombre']}</div>
+            <div style="margin-top:4px; display:flex; flex-wrap:wrap; gap:4px;">
+              <span class="badge-cat">{cat_p}</span>{tipo_p_html}
+            </div>
+            {dir_p_html}
+            {nota_p_html}
+            """, unsafe_allow_html=True)
+
+        # Cuatro controles uniformes debajo del nombre y de toda su subinformación.
+        with st.container(key=f"saved-controls-row-{p_spot['id']}"):
+            c_edit, c_map, c_hr, c_day = st.columns([0.8, 0.9, 1.7, 1.9], gap="small")
+            with c_edit:
+                if st.button("Editar", key=f"btn_ed_pool_{p_spot['id']}", help="Editar sitio", use_container_width=True):
                     ek = f"pool_{p_spot['id']}"
                     st.session_state.editando_spot_key = None if st.session_state.editando_spot_key == ek else ek
                     st.rerun()
-                st.markdown('</div>', unsafe_allow_html=True)
-
-        # Fila 2: Hora | Día | Maps, en la misma cuadrícula que el itinerario.
-        with st.container(key=f"saved-controls-row-{p_spot['id']}"):
-            c_p_hr, c_p_dia, c_p_mp = st.columns([1.0, 2.15, 1.0], gap="small")
-            with c_p_hr:
-                st.markdown('<span class="mobile-control-marker compact-hora"></span>', unsafe_allow_html=True)
+            with c_map:
+                g_url_sp = f"https://www.google.com/maps/search/?api=1&query={urllib.parse.quote(p_spot['nombre'] + ' New York')}"
+                st.link_button("Mapa", g_url_sp, use_container_width=True, key=f"map_saved_{p_spot['id']}", help="Abrir en Google Maps")
+            with c_hr:
                 nueva_h_pool = st.text_input(
                     "Hora",
                     value=hora_p,
@@ -2350,12 +2492,11 @@ with pestanas[2]:
                         st.session_state.lugares[idx_sp_real]["hora"] = hl
                         guardar_itinerario_disco(st.session_state.lugares)
                         st.rerun()
-            with c_p_dia:
-                st.markdown('<span class="mobile-control-marker compact-dia"></span>', unsafe_allow_html=True)
+            with c_day:
                 opts_dia_pool = ["— Día —"] + [f"Día {d}" for d in range(1, 11)]
                 idx_sel_pool = dia_p if 1 <= dia_p <= 10 else 0
                 asig_dia = selectbox_sin_teclado(
-                    "Mover a:",
+                    "Día",
                     opts_dia_pool,
                     index=idx_sel_pool,
                     key=f"asig_dia_pool_{p_spot['id']}",
@@ -2367,10 +2508,6 @@ with pestanas[2]:
                         st.session_state.lugares[idx_sp_real]["dia"] = d_num
                         guardar_itinerario_disco(st.session_state.lugares)
                         st.rerun()
-            with c_p_mp:
-                st.markdown('<span class="mobile-control-marker compact-maps"></span>', unsafe_allow_html=True)
-                g_url_sp = f"https://www.google.com/maps/search/?api=1&query={urllib.parse.quote(p_spot['nombre'] + ' New York')}"
-                st.link_button("🗺️", g_url_sp, use_container_width=True, key=f"map_saved_{p_spot['id']}", help="Abrir en Google Maps")
 
         if idx_sp_real is not None:
             render_editor_sitio_panel(p_spot, idx_sp_real, "pool")
