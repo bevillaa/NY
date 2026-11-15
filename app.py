@@ -316,7 +316,7 @@ st.markdown("""
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08) !important;
   }
 
-  /* Botones gEnerorales limpios */
+  /* Botones generales limpios */
   .stButton > button, .stFormSubmitButton > button, [data-testid="stLinkButton"] > a {
     border-radius: 9px !important;
     font-weight: 800 !important;
@@ -338,7 +338,7 @@ st.markdown("""
     color: #0F172A !important;
   }
 
-  /* Botón pequeño de eDiciembreión ✏️ junto al nombre */
+  /* Botón pequeño de edición ✏️ junto al nombre */
   .edit-mini-btn {
     display: flex !important;
     justify-content: flex-end !important;
@@ -530,7 +530,7 @@ st.markdown("""
       padding: 0 !important;
     }
 
-    /* Filas de nombre dentro de contEnerodores con identidad CSS propia. */
+    /* Filas de nombre dentro de contenedores con identidad CSS propia. */
     [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] {
       display: grid !important;
       grid-template-columns: 26px minmax(0, 1fr) 36px !important;
@@ -576,7 +576,7 @@ st.markdown("""
       line-height: 1 !important;
     }
 
-    /* Hora | Día | Maps: la hora tiEnero anchura suficiente para HH:MM,
+    /* Hora | Día | Maps: la hora tiene anchura suficiente para HH:MM,
        el día ocupa solo el ancho natural de su opción más larga y Maps es icono. */
     [class*="st-key-it-controls-row-"] [data-testid="stHorizontalBlock"],
     [class*="st-key-saved-controls-row-"] [data-testid="stHorizontalBlock"] {
@@ -1040,7 +1040,7 @@ st.markdown("""
 
   /* ===== FILA DEFINITIVA: EDITAR | MAPA | HORA | DÍA =====
      La información del lugar queda encima; estos cuatro controles van
-     inmediatamente debajo y mantiEneron el mismo orden en Itinerario/Guardados. */
+     inmediatamente debajo y mantienen el mismo orden en Itinerario/Guardados. */
   @media (max-width: 768px) {
     [class*="st-key-it-controls-row-"] [data-testid="stHorizontalBlock"],
     [class*="st-key-saved-controls-row-"] [data-testid="stHorizontalBlock"] {
@@ -1393,7 +1393,7 @@ st.markdown("""
 
 
   /* Los widgets conservaban anchuras fijas de reglas antiguas. Este bloque,
-     al estar al final, fuerza también sus contEnerodores internos a ocupar
+     al estar al final, fuerza también sus contenedores internos a ocupar
      exactamente el ancho de cada una de las cuatro columnas. */
   @media (max-width: 768px) {
     [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(1) .stButton,
@@ -1809,7 +1809,7 @@ st.markdown("""
       padding: 1px 5px !important;
     }
 
-    /* Los cuatro widgets tiEneron una cuadrícula fija mínima que cabe incluso
+    /* Los cuatro widgets tienen una cuadrícula fija mínima que cabe incluso
        en un móvil de 280 px: Editar, Mapa, Hora y Día. */
     [class*="st-key-it-controls-row-"],
     [class*="st-key-saved-controls-row-"] {
@@ -2481,7 +2481,7 @@ st.markdown("""
       line-height: 1 !important;
     }
 
-    /* Hora: mantiEnero los cinco caracteres HH:MM legibles. */
+    /* Hora: mantiene los cinco caracteres HH:MM legibles. */
     [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(3) [data-testid="stTextInput"],
     [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(3) [data-testid="stTextInput"],
     [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(3) [data-baseweb="input"],
@@ -2564,7 +2564,7 @@ st.markdown("""
 
 
   /* Corrección de renderizado: Streamlit envuelve el contenido del botón en
-     un div. Se restablece ese contEnerodor para que no herede el recorte usado
+     un div. Se restablece ese contenedor para que no herede el recorte usado
      por las reglas antiguas de iconos CSS. */
   @media (max-width: 768px) {
     [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(1) [data-testid="stButton"] > button > div,
@@ -2620,7 +2620,7 @@ st.markdown("""
       line-height: 1 !important;
     }
 
-    /* Desactiva las pseudo-imágEneros SVG antiguas del enlace; el icono visible
+    /* Desactiva las pseudo-imágenes SVG antiguas del enlace; el icono visible
        es el emoji que forma parte de la propia etiqueta accesible del enlace. */
     [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(2) [data-testid="stLinkButton"] > a::before,
     [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(2) [data-testid="stLinkButton"] > a::before {
@@ -2855,24 +2855,24 @@ st.markdown("""
 
 
 # =============================================================================
-# 2. DEFINICIÓN DEL VIAJE NAVIDEÑO (26 Diciembre 2026 - 4 Enero 2027)
+# 2. DEFINICIÓN DEL VIAJE NAVIDEÑO (26 DIC 2026 - 4 ENE 2027)
 # =============================================================================
 DIAS_VIAJE = {
-    1:  {"fecha": "26 Diciembre", "dia": "Sábado"},
-    2:  {"fecha": "27 Diciembre", "dia": "Domingo"},
-    3:  {"fecha": "28 Diciembre", "dia": "Lunes"},
-    4:  {"fecha": "29 Diciembre", "dia": "Martes"},
-    5:  {"fecha": "30 Diciembre", "dia": "Miércoles"},
-    6:  {"fecha": "31 Diciembre", "dia": "Jueves"},
-    7:  {"fecha": "01 Enero", "dia": "Viernes"},
-    8:  {"fecha": "02 Enero", "dia": "Sábado"},
-    9:  {"fecha": "03 Enero", "dia": "Domingo"},
-    10: {"fecha": "04 Enero", "dia": "Lunes"},
+    1:  {"fecha": "26 Dic", "dia": "Sábado"},
+    2:  {"fecha": "27 Dic", "dia": "Domingo"},
+    3:  {"fecha": "28 Dic", "dia": "Lunes"},
+    4:  {"fecha": "29 Dic", "dia": "Martes"},
+    5:  {"fecha": "30 Dic", "dia": "Miércoles"},
+    6:  {"fecha": "31 Dic", "dia": "Jueves"},
+    7:  {"fecha": "01 Ene", "dia": "Viernes"},
+    8:  {"fecha": "02 Ene", "dia": "Sábado"},
+    9:  {"fecha": "03 Ene", "dia": "Domingo"},
+    10: {"fecha": "04 Ene", "dia": "Lunes"},
 }
 
 def etiqueta_dia(d: int) -> str:
     info = DIAS_VIAJE.get(d, {})
-    return f"Día {d}: {info.get('fecha', '')} - {info.get('dia', '')}".strip()
+    return f"Día {d}: {info.get('fecha', '')} {info.get('dia', '')}".strip()
 
 def etiqueta_dia_corta(d: int) -> str:
     info = DIAS_VIAJE.get(d, {})
@@ -2899,7 +2899,7 @@ def linkificar_nota(nota: str) -> str:
             destino = url if url.lower().startswith(("http://", "https://")) else f"https://{url}"
             partes.append(
                 f'<a href="{html.escape(destino, quote=True)}" target="_blank" '
-                f'rel="noopEneror noreferrer" style="color:#1D4ED8; text-decoration:underline; '
+                f'rel="noopener noreferrer" style="color:#1D4ED8; text-decoration:underline; '
                 f'overflow-wrap:anywhere;">{html.escape(url)}</a>'
             )
         partes.append(html.escape(puntuacion_final))
@@ -2984,7 +2984,7 @@ def clasificar_lugar(nombre: str, direccion: str = "", lista_origen: str = "") -
     if any(k in nom for k in ['park', 'central park', 'bridge', 'puente', 'high line', 'little island', 'fulton ferry', 'domino', 'pier 17', 'pier 57', 'pier 35', 'pebble beach', 'tudor city', 'squibb', 'battery', 'waterfront', 'picnic', 'botanic', 'coney island', 'boardwalk']):
         return "🌲 Parques", "Exterior"
 
-    if any(k in nom for k in ['museum', 'the met', 'moma', 'morgan library', 'tEneroment', '9/11 memorial', 'oculus', 'grand central', 'library', 'atlas', 'one times square', 'times square', 'memorial', 'statue of liberty', 'trinity church', 'rockefeller center', 'st. patrick']):
+    if any(k in nom for k in ['museum', 'the met', 'moma', 'morgan library', 'tenement', '9/11 memorial', 'oculus', 'grand central', 'library', 'atlas', 'one times square', 'times square', 'memorial', 'statue of liberty', 'trinity church', 'rockefeller center', 'st. patrick']):
         tipo = "Exterior" if any(x in nom for x in ['times square', 'atlas', 'statue']) else "Interior"
         return "🏛️ Cultura", tipo
 
@@ -3018,14 +3018,14 @@ def selectbox_sin_teclado(*args, **kwargs):
         return st.selectbox(*args, **kwargs)
 
 
-def obtEneror_emoji_categoria(cat: str) -> str:
+def obtener_emoji_categoria(cat: str) -> str:
     for ch in cat:
         if ord(ch) > 127:
             return ch
     return "📍"
 
 def crear_pin_google_maps(categoria: str, nombre: str = ""):
-    emoji = obtEneror_emoji_categoria(categoria)
+    emoji = obtener_emoji_categoria(categoria)
     html_pin = f"""
     <div style="
         width: 34px; height: 34px;
@@ -3054,7 +3054,7 @@ def ordenar_por_hora(lista_sitios: list) -> list:
 # 4. APIs EXTERNAS: CAMBIO DE MONEDA & OPEN-METEO EN TIEMPO REAL
 # =============================================================================
 @st.cache_data(ttl=3600)
-def obtEneror_tasa_usd_eur():
+def obtener_tasa_usd_eur():
     try:
         url = "https://open.er-api.com/v6/latest/USD"
         req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
@@ -3111,8 +3111,8 @@ def cargar_config_viaje():
         except Exception:
             pass
     return {
-        "vuelo_ida": {"aerolinea": "Aer Lingus", "fecha": "26 Diciembre", "hora": "15:30", "vuelo": "Aer Lingus · EI583, EI107", "aeropuerto": "JFK / Nueva York"},
-        "vuelo_vuelta": {"aerolinea": "Aer Lingus", "fecha": "4 Enero", "hora": "20:45", "vuelo": "Aer Lingus · EI104, EI582", "aeropuerto": "JFK / Nueva York"},
+        "vuelo_ida": {"aerolinea": "Aer Lingus", "fecha": "26 Dic", "hora": "15:30", "vuelo": "Aer Lingus · EI583, EI107", "aeropuerto": "JFK / Nueva York"},
+        "vuelo_vuelta": {"aerolinea": "Aer Lingus", "fecha": "4 Ene", "hora": "20:45", "vuelo": "Aer Lingus · EI104, EI582", "aeropuerto": "JFK / Nueva York"},
         "hotel": {
             "nombre": "Courtyard by Marriott New York Manhattan Upper East Side",
             "direccion": "410 E 92nd St, New York, NY 10128",
@@ -3216,15 +3216,15 @@ def sincronizar_lugares_desde_disco():
     if _huella_datos(anteriores) == _huella_datos(nuevos):
         return False
 
-    antes_por_id = {str(x.get("id")): x for x in anteriores if isinstance(x, Diciembret) and x.get("id") is not None}
-    nuevos_por_id = {str(x.get("id")): x for x in nuevos if isinstance(x, Diciembret) and x.get("id") is not None}
+    antes_por_id = {str(x.get("id")): x for x in anteriores if isinstance(x, dict) and x.get("id") is not None}
+    nuevos_por_id = {str(x.get("id")): x for x in nuevos if isinstance(x, dict) and x.get("id") is not None}
     ids_cambiados = set(antes_por_id) | set(nuevos_por_id)
     ids_cambiados = {
         pid for pid in ids_cambiados
         if _huella_datos(antes_por_id.get(pid)) != _huella_datos(nuevos_por_id.get(pid))
     }
 
-    # Los widgets mantiEneron su valor dentro de cada sesión. Al cambiar un lugar
+    # Los widgets mantienen su valor dentro de cada sesión. Al cambiar un lugar
     # desde otro dispositivo, eliminamos solo sus claves para que se reconstruyan
     # con la hora/día/estado más recientes del archivo compartido.
     prefijos_widget_lugar = (
@@ -3242,7 +3242,7 @@ def sincronizar_lugares_desde_disco():
                 pass
 
     st.session_state.lugares = nuevos
-    ids_actuales = {x.get("id") for x in nuevos if isinstance(x, Diciembret)}
+    ids_actuales = {x.get("id") for x in nuevos if isinstance(x, dict)}
     if st.session_state.get("lugar_activo_id") not in ids_actuales:
         st.session_state.lugar_activo_id = None
     return True
@@ -3302,7 +3302,7 @@ def extraer_lugares_lista_gmaps(url_lista: str, nombre_lista: str = ""):
                     return
                 for hijo in nodo:
                     _buscar_entidades(hijo)
-            elif isinstance(nodo, Diciembret):
+            elif isinstance(nodo, dict):
                 for v in nodo.values():
                     _buscar_entidades(v)
 
@@ -3432,7 +3432,7 @@ def importar_sitio_desde_gmaps(url_o_texto: str, dia_dest: int = 0, hora: str = 
 
     return agregar_sitio_a_lugares(nombre_extraido, dir_ext, lat_ext, lon_ext, None, None, dia_dest, hora, nota)
 
-def render_editor_sitio_panel(spot: Diciembret, idx_real: int, key_ctx: str):
+def render_editor_sitio_panel(spot: dict, idx_real: int, key_ctx: str):
     """Panel desplegable para editar nombre, dirección, nota manual, hora, categoría, día y coords."""
     edit_key = f"{key_ctx}_{spot['id']}"
     if st.session_state.get("editando_spot_key") != edit_key:
@@ -3625,7 +3625,7 @@ if "editando_spot_key" not in st.session_state:
 
 
 def _vigilar_cambios_de_otros_dispositivos():
-    """Comprueba perióDiciembreamente cambios de itinerario, hotel, vuelos y listas."""
+    """Comprueba periódicamente cambios de itinerario, hotel, vuelos y listas."""
     datos_compartidos = cargar_itinerario_disco()
     cambio_lugares = _huella_datos(datos_compartidos) != _huella_datos(st.session_state.get("lugares", []))
     cambio_config = _huella_datos(cargar_config_viaje()) != _huella_datos(st.session_state.get("config_viaje", {}))
@@ -3664,11 +3664,11 @@ st.markdown(f"""
 <div class="hero-container">
   <div style="display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:10px;">
     <div>
-      <div class="hero-eyebrow">🎄 NAVIDAD & FIN DE AÑO · 26 Diciembre 2026 - 4 Enero 2027 ❄️</div>
+      <div class="hero-eyebrow">🎄 NAVIDAD & FIN DE AÑO · 26 DIC 2026 - 4 ENE 2027 ❄️</div>
       <div class="hero-title">Navidad en Nueva York 🗽✨</div>
       <div style="margin-top: 5px;">
-        <span class="hero-pill">✈️ {v_ida.get('vuelo','Aer Lingus · EI583, EI107')} · {v_ida.get('fecha','26 Diciembre')}</span>
-        <span class="hero-pill">🛫 {v_vta.get('vuelo','Aer Lingus · EI104, EI582')} · {v_vta.get('fecha','4 Enero')}</span>
+        <span class="hero-pill">✈️ {v_ida.get('vuelo','Aer Lingus · EI583, EI107')} · {v_ida.get('fecha','26 Dic')}</span>
+        <span class="hero-pill">🛫 {v_vta.get('vuelo','Aer Lingus · EI104, EI582')} · {v_vta.get('fecha','4 Ene')}</span>
         <span class="hero-pill">🏨 {hotel.get('nombre','Courtyard by Marriott Upper East Side')}</span>
       </div>
     </div>
@@ -3811,7 +3811,7 @@ with pestanas[0]:
             <span style="font-size: 11px; font-weight: 800; color: #2563EB;">{dia_txt}</span>
             <span style="font-size: 10px; font-weight: 700; background: #F1F5F9; color: #0F172A; padding: 2px 6px; border-radius: 6px;">{tipo_badge}</span>
           </div>
-          <div style="font-size: 14px; font-weight: 800; color: #0F172A; margin-bottom: 3px;">{obtEneror_emoji_categoria(cat_spot)} {nom_spot}</div>
+          <div style="font-size: 14px; font-weight: 800; color: #0F172A; margin-bottom: 3px;">{obtener_emoji_categoria(cat_spot)} {nom_spot}</div>
           {f'<div style="font-size: 11px; color: #0F172A; margin-bottom: 3px;">📍 {dir_spot}</div>' if dir_spot else ''}
           {f'<div style="font-size:10.5px; color:#475569; font-style:italic; line-height:1.3; margin-bottom:6px; overflow-wrap:anywhere;">📝 {linkificar_nota(nota_spot)}</div>' if nota_spot else ''}
           <div style="font-size: 11px; color: #0F172A; margin-bottom: 8px;"><b>Categoría:</b> {cat_spot}</div>
@@ -3825,7 +3825,7 @@ with pestanas[0]:
         folium.Marker(
             location=pt,
             popup=folium.Popup(popup_html, max_width=260),
-            tooltip=f"{obtEneror_emoji_categoria(cat_spot)} {nom_spot}" + (f" ({hora_spot})" if hora_spot else ""),
+            tooltip=f"{obtener_emoji_categoria(cat_spot)} {nom_spot}" + (f" ({hora_spot})" if hora_spot else ""),
             icon=crear_pin_google_maps(cat_spot, nom_spot)
         ).add_to(mapa)
 
@@ -3877,7 +3877,7 @@ with pestanas[0]:
             c_sh_tit, c_sh_ed, c_sh_cl = st.columns([8.5, 0.75, 0.75])
             with c_sh_tit:
                 st.markdown(
-                    f"<div style='font-size:1.1rem; font-weight:900; color:#0F172A; line-height:1.25;'>{obtEneror_emoji_categoria(cat_sp)} {sp['nombre']}</div>",
+                    f"<div style='font-size:1.1rem; font-weight:900; color:#0F172A; line-height:1.25;'>{obtener_emoji_categoria(cat_sp)} {sp['nombre']}</div>",
                     unsafe_allow_html=True
                 )
             with c_sh_ed:
@@ -3993,7 +3993,7 @@ with pestanas[1]:
                 idx_real = next((i for i, x in enumerate(st.session_state.lugares) if x["id"] == item["id"]), None)
                 is_visited = item.get("visitado", False)
                 cat_i = normalizar_categoria(item.get("categoria", "📍 Otros"))
-                emoji_i = obtEneror_emoji_categoria(cat_i)
+                emoji_i = obtener_emoji_categoria(cat_i)
                 dir_i = item.get("direccion", "")
                 nota_i = item.get("nota", "")
                 hora_i = item.get("hora", "")
@@ -4080,9 +4080,9 @@ with pestanas[2]:
     st.markdown("<div style='height: 6px;'></div>", unsafe_allow_html=True)
     st.markdown('<div class="ny-card-header">Lugares Guardados & Gestión de Sitios</div>', unsafe_allow_html=True)
 
-    ver_todos_eDiciembreion = st.checkbox("Mostrar también los lugares ya asignados a días", value=False, key="chk_ver_todos_guardados")
+    ver_todos_edicion = st.checkbox("Mostrar también los lugares ya asignados a días", value=False, key="chk_ver_todos_guardados")
 
-    if ver_todos_eDiciembreion:
+    if ver_todos_edicion:
         pool_guardados = list(st.session_state.lugares)
     else:
         pool_guardados = [l for l in st.session_state.lugares if l.get("dia", 0) == 0]
@@ -4118,7 +4118,7 @@ with pestanas[2]:
         # Toda la información se presenta antes de los controles.
         with st.container(key=f"saved-heading-row-{p_spot['id']}"):
             st.markdown(f"""
-            <div class="place-list-title">{obtEneror_emoji_categoria(cat_p)} {p_spot['nombre']}</div>
+            <div class="place-list-title">{obtener_emoji_categoria(cat_p)} {p_spot['nombre']}</div>
             <div style="margin-top:4px; display:flex; flex-wrap:wrap; gap:4px;">
               <span class="badge-cat">{cat_p}</span>{tipo_p_html}
             </div>
@@ -4274,7 +4274,7 @@ with pestanas[5]:
             nota_ext_html = bloque_nota_html(spot_ext.get("nota", ""))
             st.markdown(f"""
             <div style="background:#FFF5F5; border-left:4px solid #EF4444; border-radius:12px; padding:10px 14px; margin: 8px 0;">
-              <div style="font-weight:700; color:#991B1B;">{obtEneror_emoji_categoria(normalizar_categoria(spot_ext.get('categoria','')))} {spot_ext['nombre']}</div>
+              <div style="font-weight:700; color:#991B1B;">{obtener_emoji_categoria(normalizar_categoria(spot_ext.get('categoria','')))} {spot_ext['nombre']}</div>
               <div style="font-size:0.8rem; color:#7F1D1D;">Plan exterior · Día {num_dia_c}{dir_ext_txt}</div>
               {nota_ext_html}
             </div>
@@ -4308,7 +4308,7 @@ with pestanas[5]:
 with pestanas[3]:
     st.markdown('<div class="ny-card-header">💵 Calculadora</div>', unsafe_allow_html=True)
 
-    tasa_eur, fecha_tasa = obtEneror_tasa_usd_eur()
+    tasa_eur, fecha_tasa = obtener_tasa_usd_eur()
 
     col_fx, col_tax = st.columns([2.5, 3])
 
@@ -4345,7 +4345,7 @@ with pestanas[3]:
         st.markdown("#### 🧾 Calculadora de Cuenta, Tax & Tips")
 
         subtotal_bill = st.number_input("Subtotal de la cuenta ($ USD):", min_value=0.0, value=65.0, step=5.0)
-        es_ropa_exenta = st.checkbox("👕 Prenda de ropa/calzado < $110 (Exenta de Tax en NYC)")
+        es_ropa_exenta = st.checkbox("👕 Prenda de ropa/calzado < $110 (Exenta de Sales Tax en NYC)")
 
         col_t1, col_t2 = st.columns(2)
         with col_t1:
@@ -4374,7 +4374,7 @@ with pestanas[3]:
             <b>${subtotal_bill:.2f}</b>
           </div>
           <div style="display:flex; justify-content:space-between; margin-bottom:6px; font-size:0.88rem;">
-            <span style="color:#0F172A;">NYC Tax ({'Exenta' if es_ropa_exenta else '8.875%'}):</span>
+            <span style="color:#0F172A;">NYC Sales Tax ({'Exenta' if es_ropa_exenta else '8.875%'}):</span>
             <b>{'Exenta ($0.00)' if es_ropa_exenta else f'${tax_total:.2f}'}</b>
           </div>
           <div style="display:flex; justify-content:space-between; margin-bottom:10px; font-size:0.88rem;">
@@ -4421,7 +4421,7 @@ with pestanas[4]:
         """, unsafe_allow_html=True)
 
         if cods_ida:
-            st.markdown(f"**🛫 Ida ({v_ida.get('fecha', '26 Diciembreiembre')} · {v_ida.get('hora', '15:30')}):**")
+            st.markdown(f"**🛫 Ida ({v_ida.get('fecha', '26 Dic')} · {v_ida.get('hora', '15:30')}):**")
             for idx_c, cod in enumerate(cods_ida):
                 fa_url = f"https://es.flightaware.com/live/flight/{cod}"
                 fr_url = f"https://www.flightradar24.com/data/flights/{cod.lower()}"
@@ -4434,7 +4434,7 @@ with pestanas[4]:
                         st.link_button("Flightradar24 ↗", fr_url, use_container_width=True)
 
         if cods_vta:
-            st.markdown(f"**🛬 Regreso ({v_vta.get('fecha', '4 Eneroro')} · {v_vta.get('hora', '20:45')}):**")
+            st.markdown(f"**🛬 Regreso ({v_vta.get('fecha', '4 Ene')} · {v_vta.get('hora', '20:45')}):**")
             for idx_c, cod in enumerate(cods_vta):
                 fa_url = f"https://es.flightaware.com/live/flight/{cod}"
                 fr_url = f"https://www.flightradar24.com/data/flights/{cod.lower()}"
@@ -4450,12 +4450,12 @@ with pestanas[4]:
         with st.expander("✏️ Editar datos de vuelos", expanded=False):
             with st.form("form_editar_vuelos"):
                 ida_v = st.text_input("Vuelo Ida (ej. Aer Lingus · EI583, EI107):", value=v_ida.get("vuelo", "Aer Lingus · EI583, EI107"))
-                ida_f = st.text_input("Fecha Ida:", value=v_ida.get("fecha", "26 Diciembre"))
+                ida_f = st.text_input("Fecha Ida:", value=v_ida.get("fecha", "26 Dic"))
                 ida_h = st.text_input("Hora Ida:", value=v_ida.get("hora", "15:30"))
                 ida_a = st.text_input("Aeropuerto:", value=v_ida.get("aeropuerto", "JFK / Nueva York"))
                 st.markdown("---")
                 vta_v = st.text_input("Vuelo Regreso (ej. Aer Lingus · EI104, EI582):", value=v_vta.get("vuelo", "Aer Lingus · EI104, EI582"))
-                vta_f = st.text_input("Fecha Regreso:", value=v_vta.get("fecha", "4 Enero"))
+                vta_f = st.text_input("Fecha Regreso:", value=v_vta.get("fecha", "4 Ene"))
                 vta_h = st.text_input("Hora Regreso:", value=v_vta.get("hora", "20:45"))
                 vta_a = st.text_input("Aeropuerto Regreso:", value=v_vta.get("aeropuerto", "JFK / Nueva York"))
                 if st.form_submit_button("💾 Guardar Vuelos"):
@@ -4514,9 +4514,9 @@ with pestanas[4]:
     for idx_lst, lst_data in enumerate(listas_config):
         nombre_lista = str(lst_data.get("nombre", f"Lista {idx_lst + 1}"))
         url_lista = str(lst_data.get("url", ""))
-        sufijo_eDiciembreion = hashlib.sha1(f"{nombre_lista}\0{url_lista}".encode("utf-8")).hexdigest()[:10]
-        key_ed_nombre = f"gmaps_edit_nombre_{idx_lst}_{sufijo_eDiciembreion}"
-        key_ed_url = f"gmaps_edit_url_{idx_lst}_{sufijo_eDiciembreion}"
+        sufijo_edicion = hashlib.sha1(f"{nombre_lista}\0{url_lista}".encode("utf-8")).hexdigest()[:10]
+        key_ed_nombre = f"gmaps_edit_nombre_{idx_lst}_{sufijo_edicion}"
+        key_ed_url = f"gmaps_edit_url_{idx_lst}_{sufijo_edicion}"
 
         st.markdown(
             f"<div style='font-weight:800; color:#0F172A; overflow-wrap:anywhere;'>{idx_lst + 1}. {html.escape(nombre_lista)}</div>"
