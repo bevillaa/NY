@@ -1452,6 +1452,322 @@ st.markdown("""
     }
   }
 
+
+  /* ===== AJUSTE FINO FINAL: ICONOS COMPACTOS Y DÍA SIEMPRE LEGIBLE =====
+     Solo afecta a móvil; escritorio conserva sus tamaños y etiquetas normales. */
+  @media (max-width: 768px) {
+    [class*="st-key-it-controls-row-"],
+    [class*="st-key-saved-controls-row-"] {
+      width: 100% !important;
+      max-width: 100% !important;
+      min-width: 0 !important;
+      box-sizing: border-box !important;
+    }
+
+    [class*="st-key-it-controls-row-"] [data-testid="stHorizontalBlock"],
+    [class*="st-key-saved-controls-row-"] [data-testid="stHorizontalBlock"] {
+      display: grid !important;
+      grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+      grid-auto-flow: column !important;
+      align-items: center !important;
+      justify-content: stretch !important;
+      gap: 4px !important;
+      width: 100% !important;
+      max-width: 100% !important;
+      min-width: 0 !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      box-sizing: border-box !important;
+    }
+
+    [class*="st-key-it-controls-row-"] [data-testid="column"],
+    [class*="st-key-saved-controls-row-"] [data-testid="column"] {
+      display: block !important;
+      width: 100% !important;
+      min-width: 0 !important;
+      max-width: 100% !important;
+      flex: none !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      overflow: visible !important;
+      box-sizing: border-box !important;
+    }
+
+    /* Cuatro widgets compactos y alineados; no heredan mínimos de reglas antiguas. */
+    [class*="st-key-it-controls-row-"] [data-testid="column"] > div,
+    [class*="st-key-saved-controls-row-"] [data-testid="column"] > div,
+    [class*="st-key-it-controls-row-"] [data-testid="column"] [data-testid="stElementContainer"],
+    [class*="st-key-saved-controls-row-"] [data-testid="column"] [data-testid="stElementContainer"] {
+      width: 100% !important;
+      min-width: 0 !important;
+      max-width: 100% !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      box-sizing: border-box !important;
+    }
+
+    /* EDITAR: icono lápiz, botón contenido en su columna. */
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(1) [data-testid="stButton"],
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(1) [data-testid="stButton"] {
+      width: 100% !important;
+      min-width: 0 !important;
+      max-width: 100% !important;
+    }
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(1) button,
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(1) button {
+      box-sizing: border-box !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      width: 100% !important;
+      min-width: 0 !important;
+      max-width: 100% !important;
+      height: 34px !important;
+      min-height: 34px !important;
+      max-height: 34px !important;
+      padding: 0 !important;
+      margin: 0 !important;
+      border: 1px solid #94A3B8 !important;
+      border-radius: 7px !important;
+      background-color: #F8FAFC !important;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 24 24' fill='none' stroke='%23334155' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m16 4 4 4'/%3E%3Cpath d='M4 20l4-.9L19 8a2.1 2.1 0 0 0-3-3L5 16z'/%3E%3C/svg%3E") !important;
+      background-repeat: no-repeat !important;
+      background-position: center !important;
+      background-size: 18px 18px !important;
+      color: transparent !important;
+      -webkit-text-fill-color: transparent !important;
+      font-size: 0 !important;
+      line-height: 0 !important;
+      overflow: hidden !important;
+    }
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(1) button *,
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(1) button * {
+      visibility: hidden !important;
+    }
+
+    /* MAPA: icono solo, mismo tamaño y altura que Editar. */
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(2) [data-testid="stLinkButton"],
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(2) [data-testid="stLinkButton"] {
+      display: block !important;
+      width: 100% !important;
+      min-width: 0 !important;
+      max-width: 100% !important;
+      margin: 0 !important;
+    }
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(2) [data-testid="stLinkButton"] > a,
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(2) [data-testid="stLinkButton"] > a {
+      box-sizing: border-box !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      width: 100% !important;
+      min-width: 0 !important;
+      max-width: 100% !important;
+      height: 34px !important;
+      min-height: 34px !important;
+      max-height: 34px !important;
+      padding: 0 !important;
+      margin: 0 !important;
+      border: 1px solid #94A3B8 !important;
+      border-radius: 7px !important;
+      background-color: #FFFFFF !important;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='19' height='19' viewBox='0 0 24 24' fill='none' stroke='%231D4ED8' stroke-width='1.9' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m3 6 6-3 6 3 6-3v15l-6 3-6-3-6 3z'/%3E%3Cpath d='M9 3v15'/%3E%3Cpath d='M15 6v15'/%3E%3C/svg%3E") !important;
+      background-repeat: no-repeat !important;
+      background-position: center !important;
+      background-size: 18px 18px !important;
+      color: transparent !important;
+      -webkit-text-fill-color: transparent !important;
+      font-size: 0 !important;
+      line-height: 0 !important;
+      overflow: hidden !important;
+    }
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(2) a *,
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(2) a * {
+      visibility: hidden !important;
+    }
+
+    /* HORA: HH:MM completo y centrado, con ancho natural de su cuarta parte. */
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(3) [data-testid="stTextInput"],
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(3) [data-testid="stTextInput"],
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(3) [data-baseweb="input"],
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(3) [data-baseweb="input"],
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(3) [data-baseweb="base-input"],
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(3) [data-baseweb="base-input"] {
+      box-sizing: border-box !important;
+      display: flex !important;
+      width: 100% !important;
+      min-width: 0 !important;
+      max-width: 100% !important;
+      height: 34px !important;
+      min-height: 34px !important;
+      max-height: 34px !important;
+      padding: 0 2px !important;
+      margin: 0 !important;
+      border: 1px solid #94A3B8 !important;
+      border-radius: 7px !important;
+      background: #FFFFFF !important;
+    }
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(3) input,
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(3) input {
+      box-sizing: border-box !important;
+      width: 100% !important;
+      min-width: 0 !important;
+      height: 32px !important;
+      min-height: 32px !important;
+      padding: 0 !important;
+      text-align: center !important;
+      font-size: clamp(0.60rem, 2.35vw, 0.70rem) !important;
+      font-weight: 800 !important;
+      letter-spacing: 0 !important;
+      color: #0F172A !important;
+      -webkit-text-fill-color: #0F172A !important;
+    }
+
+    /* DÍA: texto completo "Día 10" y flecha pequeña; no aplicar ellipsis. */
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(4) [data-testid="stSelectbox"],
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(4) [data-testid="stSelectbox"],
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(4) [data-baseweb="select"],
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(4) [data-baseweb="select"] {
+      box-sizing: border-box !important;
+      display: block !important;
+      width: 100% !important;
+      min-width: 0 !important;
+      max-width: 100% !important;
+      margin: 0 !important;
+    }
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(4) [data-baseweb="select"] > div,
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(4) [data-baseweb="select"] > div {
+      box-sizing: border-box !important;
+      display: flex !important;
+      align-items: center !important;
+      width: 100% !important;
+      min-width: 0 !important;
+      max-width: 100% !important;
+      height: 34px !important;
+      min-height: 34px !important;
+      max-height: 34px !important;
+      padding: 0 3px !important;
+      border: 1px solid #94A3B8 !important;
+      border-radius: 7px !important;
+      background: #FFFFFF !important;
+      overflow: visible !important;
+    }
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(4) [data-baseweb="select"] span,
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(4) [data-baseweb="select"] span {
+      display: inline-block !important;
+      min-width: 0 !important;
+      max-width: none !important;
+      overflow: visible !important;
+      text-overflow: clip !important;
+      white-space: nowrap !important;
+      font-size: clamp(0.57rem, 2.25vw, 0.68rem) !important;
+      line-height: 1 !important;
+      font-weight: 800 !important;
+      color: #0F172A !important;
+      -webkit-text-fill-color: #0F172A !important;
+    }
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(4) [data-baseweb="select"] svg,
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(4) [data-baseweb="select"] svg {
+      width: 10px !important;
+      min-width: 10px !important;
+      max-width: 10px !important;
+      flex: 0 0 10px !important;
+    }
+
+    /* Evitar que una regla global aumente de nuevo el ancho/alto de los cuatro widgets. */
+    [class*="st-key-it-controls-row-"] button,
+    [class*="st-key-saved-controls-row-"] button,
+    [class*="st-key-it-controls-row-"] [data-testid="stLinkButton"] > a,
+    [class*="st-key-saved-controls-row-"] [data-testid="stLinkButton"] > a {
+      max-width: 100% !important;
+      box-sizing: border-box !important;
+    }
+
+    /* Estadística superior: reservar más ancho a la tarjeta "Guardados". */
+    .hero-container > div > div:last-child {
+      display: grid !important;
+      grid-template-columns: minmax(0, 1fr) minmax(80px, 1.12fr) minmax(0, 1fr) !important;
+      gap: 6px !important;
+      width: 100% !important;
+      max-width: 100% !important;
+      min-width: 0 !important;
+    }
+    .hero-stat-box {
+      box-sizing: border-box !important;
+      width: 100% !important;
+      min-width: 0 !important;
+      padding: 6px 3px !important;
+      overflow: visible !important;
+    }
+    .hero-stat-lbl {
+      white-space: nowrap !important;
+      word-break: normal !important;
+      overflow-wrap: normal !important;
+      font-size: clamp(0.52rem, 2.35vw, 0.62rem) !important;
+      letter-spacing: 0.1px !important;
+    }
+  }
+
+  @media (max-width: 320px) {
+    [class*="st-key-it-controls-row-"] [data-testid="stHorizontalBlock"],
+    [class*="st-key-saved-controls-row-"] [data-testid="stHorizontalBlock"] {
+      gap: 3px !important;
+    }
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(4) [data-baseweb="select"] span,
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(4) [data-baseweb="select"] span {
+      font-size: 0.57rem !important;
+    }
+    .hero-stat-lbl { font-size: 0.51rem !important; letter-spacing: 0 !important; }
+  }
+
+
+  /* Refinamiento final de tamaño: Editar y Mapa son iconos compactos centrados
+     en sus columnas; Hora y Día conservan todo el ancho útil para leerse. */
+  @media (max-width: 768px) {
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(1) [data-testid="stButton"],
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(1) [data-testid="stButton"] {
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      width: 100% !important;
+      min-width: 0 !important;
+      max-width: 100% !important;
+    }
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(1) [data-testid="stButton"] > button,
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(1) [data-testid="stButton"] > button {
+      box-sizing: border-box !important;
+      width: 36px !important;
+      min-width: 36px !important;
+      max-width: 36px !important;
+      height: 34px !important;
+      min-height: 34px !important;
+      max-height: 34px !important;
+      padding: 0 !important;
+      margin: 0 auto !important;
+    }
+
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(2) [data-testid="stLinkButton"],
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(2) [data-testid="stLinkButton"] {
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      width: 100% !important;
+      min-width: 0 !important;
+      max-width: 100% !important;
+    }
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(2) [data-testid="stLinkButton"] > a,
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(2) [data-testid="stLinkButton"] > a {
+      width: 36px !important;
+      min-width: 36px !important;
+      max-width: 36px !important;
+      height: 34px !important;
+      min-height: 34px !important;
+      max-height: 34px !important;
+      padding: 0 !important;
+      margin: 0 auto !important;
+    }
+  }
+
 </style>
 """, unsafe_allow_html=True)
 
