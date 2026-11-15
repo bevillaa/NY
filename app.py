@@ -2954,6 +2954,25 @@ st.markdown("""
       width: calc(100% - 12px) !important;
     }
   }
+
+  /* El lápiz del itinerario conserva todo su contorno y no recorta la punta. */
+  [class*="st-key-it-edit-btn-"] [data-testid="stButton"] > button {
+    width: 40px !important;
+    min-width: 40px !important;
+    max-width: 40px !important;
+    height: 38px !important;
+    min-height: 38px !important;
+    max-height: 38px !important;
+    padding: 0 2px !important;
+    overflow: visible !important;
+    text-overflow: clip !important;
+    line-height: 1.25 !important;
+    font-size: 1.12rem !important;
+  }
+  [class*="st-key-it-edit-btn-"] [data-testid="stButton"] {
+    overflow: visible !important;
+    min-width: 40px !important;
+  }
 </style>
 """, unsafe_allow_html=True)
 
@@ -3945,7 +3964,7 @@ pestanas = st.tabs([
 # TAB 1: MAPA GOOGLE
 # ─────────────────────────────────────────────────────────────────────────────
 with pestanas[0]:
-    c_m1, c_m2, c_m3 = st.columns([3, 2, 2])
+    c_m1, c_m3 = st.columns([3, 2])
     with c_m1:
         opciones_vista = [
             "🌐 Todos los Sitios",
@@ -3953,12 +3972,8 @@ with pestanas[0]:
             "🏨 Solo Hotel"
         ] + [etiqueta_dia(d) for d in range(1, 11)]
         sel_vista = selectbox_sin_teclado("Vista en el mapa:", opciones_vista, label_visibility="collapsed")
-    with c_m2:
-        sel_capa = selectbox_sin_teclado(
-            "Capa:",
-            ["Google Maps Callejero", "Google Maps Satélite / Híbrido", "Google Maps Terreno", "OpenStreetMap"],
-            label_visibility="collapsed"
-        )
+    # Se fija una única capa de Google Maps para evitar el desplegable de estilos.
+    sel_capa = "Google Maps Callejero"
     with c_m3:
         cats_actuales = sorted(set(normalizar_categoria(l.get("categoria", "📍 Otros")) for l in st.session_state.lugares))
         sel_filtro_cat = selectbox_sin_teclado("Categoría:", ["Todas"] + cats_actuales, label_visibility="collapsed")
@@ -4072,7 +4087,7 @@ with pestanas[0]:
     resultado_mapa = st_folium(
         mapa,
         use_container_width=True,
-        height=720,
+        height=920,
         returned_objects=[]
     )
 
@@ -4175,10 +4190,11 @@ with pestanas[1]:
                 with st.container(key=f"it-controls-row-{item['id']}"):
                     c_edit, c_map, c_hr, c_day = st.columns([0.8, 0.9, 1.7, 1.9], gap="small")
                     with c_edit:
-                        if st.button("✏️", key=f"btn_ed_it_{d}_{item['id']}", help="Editar sitio", use_container_width=True):
-                            ek = f"it_{d}_{item['id']}"
-                            st.session_state.editando_spot_key = None if st.session_state.editando_spot_key == ek else ek
-                            st.rerun()
+                        with st.container(key=f"it-edit-btn-{item['id']}"):
+                            if st.button("✏️", key=f"btn_ed_it_{d}_{item['id']}", help="Editar sitio", use_container_width=True):
+                                ek = f"it_{d}_{item['id']}"
+                                st.session_state.editando_spot_key = None if st.session_state.editando_spot_key == ek else ek
+                                st.rerun()
                     with c_map:
                         st.link_button("🗺️", gmaps_url, use_container_width=True, key=f"map_it_{item['id']}", help="Abrir en Google Maps")
                     with c_hr:
@@ -4727,7 +4743,13 @@ with pestanas[4]:
         key_ed_nombre = f"gmaps_edit_nombre_{idx_lst}_{sufijo_edicion}"
         key_ed_url = f"gmaps_edit_url_{idx_lst}_{sufijo_edicion}"
 
-        col_edit, col_nombre = st.columns([0.55, 9.45], gap="small", vertical_alignment="center")
+        col_nombre, col_edit = st.columns([9.45, 0.55], gap="small", vertical_alignment="center")
+        with col_nombre:
+            st.markdown(
+                f"<div style='font-weight:800; color:#0F172A; overflow-wrap:anywhere;'>{idx_lst + 1}. {html.escape(nombre_lista)}</div>"
+                f"<div class='gmaps-list-url' style='font-size:0.76rem; color:#475569; margin-top:2px; margin-bottom:6px;'>{html.escape(url_lista)}</div>",
+                unsafe_allow_html=True
+            )
         with col_edit:
             if st.button("✏️", key=f"btn_edit_list_{idx_lst}", help="Editar lista"):
                 actual = st.session_state.get("lista_gmaps_editando")
@@ -4735,12 +4757,6 @@ with pestanas[4]:
                 for clave in (key_ed_nombre, key_ed_url):
                     st.session_state.pop(clave, None)
                 st.rerun()
-        with col_nombre:
-            st.markdown(
-                f"<div style='font-weight:800; color:#0F172A; overflow-wrap:anywhere;'>{idx_lst + 1}. {html.escape(nombre_lista)}</div>"
-                f"<div class='gmaps-list-url' style='font-size:0.76rem; color:#475569; margin-top:2px; margin-bottom:6px;'>{html.escape(url_lista)}</div>",
-                unsafe_allow_html=True
-            )
 
         if st.session_state.get("lista_gmaps_editando") == idx_lst:
             st.markdown(f"**Editar lista: {html.escape(nombre_lista)}**")
