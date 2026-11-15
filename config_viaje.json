@@ -42,11 +42,15 @@
     },
     {
       "nombre": "NY",
-      "url": "https://maps.app.goo.gl/ZZAp17jsgkcfywEF6"
+      "url": "https://maps.app.goo.gl/r49QEV3j5krA47uW8"
     },
     {
       "nombre": "Life Out",
       "url": "https://maps.app.goo.gl/MiKrEc3gj9GoTXJCA"
+    },
+    {
+      "nombre": "Otros",
+      "url": "https://maps.app.goo.gl/cTPL2arWuMywwHum9"
     }
   ]
 }
