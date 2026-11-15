@@ -3069,15 +3069,14 @@ CATEGORIAS_CANONICAS = [
 
 MAPA_MIGRACION_CAT = {
     "🍕 Gastronomía": "🍽️ Gastronomía",
-    "🍕 Gastronomía, Food & Restaurantes": "🍽️ Gastronomía",
+    "🍕 Gastronomía & Restaurantes": "🍽️ Gastronomía",
     "🍪 Cafeterías & Dulces": "🍪 Dulces",
     "🍸 Copas": "🍸 Copas",
     "🎷 Jazz, Música & Ocio": "🎷 Ocio",
-    "🛍️ Compras, Shopping & Outlets": "🛍️ Compras",
+    "🛍️ Compras & Outlets": "🛍️ Compras",
     "🏛️ Museos & Monumentos": "🏛️ Cultura",
-    "🎄 Christmas market, Market & Christmas ": "🎄 Christmas markets",
-    "🏙️ Miradores, Edificio & Building": "🏙️ Miradores",
-    "🌲 Parques, Muelles, Rooftops, Spots & Puentes": "☀️ Spots",
+    "🏙️ Miradores & Observatorios": "🏙️ Miradores",
+    "🌲 Parques, Muelles, Rooftops & Puentes": "☀️ Spots",
     "🏨 Hotel Base": "🏨 Hotel",
     "📍 Otros Lugares": "📍 Otros",
     "Otros": "📍 Otros"
@@ -3101,67 +3100,71 @@ def clasificar_lugar(nombre: str, direccion: str = "", lista_origen: str = "") -
     texto_busqueda = f"{nom} {dir_txt}"
     orig = (lista_origen or "").strip().lower()
 
+    # 0. PRIORIDAD MÁXIMA: Clasificación directa por el nombre de la lista de Google Maps
+    if orig and orig not in ("google maps", "lista", "sin lista"):
+        if 'hotel' in orig or 'alojamiento' in orig:
+            return "🏨 Hotel", "Interior"
+        if any(k in orig for k in ['christmas', 'holiday', 'navidad', 'mercadillo', 'winter village']):
+            tipo_nav = "Interior" if 'santaland' in texto_busqueda else "Exterior"
+            return "🎄 Christmas markets", tipo_nav
+        if any(k in orig for k in ['mirador', 'observator']):
+            return "🏙️ Miradores", "Interior"
+        if any(k in orig for k in ['ocio', 'jazz', 'música', 'musica', 'teatro', 'show', 'deporte']):
+            return "🎷 Ocio", "Interior"
+        if any(k in orig for k in ['copas', 'rooftop', 'bar', 'cocktail', 'pub']):
+            return "🍸 Copas", "Interior"
+        if any(k in orig for k in ['dulce', 'sweet', 'cafeter', 'coffee', 'bakery', 'postre', 'helad', 'cookie']):
+            return "🍪 Dulces", "Interior"
+        if any(k in orig for k in ['compra', 'tienda', 'outlet', 'shop', 'shopping']):
+            return "🛍️ Compras", "Interior"
+        if any(k in orig for k in ['gastronom', 'food', 'restaurante', 'comer', 'cenar', 'comida']):
+            return "🍽️ Gastronomía", "Interior"
+        if any(k in orig for k in ['cultura', 'museo', 'monumento', 'historia']):
+            return "🏛️ Cultura", "Interior"
+        if any(k in orig for k in ['spot', 'parque', 'puente', 'paseo', 'barrio']):
+            return "☀️ Spots", "Exterior"
+
     # 1. Hotel
     if ('hotel' in nom or 'inn' in nom or 'alojamiento' in nom or 'hostel' in nom) and any(k in texto_busqueda for k in ['riu', 'marriott', 'hilton', 'hyatt', 'sheraton', 'base', 'courtyard', 'westin', 'intercontinental']):
-        return "🏨 Hotel", "Interior"
-    if 'hotel' in orig or 'alojamiento' in orig:
         return "🏨 Hotel", "Interior"
 
     # 2. Christmas markets
     if any(k in texto_busqueda for k in ['christmas market', 'holiday market', 'winter village', 'holiday shops', 'mercadillo navideño', 'mercado navideño', 'navidad', 'santa land', 'santaland', 'dyker heights', 'tree lighting', 'rockefeller tree']):
         tipo_nav = "Interior" if 'santaland' in texto_busqueda else "Exterior"
         return "🎄 Christmas markets", tipo_nav
-    if any(k in orig for k in ['christmas', 'holiday', 'navidad', 'mercadillo']):
-        return "🎄 Christmas markets", "Exterior"
 
     # 3. Miradores
     if any(k in texto_busqueda for k in ['summit', 'one vanderbilt', 'empire state', 'top of the rock', 'the edge', 'observatory', 'one world observatory', 'mirador', 'observation deck']):
-        return "🏙️ Miradores", "Interior"
-    if any(k in orig for k in ['mirador', 'observator']):
         return "🏙️ Miradores", "Interior"
 
     # 4. Ocio
     if any(k in texto_busqueda for k in ['jazz', 'blue note', 'smalls', 'mezzrow', 'dizzy', "arthur's tavern", 'jazzcultural', 'village vanguard', 'broadway', 'radio city', 'comedy cellar', 'lincoln center', 'teatro', 'theatre', 'madison square garden', 'barclays center', 'cinema', 'cine', 'nba', 'knicks', 'nets', 'rangers', 'hockey', 'musical', 'concierto', 'concert', 'show', 'club', 'arcade']):
         return "🎷 Ocio", "Interior"
-    if any(k in orig for k in ['ocio', 'jazz', 'música', 'musica', 'teatro', 'show', 'deporte']):
-        return "🎷 Ocio", "Interior"
 
     # 5. Copas
     if any(k in texto_busqueda for k in ['rooftop', 'westlight', 'harriet', 'magic hour', '230 fifth', 'bar 54', 'hudson vu', 'buvette', 'dante', 'speakeasy', 'cocktail', 'wine bar', 'tavern', 'brewery', 'pub', 'lounge', 'biergarten', 'taproom', 'saloon', 'copas']) or ('bar' in nom.split() and 'shake' not in nom and 'salad' not in nom and 'sushi' not in nom) or 'm social' in nom:
         return "🍸 Copas", "Interior"
-    if any(k in orig for k in ['copas', 'rooftop', 'bar', 'cocktail', 'pub']):
-        return "🍸 Copas", "Interior"
 
     # 6. Dulces
     if any(k in texto_busqueda for k in ['bakery', 'cookie', 'cookies', 'levain', 'granny', 'caffè panna', 'caffe panna', 'krispy kreme', 'sweets', 'sweet', 'pastry', 'pâtisserie', 'donut', 'doughnut', 'helado', 'ice cream', 'gelato', 'louis vuitton nyc', 'café', 'cafe', 'coffee', 'starbucks', 'magnolia', 'chocolate', 'chocolat', 'cupcake', 'cheesecake', 'crepe', 'waffle', 'boba', 'matcha', 'tea room', 'dulce']):
-        return "🍪 Dulces", "Interior"
-    if any(k in orig for k in ['dulce', 'sweet', 'cafeter', 'coffee', 'bakery', 'postre']):
         return "🍪 Dulces", "Interior"
 
     # 7. Compras
     if any(k in texto_busqueda for k in ['outlet', 'outlets', 'marshalls', 't.j. maxx', 'tj maxx', 'target', 'macy', 'burlington', 'century 21', 'five below', 'goodwill', 'woodbury', 'jersey gardens', 'grand slam', 'shopping', 'store', 'zara', 'uniqlo', 'tanger', 'apple store', 'sephora', 'nordstrom', 'bloomingdale', 'saks', 'nike', 'adidas', 'lego', 'nintendo', 'fao schwarz', 'thrift', 'vintage', 'mall', 'tienda', 'boutique', 'market', 'bazar', 'souvenir']):
         if 'chelsea market' not in texto_busqueda and 'time out market' not in texto_busqueda and 'christmas market' not in texto_busqueda and 'holiday market' not in texto_busqueda:
             return "🛍️ Compras", "Interior"
-    if any(k in orig for k in ['compra', 'tienda', 'outlet', 'shop']):
-        return "🛍️ Compras", "Interior"
 
     # 8. Gastronomía
     if any(k in texto_busqueda for k in ['pizza', 'pizzeria', 'burger', 'katz', 'dumpling', 'motek', 'piada', 'shake shack', 'chelsea market', 'time out market', 'deli', 'pastrami', 'tacos', 'taco', 'restaurant', 'restaurante', 'trader joe', 'eataly', 'food hall', 'bagel', 'ramen', 'sushi', 'diner', 'smokehouse', 'noodle', 'food', 'steakhouse', 'bistro', 'trattoria', 'osteria', 'grill', 'kitchen', 'bbq', 'barbecue', 'brunch', 'cantina', 'taqueria', 'hot dog', 'lobster', 'seafood']):
-        return "🍽️ Gastronomía", "Interior"
-    if any(k in orig for k in ['gastronom', 'food', 'restaurante', 'comer', 'cenar']):
         return "🍽️ Gastronomía", "Interior"
 
     # 9. Cultura
     if any(k in texto_busqueda for k in ['museum', 'museo', 'the met', 'moma', 'guggenheim', 'whitney', 'natural history', 'morgan library', 'tenement', '9/11 memorial', 'oculus', 'grand central', 'library', 'biblioteca', 'atlas', 'one times square', 'times square', 'memorial', 'statue of liberty', 'estatua de la libertad', 'ellis island', 'trinity church', 'rockefeller center', 'st. patrick', 'cathedral', 'catedral', 'church', 'iglesia', 'united nations', 'onu', 'wall street', 'charging bull', 'federal hall', 'chrysler building', 'flatiron', 'empire state', 'gallery', 'galería']):
         tipo = "Exterior" if any(x in texto_busqueda for x in ['times square', 'atlas', 'statue', 'charging bull', 'wall street', 'memorial']) else "Interior"
         return "🏛️ Cultura", tipo
-    if any(k in orig for k in ['cultura', 'museo', 'monumento', 'historia']):
-        return "🏛️ Cultura", "Interior"
 
     # 10. Spots
     if any(k in texto_busqueda for k in ['park', 'parque', 'central park', 'bryant park', 'washington square', 'bridge', 'puente', 'brooklyn bridge', 'manhattan bridge', 'high line', 'little island', 'fulton ferry', 'domino', 'pier 17', 'pier 57', 'pier 35', 'pier', 'muelle', 'pebble beach', 'tudor city', 'squibb', 'battery', 'waterfront', 'picnic', 'botanic', 'coney island', 'boardwalk', 'dumbo', 'soho', 'west village', 'greenwich', 'chinatown', 'little italy', 'hudson yards', 'vessel', 'roosevelt island', 'tram', 'ferry', 'spot', 'mirador callejero']):
-        return "☀️ Spots", "Exterior"
-    if any(k in orig for k in ['spot', 'parque', 'puente', 'paseo', 'barrio']):
         return "☀️ Spots", "Exterior"
 
     # 11. Otros (fallback cuando no encaja en ninguna categoría anterior ni en el nombre de lista)
@@ -3443,6 +3446,14 @@ def extraer_lugares_lista_gmaps(url_lista: str, nombre_lista: str = ""):
 
     encontrados = []
     vistos = set()
+    titulo_detectado = (nombre_lista or "").strip()
+
+    def _limpiar_titulo_gmaps(raw_title: str) -> str:
+        t = html.unescape(str(raw_title or "")).strip()
+        t = re.sub(r"\s*-\s*Google\s*Maps\s*$", "", t, flags=re.IGNORECASE).strip()
+        if t.lower() in ("google maps", "maps", ""):
+            return ""
+        return t
 
     def _agregar(nombre, lat, lon, direccion=""):
         nombre = re.sub(r"\s+", " ", str(nombre or "")).strip(" ,\t\r\n")
@@ -3458,7 +3469,8 @@ def extraer_lugares_lista_gmaps(url_lista: str, nombre_lista: str = ""):
         if not clave or clave in vistos:
             return
         vistos.add(clave)
-        cat, tipo = clasificar_lugar(nombre, direccion, nombre_lista)
+        origen_efectivo = f"{nombre_lista} {titulo_detectado}".strip()
+        cat, tipo = clasificar_lugar(nombre, direccion, origen_efectivo)
         encontrados.append({
             "nombre": nombre,
             "lat": lat,
@@ -3468,6 +3480,7 @@ def extraer_lugares_lista_gmaps(url_lista: str, nombre_lista: str = ""):
             "categoria": cat,
             "tipo": tipo,
             "hora": "",
+            "lista_origen": titulo_detectado or nombre_lista or "",
         })
 
     try:
@@ -3475,6 +3488,22 @@ def extraer_lugares_lista_gmaps(url_lista: str, nombre_lista: str = ""):
         with opener.open(url_limpia, timeout=12) as respuesta:
             url_final = respuesta.geturl()
             pagina = respuesta.read().decode("utf-8", errors="ignore")
+
+        # Intentar extraer el nombre real de la lista desde los metadatos HTML de Google Maps
+        for pat_tit in (
+            r'<meta[^>]+property=["\']og:title["\'][^>]+content=["\']([^"\']+)["\']',
+            r'<meta[^>]+content=["\']([^"\']+)["\'][^>]+property=["\']og:title["\']',
+            r'<title>([^<]+)</title>',
+        ):
+            m_tit = re.search(pat_tit, pagina, flags=re.IGNORECASE)
+            if m_tit:
+                cand = _limpiar_titulo_gmaps(m_tit.group(1))
+                if cand:
+                    if not titulo_detectado or titulo_detectado.lower() in ("google maps", "lista", "sin lista"):
+                        titulo_detectado = cand
+                    elif cand.lower() not in titulo_detectado.lower():
+                        titulo_detectado = f"{titulo_detectado} ({cand})"
+                    break
 
         patrones = (
             r'href="(/maps/preview/entitylist/getlist\?[^\"]+)"',
@@ -3519,6 +3548,17 @@ def extraer_lugares_lista_gmaps(url_lista: str, nombre_lista: str = ""):
                     raw = respuesta_lista.read().decode("utf-8", errors="ignore")
                 raw = re.sub(r"^\)\]\}'\s*", "", raw)
                 data = json.loads(raw)
+                # En el JSON de getlist de Google Maps, el título de la lista suele venir en data[0][4] o data[0][1]
+                if isinstance(data, list) and data and isinstance(data[0], list):
+                    for idx_cand in (4, 1, 2):
+                        if len(data[0]) > idx_cand and isinstance(data[0][idx_cand], str):
+                            cand_json = _limpiar_titulo_gmaps(data[0][idx_cand])
+                            if cand_json and len(cand_json) >= 3 and not cand_json.startswith(("http", "ChIJ", "/")):
+                                if not titulo_detectado or titulo_detectado.lower() in ("google maps", "lista", "sin lista"):
+                                    titulo_detectado = cand_json
+                                elif cand_json.lower() not in titulo_detectado.lower():
+                                    titulo_detectado = f"{titulo_detectado} ({cand_json})"
+                                break
             except Exception:
                 continue
 
@@ -3655,7 +3695,7 @@ def importar_sitio_desde_gmaps(url_o_texto: str, dia_dest: int = 0, hora: str = 
         return False, "Introduce un enlace de Google Maps válido."
 
     if "maps" in raw.lower():
-        lugares_lst = extraer_lugares_lista_gmaps(raw, "Google Maps")
+        lugares_lst = extraer_lugares_lista_gmaps(raw, "")
         if lugares_lst:
             existentes = {str(x.get("nombre", "")).strip().casefold() for x in st.session_state.lugares}
             nuevos = 0
@@ -4756,14 +4796,25 @@ if seccion_principal == "✈️ Vuelos & Hotel":
                             if not nombre_sync:
                                 continue
                             dir_sync = str(item_sync.get("direccion", "")).strip()
-                            cat_clasif, tipo_clasif = clasificar_lugar(nombre_sync, dir_sync, nom_lista)
+                            origen_sync = str(item_sync.get("lista_origen") or nom_lista).strip()
+                            cat_clasif, tipo_clasif = clasificar_lugar(nombre_sync, dir_sync, origen_sync)
                             cat_final = normalizar_categoria(cat_clasif)
                             clave_sync = _clave_lugar_sync(nombre_sync, item_sync.get("lat"), item_sync.get("lon"))
-                            if clave_sync in mapa_existentes_sync:
-                                existente = mapa_existentes_sync[clave_sync]
+                            existente = mapa_existentes_sync.get(clave_sync)
+                            if existente is None:
+                                # Fallback por nombre normalizado si ya existía con coords ligeramente distintas
+                                nombre_norm_sync = re.sub(r"\s+", " ", nombre_sync.casefold())
+                                for (k_nom, _, _), cand_ex in mapa_existentes_sync.items():
+                                    if k_nom == nombre_norm_sync:
+                                        existente = cand_ex
+                                        break
+                            if existente is not None:
                                 cambio_item = False
                                 if dir_sync and not existente.get("direccion"):
                                     existente["direccion"] = dir_sync
+                                    cambio_item = True
+                                if origen_sync and existente.get("lista_origen") != origen_sync:
+                                    existente["lista_origen"] = origen_sync
                                     cambio_item = True
                                 if existente.get("categoria") != cat_final:
                                     existente["categoria"] = cat_final
@@ -4785,6 +4836,7 @@ if seccion_principal == "✈️ Vuelos & Hotel":
                                 "nota": "",
                                 "categoria": cat_final,
                                 "tipo": tipo_clasif,
+                                "lista_origen": origen_sync,
                                 "visitado": False
                             }
                             st.session_state.lugares.append(nuevo_lugar_sync)
@@ -4800,7 +4852,18 @@ if seccion_principal == "✈️ Vuelos & Hotel":
                         continue
                     cat_actual = lugar_reg.get("categoria", "")
                     cat_norm = normalizar_categoria(cat_actual)
-                    if cat_norm in ("📍 Otros", "☀️ Spots") and not cat_actual:
+                    origen_reg = str(lugar_reg.get("lista_origen", "")).strip()
+                    if origen_reg:
+                        cat_auto, tipo_auto = clasificar_lugar(
+                            lugar_reg.get("nombre", ""),
+                            lugar_reg.get("direccion", ""),
+                            origen_reg
+                        )
+                        cat_norm = normalizar_categoria(cat_auto)
+                        if lugar_reg.get("tipo") != tipo_auto:
+                            lugar_reg["tipo"] = tipo_auto
+                            total_actualizados += 1
+                    elif cat_norm in ("📍 Otros", "☀️ Spots") and not cat_actual:
                         cat_auto, tipo_auto = clasificar_lugar(
                             lugar_reg.get("nombre", ""),
                             lugar_reg.get("direccion", "")
