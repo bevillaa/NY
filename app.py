@@ -2177,6 +2177,198 @@ st.markdown("""
     }
   }
 
+
+
+  /* ===== ÚLTIMO AJUSTE MÓVIL: ICONOS SVG FIJOS + HORA LEGIBLE ===== */
+  @media (max-width: 768px) {
+    [class*="st-key-it-controls-row-"] [data-testid="stHorizontalBlock"],
+    [class*="st-key-saved-controls-row-"] [data-testid="stHorizontalBlock"] {
+      display: grid !important;
+      grid-template-columns: 30px 30px 92px minmax(102px, 1fr) !important;
+      grid-auto-flow: column !important;
+      justify-content: stretch !important;
+      align-items: center !important;
+      column-gap: 3px !important;
+      row-gap: 0 !important;
+      width: 100% !important;
+      min-width: 0 !important;
+      max-width: 100% !important;
+      box-sizing: border-box !important;
+    }
+    [class*="st-key-it-controls-row-"] [data-testid="column"],
+    [class*="st-key-saved-controls-row-"] [data-testid="column"] {
+      display: block !important;
+      width: 100% !important;
+      min-width: 0 !important;
+      max-width: 100% !important;
+      flex: none !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      box-sizing: border-box !important;
+      overflow: visible !important;
+    }
+
+    /* EDITAR: la etiqueta accesible permanece en el HTML, visualmente se
+       sustituye siempre por un lápiz SVG independiente de fuentes/emoji. */
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(1) [data-testid="stButton"],
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(1) [data-testid="stButton"] {
+      width: 30px !important;
+      min-width: 30px !important;
+      max-width: 30px !important;
+      margin: 0 !important;
+    }
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(1) button,
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(1) button {
+      position: relative !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      box-sizing: border-box !important;
+      width: 30px !important;
+      min-width: 30px !important;
+      max-width: 30px !important;
+      height: 34px !important;
+      min-height: 34px !important;
+      max-height: 34px !important;
+      padding: 0 !important;
+      margin: 0 !important;
+      border: 1px solid #94A3B8 !important;
+      border-radius: 7px !important;
+      background: #FFFFFF !important;
+      color: transparent !important;
+      -webkit-text-fill-color: transparent !important;
+      font-size: 0 !important;
+      line-height: 0 !important;
+      text-indent: -9999px !important;
+      overflow: hidden !important;
+    }
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(1) button::before,
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(1) button::before {
+      content: "" !important;
+      display: block !important;
+      flex: 0 0 17px !important;
+      width: 17px !important;
+      height: 17px !important;
+      margin: 0 !important;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23334155' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m16 4 4 4'/%3E%3Cpath d='M4 20l4-.9L19 8a2.1 2.1 0 0 0-3-3L5 16z'/%3E%3C/svg%3E") !important;
+      background-repeat: no-repeat !important;
+      background-position: center !important;
+      background-size: contain !important;
+      text-indent: 0 !important;
+    }
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(1) button > *,
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(1) button > * {
+      position: absolute !important;
+      width: 1px !important;
+      height: 1px !important;
+      padding: 0 !important;
+      margin: -1px !important;
+      overflow: hidden !important;
+      clip: rect(0, 0, 0, 0) !important;
+      white-space: nowrap !important;
+      border: 0 !important;
+    }
+
+    /* MAPA: enlace real a Google Maps, con icono dibujado por CSS. */
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(2) [data-testid="stLinkButton"],
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(2) [data-testid="stLinkButton"] {
+      width: 30px !important;
+      min-width: 30px !important;
+      max-width: 30px !important;
+      margin: 0 !important;
+    }
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(2) [data-testid="stLinkButton"] > a,
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(2) [data-testid="stLinkButton"] > a {
+      position: relative !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      box-sizing: border-box !important;
+      width: 30px !important;
+      min-width: 30px !important;
+      max-width: 30px !important;
+      height: 34px !important;
+      min-height: 34px !important;
+      max-height: 34px !important;
+      padding: 0 !important;
+      margin: 0 !important;
+      border: 1px solid #94A3B8 !important;
+      border-radius: 7px !important;
+      background: #FFFFFF !important;
+      color: transparent !important;
+      -webkit-text-fill-color: transparent !important;
+      font-size: 0 !important;
+      line-height: 0 !important;
+      text-indent: -9999px !important;
+      text-decoration: none !important;
+      overflow: hidden !important;
+    }
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(2) [data-testid="stLinkButton"] > a::before,
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(2) [data-testid="stLinkButton"] > a::before {
+      content: "" !important;
+      display: block !important;
+      flex: 0 0 18px !important;
+      width: 18px !important;
+      height: 18px !important;
+      margin: 0 !important;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231D4ED8' stroke-width='1.9' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m3 6 6-3 6 3 6-3v15l-6 3-6-3-6 3z'/%3E%3Cpath d='M9 3v15'/%3E%3Cpath d='M15 6v15'/%3E%3C/svg%3E") !important;
+      background-repeat: no-repeat !important;
+      background-position: center !important;
+      background-size: contain !important;
+      text-indent: 0 !important;
+    }
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(2) a > *,
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(2) a > * {
+      position: absolute !important;
+      width: 1px !important;
+      height: 1px !important;
+      padding: 0 !important;
+      margin: -1px !important;
+      overflow: hidden !important;
+      clip: rect(0, 0, 0, 0) !important;
+      white-space: nowrap !important;
+      border: 0 !important;
+    }
+
+    /* HORA: 84 px reales para que HH:MM nunca se comprima ni desaparezcan
+       los minutos. El campo conserva tamaño de letra legible. */
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(3) [data-testid="stTextInput"],
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(3) [data-testid="stTextInput"],
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(3) [data-baseweb="input"],
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(3) [data-baseweb="input"],
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(3) [data-baseweb="base-input"],
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(3) [data-baseweb="base-input"] {
+      display: flex !important;
+      box-sizing: border-box !important;
+      width: 92px !important;
+      min-width: 92px !important;
+      max-width: 92px !important;
+      height: 34px !important;
+      min-height: 34px !important;
+      max-height: 34px !important;
+      padding: 0 3px !important;
+      margin: 0 !important;
+      border: 1px solid #94A3B8 !important;
+      border-radius: 7px !important;
+      background: #FFFFFF !important;
+    }
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(3) input,
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(3) input {
+      box-sizing: border-box !important;
+      width: 100% !important;
+      min-width: 0 !important;
+      height: 32px !important;
+      padding: 0 2px !important;
+      text-align: center !important;
+      font-size: 0.78rem !important;
+      font-weight: 800 !important;
+      letter-spacing: 0 !important;
+      font-variant-numeric: tabular-nums !important;
+      color: #0F172A !important;
+      -webkit-text-fill-color: #0F172A !important;
+    }
+  }
+
 </style>
 """, unsafe_allow_html=True)
 
@@ -3360,12 +3552,12 @@ with pestanas[1]:
                 with st.container(key=f"it-controls-row-{item['id']}"):
                     c_edit, c_map, c_hr, c_day = st.columns([0.8, 0.9, 1.7, 1.9], gap="small")
                     with c_edit:
-                        if st.button("✏️", key=f"btn_ed_it_{d}_{item['id']}", help="Editar sitio", use_container_width=True):
+                        if st.button("Editar", key=f"btn_ed_it_{d}_{item['id']}", help="Editar sitio", use_container_width=True):
                             ek = f"it_{d}_{item['id']}"
                             st.session_state.editando_spot_key = None if st.session_state.editando_spot_key == ek else ek
                             st.rerun()
                     with c_map:
-                        st.link_button("🗺️", gmaps_url, use_container_width=True, key=f"map_it_{item['id']}", help="Abrir en Google Maps")
+                        st.link_button("Mapa", gmaps_url, use_container_width=True, key=f"map_it_{item['id']}", help="Abrir en Google Maps")
                     with c_hr:
                         nueva_h = st.text_input(
                             "Hora",
@@ -3460,13 +3652,13 @@ with pestanas[2]:
         with st.container(key=f"saved-controls-row-{p_spot['id']}"):
             c_edit, c_map, c_hr, c_day = st.columns([0.8, 0.9, 1.7, 1.9], gap="small")
             with c_edit:
-                if st.button("✏️", key=f"btn_ed_pool_{p_spot['id']}", help="Editar sitio", use_container_width=True):
+                if st.button("Editar", key=f"btn_ed_pool_{p_spot['id']}", help="Editar sitio", use_container_width=True):
                     ek = f"pool_{p_spot['id']}"
                     st.session_state.editando_spot_key = None if st.session_state.editando_spot_key == ek else ek
                     st.rerun()
             with c_map:
                 g_url_sp = f"https://www.google.com/maps/search/?api=1&query={urllib.parse.quote(p_spot['nombre'] + ' New York')}"
-                st.link_button("🗺️", g_url_sp, use_container_width=True, key=f"map_saved_{p_spot['id']}", help="Abrir en Google Maps")
+                st.link_button("Mapa", g_url_sp, use_container_width=True, key=f"map_saved_{p_spot['id']}", help="Abrir en Google Maps")
             with c_hr:
                 nueva_h_pool = st.text_input(
                     "Hora",
