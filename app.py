@@ -444,94 +444,273 @@ st.markdown("""
   }
 
   /* =========================================================================
-     BLINDAJE TOTAL VERSIÓN MÓVIL (iPhone & Android < 768px)
+     DISEÑO RESPONSIVE PARA MÓVILES
+     En pantallas estrechas se apilan las columnas para evitar que Streamlit
+     comprima los controles hasta dejarlos cortados. Solo las filas de acciones
+     de cada lugar conservan una distribución horizontal compacta.
      ========================================================================= */
   @media (max-width: 768px) {
-    .block-container {
-      padding-left: 0.5rem !important;
-      padding-right: 0.5rem !important;
-      padding-top: 0.5rem !important;
-      max-width: 100vw !important;
+    html, body, .stApp, [data-testid="stAppViewContainer"],
+    [data-testid="stMain"], section.main {
+      margin: 0 !important;
+      width: 100% !important;
+      max-width: 100% !important;
       overflow-x: hidden !important;
     }
+
+    .block-container {
+      width: 100% !important;
+      max-width: 100% !important;
+      padding: 0.55rem 0.65rem 2rem !important;
+      margin: 0 auto !important;
+      overflow-x: hidden !important;
+    }
+
+    /* Evita desbordamientos provocados por textos, enlaces o direcciones largos. */
+    [data-testid="stMarkdownContainer"],
+    [data-testid="stText"],
+    .stCaption, p, a, code, pre {
+      max-width: 100% !important;
+      overflow-wrap: anywhere !important;
+      word-break: normal !important;
+    }
+
     .hero-container {
       padding: 11px 12px !important;
       border-radius: 14px !important;
       margin-bottom: 9px !important;
     }
     .hero-title {
-      font-size: 1.38rem !important;
+      font-size: 1.32rem !important;
+      line-height: 1.18 !important;
     }
     .hero-eyebrow {
-      font-size: 0.68rem !important;
+      font-size: 0.64rem !important;
+      letter-spacing: 0.65px !important;
+      line-height: 1.35 !important;
     }
     .hero-pill {
-      font-size: 0.72rem !important;
-      padding: 3px 8px !important;
+      display: inline-flex !important;
+      max-width: 100% !important;
+      white-space: normal !important;
+      overflow-wrap: anywhere !important;
+      font-size: 0.71rem !important;
+      line-height: 1.25 !important;
+      padding: 4px 8px !important;
     }
     .hero-stat-box {
-      padding: 5px 6px !important;
-      min-width: 60px !important;
+      min-width: 0 !important;
+      flex: 1 1 28% !important;
+      padding: 5px 4px !important;
     }
-    .hero-stat-val {
-      font-size: 1.15rem !important;
+    .hero-stat-val { font-size: 1.08rem !important; }
+    .hero-stat-lbl {
+      font-size: 0.58rem !important;
+      letter-spacing: 0.35px !important;
+      overflow-wrap: anywhere !important;
     }
+
     .ny-card {
-      padding: 11px 12px !important;
+      padding: 10px 11px !important;
       border-radius: 13px !important;
+    }
+    .ny-card-header {
+      font-size: 0.76rem !important;
+      letter-spacing: 0.7px !important;
+      line-height: 1.3 !important;
     }
     .place-sheet {
-      padding: 11px 12px !important;
+      padding: 10px 11px !important;
       border-radius: 13px !important;
+      overflow: hidden !important;
+    }
+    .place-note {
+      font-size: 0.76rem !important;
+      line-height: 1.35 !important;
+      overflow-wrap: anywhere !important;
     }
 
-    /* Mantener filas de cabecera y barra de controles de cada lugar en horizontal */
+    /* Por defecto, cada grupo de columnas pasa a filas de ancho completo. */
     [data-testid="stHorizontalBlock"] {
-      gap: 0.3rem !important;
-      flex-wrap: nowrap !important;
-      align-items: center !important;
-    }
-    [data-testid="column"] {
+      display: flex !important;
+      flex-wrap: wrap !important;
+      align-items: stretch !important;
+      gap: 0.5rem !important;
+      width: 100% !important;
       min-width: 0 !important;
     }
+    [data-testid="stHorizontalBlock"] > [data-testid="column"] {
+      flex: 1 1 100% !important;
+      width: 100% !important;
+      min-width: 0 !important;
+      max-width: 100% !important;
+      margin: 0 !important;
+      padding: 0 !important;
+    }
 
-    /* Formularios sí hacen wrap si son campos grandes */
-    [data-testid="stForm"] [data-testid="stHorizontalBlock"] {
-      flex-wrap: wrap !important;
+    /* Fila de un lugar en el itinerario: checkbox | información | editar. */
+    [data-testid="stHorizontalBlock"]:has([data-testid="stCheckbox"]):has(.edit-mini-btn)
+      > [data-testid="column"]:nth-child(1) {
+      flex: 0 0 30px !important;
+      width: 30px !important;
+      max-width: 30px !important;
+    }
+    [data-testid="stHorizontalBlock"]:has([data-testid="stCheckbox"]):has(.edit-mini-btn)
+      > [data-testid="column"]:nth-child(2) {
+      flex: 1 1 calc(100% - 76px) !important;
+      width: auto !important;
+      min-width: 0 !important;
+    }
+    [data-testid="stHorizontalBlock"]:has([data-testid="stCheckbox"]):has(.edit-mini-btn)
+      > [data-testid="column"]:nth-child(3) {
+      flex: 0 0 30px !important;
+      width: 30px !important;
+      max-width: 30px !important;
+    }
+
+    /* Barra de hora, día y Maps: elimina columnas vacías y deja controles legibles. */
+    [data-testid="stHorizontalBlock"]:has(.compact-hora):has(.compact-ctrl)
+      > [data-testid="column"]:not(:has(.compact-hora)):not(:has(.compact-ctrl)) {
+      display: none !important;
+    }
+    [data-testid="stHorizontalBlock"]:has(.compact-hora):has(.compact-ctrl)
+      > [data-testid="column"]:has(.compact-hora) {
+      flex: 0 1 82px !important;
+      width: 82px !important;
+      min-width: 76px !important;
+      max-width: 94px !important;
+    }
+    [data-testid="stHorizontalBlock"]:has(.compact-hora):has(.compact-ctrl)
+      > [data-testid="column"]:has(.compact-ctrl) {
+      flex: 1 1 112px !important;
+      width: auto !important;
+      min-width: 105px !important;
+      max-width: 100% !important;
+    }
+
+    /* Las seis pestañas quedan visibles en dos columnas, sin una tira recortada. */
+    .stTabs [data-baseweb="tab-list"] {
+      display: grid !important;
+      grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+      gap: 4px !important;
+      padding: 4px !important;
+      overflow: visible !important;
+      white-space: normal !important;
+    }
+    .stTabs [data-baseweb="tab"] {
+      display: flex !important;
+      justify-content: center !important;
+      align-items: center !important;
+      width: 100% !important;
+      min-width: 0 !important;
+      min-height: 38px !important;
+      height: auto !important;
+      padding: 6px 4px !important;
+      white-space: normal !important;
+      text-align: center !important;
+      line-height: 1.15 !important;
+      font-size: 0.75rem !important;
+      overflow-wrap: anywhere !important;
+    }
+
+    /* Botones y controles táctiles: nunca más anchos que la pantalla. */
+    .stButton, .stFormSubmitButton, [data-testid="stLinkButton"],
+    .stButton > button, .stFormSubmitButton > button,
+    [data-testid="stLinkButton"] > a {
+      max-width: 100% !important;
+      min-width: 0 !important;
+    }
+    .stButton > button, .stFormSubmitButton > button,
+    [data-testid="stLinkButton"] > a {
+      min-height: 36px !important;
+      height: auto !important;
+      padding: 7px 8px !important;
+      white-space: normal !important;
+      line-height: 1.15 !important;
+      overflow-wrap: anywhere !important;
+      font-size: 0.76rem !important;
     }
 
     .compact-hora [data-testid="stTextInput"] {
-      max-width: 76px !important;
+      width: 100% !important;
+      max-width: 100% !important;
+    }
+    .compact-hora [data-baseweb="input"],
+    .compact-hora [data-baseweb="base-input"] {
+      width: 100% !important;
+      min-width: 0 !important;
     }
     .compact-hora input {
-      font-size: 0.73rem !important;
-      padding: 0 2px !important;
+      font-size: 0.75rem !important;
+      padding: 0 3px !important;
+    }
+    .compact-ctrl, .compact-ctrl [data-baseweb="select"] {
+      width: 100% !important;
+      min-width: 0 !important;
     }
     .compact-ctrl [data-baseweb="select"] span,
     .compact-ctrl [data-baseweb="select"] div {
-      font-size: 0.74rem !important;
+      font-size: 0.73rem !important;
+      line-height: 1.15 !important;
     }
     .compact-ctrl [data-testid="stLinkButton"] > a,
     .compact-ctrl .stButton > button {
+      width: 100% !important;
       font-size: 0.73rem !important;
-      padding: 0 0.35rem !important;
+      padding: 6px 4px !important;
     }
     .edit-mini-btn button {
-      min-height: 25px !important;
-      height: 25px !important;
-      width: 26px !important;
-      min-width: 26px !important;
-      max-width: 26px !important;
-      font-size: 0.72rem !important;
+      min-height: 28px !important;
+      height: 28px !important;
+      width: 28px !important;
+      min-width: 28px !important;
+      max-width: 28px !important;
+      padding: 0 !important;
+    }
+
+    /* Pestañas, formularios, filtros y métricas sin anchuras mínimas heredadas. */
+    .stSelectbox, .stTextInput, .stNumberInput, .stDateInput,
+    .stMultiSelect, .stSlider, [data-testid="stFileUploader"] {
+      width: 100% !important;
+      max-width: 100% !important;
+      min-width: 0 !important;
+    }
+    [data-baseweb="select"], [data-baseweb="input"],
+    [data-baseweb="base-input"] {
+      max-width: 100% !important;
+      min-width: 0 !important;
     }
     .stRadio > div {
       flex-wrap: wrap !important;
-      gap: 0.4rem !important;
+      gap: 0.45rem !important;
     }
+
     iframe {
-      height: 400px !important;
+      display: block !important;
+      width: 100% !important;
+      max-width: 100% !important;
+      height: 380px !important;
     }
   }
+
+  /* Teléfonos especialmente estrechos (iPhone mini y similares). */
+  @media (max-width: 380px) {
+    .block-container { padding-left: 0.45rem !important; padding-right: 0.45rem !important; }
+    .hero-title { font-size: 1.2rem !important; }
+    .stTabs [data-baseweb="tab"] { font-size: 0.69rem !important; padding: 6px 2px !important; }
+    [data-testid="stHorizontalBlock"]:has(.compact-hora):has(.compact-ctrl)
+      > [data-testid="column"]:has(.compact-hora) {
+      flex-basis: 72px !important;
+      width: 72px !important;
+      min-width: 70px !important;
+    }
+    [data-testid="stHorizontalBlock"]:has(.compact-hora):has(.compact-ctrl)
+      > [data-testid="column"]:has(.compact-ctrl) {
+      flex-basis: 100px !important;
+      min-width: 98px !important;
+    }
+  }
+
 </style>
 """, unsafe_allow_html=True)
 
