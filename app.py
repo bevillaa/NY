@@ -3096,51 +3096,75 @@ def normalizar_categoria(cat: str) -> str:
 
 def clasificar_lugar(nombre: str, direccion: str = "", lista_origen: str = "") -> tuple[str, str]:
     nom = (nombre or "").strip().lower()
+    dir_txt = (direccion or "").strip().lower()
+    texto_busqueda = f"{nom} {dir_txt}"
     orig = (lista_origen or "").strip().lower()
 
-    if ('hotel' in nom or 'inn' in nom or 'alojamiento' in nom) and any(k in nom for k in ['riu', 'marriott', 'hilton', 'hyatt', 'sheraton', 'base']):
+    # 1. Hotel
+    if ('hotel' in nom or 'inn' in nom or 'alojamiento' in nom or 'hostel' in nom) and any(k in texto_busqueda for k in ['riu', 'marriott', 'hilton', 'hyatt', 'sheraton', 'base', 'courtyard', 'westin', 'intercontinental']):
+        return "🏨 Hotel", "Interior"
+    if 'hotel' in orig or 'alojamiento' in orig:
         return "🏨 Hotel", "Interior"
 
-    if any(k in nom for k in ['christmas market', 'holiday market', 'winter village', 'holiday shops', 'mercadillo navideño', 'mercado navideño']) or 'christmas market' in orig or 'holiday market' in orig:
+    # 2. Christmas markets
+    if any(k in texto_busqueda for k in ['christmas market', 'holiday market', 'winter village', 'holiday shops', 'mercadillo navideño', 'mercado navideño', 'navidad', 'santa land', 'santaland', 'dyker heights', 'tree lighting', 'rockefeller tree']):
+        tipo_nav = "Interior" if 'santaland' in texto_busqueda else "Exterior"
+        return "🎄 Christmas markets", tipo_nav
+    if any(k in orig for k in ['christmas', 'holiday', 'navidad', 'mercadillo']):
         return "🎄 Christmas markets", "Exterior"
 
-    if any(k in nom for k in ['summit', 'one vanderbilt', 'empire state', 'top of the rock', 'the edge', 'observatory', 'one world observatory']):
+    # 3. Miradores
+    if any(k in texto_busqueda for k in ['summit', 'one vanderbilt', 'empire state', 'top of the rock', 'the edge', 'observatory', 'one world observatory', 'mirador', 'observation deck']):
+        return "🏙️ Miradores", "Interior"
+    if any(k in orig for k in ['mirador', 'observator']):
         return "🏙️ Miradores", "Interior"
 
-    if any(k in nom for k in ['jazz', 'blue note', 'smalls', 'mezzrow', 'dizzy', "arthur's tavern", 'jazzcultural', 'village vanguard', 'broadway show', 'radio city', 'comedy cellar', 'lincoln center', 'teatro', 'theatre']):
+    # 4. Ocio
+    if any(k in texto_busqueda for k in ['jazz', 'blue note', 'smalls', 'mezzrow', 'dizzy', "arthur's tavern", 'jazzcultural', 'village vanguard', 'broadway', 'radio city', 'comedy cellar', 'lincoln center', 'teatro', 'theatre', 'madison square garden', 'barclays center', 'cinema', 'cine', 'nba', 'knicks', 'nets', 'rangers', 'hockey', 'musical', 'concierto', 'concert', 'show', 'club', 'arcade']):
+        return "🎷 Ocio", "Interior"
+    if any(k in orig for k in ['ocio', 'jazz', 'música', 'musica', 'teatro', 'show', 'deporte']):
         return "🎷 Ocio", "Interior"
 
-    if any(k in nom for k in ['rooftop', 'westlight', 'harriet', 'magic hour', '230 fifth', 'bar 54', 'hudson vu', 'buvette', 'dante', 'speakeasy', 'cocktail', 'wine bar', 'tavern', 'brewery', 'pub']) or ('bar' in nom.split() and 'shake' not in nom and 'salad' not in nom) or 'm social' in nom:
+    # 5. Copas
+    if any(k in texto_busqueda for k in ['rooftop', 'westlight', 'harriet', 'magic hour', '230 fifth', 'bar 54', 'hudson vu', 'buvette', 'dante', 'speakeasy', 'cocktail', 'wine bar', 'tavern', 'brewery', 'pub', 'lounge', 'biergarten', 'taproom', 'saloon', 'copas']) or ('bar' in nom.split() and 'shake' not in nom and 'salad' not in nom and 'sushi' not in nom) or 'm social' in nom:
+        return "🍸 Copas", "Interior"
+    if any(k in orig for k in ['copas', 'rooftop', 'bar', 'cocktail', 'pub']):
         return "🍸 Copas", "Interior"
 
-    if any(k in nom for k in ['bakery', 'cookie', 'cookies', 'levain', 'granny', 'caffè panna', 'caffe panna', 'krispy kreme', 'sweets', 'sweet', 'pastry', 'pâtisserie', 'donut', 'helado', 'ice cream', 'louis vuitton nyc', 'café', 'cafe', 'coffee', 'starbucks', 'magnolia', 'chocolate']):
+    # 6. Dulces
+    if any(k in texto_busqueda for k in ['bakery', 'cookie', 'cookies', 'levain', 'granny', 'caffè panna', 'caffe panna', 'krispy kreme', 'sweets', 'sweet', 'pastry', 'pâtisserie', 'donut', 'doughnut', 'helado', 'ice cream', 'gelato', 'louis vuitton nyc', 'café', 'cafe', 'coffee', 'starbucks', 'magnolia', 'chocolate', 'chocolat', 'cupcake', 'cheesecake', 'crepe', 'waffle', 'boba', 'matcha', 'tea room', 'dulce']):
+        return "🍪 Dulces", "Interior"
+    if any(k in orig for k in ['dulce', 'sweet', 'cafeter', 'coffee', 'bakery', 'postre']):
         return "🍪 Dulces", "Interior"
 
-    if any(k in nom for k in ['outlet', 'outlets', 'marshalls', 't.j. maxx', 'tj maxx', 'target', 'macy', 'burlington', 'century 21', 'five below', 'goodwill', 'woodbury', 'jersey gardens', 'grand slam', 'shopping', 'store', 'zara', 'uniqlo', 'tanger', 'apple store', 'sephora', 'nordstrom', 'bloomingdale']):
+    # 7. Compras
+    if any(k in texto_busqueda for k in ['outlet', 'outlets', 'marshalls', 't.j. maxx', 'tj maxx', 'target', 'macy', 'burlington', 'century 21', 'five below', 'goodwill', 'woodbury', 'jersey gardens', 'grand slam', 'shopping', 'store', 'zara', 'uniqlo', 'tanger', 'apple store', 'sephora', 'nordstrom', 'bloomingdale', 'saks', 'nike', 'adidas', 'lego', 'nintendo', 'fao schwarz', 'thrift', 'vintage', 'mall', 'tienda', 'boutique', 'market', 'bazar', 'souvenir']):
+        if 'chelsea market' not in texto_busqueda and 'time out market' not in texto_busqueda and 'christmas market' not in texto_busqueda and 'holiday market' not in texto_busqueda:
+            return "🛍️ Compras", "Interior"
+    if any(k in orig for k in ['compra', 'tienda', 'outlet', 'shop']):
         return "🛍️ Compras", "Interior"
 
-    if any(k in nom for k in ['pizza', 'pizzeria', 'burger', 'katz', 'dumpling', 'motek', 'piada', 'shake shack', 'chelsea market', 'time out market', 'deli', 'pastrami', 'tacos', 'taco', 'restaurant', 'trader joe', 'eataly', 'food hall', 'bagel', 'ramen', 'sushi', 'diner', 'smokehouse', 'noodle', 'food']):
+    # 8. Gastronomía
+    if any(k in texto_busqueda for k in ['pizza', 'pizzeria', 'burger', 'katz', 'dumpling', 'motek', 'piada', 'shake shack', 'chelsea market', 'time out market', 'deli', 'pastrami', 'tacos', 'taco', 'restaurant', 'restaurante', 'trader joe', 'eataly', 'food hall', 'bagel', 'ramen', 'sushi', 'diner', 'smokehouse', 'noodle', 'food', 'steakhouse', 'bistro', 'trattoria', 'osteria', 'grill', 'kitchen', 'bbq', 'barbecue', 'brunch', 'cantina', 'taqueria', 'hot dog', 'lobster', 'seafood']):
+        return "🍽️ Gastronomía", "Interior"
+    if any(k in orig for k in ['gastronom', 'food', 'restaurante', 'comer', 'cenar']):
         return "🍽️ Gastronomía", "Interior"
 
-    if any(k in nom for k in ['park', 'central park', 'bridge', 'puente', 'high line', 'little island', 'fulton ferry', 'domino', 'pier 17', 'pier 57', 'pier 35', 'pebble beach', 'tudor city', 'squibb', 'battery', 'waterfront', 'picnic', 'botanic', 'coney island', 'boardwalk']):
-        return "☀️ Spots", "Exterior"
-
-    if any(k in nom for k in ['museum', 'the met', 'moma', 'morgan library', 'tenement', '9/11 memorial', 'oculus', 'grand central', 'library', 'atlas', 'one times square', 'times square', 'memorial', 'statue of liberty', 'trinity church', 'rockefeller center', 'st. patrick']):
-        tipo = "Exterior" if any(x in nom for x in ['times square', 'atlas', 'statue']) else "Interior"
+    # 9. Cultura
+    if any(k in texto_busqueda for k in ['museum', 'museo', 'the met', 'moma', 'guggenheim', 'whitney', 'natural history', 'morgan library', 'tenement', '9/11 memorial', 'oculus', 'grand central', 'library', 'biblioteca', 'atlas', 'one times square', 'times square', 'memorial', 'statue of liberty', 'estatua de la libertad', 'ellis island', 'trinity church', 'rockefeller center', 'st. patrick', 'cathedral', 'catedral', 'church', 'iglesia', 'united nations', 'onu', 'wall street', 'charging bull', 'federal hall', 'chrysler building', 'flatiron', 'empire state', 'gallery', 'galería']):
+        tipo = "Exterior" if any(x in texto_busqueda for x in ['times square', 'atlas', 'statue', 'charging bull', 'wall street', 'memorial']) else "Interior"
         return "🏛️ Cultura", tipo
+    if any(k in orig for k in ['cultura', 'museo', 'monumento', 'historia']):
+        return "🏛️ Cultura", "Interior"
 
-    if 'sweet' in orig:
-        return "🍪 Dulces", "Interior"
-    if 'food' in orig:
-        return "🍽️ Gastronomía", "Interior"
-    if 'rooftop' in orig:
-        return "🍸 Copas", "Interior"
-    if 'tienda' in orig or 'outlet' in orig:
-        return "🛍️ Compras", "Interior"
-    if 'spot' in orig:
+    # 10. Spots
+    if any(k in texto_busqueda for k in ['park', 'parque', 'central park', 'bryant park', 'washington square', 'bridge', 'puente', 'brooklyn bridge', 'manhattan bridge', 'high line', 'little island', 'fulton ferry', 'domino', 'pier 17', 'pier 57', 'pier 35', 'pier', 'muelle', 'pebble beach', 'tudor city', 'squibb', 'battery', 'waterfront', 'picnic', 'botanic', 'coney island', 'boardwalk', 'dumbo', 'soho', 'west village', 'greenwich', 'chinatown', 'little italy', 'hudson yards', 'vessel', 'roosevelt island', 'tram', 'ferry', 'spot', 'mirador callejero']):
+        return "☀️ Spots", "Exterior"
+    if any(k in orig for k in ['spot', 'parque', 'puente', 'paseo', 'barrio']):
         return "☀️ Spots", "Exterior"
 
-    return "☀️ Spots", "Exterior"
+    # 11. Otros (fallback cuando no encaja en ninguna categoría anterior ni en el nombre de lista)
+    return "📍 Otros", "Exterior"
 
 def selectbox_sin_teclado(*args, **kwargs):
     """Selectbox sin búsqueda de texto: el móvil solo muestra las opciones.
@@ -4696,6 +4720,7 @@ if seccion_principal == "✈️ Vuelos & Hotel":
     else:
         if st.button("🔄 Sincronizar todas las listas", key="btn_sync_all_gmaps", use_container_width=True, type="primary"):
             total_nuevos = 0
+            total_actualizados = 0
             total_descargados = 0
             errores_sync = []
             # La clave de duplicados combina nombre y coordenadas para no descartar
@@ -4706,8 +4731,8 @@ if seccion_principal == "✈️ Vuelos & Hotel":
                     return (nombre_n, round(float(lat), 5), round(float(lon), 5))
                 except (TypeError, ValueError):
                     return (nombre_n, None, None)
-            existentes_sync = {
-                _clave_lugar_sync(x.get("nombre"), x.get("lat"), x.get("lon"))
+            mapa_existentes_sync = {
+                _clave_lugar_sync(x.get("nombre"), x.get("lat"), x.get("lon")): x
                 for x in st.session_state.lugares if isinstance(x, dict)
             }
             ids_sync = []
@@ -4715,7 +4740,7 @@ if seccion_principal == "✈️ Vuelos & Hotel":
                 try: ids_sync.append(int(x.get("id", 0)))
                 except (TypeError, ValueError, AttributeError): pass
             max_id_sync = max(ids_sync, default=0)
-            with st.spinner("Sincronizando todas tus listas de Google Maps..."):
+            with st.spinner("Sincronizando todas tus listas de Google Maps y clasificando categorías..."):
                 for i_lista, datos_lista in enumerate(listas_config):
                     nom_lista = str(datos_lista.get("nombre", f"Lista {i_lista + 1}"))
                     url_lista_sync = str(datos_lista.get("url", "")).strip()
@@ -4729,33 +4754,75 @@ if seccion_principal == "✈️ Vuelos & Hotel":
                             nombre_sync = str(item_sync.get("nombre", "")).strip()
                             if not nombre_sync:
                                 continue
+                            dir_sync = str(item_sync.get("direccion", "")).strip()
+                            cat_clasif, tipo_clasif = clasificar_lugar(nombre_sync, dir_sync, nom_lista)
+                            cat_final = normalizar_categoria(cat_clasif)
                             clave_sync = _clave_lugar_sync(nombre_sync, item_sync.get("lat"), item_sync.get("lon"))
-                            if clave_sync in existentes_sync:
+                            if clave_sync in mapa_existentes_sync:
+                                existente = mapa_existentes_sync[clave_sync]
+                                cambio_item = False
+                                if dir_sync and not existente.get("direccion"):
+                                    existente["direccion"] = dir_sync
+                                    cambio_item = True
+                                if existente.get("categoria") != cat_final:
+                                    existente["categoria"] = cat_final
+                                    cambio_item = True
+                                if existente.get("tipo") != tipo_clasif:
+                                    existente["tipo"] = tipo_clasif
+                                    cambio_item = True
+                                if cambio_item:
+                                    total_actualizados += 1
                                 continue
                             max_id_sync += 1
-                            st.session_state.lugares.append({
+                            nuevo_lugar_sync = {
                                 "id": max_id_sync,
                                 "nombre": nombre_sync,
                                 "lat": float(item_sync.get("lat", 40.7580)),
                                 "lon": float(item_sync.get("lon", -73.9855)),
                                 "dia": 0, "hora": "",
-                                "direccion": item_sync.get("direccion", ""),
+                                "direccion": dir_sync,
                                 "nota": "",
-                                "categoria": normalizar_categoria(item_sync.get("categoria", "📍 Otros")),
-                                "tipo": item_sync.get("tipo", "Interior"),
+                                "categoria": cat_final,
+                                "tipo": tipo_clasif,
                                 "visitado": False
-                            })
-                            existentes_sync.add(clave_sync)
+                            }
+                            st.session_state.lugares.append(nuevo_lugar_sync)
+                            mapa_existentes_sync[clave_sync] = nuevo_lugar_sync
                             total_nuevos += 1
                     except Exception as exc:
                         errores_sync.append(f"{nom_lista}: {exc}")
-            if total_nuevos:
+
+                # Pasar también el motor de categorías por el resto de lugares guardados
+                # para asegurar que todas las categorías estén normalizadas y actualizadas
+                for lugar_reg in st.session_state.lugares:
+                    if not isinstance(lugar_reg, dict):
+                        continue
+                    cat_actual = lugar_reg.get("categoria", "")
+                    cat_norm = normalizar_categoria(cat_actual)
+                    if cat_norm in ("📍 Otros", "☀️ Spots") and not cat_actual:
+                        cat_auto, tipo_auto = clasificar_lugar(
+                            lugar_reg.get("nombre", ""),
+                            lugar_reg.get("direccion", "")
+                        )
+                        cat_norm = normalizar_categoria(cat_auto)
+                        if lugar_reg.get("tipo") != tipo_auto:
+                            lugar_reg["tipo"] = tipo_auto
+                            total_actualizados += 1
+                    if cat_actual != cat_norm:
+                        lugar_reg["categoria"] = cat_norm
+                        total_actualizados += 1
+
+            if total_nuevos or total_actualizados:
                 if guardar_itinerario_disco(st.session_state.lugares):
-                    st.success(f"Sincronización terminada: {total_nuevos} lugares nuevos añadidos. {total_descargados} resultados recibidos en total.")
+                    st.success(
+                        f"Sincronización terminada: {total_nuevos} lugares nuevos añadidos y "
+                        f"{total_actualizados} lugares reclasificados/actualizados. "
+                        f"({total_descargados} resultados recibidos en total)."
+                    )
                 else:
                     st.error("No se pudieron guardar los lugares sincronizados en el archivo compartido.")
             else:
-                st.info(f"Sincronización terminada. No había lugares nuevos. {total_descargados} resultados recibidos en total.")
+                st.info(f"Sincronización terminada. No había cambios nuevos. ({total_descargados} resultados recibidos en total).")
             for error_sync in errores_sync:
                 st.warning(error_sync)
             st.rerun()
