@@ -2631,6 +2631,225 @@ st.markdown("""
     }
   }
 
+
+
+  /* ======================================================================
+     AJUSTE FINAL: CUATRO CONTROLES A TODO EL ANCHO EN ITINERARIO/GUARDADOS.
+     Orden real del código Python: Editar | Mapa | Hora | Día.
+     ====================================================================== */
+  @media (max-width: 768px) {
+    [class*="st-key-it-controls-row-"] [data-testid="stHorizontalBlock"],
+    [class*="st-key-saved-controls-row-"] [data-testid="stHorizontalBlock"] {
+      display: grid !important;
+      grid-template-columns:
+        minmax(36px, 0.85fr)
+        minmax(36px, 0.85fr)
+        minmax(76px, 1.7fr)
+        minmax(84px, 1.9fr) !important;
+      grid-auto-flow: column !important;
+      grid-auto-columns: minmax(0, 1fr) !important;
+      justify-content: stretch !important;
+      align-items: stretch !important;
+      column-gap: 5px !important;
+      row-gap: 0 !important;
+      width: 100% !important;
+      min-width: 0 !important;
+      max-width: 100% !important;
+      box-sizing: border-box !important;
+    }
+
+    [class*="st-key-it-controls-row-"] [data-testid="column"],
+    [class*="st-key-saved-controls-row-"] [data-testid="column"] {
+      display: block !important;
+      flex: none !important;
+      width: 100% !important;
+      min-width: 0 !important;
+      max-width: 100% !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      box-sizing: border-box !important;
+      overflow: visible !important;
+    }
+
+    /* Editar (columna 1): icono SVG, botón ocupa toda su columna. */
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(1) .stButton,
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(1) .stButton,
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(1) [data-testid="stButton"],
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(1) [data-testid="stButton"] {
+      display: block !important;
+      width: 100% !important;
+      min-width: 0 !important;
+      max-width: 100% !important;
+      margin: 0 !important;
+    }
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(1) .stButton > button,
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(1) .stButton > button {
+      box-sizing: border-box !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      width: 100% !important;
+      min-width: 0 !important;
+      max-width: 100% !important;
+      height: 36px !important;
+      min-height: 36px !important;
+      max-height: 36px !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      border: 1.5px solid #94A3B8 !important;
+      border-radius: 8px !important;
+      background-color: #FFFFFF !important;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%23334155' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m16 4 4 4'/%3E%3Cpath d='M4 20l4-.9L19 8a2.1 2.1 0 0 0-3-3L5 16z'/%3E%3C/svg%3E") !important;
+      background-repeat: no-repeat !important;
+      background-position: center center !important;
+      background-size: 19px 19px !important;
+      color: transparent !important;
+      font-size: 0 !important;
+      line-height: 0 !important;
+      overflow: hidden !important;
+      box-shadow: none !important;
+    }
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(1) .stButton > button span,
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(1) .stButton > button span {
+      display: none !important;
+    }
+
+    /* Mapa (columna 2): icono SVG y ancho completo de su pista. */
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(2) [data-testid="stLinkButton"],
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(2) [data-testid="stLinkButton"] {
+      display: block !important;
+      width: 100% !important;
+      min-width: 0 !important;
+      max-width: 100% !important;
+      margin: 0 !important;
+    }
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(2) [data-testid="stLinkButton"] > a,
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(2) [data-testid="stLinkButton"] > a {
+      box-sizing: border-box !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      width: 100% !important;
+      min-width: 0 !important;
+      max-width: 100% !important;
+      height: 36px !important;
+      min-height: 36px !important;
+      max-height: 36px !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      border: 1.5px solid #94A3B8 !important;
+      border-radius: 8px !important;
+      background-color: #FFFFFF !important;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='22' height='22' viewBox='0 0 24 24' fill='none' stroke='%231D4ED8' stroke-width='1.9' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m3 6 6-3 6 3 6-3v15l-6 3-6-3-6 3z'/%3E%3Cpath d='M9 3v15'/%3E%3Cpath d='M15 6v15'/%3E%3C/svg%3E") !important;
+      background-repeat: no-repeat !important;
+      background-position: center center !important;
+      background-size: 20px 20px !important;
+      color: transparent !important;
+      font-size: 0 !important;
+      line-height: 0 !important;
+      overflow: hidden !important;
+      text-decoration: none !important;
+      box-shadow: none !important;
+    }
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(2) [data-testid="stLinkButton"] > a span,
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(2) [data-testid="stLinkButton"] > a span {
+      display: none !important;
+    }
+
+    /* Hora (columna 3): el campo rellena la tercera pista y muestra HH:MM. */
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(3) [data-testid="stTextInput"],
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(3) [data-testid="stTextInput"],
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(3) .stTextInput,
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(3) .stTextInput,
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(3) [data-baseweb="input"],
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(3) [data-baseweb="input"],
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(3) [data-baseweb="base-input"],
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(3) [data-baseweb="base-input"] {
+      box-sizing: border-box !important;
+      display: block !important;
+      width: 100% !important;
+      min-width: 0 !important;
+      max-width: 100% !important;
+      height: 36px !important;
+      min-height: 36px !important;
+      max-height: 36px !important;
+      margin: 0 !important;
+      border-radius: 8px !important;
+    }
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(3) input,
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(3) input {
+      box-sizing: border-box !important;
+      width: 100% !important;
+      min-width: 0 !important;
+      height: 34px !important;
+      min-height: 34px !important;
+      padding: 0 2px !important;
+      font-size: 0.76rem !important;
+      font-weight: 800 !important;
+      text-align: center !important;
+      letter-spacing: 0 !important;
+      font-variant-numeric: tabular-nums !important;
+      color: #0F172A !important;
+      -webkit-text-fill-color: #0F172A !important;
+    }
+
+    /* Día (columna 4): rellena el ancho sobrante y deja íntegro "Día 10". */
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(4) [data-testid="stSelectbox"],
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(4) [data-testid="stSelectbox"],
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(4) .stSelectbox,
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(4) .stSelectbox,
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(4) [data-baseweb="select"],
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(4) [data-baseweb="select"] {
+      display: block !important;
+      box-sizing: border-box !important;
+      width: 100% !important;
+      min-width: 0 !important;
+      max-width: 100% !important;
+      margin: 0 !important;
+    }
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(4) [data-baseweb="select"] > div,
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(4) [data-baseweb="select"] > div {
+      display: flex !important;
+      align-items: center !important;
+      box-sizing: border-box !important;
+      width: 100% !important;
+      min-width: 0 !important;
+      max-width: 100% !important;
+      height: 36px !important;
+      min-height: 36px !important;
+      max-height: 36px !important;
+      padding-left: 6px !important;
+      padding-right: 17px !important;
+      border-radius: 8px !important;
+    }
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(4) [data-baseweb="select"] span,
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(4) [data-baseweb="select"] span {
+      font-size: 0.70rem !important;
+      line-height: 1 !important;
+      font-weight: 800 !important;
+      white-space: nowrap !important;
+    }
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(4) [data-baseweb="select"] svg,
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(4) [data-baseweb="select"] svg {
+      width: 13px !important;
+      min-width: 13px !important;
+    }
+  }
+
+  /* En móviles muy estrechos la pista de hora y el día conservan sus mínimos;
+     los iconos reducen solo lo imprescindible y el grid sigue llenando la fila. */
+  @media (max-width: 320px) {
+    [class*="st-key-it-controls-row-"] [data-testid="stHorizontalBlock"],
+    [class*="st-key-saved-controls-row-"] [data-testid="stHorizontalBlock"] {
+      grid-template-columns:
+        minmax(34px, 0.82fr)
+        minmax(34px, 0.82fr)
+        minmax(74px, 1.75fr)
+        minmax(82px, 1.95fr) !important;
+      column-gap: 4px !important;
+    }
+  }
+
 </style>
 """, unsafe_allow_html=True)
 
