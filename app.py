@@ -3192,9 +3192,6 @@ def cargar_itinerario_disco():
         guardar_itinerario_disco(datos)
 
     return datos
-        except Exception:
-            pass
-    return []
 
 def guardar_itinerario_disco(lugares):
     """Guarda el itinerario que comparten las sesiones de esta publicación."""
