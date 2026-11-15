@@ -3255,138 +3255,165 @@ def sincronizar_lugares_desde_disco():
 # 6. SINCRONIZADOR DE LISTAS DE GOOGLE MAPS
 # =============================================================================
 def extraer_lugares_lista_gmaps(url_lista: str, nombre_lista: str = ""):
+    """
+    Descarga una lista compartida de Google Maps y extrae todos los lugares.
+    Recorre todo el árbol de respuesta (sin detenerse al encontrar el primer
+    elemento con coordenadas) y procesa todos los endpoints de lista presentes.
+    """
     import http.cookiejar
 
-    lugares_encontrados = []
     url_limpia = (url_lista or "").strip()
     if not url_limpia:
-        return lugares_encontrados
+        return []
 
-    # Configurar gestor de cookies con consentimiento aceptado para evitar redirección a consent.google.com
     cj = http.cookiejar.CookieJar()
     opener = urllib.request.build_opener(urllib.request.HTTPCookieProcessor(cj))
     opener.addheaders = [
-        ('User-Agent', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36'),
-        ('Accept', 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'),
-        ('Accept-Language', 'es-ES,es;q=0.9,en;q=0.8'),
-        ('Cookie', 'CONSENT=YES+cb.20230531-07-p0.es+FX+999; SOCS=CAESHAgBEhJnd3NfMjAyMzA4MTAtMF9SQzIaAmVzIAEaBgiA_LyaBg')
+        ("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/124.0.0.0 Safari/537.36"),
+        ("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8"),
+        ("Accept-Language", "es-ES,es;q=0.9,en;q=0.8"),
+        ("Cookie", "CONSENT=YES+cb.20230531-07-p0.es+FX+999; SOCS=CAESHAgBEhJnd3NfMjAyMzA4MTAtMF9SQzIaAmVzIAEaBgiA_LyaBg"),
     ]
 
+    encontrados = []
+    vistos = set()
+
+    def _agregar(nombre, lat, lon, direccion=""):
+        nombre = re.sub(r"\s+", " ", str(nombre or "")).strip(" ,\t\r\n")
+        if not nombre or len(nombre) < 2:
+            return
+        try:
+            lat, lon = float(lat), float(lon)
+        except (TypeError, ValueError):
+            return
+        if not (-90 <= lat <= 90 and -180 <= lon <= 180):
+            return
+        clave = re.sub(r"[^a-z0-9]+", "", nombre.casefold())
+        if not clave or clave in vistos:
+            return
+        vistos.add(clave)
+        cat, tipo = clasificar_lugar(nombre, direccion, nombre_lista)
+        encontrados.append({
+            "nombre": nombre,
+            "lat": lat,
+            "lon": lon,
+            "direccion": str(direccion or "").strip(),
+            "nota": "",
+            "categoria": cat,
+            "tipo": tipo,
+            "hora": "",
+        })
+
     try:
-        # 1. Abrir la URL (resuelve automáticamente maps.app.goo.gl -> google.com/maps/placelists/...)
-        with opener.open(url_limpia, timeout=15) as r:
-            url_final = r.geturl()
-            html_content = r.read().decode('utf-8', errors='ignore')
+        # Resuelve enlaces cortos maps.app.goo.gl y enlaces compartidos normales.
+        with opener.open(url_limpia, timeout=12) as respuesta:
+            url_final = respuesta.geturl()
+            pagina = respuesta.read().decode("utf-8", errors="ignore")
 
-        # 2. Localizar el endpoint interno entitylist/getlist tanto en etiquetas HTML como en bloques JS escapados
-        patrones_endpoint = [
-            r'href="(/maps/preview/entitylist/getlist\?[^"]+)"',
+        patrones = (
+            r'href="(/maps/preview/entitylist/getlist\?[^\"]+)"',
             r'((?:https://www\.google\.com)?/maps/preview/entitylist/getlist\?[^"\'\\<>]+)',
-            r'(\\/maps\\/preview\\/entitylist\\/getlist\?[^"\'<>]+)'
-        ]
-
-        entity_path = None
-        for pat in patrones_endpoint:
-            m = re.search(pat, html_content)
-            if m:
-                entity_path = m.group(1)
-                break
-
-        if not entity_path:
-            # Si es un enlace de un único sitio (/place/...) en lugar de una lista completa
-            m_place = re.search(r'/place/([^/@?]+)', url_final)
-            if m_place:
-                nom_lugar = urllib.parse.unquote_plus(m_place.group(1)).replace("+", " ").strip()
-                m_coords = re.search(r'@(-?\d+\.\d+),(-?\d+\.\d+)', url_final)
-                if nom_lugar:
-                    lat_p = float(m_coords.group(1)) if m_coords else None
-                    lon_p = float(m_coords.group(2)) if m_coords else None
-                    if lat_p is None or lon_p is None:
-                        lat_p, lon_p, dir_p = geocodificar_direccion_o_nombre(f"{nom_lugar}, New York")
-                    else:
-                        dir_p = ""
-                    cat, tipo = clasificar_lugar(nom_lugar, dir_p, nombre_lista)
-                    lugares_encontrados.append({
-                        "nombre": nom_lugar,
-                        "lat": lat_p if lat_p is not None else 40.7580,
-                        "lon": lon_p if lon_p is not None else -73.9855,
-                        "direccion": dir_p,
-                        "nota": "",
-                        "categoria": cat,
-                        "tipo": tipo,
-                        "hora": ""
-                    })
-            return lugares_encontrados
-
-        # 3. Desescapar correctamente &, \u0026 y barras invertidas para evitar HTTP 400
-        entity_path = (
-            html.unescape(entity_path)
-            .replace("\\u0026", "&")
-            .replace("\\u003d", "=")
-            .replace("\\/", "/")
+            r'(\\?/maps\\?/preview\\?/entitylist\\?/getlist\\?[^"\'<>]+)',
         )
+        rutas = []
+        for patron in patrones:
+            rutas.extend(re.findall(patron, pagina))
+        # Mantener orden y eliminar endpoints repetidos.
+        rutas = list(dict.fromkeys(rutas))
 
-        if entity_path.startswith("http"):
-            entity_url = entity_path
-        else:
-            entity_url = "https://www.google.com" + (entity_path if entity_path.startswith("/") else "/" + entity_path)
+        if not rutas:
+            # Un enlace de un solo lugar también se admite.
+            m_lugar = re.search(r"/place/([^/@?]+)", url_final)
+            if m_lugar:
+                nombre = urllib.parse.unquote_plus(m_lugar.group(1)).replace("+", " ").strip()
+                m_coords = re.search(r"@(-?\d+(?:\.\d+)?),(-?\d+(?:\.\d+)?)", url_final)
+                if m_coords:
+                    _agregar(nombre, m_coords.group(1), m_coords.group(2))
+                else:
+                    lat, lon, direccion = geocodificar_direccion_o_nombre(f"{nombre}, New York")
+                    if lat is not None and lon is not None:
+                        _agregar(nombre, lat, lon, direccion)
+            return encontrados
 
-        # 4. Descargar el JSON real de la lista de Google Maps
-        with opener.open(entity_url, timeout=15) as r2:
-            raw = r2.read().decode("utf-8", errors="ignore")
+        for ruta in rutas:
+            ruta = (
+                html.unescape(ruta)
+                .replace("\\u0026", "&")
+                .replace("\\u003d", "=")
+                .replace("\\/", "/")
+                .replace("\\?", "?")
+            )
+            if ruta.startswith("http"):
+                endpoint = ruta
+            else:
+                endpoint = "https://www.google.com" + (ruta if ruta.startswith("/") else "/" + ruta)
 
-        # Limpiar prefijo de seguridad de Google )]}'
-        raw_limpio = re.sub(r"^\)\]\}'\s*", "", raw)
-        data = json.loads(raw_limpio)
+            try:
+                with opener.open(endpoint, timeout=12) as respuesta_lista:
+                    raw = respuesta_lista.read().decode("utf-8", errors="ignore")
+                raw = re.sub(r"^\)\]\}'\s*", "", raw)
+                data = json.loads(raw)
+            except Exception:
+                continue
 
-        # 5. Recorrer el árbol JSON extrayendo cada lugar guardado, sus coordenadas, dirección y nota
-        def _buscar_entidades(nodo):
-            if isinstance(nodo, list):
-                coords = None
-                for el in nodo:
-                    if (isinstance(el, list) and len(el) >= 4 and el[0] is None and el[1] is None
-                            and isinstance(el[2], (int, float)) and isinstance(el[3], (int, float))):
-                        coords = (float(el[2]), float(el[3]))
-                        break
-                if coords:
-                    strs = [
-                        s.strip() for s in nodo
-                        if isinstance(s, str) and len(s.strip()) > 1
-                        and not s.startswith(("http", "ChIJ", "/g/", "/m/", "0x"))
-                    ]
-                    if strs:
-                        # Google suele poner el nombre en strs[0] o junto con la dirección
-                        nombre_raw = strs[0]
-                        partes = nombre_raw.split(",")
-                        nom_spot = partes[0].strip()
-                        dir_spot = ", ".join(partes[1:]).strip() if len(partes) > 1 else (strs[1] if len(strs) > 1 else "")
-                        cat, tipo = clasificar_lugar(nom_spot, dir_spot, nombre_lista)
-                        lugares_encontrados.append({
-                            "nombre": nom_spot,
-                            "lat": coords[0],
-                            "lon": coords[1],
-                            "direccion": dir_spot,
-                            "nota": "",
-                            "categoria": cat,
-                            "tipo": tipo,
-                            "hora": ""
-                        })
+            def _recorrer(nodo):
+                if isinstance(nodo, dict):
+                    for valor in nodo.values():
+                        _recorrer(valor)
                     return
+
+                if not isinstance(nodo, list):
+                    return
+
+                # Formato habitual de Google: [null, null, latitud, longitud].
+                coords = None
+                for elemento in nodo:
+                    if (
+                        isinstance(elemento, list) and len(elemento) >= 4
+                        and elemento[0] is None and elemento[1] is None
+                        and isinstance(elemento[2], (int, float))
+                        and isinstance(elemento[3], (int, float))
+                    ):
+                        coords = (elemento[2], elemento[3])
+                        break
+
+                if coords:
+                    textos = [
+                        x.strip() for x in nodo
+                        if isinstance(x, str) and len(x.strip()) > 1
+                        and not x.strip().startswith(("http", "ChIJ", "/g/", "/m/", "0x"))
+                    ]
+                    if textos:
+                        # El nombre suele ser el primer texto; el resto puede ser dirección.
+                        nombre_raw = textos[0]
+                        partes = nombre_raw.split(",", 1)
+                        nombre = partes[0].strip()
+                        direccion = partes[1].strip() if len(partes) > 1 else (
+                            textos[1] if len(textos) > 1 else ""
+                        )
+                        _agregar(nombre, coords[0], coords[1], direccion)
+
+                # Importante: seguir recorriendo hijos incluso si este nodo tenía
+                # coordenadas; algunas respuestas anidan varios sitios en el mismo bloque.
                 for hijo in nodo:
-                    _buscar_entidades(hijo)
-            elif isinstance(nodo, dict):
-                for v in nodo.values():
-                    _buscar_entidades(v)
+                    if isinstance(hijo, (list, dict)):
+                        _recorrer(hijo)
 
-        _buscar_entidades(data)
+            _recorrer(data)
 
-    except Exception as e:
-        st.warning(f"Aviso de sincronización ({nombre_lista}): {e}")
+    except Exception as exc:
+        try:
+            st.warning(f"Aviso de sincronización ({nombre_lista}): {exc}")
+        except Exception:
+            pass
 
-    return lugares_encontrados
+    return encontrados
+
+
 # =============================================================================
 # 6B. HERRAMIENTAS PARA AÑADIR Y EDITAR LUGARES
 # =============================================================================
+@st.cache_data(ttl=86400, show_spinner=False)
 def geocodificar_direccion_o_nombre(texto: str) -> tuple:
     if not texto:
         return None, None, ""
@@ -3450,14 +3477,15 @@ def importar_sitio_desde_gmaps(url_o_texto: str, dia_dest: int = 0, hora: str = 
     if not raw:
         return False, "Introduce un enlace de Google Maps válido."
 
-    if "maps" in raw and ("entitylist" in raw or "data=" in raw or "u3WSz" in raw or "gHBnh" in raw):
+    if "maps" in raw.lower():
         lugares_lst = extraer_lugares_lista_gmaps(raw, "Google Maps")
         if lugares_lst:
-            existentes = set(x.get("nombre", "").lower() for x in st.session_state.lugares)
+            existentes = {str(x.get("nombre", "")).strip().casefold() for x in st.session_state.lugares}
             nuevos = 0
             max_id = max([x.get("id", 0) for x in st.session_state.lugares], default=0)
             for s in lugares_lst:
-                if s["nombre"].lower() not in existentes:
+                clave_nombre = str(s.get("nombre", "")).strip().casefold()
+                if clave_nombre and clave_nombre not in existentes:
                     max_id += 1
                     s["id"] = max_id
                     s["dia"] = dia_dest
@@ -3465,6 +3493,7 @@ def importar_sitio_desde_gmaps(url_o_texto: str, dia_dest: int = 0, hora: str = 
                     s["nota"] = (nota or "").strip()
                     s["visitado"] = False
                     st.session_state.lugares.append(s)
+                    existentes.add(s["nombre"].strip().casefold())
                     nuevos += 1
             if nuevos > 0:
                 guardar_itinerario_disco(st.session_state.lugares)
@@ -3713,7 +3742,7 @@ def _vigilar_cambios_de_otros_dispositivos():
 
 
 if hasattr(st, "fragment"):
-    @st.fragment(run_every="5s")
+    @st.fragment(run_every="15s")
     def _sincronizador_automatico_dispositivos():
         _vigilar_cambios_de_otros_dispositivos()
 
@@ -4123,7 +4152,6 @@ with pestanas[1]:
                                     hl = "0" + hl
                                 st.session_state.lugares[idx_real]["hora"] = hl
                                 guardar_itinerario_disco(st.session_state.lugares)
-                                st.rerun()
                     with c_day:
                         dest_d = selectbox_sin_teclado(
                             "Día",
@@ -4136,7 +4164,6 @@ with pestanas[1]:
                         if val_dest != d and idx_real is not None:
                             st.session_state.lugares[idx_real]["dia"] = val_dest
                             guardar_itinerario_disco(st.session_state.lugares)
-                            st.rerun()
 
                 if idx_real is not None:
                     render_editor_sitio_panel(item, idx_real, f"it_{d}")
