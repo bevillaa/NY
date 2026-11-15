@@ -3059,7 +3059,7 @@ CATEGORIAS_CANONICAS = [
     "🍸 Copas",
     "🎷 Ocio",
     "🛍️ Compras",
-    "🏛️ Turisteo",
+    "🏛️ Cultura",
     "🏙️ Miradores",
     "☀️ Spots",
     "📍 Otros",
@@ -3073,7 +3073,7 @@ MAPA_MIGRACION_CAT = {
     "🍸 Copas": "🍸 Copas",
     "🎷 Jazz, Música & Ocio": "🎷 Ocio",
     "🛍️ Compras & Outlets": "🛍️ Compras",
-    "🏛️ Museos & Monumentos": "🏛️ Turisteo",
+    "🏛️ Museos & Monumentos": "🏛️ Cultura",
     "🏙️ Miradores & Observatorios": "🏙️ Miradores",
     "🌲 Parques, Muelles, Rooftops & Puentes": "☀️ Spots",
     "🏨 Hotel Base": "🏨 Hotel",
@@ -3123,7 +3123,7 @@ def clasificar_lugar(nombre: str, direccion: str = "", lista_origen: str = "") -
 
     if any(k in nom for k in ['museum', 'the met', 'moma', 'morgan library', 'tenement', '9/11 memorial', 'oculus', 'grand central', 'library', 'atlas', 'one times square', 'times square', 'memorial', 'statue of liberty', 'trinity church', 'rockefeller center', 'st. patrick']):
         tipo = "Exterior" if any(x in nom for x in ['times square', 'atlas', 'statue']) else "Interior"
-        return "🏛️ Turisteo", tipo
+        return "🏛️ Cultura", tipo
 
     if 'sweet' in orig:
         return "🍪 Dulces", "Interior"
