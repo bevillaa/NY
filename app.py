@@ -4125,7 +4125,7 @@ with pestanas[1]:
                     with c_day:
                         dest_d = selectbox_sin_teclado(
                             "Día",
-                            [f"Día {x}" for x in range(1, 11)] + ["Guardados"],
+                            ["Guardados"] + [f"Día {x}" for x in range(1, 11)],
                             index=d - 1,
                             key=f"mvd_it_{d}_{item['id']}",
                             label_visibility="collapsed"
@@ -4224,7 +4224,7 @@ with pestanas[2]:
                         guardar_itinerario_disco(st.session_state.lugares)
                         st.rerun()
             with c_day:
-                opts_dia_pool = ["— Día —"] + [f"Día {d}" for d in range(1, 11)]
+                opts_dia_pool = ["- Día -"] + [f"Día {d}" for d in range(1, 11)]
                 idx_sel_pool = dia_p if 1 <= dia_p <= 10 else 0
                 asig_dia = selectbox_sin_teclado(
                     "Día",
