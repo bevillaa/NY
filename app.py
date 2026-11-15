@@ -1768,6 +1768,415 @@ st.markdown("""
     }
   }
 
+
+  /* ===== CORRECCIÓN DEFINITIVA MÓVIL: ICONOS REALES + DÍA LEGIBLE ===== */
+  .place-list-title {
+    font-size: 0.94rem !important;
+    font-weight: 900 !important;
+    line-height: 1.2 !important;
+    overflow-wrap: anywhere !important;
+    color: #0F172A;
+  }
+  .place-list-address {
+    margin-top: 3px !important;
+    color: #475569 !important;
+    font-size: 0.76rem !important;
+    line-height: 1.25 !important;
+    font-weight: 600 !important;
+    overflow-wrap: anywhere !important;
+  }
+
+  @media (max-width: 768px) {
+    /* Nombre dominante; categoría, entorno, dirección y nota siempre menores. */
+    .place-list-title {
+      font-size: 0.88rem !important;
+      line-height: 1.18 !important;
+      letter-spacing: 0 !important;
+    }
+    .place-list-address {
+      font-size: 0.68rem !important;
+      line-height: 1.25 !important;
+      margin-top: 2px !important;
+    }
+    .place-note {
+      font-size: 0.66rem !important;
+      line-height: 1.25 !important;
+      margin-top: 2px !important;
+    }
+    .badge-cat, .badge-indoor, .badge-outdoor {
+      font-size: 0.63rem !important;
+      line-height: 1.15 !important;
+      padding: 1px 5px !important;
+    }
+
+    /* Los cuatro widgets tienen una cuadrícula fija mínima que cabe incluso
+       en un móvil de 280 px: Editar, Mapa, Hora y Día. */
+    [class*="st-key-it-controls-row-"],
+    [class*="st-key-saved-controls-row-"] {
+      width: 100% !important;
+      min-width: 0 !important;
+      max-width: 100% !important;
+      box-sizing: border-box !important;
+    }
+    [class*="st-key-it-controls-row-"] [data-testid="stHorizontalBlock"],
+    [class*="st-key-saved-controls-row-"] [data-testid="stHorizontalBlock"] {
+      display: grid !important;
+      grid-template-columns: minmax(34px, 0.72fr) minmax(34px, 0.72fr) minmax(74px, 1fr) minmax(100px, 1.38fr) !important;
+      grid-auto-flow: column !important;
+      align-items: center !important;
+      justify-content: stretch !important;
+      gap: 4px !important;
+      width: 100% !important;
+      min-width: 0 !important;
+      max-width: 100% !important;
+      box-sizing: border-box !important;
+      margin: 0 !important;
+      padding: 0 !important;
+    }
+    [class*="st-key-it-controls-row-"] [data-testid="column"],
+    [class*="st-key-saved-controls-row-"] [data-testid="column"] {
+      display: block !important;
+      width: 100% !important;
+      min-width: 0 !important;
+      max-width: 100% !important;
+      flex: none !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      box-sizing: border-box !important;
+      overflow: visible !important;
+    }
+    [class*="st-key-it-controls-row-"] [data-testid="column"] [data-testid="stElementContainer"],
+    [class*="st-key-saved-controls-row-"] [data-testid="column"] [data-testid="stElementContainer"],
+    [class*="st-key-it-controls-row-"] [data-testid="column"] .stButton,
+    [class*="st-key-saved-controls-row-"] [data-testid="column"] .stButton,
+    [class*="st-key-it-controls-row-"] [data-testid="column"] [data-testid="stLinkButton"],
+    [class*="st-key-saved-controls-row-"] [data-testid="column"] [data-testid="stLinkButton"],
+    [class*="st-key-it-controls-row-"] [data-testid="column"] [data-testid="stTextInput"],
+    [class*="st-key-saved-controls-row-"] [data-testid="column"] [data-testid="stTextInput"],
+    [class*="st-key-it-controls-row-"] [data-testid="column"] [data-testid="stSelectbox"],
+    [class*="st-key-saved-controls-row-"] [data-testid="column"] [data-testid="stSelectbox"] {
+      width: 100% !important;
+      min-width: 0 !important;
+      max-width: 100% !important;
+      box-sizing: border-box !important;
+      margin: 0 !important;
+      padding: 0 !important;
+    }
+
+    /* Editar y Mapa llevan ahora emoji como contenido nativo del widget.
+       No se oculta ni se sustituye el texto mediante background-image. */
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(1) [data-testid="stButton"] > button,
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(1) [data-testid="stButton"] > button,
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(2) [data-testid="stLinkButton"] > a,
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(2) [data-testid="stLinkButton"] > a {
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      width: 100% !important;
+      min-width: 0 !important;
+      max-width: 100% !important;
+      height: 36px !important;
+      min-height: 36px !important;
+      max-height: 36px !important;
+      box-sizing: border-box !important;
+      padding: 0 !important;
+      margin: 0 !important;
+      border: 1px solid #94A3B8 !important;
+      border-radius: 7px !important;
+      background-image: none !important;
+      background-color: #FFFFFF !important;
+      color: #334155 !important;
+      -webkit-text-fill-color: #334155 !important;
+      font-family: 'Apple Color Emoji', 'Segoe UI Emoji', 'Noto Color Emoji', sans-serif !important;
+      font-size: 1.05rem !important;
+      line-height: 1 !important;
+      font-weight: 400 !important;
+      text-decoration: none !important;
+      white-space: nowrap !important;
+      overflow: visible !important;
+      visibility: visible !important;
+    }
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(1) [data-testid="stButton"] > button *,
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(1) [data-testid="stButton"] > button *,
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(2) [data-testid="stLinkButton"] > a *,
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(2) [data-testid="stLinkButton"] > a * {
+      display: inline !important;
+      visibility: visible !important;
+      opacity: 1 !important;
+      color: inherit !important;
+      -webkit-text-fill-color: currentColor !important;
+      font-family: 'Apple Color Emoji', 'Segoe UI Emoji', 'Noto Color Emoji', sans-serif !important;
+      font-size: inherit !important;
+      line-height: 1 !important;
+      margin: 0 !important;
+      padding: 0 !important;
+    }
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(1) [data-testid="stButton"] > button p,
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(1) [data-testid="stButton"] > button p,
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(2) [data-testid="stLinkButton"] > a p,
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(2) [data-testid="stLinkButton"] > a p {
+      display: inline !important;
+      margin: 0 !important;
+      font-size: inherit !important;
+      line-height: 1 !important;
+    }
+
+    /* Hora: conserva HH:MM y no se estrecha por los iconos. */
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(3) [data-testid="stTextInput"],
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(3) [data-testid="stTextInput"],
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(3) [data-baseweb="input"],
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(3) [data-baseweb="input"],
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(3) [data-baseweb="base-input"],
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(3) [data-baseweb="base-input"] {
+      width: 100% !important;
+      min-width: 0 !important;
+      max-width: 100% !important;
+      height: 36px !important;
+      min-height: 36px !important;
+      max-height: 36px !important;
+      box-sizing: border-box !important;
+      padding: 0 2px !important;
+      margin: 0 !important;
+      border: 1px solid #94A3B8 !important;
+      border-radius: 7px !important;
+      background: #FFFFFF !important;
+    }
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(3) input,
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(3) input {
+      width: 100% !important;
+      min-width: 0 !important;
+      height: 34px !important;
+      box-sizing: border-box !important;
+      padding: 0 1px !important;
+      text-align: center !important;
+      font-size: 0.72rem !important;
+      font-weight: 800 !important;
+      letter-spacing: 0 !important;
+      color: #0F172A !important;
+      -webkit-text-fill-color: #0F172A !important;
+      font-variant-numeric: tabular-nums !important;
+    }
+
+    /* Día: se reserva un mínimo real de 100 px para que no se corte "Día 10". */
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(4) [data-testid="stSelectbox"],
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(4) [data-testid="stSelectbox"],
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(4) [data-baseweb="select"],
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(4) [data-baseweb="select"] {
+      width: 100% !important;
+      min-width: 0 !important;
+      max-width: 100% !important;
+      box-sizing: border-box !important;
+      margin: 0 !important;
+    }
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(4) [data-baseweb="select"] > div,
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(4) [data-baseweb="select"] > div {
+      display: flex !important;
+      align-items: center !important;
+      width: 100% !important;
+      min-width: 0 !important;
+      max-width: 100% !important;
+      height: 36px !important;
+      min-height: 36px !important;
+      max-height: 36px !important;
+      box-sizing: border-box !important;
+      padding: 0 4px 0 6px !important;
+      border: 1px solid #94A3B8 !important;
+      border-radius: 7px !important;
+      background: #FFFFFF !important;
+      overflow: visible !important;
+    }
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(4) [data-baseweb="select"] span,
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(4) [data-baseweb="select"] span {
+      white-space: nowrap !important;
+      overflow: visible !important;
+      text-overflow: clip !important;
+      font-size: 0.68rem !important;
+      line-height: 1 !important;
+      font-weight: 800 !important;
+      color: #0F172A !important;
+      -webkit-text-fill-color: #0F172A !important;
+    }
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(4) [data-baseweb="select"] svg,
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(4) [data-baseweb="select"] svg {
+      flex: 0 0 12px !important;
+      width: 12px !important;
+      min-width: 12px !important;
+      max-width: 12px !important;
+    }
+  }
+
+  @media (max-width: 320px) {
+    [class*="st-key-it-controls-row-"] [data-testid="stHorizontalBlock"],
+    [class*="st-key-saved-controls-row-"] [data-testid="stHorizontalBlock"] {
+      grid-template-columns: minmax(34px, 0.72fr) minmax(34px, 0.72fr) minmax(72px, 1fr) minmax(98px, 1.38fr) !important;
+      gap: 3px !important;
+    }
+    .place-list-title { font-size: 0.86rem !important; }
+    .place-list-address, .place-note { font-size: 0.65rem !important; }
+  }
+
+
+  /* Medidas finales de móvil: los dos iconos ocupan solo su tamaño real,
+     hora legible y selector de día suficientemente ancho para "Día 10". */
+  @media (max-width: 768px) {
+    [class*="st-key-it-controls-row-"] [data-testid="stHorizontalBlock"],
+    [class*="st-key-saved-controls-row-"] [data-testid="stHorizontalBlock"] {
+      grid-template-columns: 34px 34px 74px 102px !important;
+      grid-auto-flow: column !important;
+      justify-content: start !important;
+      align-items: center !important;
+      column-gap: 4px !important;
+      row-gap: 0 !important;
+      width: 100% !important;
+      min-width: 0 !important;
+      max-width: 100% !important;
+    }
+    [class*="st-key-it-controls-row-"] [data-testid="column"],
+    [class*="st-key-saved-controls-row-"] [data-testid="column"] {
+      width: auto !important;
+      min-width: 0 !important;
+      max-width: none !important;
+      flex: none !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      box-sizing: border-box !important;
+    }
+    /* Botones icono: exactamente 34 px, sin textos ni SVG de fondo ocultando
+       el contenido real (✏️ y 🗺️ se renderizan como etiqueta de Streamlit). */
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(1) [data-testid="stButton"],
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(1) [data-testid="stButton"],
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(2) [data-testid="stLinkButton"],
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(2) [data-testid="stLinkButton"] {
+      width: 34px !important;
+      min-width: 34px !important;
+      max-width: 34px !important;
+      margin: 0 !important;
+    }
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(1) button,
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(1) button,
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(2) a,
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(2) a {
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      box-sizing: border-box !important;
+      width: 34px !important;
+      min-width: 34px !important;
+      max-width: 34px !important;
+      height: 36px !important;
+      min-height: 36px !important;
+      max-height: 36px !important;
+      padding: 0 !important;
+      margin: 0 !important;
+      border: 1px solid #94A3B8 !important;
+      border-radius: 7px !important;
+      background: #FFFFFF !important;
+      background-image: none !important;
+      color: #334155 !important;
+      -webkit-text-fill-color: #334155 !important;
+      font-family: 'Apple Color Emoji', 'Segoe UI Emoji', 'Noto Color Emoji', sans-serif !important;
+      font-size: 1rem !important;
+      line-height: 1 !important;
+      text-decoration: none !important;
+      white-space: nowrap !important;
+      overflow: visible !important;
+      visibility: visible !important;
+    }
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(1) button *,
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(1) button *,
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(2) a *,
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(2) a * {
+      display: inline !important;
+      visibility: visible !important;
+      opacity: 1 !important;
+      color: inherit !important;
+      -webkit-text-fill-color: currentColor !important;
+      font-family: 'Apple Color Emoji', 'Segoe UI Emoji', 'Noto Color Emoji', sans-serif !important;
+      font-size: inherit !important;
+      line-height: 1 !important;
+      margin: 0 !important;
+      padding: 0 !important;
+    }
+    /* Hora fija para que HH:MM no se corte en pantallas estrechas. */
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(3) [data-testid="stTextInput"],
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(3) [data-testid="stTextInput"],
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(3) [data-baseweb="input"],
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(3) [data-baseweb="input"],
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(3) [data-baseweb="base-input"],
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(3) [data-baseweb="base-input"] {
+      width: 74px !important;
+      min-width: 74px !important;
+      max-width: 74px !important;
+      height: 36px !important;
+      min-height: 36px !important;
+      max-height: 36px !important;
+      box-sizing: border-box !important;
+      padding: 0 2px !important;
+      margin: 0 !important;
+    }
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(3) input,
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(3) input {
+      width: 100% !important;
+      min-width: 0 !important;
+      height: 34px !important;
+      padding: 0 1px !important;
+      font-size: 0.72rem !important;
+      font-weight: 800 !important;
+      text-align: center !important;
+      letter-spacing: 0 !important;
+      color: #0F172A !important;
+      -webkit-text-fill-color: #0F172A !important;
+    }
+    /* Desplegable con anchura mínima real de 102 px. */
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(4) [data-testid="stSelectbox"],
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(4) [data-testid="stSelectbox"],
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(4) [data-baseweb="select"],
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(4) [data-baseweb="select"] {
+      width: 102px !important;
+      min-width: 102px !important;
+      max-width: 102px !important;
+      box-sizing: border-box !important;
+      margin: 0 !important;
+    }
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(4) [data-baseweb="select"] > div,
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(4) [data-baseweb="select"] > div {
+      display: flex !important;
+      align-items: center !important;
+      width: 102px !important;
+      min-width: 102px !important;
+      max-width: 102px !important;
+      height: 36px !important;
+      min-height: 36px !important;
+      max-height: 36px !important;
+      box-sizing: border-box !important;
+      padding: 0 4px 0 6px !important;
+      overflow: visible !important;
+    }
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(4) [data-baseweb="select"] span,
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(4) [data-baseweb="select"] span {
+      white-space: nowrap !important;
+      overflow: visible !important;
+      text-overflow: clip !important;
+      font-size: 0.69rem !important;
+      font-weight: 800 !important;
+      color: #0F172A !important;
+      -webkit-text-fill-color: #0F172A !important;
+    }
+  }
+
+  /* La tarjeta central del resumen siempre muestra GUARDADOS completo. */
+  @media (max-width: 768px) {
+    .hero-container > div > div:last-child {
+      grid-template-columns: minmax(0, 1fr) minmax(88px, 1.18fr) minmax(0, 1fr) !important;
+    }
+    .hero-container .hero-stat-box:nth-child(2) .hero-stat-lbl {
+      white-space: nowrap !important;
+      overflow: visible !important;
+      font-size: 0.58rem !important;
+      letter-spacing: 0 !important;
+    }
+  }
+
 </style>
 """, unsafe_allow_html=True)
 
@@ -2933,11 +3342,11 @@ with pestanas[1]:
                         txt_c = "#334155" if is_visited else "#0F172A"
                         strike = "text-decoration: line-through; opacity: 0.78;" if is_visited else ""
                         tipo_badge = '<span class="badge-indoor">🌧️ Interior</span>' if item.get("tipo") == "Interior" else '<span class="badge-outdoor">☀️ Exterior</span>'
-                        dir_html = f'<div style="font-size:0.78rem; color:#334155; font-weight:600; margin-top:3px;">📍 {dir_i}</div>' if dir_i else ''
+                        dir_html = f'<div class="place-list-address">📍 {html.escape(str(dir_i))}</div>' if dir_i else ''
                         nota_html = bloque_nota_html(nota_i)
                         st.markdown(f"""
                         <div style="{strike}; min-width:0; overflow-wrap:anywhere;">
-                          <div style="font-weight:900; font-size:0.94rem; line-height:1.25; color:{txt_c};">#{seq_idx} · {emoji_i} {item['nombre']}</div>
+                          <div class="place-list-title" style="color:{txt_c};">#{seq_idx} · {emoji_i} {item['nombre']}</div>
                           <div style="margin-top:4px; display:flex; flex-wrap:wrap; gap:4px;">
                             <span class="badge-cat">{cat_i}</span>
                             {tipo_badge}
@@ -2951,12 +3360,12 @@ with pestanas[1]:
                 with st.container(key=f"it-controls-row-{item['id']}"):
                     c_edit, c_map, c_hr, c_day = st.columns([0.8, 0.9, 1.7, 1.9], gap="small")
                     with c_edit:
-                        if st.button("Editar", key=f"btn_ed_it_{d}_{item['id']}", help="Editar sitio", use_container_width=True):
+                        if st.button("✏️", key=f"btn_ed_it_{d}_{item['id']}", help="Editar sitio", use_container_width=True):
                             ek = f"it_{d}_{item['id']}"
                             st.session_state.editando_spot_key = None if st.session_state.editando_spot_key == ek else ek
                             st.rerun()
                     with c_map:
-                        st.link_button("Mapa", gmaps_url, use_container_width=True, key=f"map_it_{item['id']}", help="Abrir en Google Maps")
+                        st.link_button("🗺️", gmaps_url, use_container_width=True, key=f"map_it_{item['id']}", help="Abrir en Google Maps")
                     with c_hr:
                         nueva_h = st.text_input(
                             "Hora",
@@ -3033,13 +3442,13 @@ with pestanas[2]:
         hora_p = p_spot.get("hora", "")
 
         nota_p_html = bloque_nota_html(nota_p)
-        dir_p_html = f'<div style="font-size:0.78rem; color:#334155; font-weight:600; margin-top:3px;">📍 {dir_p}</div>' if dir_p else ''
+        dir_p_html = f'<div class="place-list-address">📍 {html.escape(str(dir_p))}</div>' if dir_p else ''
         tipo_p_html = '<span class="badge-indoor">🌧️ Interior</span>' if p_spot.get("tipo") == "Interior" else '<span class="badge-outdoor">☀️ Exterior</span>'
 
         # Toda la información se presenta antes de los controles.
         with st.container(key=f"saved-heading-row-{p_spot['id']}"):
             st.markdown(f"""
-            <div style="font-size:0.94rem; font-weight:900; line-height:1.25; color:#0F172A; overflow-wrap:anywhere;">{obtener_emoji_categoria(cat_p)} {p_spot['nombre']}</div>
+            <div class="place-list-title">{obtener_emoji_categoria(cat_p)} {p_spot['nombre']}</div>
             <div style="margin-top:4px; display:flex; flex-wrap:wrap; gap:4px;">
               <span class="badge-cat">{cat_p}</span>{tipo_p_html}
             </div>
@@ -3051,13 +3460,13 @@ with pestanas[2]:
         with st.container(key=f"saved-controls-row-{p_spot['id']}"):
             c_edit, c_map, c_hr, c_day = st.columns([0.8, 0.9, 1.7, 1.9], gap="small")
             with c_edit:
-                if st.button("Editar", key=f"btn_ed_pool_{p_spot['id']}", help="Editar sitio", use_container_width=True):
+                if st.button("✏️", key=f"btn_ed_pool_{p_spot['id']}", help="Editar sitio", use_container_width=True):
                     ek = f"pool_{p_spot['id']}"
                     st.session_state.editando_spot_key = None if st.session_state.editando_spot_key == ek else ek
                     st.rerun()
             with c_map:
                 g_url_sp = f"https://www.google.com/maps/search/?api=1&query={urllib.parse.quote(p_spot['nombre'] + ' New York')}"
-                st.link_button("Mapa", g_url_sp, use_container_width=True, key=f"map_saved_{p_spot['id']}", help="Abrir en Google Maps")
+                st.link_button("🗺️", g_url_sp, use_container_width=True, key=f"map_saved_{p_spot['id']}", help="Abrir en Google Maps")
             with c_hr:
                 nueva_h_pool = st.text_input(
                     "Hora",
