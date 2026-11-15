@@ -1600,7 +1600,7 @@ with pestanas[1]:
 
 
 # ─────────────────────────────────────────────────────────────────────────────
-# TAB 3: BANDEJA DE GUARDADOS (CON BOTÓN DE HORA, DÍA, MAPS Y EDITAR PEQUEÑO)
+# TAB 3: BANDEJA DE GUARDADOS
 # ─────────────────────────────────────────────────────────────────────────────
 with pestanas[2]:
     render_formulario_agregar_lugar("guardados")
@@ -1787,7 +1787,7 @@ with pestanas[3]:
     st.markdown("#### 🔄 Sustituciones Inteligentes por Cercanía")
     st.caption("Intercambia cualquier plan al aire libre por los sitios a cubierto más cercanos:")
 
-    planes_ext_dia = [l for l in st.session_state.lugares if l.get("dia", 0) == num_dia_c and l.get("tipo") == "Exterior"]
+    planes_ext_dia = [l for l in st.session_state.lugares if l.get("dia", 0) == num_dia_c and l.get("tipo"] == "Exterior"]
     lugares_indoor = [l for l in st.session_state.lugares if l.get("tipo") == "Interior"]
 
     if not planes_ext_dia:
