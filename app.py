@@ -4093,7 +4093,7 @@ with pestanas[0]:
                 st.markdown('</div>', unsafe_allow_html=True)
 
             if dir_sp:
-                st.markdown(f'<div style="font-size:0.82rem; color:#334155; font-weight:600; margin-top:2px;">📍 {dir_sp}</div>', unsafe_allow_html=True)
+                st.markdown(f'<div style="font-size:0.82rem; color:#334155; font-weight:600; margin-top:2px;">🗒️ {dir_sp}</div>', unsafe_allow_html=True)
             if nota_sp:
                 st.markdown(bloque_nota_html(nota_sp), unsafe_allow_html=True)
 
