@@ -75,6 +75,18 @@ st.markdown("""
     color: #0F172A !important;
   }
 
+  div[role="radiogroup"] {
+    gap: 0.35rem !important;
+    flex-wrap: wrap !important;
+    margin: 0.15rem 0 0.8rem 0 !important;
+  }
+  div[role="radiogroup"] label {
+    border: 1px solid #E2E8F0 !important;
+    border-radius: 10px !important;
+    padding: 0.35rem 0.7rem !important;
+    background: #FFFFFF !important;
+  }
+
   [data-testid="stExpander"] {
     border: 1.5px solid #CBD5E1 !important;
     border-radius: 14px !important;
@@ -3950,20 +3962,29 @@ st.markdown(f"""
 # =============================================================================
 # 9. PESTAÑAS PRINCIPALES DEL SISTEMA
 # =============================================================================
-pestanas = st.tabs([
+# Navegación bajo demanda: solo se construye la sección elegida.
+# Así evitamos renderizar el mapa y el resto de pestañas en cada cambio.
+SECCIONES_PRINCIPALES = [
     "🗺️ Mapa",
     "📅 Itinerario",
     "📍 Guardados",
     "💵 Divisas & Tip",
     "✈️ Vuelos & Hotel",
-    "🌧️ Clima"
-])
+    "🌧️ Clima",
+]
+seccion_principal = st.radio(
+    "Sección del viaje",
+    SECCIONES_PRINCIPALES,
+    horizontal=True,
+    label_visibility="collapsed",
+    key="seccion_principal_activa",
+)
 
 
 # ─────────────────────────────────────────────────────────────────────────────
 # TAB 1: MAPA GOOGLE
 # ─────────────────────────────────────────────────────────────────────────────
-with pestanas[0]:
+if seccion_principal == "🗺️ Mapa":
     c_m1, c_m3 = st.columns([3, 2])
     with c_m1:
         opciones_vista = [
@@ -4094,7 +4115,7 @@ with pestanas[0]:
 # ─────────────────────────────────────────────────────────────────────────────
 # TAB 2: ITINERARIO COMPLETO
 # ─────────────────────────────────────────────────────────────────────────────
-with pestanas[1]:
+if seccion_principal == "📅 Itinerario":
     total_itinerario = [l for l in st.session_state.lugares if l.get("dia", 0) > 0]
     total_visitados = [l for l in total_itinerario if l.get("visitado", False)]
     pct_progreso = int((len(total_visitados) / max(1, len(total_itinerario))) * 100) if total_itinerario else 0
@@ -4234,7 +4255,7 @@ with pestanas[1]:
 # ─────────────────────────────────────────────────────────────────────────────
 # TAB 3: BANDEJA DE GUARDADOS (CON BOTÓN DE HORA, DÍA, MAPS Y EDITAR PEQUEÑO)
 # ─────────────────────────────────────────────────────────────────────────────
-with pestanas[2]:
+if seccion_principal == "📍 Guardados":
     render_formulario_agregar_lugar("guardados")
     st.markdown("<div style='height: 6px;'></div>", unsafe_allow_html=True)
     st.markdown('<div class="ny-card-header">Lugares Guardados & Gestión de Sitios</div>', unsafe_allow_html=True)
@@ -4338,7 +4359,7 @@ with pestanas[2]:
 # ─────────────────────────────────────────────────────────────────────────────
 # TAB 4: MODO LLUVIA & CLIMA EN TIEMPO REAL
 # ─────────────────────────────────────────────────────────────────────────────
-with pestanas[5]:
+if seccion_principal == "🌧️ Clima":
     st.markdown('<div class="ny-card-header">🌧️ Clima en Tiempo Real & Plan B a Cubierto</div>', unsafe_allow_html=True)
 
     clima_data = consultar_clima_nyc()
@@ -4464,7 +4485,7 @@ with pestanas[5]:
 # ─────────────────────────────────────────────────────────────────────────────
 # TAB 5: DIVISAS EN TIEMPO REAL & CALCULADORA TAX Y PROPINAS NY
 # ─────────────────────────────────────────────────────────────────────────────
-with pestanas[3]:
+if seccion_principal == "💵 Divisas & Tip":
     st.markdown('<div class="ny-card-header">💵 Calculadora</div>', unsafe_allow_html=True)
 
     tasa_eur, fecha_tasa = obtener_tasa_usd_eur()
@@ -4563,7 +4584,7 @@ with pestanas[3]:
 def extraer_codigos_vuelo(texto_vuelo: str) -> list:
     return re.findall(r"\b([A-Z]{2}\d{2,4})\b", (texto_vuelo or "").upper())
 
-with pestanas[4]:
+if seccion_principal == "✈️ Vuelos & Hotel":
     c_vl1, c_vl2 = st.columns(2)
 
     with c_vl1:
