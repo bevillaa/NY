@@ -3156,8 +3156,8 @@ def guardar_config_viaje(cfg):
 
 def cargar_itinerario_disco():
     
-    if os.path.exists(ARCH_ITINERARIO):        
-    try:
+    if os.path.exists(ARCH_ITINERARIO):
+        try:
             with open(ARCH_ITINERARIO, "r", encoding="utf-8") as f:
                 datos = json.load(f)
                 modificado = False
