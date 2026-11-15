@@ -3155,30 +3155,43 @@ def guardar_config_viaje(cfg):
     return _guardar_json_atomico(ARCH_CONFIG, cfg)
 
 def cargar_itinerario_disco():
-    # Cada vez que se modifique o reinicie la app, el itinerario inicia vacío
-    if not st.session_state.get("_app_inicializada", False):
-        st.session_state["_app_inicializada"] = True
-        guardar_itinerario_disco([])
-        return []
+    datos = []
     if os.path.exists(ARCH_ITINERARIO):
         try:
             with open(ARCH_ITINERARIO, "r", encoding="utf-8") as f:
                 datos = json.load(f)
-                modificado = False
-                for p in datos:
-                    cat_norm = normalizar_categoria(p.get("categoria", ""))
-                    if p.get("categoria") != cat_norm:
-                        p["categoria"] = cat_norm
-                        modificado = True
-                    if "hora" not in p:
-                        p["hora"] = ""
-                        modificado = True
-                    if "nota" not in p:
-                        p["nota"] = ""
-                        modificado = True
-                if modificado:
-                    guardar_itinerario_disco(datos)
-                return datos
+        except Exception:
+            datos = []
+
+    modificado = False
+
+    # Al iniciar o reiniciar la app, solo se limpia el itinerario (días 1..10):
+    # los lugares pasan a Guardados (dia = 0) sin perderse.
+    if not st.session_state.get("_app_inicializada", False):
+        st.session_state["_app_inicializada"] = True
+        for p in datos:
+            if p.get("dia", 0) != 0:
+                p["dia"] = 0
+                p["hora"] = ""
+                p["visitado"] = False
+                modificado = True
+
+    for p in datos:
+        cat_norm = normalizar_categoria(p.get("categoria", ""))
+        if p.get("categoria") != cat_norm:
+            p["categoria"] = cat_norm
+            modificado = True
+        if "hora" not in p:
+            p["hora"] = ""
+            modificado = True
+        if "nota" not in p:
+            p["nota"] = ""
+            modificado = True
+
+    if modificado:
+        guardar_itinerario_disco(datos)
+
+    return datos
         except Exception:
             pass
     return []
