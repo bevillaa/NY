@@ -1045,10 +1045,10 @@ st.markdown("""
     [class*="st-key-it-controls-row-"] [data-testid="stHorizontalBlock"],
     [class*="st-key-saved-controls-row-"] [data-testid="stHorizontalBlock"] {
       display: grid !important;
-      grid-template-columns: 30px 30px 62px 68px !important;
+      grid-template-columns: 36px 38px 76px 88px !important;
       justify-content: start !important;
       align-items: center !important;
-      gap: 3px !important;
+      gap: 5px !important;
       width: 100% !important;
       min-width: 0 !important;
       margin-top: 5px !important;
@@ -2927,34 +2927,6 @@ st.markdown("""
     }
   }
 
-
-  /* Controles compactos: no deben competir visualmente con el nombre del lugar. */
-  @media (max-width: 768px) {
-    [class*="st-key-it-controls-row-"] [data-testid="stHorizontalBlock"],
-    [class*="st-key-saved-controls-row-"] [data-testid="stHorizontalBlock"] {
-      grid-template-columns: 30px 30px 62px 68px !important;
-      gap: 3px !important;
-    }
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(1) button,
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(1) button {
-      width: 30px !important; min-width: 30px !important; max-width: 30px !important;
-      height: 30px !important; min-height: 30px !important; max-height: 30px !important;
-    }
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(2) [data-testid="stLinkButton"] > a,
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(2) [data-testid="stLinkButton"] > a {
-      width: 30px !important; min-width: 30px !important; max-width: 30px !important;
-      height: 30px !important; min-height: 30px !important; max-height: 30px !important;
-      padding: 0 !important;
-    }
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(3) input,
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(3) input,
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(4) [data-baseweb="select"),
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(4) [data-baseweb="select"] {
-      min-height: 30px !important; height: 30px !important;
-      font-size: 0.72rem !important;
-    }
-  }
-
 </style>
 """, unsafe_allow_html=True)
 
@@ -3024,12 +2996,12 @@ def bloque_nota_html(nota: str) -> str:
 # 3. MOTOR INTELIGENTE DE CATEGORÍAS
 # =============================================================================
 CATEGORIAS_CANONICAS = [
-    "🍽️ Gastronomía",
+    "🍕 Gastronomía",
     "🍪 Dulces",
     "🍸 Copas",
     "🎷 Ocio",
     "🛍️ Compras",
-    "🗽 Turisteo",
+    "🏛️ Cultura",
     "🏙️ Miradores",
     "☀️ Spots",
     "🏨 Hotel",
@@ -3037,14 +3009,12 @@ CATEGORIAS_CANONICAS = [
 ]
 
 MAPA_MIGRACION_CAT = {
-    "🍕 Gastronomía": "🍽️ Gastronomía",
-    "🏛️ Cultura": "🗽 Turisteo",
-    "🍕 Gastronomía & Restaurantes": "🍽️ Gastronomía",
+    "🍕 Gastronomía & Restaurantes": "🍕 Gastronomía",
     "🍪 Cafeterías & Dulces": "🍪 Dulces",
     "🍸 Rooftops & Copas": "🍸 Copas",
     "🎷 Jazz, Música & Ocio": "🎷 Ocio",
     "🛍️ Compras & Outlets": "🛍️ Compras",
-    "🏛️ Museos & Monumentos": "🗽 Turisteo",
+    "🏛️ Museos & Monumentos": "🏛️ Cultura",
     "🏙️ Miradores & Observatorios": "🏙️ Miradores",
     "🌲 Parques, Muelles & Puentes": "☀️ Spots",
     "🏨 Hotel Base": "🏨 Hotel",
@@ -3086,19 +3056,19 @@ def clasificar_lugar(nombre: str, direccion: str = "", lista_origen: str = "") -
         return "🛍️ Compras", "Interior"
 
     if any(k in nom for k in ['pizza', 'pizzeria', 'burger', 'katz', 'dumpling', 'motek', 'piada', 'shake shack', 'chelsea market', 'time out market', 'deli', 'pastrami', 'tacos', 'taco', 'restaurant', 'trader joe', 'eataly', 'food hall', 'bagel', 'ramen', 'sushi', 'diner', 'smokehouse', 'noodle', 'food']):
-        return "🍽️ Gastronomía", "Interior"
+        return "🍕 Gastronomía", "Interior"
 
     if any(k in nom for k in ['park', 'central park', 'bridge', 'puente', 'high line', 'little island', 'fulton ferry', 'domino', 'pier 17', 'pier 57', 'pier 35', 'pebble beach', 'tudor city', 'squibb', 'battery', 'waterfront', 'picnic', 'botanic', 'coney island', 'boardwalk']):
         return "☀️ Spots", "Exterior"
 
     if any(k in nom for k in ['museum', 'the met', 'moma', 'morgan library', 'tenement', '9/11 memorial', 'oculus', 'grand central', 'library', 'atlas', 'one times square', 'times square', 'memorial', 'statue of liberty', 'trinity church', 'rockefeller center', 'st. patrick']):
         tipo = "Exterior" if any(x in nom for x in ['times square', 'atlas', 'statue']) else "Interior"
-        return "🗽 Turisteo", tipo
+        return "🏛️ Cultura", tipo
 
     if 'sweet' in orig:
         return "🍪 Dulces", "Interior"
     if 'food' in orig:
-        return "🍽️ Gastronomía", "Interior"
+        return "🍕 Gastronomía", "Interior"
     if 'rooftop' in orig:
         return "🍸 Copas", "Interior"
     if 'tienda' in orig or 'outlet' in orig:
@@ -3903,6 +3873,11 @@ st.markdown(f"""
     <div>
       <div class="hero-eyebrow">🎄 NAVIDAD & FIN DE AÑO · 26 DIC 2026 - 4 ENE 2027 ❄️</div>
       <div class="hero-title">Navidad en Nueva York 🗽✨</div>
+      <div style="margin-top: 5px;">
+        <span class="hero-pill">✈️ {v_ida.get('vuelo','Aer Lingus · EI583, EI107')} · {v_ida.get('fecha','26 Dic')}</span>
+        <span class="hero-pill">🛫 {v_vta.get('vuelo','Aer Lingus · EI104, EI582')} · {v_vta.get('fecha','4 Ene')}</span>
+        <span class="hero-pill">🏨 {hotel.get('nombre','Courtyard by Marriott Upper East Side')}</span>
+      </div>
     </div>
     <div style="display:flex; gap:8px; flex-wrap:wrap; width:auto;">
       <div class="hero-stat-box">
@@ -4204,7 +4179,7 @@ with pestanas[1]:
         st.markdown(f'<div id="dia-{d}"></div>', unsafe_allow_html=True)
 
         st.markdown(f"""
-        <div style="background:#FFFFFF; border:1.5px solid #CBD5E1; border-left:1.5px solid #CBD5E1; border-radius:13px; padding:8px 0; margin-top:10px; margin-bottom:8px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:6px;">
+        <div style="background:#FFFFFF; border:1.5px solid #CBD5E1; border-left:1.5px solid #CBD5E1; border-radius:13px; padding:8px 12px; margin-top:10px; margin-bottom:8px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:6px;">
           <div style="font-weight:900; font-size:0.98rem; color:#0F172A;">
             {etiqueta_dia(d)}
           </div>
@@ -4260,7 +4235,7 @@ with pestanas[1]:
 
                 # Los cuatro controles, siempre en el mismo orden: Editar | Mapa | Hora | Día.
                 with st.container(key=f"it-controls-row-{item['id']}"):
-                    c_edit, c_map, c_hr, c_day = st.columns([0.45, 0.55, 1.1, 1.15], gap="small")
+                    c_edit, c_map, c_hr, c_day = st.columns([0.8, 0.9, 1.7, 1.9], gap="small")
                     with c_edit:
                         if st.button("✏️", key=f"btn_ed_it_{d}_{item['id']}", help="Editar sitio", use_container_width=True):
                             ek = f"it_{d}_{item['id']}"
@@ -4358,7 +4333,7 @@ with pestanas[2]:
 
         # Cuatro controles uniformes debajo del nombre y de toda su subinformación.
         with st.container(key=f"saved-controls-row-{p_spot['id']}"):
-            c_edit, c_map, c_hr, c_day = st.columns([0.45, 0.55, 1.1, 1.15], gap="small")
+            c_edit, c_map, c_hr, c_day = st.columns([0.8, 0.9, 1.7, 1.9], gap="small")
             with c_edit:
                 if st.button("✏️", key=f"btn_ed_pool_{p_spot['id']}", help="Editar sitio", use_container_width=True):
                     ek = f"pool_{p_spot['id']}"
