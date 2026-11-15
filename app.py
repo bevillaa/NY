@@ -2850,6 +2850,74 @@ st.markdown("""
     }
   }
 
+  /* Ajustes finales para que la página completa pueda desplazarse en móvil. */
+  @media (max-width: 768px) {
+    html, body {
+      height: auto !important;
+      min-height: 100% !important;
+      overflow-y: auto !important;
+      overscroll-behavior-y: auto !important;
+    }
+
+    .stApp,
+    [data-testid="stAppViewContainer"],
+    [data-testid="stMain"],
+    section.main {
+      height: auto !important;
+      min-height: 100dvh !important;
+      max-height: none !important;
+      overflow-y: visible !important;
+      overflow-x: hidden !important;
+    }
+
+    [data-testid="stMainBlockContainer"],
+    .block-container {
+      height: auto !important;
+      min-height: 0 !important;
+      max-height: none !important;
+      overflow: visible !important;
+      padding-top: max(0.85rem, env(safe-area-inset-top)) !important;
+      padding-bottom: calc(3.5rem + env(safe-area-inset-bottom)) !important;
+    }
+
+    /* La cabecera tenía una altura fija de 30px que podía cortar su contenido. */
+    .hero-container {
+      height: auto !important;
+      min-height: 0 !important;
+      max-height: none !important;
+      overflow: visible !important;
+      padding: 12px !important;
+      margin-top: 4px !important;
+      margin-bottom: 12px !important;
+    }
+
+    .hero-container > div {
+      min-width: 0 !important;
+      width: 100% !important;
+    }
+
+    .hero-container > div > div:first-child {
+      min-width: 0 !important;
+      width: 100% !important;
+    }
+
+    [data-testid="stTabs"],
+    [data-testid="stTabContent"],
+    [data-testid="stVerticalBlock"] {
+      min-height: 0 !important;
+      max-height: none !important;
+      overflow: visible !important;
+    }
+
+    footer, [data-testid="stFooter"] {
+      display: block !important;
+      visibility: visible !important;
+      height: auto !important;
+      min-height: 2rem !important;
+      padding-bottom: env(safe-area-inset-bottom) !important;
+    }
+  }
+
 </style>
 """, unsafe_allow_html=True)
 
@@ -4282,7 +4350,7 @@ with pestanas[2]:
                         guardar_itinerario_disco(st.session_state.lugares)
                         st.rerun()
             with c_day:
-                opts_dia_pool = ["— Día —"] + [f"Día {d}" for d in range(1, 11)]
+                opts_dia_pool = ["- Día -"] + [f"Día {d}" for d in range(1, 11)]
                 idx_sel_pool = dia_p if 1 <= dia_p <= 10 else 0
                 asig_dia = selectbox_sin_teclado(
                     "Día",
@@ -4291,7 +4359,7 @@ with pestanas[2]:
                     key=f"asig_dia_pool_{p_spot['id']}",
                     label_visibility="collapsed"
                 )
-                if asig_dia != "— Día —" and idx_sp_real is not None:
+                if asig_dia != "- Día -" and idx_sp_real is not None:
                     d_num = int(re.search(r"Día (\d+)", asig_dia).group(1))
                     if d_num != dia_p:
                         st.session_state.lugares[idx_sp_real]["dia"] = d_num
@@ -4410,7 +4478,7 @@ with pestanas[5]:
 
             c_sust1, c_sust2 = st.columns([3.5, 1.5])
             with c_sust1:
-                opciones_cercanas = [f"{x['nombre']} (a {d:.1f} km) — {normalizar_categoria(x.get('categoria',''))}" for d, x in top_cercanos]
+                opciones_cercanas = [f"{x['nombre']} (a {d:.1f} km) - {normalizar_categoria(x.get('categoria',''))}" for d, x in top_cercanos]
                 sel_sust = selectbox_sin_teclado("Sustituto a cubierto:", opciones_cercanas, key=f"sel_sust_{spot_ext['id']}", label_visibility="collapsed")
             with c_sust2:
                 if st.button("🔄 Cambiar", key=f"btn_swap_{spot_ext['id']}", use_container_width=True):
