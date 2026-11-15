@@ -24,115 +24,192 @@ st.set_page_config(
 
 st.markdown("""
 <style>
-  /* ── Tipografía Calibri universal (con Carlito de Google Fonts para Linux / Streamlit Cloud) ── */
-  @import url('https://fonts.googleapis.com/css2?family=Carlito:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+  /* ── Tipografía Calibri universal y protección absoluta contra modo oscuro en móviles ── */
+  @import url('https://fonts.googleapis.com/css2?family=Carlito:ital,wght@0,400;0,700;1,400;1,700&family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap');
 
-  html, body, [class*="css"], [class*="st-"], .stMarkdown, .stButton, button, input, select, textarea, div, p, span, h1, h2, h3, h4, h5, h6 {
-    font-family: 'Calibri', 'Carlito', 'Segoe UI', Candara, -apple-system, BlinkMacSystemFont, Arial, sans-serif !important;
+  :root {
+    color-scheme: light !important;
   }
 
-  /* Fijar fondo y texto para evitar alteraciones de tema oscuro en móviles / Streamlit Cloud */
-  .stApp {
-    background-color: #F8F9FA !important;
+  /* Aplicar Calibri y color oscuro de alto contraste (#0F172A) a todos los elementos de texto */
+  html, body, .stApp, p, h1, h2, h3, h4, h5, h6, label, input, button, select, textarea,
+  .stMarkdown, [data-testid="stMarkdownContainer"], [data-testid="stText"], .stCaption, small {
+    font-family: 'Calibri', 'Carlito', 'Segoe UI', Candara, -apple-system, BlinkMacSystemFont, Arial, sans-serif !important;
     color: #0F172A !important;
   }
-  html, body, [class*="css"] {
+
+  /* Proteger estrictamente TODOS los iconos de Streamlit para evitar texto como '_arrow_right' o solapes */
+  [data-testid="stIconMaterial"],
+  [data-testid="stIconEmoji"],
+  [data-testid*="Icon"],
+  [data-testid*="icon"],
+  [data-testid*="Chevron"],
+  [data-testid="stExpanderToggleIcon"],
+  [data-testid="stExpanderStepChevron"],
+  [data-testid="stExpanderStepIcon"],
+  .material-icons,
+  [class*="material-symbols"],
+  [data-baseweb="icon"],
+  span.e1vmumty0 {
+    font-family: 'Material Symbols Rounded', 'Material Symbols Outlined', 'Material Icons' !important;
+    font-weight: normal !important;
+    font-style: normal !important;
+    font-size: 20px !important;
+    line-height: 1 !important;
+    letter-spacing: normal !important;
+    text-transform: none !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    white-space: nowrap !important;
+    word-wrap: normal !important;
+    direction: ltr !important;
+    -webkit-font-feature-settings: 'liga' !important;
+    font-feature-settings: 'liga' !important;
+    -webkit-font-smoothing: antialiased !important;
+    color: #0F172A !important;
+  }
+
+  /* Expander estilizado sin solape entre flecha, icono y texto */
+  [data-testid="stExpander"] {
+    border: 1.5px solid #CBD5E1 !important;
+    border-radius: 14px !important;
+    background: #FFFFFF !important;
+    overflow: hidden !important;
+  }
+  [data-testid="stExpander"] details summary {
+    display: flex !important;
+    align-items: center !important;
+    gap: 12px !important;
+    padding: 12px 16px !important;
+    background: #FFFFFF !important;
+    color: #0F172A !important;
+    font-weight: 800 !important;
+    font-size: 0.96rem !important;
+    cursor: pointer !important;
+    list-style: none !important;
+  }
+  [data-testid="stExpander"] details summary::-webkit-details-marker {
+    display: none !important;
+  }
+  [data-testid="stExpander"] details summary > span,
+  [data-testid="stExpander"] details summary > div {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    position: static !important;
+    transform: none !important;
+    margin: 0 !important;
+  }
+  [data-testid="stExpander"] details summary [data-testid="stIconMaterial"] {
+    flex-shrink: 0 !important;
+    width: 22px !important;
+    height: 22px !important;
+    margin-right: 4px !important;
+  }
+
+  /* Fijar fondo claro y contraste máximo en móviles y Streamlit Cloud */
+  .stApp, html, body, [data-testid="stAppViewContainer"], [data-testid="stHeader"] {
     background-color: #F8F9FA !important;
     color: #0F172A !important;
   }
   .block-container {
-    padding-top: 1.2rem;
-    padding-bottom: 2.5rem;
-    max-width: 1320px;
+    padding-top: 1.2rem !important;
+    padding-bottom: 2.5rem !important;
+    max-width: 1320px !important;
   }
 
   /* ── Hero Banner Totalmente Blanco con Toques Navideños ── */
   .hero-container {
     background: #FFFFFF !important;
     border-radius: 20px;
-    padding: 24px 28px;
+    padding: 22px 26px;
     color: #0F172A !important;
-    margin-bottom: 20px;
+    margin-bottom: 18px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
-    border: 1.5px solid #E2E8F0;
-    border-top: 5px solid #15803D; /* Verde pino navideño */
+    border: 1.5px solid #CBD5E1;
+    border-top: 5px solid #15803D;
   }
   .hero-eyebrow {
-    font-size: 0.8rem;
-    font-weight: 700;
+    font-size: 0.85rem;
+    font-weight: 800;
     text-transform: uppercase;
-    letter-spacing: 1.5px;
-    color: #15803D; /* Verde acebo / pino */
+    letter-spacing: 1.3px;
+    color: #15803D !important;
   }
   .hero-title {
-    font-size: 2.3rem;
-    font-weight: 700;
+    font-size: 2.2rem;
+    font-weight: 800;
     margin: 4px 0 10px 0;
-    color: #0F172A;
+    color: #0F172A !important;
     letter-spacing: -0.5px;
+    line-height: 1.15;
   }
   .hero-pill {
     display: inline-flex;
     align-items: center;
     gap: 6px;
     background: #F8FAFC !important;
-    border: 1px solid #E2E8F0 !important;
+    border: 1.5px solid #CBD5E1 !important;
     border-radius: 30px;
     padding: 6px 14px;
-    font-size: 0.85rem;
-    color: #1E293B !important;
-    font-weight: 600;
+    font-size: 0.88rem;
+    color: #0F172A !important;
+    font-weight: 700;
     margin-right: 6px;
     margin-bottom: 5px;
   }
   .hero-stat-box {
     background: #F8FAFC !important;
-    border: 1px solid #E2E8F0 !important;
+    border: 1.5px solid #CBD5E1 !important;
     border-radius: 14px;
-    padding: 10px 18px;
+    padding: 10px 16px;
     text-align: center;
-    min-width: 80px;
+    min-width: 78px;
+    flex: 1 1 auto;
   }
   .hero-stat-val {
     font-size: 1.6rem;
-    font-weight: 800;
+    font-weight: 900;
     color: #0F172A !important;
   }
   .hero-stat-lbl {
-    font-size: 0.68rem;
-    font-weight: 700;
+    font-size: 0.72rem;
+    font-weight: 800;
     text-transform: uppercase;
     letter-spacing: 1px;
-    color: #64748B !important;
+    color: #0F172A !important;
   }
 
-  /* ── Tarjetas Neutras Minimalistas ── */
+  /* ── Tarjetas Neutras Minimalistas (Letras Oscuras de Alto Contraste) ── */
   .ny-card {
-    background: #FFFFFF;
-    border: 1px solid #E2E8F0;
+    background: #FFFFFF !important;
+    border: 1.5px solid #CBD5E1 !important;
     border-radius: 16px;
     padding: 18px 20px;
     margin-bottom: 12px;
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.03);
+    color: #0F172A !important;
   }
   .ny-card-header {
-    font-size: 0.76rem;
-    font-weight: 700;
+    font-size: 0.84rem;
+    font-weight: 800;
     text-transform: uppercase;
-    letter-spacing: 1.4px;
-    color: #64748B;
+    letter-spacing: 1.3px;
+    color: #0F172A !important;
     margin-bottom: 10px;
   }
 
   /* ── Ficha Detallada de Lugar (Place Sheet) ── */
   .place-sheet {
-    background: #FFFFFF;
-    border: 1.5px solid #CBD5E1;
+    background: #FFFFFF !important;
+    border: 2px solid #CBD5E1 !important;
     border-radius: 18px;
     padding: 18px 22px;
     margin: 14px 0;
     box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.08);
     animation: fadeIn 0.2s ease-out;
+    color: #0F172A !important;
   }
   @keyframes fadeIn {
     from { opacity: 0; transform: translateY(6px); }
@@ -142,58 +219,66 @@ st.markdown("""
   /* ── Badges y Píldoras ── */
   .badge-cat {
     display: inline-block;
-    background: #F1F5F9;
-    color: #334155;
-    font-size: 0.78rem;
-    font-weight: 700;
+    background: #F1F5F9 !important;
+    color: #0F172A !important;
+    font-size: 0.82rem;
+    font-weight: 800;
     padding: 3px 10px;
     border-radius: 8px;
-    border: 1px solid #E2E8F0;
+    border: 1px solid #CBD5E1;
   }
   .badge-indoor {
     display: inline-block;
-    background: #EFF6FF;
-    color: #1D4ED8;
-    font-size: 0.76rem;
-    font-weight: 700;
+    background: #EFF6FF !important;
+    color: #1E3A8A !important;
+    font-size: 0.8rem;
+    font-weight: 800;
     padding: 3px 10px;
     border-radius: 8px;
+    border: 1px solid #BFDBFE;
   }
   .badge-outdoor {
     display: inline-block;
-    background: #ECFDF5;
-    color: #047857;
-    font-size: 0.76rem;
-    font-weight: 700;
+    background: #ECFDF5 !important;
+    color: #064E3B !important;
+    font-size: 0.8rem;
+    font-weight: 800;
     padding: 3px 10px;
     border-radius: 8px;
+    border: 1px solid #A7F3D0;
   }
   .badge-dia {
     display: inline-block;
-    background: #FEF3C7;
-    color: #B45309;
-    font-size: 0.76rem;
-    font-weight: 700;
+    background: #FEF3C7 !important;
+    color: #78350F !important;
+    font-size: 0.8rem;
+    font-weight: 800;
     padding: 3px 10px;
     border-radius: 8px;
+    border: 1px solid #FDE68A;
   }
 
-  /* ── Pestañas Streamlit Estilizadas ── */
+  /* ── Pestañas Streamlit Estilizadas (Scroll horizontal limpio en móvil) ── */
   .stTabs [data-baseweb="tab-list"] {
     gap: 4px;
-    background: #EDEFEA;
+    background: #E2E8F0 !important;
     padding: 5px;
     border-radius: 14px;
-    border: 1px solid #E2E8F0;
+    border: 1px solid #CBD5E1;
+    overflow-x: auto !important;
+    flex-wrap: nowrap !important;
+    -webkit-overflow-scrolling: touch;
   }
   .stTabs [data-baseweb="tab"] {
     border-radius: 10px !important;
-    font-size: 0.88rem !important;
-    font-weight: 600 !important;
-    color: #64748B !important;
-    padding: 8px 16px !important;
+    font-size: 0.9rem !important;
+    font-weight: 800 !important;
+    color: #0F172A !important;
+    padding: 8px 14px !important;
     border: none !important;
     background: transparent !important;
+    white-space: nowrap !important;
+    flex-shrink: 0 !important;
   }
   .stTabs [aria-selected="true"] {
     background: #FFFFFF !important;
@@ -201,35 +286,74 @@ st.markdown("""
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08) !important;
   }
 
-  /* ── Botones Redondeados ── */
-  .stButton > button {
+  /* ── Botones Redondeados de Alto Contraste ── */
+  .stButton > button, .stFormSubmitButton > button, [data-testid="stLinkButton"] > a {
     border-radius: 11px !important;
-    font-weight: 600 !important;
-    font-size: 0.88rem !important;
-    min-height: 40px;
-    border: 1px solid #CBD5E1 !important;
+    font-weight: 800 !important;
+    font-size: 0.9rem !important;
+    min-height: 40px !important;
+    border: 1.5px solid #94A3B8 !important;
     background: #FFFFFF !important;
-    color: #1E293B !important;
+    color: #0F172A !important;
     transition: all 0.15s ease-in-out !important;
   }
-  .stButton > button:hover {
-    background: #F8FAFC !important;
-    border-color: #94A3B8 !important;
-    transform: translateY(-1px);
+  .stButton > button:hover, .stFormSubmitButton > button:hover, [data-testid="stLinkButton"] > a:hover {
+    background: #F1F5F9 !important;
+    border-color: #0F172A !important;
+    color: #0F172A !important;
   }
 
   /* ── Map iFrame ── */
   iframe {
     border-radius: 18px !important;
-    border: 1px solid #CBD5E1 !important;
+    border: 1.5px solid #CBD5E1 !important;
   }
 
-  /* ── Inputs y Selectores ── */
+  /* ── Inputs, Selectores y Radio Buttons ── */
   .stSelectbox > div > div, .stTextInput > div > div, .stNumberInput > div > div {
     border-radius: 11px !important;
-    border-color: #CBD5E1 !important;
+    border: 1.5px solid #94A3B8 !important;
     background: #FFFFFF !important;
-    font-size: 0.9rem !important;
+    font-size: 0.92rem !important;
+    color: #0F172A !important;
+  }
+  [data-baseweb="select"] span, [data-baseweb="select"] div {
+    color: #0F172A !important;
+    font-weight: 700 !important;
+  }
+  ul[role="listbox"], ul[role="listbox"] li {
+    background-color: #FFFFFF !important;
+    color: #0F172A !important;
+  }
+
+  /* ── Adaptación Responsive para Móvil (Mismo aspecto que Web) ── */
+  @media (max-width: 768px) {
+    .block-container {
+      padding-left: 0.75rem !important;
+      padding-right: 0.75rem !important;
+      padding-top: 0.75rem !important;
+    }
+    .hero-container {
+      padding: 16px 16px !important;
+      border-radius: 16px !important;
+    }
+    .hero-title {
+      font-size: 1.65rem !important;
+    }
+    .hero-pill {
+      font-size: 0.8rem !important;
+      padding: 4px 10px !important;
+    }
+    .hero-stat-box {
+      padding: 8px 10px !important;
+      min-width: 70px !important;
+    }
+    .hero-stat-val {
+      font-size: 1.35rem !important;
+    }
+    [data-testid="stHorizontalBlock"] {
+      gap: 0.5rem !important;
+    }
   }
 </style>
 """, unsafe_allow_html=True)
@@ -853,7 +977,7 @@ with pestanas[0]:
     <div style="font-family: -apple-system, sans-serif; min-width: 210px; padding: 4px;">
       <span style="background: #FEF3C7; color: #92400E; padding: 2px 8px; border-radius: 10px; font-size: 11px; font-weight: 700;">🏨 TU HOTEL BASE</span>
       <div style="font-size: 15px; font-weight: 700; color: #0F172A; margin: 6px 0 2px;">{h_nom}</div>
-      <div style="font-size: 12px; color: #475569;">📍 {h_dir}</div>
+      <div style="font-size: 12px; color: #0F172A;">📍 {h_dir}</div>
     </div>
     """
     folium.Marker(
@@ -886,11 +1010,11 @@ with pestanas[0]:
         <div style="font-family: -apple-system, BlinkMacSystemFont, sans-serif; min-width: 230px; padding: 4px;">
           <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
             <span style="font-size: 11px; font-weight: 800; color: #2563EB;">{dia_txt}</span>
-            <span style="font-size: 10px; font-weight: 700; background: #F1F5F9; color: #475569; padding: 2px 6px; border-radius: 6px;">{tipo_badge}</span>
+            <span style="font-size: 10px; font-weight: 700; background: #F1F5F9; color: #0F172A; padding: 2px 6px; border-radius: 6px;">{tipo_badge}</span>
           </div>
           <div style="font-size: 15px; font-weight: 800; color: #0F172A; margin-bottom: 3px;">{obtener_emoji_categoria(cat_spot)} {nom_spot}</div>
-          {f'<div style="font-size: 12px; color: #64748B; margin-bottom: 6px;">📍 {dir_spot}</div>' if dir_spot else ''}
-          <div style="font-size: 11px; color: #475569; margin-bottom: 8px;"><b>Categoría:</b> {cat_spot}</div>
+          {f'<div style="font-size: 12px; color: #0F172A; margin-bottom: 6px;">📍 {dir_spot}</div>' if dir_spot else ''}
+          <div style="font-size: 11px; color: #0F172A; margin-bottom: 8px;"><b>Categoría:</b> {cat_spot}</div>
           <div style="display: flex; gap: 6px;">
             <a href="{g_search}" target="_blank" style="flex:1; text-align:center; background:#1A73E8; color:white; padding:7px 4px; border-radius:8px; font-size:11px; font-weight:700; text-decoration:none;">Abrir en Maps →</a>
             <a href="{g_route}" target="_blank" style="text-align:center; background:#F8FAFC; border:1px solid #CBD5E1; color:#0F172A; padding:7px 8px; border-radius:8px; font-size:11px; font-weight:700; text-decoration:none;">🧭 Ruta</a>
@@ -949,7 +1073,7 @@ with pestanas[0]:
                     <span class="badge-cat">{cat_sp}</span>
                   </div>
                   <h2 style="margin:2px 0 4px 0; font-size:1.35rem; color:#0F172A;">{obtener_emoji_categoria(cat_sp)} {sp['nombre']}</h2>
-                  {f'<div style="font-size:0.88rem; color:#64748B;">📍 {dir_sp}</div>' if dir_sp else ''}
+                  {f'<div style="font-size:0.88rem; color:#0F172A;">📍 {dir_sp}</div>' if dir_sp else ''}
                 </div>
               </div>
             </div>
@@ -984,89 +1108,213 @@ with pestanas[0]:
 
 
 # ─────────────────────────────────────────────────────────────────────────────
-# TAB 2: ITINERARIO CRONOLÓGICO (10 DÍAS)
+# TAB 2: ITINERARIO COMPLETO (TODOS LOS DÍAS JUNTOS & PLANIFICADOR DETALLADO)
 # ─────────────────────────────────────────────────────────────────────────────
 with pestanas[1]:
-    st.markdown('<div class="ny-card-header">Cronograma Diario de Actividades</div>', unsafe_allow_html=True)
+    total_itinerario = [l for l in st.session_state.lugares if l.get("dia", 0) > 0]
+    total_visitados = [l for l in total_itinerario if l.get("visitado", False)]
+    pct_progreso = int((len(total_visitados) / max(1, len(total_itinerario))) * 100) if total_itinerario else 0
 
-    dia_sel_t2 = st.selectbox(
-        "Selecciona el día a planificar:",
-        [f"Día {d}: {DIAS_VIAJE[d]['fecha']} ({DIAS_VIAJE[d]['dia']}) — {DIAS_VIAJE[d]['titulo']}" for d in range(1, 11)],
-        key="dia_planner_tab2"
+    col_it_head1, col_it_head2 = st.columns([3, 2])
+    with col_it_head1:
+        st.markdown('<div class="ny-card-header">🎄 CRONOGRAMA DE VIAJE · 10 DÍAS EN NUEVA YORK</div>', unsafe_allow_html=True)
+    with col_it_head2:
+        st.markdown(
+            f'<div style="text-align:right; font-weight:800; font-size:0.92rem; color:#0F172A;">'
+            f'Progreso: <b>{len(total_visitados)}</b> de <b>{len(total_itinerario)}</b> paradas visitadas ({pct_progreso}%)'
+            f'</div>',
+            unsafe_allow_html=True
+        )
+
+    # Botón/desplegable de añadir sitios directamente en la sección de itinerario
+    render_formulario_agregar_lugar("itinerario")
+    st.markdown("<div style='height: 6px;'></div>", unsafe_allow_html=True)
+
+    # Selector de modo de vista
+    modo_vista_it = st.radio(
+        "Modo de visualización:",
+        ["📋 Ver Todos los Días Juntos (Días 1 a 10)", "🔍 Planificador Detallado (Día a Día)"],
+        horizontal=True,
+        key="modo_vista_itinerario"
     )
-    num_dia_t2 = int(re.search(r'Día (\d+):', dia_sel_t2).group(1))
-    
-    paradas_dia = [l for l in st.session_state.lugares if l.get("dia", 0) == num_dia_t2]
-    guardados_pool = [l for l in st.session_state.lugares if l.get("dia", 0) == 0]
 
-    col_it1, col_it2 = st.columns([3.5, 2])
-    with col_it1:
-        st.markdown(f"**{len(paradas_dia)} sitios asignados para esta jornada**")
-        if not paradas_dia:
-            st.info(f"Aún no hay sitios para el Día {num_dia_t2}. Añade paradas desde tu bandeja de guardados a la derecha.")
-        else:
-            for seq_idx, item in enumerate(paradas_dia, 1):
-                idx_real = next((i for i, x in enumerate(st.session_state.lugares) if x["id"] == item["id"]), None)
-                is_visited = item.get("visitado", False)
-                cat_i = item.get("categoria", "📍 Otros Lugares")
-                emoji_i = obtener_emoji_categoria(cat_i)
+    if "Todos los Días Juntos" in modo_vista_it:
+        # Barra rápida de saltos a cada día
+        st.markdown(
+            '<div style="display:flex; flex-wrap:wrap; gap:6px; margin:8px 0 16px 0;">' +
+            "".join([
+                f'<a href="#dia-{d}" style="text-decoration:none; background:#FFFFFF; border:1.5px solid #94A3B8; border-radius:10px; padding:5px 11px; font-size:0.84rem; font-weight:800; color:#0F172A;">Día {d} · {DIAS_VIAJE[d]["fecha"]}</a>'
+                for d in range(1, 11)
+            ]) +
+            '</div>',
+            unsafe_allow_html=True
+        )
 
-                with st.container():
-                    c_chk, c_info, c_move = st.columns([0.5, 4.5, 1.8])
-                    with c_chk:
-                        chk_val = st.checkbox("", value=is_visited, key=f"chk_v_{item['id']}")
-                        if chk_val != is_visited and idx_real is not None:
-                            st.session_state.lugares[idx_real]["visitado"] = chk_val
-                            guardar_itinerario_disco(st.session_state.lugares)
-                            st.rerun()
-                    with c_info:
-                        txt_color = "#94A3B8" if is_visited else "#0F172A"
-                        strike_style = "text-decoration: line-through;" if is_visited else ""
-                        item_dir = f" · 📍 {item['direccion']}" if item.get("direccion") else ""
-                        st.markdown(f"""
-                        <div style="{strike_style} font-weight:700; font-size:1rem; color:{txt_color};">
-                          #{seq_idx} · {emoji_i} {item['nombre']}
-                        </div>
-                        <div style="font-size:0.8rem; color:#64748B;">
-                          {cat_i} · {'🌧️ Interior' if item.get('tipo') == 'Interior' else '☀️ Exterior'}{item_dir}
-                        </div>
-                        """, unsafe_allow_html=True)
-                    with c_move:
-                        dest_d = st.selectbox(
-                            "",
-                            [f"Día {x}" for x in range(1, 11)] + ["Guardados"],
-                            index=num_dia_t2 - 1,
-                            key=f"mvd_{item['id']}",
-                            label_visibility="collapsed"
-                        )
-                        val_dest = 0 if dest_d == "Guardados" else int(dest_d.replace("Día ", ""))
-                        if val_dest != num_dia_t2 and idx_real is not None:
-                            st.session_state.lugares[idx_real]["dia"] = val_dest
-                            guardar_itinerario_disco(st.session_state.lugares)
-                            st.rerun()
-                    st.markdown('<hr style="margin:4px 0; border-color:#F1F5F9;">', unsafe_allow_html=True)
+        # Mostrar cada uno de los 10 días completos sin el título largo de cada día
+        for d in range(1, 11):
+            dia_info = DIAS_VIAJE[d]
+            paradas_dia = [l for l in st.session_state.lugares if l.get("dia", 0) == d]
+            visitados_dia = [l for l in paradas_dia if l.get("visitado", False)]
 
-    with col_it2:
-        st.markdown(f"**Añadir a hoy desde Guardados ({len(guardados_pool)}):**")
-        if not guardados_pool:
-            st.caption("No tienes sitios pendientes en la bandeja.")
-        else:
-            for g_item in guardados_pool[:12]:
-                idx_g_real = next((i for i, x in enumerate(st.session_state.lugares) if x["id"] == g_item["id"]), None)
-                cat_g = g_item.get("categoria", "📍 Otros Lugares")
-                c_ga, c_gb = st.columns([4, 1.2])
-                with c_ga:
-                    st.markdown(f"""
-                    <div style="font-size:0.88rem; font-weight:600; color:#1E293B;">{obtener_emoji_categoria(cat_g)} {g_item['nombre']}</div>
-                    <div style="font-size:0.75rem; color:#64748B;">{cat_g}</div>
-                    """, unsafe_allow_html=True)
-                with c_gb:
-                    if st.button("➕", key=f"btn_add_to_day_{g_item['id']}", use_container_width=True):
-                        if idx_g_real is not None:
-                            st.session_state.lugares[idx_g_real]["dia"] = num_dia_t2
-                            guardar_itinerario_disco(st.session_state.lugares)
-                            st.rerun()
+            st.markdown(f'<div id="dia-{d}"></div>', unsafe_allow_html=True)
 
+            with st.container():
+                st.markdown(f'''
+                <div style="background:#FFFFFF; border:1.5px solid #CBD5E1; border-left:6px solid #15803D; border-radius:14px; padding:12px 18px; margin-top:14px; margin-bottom:8px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
+                  <div>
+                    <span style="background:#FEF3C7; color:#78350F; font-size:0.86rem; font-weight:900; padding:3px 10px; border-radius:8px; margin-right:8px; border:1px solid #FDE68A;">
+                      DÍA {d}
+                    </span>
+                    <span style="font-weight:800; font-size:1.05rem; color:#0F172A;">
+                      {dia_info['fecha']} · {dia_info['dia']}
+                    </span>
+                  </div>
+                  <div style="font-weight:800; font-size:0.85rem; color:#0F172A; background:#F8FAFC; border:1.5px solid #CBD5E1; border-radius:20px; padding:3px 12px;">
+                    📍 {len(paradas_dia)} paradas ({len(visitados_dia)} hechas)
+                  </div>
+                </div>
+                ''', unsafe_allow_html=True)
+
+                if not paradas_dia:
+                    st.markdown('''
+                    <div style="background:#FFFFFF; border:1.5px dashed #94A3B8; border-radius:12px; padding:14px 18px; color:#0F172A; font-size:0.92rem; font-weight:600; margin-bottom:12px;">
+                      ❄️ Sin actividades asignadas todavía para este día. Usa el botón de arriba para añadir sitios o asígnalos desde Guardados.
+                    </div>
+                    ''', unsafe_allow_html=True)
+                else:
+                    for seq_idx, item in enumerate(paradas_dia, 1):
+                        idx_real = next((i for i, x in enumerate(st.session_state.lugares) if x["id"] == item["id"]), None)
+                        is_visited = item.get("visitado", False)
+                        cat_i = item.get("categoria", "📍 Otros Lugares")
+                        emoji_i = obtener_emoji_categoria(cat_i)
+                        dir_i = item.get("direccion", "")
+                        maps_q = urllib.parse.quote(f"{item['nombre']}, New York")
+                        gmaps_url = f"https://www.google.com/maps/search/?api=1&query={maps_q}"
+
+                        c_chk, c_info, c_action = st.columns([0.45, 4.35, 2.2])
+                        with c_chk:
+                            chk_val = st.checkbox("", value=is_visited, key=f"chk_all_{d}_{item['id']}")
+                            if chk_val != is_visited and idx_real is not None:
+                                st.session_state.lugares[idx_real]["visitado"] = chk_val
+                                guardar_itinerario_disco(st.session_state.lugares)
+                                st.rerun()
+
+                        with c_info:
+                            txt_c = "#334155" if is_visited else "#0F172A"
+                            strike = "text-decoration: line-through; opacity: 0.8;" if is_visited else ""
+                            tipo_badge = '<span class="badge-indoor" style="font-size:0.75rem; padding:1px 6px;">🌧️ Interior</span>' if item.get("tipo") == "Interior" else '<span class="badge-outdoor" style="font-size:0.75rem; padding:1px 6px;">☀️ Exterior</span>'
+                            dir_html = f'<div style="font-size:0.84rem; color:#0F172A; font-weight:600; margin-top:2px;">📍 {dir_i}</div>' if dir_i else ''
+
+                            st.markdown(f'''
+                            <div style="{strike}">
+                              <span style="font-weight:900; font-size:1rem; color:{txt_c};">#{seq_idx} · {emoji_i} {item['nombre']}</span>
+                              <span class="badge-cat" style="font-size:0.75rem; padding:1px 8px; margin-left:6px;">{cat_i}</span>
+                              {tipo_badge}
+                            </div>
+                            {dir_html}
+                            ''', unsafe_allow_html=True)
+
+                        with c_action:
+                            col_act_a, col_act_b = st.columns([1.6, 1])
+                            with col_act_a:
+                                dest_d = st.selectbox(
+                                    "",
+                                    [f"Día {x}" for x in range(1, 11)] + ["Guardados"],
+                                    index=d - 1,
+                                    key=f"mvd_all_{d}_{item['id']}",
+                                    label_visibility="collapsed"
+                                )
+                                val_dest = 0 if dest_d == "Guardados" else int(dest_d.replace("Día ", ""))
+                                if val_dest != d and idx_real is not None:
+                                    st.session_state.lugares[idx_real]["dia"] = val_dest
+                                    guardar_itinerario_disco(st.session_state.lugares)
+                                    st.rerun()
+                            with col_act_b:
+                                st.markdown(f'<a href="{gmaps_url}" target="_blank" style="text-decoration:none;"><button style="width:100%; height:38px; border-radius:9px; border:1.5px solid #94A3B8; background:#FFFFFF; color:#0F172A; font-weight:800; font-size:0.82rem; cursor:pointer;">🗺️ Maps</button></a>', unsafe_allow_html=True)
+
+                        st.markdown('<div style="height:1px; background:#CBD5E1; margin:6px 0;"></div>', unsafe_allow_html=True)
+
+                st.markdown("<div style='height: 10px;'></div>", unsafe_allow_html=True)
+
+    else:
+        # Modo Planificador Detallado Día a Día (sin el título largo de cada día)
+        dia_sel_t2 = st.selectbox(
+            "Selecciona el día a planificar:",
+            [f"Día {d}: {DIAS_VIAJE[d]['fecha']} ({DIAS_VIAJE[d]['dia']})" for d in range(1, 11)],
+            key="dia_planner_tab2"
+        )
+        num_dia_t2 = int(re.search(r'Día (\d+):', dia_sel_t2).group(1))
+
+        paradas_dia = [l for l in st.session_state.lugares if l.get("dia", 0) == num_dia_t2]
+        guardados_pool = [l for l in st.session_state.lugares if l.get("dia", 0) == 0]
+
+        col_it1, col_it2 = st.columns([3.5, 2])
+        with col_it1:
+            st.markdown(f"**{len(paradas_dia)} sitios asignados para esta jornada**")
+            if not paradas_dia:
+                st.info(f"Aún no hay sitios para el Día {num_dia_t2}. Añade paradas desde arriba o desde tu bandeja de guardados.")
+            else:
+                for seq_idx, item in enumerate(paradas_dia, 1):
+                    idx_real = next((i for i, x in enumerate(st.session_state.lugares) if x["id"] == item["id"]), None)
+                    is_visited = item.get("visitado", False)
+                    cat_i = item.get("categoria", "📍 Otros Lugares")
+                    emoji_i = obtener_emoji_categoria(cat_i)
+
+                    with st.container():
+                        c_chk, c_info, c_move = st.columns([0.5, 4.5, 1.8])
+                        with c_chk:
+                            chk_val = st.checkbox("", value=is_visited, key=f"chk_v_{item['id']}")
+                            if chk_val != is_visited and idx_real is not None:
+                                st.session_state.lugares[idx_real]["visitado"] = chk_val
+                                guardar_itinerario_disco(st.session_state.lugares)
+                                st.rerun()
+                        with c_info:
+                            txt_color = "#334155" if is_visited else "#0F172A"
+                            strike_style = "text-decoration: line-through; opacity: 0.8;" if is_visited else ""
+                            item_dir = f" · 📍 {item['direccion']}" if item.get("direccion") else ""
+                            st.markdown(f'''
+                            <div style="{strike_style} font-weight:800; font-size:1rem; color:{txt_color};">
+                              #{seq_idx} · {emoji_i} {item['nombre']}
+                            </div>
+                            <div style="font-size:0.84rem; color:#0F172A; font-weight:600;">
+                              {cat_i} · {'🌧️ Interior' if item.get('tipo') == 'Interior' else '☀️ Exterior'}{item_dir}
+                            </div>
+                            ''', unsafe_allow_html=True)
+                        with c_move:
+                            dest_d = st.selectbox(
+                                "",
+                                [f"Día {x}" for x in range(1, 11)] + ["Guardados"],
+                                index=num_dia_t2 - 1,
+                                key=f"mvd_{item['id']}",
+                                label_visibility="collapsed"
+                            )
+                            val_dest = 0 if dest_d == "Guardados" else int(dest_d.replace("Día ", ""))
+                            if val_dest != num_dia_t2 and idx_real is not None:
+                                st.session_state.lugares[idx_real]["dia"] = val_dest
+                                guardar_itinerario_disco(st.session_state.lugares)
+                                st.rerun()
+                        st.markdown('<hr style="margin:4px 0; border-color:#CBD5E1;">', unsafe_allow_html=True)
+
+        with col_it2:
+            st.markdown(f"**Añadir a hoy desde Guardados ({len(guardados_pool)}):**")
+            if not guardados_pool:
+                st.caption("No tienes sitios pendientes en la bandeja.")
+            else:
+                for g_item in guardados_pool[:12]:
+                    idx_g_real = next((i for i, x in enumerate(st.session_state.lugares) if x["id"] == g_item["id"]), None)
+                    cat_g = g_item.get("categoria", "📍 Otros Lugares")
+                    c_ga, c_gb = st.columns([4, 1.2])
+                    with c_ga:
+                        st.markdown(f'''
+                        <div style="font-size:0.9rem; font-weight:800; color:#0F172A;">{obtener_emoji_categoria(cat_g)} {g_item['nombre']}</div>
+                        <div style="font-size:0.8rem; color:#0F172A; font-weight:600;">{cat_g}</div>
+                        ''', unsafe_allow_html=True)
+                    with c_gb:
+                        if st.button("➕", key=f"btn_add_to_day_{g_item['id']}", use_container_width=True):
+                            if idx_g_real is not None:
+                                st.session_state.lugares[idx_g_real]["dia"] = num_dia_t2
+                                guardar_itinerario_disco(st.session_state.lugares)
+                                st.rerun()
 
 # ─────────────────────────────────────────────────────────────────────────────
 # TAB 3: BANDEJA DE GUARDADOS (WISHLIST)
@@ -1098,7 +1346,7 @@ with pestanas[2]:
         with c_p1:
             st.markdown(f"""
             <div style="font-size:0.95rem; font-weight:700; color:#0F172A;">{obtener_emoji_categoria(cat_p)} {p_spot['nombre']}</div>
-            <div style="font-size:0.8rem; color:#64748B;">{cat_p} · {'🌧️ Interior' if p_spot.get('tipo') == 'Interior' else '☀️ Exterior'} {f'· 📍 {dir_p}' if dir_p else ''}</div>
+            <div style="font-size:0.8rem; color:#0F172A;">{cat_p} · {'🌧️ Interior' if p_spot.get('tipo') == 'Interior' else '☀️ Exterior'} {f'· 📍 {dir_p}' if dir_p else ''}</div>
             """, unsafe_allow_html=True)
         with c_p2:
             asig_dia = st.selectbox(
@@ -1143,8 +1391,8 @@ with pestanas[3]:
             st.markdown(f"""
             <div class="ny-card" style="border-left: 5px solid {'#3B82F6' if precip > 0 else '#10B981'};">
               <div style="font-size:1.8rem; font-weight:800; color:#0F172A;">{temp_c:.1f} °C</div>
-              <div style="font-size:0.9rem; font-weight:600; color:#475569;">{desc_clima}</div>
-              <div style="font-size:0.8rem; color:#64748B; margin-top:6px;">
+              <div style="font-size:0.9rem; font-weight:600; color:#0F172A;">{desc_clima}</div>
+              <div style="font-size:0.8rem; color:#0F172A; margin-top:6px;">
                 Sensación térmica: <b>{sens_c:.1f} °C</b> · Humedad: <b>{cur.get('relative_humidity_2m', 60)}%</b><br>
                 Precipitación en vivo: <b>{precip:.1f} mm</b>
               </div>
@@ -1186,7 +1434,7 @@ with pestanas[3]:
         st.markdown(f"""
         <div style="background:{color_card}; border: 1.5px solid {border_card}; border-radius:14px; padding:14px 18px;">
           <div style="font-weight:800; font-size:1.1rem; color:#0F172A;">Día {num_dia_c} ({DIAS_VIAJE[num_dia_c]['fecha']}) · {desc_dia}</div>
-          <div style="font-size:0.85rem; color:#334155; margin-top:4px;">
+          <div style="font-size:0.85rem; color:#0F172A; margin-top:4px;">
             🌡️ Temperaturas: <b>{temp_min_est:.0f} °C a {temp_max_est:.0f} °C</b><br>
             🌧️ Probabilidad de Precipitación: <b>{prob_lluvia}%</b> ({precip_mm:.1f} mm)
           </div>
@@ -1256,9 +1504,9 @@ with pestanas[4]:
     with col_fx:
         st.markdown("#### 💱 Conversor de Divisas en Tiempo Real")
         st.markdown(f"""
-        <div style="background:#F1F5F9; border-radius:12px; padding:10px 14px; margin-bottom:14px; font-size:0.85rem; color:#334155;">
+        <div style="background:#F1F5F9; border-radius:12px; padding:10px 14px; margin-bottom:14px; font-size:0.85rem; color:#0F172A;">
           Tasa de cambio actual: <b>1 USD = {tasa_eur:.4f} EUR</b><br>
-          <span style="font-size:0.75rem; color:#64748B;">Actualizado: {fecha_tasa}</span>
+          <span style="font-size:0.75rem; color:#0F172A;">Actualizado: {fecha_tasa}</span>
         </div>
         """, unsafe_allow_html=True)
 
@@ -1268,7 +1516,7 @@ with pestanas[4]:
             res_eur = val_usd * tasa_eur
             st.markdown(f"""
             <div style="background:#FFFFFF; border:1.5px solid #CBD5E1; border-radius:14px; padding:16px; text-align:center; margin-top:10px;">
-              <div style="font-size:0.85rem; color:#64748B;">Equivalente en Euros:</div>
+              <div style="font-size:0.85rem; color:#0F172A;">Equivalente en Euros:</div>
               <div style="font-size:2rem; font-weight:800; color:#0F172A;">{res_eur:.2f} €</div>
             </div>
             """, unsafe_allow_html=True)
@@ -1277,7 +1525,7 @@ with pestanas[4]:
             res_usd = val_eur / tasa_eur if tasa_eur > 0 else 0
             st.markdown(f"""
             <div style="background:#FFFFFF; border:1.5px solid #CBD5E1; border-radius:14px; padding:16px; text-align:center; margin-top:10px;">
-              <div style="font-size:0.85rem; color:#64748B;">Equivalente en Dólares:</div>
+              <div style="font-size:0.85rem; color:#0F172A;">Equivalente en Dólares:</div>
               <div style="font-size:2rem; font-weight:800; color:#0F172A;">${res_usd:.2f} USD</div>
             </div>
             """, unsafe_allow_html=True)
@@ -1305,22 +1553,22 @@ with pestanas[4]:
         st.markdown(f"""
         <div class="ny-card" style="margin-top:12px; border: 1.5px solid #E2E8F0;">
           <div style="display:flex; justify-content:space-between; margin-bottom:6px; font-size:0.9rem;">
-            <span style="color:#64748B;">Subtotal carta:</span>
+            <span style="color:#0F172A;">Subtotal carta:</span>
             <b>${subtotal_bill:.2f}</b>
           </div>
           <div style="display:flex; justify-content:space-between; margin-bottom:6px; font-size:0.9rem;">
-            <span style="color:#64748B;">NYC Sales Tax ({'Exenta' if es_ropa_exenta else '8.875%'}):</span>
+            <span style="color:#0F172A;">NYC Sales Tax ({'Exenta' if es_ropa_exenta else '8.875%'}):</span>
             <b>{'Exenta ($0.00)' if es_ropa_exenta else f'${tax_total:.2f}'}</b>
           </div>
           <div style="display:flex; justify-content:space-between; margin-bottom:10px; font-size:0.9rem;">
-            <span style="color:#64748B;">Propina ({pct_propina}%):</span>
+            <span style="color:#0F172A;">Propina ({pct_propina}%):</span>
             <b>${tip_total:.2f}</b>
           </div>
           <div style="border-top:1.5px solid #E2E8F0; padding-top:10px; display:flex; justify-content:space-between; align-items:center;">
             <span style="font-size:1.1rem; font-weight:800; color:#0F172A;">Total a Pagar:</span>
             <div style="text-align:right;">
               <span style="font-size:1.45rem; font-weight:800; color:#0F172A;">${gran_total:.2f} USD</span><br>
-              <span style="font-size:0.85rem; color:#64748B;">≈ {gran_total_eur:.2f} €</span>
+              <span style="font-size:0.85rem; color:#0F172A;">≈ {gran_total_eur:.2f} €</span>
             </div>
           </div>
         </div>
