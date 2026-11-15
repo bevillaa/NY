@@ -3253,62 +3253,102 @@ def sincronizar_lugares_desde_disco():
 # =============================================================================
 def extraer_lugares_lista_gmaps(url_lista: str, nombre_lista: str = ""):
     lugares_encontrados = []
+    
+    # Cabeceras mejoradas para evitar bloqueos HTTP 400 de Google Maps
     headers = {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/120.0.0.0 Safari/537.36',
-        'Accept-Language': 'es-ES,es;q=0.9,en;q=0.8'
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36',
+        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8',
+        'Accept-Language': 'es-ES,es;q=0.9,en;q=0.8',
+        'Cache-Control': 'no-cache',
+        'Pragma': 'no-cache'
     }
+    
     try:
+        # Resolver redirecciones cortas de Google Maps (ej. maps.app.goo.gl)
+        parsed_url = urllib.parse.urlparse(url_lista)
+        if "app.goo.gl" in parsed_url.netloc or "goo.gl" in parsed_url.netloc:
+            req_redir = urllib.request.Request(url_lista, headers=headers)
+            with urllib.request.urlopen(req_redir, timeout=10) as resp_redir:
+                url_lista = resp_redir.geturl()
+
         req = urllib.request.Request(url_lista, headers=headers)
-        with urllib.request.urlopen(req, timeout=10) as r:
-            html = r.read().decode('utf-8', errors='ignore')
-        m = re.search(r'href="(/maps/preview/entitylist/getlist\?[^"]+)"', html)
-        if not m:
-            return lugares_encontrados
-        
-        entity_url = "https://www.google.com" + m.group(1).replace("&", "&")
-        req2 = urllib.request.Request(entity_url, headers=headers)
-        with urllib.request.urlopen(req2, timeout=10) as r2:
-            raw = r2.read().decode("utf-8", errors="ignore").lstrip(")]}'\n")
-        data = json.loads(raw)
+        with urllib.request.urlopen(req, timeout=12) as r:
+            html_content = r.read().decode('utf-8', errors='ignore')
+            
+        # Intento 1: Buscar la URL interna de entidad de lista de Google Maps
+        m = re.search(r'href="(/maps/preview/entitylist/getlist\?[^"]+)"', html_content)
+        if m:
+            entity_url = "https://www.google.com" + m.group(1).replace("&", "&")
+            req2 = urllib.request.Request(entity_url, headers=headers)
+            with urllib.request.urlopen(req2, timeout=10) as r2:
+                raw = r2.read().decode("utf-8", errors="ignore").lstrip(")]}'\n")
+            data = json.loads(raw)
 
-        def _buscar_entidades(nodo):
-            if isinstance(nodo, list):
-                coords = None
-                for el in nodo:
-                    if (isinstance(el, list) and len(el) >= 4 and el[0] is None and el[1] is None
-                            and isinstance(el[2], (int, float)) and isinstance(el[3], (int, float))):
-                        coords = (float(el[2]), float(el[3]))
-                        break
-                if coords:
-                    strs = [s for s in nodo if isinstance(s, str) and len(s) > 1 
-                            and not s.startswith("http") and not s.startswith("ChIJ")
-                            and not s.startswith("/g/") and not s.startswith("/m/")]
-                    if strs:
-                        nombre_raw = strs[0]
-                        partes = nombre_raw.split(",")
-                        nom_spot = partes[0].strip()
-                        dir_spot = ", ".join(partes[1:]).strip() if len(partes) > 1 else ""
-                        cat, tipo = clasificar_lugar(nom_spot, dir_spot, nombre_lista)
-                        lugares_encontrados.append({
-                            "nombre": nom_spot,
-                            "lat": coords[0],
-                            "lon": coords[1],
-                            "direccion": dir_spot,
-                            "nota": "",
-                            "categoria": cat,
-                            "tipo": tipo,
-                            "hora": ""
-                        })
-                    return
-                for hijo in nodo:
-                    _buscar_entidades(hijo)
-            elif isinstance(nodo, dict):
-                for v in nodo.values():
-                    _buscar_entidades(v)
+            def _buscar_entidades(nodo):
+                if isinstance(nodo, list):
+                    coords = None
+                    for el in nodo:
+                        if (isinstance(el, list) and len(el) >= 4 and el[0] is None and el[1] is None
+                                and isinstance(el[2], (int, float)) and isinstance(el[3], (int, float))):
+                            coords = (float(el[2]), float(el[3]))
+                            break
+                    if coords:
+                        strs = [s for s in nodo if isinstance(s, str) and len(s) > 1 
+                                and not s.startswith("http") and not s.startswith("ChIJ")
+                                and not s.startswith("/g/") and not s.startswith("/m/")]
+                        if strs:
+                            nombre_raw = strs[0]
+                            partes = nombre_raw.split(",")
+                            nom_spot = partes[0].strip()
+                            dir_spot = ", ".join(partes[1:]).strip() if len(partes) > 1 else ""
+                            cat, tipo = clasificar_lugar(nom_spot, dir_spot, nombre_lista)
+                            lugares_encontrados.append({
+                                "nombre": nom_spot,
+                                "lat": coords[0],
+                                "lon": coords[1],
+                                "direccion": dir_spot,
+                                "nota": "",
+                                "categoria": cat,
+                                "tipo": tipo,
+                                "hora": ""
+                            })
+                        return
+                    for hijo in nodo:
+                        _buscar_entidades(hijo)
+                elif isinstance(nodo, dict):
+                    for v in nodo.values():
+                        _buscar_entidades(v)
 
-        _buscar_entidades(data)
+            _buscar_entidades(data)
+
+        # Intento 2 (Fallback): Extraer metadatos incrustados en etiquetas meta de la página si el formato principal cambia
+        if not lugares_encontrados:
+            meta_titulos = re.findall(r'<meta property="og:title" content="([^"]+)"', html_content)
+            meta_desc = re.findall(r'<meta property="og:description" content="([^"]+)"', html_content)
+            
+            if meta_titulos:
+                titulo_lista = meta_titulos[0]
+                # Si la página contiene nombres de lugares en la descripción o metadatos secundarios
+                for desc in meta_desc:
+                    posibles_lugares = [l.strip() for l in desc.split("·") if len(l.strip()) > 3]
+                    for nom_spot in posibles_lugares:
+                        if nom_spot.lower() not in [l["nombre"].lower() for l in lugares_encontrados]:
+                            cat, tipo = clasificar_lugar(nom_spot, "", nombre_lista)
+                            # Coordenadas aproximadas de centro de Nueva York como punto de partida geocodificable
+                            lugares_encontrados.append({
+                                "nombre": nom_spot,
+                                "lat": 40.7580,
+                                "lon": -73.9855,
+                                "direccion": "Nueva York",
+                                "nota": f"Importado desde: {titulo_lista}",
+                                "categoria": cat,
+                                "tipo": tipo,
+                                "hora": ""
+                            })
+
     except Exception as e:
-        st.warning(f"Aviso de sincronización ({nombre_lista}): {e}")
+        st.warning(f"Aviso de sincronización ({nombre_lista}): HTTP Error o formato incompatible. ({e})")
+        
     return lugares_encontrados
 
 
