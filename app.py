@@ -2681,7 +2681,7 @@ st.markdown("""
       display: grid !important;
       grid-template-columns:
         minmax(40px, 0.90fr)
-        minmax(36px, 0.85fr)
+        minmax(40px, 0.90fr)
         minmax(76px, 1.7fr)
         minmax(84px, 1.9fr) !important;
       grid-auto-flow: column !important;
@@ -2881,7 +2881,7 @@ st.markdown("""
     [class*="st-key-saved-controls-row-"] [data-testid="stHorizontalBlock"] {
       grid-template-columns:
         minmax(38px, 0.90fr)
-        minmax(34px, 0.82fr)
+        minmax(38px, 0.90fr)
         minmax(74px, 1.75fr)
         minmax(82px, 1.95fr) !important;
       column-gap: 4px !important;
