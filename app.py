@@ -5103,10 +5103,7 @@ if seccion_principal == "📎Guardados":
         if (flt_cat_g == "Todas" or normalizar_categoria(l.get("categoria", "")) == flt_cat_g)
         and (not busq_g.strip() or busq_g.strip().lower() in l.get("nombre", "").lower())
     ]
-    if nuevos_ids_set:
-        visibles_pool.sort(
-            key=lambda l: (0, nuevos_orden[l.get("id")]) if l.get("id") in nuevos_ids_set else (1, 0)
-        )
+    visibles_pool.sort(key=lambda l: int(l.get("id", 0)), reverse=True)
 
     st.caption(f"Mostrando **{len(visibles_pool)}** sitios")
 
