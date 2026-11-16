@@ -21,7 +21,7 @@ ARCH_CONFIG     = "config_viaje.json"
 # 1. CONFIGURACIÓN DE PÁGINA & ESTILO NAVIDEÑO EDITORIAL (MÓVIL + WEB)
 # =============================================================================
 st.set_page_config(
-    page_title="Nueva York · Itinerario",
+    page_title="Nueva York · Travel Journal",
     page_icon="🗽",
     layout="wide",
     initial_sidebar_state="collapsed"
@@ -4203,7 +4203,7 @@ def ejecutar_sincronizacion_listas_gmaps():
             pass
     max_id_sync = max(ids_sync, default=0)
 
-    with st.spinner("Sincronizando y clasificando lugares..."):
+    with st.spinner("Sincronizando todas las listas de Google Maps y clasificando lugares..."):
         for i_lista, datos_lista in enumerate(listas_config):
             nom_lista = str(datos_lista.get("nombre", f"Lista {i_lista + 1}"))
             url_lista_sync = str(datos_lista.get("url", "")).strip()
@@ -4237,6 +4237,12 @@ def ejecutar_sincronizacion_listas_gmaps():
                         if origen_sync and existente.get("lista_origen") != origen_sync:
                             existente["lista_origen"] = origen_sync
                             cambio_item = True
+                        if existente.get("categoria") != cat_final:
+                            existente["categoria"] = cat_final
+                            cambio_item = True
+                        if existente.get("tipo") != tipo_clasif:
+                            existente["tipo"] = tipo_clasif
+                            cambio_item = True
                         if cambio_item:
                             total_actualizados += 1
                         continue
@@ -4265,18 +4271,19 @@ def ejecutar_sincronizacion_listas_gmaps():
         for lugar_reg in st.session_state.lugares:
             if not isinstance(lugar_reg, dict):
                 continue
-            if lugar_reg.get("manual", False):
-                continue
             cat_actual = lugar_reg.get("categoria", "")
-            if not cat_actual:  # Solo autocalasifica si está totalmente vacío
+            cat_norm = normalizar_categoria(cat_actual)
+            origen_reg = str(lugar_reg.get("lista_origen", "")).strip()
+            if origen_reg:
                 cat_auto, tipo_auto = clasificar_lugar(
                     lugar_reg.get("nombre", ""),
                     lugar_reg.get("direccion", ""),
-                    str(lugar_reg.get("lista_origen", ""))
+                    origen_reg
                 )
-                lugar_reg["categoria"] = normalizar_categoria(cat_auto)
-                lugar_reg["tipo"] = tipo_auto
-                total_actualizados += 1
+                cat_norm = normalizar_categoria(cat_auto)
+                if lugar_reg.get("tipo") != tipo_auto:
+                    lugar_reg["tipo"] = tipo_auto
+                    total_actualizados += 1
             elif cat_norm in ("📍 Otros", "☀️ Spots") and not cat_actual:
                 cat_auto, tipo_auto = clasificar_lugar(
                     lugar_reg.get("nombre", ""),
@@ -4296,15 +4303,23 @@ def ejecutar_sincronizacion_listas_gmaps():
 
     if total_nuevos or total_actualizados:
         if guardar_itinerario_disco(st.session_state.lugares):
-            st.toast(f"Sincronizados: {total_nuevos} nuevos, {total_actualizados} actualizados.", icon="🔄"):
+            st.toast(f"Sincronizados: {total_nuevos} nuevos, {total_actualizados} actualizados.", icon="🔄")
+            st.session_state["_msg_sync_guardados"] = (
+                "success",
+                f"Sincronización terminada: {total_nuevos} lugares nuevos añadidos y "
+                f"{total_actualizados} lugares reclasificados/actualizados."
+            )
         else:
             st.session_state["_msg_sync_guardados"] = (
                 "error",
                 "No se pudieron guardar los lugares sincronizados en el archivo compartido."
             )
     else:
-        st.toast("No hay sitios nuevos.", icon="✅")
-    
+        st.toast("Listas al día. No hay sitios nuevos.", icon="✅")
+        st.session_state["_msg_sync_guardados"] = (
+            "info",
+            f"Sincronización terminada, {total_descargados} resultados recibidos."
+        )
     if errores_sync:
         st.session_state["_errores_sync_guardados"] = errores_sync
     st.rerun()
@@ -4528,8 +4543,7 @@ def render_editor_sitio_panel(spot: dict, idx_real: int, key_ctx: str):
                         "tipo": ed_tipo,
                         "dia": nuevo_dia,
                         "lat": float(ed_lat),
-                        "lon": float(ed_lon),
-                        "manual": True
+                        "lon": float(ed_lon)
                     })
                     guardar_itinerario_disco(st.session_state.lugares)
                     st.session_state.editando_spot_key = None
@@ -5054,11 +5068,14 @@ if seccion_principal == "📎Guardados":
     if pulsado_sync:
         ejecutar_sincronizacion_listas_gmaps()
 
-    if "_errores_sync_guardados" in st.session_state:
-        errores_temp = st.session_state.pop("_errores_sync_guardados")
-        for err_s in errores_temp:
-            st.warning(err_s)
-
+    if "_msg_sync_guardados" in st.session_state:
+        tipo_msg, txt_msg = st.session_state.pop("_msg_sync_guardados")
+        if tipo_msg == "success":
+            st.success(txt_msg)
+        elif tipo_msg == "error":
+            st.error(txt_msg)
+        else:
+            st.info(txt_msg)
     if "_errores_sync_guardados" in st.session_state:
         for err_s in st.session_state.pop("_errores_sync_guardados"):
             st.warning(err_s)
@@ -5493,7 +5510,7 @@ if seccion_principal == "✈️Info":
 if seccion_principal == "🗒️Listas":
     st.markdown("---")
     st.markdown('<div class="ny-card-header">🔄 Sincronización de Listas de Google Maps</div>', unsafe_allow_html=True)
-    st.caption("Se puede cambiar el nombre o la URL de cualquier lista. Pulsar sincronizar para importar los lugares nuevos.")
+    st.caption("Se puede cambiar el nombre o la URL de cualquier lista, después pulsar sincronizar para importar los lugares nuevos.")
 
     listas_config = st.session_state.config_viaje.get("listas_gmaps", [])
     if not listas_config:
