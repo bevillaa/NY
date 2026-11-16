@@ -4476,6 +4476,95 @@ st.markdown("""
     }
   }
 
+
+  /* FIX DEFINITIVO: mapa como widget nativo Streamlit, misma caja que Editar. */
+  [class*="st-key-it-edit-button-wrap-"] [data-testid="stButton"] > button,
+  [class*="st-key-saved-edit-button-wrap-"] [data-testid="stButton"] > button,
+  [class*="st-key-it-map-button-wrap-"] [data-testid="stLinkButton"] a,
+  [class*="st-key-saved-map-button-wrap-"] [data-testid="stLinkButton"] a {
+    box-sizing: border-box !important;
+    display: inline-flex !important;
+    flex: 0 0 38px !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 38px !important;
+    min-width: 38px !important;
+    max-width: 38px !important;
+    height: 38px !important;
+    min-height: 38px !important;
+    max-height: 38px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: 1px solid #CBD5E1 !important;
+    border-radius: 9px !important;
+    background: #FFFFFF !important;
+    background-color: #FFFFFF !important;
+    background-image: none !important;
+    box-shadow: none !important;
+    overflow: hidden !important;
+    line-height: 0 !important;
+  }
+  [class*="st-key-it-map-button-wrap-"] [data-testid="stLinkButton"],
+  [class*="st-key-saved-map-button-wrap-"] [data-testid="stLinkButton"],
+  [class*="st-key-it-map-button-wrap-"] [data-testid="stElementContainer"],
+  [class*="st-key-saved-map-button-wrap-"] [data-testid="stElementContainer"] {
+    box-sizing: border-box !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 38px !important;
+    min-width: 38px !important;
+    max-width: 38px !important;
+    height: 38px !important;
+    min-height: 38px !important;
+    max-height: 38px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  [class*="st-key-it-map-button-wrap-"] [data-testid="stLinkButton"] a > *,
+  [class*="st-key-saved-map-button-wrap-"] [data-testid="stLinkButton"] a > *,
+  [class*="st-key-it-map-button-wrap-"] [data-testid="stLinkButton"] a p,
+  [class*="st-key-saved-map-button-wrap-"] [data-testid="stLinkButton"] a p {
+    display: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  [class*="st-key-it-map-button-wrap-"] [data-testid="stLinkButton"] a::before,
+  [class*="st-key-saved-map-button-wrap-"] [data-testid="stLinkButton"] a::before {
+    content: "" !important;
+    display: block !important;
+    flex: 0 0 13px !important;
+    width: 13px !important;
+    height: 13px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: center / contain no-repeat url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23334155' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m3 6 6-3 6 3 6-3v15l-6 3-6-3-6 3z'/%3E%3Cpath d='M9 3v15M15 6v15'/%3E%3C/svg%3E") !important;
+  }
+  [class*="st-key-it-map-button-wrap-"] [data-testid="stLinkButton"] a:hover,
+  [class*="st-key-it-map-button-wrap-"] [data-testid="stLinkButton"] a:focus,
+  [class*="st-key-it-map-button-wrap-"] [data-testid="stLinkButton"] a:active,
+  [class*="st-key-saved-map-button-wrap-"] [data-testid="stLinkButton"] a:hover,
+  [class*="st-key-saved-map-button-wrap-"] [data-testid="stLinkButton"] a:focus,
+  [class*="st-key-saved-map-button-wrap-"] [data-testid="stLinkButton"] a:active {
+    background: #FFFFFF !important;
+    background-color: #FFFFFF !important;
+    border-color: #CBD5E1 !important;
+    box-shadow: none !important;
+  }
+  @media (max-width: 768px) {
+    [class*="st-key-it-edit-button-wrap-"],
+    [class*="st-key-saved-edit-button-wrap-"],
+    [class*="st-key-it-map-button-wrap-"],
+    [class*="st-key-saved-map-button-wrap-"] {
+      width: 38px !important;
+      min-width: 38px !important;
+      max-width: 38px !important;
+      height: 38px !important;
+      min-height: 38px !important;
+      max-height: 38px !important;
+    }
+  }
+
 </style>
 """, unsafe_allow_html=True)
 
@@ -6102,11 +6191,7 @@ if seccion_principal == "🗽Ruta":
                                 st.rerun()
                     with c_map_head:
                         with st.container(key=f"it-map-button-wrap-{item['id']}"):
-                            st.markdown(
-                                f'<a class="place-map-icon-button" href="{html.escape(gmaps_url, quote=True)}" target="_blank" rel="noopener noreferrer" aria-label="Abrir en Google Maps" title="Abrir en Google Maps">'
-                                '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3 6 6-3 6 3 6-3v15l-6 3-6-3-6 3z"/><path d="M9 3v15M15 6v15"/></svg></a>',
-                                unsafe_allow_html=True
-                            )
+                            st.link_button(" ", url=gmaps_url, help="Abrir en Google Maps")
                     with c_chk:
                         chk_val = st.checkbox("", value=is_visited, key=f"chk_it_{d}_{item['id']}")
                         if chk_val != is_visited and idx_real is not None:
@@ -6245,11 +6330,7 @@ if seccion_principal == "📌Guardados":
             with c_saved_map:
                 g_url_sp = f"https://www.google.com/maps/search/?api=1&query={urllib.parse.quote(p_spot['nombre'] + ' New York')}"
                 with st.container(key=f"saved-map-button-wrap-{p_spot['id']}"):
-                    st.markdown(
-                        f'<a class="place-map-icon-button" href="{html.escape(g_url_sp, quote=True)}" target="_blank" rel="noopener noreferrer" aria-label="Abrir en Google Maps" title="Abrir en Google Maps">'
-                        '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3 6 6-3 6 3 6-3v15l-6 3-6-3-6 3z"/><path d="M9 3v15M15 6v15"/></svg></a>',
-                        unsafe_allow_html=True
-                    )
+                        st.link_button(" ", url=g_url_sp, help="Abrir en Google Maps")
             # Dirección y nota en una fila independiente de ancho completo.
             if dir_p_html or nota_p_html:
                 st.markdown(f'<div class="place-full-width-info">{dir_p_html}{nota_p_html}</div>', unsafe_allow_html=True)
