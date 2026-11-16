@@ -4416,6 +4416,141 @@ st.markdown("""
     box-shadow: none !important;
   }
 
+
+
+  /* AJUSTE AISLADO Y FINAL: controles de encabezado en escritorio y móvil.
+     El mapa es un enlace HTML propio para que Streamlit no le aplique el tema azul. */
+  div[class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"],
+  div[class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"] {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) 27px 27px 24px !important;
+    align-items: center !important;
+    justify-content: start !important;
+    column-gap: 3px !important;
+    row-gap: 0 !important;
+    width: 100% !important;
+    min-width: 0 !important;
+  }
+  div[class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"] {
+    grid-template-columns: minmax(0, 1fr) 27px 27px !important;
+  }
+  div[class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"],
+  div[class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"] {
+    box-sizing: border-box !important;
+    flex: none !important;
+    width: auto !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  div[class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2),
+  div[class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(3),
+  div[class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(2),
+  div[class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(3) {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 27px !important;
+    min-width: 27px !important;
+    max-width: 27px !important;
+  }
+  div[class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2) button,
+  div[class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(2) button {
+    box-sizing: border-box !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 26px !important;
+    min-width: 26px !important;
+    max-width: 26px !important;
+    height: 26px !important;
+    min-height: 26px !important;
+    max-height: 26px !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    border: 1px solid #D1D5DB !important;
+    border-radius: 6px !important;
+    background: #FFFFFF !important;
+    background-color: #FFFFFF !important;
+    background-image: none !important;
+    box-shadow: none !important;
+    color: #334155 !important;
+    -webkit-text-fill-color: #334155 !important;
+    font-family: Arial, sans-serif !important;
+    font-size: 12px !important;
+    line-height: 1 !important;
+    overflow: visible !important;
+  }
+  div[class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2) button:hover,
+  div[class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2) button:focus,
+  div[class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2) button:active,
+  div[class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(2) button:hover,
+  div[class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(2) button:focus,
+  div[class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(2) button:active {
+    background: #FFFFFF !important;
+    background-color: #FFFFFF !important;
+    color: #334155 !important;
+  }
+  .place-map-icon-button {
+    box-sizing: border-box !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    vertical-align: middle !important;
+    width: 26px !important;
+    min-width: 26px !important;
+    max-width: 26px !important;
+    height: 26px !important;
+    min-height: 26px !important;
+    max-height: 26px !important;
+    padding: 0 !important;
+    margin: 0 auto !important;
+    border: 1px solid #D1D5DB !important;
+    border-radius: 6px !important;
+    background: #FFFFFF !important;
+    background-color: #FFFFFF !important;
+    box-shadow: none !important;
+    text-decoration: none !important;
+    line-height: 0 !important;
+  }
+  .place-map-icon-button:hover,
+  .place-map-icon-button:focus,
+  .place-map-icon-button:active {
+    background: #FFFFFF !important;
+    background-color: #FFFFFF !important;
+    border-color: #D1D5DB !important;
+    box-shadow: none !important;
+  }
+  .place-map-icon-button svg {
+    display: block !important;
+    width: 13px !important;
+    height: 13px !important;
+    flex: 0 0 13px !important;
+    fill: none !important;
+    stroke: #334155 !important;
+    stroke-width: 1.8 !important;
+    stroke-linecap: round !important;
+    stroke-linejoin: round !important;
+  }
+  @media (max-width: 768px) {
+    div[class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] {
+      grid-template-columns: minmax(0, 1fr) 27px 27px 24px !important;
+      column-gap: 3px !important;
+    }
+    div[class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"] {
+      grid-template-columns: minmax(0, 1fr) 27px 27px !important;
+      column-gap: 3px !important;
+    }
+    div[class*="st-key-it-heading-row-"] [data-testid="column"],
+    div[class*="st-key-saved-heading-row-"] [data-testid="column"] {
+      flex: none !important;
+      min-width: 0 !important;
+      margin: 0 !important;
+      padding: 0 !important;
+    }
+  }
+
 </style>
 """, unsafe_allow_html=True)
 
@@ -6040,7 +6175,11 @@ if seccion_principal == "🗽Ruta":
                             st.session_state.editando_spot_key = None if st.session_state.editando_spot_key == ek else ek
                             st.rerun()
                     with c_map_head:
-                        st.link_button(" ", gmaps_url, key=f"map_it_{item['id']}", help="Abrir en Google Maps")
+                        st.markdown(
+                            f'<a class="place-map-icon-button" href="{html.escape(gmaps_url, quote=True)}" target="_blank" rel="noopener noreferrer" aria-label="Abrir en Google Maps" title="Abrir en Google Maps">'
+                            '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3 6 6-3 6 3 6-3v15l-6 3-6-3-6 3z"/><path d="M9 3v15M15 6v15"/></svg></a>',
+                            unsafe_allow_html=True
+                        )
                     with c_chk:
                         chk_val = st.checkbox("", value=is_visited, key=f"chk_it_{d}_{item['id']}")
                         if chk_val != is_visited and idx_real is not None:
@@ -6177,7 +6316,11 @@ if seccion_principal == "📌Guardados":
                     st.rerun()
             with c_saved_map:
                 g_url_sp = f"https://www.google.com/maps/search/?api=1&query={urllib.parse.quote(p_spot['nombre'] + ' New York')}"
-                st.link_button(" ", g_url_sp, key=f"map_saved_{p_spot['id']}", help="Abrir en Google Maps")
+                st.markdown(
+                    f'<a class="place-map-icon-button" href="{html.escape(g_url_sp, quote=True)}" target="_blank" rel="noopener noreferrer" aria-label="Abrir en Google Maps" title="Abrir en Google Maps">'
+                    '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3 6 6-3 6 3 6-3v15l-6 3-6-3-6 3z"/><path d="M9 3v15M15 6v15"/></svg></a>',
+                    unsafe_allow_html=True
+                )
             # Dirección y nota en una fila independiente de ancho completo.
             if dir_p_html or nota_p_html:
                 st.markdown(f'<div class="place-full-width-info">{dir_p_html}{nota_p_html}</div>', unsafe_allow_html=True)
