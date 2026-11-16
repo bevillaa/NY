@@ -29,6 +29,18 @@ st.set_page_config(
 
 st.markdown("""
 <style>
+  /* Oculta la barra superior propia de Streamlit (GitHub, menú, editar y compartir),
+     sin ocultar la cabecera personalizada de la aplicación. */
+  [data-testid="stToolbar"],
+  [data-testid="stAppToolbar"],
+  .stAppToolbar,
+  .stAppDeployButton {
+    display: none !important;
+    visibility: hidden !important;
+    height: 0 !important;
+    min-height: 0 !important;
+  }
+
   @import url('https://fonts.googleapis.com/css2?family=Carlito:ital,wght@0,400;0,700;1,400;1,700&family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap');
 
   :root {
