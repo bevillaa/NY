@@ -4281,17 +4281,25 @@ st.markdown("""
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
+    height: 38px !important;
+    min-height: 38px !important;
+    max-height: 38px !important;
     width: 38px !important;
     min-width: 38px !important;
     margin: 0 !important;
     padding: 0 !important;
   }
   [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(4) [data-testid="stCheckbox"] label {
+    width: 22px !important;
+    height: 22px !important;
+    min-width: 22px !important;
+    min-height: 22px !important;
+    border-radius: 7px !important;
+    border: 1.5px solid #94A3B8 !important;
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
     margin: 0 !important;
-    padding: 0 !important;
   }
   /* Solo el enlace del mapa: misma caja exterior que el botón lápiz existente. */
   [class*="st-key-it-map-button-wrap-"],
