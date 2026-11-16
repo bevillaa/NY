@@ -4952,6 +4952,146 @@ st.markdown("""
     }
   }
 
+
+
+  /* Corrección localizada y explícita de los dos botones de cada lugar.
+     Se identifican por contenedores propios, no por el orden de columnas. */
+  [class*="st-key-it-edit-button-wrap-"],
+  [class*="st-key-it-map-button-wrap-"],
+  [class*="st-key-saved-edit-button-wrap-"],
+  [class*="st-key-saved-map-button-wrap-"] {
+    box-sizing: border-box !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 30px !important;
+    min-width: 30px !important;
+    max-width: 30px !important;
+    height: 30px !important;
+    min-height: 30px !important;
+    max-height: 30px !important;
+    margin: 0 auto !important;
+    padding: 0 !important;
+    align-self: center !important;
+    overflow: visible !important;
+  }
+  [class*="st-key-it-edit-button-wrap-"] [data-testid="stElementContainer"],
+  [class*="st-key-it-map-button-wrap-"] [data-testid="stElementContainer"],
+  [class*="st-key-saved-edit-button-wrap-"] [data-testid="stElementContainer"],
+  [class*="st-key-saved-map-button-wrap-"] [data-testid="stElementContainer"] {
+    box-sizing: border-box !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 30px !important;
+    min-width: 30px !important;
+    max-width: 30px !important;
+    height: 30px !important;
+    min-height: 30px !important;
+    max-height: 30px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  [class*="st-key-it-edit-button-wrap-"] [data-testid="stButton"],
+  [class*="st-key-saved-edit-button-wrap-"] [data-testid="stButton"],
+  [class*="st-key-it-edit-button-wrap-"] [data-testid="stButton"] > button,
+  [class*="st-key-saved-edit-button-wrap-"] [data-testid="stButton"] > button,
+  [class*="st-key-it-map-button-wrap-"] .place-map-icon-button,
+  [class*="st-key-saved-map-button-wrap-"] .place-map-icon-button {
+    box-sizing: border-box !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    vertical-align: middle !important;
+    position: relative !important;
+    width: 30px !important;
+    min-width: 30px !important;
+    max-width: 30px !important;
+    height: 30px !important;
+    min-height: 30px !important;
+    max-height: 30px !important;
+    flex: 0 0 30px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: 1px solid #CBD5E1 !important;
+    border-radius: 7px !important;
+    background: #FFFFFF !important;
+    background-color: #FFFFFF !important;
+    background-image: none !important;
+    box-shadow: none !important;
+    overflow: hidden !important;
+    line-height: 0 !important;
+  }
+  [class*="st-key-it-edit-button-wrap-"] [data-testid="stButton"] > button,
+  [class*="st-key-saved-edit-button-wrap-"] [data-testid="stButton"] > button {
+    color: transparent !important;
+    -webkit-text-fill-color: transparent !important;
+    font-size: 0 !important;
+    line-height: 0 !important;
+  }
+  [class*="st-key-it-edit-button-wrap-"] [data-testid="stButton"] > button::before,
+  [class*="st-key-saved-edit-button-wrap-"] [data-testid="stButton"] > button::before {
+    content: "" !important;
+    display: block !important;
+    position: absolute !important;
+    left: 50% !important;
+    top: 50% !important;
+    width: 13px !important;
+    height: 13px !important;
+    transform: translate(-50%, -50%) !important;
+    background: center / contain no-repeat url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23334155' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m16 4 4 4'/%3E%3Cpath d='M4 20l4-.9L19 8a2.1 2.1 0 0 0-3-3L5 16z'/%3E%3C/svg%3E") !important;
+  }
+  [class*="st-key-it-map-button-wrap-"] .place-map-icon-button svg,
+  [class*="st-key-saved-map-button-wrap-"] .place-map-icon-button svg {
+    display: block !important;
+    position: absolute !important;
+    left: 50% !important;
+    top: 50% !important;
+    width: 13px !important;
+    height: 13px !important;
+    min-width: 13px !important;
+    min-height: 13px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    transform: translate(-50%, -50%) !important;
+  }
+  [class*="st-key-it-edit-button-wrap-"] button:hover,
+  [class*="st-key-it-edit-button-wrap-"] button:focus,
+  [class*="st-key-it-edit-button-wrap-"] button:active,
+  [class*="st-key-it-map-button-wrap-"] .place-map-icon-button:hover,
+  [class*="st-key-it-map-button-wrap-"] .place-map-icon-button:focus,
+  [class*="st-key-it-map-button-wrap-"] .place-map-icon-button:active,
+  [class*="st-key-saved-edit-button-wrap-"] button:hover,
+  [class*="st-key-saved-edit-button-wrap-"] button:focus,
+  [class*="st-key-saved-edit-button-wrap-"] button:active,
+  [class*="st-key-saved-map-button-wrap-"] .place-map-icon-button:hover,
+  [class*="st-key-saved-map-button-wrap-"] .place-map-icon-button:focus,
+  [class*="st-key-saved-map-button-wrap-"] .place-map-icon-button:active {
+    background: #FFFFFF !important;
+    background-color: #FFFFFF !important;
+    border-color: #CBD5E1 !important;
+    box-shadow: none !important;
+  }
+  [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"],
+  [class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"] {
+    align-items: center !important;
+  }
+  @media (max-width: 768px) {
+    [class*="st-key-it-edit-button-wrap-"],
+    [class*="st-key-it-map-button-wrap-"],
+    [class*="st-key-saved-edit-button-wrap-"],
+    [class*="st-key-saved-map-button-wrap-"] {
+      width: 30px !important;
+      min-width: 30px !important;
+      max-width: 30px !important;
+      height: 30px !important;
+      min-height: 30px !important;
+      max-height: 30px !important;
+      margin-left: auto !important;
+      margin-right: auto !important;
+    }
+  }
+
 </style>
 """, unsafe_allow_html=True)
 
@@ -6571,16 +6711,18 @@ if seccion_principal == "🗽Ruta":
                         """, unsafe_allow_html=True)
 
                     with c_edit_head:
-                        if st.button("✎", key=f"btn_ed_it_{d}_{item['id']}", help="Editar sitio"):
-                            ek = f"it_{d}_{item['id']}"
-                            st.session_state.editando_spot_key = None if st.session_state.editando_spot_key == ek else ek
-                            st.rerun()
+                        with st.container(key=f"it-edit-button-wrap-{item['id']}"):
+                            if st.button(" ", key=f"btn_ed_it_{d}_{item['id']}", help="Editar sitio"):
+                                ek = f"it_{d}_{item['id']}"
+                                st.session_state.editando_spot_key = None if st.session_state.editando_spot_key == ek else ek
+                                st.rerun()
                     with c_map_head:
-                        st.markdown(
-                            f'<a class="place-map-icon-button" href="{html.escape(gmaps_url, quote=True)}" target="_blank" rel="noopener noreferrer" aria-label="Abrir en Google Maps" title="Abrir en Google Maps">'
-                            '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3 6 6-3 6 3 6-3v15l-6 3-6-3-6 3z"/><path d="M9 3v15M15 6v15"/></svg></a>',
-                            unsafe_allow_html=True
-                        )
+                        with st.container(key=f"it-map-button-wrap-{item['id']}"):
+                            st.markdown(
+                                f'<a class="place-map-icon-button" href="{html.escape(gmaps_url, quote=True)}" target="_blank" rel="noopener noreferrer" aria-label="Abrir en Google Maps" title="Abrir en Google Maps">'
+                                '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3 6 6-3 6 3 6-3v15l-6 3-6-3-6 3z"/><path d="M9 3v15M15 6v15"/></svg></a>',
+                                unsafe_allow_html=True
+                            )
                     with c_chk:
                         chk_val = st.checkbox("", value=is_visited, key=f"chk_it_{d}_{item['id']}")
                         if chk_val != is_visited and idx_real is not None:
@@ -6711,17 +6853,19 @@ if seccion_principal == "📌Guardados":
                 </div>
                 """, unsafe_allow_html=True)
             with c_saved_edit:
-                if st.button("✎", key=f"btn_ed_pool_{p_spot['id']}", help="Editar sitio"):
-                    ek = f"pool_{p_spot['id']}"
-                    st.session_state.editando_spot_key = None if st.session_state.editando_spot_key == ek else ek
-                    st.rerun()
+                with st.container(key=f"saved-edit-button-wrap-{p_spot['id']}"):
+                    if st.button(" ", key=f"btn_ed_pool_{p_spot['id']}", help="Editar sitio"):
+                        ek = f"pool_{p_spot['id']}"
+                        st.session_state.editando_spot_key = None if st.session_state.editando_spot_key == ek else ek
+                        st.rerun()
             with c_saved_map:
                 g_url_sp = f"https://www.google.com/maps/search/?api=1&query={urllib.parse.quote(p_spot['nombre'] + ' New York')}"
-                st.markdown(
-                    f'<a class="place-map-icon-button" href="{html.escape(g_url_sp, quote=True)}" target="_blank" rel="noopener noreferrer" aria-label="Abrir en Google Maps" title="Abrir en Google Maps">'
-                    '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3 6 6-3 6 3 6-3v15l-6 3-6-3-6 3z"/><path d="M9 3v15M15 6v15"/></svg></a>',
-                    unsafe_allow_html=True
-                )
+                with st.container(key=f"saved-map-button-wrap-{p_spot['id']}"):
+                    st.markdown(
+                        f'<a class="place-map-icon-button" href="{html.escape(g_url_sp, quote=True)}" target="_blank" rel="noopener noreferrer" aria-label="Abrir en Google Maps" title="Abrir en Google Maps">'
+                        '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3 6 6-3 6 3 6-3v15l-6 3-6-3-6 3z"/><path d="M9 3v15M15 6v15"/></svg></a>',
+                        unsafe_allow_html=True
+                    )
             # Dirección y nota en una fila independiente de ancho completo.
             if dir_p_html or nota_p_html:
                 st.markdown(f'<div class="place-full-width-info">{dir_p_html}{nota_p_html}</div>', unsafe_allow_html=True)
