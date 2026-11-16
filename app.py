@@ -4299,8 +4299,7 @@ def ejecutar_sincronizacion_listas_gmaps():
             st.toast(f"Sincronizados: {total_nuevos} nuevos, {total_actualizados} actualizados.", icon="🔄")
             st.session_state["_msg_sync_guardados"] = (
                 "success",
-                f"Sincronización terminada: {total_nuevos} lugares nuevos añadidos y "
-                f"{total_actualizados} lugares reclasificados/actualizados."
+                f"Sincronización terminada: {total_nuevos} lugares nuevos añadidos"
             )
         else:
             st.session_state["_msg_sync_guardados"] = (
