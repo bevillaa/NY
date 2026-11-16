@@ -4565,6 +4565,74 @@ st.markdown("""
     }
   }
 
+
+  /* Enlace HTML del mapa: caja y centrado idénticos al botón Editar (38 x 38 px). */
+  [class*="st-key-it-map-button-wrap-"] [data-testid="stElementContainer"],
+  [class*="st-key-saved-map-button-wrap-"] [data-testid="stElementContainer"],
+  [class*="st-key-it-map-button-wrap-"] [data-testid="stMarkdownContainer"],
+  [class*="st-key-saved-map-button-wrap-"] [data-testid="stMarkdownContainer"] {
+    box-sizing: border-box !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 38px !important;
+    min-width: 38px !important;
+    max-width: 38px !important;
+    height: 38px !important;
+    min-height: 38px !important;
+    max-height: 38px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  [class*="st-key-it-map-button-wrap-"] [data-testid="stMarkdownContainer"] p,
+  [class*="st-key-saved-map-button-wrap-"] [data-testid="stMarkdownContainer"] p {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 38px !important;
+    height: 38px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  [class*="st-key-it-map-button-wrap-"] a.place-map-link-direct,
+  [class*="st-key-saved-map-button-wrap-"] a.place-map-link-direct,
+  [class*="st-key-it-map-button-wrap-"] a.place-map-link-direct:hover,
+  [class*="st-key-it-map-button-wrap-"] a.place-map-link-direct:focus,
+  [class*="st-key-it-map-button-wrap-"] a.place-map-link-direct:active,
+  [class*="st-key-saved-map-button-wrap-"] a.place-map-link-direct:hover,
+  [class*="st-key-saved-map-button-wrap-"] a.place-map-link-direct:focus,
+  [class*="st-key-saved-map-button-wrap-"] a.place-map-link-direct:active {
+    box-sizing: border-box !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 38px !important;
+    min-width: 38px !important;
+    max-width: 38px !important;
+    height: 38px !important;
+    min-height: 38px !important;
+    max-height: 38px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: #FFFFFF !important;
+    background-color: #FFFFFF !important;
+    background-image: none !important;
+    border: 1px solid #CBD5E1 !important;
+    border-radius: 9px !important;
+    box-shadow: none !important;
+    text-decoration: none !important;
+  }
+  [class*="st-key-it-map-button-wrap-"] a.place-map-link-direct svg,
+  [class*="st-key-saved-map-button-wrap-"] a.place-map-link-direct svg {
+    display: block !important;
+    width: 13px !important;
+    height: 13px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    flex: 0 0 13px !important;
+    transform: none !important;
+  }
+
 </style>
 """, unsafe_allow_html=True)
 
@@ -6191,7 +6259,20 @@ if seccion_principal == "🗽Ruta":
                                 st.rerun()
                     with c_map_head:
                         with st.container(key=f"it-map-button-wrap-{item['id']}"):
-                            st.link_button(" ", url=gmaps_url, help="Abrir en Google Maps")
+                            st.markdown(
+                                f"""<a class="place-map-link-direct" href="{html.escape(gmaps_url, quote=True)}"
+                                target="_blank" rel="noopener noreferrer" title="Abrir en Google Maps"
+                                aria-label="Abrir en Google Maps"
+                                style="box-sizing:border-box!important;display:flex!important;align-items:center!important;justify-content:center!important;width:38px!important;min-width:38px!important;max-width:38px!important;height:38px!important;min-height:38px!important;max-height:38px!important;margin:0!important;padding:0!important;border:1px solid #CBD5E1!important;border-radius:9px!important;background:#FFFFFF!important;background-color:#FFFFFF!important;background-image:none!important;box-shadow:none!important;text-decoration:none!important;line-height:0!important;overflow:hidden!important;">
+                                  <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24"
+                                  fill="none" stroke="#334155" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                  style="display:block!important;width:13px!important;height:13px!important;min-width:13px!important;min-height:13px!important;flex:0 0 13px!important;margin:0!important;padding:0!important;">
+                                    <path d="m3 6 6-3 6 3 6-3v15l-6 3-6-3-6 3z"/>
+                                    <path d="M9 3v15M15 6v15"/>
+                                  </svg>
+                                </a>""",
+                                unsafe_allow_html=True
+                            )
                     with c_chk:
                         chk_val = st.checkbox("", value=is_visited, key=f"chk_it_{d}_{item['id']}")
                         if chk_val != is_visited and idx_real is not None:
@@ -6330,7 +6411,20 @@ if seccion_principal == "📌Guardados":
             with c_saved_map:
                 g_url_sp = f"https://www.google.com/maps/search/?api=1&query={urllib.parse.quote(p_spot['nombre'] + ' New York')}"
                 with st.container(key=f"saved-map-button-wrap-{p_spot['id']}"):
-                        st.link_button(" ", url=g_url_sp, help="Abrir en Google Maps")
+                        st.markdown(
+                            f"""<a class="place-map-link-direct" href="{html.escape(g_url_sp, quote=True)}"
+                            target="_blank" rel="noopener noreferrer" title="Abrir en Google Maps"
+                            aria-label="Abrir en Google Maps"
+                            style="box-sizing:border-box!important;display:flex!important;align-items:center!important;justify-content:center!important;width:38px!important;min-width:38px!important;max-width:38px!important;height:38px!important;min-height:38px!important;max-height:38px!important;margin:0!important;padding:0!important;border:1px solid #CBD5E1!important;border-radius:9px!important;background:#FFFFFF!important;background-color:#FFFFFF!important;background-image:none!important;box-shadow:none!important;text-decoration:none!important;line-height:0!important;overflow:hidden!important;">
+                              <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24"
+                              fill="none" stroke="#334155" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                              style="display:block!important;width:13px!important;height:13px!important;min-width:13px!important;min-height:13px!important;flex:0 0 13px!important;margin:0!important;padding:0!important;">
+                                <path d="m3 6 6-3 6 3 6-3v15l-6 3-6-3-6 3z"/>
+                                <path d="M9 3v15M15 6v15"/>
+                              </svg>
+                            </a>""",
+                            unsafe_allow_html=True
+                        )
             # Dirección y nota en una fila independiente de ancho completo.
             if dir_p_html or nota_p_html:
                 st.markdown(f'<div class="place-full-width-info">{dir_p_html}{nota_p_html}</div>', unsafe_allow_html=True)
