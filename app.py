@@ -4406,6 +4406,81 @@ st.markdown("""
 
 
 
+
+  /* Ajuste puntual: acciones de Ruta alineadas y con caja idéntica. */
+  [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] {
+    grid-template-columns: minmax(0, 1fr) 38px 38px 38px !important;
+    align-items: center !important;
+    column-gap: 6px !important;
+  }
+  [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2),
+  [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(3),
+  [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(4) {
+    box-sizing: border-box !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    align-self: center !important;
+    width: 38px !important;
+    min-width: 38px !important;
+    max-width: 38px !important;
+    height: 38px !important;
+    min-height: 38px !important;
+    max-height: 38px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  [class*="st-key-it-edit-button-wrap-"] [data-testid="stButton"],
+  [class*="st-key-it-edit-button-wrap-"] [data-testid="stButton"] > button,
+  [class*="st-key-it-map-button-wrap-"] [data-testid="stLinkButton"],
+  [class*="st-key-it-map-button-wrap-"] [data-testid="stLinkButton"] > a,
+  [class*="st-key-saved-map-button-wrap-"] [data-testid="stLinkButton"],
+  [class*="st-key-saved-map-button-wrap-"] [data-testid="stLinkButton"] > a {
+    box-sizing: border-box !important;
+    width: 38px !important;
+    min-width: 38px !important;
+    max-width: 38px !important;
+    height: 38px !important;
+    min-height: 38px !important;
+    max-height: 38px !important;
+    margin: 0 !important;
+  }
+  [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(4) [data-testid="stCheckbox"],
+  [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(4) [data-testid="stCheckbox"] label {
+    box-sizing: border-box !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 38px !important;
+    min-width: 38px !important;
+    max-width: 38px !important;
+    height: 38px !important;
+    min-height: 38px !important;
+    max-height: 38px !important;
+    margin: 0 !important;
+  }
+
+  /* El mapa mantiene el mismo borde neutro que el lápiz, incluso con foco. */
+  [class*="st-key-it-map-button-wrap-"] [data-testid="stLinkButton"] a,
+  [class*="st-key-it-map-button-wrap-"] [data-testid="stLinkButton"] a:link,
+  [class*="st-key-it-map-button-wrap-"] [data-testid="stLinkButton"] a:visited,
+  [class*="st-key-it-map-button-wrap-"] [data-testid="stLinkButton"] a:hover,
+  [class*="st-key-it-map-button-wrap-"] [data-testid="stLinkButton"] a:focus,
+  [class*="st-key-it-map-button-wrap-"] [data-testid="stLinkButton"] a:active,
+  [class*="st-key-saved-map-button-wrap-"] [data-testid="stLinkButton"] a,
+  [class*="st-key-saved-map-button-wrap-"] [data-testid="stLinkButton"] a:link,
+  [class*="st-key-saved-map-button-wrap-"] [data-testid="stLinkButton"] a:visited,
+  [class*="st-key-saved-map-button-wrap-"] [data-testid="stLinkButton"] a:hover,
+  [class*="st-key-saved-map-button-wrap-"] [data-testid="stLinkButton"] a:focus,
+  [class*="st-key-saved-map-button-wrap-"] [data-testid="stLinkButton"] a:active {
+    border: 1px solid #CBD5E1 !important;
+    outline: none !important;
+    box-shadow: none !important;
+    background: #FFFFFF !important;
+    background-color: #FFFFFF !important;
+    transform: none !important;
+  }
+
 </style>
 """, unsafe_allow_html=True)
 
