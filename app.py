@@ -6532,20 +6532,22 @@ if seccion_principal == "🗒️Listas":
         key_ed_nombre = f"gmaps_edit_nombre_{idx_lst}_{sufijo_edicion}"
         key_ed_url = f"gmaps_edit_url_{idx_lst}_{sufijo_edicion}"
 
-        col_nombre, col_edit = st.columns([9.45, 0.55], gap="small", vertical_alignment="center")
-        with col_nombre:
-            st.markdown(
-                f"<div style='font-weight:800; color:#0F172A; overflow-wrap:anywhere;'>{idx_lst + 1}. {html.escape(nombre_lista)}</div>"
-                f"<div class='gmaps-list-url' style='font-size:0.76rem; color:#475569; margin-top:2px; margin-bottom:6px;'>{html.escape(url_lista)}</div>",
-                unsafe_allow_html=True
-            )
-        with col_edit:
-            if st.button("✏️", key=f"btn_edit_list_{idx_lst}", help="Editar lista"):
-                actual = st.session_state.get("lista_gmaps_editando")
-                st.session_state.lista_gmaps_editando = None if actual == idx_lst else idx_lst
-                for clave in (key_ed_nombre, key_ed_url):
-                    st.session_state.pop(clave, None)
-                st.rerun()
+        with st.container(key=f"saved-heading-row-list-{idx_lst}"):
+            col_nombre, col_edit = st.columns([9.45, 0.55], gap="small", vertical_alignment="center")
+            with col_nombre:
+                st.markdown(
+                    f"<div style='font-weight:800; color:#0F172A; overflow-wrap:anywhere;'>{idx_lst + 1}. {html.escape(nombre_lista)}</div>"
+                    f"<div class='gmaps-list-url' style='font-size:0.76rem; color:#475569; margin-top:2px; margin-bottom:6px;'>{html.escape(url_lista)}</div>",
+                    unsafe_allow_html=True
+                )
+            with col_edit:
+                with st.container(key=f"saved-edit-button-wrap-list-{idx_lst}"):
+                    if st.button(" ", key=f"btn_ed_pool_list_{idx_lst}", help="Editar lista"):
+                        actual = st.session_state.get("lista_gmaps_editando")
+                        st.session_state.lista_gmaps_editando = None if actual == idx_lst else idx_lst
+                        for clave in (key_ed_nombre, key_ed_url):
+                            st.session_state.pop(clave, None)
+                        st.rerun()
 
         if st.session_state.get("lista_gmaps_editando") == idx_lst:
             st.markdown(f"**Editar lista: {html.escape(nombre_lista)}**")
