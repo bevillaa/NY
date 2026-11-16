@@ -4907,7 +4907,7 @@ if seccion_principal == "📍Ruta":
             unsafe_allow_html=True
         )
 
-    opciones_filtro_it = ["📋 Todos los Días (Días 1 a 10)"] + [etiqueta_dia(d) for d in range(1, 11)]
+    opciones_filtro_it = ["✨ Todos los Días"] + [etiqueta_dia(d) for d in range(1, 11)]
     filtro_it_sel = selectbox_sin_teclado(
         "Ver itinerario:",
         opciones_filtro_it,
