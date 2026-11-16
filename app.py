@@ -3224,6 +3224,40 @@ st.markdown("""
     font-weight: 600 !important;
     letter-spacing: -0.018em !important;
   }
+
+  /* Ajuste fino: iconos de Editar y Google Maps ligeramente más pequeños en móvil. */
+  @media (max-width: 768px) {
+    [class*="st-key-it-controls-row-"] [data-testid="stHorizontalBlock"],
+    [class*="st-key-saved-controls-row-"] [data-testid="stHorizontalBlock"] {
+      grid-template-columns: 36px 36px 86px 80px !important;
+      column-gap: 3px !important;
+    }
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(1),
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(1),
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(2),
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(2) {
+      width: 36px !important; min-width: 36px !important; max-width: 36px !important;
+    }
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(1) button,
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(1) button,
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(2) [data-testid="stLinkButton"] > a,
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(2) [data-testid="stLinkButton"] > a {
+      width: 36px !important; min-width: 36px !important; max-width: 36px !important;
+      font-size: 19px !important;
+    }
+  }
+  @media (max-width: 320px) {
+    [class*="st-key-it-controls-row-"] [data-testid="stHorizontalBlock"],
+    [class*="st-key-saved-controls-row-"] [data-testid="stHorizontalBlock"] {
+      grid-template-columns: 36px 36px 78px 80px !important;
+    }
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(1) button,
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(1) button,
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(2) [data-testid="stLinkButton"] > a,
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(2) [data-testid="stLinkButton"] > a {
+      width: 36px !important; min-width: 36px !important; max-width: 36px !important;
+    }
+  }
 </style>
 """, unsafe_allow_html=True)
 
@@ -4464,6 +4498,7 @@ SECCIONES_PRINCIPALES = [
     "📍 Guardados",
     "💵 Divisas & Tip",
     "✈️ Vuelos & Hotel",
+    "📋 Listas Google",
 ]
 seccion_principal = st.radio(
     "Sección del viaje",
@@ -5086,12 +5121,7 @@ if seccion_principal == "✈️ Vuelos & Hotel":
         cods_ida = extraer_codigos_vuelo(v_ida.get("vuelo", ""))
         cods_vta = extraer_codigos_vuelo(v_vta.get("vuelo", ""))
 
-        st.markdown("""
-        <div class="ny-card" style="border-left: 5px solid #2563EB; margin-bottom:10px;">
-          <div style="font-weight:800; font-size:0.92rem; color:#0F172A; margin-bottom:4px;">📡 Seguimiento en Vivo (FlightAware / Flightradar24)</div>
-          <div style="font-size:0.82rem; color:#0F172A;">Pulsa en el código de vuelo para ver terminal, puerta y retrasos:</div>
-        </div>
-        """, unsafe_allow_html=True)
+        st.caption("Consulta los detalles de cada vuelo en FlightAware o Flightradar24.")
 
         if cods_ida:
             st.markdown(f"**🛫 Ida ({v_ida.get('fecha', '26 Dic')} · {v_ida.get('hora', '15:30')}):**")
@@ -5176,6 +5206,12 @@ if seccion_principal == "✈️ Vuelos & Hotel":
                     st.toast("Hotel base actualizado.", icon="🏨")
                     st.rerun()
 
+
+# ─────────────────────────────────────────────────────────────────────────────
+# NUEVA PESTAÑA: LISTAS DE GOOGLE MAPS
+# Se conserva íntegro el código de gestión y sincronización existente.
+# ─────────────────────────────────────────────────────────────────────────────
+if seccion_principal == "📋 Listas Google":
     st.markdown("---")
     st.markdown('<div class="ny-card-header">🔄 Sincronización de Listas de Google Maps</div>', unsafe_allow_html=True)
     st.caption("Puedes cambiar el nombre o la URL compartida de cualquier lista aquí mismo. Después pulsa sincronizar para importar los lugares nuevos.")
