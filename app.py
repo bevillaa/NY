@@ -3698,8 +3698,8 @@ st.markdown("""
     border-radius: 7px !important;
     background: #FFFFFF !important;
     background-color: #FFFFFF !important;
-    color: #1D4ED8 !important;
-    -webkit-text-fill-color: #1D4ED8 !important;
+    color: #FFFFFF !important;
+    -webkit-text-fill-color: #FFFFFF !important;
     box-shadow: none !important;
     font-size: 15px !important;
     line-height: 1 !important;
@@ -4442,7 +4442,7 @@ def linkificar_nota(nota: str) -> str:
             destino = url if url.lower().startswith(("http://", "https://")) else f"https://{url}"
             partes.append(
                 f'<a href="{html.escape(destino, quote=True)}" target="_blank" '
-                f'rel="noopener noreferrer" style="color:#1D4ED8; text-decoration:underline; '
+                f'rel="noopener noreferrer" style="color:#FFFFFF; text-decoration:underline; '
                 f'overflow-wrap:anywhere;">{html.escape(url)}</a>'
             )
         partes.append(html.escape(puntuacion_final))
