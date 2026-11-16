@@ -4157,11 +4157,11 @@ st.markdown("""
   div[class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stButton"] > button::after {
     content: "" !important;
     display: block !important;
-    flex: 0 0 13px !important;
-    width: 13px !important;
-    height: 13px !important;
+    flex: 0 0 14px !important;
+    width: 14px !important;
+    height: 14px !important;
     margin: 0 !important;
-    background: transparent center / 13px 13px no-repeat url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23334155' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m16 4 4 4'/%3E%3Cpath d='M4 20l4-.9L19 8a2.1 2.1 0 0 0-3-3L5 16z'/%3E%3C/svg%3E") !important;
+    background: transparent center / 14px 14px no-repeat url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23334155' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m16 4 4 4'/%3E%3Cpath d='M4 20l4-.9L19 8a2.1 2.1 0 0 0-3-3L5 16z'/%3E%3C/svg%3E") !important;
   }
   div[class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stButton"] > button > *,
   div[class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stButton"] > button > * {
