@@ -386,6 +386,7 @@ st.markdown("""
     font-size: 0.78rem !important;
     border-radius: 8px !important;
     width: auto !important;
+    white-space: nowrap !important;
   }
   @media (max-width: 768px) {
     [class*="st-key-guardados-header-row"] [data-testid="stHorizontalBlock"] {
@@ -5054,6 +5055,7 @@ if seccion_principal == "📍Ruta":
 if seccion_principal == "📎Guardados":
     render_formulario_agregar_lugar("guardados")
     st.markdown("<div style='height: 6px;'></div>", unsafe_allow_html=True)
+    pulsado_sync = False
     with st.container(key="guardados-header-row"):
         col_gh1, col_gh2 = st.columns([3.4, 1.2], vertical_alignment="center")
         with col_gh1:
@@ -5061,7 +5063,10 @@ if seccion_principal == "📎Guardados":
         with col_gh2:
             with st.container(key="btn_sync_guardados_wrap"):
                 if st.button("🔄 Sincronizar", key="btn_sync_guardados_mini", help="Sincronizar listas de Google Maps"):
-                    ejecutar_sincronizacion_listas_gmaps()
+                    pulsado_sync = True
+
+    if pulsado_sync:
+        ejecutar_sincronizacion_listas_gmaps()
 
     if "_msg_sync_guardados" in st.session_state:
         tipo_msg, txt_msg = st.session_state.pop("_msg_sync_guardados")
@@ -5122,7 +5127,7 @@ if seccion_principal == "📎Guardados":
             st.markdown(f"""
             <div class="place-list-title">{obtener_emoji_categoria(cat_p)} {p_spot['nombre']}</div>
             <div style="margin-top:4px; display:flex; flex-wrap:wrap; gap:4px;">
-              {'<span class="badge-dia">✨ Nuevo</span>' if p_spot.get("id") in nuevos_ids_set else ''}<span class="badge-cat">{cat_p}</span>{tipo_p_html}
+              <span class="badge-cat">{cat_p}</span>{tipo_p_html}
             </div>
             {dir_p_html}
             {nota_p_html}
