@@ -3906,6 +3906,69 @@ st.markdown("""
     .place-full-width-info .place-note { width: 100% !important; max-width: 100% !important; }
   }
 
+
+  /* Corrección definitiva de los dos botones de cada lugar: fondo blanco real y lápiz sin recorte. */
+  div[class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stButton"] button,
+  div[class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stButton"] button,
+  div[class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(3) [data-testid="stLinkButton"] a,
+  div[class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(3) [data-testid="stLinkButton"] a,
+  div[class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stButton"] button:hover,
+  div[class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stButton"] button:hover,
+  div[class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(3) [data-testid="stLinkButton"] a:hover,
+  div[class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(3) [data-testid="stLinkButton"] a:hover {
+    background: #FFFFFF !important;
+    background-color: #FFFFFF !important;
+    background-image: none !important;
+    border: 1px solid #CBD5E1 !important;
+    box-shadow: none !important;
+    opacity: 1 !important;
+    filter: none !important;
+    overflow: visible !important;
+  }
+  div[class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stButton"] button,
+  div[class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stButton"] button {
+    width: 30px !important; min-width: 30px !important; max-width: 30px !important;
+    height: 30px !important; min-height: 30px !important; max-height: 30px !important;
+    padding: 0 !important; margin: 0 !important;
+    color: #334155 !important; -webkit-text-fill-color: #334155 !important;
+    font-family: Arial, sans-serif !important;
+    font-size: 17px !important; font-weight: 600 !important;
+    line-height: 1 !important; white-space: nowrap !important;
+    display: inline-flex !important; align-items: center !important; justify-content: center !important;
+  }
+  div[class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stButton"] button p,
+  div[class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stButton"] button p {
+    color: #334155 !important; -webkit-text-fill-color: #334155 !important;
+    font-size: 17px !important; line-height: 1 !important; margin: 0 !important;
+  }
+  div[class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stButton"] button::before,
+  div[class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stButton"] button::after,
+  div[class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stButton"] button::before,
+  div[class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stButton"] button::after {
+    content: none !important; display: none !important; background: none !important;
+  }
+  div[class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(3) [data-testid="stLinkButton"] a,
+  div[class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(3) [data-testid="stLinkButton"] a {
+    width: 30px !important; min-width: 30px !important; max-width: 30px !important;
+    height: 30px !important; min-height: 30px !important; max-height: 30px !important;
+    padding: 0 !important; margin: 0 !important;
+    color: #334155 !important; -webkit-text-fill-color: #334155 !important;
+    font-size: 14px !important; line-height: 1 !important;
+    display: inline-flex !important; align-items: center !important; justify-content: center !important;
+    text-decoration: none !important;
+  }
+  div[class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(3) [data-testid="stLinkButton"] a p,
+  div[class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(3) [data-testid="stLinkButton"] a p {
+    color: #334155 !important; -webkit-text-fill-color: #334155 !important;
+    font-size: 14px !important; line-height: 1 !important; margin: 0 !important;
+  }
+  div[class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(3) [data-testid="stLinkButton"] a::before,
+  div[class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(3) [data-testid="stLinkButton"] a::after,
+  div[class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(3) [data-testid="stLinkButton"] a::before,
+  div[class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(3) [data-testid="stLinkButton"] a::after {
+    content: none !important; display: none !important; background: none !important;
+  }
+
 </style>
 """, unsafe_allow_html=True)
 
@@ -5525,7 +5588,7 @@ if seccion_principal == "🗽Ruta":
                         """, unsafe_allow_html=True)
 
                     with c_edit_head:
-                        if st.button("✏️", key=f"btn_ed_it_{d}_{item['id']}", help="Editar sitio"):
+                        if st.button("✎", key=f"btn_ed_it_{d}_{item['id']}", help="Editar sitio"):
                             ek = f"it_{d}_{item['id']}"
                             st.session_state.editando_spot_key = None if st.session_state.editando_spot_key == ek else ek
                             st.rerun()
@@ -5661,7 +5724,7 @@ if seccion_principal == "📌Guardados":
                 </div>
                 """, unsafe_allow_html=True)
             with c_saved_edit:
-                if st.button("✏️", key=f"btn_ed_pool_{p_spot['id']}", help="Editar sitio"):
+                if st.button("✎", key=f"btn_ed_pool_{p_spot['id']}", help="Editar sitio"):
                     ek = f"pool_{p_spot['id']}"
                     st.session_state.editando_spot_key = None if st.session_state.editando_spot_key == ek else ek
                     st.rerun()
