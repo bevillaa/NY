@@ -3696,8 +3696,8 @@ st.markdown("""
     margin: 0 !important;
     border: 1px solid #93B4E8 !important;
     border-radius: 7px !important;
-    background: #DBEAFE !important;
-    background-color: #DBEAFE !important;
+    background: #FFFFFF !important;
+    background-color: #FFFFFF !important;
     color: #1D4ED8 !important;
     -webkit-text-fill-color: #1D4ED8 !important;
     box-shadow: none !important;
