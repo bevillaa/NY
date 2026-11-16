@@ -4714,6 +4714,80 @@ st.markdown("""
     padding: 0 !important;
   }
 
+
+  /* AJUSTE DEFINITIVO DE LOS BOTONES DEL ENCABEZADO: lápiz y mapa iguales,
+     con separación visible. Se aplica al enlace HTML real de Google Maps. */
+  @media (max-width: 768px) {
+    div[class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"],
+    div[class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"] {
+      column-gap: 8px !important;
+    }
+    div[class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2),
+    div[class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(2),
+    div[class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(3),
+    div[class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(3) {
+      width: 38px !important;
+      min-width: 38px !important;
+      max-width: 38px !important;
+      justify-self: center !important;
+      overflow: visible !important;
+    }
+    div[class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stButton"],
+    div[class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stButton"],
+    div[class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stButton"] > button,
+    div[class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stButton"] > button,
+    div[class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(3) .place-map-link-direct,
+    div[class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(3) .place-map-link-direct {
+      box-sizing: border-box !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      width: 38px !important;
+      min-width: 38px !important;
+      max-width: 38px !important;
+      height: 38px !important;
+      min-height: 38px !important;
+      max-height: 38px !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      border: 1px solid #CBD5E1 !important;
+      border-radius: 9px !important;
+      background-color: #FFFFFF !important;
+      background-repeat: no-repeat !important;
+      background-position: center !important;
+      box-shadow: none !important;
+      overflow: hidden !important;
+    }
+    div[class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stButton"] > button,
+    div[class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stButton"] > button {
+      background-size: 13px 13px !important;
+    }
+    div[class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(3) .place-map-link-direct,
+    div[class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(3) .place-map-link-direct {
+      background-image: none !important;
+    }
+    div[class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(3) .place-map-link-direct svg,
+    div[class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(3) .place-map-link-direct svg {
+      display: block !important;
+      width: 13px !important;
+      min-width: 13px !important;
+      height: 13px !important;
+      min-height: 13px !important;
+      flex: 0 0 13px !important;
+      margin: 0 !important;
+      transform: none !important;
+    }
+    div[class*="st-key-it-map-button-wrap-"] [data-testid="stMarkdownContainer"] p,
+    div[class*="st-key-saved-map-button-wrap-"] [data-testid="stMarkdownContainer"] p {
+      width: 38px !important;
+      min-width: 38px !important;
+      max-width: 38px !important;
+      height: 38px !important;
+      margin: 0 !important;
+      padding: 0 !important;
+    }
+  }
+
 </style>
 """, unsafe_allow_html=True)
 
