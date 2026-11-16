@@ -374,6 +374,41 @@ st.markdown("""
     color: #0F172A !important;
   }
 
+  /* Botón pequeño de sincronizar listas en Guardados */
+  [class*="st-key-btn_sync_guardados_wrap"] {
+    display: flex !important;
+    justify-content: flex-end !important;
+  }
+  [class*="st-key-btn_sync_guardados_wrap"] button {
+    min-height: 30px !important;
+    height: 30px !important;
+    padding: 0 10px !important;
+    font-size: 0.78rem !important;
+    border-radius: 8px !important;
+    width: auto !important;
+  }
+  @media (max-width: 768px) {
+    [class*="st-key-guardados-header-row"] [data-testid="stHorizontalBlock"] {
+      display: grid !important;
+      grid-template-columns: minmax(0, 1fr) auto !important;
+      align-items: center !important;
+      gap: 6px !important;
+    }
+    [class*="st-key-guardados-header-row"] [data-testid="column"] {
+      width: auto !important;
+      min-width: 0 !important;
+      flex: none !important;
+    }
+    [class*="st-key-btn_sync_guardados_wrap"] button {
+      min-height: 30px !important;
+      height: 30px !important;
+      padding: 0 9px !important;
+      font-size: 0.74rem !important;
+      white-space: nowrap !important;
+      width: auto !important;
+    }
+  }
+
   /* Botón pequeño de edición ✏️ junto al nombre */
   .edit-mini-btn {
     display: flex !important;
@@ -4136,6 +4171,159 @@ def extraer_lugares_lista_gmaps(url_lista: str, nombre_lista: str = ""):
     return encontrados
 
 
+
+def ejecutar_sincronizacion_listas_gmaps():
+    listas_config = st.session_state.config_viaje.get("listas_gmaps", [])
+    if not listas_config:
+        st.info("Todavía no hay listas de Google Maps guardadas.")
+        return
+    total_nuevos = 0
+    total_actualizados = 0
+    total_descargados = 0
+    errores_sync = []
+    nuevos_ids = []
+
+    def _clave_lugar_sync(nombre, lat, lon):
+        nombre_n = re.sub(r"\s+", " ", str(nombre or "").strip().casefold())
+        try:
+            return (nombre_n, round(float(lat), 5), round(float(lon), 5))
+        except (TypeError, ValueError):
+            return (nombre_n, None, None)
+
+    mapa_existentes_sync = {
+        _clave_lugar_sync(x.get("nombre"), x.get("lat"), x.get("lon")): x
+        for x in st.session_state.lugares if isinstance(x, dict)
+    }
+    ids_sync = []
+    for x in st.session_state.lugares:
+        try:
+            ids_sync.append(int(x.get("id", 0)))
+        except (TypeError, ValueError, AttributeError):
+            pass
+    max_id_sync = max(ids_sync, default=0)
+
+    with st.spinner("Sincronizando todas tus listas de Google Maps y clasificando categorías..."):
+        for i_lista, datos_lista in enumerate(listas_config):
+            nom_lista = str(datos_lista.get("nombre", f"Lista {i_lista + 1}"))
+            url_lista_sync = str(datos_lista.get("url", "")).strip()
+            if not url_lista_sync:
+                errores_sync.append(f"{nom_lista}: falta la URL")
+                continue
+            try:
+                descargados_lista = extraer_lugares_lista_gmaps(url_lista_sync, nom_lista)
+                total_descargados += len(descargados_lista or [])
+                for item_sync in descargados_lista or []:
+                    nombre_sync = str(item_sync.get("nombre", "")).strip()
+                    if not nombre_sync:
+                        continue
+                    dir_sync = str(item_sync.get("direccion", "")).strip()
+                    origen_sync = str(item_sync.get("lista_origen") or nom_lista).strip()
+                    cat_clasif, tipo_clasif = clasificar_lugar(nombre_sync, dir_sync, origen_sync)
+                    cat_final = normalizar_categoria(cat_clasif)
+                    clave_sync = _clave_lugar_sync(nombre_sync, item_sync.get("lat"), item_sync.get("lon"))
+                    existente = mapa_existentes_sync.get(clave_sync)
+                    if existente is None:
+                        nombre_norm_sync = re.sub(r"\s+", " ", nombre_sync.casefold())
+                        for (k_nom, _, _), cand_ex in mapa_existentes_sync.items():
+                            if k_nom == nombre_norm_sync:
+                                existente = cand_ex
+                                break
+                    if existente is not None:
+                        cambio_item = False
+                        if dir_sync and not existente.get("direccion"):
+                            existente["direccion"] = dir_sync
+                            cambio_item = True
+                        if origen_sync and existente.get("lista_origen") != origen_sync:
+                            existente["lista_origen"] = origen_sync
+                            cambio_item = True
+                        if existente.get("categoria") != cat_final:
+                            existente["categoria"] = cat_final
+                            cambio_item = True
+                        if existente.get("tipo") != tipo_clasif:
+                            existente["tipo"] = tipo_clasif
+                            cambio_item = True
+                        if cambio_item:
+                            total_actualizados += 1
+                        continue
+                    max_id_sync += 1
+                    nuevo_lugar_sync = {
+                        "id": max_id_sync,
+                        "nombre": nombre_sync,
+                        "lat": float(item_sync.get("lat", 40.7580)),
+                        "lon": float(item_sync.get("lon", -73.9855)),
+                        "dia": 0,
+                        "hora": "",
+                        "direccion": dir_sync,
+                        "nota": "",
+                        "categoria": cat_final,
+                        "tipo": tipo_clasif,
+                        "lista_origen": origen_sync,
+                        "visitado": False
+                    }
+                    st.session_state.lugares.append(nuevo_lugar_sync)
+                    mapa_existentes_sync[clave_sync] = nuevo_lugar_sync
+                    nuevos_ids.append(max_id_sync)
+                    total_nuevos += 1
+            except Exception as exc:
+                errores_sync.append(f"{nom_lista}: {exc}")
+
+        for lugar_reg in st.session_state.lugares:
+            if not isinstance(lugar_reg, dict):
+                continue
+            cat_actual = lugar_reg.get("categoria", "")
+            cat_norm = normalizar_categoria(cat_actual)
+            origen_reg = str(lugar_reg.get("lista_origen", "")).strip()
+            if origen_reg:
+                cat_auto, tipo_auto = clasificar_lugar(
+                    lugar_reg.get("nombre", ""),
+                    lugar_reg.get("direccion", ""),
+                    origen_reg
+                )
+                cat_norm = normalizar_categoria(cat_auto)
+                if lugar_reg.get("tipo") != tipo_auto:
+                    lugar_reg["tipo"] = tipo_auto
+                    total_actualizados += 1
+            elif cat_norm in ("📍 Otros", "☀️ Spots") and not cat_actual:
+                cat_auto, tipo_auto = clasificar_lugar(
+                    lugar_reg.get("nombre", ""),
+                    lugar_reg.get("direccion", "")
+                )
+                cat_norm = normalizar_categoria(cat_auto)
+                if lugar_reg.get("tipo") != tipo_auto:
+                    lugar_reg["tipo"] = tipo_auto
+                    total_actualizados += 1
+            if cat_actual != cat_norm:
+                lugar_reg["categoria"] = cat_norm
+                total_actualizados += 1
+
+    if nuevos_ids:
+        prev_nuevos = st.session_state.get("nuevos_lugares_ids", [])
+        st.session_state.nuevos_lugares_ids = list(dict.fromkeys(nuevos_ids + prev_nuevos))
+
+    if total_nuevos or total_actualizados:
+        if guardar_itinerario_disco(st.session_state.lugares):
+            st.toast(f"Sincronizados: {total_nuevos} nuevos, {total_actualizados} actualizados.", icon="🔄")
+            st.session_state["_msg_sync_guardados"] = (
+                "success",
+                f"Sincronización terminada: {total_nuevos} lugares nuevos añadidos y "
+                f"{total_actualizados} lugares reclasificados/actualizados."
+            )
+        else:
+            st.session_state["_msg_sync_guardados"] = (
+                "error",
+                "No se pudieron guardar los lugares sincronizados en el archivo compartido."
+            )
+    else:
+        st.toast("Listas al día. No hay sitios nuevos.", icon="✅")
+        st.session_state["_msg_sync_guardados"] = (
+            "info",
+            f"Sincronización terminada. No había cambios nuevos. ({total_descargados} resultados recibidos)."
+        )
+    if errores_sync:
+        st.session_state["_errores_sync_guardados"] = errores_sync
+    st.rerun()
+
+
 # =============================================================================
 # 6B. HERRAMIENTAS PARA AÑADIR Y EDITAR LUGARES
 # =============================================================================
@@ -4207,6 +4395,8 @@ def agregar_sitio_a_lugares(nombre: str, direccion: str = "", lat: float = None,
     if not guardar_itinerario_disco(st.session_state.lugares):
         st.session_state.lugares.pop()
         return False, "No se pudo guardar el lugar en el archivo compartido. No se ha añadido; revisa los permisos de escritura."
+    prev_nuevos = st.session_state.get("nuevos_lugares_ids", [])
+    st.session_state.nuevos_lugares_ids = list(dict.fromkeys([max_id] + prev_nuevos))
     return True, f"¡'{nom}' añadido con éxito como {nuevo['categoria']}!"
 
 def importar_sitio_desde_gmaps(url_o_texto: str, dia_dest: int = 0, hora: str = "", nota: str = "") -> tuple:
@@ -4233,10 +4423,13 @@ def importar_sitio_desde_gmaps(url_o_texto: str, dia_dest: int = 0, hora: str = 
                     existentes.add(s["nombre"].strip().casefold())
                     nuevos += 1
             if nuevos > 0:
+                ids_imp = [x["id"] for x in st.session_state.lugares[-nuevos:]]
                 if not guardar_itinerario_disco(st.session_state.lugares):
                     # Si el guardado remoto falla, no damos la importación por hecha.
                     st.session_state.lugares = cargar_itinerario_disco()
                     return False, "No se pudieron guardar en GitHub los lugares importados. No se ha confirmado la importación."
+                prev_nuevos = st.session_state.get("nuevos_lugares_ids", [])
+                st.session_state.nuevos_lugares_ids = list(dict.fromkeys(ids_imp + prev_nuevos))
                 return True, f"¡Se importaron {nuevos} lugares desde la lista de Google Maps!"
 
     nombre_extraido = ""
@@ -4861,7 +5054,26 @@ if seccion_principal == "📍Ruta":
 if seccion_principal == "📎Guardados":
     render_formulario_agregar_lugar("guardados")
     st.markdown("<div style='height: 6px;'></div>", unsafe_allow_html=True)
-    st.markdown('<div class="ny-card-header">Lugares Guardados & Gestión de Sitios</div>', unsafe_allow_html=True)
+    with st.container(key="guardados-header-row"):
+        col_gh1, col_gh2 = st.columns([3.4, 1.2], vertical_alignment="center")
+        with col_gh1:
+            st.markdown('<div class="ny-card-header" style="margin-bottom:0;">Lugares Guardados & Gestión de Sitios</div>', unsafe_allow_html=True)
+        with col_gh2:
+            with st.container(key="btn_sync_guardados_wrap"):
+                if st.button("🔄 Sincronizar", key="btn_sync_guardados_mini", help="Sincronizar listas de Google Maps"):
+                    ejecutar_sincronizacion_listas_gmaps()
+
+    if "_msg_sync_guardados" in st.session_state:
+        tipo_msg, txt_msg = st.session_state.pop("_msg_sync_guardados")
+        if tipo_msg == "success":
+            st.success(txt_msg)
+        elif tipo_msg == "error":
+            st.error(txt_msg)
+        else:
+            st.info(txt_msg)
+    if "_errores_sync_guardados" in st.session_state:
+        for err_s in st.session_state.pop("_errores_sync_guardados"):
+            st.warning(err_s)
 
     ver_todos_edicion = st.checkbox("Mostrar también los lugares ya asignados a días", value=False, key="chk_ver_todos_guardados")
 
@@ -4878,11 +5090,18 @@ if seccion_principal == "📎Guardados":
     with col_flt2:
         busq_g = st.text_input("Buscar:", placeholder="Nombre del sitio...", key="busq_pool_nom")
 
+    nuevos_ids_set = set(st.session_state.get("nuevos_lugares_ids", []))
+    nuevos_orden = {nid: idx for idx, nid in enumerate(st.session_state.get("nuevos_lugares_ids", []))}
+
     visibles_pool = [
         l for l in pool_guardados
         if (flt_cat_g == "Todas" or normalizar_categoria(l.get("categoria", "")) == flt_cat_g)
         and (not busq_g.strip() or busq_g.strip().lower() in l.get("nombre", "").lower())
     ]
+    if nuevos_ids_set:
+        visibles_pool.sort(
+            key=lambda l: (0, nuevos_orden[l.get("id")]) if l.get("id") in nuevos_ids_set else (1, 0)
+        )
 
     st.caption(f"Mostrando **{len(visibles_pool)}** sitios")
 
@@ -4903,7 +5122,7 @@ if seccion_principal == "📎Guardados":
             st.markdown(f"""
             <div class="place-list-title">{obtener_emoji_categoria(cat_p)} {p_spot['nombre']}</div>
             <div style="margin-top:4px; display:flex; flex-wrap:wrap; gap:4px;">
-              <span class="badge-cat">{cat_p}</span>{tipo_p_html}
+              {'<span class="badge-dia">✨ Nuevo</span>' if p_spot.get("id") in nuevos_ids_set else ''}<span class="badge-cat">{cat_p}</span>{tipo_p_html}
             </div>
             {dir_p_html}
             {nota_p_html}
@@ -5296,136 +5515,7 @@ if seccion_principal == "🗒️Listas":
         st.info("Todavía no hay listas de Google Maps guardadas.")
     else:
         if st.button("🔄 Sincronizar todas las listas", key="btn_sync_all_gmaps", use_container_width=True, type="primary"):
-            total_nuevos = 0
-            total_actualizados = 0
-            total_descargados = 0
-            errores_sync = []
-            # La clave de duplicados combina nombre y coordenadas para no descartar
-            # lugares distintos que tengan nombres iguales.
-            def _clave_lugar_sync(nombre, lat, lon):
-                nombre_n = re.sub(r"\s+", " ", str(nombre or "").strip().casefold())
-                try:
-                    return (nombre_n, round(float(lat), 5), round(float(lon), 5))
-                except (TypeError, ValueError):
-                    return (nombre_n, None, None)
-            mapa_existentes_sync = {
-                _clave_lugar_sync(x.get("nombre"), x.get("lat"), x.get("lon")): x
-                for x in st.session_state.lugares if isinstance(x, dict)
-            }
-            ids_sync = []
-            for x in st.session_state.lugares:
-                try: ids_sync.append(int(x.get("id", 0)))
-                except (TypeError, ValueError, AttributeError): pass
-            max_id_sync = max(ids_sync, default=0)
-            with st.spinner("Sincronizando todas tus listas de Google Maps y clasificando categorías..."):
-                for i_lista, datos_lista in enumerate(listas_config):
-                    nom_lista = str(datos_lista.get("nombre", f"Lista {i_lista + 1}"))
-                    url_lista_sync = str(datos_lista.get("url", "")).strip()
-                    if not url_lista_sync:
-                        errores_sync.append(f"{nom_lista}: falta la URL")
-                        continue
-                    try:
-                        descargados_lista = extraer_lugares_lista_gmaps(url_lista_sync, nom_lista)
-                        total_descargados += len(descargados_lista or [])
-                        for item_sync in descargados_lista or []:
-                            nombre_sync = str(item_sync.get("nombre", "")).strip()
-                            if not nombre_sync:
-                                continue
-                            dir_sync = str(item_sync.get("direccion", "")).strip()
-                            origen_sync = str(item_sync.get("lista_origen") or nom_lista).strip()
-                            cat_clasif, tipo_clasif = clasificar_lugar(nombre_sync, dir_sync, origen_sync)
-                            cat_final = normalizar_categoria(cat_clasif)
-                            clave_sync = _clave_lugar_sync(nombre_sync, item_sync.get("lat"), item_sync.get("lon"))
-                            existente = mapa_existentes_sync.get(clave_sync)
-                            if existente is None:
-                                # Fallback por nombre normalizado si ya existía con coords ligeramente distintas
-                                nombre_norm_sync = re.sub(r"\s+", " ", nombre_sync.casefold())
-                                for (k_nom, _, _), cand_ex in mapa_existentes_sync.items():
-                                    if k_nom == nombre_norm_sync:
-                                        existente = cand_ex
-                                        break
-                            if existente is not None:
-                                cambio_item = False
-                                if dir_sync and not existente.get("direccion"):
-                                    existente["direccion"] = dir_sync
-                                    cambio_item = True
-                                if origen_sync and existente.get("lista_origen") != origen_sync:
-                                    existente["lista_origen"] = origen_sync
-                                    cambio_item = True
-                                if existente.get("categoria") != cat_final:
-                                    existente["categoria"] = cat_final
-                                    cambio_item = True
-                                if existente.get("tipo") != tipo_clasif:
-                                    existente["tipo"] = tipo_clasif
-                                    cambio_item = True
-                                if cambio_item:
-                                    total_actualizados += 1
-                                continue
-                            max_id_sync += 1
-                            nuevo_lugar_sync = {
-                                "id": max_id_sync,
-                                "nombre": nombre_sync,
-                                "lat": float(item_sync.get("lat", 40.7580)),
-                                "lon": float(item_sync.get("lon", -73.9855)),
-                                "dia": 0, "hora": "",
-                                "direccion": dir_sync,
-                                "nota": "",
-                                "categoria": cat_final,
-                                "tipo": tipo_clasif,
-                                "lista_origen": origen_sync,
-                                "visitado": False
-                            }
-                            st.session_state.lugares.append(nuevo_lugar_sync)
-                            mapa_existentes_sync[clave_sync] = nuevo_lugar_sync
-                            total_nuevos += 1
-                    except Exception as exc:
-                        errores_sync.append(f"{nom_lista}: {exc}")
-
-                # Pasar también el motor de categorías por el resto de lugares guardados
-                # para asegurar que todas las categorías estén normalizadas y actualizadas
-                for lugar_reg in st.session_state.lugares:
-                    if not isinstance(lugar_reg, dict):
-                        continue
-                    cat_actual = lugar_reg.get("categoria", "")
-                    cat_norm = normalizar_categoria(cat_actual)
-                    origen_reg = str(lugar_reg.get("lista_origen", "")).strip()
-                    if origen_reg:
-                        cat_auto, tipo_auto = clasificar_lugar(
-                            lugar_reg.get("nombre", ""),
-                            lugar_reg.get("direccion", ""),
-                            origen_reg
-                        )
-                        cat_norm = normalizar_categoria(cat_auto)
-                        if lugar_reg.get("tipo") != tipo_auto:
-                            lugar_reg["tipo"] = tipo_auto
-                            total_actualizados += 1
-                    elif cat_norm in ("📍 Otros", "☀️ Spots") and not cat_actual:
-                        cat_auto, tipo_auto = clasificar_lugar(
-                            lugar_reg.get("nombre", ""),
-                            lugar_reg.get("direccion", "")
-                        )
-                        cat_norm = normalizar_categoria(cat_auto)
-                        if lugar_reg.get("tipo") != tipo_auto:
-                            lugar_reg["tipo"] = tipo_auto
-                            total_actualizados += 1
-                    if cat_actual != cat_norm:
-                        lugar_reg["categoria"] = cat_norm
-                        total_actualizados += 1
-
-            if total_nuevos or total_actualizados:
-                if guardar_itinerario_disco(st.session_state.lugares):
-                    st.success(
-                        f"Sincronización terminada: {total_nuevos} lugares nuevos añadidos y "
-                        f"{total_actualizados} lugares reclasificados/actualizados. "
-                        f"({total_descargados} resultados recibidos en total)."
-                    )
-                else:
-                    st.error("No se pudieron guardar los lugares sincronizados en el archivo compartido.")
-            else:
-                st.info(f"Sincronización terminada. No había cambios nuevos. ({total_descargados} resultados recibidos en total).")
-            for error_sync in errores_sync:
-                st.warning(error_sync)
-            st.rerun()
+            ejecutar_sincronizacion_listas_gmaps()
 
     for idx_lst, lst_data in enumerate(listas_config):
         nombre_lista = str(lst_data.get("nombre", f"Lista {idx_lst + 1}"))
