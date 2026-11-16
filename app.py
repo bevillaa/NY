@@ -4297,7 +4297,6 @@ def ejecutar_sincronizacion_listas_gmaps():
     if total_nuevos or total_actualizados:
         if guardar_itinerario_disco(st.session_state.lugares):
             st.toast(f"Sincronizados: {total_nuevos} nuevos, {total_actualizados} actualizados.", icon="🔄")Í:
-            # st.session_state["_msg_sync_guardados"] = ("success", ...)
         else:
             st.session_state["_msg_sync_guardados"] = (
                 "error",
@@ -4305,7 +4304,6 @@ def ejecutar_sincronizacion_listas_gmaps():
             )
     else:
         st.toast("No hay sitios nuevos.", icon="✅")
-        # st.session_state["_msg_sync_guardados"] = ("info", ...)
     
     if errores_sync:
         st.session_state["_errores_sync_guardados"] = errores_sync
@@ -5055,11 +5053,6 @@ if seccion_principal == "📎Guardados":
 
     if pulsado_sync:
         ejecutar_sincronizacion_listas_gmaps()
-
-    # if "_msg_sync_guardados" in st.session_state:
-    #     tipo_msg, txt_msg = st.session_state.pop("_msg_sync_guardados")
-    #     if tipo_msg == "error":
-    #        st.error(txt_msg)
 
     if "_errores_sync_guardados" in st.session_state:
         errores_temp = st.session_state.pop("_errores_sync_guardados")
