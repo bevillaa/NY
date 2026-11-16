@@ -3494,29 +3494,47 @@ st.markdown("""
   }
 
 
-  /* RESTAURAR LOS EMOJIS NATIVOS DE EDITAR Y MAPA.
-     Los controles ya contienen ✏️ y 🗺️ desde Python; reglas CSS anteriores
-     los estaban dejando transparentes/invisibles. No se toca su geometría. */
-  [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2) button,
-  [class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(2) button,
-  [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(3) a,
-  [class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(3) a {
+  /* ICONOS VISIBLES EN LOS CONTROLES REALES DE LA FILA DEL NOMBRE.
+     Se usan pseudo-elementos para no depender de cómo Streamlit renderice
+     el texto/emoji interno. No se altera la geometría de los botones. */
+  [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stButton"] > button,
+  [class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stButton"] > button,
+  [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(3) [data-testid="stLinkButton"] > a,
+  [class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(3) [data-testid="stLinkButton"] > a {
+    position: relative !important;
+    color: transparent !important;
+    -webkit-text-fill-color: transparent !important;
+    font-size: 0 !important;
     background-image: none !important;
-    color: #1f2937 !important;
-    -webkit-text-fill-color: #1f2937 !important;
-    font-size: 1rem !important;
-    line-height: 1 !important;
+    overflow: hidden !important;
   }
-  [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2) button *,
-  [class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(2) button *,
-  [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(3) a *,
-  [class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(3) a * {
-    visibility: visible !important;
-    opacity: 1 !important;
-    color: #1f2937 !important;
-    -webkit-text-fill-color: #1f2937 !important;
-    font-size: 1rem !important;
-    line-height: 1 !important;
+
+  [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stButton"] > button::after,
+  [class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stButton"] > button::after {
+    content: "" !important;
+    display: block !important;
+    width: 20px !important;
+    height: 20px !important;
+    flex: 0 0 20px !important;
+    background: center / contain no-repeat url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23334155' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m16 4 4 4'/%3E%3Cpath d='M4 20l4-.9L19 8a2.1 2.1 0 0 0-3-3L5 16z'/%3E%3C/svg%3E") !important;
+  }
+
+  [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(3) [data-testid="stLinkButton"] > a::after,
+  [class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(3) [data-testid="stLinkButton"] > a::after {
+    content: "" !important;
+    display: block !important;
+    width: 21px !important;
+    height: 21px !important;
+    flex: 0 0 21px !important;
+    background: center / contain no-repeat url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231D4ED8' stroke-width='1.9' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m3 6 6-3 6 3 6-3v15l-6 3-6-3-6 3z'/%3E%3Cpath d='M9 3v15'/%3E%3Cpath d='M15 6v15'/%3E%3C/svg%3E") !important;
+  }
+
+  [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stButton"] > button *,
+  [class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stButton"] > button *,
+  [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(3) [data-testid="stLinkButton"] > a *,
+  [class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(3) [data-testid="stLinkButton"] > a * {
+    display: none !important;
+    visibility: hidden !important;
   }
 
 </style>
