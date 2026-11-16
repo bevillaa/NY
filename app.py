@@ -3969,6 +3969,90 @@ st.markdown("""
     content: none !important; display: none !important; background: none !important;
   }
 
+
+  /* Sobrescritura final por clave de widget: fondo blanco real e iconos monocromos alineados. */
+  div[class*="st-key-btn_ed_it_"] [data-testid="stButton"] > button,
+  div[class*="st-key-btn_ed_pool_"] [data-testid="stButton"] > button,
+  div[class*="st-key-map_it_"] [data-testid="stLinkButton"] > a,
+  div[class*="st-key-map_saved_"] [data-testid="stLinkButton"] > a,
+  div[class*="st-key-btn_ed_it_"] button,
+  div[class*="st-key-btn_ed_pool_"] button,
+  div[class*="st-key-map_it_"] a,
+  div[class*="st-key-map_saved_"] a {
+    appearance: none !important;
+    -webkit-appearance: none !important;
+    box-sizing: border-box !important;
+    width: 30px !important;
+    min-width: 30px !important;
+    max-width: 30px !important;
+    height: 30px !important;
+    min-height: 30px !important;
+    max-height: 30px !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    border: 1px solid #CBD5E1 !important;
+    border-radius: 7px !important;
+    background: #FFFFFF !important;
+    background-color: #FFFFFF !important;
+    background-repeat: no-repeat !important;
+    background-position: center center !important;
+    background-size: 13px 13px !important;
+    box-shadow: none !important;
+    color: transparent !important;
+    -webkit-text-fill-color: transparent !important;
+    font-size: 0 !important;
+    line-height: 0 !important;
+    text-decoration: none !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    overflow: hidden !important;
+    opacity: 1 !important;
+    filter: none !important;
+  }
+  div[class*="st-key-btn_ed_it_"] [data-testid="stButton"] > button,
+  div[class*="st-key-btn_ed_pool_"] [data-testid="stButton"] > button,
+  div[class*="st-key-btn_ed_it_"] button,
+  div[class*="st-key-btn_ed_pool_"] button {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23334155' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m15 5 4 4'/%3E%3Cpath d='M4 20l4-.8L19 8a2 2 0 0 0-3-3L5 16z'/%3E%3Cpath d='m4 20 1-4'/%3E%3C/svg%3E") !important;
+    background-size: 12px 12px !important;
+  }
+  div[class*="st-key-map_it_"] [data-testid="stLinkButton"] > a,
+  div[class*="st-key-map_saved_"] [data-testid="stLinkButton"] > a,
+  div[class*="st-key-map_it_"] a,
+  div[class*="st-key-map_saved_"] a {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23334155' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m3 6 6-3 6 3 6-3v15l-6 3-6-3-6 3z'/%3E%3Cpath d='M9 3v15'/%3E%3Cpath d='M15 6v15'/%3E%3C/svg%3E") !important;
+    background-size: 14px 14px !important;
+  }
+  div[class*="st-key-btn_ed_it_"] button:hover,
+  div[class*="st-key-btn_ed_it_"] button:focus,
+  div[class*="st-key-btn_ed_it_"] button:active,
+  div[class*="st-key-btn_ed_pool_"] button:hover,
+  div[class*="st-key-btn_ed_pool_"] button:focus,
+  div[class*="st-key-btn_ed_pool_"] button:active,
+  div[class*="st-key-map_it_"] a:hover,
+  div[class*="st-key-map_it_"] a:focus,
+  div[class*="st-key-map_saved_"] a:hover,
+  div[class*="st-key-map_saved_"] a:focus {
+    background-color: #FFFFFF !important;
+    background-repeat: no-repeat !important;
+    border-color: #CBD5E1 !important;
+    box-shadow: none !important;
+    color: transparent !important;
+    -webkit-text-fill-color: transparent !important;
+  }
+  div[class*="st-key-btn_ed_it_"] button p,
+  div[class*="st-key-btn_ed_pool_"] button p,
+  div[class*="st-key-map_it_"] a p,
+  div[class*="st-key-map_saved_"] a p,
+  div[class*="st-key-btn_ed_it_"] button span,
+  div[class*="st-key-btn_ed_pool_"] button span,
+  div[class*="st-key-map_it_"] a span,
+  div[class*="st-key-map_saved_"] a span {
+    display: none !important;
+    visibility: hidden !important;
+  }
+
 </style>
 """, unsafe_allow_html=True)
 
