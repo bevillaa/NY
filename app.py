@@ -3849,6 +3849,63 @@ st.markdown("""
     }
   }
 
+
+  /* Corrección estructural final: botones compactos y contenido informativo a ancho completo. */
+  div[class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"],
+  div[class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"] {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) 30px 30px 24px !important;
+    column-gap: 3px !important;
+    width: 100% !important;
+    min-width: 0 !important;
+  }
+  div[class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"] {
+    grid-template-columns: minmax(0, 1fr) 30px 30px !important;
+  }
+  div[class*="st-key-it-heading-row-"] [data-testid="column"],
+  div[class*="st-key-saved-heading-row-"] [data-testid="column"] {
+    min-width: 0 !important; width: auto !important; max-width: none !important;
+    flex: none !important; padding: 0 !important; margin: 0 !important;
+  }
+  div[class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2) button,
+  div[class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(2) button,
+  div[class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(3) a,
+  div[class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(3) a {
+    width: 30px !important; min-width: 30px !important; max-width: 30px !important;
+    height: 30px !important; min-height: 30px !important; max-height: 30px !important;
+    padding: 0 !important; margin: 0 !important; box-sizing: border-box !important;
+    background-color: #FFFFFF !important; background-repeat: no-repeat !important;
+    background-position: center !important; background-size: 13px 13px !important;
+    border: 1px solid #CBD5E1 !important; border-radius: 7px !important;
+    box-shadow: none !important; font-size: 0 !important; color: transparent !important;
+    -webkit-text-fill-color: transparent !important; overflow: hidden !important;
+    display: inline-flex !important; align-items: center !important; justify-content: center !important;
+  }
+  div[class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2) button,
+  div[class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(2) button {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23334155' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m16 4 4 4'/%3E%3Cpath d='M4 20l4-.9L19 8a2.1 2.1 0 0 0-3-3L5 16z'/%3E%3C/svg%3E") !important;
+  }
+  div[class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(3) a,
+  div[class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(3) a {
+    background-size: 16px 16px !important;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231D4ED8' stroke-width='1.9' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m3 6 6-3 6 3 6-3v15l-6 3-6-3-6 3z'/%3E%3Cpath d='M9 3v15'/%3E%3Cpath d='M15 6v15'/%3E%3C/svg%3E") !important;
+  }
+  .place-full-width-info, .place-full-width-info .place-list-address,
+  .place-full-width-info .place-note {
+    display: block !important; width: 100% !important; max-width: 100% !important;
+    min-width: 0 !important; box-sizing: border-box !important;
+    overflow-wrap: anywhere !important; white-space: pre-wrap !important;
+  }
+  .place-full-width-info { flex: 1 1 100% !important; }
+  @media (max-width: 768px) {
+    div[class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"],
+    div[class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"] {
+      column-gap: 3px !important; width: 100% !important;
+    }
+    .place-full-width-info, .place-full-width-info .place-list-address,
+    .place-full-width-info .place-note { width: 100% !important; max-width: 100% !important; }
+  }
+
 </style>
 """, unsafe_allow_html=True)
 
@@ -5461,13 +5518,10 @@ if seccion_principal == "🗽Ruta":
                         dir_html = f'<div class="place-list-address">📍 {html.escape(str(dir_i))}</div>' if dir_i else ''
                         nota_html = bloque_nota_html(nota_i)
                         st.markdown(f"""
-                        <div style="{strike}; min-width:0; overflow-wrap:anywhere;">
+                        <div style="{strike}; min-width:0; width:100%; overflow-wrap:anywhere;">
                           <div class="place-list-title" style="color:{txt_c};">{emoji_i} {item['nombre']}</div>
-                          <div style="margin-top:4px; display:flex; flex-wrap:wrap; gap:4px;">
-                          </div>
+                          <div style="margin-top:4px; display:flex; flex-wrap:wrap; gap:4px;"></div>
                         </div>
-                        {dir_html}
-                        {nota_html}
                         """, unsafe_allow_html=True)
 
                     with c_edit_head:
@@ -5483,6 +5537,9 @@ if seccion_principal == "🗽Ruta":
                             st.session_state.lugares[idx_real]["visitado"] = chk_val
                             guardar_itinerario_disco(st.session_state.lugares)
                             st.rerun()
+                    # Dirección y nota fuera de la fila de botones: ancho completo.
+                    if dir_html or nota_html:
+                        st.markdown(f'<div class="place-full-width-info">{dir_html}{nota_html}</div>', unsafe_allow_html=True)
 
                 # Los cuatro controles, siempre en el mismo orden: Editar | Mapa | Hora | Día.
                 with st.container(key=f"it-controls-row-{item['id']}"):
@@ -5596,12 +5653,12 @@ if seccion_principal == "📌Guardados":
             c_saved_info, c_saved_edit, c_saved_map = st.columns([8.8, 0.6, 0.6], gap="small")
             with c_saved_info:
                 st.markdown(f"""
-                <div class="place-list-title">{obtener_emoji_categoria(cat_p)} {p_spot['nombre']}</div>
-                <div style="margin-top:4px; display:flex; flex-wrap:wrap; gap:4px;">
-                  <span class="badge-cat">{cat_p}</span>{tipo_p_html}
+                <div style="width:100%; min-width:0; overflow-wrap:anywhere;">
+                  <div class="place-list-title">{obtener_emoji_categoria(cat_p)} {p_spot['nombre']}</div>
+                  <div style="margin-top:4px; display:flex; flex-wrap:wrap; gap:4px;">
+                    <span class="badge-cat">{cat_p}</span>{tipo_p_html}
+                  </div>
                 </div>
-                {dir_p_html}
-                {nota_p_html}
                 """, unsafe_allow_html=True)
             with c_saved_edit:
                 if st.button("✏️", key=f"btn_ed_pool_{p_spot['id']}", help="Editar sitio"):
@@ -5611,6 +5668,9 @@ if seccion_principal == "📌Guardados":
             with c_saved_map:
                 g_url_sp = f"https://www.google.com/maps/search/?api=1&query={urllib.parse.quote(p_spot['nombre'] + ' New York')}"
                 st.link_button("🗺️", g_url_sp, key=f"map_saved_{p_spot['id']}", help="Abrir en Google Maps")
+            # Dirección y nota en una fila independiente de ancho completo.
+            if dir_p_html or nota_p_html:
+                st.markdown(f'<div class="place-full-width-info">{dir_p_html}{nota_p_html}</div>', unsafe_allow_html=True)
 
         # Cuatro controles uniformes debajo del nombre y de toda su subinformación.
         with st.container(key=f"saved-controls-row-{p_spot['id']}"):
