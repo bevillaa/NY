@@ -2681,7 +2681,7 @@ st.markdown("""
       display: grid !important;
       grid-template-columns:
         minmax(40px, 0.90fr)
-        minmax(32px, 0.78fr)
+        minmax(36px, 0.85fr)
         minmax(76px, 1.7fr)
         minmax(84px, 1.9fr) !important;
       grid-auto-flow: column !important;
@@ -4704,7 +4704,7 @@ if seccion_principal == "Ruta":
 
                 # Los cuatro controles, siempre en el mismo orden: Editar | Mapa | Hora | Día.
                 with st.container(key=f"it-controls-row-{item['id']}"):
-                    c_edit, c_map, c_hr, c_day = st.columns([0.8, 0.82, 1.7, 1.9], gap="small")
+                    c_edit, c_map, c_hr, c_day = st.columns([0.8, 0.9, 1.7, 1.9], gap="small")
                     with c_edit:
                         with st.container(key=f"it-edit-btn-{item['id']}"):
                             if st.button("✏️", key=f"btn_ed_it_{d}_{item['id']}", help="Editar sitio", use_container_width=True):
@@ -4803,7 +4803,7 @@ if seccion_principal == "Guardados":
 
         # Cuatro controles uniformes debajo del nombre y de toda su subinformación.
         with st.container(key=f"saved-controls-row-{p_spot['id']}"):
-            c_edit, c_map, c_hr, c_day = st.columns([0.8, 0.82, 1.7, 1.9], gap="small")
+            c_edit, c_map, c_hr, c_day = st.columns([0.8, 0.9, 1.7, 1.9], gap="small")
             with c_edit:
                 if st.button("✏️", key=f"btn_ed_pool_{p_spot['id']}", help="Editar sitio", use_container_width=True):
                     ek = f"pool_{p_spot['id']}"
