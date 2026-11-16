@@ -3611,11 +3611,13 @@ st.markdown("""
   }
 
 
-  /* Ajuste puntual: acciones compactas y columna de texto a todo el ancho disponible. */
+
+
+  /* Ajustes estrictamente limitados a las filas de lugares (itinerario y guardados). */
   [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] {
     display: grid !important;
-    grid-template-columns: minmax(0, 1fr) 32px 32px 24px !important;
-    column-gap: 2px !important;
+    grid-template-columns: minmax(0, 1fr) 30px 30px 24px !important;
+    column-gap: 3px !important;
     row-gap: 0 !important;
     width: 100% !important;
     min-width: 0 !important;
@@ -3623,8 +3625,8 @@ st.markdown("""
   }
   [class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"] {
     display: grid !important;
-    grid-template-columns: minmax(0, 1fr) 32px 32px !important;
-    column-gap: 2px !important;
+    grid-template-columns: minmax(0, 1fr) 30px 30px !important;
+    column-gap: 3px !important;
     row-gap: 0 !important;
     width: 100% !important;
     min-width: 0 !important;
@@ -3642,8 +3644,8 @@ st.markdown("""
   }
   [class*="st-key-it-heading-row-"] [data-testid="column"]:first-child,
   [class*="st-key-saved-heading-row-"] [data-testid="column"]:first-child {
-    width: 100% !important;
     min-width: 0 !important;
+    max-width: none !important;
     overflow: visible !important;
   }
   [class*="st-key-it-heading-row-"] [data-testid="column"]:first-child [data-testid="stMarkdownContainer"],
@@ -3651,62 +3653,77 @@ st.markdown("""
     width: 100% !important;
     max-width: none !important;
     min-width: 0 !important;
-    overflow: visible !important;
   }
-  [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stButton"] > button,
-  [class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stButton"] > button,
-  [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(3) [data-testid="stLinkButton"] > a,
-  [class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(3) [data-testid="stLinkButton"] > a {
+  /* Selectores deliberadamente amplios: Streamlit cambia los wrappers internos entre versiones. */
+  div[class*="st-key-it-heading-row-"] button,
+  div[class*="st-key-saved-heading-row-"] button {
     box-sizing: border-box !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    width: 32px !important;
-    min-width: 32px !important;
-    max-width: 32px !important;
-    height: 32px !important;
-    min-height: 32px !important;
-    max-height: 32px !important;
-    margin: 0 !important;
+    width: 30px !important;
+    min-width: 30px !important;
+    max-width: 30px !important;
+    height: 30px !important;
+    min-height: 30px !important;
+    max-height: 30px !important;
     padding: 0 !important;
+    margin: 0 !important;
     border: 1px solid #94A3B8 !important;
     border-radius: 7px !important;
-    background-color: #E2E8F0 !important;
-    background-repeat: no-repeat !important;
-    background-position: center !important;
-    background-size: 19px 19px !important;
-    color: transparent !important;
-    -webkit-text-fill-color: transparent !important;
-    font-size: 0 !important;
-    line-height: 0 !important;
+    background: #DCE4EE !important;
+    background-color: #DCE4EE !important;
+    color: #1E293B !important;
+    -webkit-text-fill-color: #1E293B !important;
     box-shadow: none !important;
+    font-size: 15px !important;
+    line-height: 1 !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+  div[class*="st-key-it-heading-row-"] [data-testid="stLinkButton"] a,
+  div[class*="st-key-saved-heading-row-"] [data-testid="stLinkButton"] a {
+    box-sizing: border-box !important;
+    width: 30px !important;
+    min-width: 30px !important;
+    max-width: 30px !important;
+    height: 30px !important;
+    min-height: 30px !important;
+    max-height: 30px !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    border: 1px solid #93B4E8 !important;
+    border-radius: 7px !important;
+    background: #DBEAFE !important;
+    background-color: #DBEAFE !important;
+    color: #1D4ED8 !important;
+    -webkit-text-fill-color: #1D4ED8 !important;
+    box-shadow: none !important;
+    font-size: 15px !important;
+    line-height: 1 !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
     text-decoration: none !important;
   }
-  [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stButton"] > button,
-  [class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stButton"] > button {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23334155' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m16 4 4 4'/%3E%3Cpath d='M4 20l4-.9L19 8a2.1 2.1 0 0 0-3-3L5 16z'/%3E%3C/svg%3E") !important;
+  /* Hora y día empiezan en el mismo borde izquierdo que el texto del lugar. */
+  [class*="st-key-it-controls-row-"] [data-testid="stHorizontalBlock"],
+  [class*="st-key-saved-controls-row-"] [data-testid="stHorizontalBlock"] {
+    display: grid !important;
+    grid-template-columns: minmax(105px, 140px) minmax(105px, 1fr) !important;
+    justify-content: start !important;
+    align-items: center !important;
+    column-gap: 7px !important;
+    row-gap: 0 !important;
+    width: 100% !important;
+    min-width: 0 !important;
   }
-  [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(3) [data-testid="stLinkButton"] > a,
-  [class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(3) [data-testid="stLinkButton"] > a {
-    background-color: #DBEAFE !important;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231D4ED8' stroke-width='1.9' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m3 6 6-3 6 3 6-3v15l-6 3-6-3-6 3z'/%3E%3Cpath d='M9 3v15'/%3E%3Cpath d='M15 6v15'/%3E%3C/svg%3E") !important;
-  }
-  [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2) button *,
-  [class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(2) button *,
-  [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(3) a *,
-  [class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(3) a * {
-    display: none !important;
-    visibility: hidden !important;
-  }
-  @media (max-width: 768px) {
-    [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] {
-      grid-template-columns: minmax(0, 1fr) 32px 32px 24px !important;
-      column-gap: 2px !important;
-    }
-    [class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"] {
-      grid-template-columns: minmax(0, 1fr) 32px 32px !important;
-      column-gap: 2px !important;
-    }
+  [class*="st-key-it-controls-row-"] [data-testid="column"],
+  [class*="st-key-saved-controls-row-"] [data-testid="column"] {
+    width: auto !important;
+    min-width: 0 !important;
+    max-width: none !important;
+    flex: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
   }
 
 </style>
@@ -5346,7 +5363,7 @@ if seccion_principal == "🗽Ruta":
 
                 # Los cuatro controles, siempre en el mismo orden: Editar | Mapa | Hora | Día.
                 with st.container(key=f"it-controls-row-{item['id']}"):
-                    c_edit, c_map, c_hr, c_day = st.columns([0.8, 0.9, 1.7, 1.9], gap="small")
+                    c_hr, c_day = st.columns([1.7, 1.9], gap="small")
                     with c_hr:
                         nueva_h = st.text_input(
                             "Hora",
@@ -5474,7 +5491,7 @@ if seccion_principal == "📌Guardados":
 
         # Cuatro controles uniformes debajo del nombre y de toda su subinformación.
         with st.container(key=f"saved-controls-row-{p_spot['id']}"):
-            c_edit, c_map, c_hr, c_day = st.columns([0.8, 0.9, 1.7, 1.9], gap="small")
+            c_hr, c_day = st.columns([1.7, 1.9], gap="small")
             with c_hr:
                 nueva_h_pool = st.text_input(
                     "Hora",
