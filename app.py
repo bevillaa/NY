@@ -5100,6 +5100,70 @@ st.markdown("""
     }
   }
 
+
+  /* Ajuste solicitado: conservar las cajas de 38x38 ya correctas.
+     El lápiz queda sin recuadro; el mapa conserva su botón y centra el SVG. */
+  [class*="st-key-it-edit-button-wrap-"] [data-testid="stButton"] > button,
+  [class*="st-key-saved-edit-button-wrap-"] [data-testid="stButton"] > button {
+    box-sizing: border-box !important;
+    width: 38px !important;
+    min-width: 38px !important;
+    max-width: 38px !important;
+    height: 38px !important;
+    min-height: 38px !important;
+    max-height: 38px !important;
+    border: 0 !important;
+    outline: 0 !important;
+    box-shadow: none !important;
+    background-color: transparent !important;
+    border-radius: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  [class*="st-key-it-edit-button-wrap-"] [data-testid="stButton"] > button:hover,
+  [class*="st-key-saved-edit-button-wrap-"] [data-testid="stButton"] > button:hover,
+  [class*="st-key-it-edit-button-wrap-"] [data-testid="stButton"] > button:focus,
+  [class*="st-key-saved-edit-button-wrap-"] [data-testid="stButton"] > button:focus {
+    border: 0 !important;
+    outline: 0 !important;
+    box-shadow: none !important;
+    background-color: transparent !important;
+  }
+  [class*="st-key-it-map-button-wrap-"] a.place-map-link-direct,
+  [class*="st-key-saved-map-button-wrap-"] a.place-map-link-direct {
+    box-sizing: border-box !important;
+    width: 38px !important;
+    min-width: 38px !important;
+    max-width: 38px !important;
+    height: 38px !important;
+    min-height: 38px !important;
+    max-height: 38px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    line-height: 0 !important;
+  }
+  [class*="st-key-it-map-button-wrap-"] a.place-map-link-direct svg,
+  [class*="st-key-saved-map-button-wrap-"] a.place-map-link-direct svg {
+    display: block !important;
+    width: 13px !important;
+    min-width: 13px !important;
+    max-width: 13px !important;
+    height: 13px !important;
+    min-height: 13px !important;
+    max-height: 13px !important;
+    flex: 0 0 13px !important;
+    margin: 0 auto !important;
+    padding: 0 !important;
+    position: static !important;
+    transform: none !important;
+  }
+
 </style>
 """, unsafe_allow_html=True)
 
