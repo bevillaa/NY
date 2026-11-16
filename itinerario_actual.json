@@ -1376,5 +1376,19 @@
     "tipo": "Interior",
     "lista_origen": "Rooftop (NY rooftop)",
     "visitado": false
+  },
+  {
+    "id": 101,
+    "nombre": "Baked Cheese Haus Raclette",
+    "lat": 40.754316599999996,
+    "lon": -73.983274,
+    "dia": 0,
+    "hora": "",
+    "direccion": "33-37 W 40th St, New York, NY 10018, United States",
+    "nota": "",
+    "categoria": "🍽️ Gastronomía",
+    "tipo": "Interior",
+    "lista_origen": "Food (NY food)",
+    "visitado": false
   }
 ]
