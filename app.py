@@ -277,7 +277,7 @@ st.markdown("""
     font-weight: 900;
     padding: 1px 7px;
     border-radius: 6px;
-    border: 1px solid #93C5FD;
+    border: 1px solid #CBD5E1;
   }
   .badge-indoor {
     display: inline-block;
@@ -469,7 +469,7 @@ st.markdown("""
   }
   [data-testid="column"]:has(.compact-hora) [data-baseweb="input"]:focus-within {
     background: #FFFFFF !important;
-    border: 1.5px solid #2563EB !important;
+    border: 1.5px solid #FFFFFF !important;
   }
 
   /* Controles compactos: el marcador identifica la columna del widget. */
@@ -5881,7 +5881,7 @@ if seccion_principal == "🗺️Mapa":
         popup_html = f"""
         <div style="font-family: -apple-system, BlinkMacSystemFont, sans-serif; min-width: 220px; padding: 4px;">
           <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; gap: 4px;">
-            <span style="font-size: 11px; font-weight: 800; color: #2563EB;">{dia_txt}</span>
+            <span style="font-size: 11px; font-weight: 800; color: #FFFFFF;">{dia_txt}</span>
             <span style="font-size: 10px; font-weight: 700; background: #F1F5F9; color: #0F172A; padding: 2px 6px; border-radius: 6px;">{tipo_badge}</span>
           </div>
           <div style="font-size: 16px; font-weight: 800; color: #0F172A; margin-bottom: 3px;">{obtener_emoji_categoria(cat_spot)} {nom_spot}</div>
@@ -6212,7 +6212,7 @@ if seccion_principal == "🌧️ Clima":
             desc_clima, tipo_clima = traducir_codigo_clima(w_code)
             
             st.markdown(f"""
-            <div class="ny-card" style="border-left: 5px solid {'#3B82F6' if precip > 0 else '#10B981'};">
+            <div class="ny-card" style="border-left: 5px solid {'#FFFFFF' if precip > 0 else '#10B981'};">
               <div style="font-size:1.7rem; font-weight:800; color:#0F172A;">{temp_c:.1f} °C</div>
               <div style="font-size:0.9rem; font-weight:600; color:#0F172A;">{desc_clima}</div>
               <div style="font-size:0.8rem; color:#0F172A; margin-top:6px;">
