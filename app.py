@@ -21,7 +21,7 @@ ARCH_CONFIG     = "config_viaje.json"
 # 1. CONFIGURACIÓN DE PÁGINA & ESTILO NAVIDEÑO EDITORIAL (MÓVIL + WEB)
 # =============================================================================
 st.set_page_config(
-    page_title="Nueva York · Travel Journal",
+    page_title="Nueva York · Itinerario",
     page_icon="🗽",
     layout="wide",
     initial_sidebar_state="collapsed"
