@@ -1278,5 +1278,19 @@
     "tipo": "Interior",
     "lista_origen": "Food (NY food)",
     "visitado": false
+  },
+  {
+    "id": 94,
+    "nombre": "2 Furman St",
+    "lat": 40.703044999999996,
+    "lon": -73.9956072,
+    "dia": 0,
+    "hora": "",
+    "direccion": "Brooklyn, NY 11201, United States",
+    "nota": "",
+    "categoria": "☀️ Spots",
+    "tipo": "Exterior",
+    "lista_origen": "Spots (NY spots)",
+    "visitado": false
   }
 ]
