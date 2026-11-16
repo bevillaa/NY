@@ -3432,20 +3432,20 @@ st.markdown("""
   }
   @media (max-width: 768px) {
     [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] {
-      grid-template-columns: minmax(0, 1fr) 30px 30px 26px !important;
+      grid-template-columns: minmax(0, 1fr) 34px 34px 26px !important;
       gap: 2px !important;
     }
     [class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"] {
-      grid-template-columns: minmax(0, 1fr) 30px 30px !important;
+      grid-template-columns: minmax(0, 1fr) 34px 34px !important;
       gap: 2px !important;
     }
     [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2) button,
     [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(3) a,
     [class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(2) button,
     [class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(3) a {
-      width: 28px !important; min-width: 28px !important; max-width: 28px !important;
-      height: 28px !important; min-height: 28px !important; max-height: 28px !important;
-      font-size: 1rem !important;
+      width: 32px !important; min-width: 32px !important; max-width: 32px !important;
+      height: 32px !important; min-height: 32px !important; max-height: 32px !important;
+      font-size: 0.85rem !important;
     }
     [class*="st-key-it-controls-row-"] [data-testid="stHorizontalBlock"],
     [class*="st-key-saved-controls-row-"] [data-testid="stHorizontalBlock"] {
