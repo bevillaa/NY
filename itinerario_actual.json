@@ -1292,5 +1292,19 @@
     "tipo": "Exterior",
     "lista_origen": "Spots (NY spots)",
     "visitado": false
+  },
+  {
+    "id": 95,
+    "nombre": "DUMBO Manhattan Bridge View",
+    "lat": 40.7033165,
+    "lon": -73.9895698,
+    "dia": 0,
+    "hora": "",
+    "direccion": "39-21 Washington St, Brooklyn, NY 11201, United States",
+    "nota": "",
+    "categoria": "☀️ Spots",
+    "tipo": "Exterior",
+    "lista_origen": "NY",
+    "visitado": false
   }
 ]
