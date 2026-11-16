@@ -1362,5 +1362,19 @@
     "tipo": "Interior",
     "lista_origen": "Life Out (NY life out)",
     "visitado": false
+  },
+  {
+    "id": 100,
+    "nombre": "Above NYC Rooftop",
+    "lat": 40.7534004,
+    "lon": -73.99200549999999,
+    "dia": 0,
+    "hora": "",
+    "direccion": "269 W 36th St., New York, NY 10018, United States",
+    "nota": "",
+    "categoria": "🍸 Copas",
+    "tipo": "Interior",
+    "lista_origen": "Rooftop (NY rooftop)",
+    "visitado": false
   }
 ]
