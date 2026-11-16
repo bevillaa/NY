@@ -1433,5 +1433,19 @@
     "tipo": "Interior",
     "lista_origen": "Tiendas & Outlets (NY shopping)",
     "visitado": false
+  },
+  {
+    "id": 106,
+    "nombre": "2 W 18th St",
+    "lat": 40.7386923,
+    "lon": -73.9924834,
+    "dia": 0,
+    "hora": "",
+    "direccion": "New York, NY 10011, United States",
+    "nota": "",
+    "categoria": "🍪 Dulces",
+    "tipo": "Interior",
+    "lista_origen": "NY Sweets",
+    "visitado": false
   }
 ]
