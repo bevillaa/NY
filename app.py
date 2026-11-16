@@ -4919,6 +4919,112 @@ st.markdown("""
     padding: 0 !important;
   }
 
+/* ULTIMO OVERRIDE: caja idéntica para lápiz y mapa en Itinerario y Guardados.
+   Se fijan también los wrappers de Streamlit para evitar que el enlace herede
+   dimensiones distintas a las del botón nativo. */
+  div[class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"],
+  div[class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"] {
+    column-gap: 8px !important;
+    align-items: center !important;
+  }
+  div[class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2),
+  div[class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(3),
+  div[class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(2),
+  div[class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(3) {
+    box-sizing: border-box !important;
+    display: flex !important;
+    flex: 0 0 38px !important;
+    width: 38px !important;
+    min-width: 38px !important;
+    max-width: 38px !important;
+    height: 38px !important;
+    min-height: 38px !important;
+    max-height: 38px !important;
+    align-items: center !important;
+    justify-content: center !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  div[class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stButton"],
+  div[class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stButton"],
+  div[class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stButton"] > button,
+  div[class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stButton"] > button,
+  div[class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(3) [class*="st-key-it-map-button-wrap-"] a.place-map-link-direct,
+  div[class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(3) [class*="st-key-saved-map-button-wrap-"] a.place-map-link-direct,
+  div[class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(3) a.place-map-link-direct,
+  div[class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(3) a.place-map-link-direct {
+    box-sizing: border-box !important;
+    display: flex !important;
+    flex: 0 0 38px !important;
+    width: 38px !important;
+    min-width: 38px !important;
+    max-width: 38px !important;
+    height: 38px !important;
+    min-height: 38px !important;
+    max-height: 38px !important;
+    align-items: center !important;
+    justify-content: center !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: 1px solid #CBD5E1 !important;
+    border-radius: 9px !important;
+    transform: none !important;
+  }
+  div[class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stButton"] > button,
+  div[class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stButton"] > button {
+    background-size: 16px 16px !important;
+  }
+  div[class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(3) a.place-map-link-direct svg,
+  div[class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(3) a.place-map-link-direct svg {
+    display: block !important;
+    flex: 0 0 16px !important;
+    width: 16px !important;
+    min-width: 16px !important;
+    max-width: 16px !important;
+    height: 16px !important;
+    min-height: 16px !important;
+    max-height: 16px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    transform: none !important;
+  }
+  [class*="st-key-it-map-button-wrap-"],
+  [class*="st-key-saved-map-button-wrap-"] {
+    box-sizing: border-box !important;
+    display: flex !important;
+    flex: 0 0 38px !important;
+    width: 38px !important;
+    min-width: 38px !important;
+    max-width: 38px !important;
+    height: 38px !important;
+    min-height: 38px !important;
+    max-height: 38px !important;
+    align-items: center !important;
+    justify-content: center !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  [class*="st-key-it-map-button-wrap-"] [data-testid="stElementContainer"],
+  [class*="st-key-saved-map-button-wrap-"] [data-testid="stElementContainer"],
+  [class*="st-key-it-map-button-wrap-"] [data-testid="stMarkdownContainer"],
+  [class*="st-key-saved-map-button-wrap-"] [data-testid="stMarkdownContainer"] {
+    box-sizing: border-box !important;
+    width: 38px !important;
+    min-width: 38px !important;
+    max-width: 38px !important;
+    height: 38px !important;
+    min-height: 38px !important;
+    max-height: 38px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  @media (max-width: 768px) {
+    div[class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"],
+    div[class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"] {
+      column-gap: 8px !important;
+    }
+  }
+
 </style>
 """, unsafe_allow_html=True)
 
