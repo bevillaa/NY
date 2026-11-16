@@ -3747,6 +3747,108 @@ st.markdown("""
     background-size: 17px 17px !important;
   }
 
+
+  /* AJUSTE FINAL ACOTADO: iconos y ancho de dirección/notas en ambas listas. */
+  [class*="st-key-it-heading-row-"],
+  [class*="st-key-saved-heading-row-"] {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+  }
+  [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) 30px 30px 24px !important;
+    column-gap: 3px !important;
+    width: 100% !important;
+    min-width: 0 !important;
+  }
+  [class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"] {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) 30px 30px !important;
+    column-gap: 3px !important;
+    width: 100% !important;
+    min-width: 0 !important;
+  }
+  [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"],
+  [class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"] {
+    min-width: 0 !important;
+    max-width: none !important;
+    width: auto !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+  [class*="st-key-it-heading-row-"] [data-testid="column"]:first-child,
+  [class*="st-key-saved-heading-row-"] [data-testid="column"]:first-child,
+  [class*="st-key-it-heading-row-"] [data-testid="column"]:first-child > div,
+  [class*="st-key-saved-heading-row-"] [data-testid="column"]:first-child > div,
+  [class*="st-key-it-heading-row-"] [data-testid="column"]:first-child [data-testid="stMarkdownContainer"],
+  [class*="st-key-saved-heading-row-"] [data-testid="column"]:first-child [data-testid="stMarkdownContainer"] {
+    width: 100% !important;
+    max-width: none !important;
+    min-width: 0 !important;
+    box-sizing: border-box !important;
+  }
+  [class*="st-key-it-heading-row-"] .place-list-address,
+  [class*="st-key-saved-heading-row-"] .place-list-address,
+  [class*="st-key-it-heading-row-"] .place-note,
+  [class*="st-key-saved-heading-row-"] .place-note {
+    display: block !important;
+    width: 100% !important;
+    max-width: none !important;
+    min-width: 0 !important;
+    box-sizing: border-box !important;
+    overflow-wrap: anywhere !important;
+    word-break: normal !important;
+  }
+  /* Fondo blanco sólido para los dos controles, con iconos dibujados en CSS. */
+  [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stButton"] > button,
+  [class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stButton"] > button,
+  [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(3) [data-testid="stLinkButton"] > a,
+  [class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(3) [data-testid="stLinkButton"] > a {
+    background-color: #FFFFFF !important;
+    background-image: none !important;
+    border: 1px solid #D7DEE8 !important;
+    box-shadow: none !important;
+    overflow: visible !important;
+  }
+  [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stButton"] > button::after,
+  [class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stButton"] > button::after {
+    content: "" !important;
+    display: block !important;
+    width: 12px !important;
+    height: 12px !important;
+    flex: 0 0 12px !important;
+    background: center / contain no-repeat url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23334155' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m16 4 4 4'/%3E%3Cpath d='M4 20l4-.9L19 8a2.1 2.1 0 0 0-3-3L5 16z'/%3E%3C/svg%3E") !important;
+  }
+  [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(3) [data-testid="stLinkButton"] > a::after,
+  [class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(3) [data-testid="stLinkButton"] > a::after {
+    content: "" !important;
+    display: block !important;
+    width: 16px !important;
+    height: 16px !important;
+    flex: 0 0 16px !important;
+    background: center / contain no-repeat url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231D4ED8' stroke-width='1.9' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m3 6 6-3 6 3 6-3v15l-6 3-6-3-6 3z'/%3E%3Cpath d='M9 3v15'/%3E%3Cpath d='M15 6v15'/%3E%3C/svg%3E") !important;
+  }
+  @media (max-width: 768px) {
+    [class*="st-key-it-heading-row-"],
+    [class*="st-key-saved-heading-row-"] { width: 100% !important; max-width: 100% !important; }
+    [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] {
+      grid-template-columns: minmax(0, 1fr) 30px 30px 24px !important;
+      column-gap: 3px !important;
+    }
+    [class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"] {
+      grid-template-columns: minmax(0, 1fr) 30px 30px !important;
+      column-gap: 3px !important;
+    }
+    [class*="st-key-it-heading-row-"] .place-list-address,
+    [class*="st-key-saved-heading-row-"] .place-list-address,
+    [class*="st-key-it-heading-row-"] .place-note,
+    [class*="st-key-saved-heading-row-"] .place-note {
+      width: 100% !important;
+      max-width: 100% !important;
+    }
+  }
+
 </style>
 """, unsafe_allow_html=True)
 
