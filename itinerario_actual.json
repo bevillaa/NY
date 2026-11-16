@@ -1306,5 +1306,19 @@
     "tipo": "Exterior",
     "lista_origen": "NY",
     "visitado": false
+  },
+  {
+    "id": 96,
+    "nombre": "The Plaza",
+    "lat": 40.7646318,
+    "lon": -73.9743251,
+    "dia": 0,
+    "hora": "",
+    "direccion": "768 5th Ave, New York, NY 10019, United States",
+    "nota": "",
+    "categoria": "📍 Otros",
+    "tipo": "Exterior",
+    "lista_origen": "NY",
+    "visitado": false
   }
 ]
