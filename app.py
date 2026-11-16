@@ -4637,44 +4637,38 @@ st.markdown("""
   }
 
 
-  /* AJUSTE FINAL ÚNICO: lápiz y mapa con la MISMA caja física en web y móvil.
-     La medida de referencia es la del enlace de mapa: 26 x 26 px. */
+  /* Corrección geométrica única para los botones reales de editar y mapa.
+     Se conserva el tamaño del mapa como referencia y se igualan las dos cajas. */
   div[class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"],
   div[class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"] {
-    display: grid !important;
-    grid-template-columns: minmax(0, 1fr) 26px 26px 24px !important;
     align-items: center !important;
-    justify-content: start !important;
-    column-gap: 3px !important;
-    row-gap: 0 !important;
-    width: 100% !important;
-    min-width: 0 !important;
+  }
+  div[class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] {
+    grid-template-columns: minmax(0, 1fr) 30px 30px 24px !important;
+    column-gap: 5px !important;
   }
   div[class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"] {
-    grid-template-columns: minmax(0, 1fr) 26px 26px !important;
+    grid-template-columns: minmax(0, 1fr) 30px 30px !important;
+    column-gap: 5px !important;
   }
-
-  div[class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(2),
-  div[class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(3),
-  div[class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(2),
-  div[class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(3) {
+  div[class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2),
+  div[class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(3),
+  div[class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(2),
+  div[class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(3) {
     box-sizing: border-box !important;
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
     align-self: center !important;
-    width: 26px !important;
-    min-width: 26px !important;
-    max-width: 26px !important;
-    height: 26px !important;
-    min-height: 26px !important;
-    max-height: 26px !important;
-    flex: 0 0 26px !important;
+    width: 30px !important;
+    min-width: 30px !important;
+    max-width: 30px !important;
+    height: 30px !important;
+    min-height: 30px !important;
+    max-height: 30px !important;
     margin: 0 !important;
     padding: 0 !important;
   }
-
-  /* Elimina el espacio vertical interno que Streamlit añade alrededor del widget. */
   div[class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stElementContainer"],
   div[class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(3) [data-testid="stElementContainer"],
   div[class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stElementContainer"],
@@ -4682,92 +4676,89 @@ st.markdown("""
   div[class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2) .stButton,
   div[class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(3) .stMarkdown,
   div[class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(2) .stButton,
-  div[class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(3) .stMarkdown {
+  div[class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(3) .stMarkdown,
+  div[class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(3) .stMarkdownContainer,
+  div[class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(3) .stMarkdownContainer {
     box-sizing: border-box !important;
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
-    width: 26px !important;
-    min-width: 26px !important;
-    max-width: 26px !important;
-    height: 26px !important;
-    min-height: 26px !important;
-    max-height: 26px !important;
+    width: 30px !important;
+    min-width: 30px !important;
+    max-width: 30px !important;
+    height: 30px !important;
+    min-height: 30px !important;
+    max-height: 30px !important;
     margin: 0 !important;
     padding: 0 !important;
   }
-
-  /* Lápiz: mismo tamaño exterior que el mapa; dibujo centrado de 12 px. */
-  div[class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stButton"] > button,
-  div[class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stButton"] > button {
-    box-sizing: border-box !important;
-    display: inline-flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    position: relative !important;
-    width: 26px !important;
-    min-width: 26px !important;
-    max-width: 26px !important;
-    height: 26px !important;
-    min-height: 26px !important;
-    max-height: 26px !important;
-    padding: 0 !important;
+  div[class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(3) p,
+  div[class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(3) p {
     margin: 0 !important;
-    border: 1px solid #D1D5DB !important;
-    border-radius: 6px !important;
-    background: #FFFFFF !important;
-    background-color: #FFFFFF !important;
-    background-image: none !important;
-    box-shadow: none !important;
-    color: transparent !important;
-    -webkit-text-fill-color: transparent !important;
-    font-size: 0 !important;
+    padding: 0 !important;
     line-height: 0 !important;
-    overflow: hidden !important;
   }
-  div[class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stButton"] > button::before,
-  div[class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stButton"] > button::before {
-    content: "" !important;
-    position: absolute !important;
-    inset: 0 !important;
-    width: 12px !important;
-    height: 12px !important;
-    margin: auto !important;
-    background: center / contain no-repeat url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23334155' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m16 4 4 4'/%3E%3Cpath d='M4 20l4-.9L19 8a2.1 2.1 0 0 0-3-3L5 16z'/%3E%3C/svg%3E") !important;
-  }
-  div[class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stButton"] > button::after,
-  div[class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stButton"] > button::after {
-    content: none !important;
-    display: none !important;
-  }
-
-  /* Mapa: mismo tamaño exterior y SVG centrado geométricamente. */
+  div[class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stButton"] > button,
+  div[class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stButton"] > button,
   div[class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(3) .place-map-icon-button,
   div[class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(3) .place-map-icon-button {
     box-sizing: border-box !important;
-    position: relative !important;
     display: inline-flex !important;
     align-items: center !important;
     justify-content: center !important;
     vertical-align: middle !important;
-    width: 26px !important;
-    min-width: 26px !important;
-    max-width: 26px !important;
-    height: 26px !important;
-    min-height: 26px !important;
-    max-height: 26px !important;
-    padding: 0 !important;
+    position: relative !important;
+    width: 30px !important;
+    min-width: 30px !important;
+    max-width: 30px !important;
+    height: 30px !important;
+    min-height: 30px !important;
+    max-height: 30px !important;
+    flex: 0 0 30px !important;
     margin: 0 !important;
+    padding: 0 !important;
     border: 1px solid #D1D5DB !important;
-    border-radius: 6px !important;
+    border-radius: 7px !important;
     background: #FFFFFF !important;
     background-color: #FFFFFF !important;
     background-image: none !important;
     box-shadow: none !important;
-    text-decoration: none !important;
     line-height: 0 !important;
     overflow: hidden !important;
   }
+  div[class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stButton"] > button {
+    color: transparent !important;
+    -webkit-text-fill-color: transparent !important;
+    font-size: 0 !important;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23334155' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m16 4 4 4'/%3E%3Cpath d='M4 20l4-.9L19 8a2.1 2.1 0 0 0-3-3L5 16z'/%3E%3C/svg%3E") !important;
+    background-repeat: no-repeat !important;
+    background-position: center center !important;
+    background-size: 14px 14px !important;
+  }
+  div[class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(3) .place-map-icon-button,
+  div[class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(3) .place-map-icon-button {
+    text-decoration: none !important;
+  }
+  div[class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(3) .place-map-icon-button svg,
+  div[class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(3) .place-map-icon-button svg {
+    display: block !important;
+    width: 14px !important;
+    height: 14px !important;
+    flex: 0 0 14px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    fill: none !important;
+    stroke: #334155 !important;
+    stroke-width: 1.8 !important;
+    stroke-linecap: round !important;
+    stroke-linejoin: round !important;
+  }
+  div[class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stButton"] > button:hover,
+  div[class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stButton"] > button:focus,
+  div[class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stButton"] > button:active,
+  div[class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stButton"] > button:hover,
+  div[class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stButton"] > button:focus,
+  div[class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stButton"] > button:active,
   div[class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(3) .place-map-icon-button:hover,
   div[class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(3) .place-map-icon-button:focus,
   div[class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(3) .place-map-icon-button:active,
@@ -4779,33 +4770,16 @@ st.markdown("""
     border-color: #D1D5DB !important;
     box-shadow: none !important;
   }
-  div[class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(3) .place-map-icon-button svg,
-  div[class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(3) .place-map-icon-button svg {
-    display: block !important;
-    flex: 0 0 12px !important;
-    width: 12px !important;
-    min-width: 12px !important;
-    height: 12px !important;
-    min-height: 12px !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    fill: none !important;
-    stroke: #334155 !important;
-    stroke-width: 1.8 !important;
-    stroke-linecap: round !important;
-    stroke-linejoin: round !important;
-  }
-
   @media (max-width: 768px) {
-    div[class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] {
-      grid-template-columns: minmax(0, 1fr) 26px 26px 24px !important;
-      align-items: center !important;
-      column-gap: 3px !important;
-    }
+    div[class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"],
     div[class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"] {
-      grid-template-columns: minmax(0, 1fr) 26px 26px !important;
       align-items: center !important;
-      column-gap: 3px !important;
+    }
+    div[class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2),
+    div[class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(3),
+    div[class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(2),
+    div[class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(3) {
+      align-self: center !important;
     }
   }
 
