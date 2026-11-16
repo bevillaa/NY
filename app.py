@@ -4880,6 +4880,13 @@ st.markdown("""
     }
   }
 
+/* Corrección visual final: reduce SOLO el enlace del mapa al tamaño visible del lápiz. */
+  [class*="st-key-it-map-button-wrap-"] a.place-map-link-direct,
+  [class*="st-key-saved-map-button-wrap-"] a.place-map-link-direct {
+    transform: scale(0.76) !important;
+    transform-origin: center center !important;
+  }
+
 </style>
 """, unsafe_allow_html=True)
 
