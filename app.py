@@ -5188,54 +5188,10 @@ st.markdown("""
   }
 
 
-  /* FIX DEFINITIVO: un solo borde por botón y columnas del mismo ancho.
-     El borde se aplica SOLO al botón real, nunca al wrapper stButton. */
-  [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"],
-  [class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"] {
-    display: flex !important;
-    align-items: center !important;
-    column-gap: 4px !important;
-    row-gap: 0 !important;
-    width: 100% !important;
-    min-width: 0 !important;
-  }
-  [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:first-child,
-  [class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:first-child {
-    flex: 1 1 0% !important;
-    width: auto !important;
-    min-width: 0 !important;
-    max-width: none !important;
-  }
-  [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(2),
-  [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(3),
-  [class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(2),
-  [class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(3) {
-    box-sizing: border-box !important;
-    display: flex !important;
-    flex: 0 0 36px !important;
-    width: 36px !important;
-    min-width: 36px !important;
-    max-width: 36px !important;
-    height: 36px !important;
-    min-height: 36px !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    align-items: center !important;
-    justify-content: center !important;
-  }
-  [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(4) {
-    box-sizing: border-box !important;
-    flex: 0 0 28px !important;
-    width: 28px !important;
-    min-width: 28px !important;
-    max-width: 28px !important;
-    margin: 0 !important;
-    padding: 0 !important;
-  }
-
-  [class*="st-key-it-edit-button-wrap-"],
+  /* MAPA: igualar su caja exterior al botón nativo del lápiz.
+     Se fijan también los wrappers de Streamlit para que el enlace no crezca
+     por el ancho automático de st.markdown. El lápiz no se modifica. */
   [class*="st-key-it-map-button-wrap-"],
-  [class*="st-key-saved-edit-button-wrap-"],
   [class*="st-key-saved-map-button-wrap-"] {
     box-sizing: border-box !important;
     display: flex !important;
@@ -5246,20 +5202,20 @@ st.markdown("""
     height: 36px !important;
     min-height: 36px !important;
     max-height: 36px !important;
-    margin: 0 !important;
     padding: 0 !important;
+    margin: 0 !important;
     align-items: center !important;
     justify-content: center !important;
-    border: 0 !important;
-    background: transparent !important;
-    box-shadow: none !important;
+    overflow: hidden !important;
   }
-  [class*="st-key-it-edit-button-wrap-"] [data-testid="stElementContainer"],
   [class*="st-key-it-map-button-wrap-"] [data-testid="stElementContainer"],
-  [class*="st-key-saved-edit-button-wrap-"] [data-testid="stElementContainer"],
   [class*="st-key-saved-map-button-wrap-"] [data-testid="stElementContainer"],
-  [class*="st-key-it-edit-button-wrap-"] [data-testid="stButton"],
-  [class*="st-key-saved-edit-button-wrap-"] [data-testid="stButton"] {
+  [class*="st-key-it-map-button-wrap-"] [data-testid="stMarkdown"],
+  [class*="st-key-saved-map-button-wrap-"] [data-testid="stMarkdown"],
+  [class*="st-key-it-map-button-wrap-"] .stMarkdown,
+  [class*="st-key-saved-map-button-wrap-"] .stMarkdown,
+  [class*="st-key-it-map-button-wrap-"] .stMarkdownContainer,
+  [class*="st-key-saved-map-button-wrap-"] .stMarkdownContainer {
     box-sizing: border-box !important;
     display: flex !important;
     flex: 0 0 36px !important;
@@ -5273,20 +5229,12 @@ st.markdown("""
     padding: 0 !important;
     align-items: center !important;
     justify-content: center !important;
-    border: 0 !important;
-    outline: 0 !important;
-    background: transparent !important;
-    box-shadow: none !important;
+    overflow: hidden !important;
   }
-
-  /* Único contorno del lápiz: el botón HTML real de Streamlit. */
-  [class*="st-key-it-edit-button-wrap-"] [data-testid="stButton"] > button,
-  [class*="st-key-saved-edit-button-wrap-"] [data-testid="stButton"] > button,
-  [class*="st-key-it-map-button-wrap-"] .place-map-icon-button,
-  [class*="st-key-saved-map-button-wrap-"] .place-map-icon-button {
+  [class*="st-key-it-map-button-wrap-"] a.place-map-icon-button,
+  [class*="st-key-saved-map-button-wrap-"] a.place-map-icon-button {
     box-sizing: border-box !important;
-    position: relative !important;
-    display: inline-flex !important;
+    display: flex !important;
     flex: 0 0 36px !important;
     width: 36px !important;
     min-width: 36px !important;
@@ -5296,87 +5244,57 @@ st.markdown("""
     max-height: 36px !important;
     margin: 0 !important;
     padding: 0 !important;
+    position: relative !important;
+    inset: auto !important;
     align-items: center !important;
     justify-content: center !important;
     border: 1px solid #CBD5E1 !important;
-    border-radius: 9px !important;
+    border-radius: 8px !important;
     background: #FFFFFF !important;
     background-color: #FFFFFF !important;
-    background-image: none !important;
     box-shadow: none !important;
-    outline: none !important;
     line-height: 0 !important;
     overflow: hidden !important;
-    transform: none !important;
-    vertical-align: middle !important;
   }
-  [class*="st-key-it-edit-button-wrap-"] [data-testid="stButton"] > button:hover,
-  [class*="st-key-it-edit-button-wrap-"] [data-testid="stButton"] > button:focus,
-  [class*="st-key-it-edit-button-wrap-"] [data-testid="stButton"] > button:active,
-  [class*="st-key-saved-edit-button-wrap-"] [data-testid="stButton"] > button:hover,
-  [class*="st-key-saved-edit-button-wrap-"] [data-testid="stButton"] > button:focus,
-  [class*="st-key-saved-edit-button-wrap-"] [data-testid="stButton"] > button:active,
-  [class*="st-key-it-map-button-wrap-"] .place-map-icon-button:hover,
-  [class*="st-key-it-map-button-wrap-"] .place-map-icon-button:focus,
-  [class*="st-key-it-map-button-wrap-"] .place-map-icon-button:active,
-  [class*="st-key-saved-map-button-wrap-"] .place-map-icon-button:hover,
-  [class*="st-key-saved-map-button-wrap-"] .place-map-icon-button:focus,
-  [class*="st-key-saved-map-button-wrap-"] .place-map-icon-button:active {
-    background: #FFFFFF !important;
-    background-color: #FFFFFF !important;
-    border-color: #CBD5E1 !important;
-    box-shadow: none !important;
-    outline: none !important;
-  }
-  [class*="st-key-it-edit-button-wrap-"] [data-testid="stButton"] > button,
-  [class*="st-key-saved-edit-button-wrap-"] [data-testid="stButton"] > button {
-    color: transparent !important;
-    -webkit-text-fill-color: transparent !important;
-    font-size: 0 !important;
-    line-height: 0 !important;
-  }
-  [class*="st-key-it-edit-button-wrap-"] [data-testid="stButton"] > button::before,
-  [class*="st-key-saved-edit-button-wrap-"] [data-testid="stButton"] > button::before {
-    content: "" !important;
-    display: block !important;
+  [class*="st-key-it-map-button-wrap-"] a.place-map-icon-button svg,
+  [class*="st-key-saved-map-button-wrap-"] a.place-map-icon-button svg {
     position: absolute !important;
     left: 50% !important;
     top: 50% !important;
-    width: 13px !important;
-    height: 13px !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    transform: translate(-50%, -50%) !important;
-    background: center / contain no-repeat url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23334155' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m16 4 4 4'/%3E%3Cpath d='M4 20l4-.9L19 8a2.1 2.1 0 0 0-3-3L5 16z'/%3E%3C/svg%3E") !important;
-  }
-  [class*="st-key-it-map-button-wrap-"] .place-map-icon-button svg,
-  [class*="st-key-saved-map-button-wrap-"] .place-map-icon-button svg {
     display: block !important;
-    position: absolute !important;
-    left: 50% !important;
-    top: 50% !important;
     width: 13px !important;
-    height: 13px !important;
     min-width: 13px !important;
+    height: 13px !important;
     min-height: 13px !important;
     margin: 0 !important;
     padding: 0 !important;
     transform: translate(-50%, -50%) !important;
-    transform-origin: center center !important;
+  }
+  [class*="st-key-it-map-button-wrap-"] a.place-map-icon-button:hover,
+  [class*="st-key-it-map-button-wrap-"] a.place-map-icon-button:focus,
+  [class*="st-key-it-map-button-wrap-"] a.place-map-icon-button:active,
+  [class*="st-key-saved-map-button-wrap-"] a.place-map-icon-button:hover,
+  [class*="st-key-saved-map-button-wrap-"] a.place-map-icon-button:focus,
+  [class*="st-key-saved-map-button-wrap-"] a.place-map-icon-button:active {
+    background: #FFFFFF !important;
+    background-color: #FFFFFF !important;
+    border-color: #CBD5E1 !important;
+    box-shadow: none !important;
   }
   @media (max-width: 768px) {
-    [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"],
-    [class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"] {
-      column-gap: 4px !important;
-    }
-    [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(2),
-    [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(3),
-    [class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(2),
-    [class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(3) {
+    [class*="st-key-it-map-button-wrap-"],
+    [class*="st-key-saved-map-button-wrap-"],
+    [class*="st-key-it-map-button-wrap-"] [data-testid="stElementContainer"],
+    [class*="st-key-saved-map-button-wrap-"] [data-testid="stElementContainer"],
+    [class*="st-key-it-map-button-wrap-"] a.place-map-icon-button,
+    [class*="st-key-saved-map-button-wrap-"] a.place-map-icon-button {
       flex-basis: 36px !important;
       width: 36px !important;
       min-width: 36px !important;
       max-width: 36px !important;
+      height: 36px !important;
+      min-height: 36px !important;
+      max-height: 36px !important;
     }
   }
 
