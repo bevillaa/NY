@@ -3414,7 +3414,11 @@ st.markdown("""
 
   [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(4) {
     display: flex !important;
-    justify-content: flex-end !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 38px !important;
+    min-width: 38px !important;
+    max-width: 38px !important;
   }
 
   [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(1),
@@ -4119,7 +4123,7 @@ st.markdown("""
   [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"],
   [class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"] {
     display: grid !important;
-    grid-template-columns: minmax(0, 1fr) 38px 38px 28px !important;
+    grid-template-columns: minmax(0, 1fr) 38px 38px 38px !important;
     align-items: center !important;
     justify-content: start !important;
     column-gap: 4px !important;
@@ -4239,112 +4243,6 @@ st.markdown("""
     background: center / contain no-repeat url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23334155' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m16 4 4 4'/%3E%3Cpath d='M4 20l4-.9L19 8a2.1 2.1 0 0 0-3-3L5 16z'/%3E%3C/svg%3E") !important;
   }
 
-  /* Wrapper del mapa y enlace: exactamente la misma caja que el lápiz. */
-  [class*="st-key-it-map-button-wrap-"],
-  [class*="st-key-saved-map-button-wrap-"] {
-    box-sizing: border-box !important;
-    display: flex !important;
-    flex: 0 0 38px !important;
-    align-items: center !important;
-    justify-content: center !important;
-    width: 38px !important;
-    min-width: 38px !important;
-    max-width: 38px !important;
-    height: 38px !important;
-    min-height: 38px !important;
-    max-height: 38px !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    border: 0 !important;
-    background: transparent !important;
-  }
-  [class*="st-key-it-map-button-wrap-"] [data-testid="stElementContainer"],
-  [class*="st-key-saved-map-button-wrap-"] [data-testid="stElementContainer"],
-  [class*="st-key-it-map-button-wrap-"] [data-testid="stMarkdown"],
-  [class*="st-key-saved-map-button-wrap-"] [data-testid="stMarkdown"],
-  [class*="st-key-it-map-button-wrap-"] .stMarkdown,
-  [class*="st-key-saved-map-button-wrap-"] .stMarkdown,
-  [class*="st-key-it-map-button-wrap-"] .stMarkdownContainer,
-  [class*="st-key-saved-map-button-wrap-"] .stMarkdownContainer {
-    box-sizing: border-box !important;
-    display: flex !important;
-    flex: 0 0 38px !important;
-    align-items: center !important;
-    justify-content: center !important;
-    width: 38px !important;
-    min-width: 38px !important;
-    max-width: 38px !important;
-    height: 38px !important;
-    min-height: 38px !important;
-    max-height: 38px !important;
-    margin: 0 !important;
-    padding: 0 !important;
-  }
-  [class*="st-key-it-map-button-wrap-"] a.place-map-icon-button,
-  [class*="st-key-saved-map-button-wrap-"] a.place-map-icon-button {
-    box-sizing: border-box !important;
-    position: relative !important;
-    inset: auto !important;
-    display: inline-flex !important;
-    flex: 0 0 38px !important;
-    align-items: center !important;
-    justify-content: center !important;
-    vertical-align: middle !important;
-    width: 38px !important;
-    min-width: 38px !important;
-    max-width: 38px !important;
-    height: 38px !important;
-    min-height: 38px !important;
-    max-height: 38px !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    border: 1px solid #CBD5E1 !important;
-    border-radius: 9px !important;
-    background: #FFFFFF !important;
-    background-color: #FFFFFF !important;
-    background-image: none !important;
-    box-shadow: none !important;
-    line-height: 0 !important;
-    text-decoration: none !important;
-    overflow: hidden !important;
-  }
-  [class*="st-key-it-map-button-wrap-"] a.place-map-icon-button svg,
-  [class*="st-key-saved-map-button-wrap-"] a.place-map-icon-button svg {
-    position: static !important;
-    display: block !important;
-    flex: 0 0 13px !important;
-    width: 13px !important;
-    min-width: 13px !important;
-    height: 13px !important;
-    min-height: 13px !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    transform: none !important;
-  }
-  [class*="st-key-it-map-button-wrap-"] a.place-map-icon-button:hover,
-  [class*="st-key-it-map-button-wrap-"] a.place-map-icon-button:focus,
-  [class*="st-key-it-map-button-wrap-"] a.place-map-icon-button:active,
-  [class*="st-key-saved-map-button-wrap-"] a.place-map-icon-button:hover,
-  [class*="st-key-saved-map-button-wrap-"] a.place-map-icon-button:focus,
-  [class*="st-key-saved-map-button-wrap-"] a.place-map-icon-button:active {
-    background: #FFFFFF !important;
-    background-color: #FFFFFF !important;
-    border-color: #CBD5E1 !important;
-    box-shadow: none !important;
-  }
-
-  @media (max-width: 768px) {
-    [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] {
-      grid-template-columns: minmax(0, 1fr) 38px 38px 28px !important;
-      column-gap: 4px !important;
-    }
-    [class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"] {
-      grid-template-columns: minmax(0, 1fr) 38px 38px !important;
-      column-gap: 4px !important;
-    }
-  }
-
-
   /* FIX DEFINITIVO: mapa como widget nativo Streamlit, misma caja que Editar. */
   [class*="st-key-it-edit-button-wrap-"] [data-testid="stButton"] > button,
   [class*="st-key-saved-edit-button-wrap-"] [data-testid="stButton"] > button,
@@ -4434,96 +4332,6 @@ st.markdown("""
   }
 
 
-  /* BOTÓN MAPA — ÚNICA REGLA CONSOLIDADA.
-     La caja coincide con la caja real del lápiz (38 × 38 px).
-     No se modifica ningún selector ni estilo del botón del lápiz. */
-  [class*="st-key-it-map-button-wrap-"],
-  [class*="st-key-saved-map-button-wrap-"] {
-    box-sizing: border-box !important;
-    display: flex !important;
-    flex: 0 0 38px !important;
-    align-items: center !important;
-    justify-content: center !important;
-    width: 38px !important;
-    min-width: 38px !important;
-    max-width: 38px !important;
-    height: 38px !important;
-    min-height: 38px !important;
-    max-height: 38px !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    border: 0 !important;
-    background: transparent !important;
-  }
-  [class*="st-key-it-map-button-wrap-"] [data-testid="stElementContainer"],
-  [class*="st-key-saved-map-button-wrap-"] [data-testid="stElementContainer"],
-  [class*="st-key-it-map-button-wrap-"] [data-testid="stMarkdownContainer"],
-  [class*="st-key-saved-map-button-wrap-"] [data-testid="stMarkdownContainer"],
-  [class*="st-key-it-map-button-wrap-"] [data-testid="stMarkdownContainer"] p,
-  [class*="st-key-saved-map-button-wrap-"] [data-testid="stMarkdownContainer"] p {
-    box-sizing: border-box !important;
-    display: flex !important;
-    flex: 0 0 38px !important;
-    align-items: center !important;
-    justify-content: center !important;
-    width: 38px !important;
-    min-width: 38px !important;
-    max-width: 38px !important;
-    height: 38px !important;
-    min-height: 38px !important;
-    max-height: 38px !important;
-    margin: 0 !important;
-    padding: 0 !important;
-  }
-  [class*="st-key-it-map-button-wrap-"] a.place-map-link-direct,
-  [class*="st-key-saved-map-button-wrap-"] a.place-map-link-direct {
-    box-sizing: border-box !important;
-    position: static !important;
-    display: flex !important;
-    flex: 0 0 38px !important;
-    align-items: center !important;
-    justify-content: center !important;
-    width: 38px !important;
-    min-width: 38px !important;
-    max-width: 38px !important;
-    height: 38px !important;
-    min-height: 38px !important;
-    max-height: 38px !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    border: 1px solid #CBD5E1 !important;
-    border-radius: 9px !important;
-    background: #FFFFFF !important;
-    box-shadow: none !important;
-    line-height: 0 !important;
-    text-decoration: none !important;
-    overflow: hidden !important;
-  }
-  [class*="st-key-it-map-button-wrap-"] a.place-map-link-direct svg,
-  [class*="st-key-saved-map-button-wrap-"] a.place-map-link-direct svg {
-    position: static !important;
-    display: block !important;
-    flex: 0 0 13px !important;
-    width: 13px !important;
-    min-width: 13px !important;
-    max-width: 13px !important;
-    height: 13px !important;
-    min-height: 13px !important;
-    max-height: 13px !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    transform: none !important;
-  }
-  [class*="st-key-it-map-button-wrap-"] a.place-map-link-direct:hover,
-  [class*="st-key-it-map-button-wrap-"] a.place-map-link-direct:focus,
-  [class*="st-key-it-map-button-wrap-"] a.place-map-link-direct:active,
-  [class*="st-key-saved-map-button-wrap-"] a.place-map-link-direct:hover,
-  [class*="st-key-saved-map-button-wrap-"] a.place-map-link-direct:focus,
-  [class*="st-key-saved-map-button-wrap-"] a.place-map-link-direct:active {
-    background: #FFFFFF !important;
-    border-color: #CBD5E1 !important;
-    box-shadow: none !important;
-  }
 
 </style>
 """, unsafe_allow_html=True)
@@ -6151,18 +5959,7 @@ if seccion_principal == "🗽Ruta":
                                 st.rerun()
                     with c_map_head:
                         with st.container(key=f"it-map-button-wrap-{item['id']}"):
-                            st.markdown(
-                                f"""<a class="place-map-link-direct" href="{html.escape(gmaps_url, quote=True)}"
-                                target="_blank" rel="noopener noreferrer" title="Abrir en Google Maps"
-                                aria-label="Abrir en Google Maps">
-                                  <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24"
-                                  fill="none" stroke="#334155" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <path d="m3 6 6-3 6 3 6-3v15l-6 3-6-3-6 3z"/>
-                                    <path d="M9 3v15M15 6v15"/>
-                                  </svg>
-                                </a>""",
-                                unsafe_allow_html=True
-                            )
+                            st.link_button(" ", gmaps_url, help="Abrir en Google Maps")
                     with c_chk:
                         chk_val = st.checkbox("", value=is_visited, key=f"chk_it_{d}_{item['id']}")
                         if chk_val != is_visited and idx_real is not None:
@@ -6301,18 +6098,7 @@ if seccion_principal == "📌Guardados":
             with c_saved_map:
                 g_url_sp = f"https://www.google.com/maps/search/?api=1&query={urllib.parse.quote(p_spot['nombre'] + ' New York')}"
                 with st.container(key=f"saved-map-button-wrap-{p_spot['id']}"):
-                        st.markdown(
-                            f"""<a class="place-map-link-direct" href="{html.escape(g_url_sp, quote=True)}"
-                            target="_blank" rel="noopener noreferrer" title="Abrir en Google Maps"
-                            aria-label="Abrir en Google Maps">
-                              <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24"
-                              fill="none" stroke="#334155" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="m3 6 6-3 6 3 6-3v15l-6 3-6-3-6 3z"/>
-                                <path d="M9 3v15M15 6v15"/>
-                              </svg>
-                            </a>""",
-                            unsafe_allow_html=True
-                        )
+                    st.link_button(" ", g_url_sp, help="Abrir en Google Maps")
             # Dirección y nota en una fila independiente de ancho completo.
             if dir_p_html or nota_p_html:
                 st.markdown(f'<div class="place-full-width-info">{dir_p_html}{nota_p_html}</div>', unsafe_allow_html=True)
