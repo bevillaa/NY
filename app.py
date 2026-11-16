@@ -5500,7 +5500,7 @@ if seccion_principal == "✈️Info":
 if seccion_principal == "🗒️Listas":
     st.markdown("---")
     st.markdown('<div class="ny-card-header">🔄 Sincronización de Listas de Google Maps</div>', unsafe_allow_html=True)
-    st.caption("Puedes cambiar el nombre o la URL compartida de cualquier lista aquí mismo. Después pulsa sincronizar para importar los lugares nuevos.")
+    st.caption("Se puede cambiar el nombre o la URL de cualquier lista. Pulsar sincronizar para importar los lugares nuevos.")
 
     listas_config = st.session_state.config_viaje.get("listas_gmaps", [])
     if not listas_config:
