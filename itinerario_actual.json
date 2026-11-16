@@ -1320,5 +1320,19 @@
     "tipo": "Exterior",
     "lista_origen": "NY",
     "visitado": false
+  },
+  {
+    "id": 97,
+    "nombre": "Queensboro Plaza",
+    "lat": 40.75058,
+    "lon": -73.94019999999999,
+    "dia": 0,
+    "hora": "",
+    "direccion": "Queens, NY 11101, United States",
+    "nota": "",
+    "categoria": "📍 Otros",
+    "tipo": "Exterior",
+    "lista_origen": "NY",
+    "visitado": false
   }
 ]
