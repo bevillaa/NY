@@ -4777,9 +4777,9 @@ if seccion_principal == "🗺️Mapa":
         cats_actuales = sorted(set(normalizar_categoria(l.get("categoria", "📍 Otros")) for l in st.session_state.lugares))
         sel_filtro_cat = selectbox_sin_teclado("Categoría:", ["Todas"] + cats_actuales, label_visibility="collapsed")
 
-    if "Todos" in sel_vista:
+    if "Todos los Sitios" in sel_vista:
         sitios_mapa = list(st.session_state.lugares)
-    elif "Solo Sitios en Itinerario" in sel_vista:
+    elif "Todos los Días" in sel_vista:
         sitios_mapa = [l for l in st.session_state.lugares if l.get("dia", 0) > 0]
     else:
         m_dia = re.search(r"Día (\d+):", sel_vista)
