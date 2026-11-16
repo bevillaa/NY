@@ -1105,8 +1105,8 @@
     "dia": 4,
     "hora": "10:00",
     "direccion": "South St, Whitehall St, New York, 10004, United States",
-    "nota": "",
-    "categoria": "☀️ Spots",
+    "nota": "Parada ferry gratis",
+    "categoria": "📍 Otros",
     "tipo": "Exterior",
     "lista_origen": "NY",
     "visitado": false
