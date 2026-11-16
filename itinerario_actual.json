@@ -1418,5 +1418,19 @@
     "tipo": "Interior",
     "lista_origen": "NY Sweets",
     "visitado": false
+  },
+  {
+    "id": 104,
+    "nombre": "Reiss Bloomingdale's New York",
+    "lat": 40.7624461,
+    "lon": -73.9678376,
+    "dia": 0,
+    "hora": "",
+    "direccion": "1000 Third Avenue 59th Street and, Lexington Ave, New York, NY 10022, United States",
+    "nota": "",
+    "categoria": "🛍️ Compras",
+    "tipo": "Interior",
+    "lista_origen": "Tiendas & Outlets (NY shopping)",
+    "visitado": false
   }
 ]
