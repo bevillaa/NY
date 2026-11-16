@@ -4574,7 +4574,7 @@ def render_editor_sitio_panel(spot: dict, idx_real: int, key_ctx: str):
 
 def render_formulario_agregar_lugar(key_sufijo: str = "gen"):
     """Módulo desplegable para añadir sitios desde Google Maps o a mano."""
-    with st.expander("➕ Añadir Nuevo Lugar (Google Maps o a Mano)", expanded=False):
+    with st.expander("➕ Añadir Nuevo Lugar", expanded=False):
         tab_gm, tab_man = st.tabs(["🌐 Google Maps", "✏️ A Mano"])
         dias_asig_opts = ["📌 Bandeja de Guardados"] + [etiqueta_dia(d) for d in range(1, 11)]
 
@@ -5059,7 +5059,7 @@ if seccion_principal == "📎Guardados":
     with st.container(key="guardados-header-row"):
         col_gh1, col_gh2 = st.columns([3.4, 1.2], vertical_alignment="center")
         with col_gh1:
-            st.markdown('<div class="ny-card-header" style="margin-bottom:0;">Lugares Guardados & Gestión de Sitios</div>', unsafe_allow_html=True)
+            st.markdown('<div class="ny-card-header" style="margin-bottom:0;">Lugares Guardados</div>', unsafe_allow_html=True)
         with col_gh2:
             with st.container(key="btn_sync_guardados_wrap"):
                 if st.button("🔄 Sincronizar", key="btn_sync_guardados_mini", help="Sincronizar listas de Google Maps"):
