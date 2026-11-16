@@ -3270,6 +3270,22 @@ st.markdown("""
       font-size: inherit !important;
     }
   }
+  /* Corrección de tamaño REAL de los pictogramas: se modifica el SVG de fondo,
+     no el tamaño de letra del enlace. Los botones conservan sus dimensiones. */
+  @media (max-width: 768px) {
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(1) button,
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(1) button {
+      background-size: 22px 22px !important;
+    }
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(2) [data-testid="stLinkButton"] > a,
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(2) [data-testid="stLinkButton"] > a {
+      background-size: 25px 25px !important;
+    }
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(3) input,
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(3) input {
+      font-size: 0.76rem !important;
+    }
+  }
 </style>
 """, unsafe_allow_html=True)
 
