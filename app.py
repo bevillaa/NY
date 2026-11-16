@@ -4053,6 +4053,57 @@ st.markdown("""
     visibility: hidden !important;
   }
 
+
+
+  /* FIX FINAL: los botones de mapa se seleccionan por su URL real de Google Maps.
+     Esto evita depender de las clases internas que Streamlit cambia entre versiones. */
+  a[href*="google.com/maps"] ,
+  a[href*="google.com/maps"]:hover,
+  a[href*="google.com/maps"]:focus,
+  a[href*="google.com/maps"]:active,
+  a[href*="google.com/maps"]:visited {
+    box-sizing: border-box !important;
+    width: 30px !important;
+    min-width: 30px !important;
+    max-width: 30px !important;
+    height: 30px !important;
+    min-height: 30px !important;
+    max-height: 30px !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    background: #FFFFFF !important;
+    background-color: #FFFFFF !important;
+    background-image: none !important;
+    border: 1px solid #CBD5E1 !important;
+    border-radius: 7px !important;
+    box-shadow: none !important;
+    color: transparent !important;
+    -webkit-text-fill-color: transparent !important;
+    font-size: 0 !important;
+    line-height: 0 !important;
+    text-decoration: none !important;
+    opacity: 1 !important;
+    filter: none !important;
+  }
+  a[href*="google.com/maps"]::before {
+    content: "" !important;
+    display: block !important;
+    flex: 0 0 14px !important;
+    width: 14px !important;
+    height: 14px !important;
+    background: transparent center / contain no-repeat !important;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23334155' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m3 6 6-3 6 3 6-3v15l-6 3-6-3-6 3z'/%3E%3Cpath d='M9 3v15'/%3E%3Cpath d='M15 6v15'/%3E%3C/svg%3E") !important;
+  }
+  a[href*="google.com/maps"] p,
+  a[href*="google.com/maps"] span,
+  a[href*="google.com/maps"] svg {
+    display: none !important;
+    visibility: hidden !important;
+  }
+
 </style>
 """, unsafe_allow_html=True)
 
@@ -5677,7 +5728,7 @@ if seccion_principal == "🗽Ruta":
                             st.session_state.editando_spot_key = None if st.session_state.editando_spot_key == ek else ek
                             st.rerun()
                     with c_map_head:
-                        st.link_button("🗺️", gmaps_url, key=f"map_it_{item['id']}", help="Abrir en Google Maps")
+                        st.link_button(" ", gmaps_url, key=f"map_it_{item['id']}", help="Abrir en Google Maps")
                     with c_chk:
                         chk_val = st.checkbox("", value=is_visited, key=f"chk_it_{d}_{item['id']}")
                         if chk_val != is_visited and idx_real is not None:
@@ -5814,7 +5865,7 @@ if seccion_principal == "📌Guardados":
                     st.rerun()
             with c_saved_map:
                 g_url_sp = f"https://www.google.com/maps/search/?api=1&query={urllib.parse.quote(p_spot['nombre'] + ' New York')}"
-                st.link_button("🗺️", g_url_sp, key=f"map_saved_{p_spot['id']}", help="Abrir en Google Maps")
+                st.link_button(" ", g_url_sp, key=f"map_saved_{p_spot['id']}", help="Abrir en Google Maps")
             # Dirección y nota en una fila independiente de ancho completo.
             if dir_p_html or nota_p_html:
                 st.markdown(f'<div class="place-full-width-info">{dir_p_html}{nota_p_html}</div>', unsafe_allow_html=True)
