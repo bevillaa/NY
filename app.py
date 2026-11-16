@@ -4783,6 +4783,175 @@ st.markdown("""
     }
   }
 
+
+  /* Corrección definitiva de geometría: ambos controles usan la caja del mapa
+     como referencia y se centran en la misma línea, en móvil y escritorio. */
+  [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"],
+  [class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"] {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) 36px 36px 28px !important;
+    align-items: center !important;
+    justify-content: start !important;
+    column-gap: 5px !important;
+    row-gap: 0 !important;
+    width: 100% !important;
+    min-width: 0 !important;
+  }
+  [class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"] {
+    grid-template-columns: minmax(0, 1fr) 36px 36px !important;
+  }
+
+  [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(2),
+  [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(3),
+  [class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(2),
+  [class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(3) {
+    box-sizing: border-box !important;
+    display: flex !important;
+    flex: 0 0 36px !important;
+    align-items: center !important;
+    justify-content: center !important;
+    align-self: center !important;
+    width: 36px !important;
+    min-width: 36px !important;
+    max-width: 36px !important;
+    height: 36px !important;
+    min-height: 36px !important;
+    max-height: 36px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stElementContainer"],
+  [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(3) [data-testid="stElementContainer"],
+  [class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stElementContainer"],
+  [class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(3) [data-testid="stElementContainer"],
+  [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2) .stButton,
+  [class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(2) .stButton {
+    box-sizing: border-box !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 36px !important;
+    min-width: 36px !important;
+    max-width: 36px !important;
+    height: 36px !important;
+    min-height: 36px !important;
+    max-height: 36px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stButton"] > button,
+  [class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stButton"] > button,
+  [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(3) .place-map-icon-button,
+  [class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(3) .place-map-icon-button {
+    box-sizing: border-box !important;
+    position: relative !important;
+    display: inline-flex !important;
+    flex: 0 0 36px !important;
+    align-items: center !important;
+    justify-content: center !important;
+    vertical-align: middle !important;
+    width: 36px !important;
+    min-width: 36px !important;
+    max-width: 36px !important;
+    height: 36px !important;
+    min-height: 36px !important;
+    max-height: 36px !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    border: 1px solid #CBD5E1 !important;
+    border-radius: 9px !important;
+    background: #FFFFFF !important;
+    background-color: #FFFFFF !important;
+    background-image: none !important;
+    box-shadow: none !important;
+    line-height: 0 !important;
+    transform: none !important;
+  }
+
+  [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stButton"] > button,
+  [class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stButton"] > button {
+    overflow: hidden !important;
+    color: transparent !important;
+    -webkit-text-fill-color: transparent !important;
+    font-size: 0 !important;
+  }
+  [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stButton"] > button::before,
+  [class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stButton"] > button::before {
+    content: "" !important;
+    position: absolute !important;
+    inset: 0 !important;
+    width: 14px !important;
+    height: 14px !important;
+    margin: auto !important;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23334155' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m16 4 4 4'/%3E%3Cpath d='M4 20l4-.9L19 8a2.1 2.1 0 0 0-3-3L5 16z'/%3E%3C/svg%3E") !important;
+    background-repeat: no-repeat !important;
+    background-position: center center !important;
+    background-size: 14px 14px !important;
+  }
+  [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stButton"] > button::after,
+  [class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stButton"] > button::after {
+    content: none !important;
+    display: none !important;
+  }
+
+  [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(3) .place-map-icon-button,
+  [class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(3) .place-map-icon-button {
+    padding: 0 !important;
+    overflow: hidden !important;
+  }
+  [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(3) .place-map-icon-button svg,
+  [class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(3) .place-map-icon-button svg {
+    display: block !important;
+    position: absolute !important;
+    left: 50% !important;
+    top: 50% !important;
+    width: 14px !important;
+    height: 14px !important;
+    min-width: 14px !important;
+    min-height: 14px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    transform: translate(-50%, -50%) !important;
+    fill: none !important;
+    stroke: #334155 !important;
+    stroke-width: 1.8 !important;
+    stroke-linecap: round !important;
+    stroke-linejoin: round !important;
+  }
+
+  [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stButton"] > button:hover,
+  [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stButton"] > button:focus,
+  [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stButton"] > button:active,
+  [class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stButton"] > button:hover,
+  [class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stButton"] > button:focus,
+  [class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stButton"] > button:active,
+  [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(3) .place-map-icon-button:hover,
+  [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(3) .place-map-icon-button:focus,
+  [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(3) .place-map-icon-button:active,
+  [class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(3) .place-map-icon-button:hover,
+  [class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(3) .place-map-icon-button:focus,
+  [class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(3) .place-map-icon-button:active {
+    background: #FFFFFF !important;
+    background-color: #FFFFFF !important;
+    border-color: #CBD5E1 !important;
+    box-shadow: none !important;
+  }
+
+  @media (max-width: 768px) {
+    [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] {
+      grid-template-columns: minmax(0, 1fr) 36px 36px 28px !important;
+      align-items: center !important;
+      column-gap: 5px !important;
+    }
+    [class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"] {
+      grid-template-columns: minmax(0, 1fr) 36px 36px !important;
+      align-items: center !important;
+      column-gap: 5px !important;
+    }
+  }
+
 </style>
 """, unsafe_allow_html=True)
 
