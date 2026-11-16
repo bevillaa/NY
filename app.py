@@ -5056,10 +5056,10 @@ if seccion_principal == "📎Guardados":
     if pulsado_sync:
         ejecutar_sincronizacion_listas_gmaps()
 
-    if "_msg_sync_guardados" in st.session_state:
-        tipo_msg, txt_msg = st.session_state.pop("_msg_sync_guardados")
-        if tipo_msg == "error":
-            st.error(txt_msg)
+    # if "_msg_sync_guardados" in st.session_state:
+    #     tipo_msg, txt_msg = st.session_state.pop("_msg_sync_guardados")
+    #     if tipo_msg == "error":
+    #        st.error(txt_msg)
 
     if "_errores_sync_guardados" in st.session_state:
         errores_temp = st.session_state.pop("_errores_sync_guardados")
