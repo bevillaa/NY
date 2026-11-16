@@ -4526,7 +4526,7 @@ st.markdown(f"""
 <div class="hero-container">
   <div style="display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:10px;">
     <div>
-      <div class="hero-eyebrow">✨ &nbsp;·&nbsp; 26 DIC 2026 · 4 ENE 2027</div>
+      <div class="hero-eyebrow">✨ 26 DIC 2026 · 4 ENE 2027 ✨</div>
       <div class="hero-title">🎄Navidad en Nueva York🗽</div>
       <div style="display:flex; gap:12px; flex-wrap:wrap; margin-top:7px; font-size:0.82rem; font-weight:700; color:#475569;">
         <span>Madrid&nbsp; · &nbsp;{ahora_madrid}</span>
