@@ -3370,6 +3370,7 @@ st.markdown("""
   }
 
 
+  
   /* Acciones compactas alineadas a la derecha del nombre del lugar. */
   [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"],
   [class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"] {
@@ -3379,15 +3380,18 @@ st.markdown("""
     column-gap: 5px !important;
     width: 100% !important;
   }
+
   [class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"] {
     grid-template-columns: minmax(0, 1fr) 30px 30px !important;
   }
+
   [class*="st-key-it-heading-row-"] [data-testid="column"],
   [class*="st-key-saved-heading-row-"] [data-testid="column"] {
     min-width: 0 !important;
     width: 100% !important;
     padding: 0 !important;
   }
+
   [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2) button,
   [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(3) a,
   [class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(2) button,
@@ -3404,14 +3408,15 @@ st.markdown("""
     display: inline-flex !important;
     align-items: center !important;
     justify-content: center !important;
-    font-size: 0.82rem !important;
     line-height: 1 !important;
     overflow: visible !important;
   }
+
   [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(4) {
     display: flex !important;
     justify-content: flex-end !important;
   }
+
   [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(1),
   [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(2),
   [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(1),
@@ -3425,34 +3430,61 @@ st.markdown("""
     visibility: hidden !important;
     overflow: hidden !important;
   }
+
   [class*="st-key-it-controls-row-"] [data-testid="stHorizontalBlock"],
   [class*="st-key-saved-controls-row-"] [data-testid="stHorizontalBlock"] {
     grid-template-columns: 0px 0px 76px 88px !important;
     column-gap: 5px !important;
   }
+
   @media (max-width: 768px) {
     [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] {
-      grid-template-columns: minmax(0, 1fr) 40px 40px 26px !important;
+      grid-template-columns: minmax(0, 1fr) 34px 34px 26px !important;
       gap: 2px !important;
     }
+
     [class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"] {
-      grid-template-columns: minmax(0, 1fr) 40px 40px !important;
+      grid-template-columns: minmax(0, 1fr) 34px 34px !important;
       gap: 2px !important;
     }
+
     [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2) button,
     [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(3) a,
     [class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(2) button,
     [class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(3) a {
-      width: 35px !important; min-width: 35px !important; max-width: 35px !important;
-      height: 35px !important; min-height: 35px !important; max-height: 35px !important;
-      font-size: 0.65rem !important;
+      width: 32px !important;
+      min-width: 32px !important;
+      max-width: 32px !important;
+      height: 32px !important;
+      min-height: 32px !important;
+      max-height: 32px !important;
     }
+
+    /* Reducir el tamaño del dibujo, no el área pulsable del botón. */
+    [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2) button p,
+    [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(3) a p,
+    [class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(2) button p,
+    [class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(3) a p {
+      font-size: 0.78rem !important;
+      line-height: 1 !important;
+      margin: 0 !important;
+    }
+
     [class*="st-key-it-controls-row-"] [data-testid="stHorizontalBlock"],
     [class*="st-key-saved-controls-row-"] [data-testid="stHorizontalBlock"] {
       grid-template-columns: 0px 0px 76px 88px !important;
       gap: 4px !important;
     }
   }
+
+  @media (max-width: 320px) {
+    [class*="st-key-it-controls-row-"] [data-testid="stHorizontalBlock"],
+    [class*="st-key-saved-controls-row-"] [data-testid="stHorizontalBlock"] {
+      grid-template-columns: 0px 0px 72px 84px !important;
+      gap: 3px !important;
+    }
+  }
+
   @media (max-width: 320px) {
     [class*="st-key-it-controls-row-"] [data-testid="stHorizontalBlock"],
     [class*="st-key-saved-controls-row-"] [data-testid="stHorizontalBlock"] {
