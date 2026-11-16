@@ -2998,6 +2998,37 @@ st.markdown("""
     overflow: visible !important;
     min-width: 40px !important;
   }
+  /* Corrección adicional: Streamlit puede reservar espacio aunque su toolbar esté oculta. */
+  [data-testid="stHeader"],
+  header[data-testid="stHeader"] {
+    display: none !important;
+    height: 0 !important;
+    min-height: 0 !important;
+    max-height: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    border: 0 !important;
+  }
+  [data-testid="stDecoration"] {
+    display: none !important;
+    height: 0 !important;
+  }
+  [data-testid="stMain"], section.main {
+    padding-top: 0 !important;
+    margin-top: 0 !important;
+  }
+  [data-testid="stMainBlockContainer"], .block-container {
+    padding-top: 0.45rem !important;
+    margin-top: 0 !important;
+  }
+  @media (max-width: 768px) {
+    [data-testid="stMainBlockContainer"], .block-container {
+      padding-top: max(0.25rem, env(safe-area-inset-top)) !important;
+    }
+    .hero-container {
+      margin-top: 0 !important;
+    }
+  }
 </style>
 """, unsafe_allow_html=True)
 
