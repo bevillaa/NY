@@ -1236,5 +1236,18 @@
     "tipo": "Exterior",
     "lista_origen": "Places (NY places)",
     "visitado": false
+  },
+  {
+    "id": 91,
+    "nombre": "One Beacon Court Condominium",
+    "lat": 40.7375148,
+    "lon": -74.0298278,
+    "dia": 0,
+    "hora": "09:00",
+    "direccion": "",
+    "nota": "Free Tour - Wilson Silver",
+    "categoria": "📍 Otros",
+    "tipo": "Exterior",
+    "visitado": false
   }
 ]
