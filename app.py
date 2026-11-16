@@ -3201,6 +3201,29 @@ st.markdown("""
     [data-testid="stTabs"] [role="tablist"] { gap: 2px !important; }
     [data-testid="stTabs"] button[role="tab"] { padding: .55rem .5rem !important; }
   }
+
+  /* TIPOGRAFÍA CALIBRI · mantiene intactos los iconos y símbolos */
+  html, body, .stApp,
+  .stApp p, .stApp label, .stApp input, .stApp textarea,
+  .stApp select, .stApp button,
+  .stApp [data-testid="stMarkdownContainer"],
+  .stApp [data-testid="stText"],
+  .stApp [data-testid="stCaptionContainer"],
+  .stApp .stCaption,
+  .stApp small, .stApp li, .stApp td, .stApp th,
+  .stApp [data-baseweb="select"] *,
+  .stApp [data-baseweb="input"] *,
+  .stApp [data-baseweb="textarea"] * {
+    font-family: Calibri, Carlito, "Segoe UI", Arial, sans-serif !important;
+  }
+  .stApp h1, .stApp h2, .stApp h3, .stApp h4,
+  .stApp .hero-title, .stApp [data-testid="stMarkdownContainer"] h1,
+  .stApp [data-testid="stMarkdownContainer"] h2,
+  .stApp [data-testid="stMarkdownContainer"] h3 {
+    font-family: Calibri, Carlito, "Segoe UI", Arial, sans-serif !important;
+    font-weight: 600 !important;
+    letter-spacing: -0.018em !important;
+  }
 </style>
 """, unsafe_allow_html=True)
 
