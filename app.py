@@ -3370,24 +3370,51 @@ def _github_request(ruta_repo: str, metodo: str = "GET", datos=None):
 
 
 def _cargar_json_persistente(ruta: str):
-    """Prioriza GitHub (persistente entre despliegues); usa disco como respaldo."""
+    """
+    GitHub es la fuente de verdad cuando está configurado.
+    Nunca sustituye un error remoto por una copia local potencialmente vacía/antigua.
+    """
     token, repo, _ = _github_configuracion()
     if token and repo:
         try:
             remoto = _github_request(ruta, "GET")
-            if remoto is not None and remoto[0] is not None:
-                datos, _ = remoto
-                _guardar_json_atomico(ruta, datos)
-                return datos
-            # Primera migración: si GitHub aún no tiene el JSON, conserva y
-            # sube automáticamente la copia local existente.
-            if remoto is not None and remoto[0] is None and os.path.exists(ruta):
+            if remoto is None:
+                raise RuntimeError(
+                    "No se pudo consultar GitHub: revisa GITHUB_TOKEN y GITHUB_REPO."
+                )
+            datos_remotos, _sha = remoto
+            if datos_remotos is not None:
+                # Validar la forma esperada antes de aceptar el contenido remoto.
+                if ruta == ARCH_ITINERARIO and not isinstance(datos_remotos, list):
+                    raise RuntimeError(f"{ruta} no contiene una lista JSON válida.")
+                if ruta == ARCH_CONFIG and not isinstance(datos_remotos, dict):
+                    raise RuntimeError(f"{ruta} no contiene un objeto JSON válido.")
+                _guardar_json_atomico(ruta, datos_remotos)
+                return datos_remotos
+
+            # El archivo aún no existe en GitHub: migración inicial controlada
+            # desde el disco local, si existe y contiene JSON válido.
+            if os.path.exists(ruta):
                 with open(ruta, "r", encoding="utf-8") as f:
                     datos_locales = json.load(f)
-                _guardar_json_persistente(ruta, datos_locales)
+                if ruta == ARCH_ITINERARIO and not isinstance(datos_locales, list):
+                    raise RuntimeError(f"La copia local de {ruta} no es una lista JSON.")
+                if ruta == ARCH_CONFIG and not isinstance(datos_locales, dict):
+                    raise RuntimeError(f"La copia local de {ruta} no es un objeto JSON.")
+                if not _guardar_json_persistente(ruta, datos_locales):
+                    raise RuntimeError(
+                        f"No se pudo migrar {ruta} a GitHub. No se usará una copia local como si estuviera sincronizada."
+                    )
                 return datos_locales
+            return None
         except Exception as exc:
-            st.warning(f"No se pudo leer {ruta} desde GitHub; se intentará la copia local. Detalle: {exc}")
+            # Fallar de forma segura: no cargar una copia local vieja que luego
+            # pueda sobrescribir el itinerario compartido.
+            raise RuntimeError(
+                f"No se pudieron leer los datos persistentes ({os.path.basename(ruta)}) desde GitHub: {exc}"
+            ) from exc
+
+    # Modo local solo cuando no hay configuración remota.
     if os.path.exists(ruta):
         try:
             with open(ruta, "r", encoding="utf-8") as f:
@@ -3398,16 +3425,39 @@ def _cargar_json_persistente(ruta: str):
 
 
 def _guardar_json_persistente(ruta: str, datos):
-    """Guarda localmente y, si está configurado, confirma el cambio en GitHub."""
-    local_ok = _guardar_json_atomico(ruta, datos)
+    """
+    Si GitHub está configurado, primero confirma allí el cambio.
+    El disco local es solo una caché; nunca se considera un guardado persistente
+    hasta recibir confirmación de GitHub.
+    """
     token, repo, branch = _github_configuracion()
     if not (token and repo):
-        return local_ok
+        return _guardar_json_atomico(ruta, datos)
 
     import base64
     try:
         remoto = _github_request(ruta, "GET")
-        sha = remoto[1] if remoto else None
+        if remoto is None:
+            raise RuntimeError(
+                "No se pudo leer el archivo remoto para obtener su SHA. No se ha sobrescrito nada."
+            )
+        datos_remotos, sha = remoto
+
+        # Evita que una sesión vacía por error borre accidentalmente un itinerario
+        # que ya existe en GitHub. El borrado total debe hacerse de forma deliberada
+        # desde GitHub, no como efecto secundario de una sesión recién iniciada.
+        if (
+            ruta == ARCH_ITINERARIO
+            and isinstance(datos_remotos, list)
+            and len(datos_remotos) > 0
+            and isinstance(datos, list)
+            and len(datos) == 0
+        ):
+            raise RuntimeError(
+                "Protección activada: GitHub contiene lugares y esta sesión intenta guardar una lista vacía. "
+                "No se ha sobrescrito el itinerario."
+            )
+
         contenido = base64.b64encode(
             json.dumps(datos, ensure_ascii=False, indent=2).encode("utf-8")
         ).decode("ascii")
@@ -3430,12 +3480,18 @@ def _guardar_json_persistente(ruta: str, datos):
             }
         )
         with urllib.request.urlopen(req, timeout=20) as response:
-            response.read()
+            respuesta = json.loads(response.read().decode("utf-8"))
+        if not respuesta.get("content", {}).get("sha"):
+            raise RuntimeError("GitHub no confirmó el guardado del archivo.")
+
+        # Actualizar caché local solo después de confirmar la escritura remota.
+        _guardar_json_atomico(ruta, datos)
         return True
     except Exception as exc:
         st.error(
-            f"El cambio se guardó en la sesión local, pero NO en GitHub ({os.path.basename(ruta)}). "
-            f"No está protegido frente a un redeploy. Revisa GITHUB_TOKEN, GITHUB_REPO y permisos de escritura. Detalle: {exc}"
+            f"NO se ha confirmado el guardado en GitHub ({os.path.basename(ruta)}). "
+            f"Los datos de esta sesión no están protegidos frente a un redeploy. "
+            f"No cierres la sesión hasta resolverlo. Detalle: {exc}"
         )
         return False
 
@@ -3873,7 +3929,10 @@ def importar_sitio_desde_gmaps(url_o_texto: str, dia_dest: int = 0, hora: str = 
                     existentes.add(s["nombre"].strip().casefold())
                     nuevos += 1
             if nuevos > 0:
-                guardar_itinerario_disco(st.session_state.lugares)
+                if not guardar_itinerario_disco(st.session_state.lugares):
+                    # Si el guardado remoto falla, no damos la importación por hecha.
+                    st.session_state.lugares = cargar_itinerario_disco()
+                    return False, "No se pudieron guardar en GitHub los lugares importados. No se ha confirmado la importación."
                 return True, f"¡Se importaron {nuevos} lugares desde la lista de Google Maps!"
 
     nombre_extraido = ""
