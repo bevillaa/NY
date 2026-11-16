@@ -3286,6 +3286,146 @@ st.markdown("""
       font-size: 0.76rem !important;
     }
   }
+
+
+  /* CORRECCIÓN DEFINITIVA DE ANCHURAS: MAPA | HORA | DÍA.
+     Se mantiene el lápiz tal como estaba; se reserva espacio real para
+     que los otros tres controles no se recorten en pantallas estrechas. */
+  @media (max-width: 768px) {
+    [class*="st-key-it-controls-row-"] [data-testid="stHorizontalBlock"],
+    [class*="st-key-saved-controls-row-"] [data-testid="stHorizontalBlock"] {
+      display: grid !important;
+      grid-template-columns: 36px 44px 84px minmax(100px, 1fr) !important;
+      grid-auto-flow: column !important;
+      justify-content: start !important;
+      align-items: center !important;
+      column-gap: 5px !important;
+      width: 100% !important;
+      min-width: 0 !important;
+      overflow: visible !important;
+    }
+
+    [class*="st-key-it-controls-row-"] [data-testid="column"],
+    [class*="st-key-saved-controls-row-"] [data-testid="column"] {
+      min-width: 0 !important;
+      width: auto !important;
+      max-width: none !important;
+      overflow: visible !important;
+      padding: 0 !important;
+    }
+
+    /* MAPA: columna 2. El dibujo crece y el enlace no recorta su contenido. */
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(2) [data-testid="stLinkButton"],
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(2) [data-testid="stLinkButton"] {
+      display: block !important;
+      width: 44px !important;
+      min-width: 44px !important;
+      max-width: 44px !important;
+      overflow: visible !important;
+    }
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(2) [data-testid="stLinkButton"] > a,
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(2) [data-testid="stLinkButton"] > a {
+      box-sizing: border-box !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      width: 44px !important;
+      min-width: 44px !important;
+      max-width: 44px !important;
+      height: 40px !important;
+      min-height: 40px !important;
+      max-height: 40px !important;
+      padding: 0 !important;
+      overflow: visible !important;
+      background-size: 27px 27px !important;
+    }
+
+    /* HORA: campo completo HH:MM, sin compresión del contenedor interno. */
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(3) [data-testid="stTextInput"],
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(3) [data-testid="stTextInput"],
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(3) .stTextInput,
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(3) .stTextInput {
+      width: 84px !important;
+      min-width: 84px !important;
+      max-width: 84px !important;
+      overflow: visible !important;
+    }
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(3) [data-baseweb="input"],
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(3) [data-baseweb="input"],
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(3) [data-baseweb="base-input"],
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(3) [data-baseweb="base-input"] {
+      box-sizing: border-box !important;
+      width: 84px !important;
+      min-width: 84px !important;
+      max-width: 84px !important;
+      overflow: visible !important;
+    }
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(3) input,
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(3) input {
+      width: 100% !important;
+      min-width: 0 !important;
+      font-size: 0.84rem !important;
+      letter-spacing: 0 !important;
+      text-align: center !important;
+    }
+
+    /* DÍA: ancho mínimo de 100 px para mostrar "Día 10" y la flecha. */
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(4) [data-testid="stSelectbox"],
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(4) [data-testid="stSelectbox"],
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(4) .stSelectbox,
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(4) .stSelectbox,
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(4) [data-baseweb="select"],
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(4) [data-baseweb="select"] {
+      box-sizing: border-box !important;
+      width: 100% !important;
+      min-width: 100px !important;
+      max-width: none !important;
+      overflow: visible !important;
+    }
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(4) [data-baseweb="select"] > div,
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(4) [data-baseweb="select"] > div {
+      box-sizing: border-box !important;
+      width: 100% !important;
+      min-width: 100px !important;
+      max-width: none !important;
+      padding-left: 7px !important;
+      padding-right: 20px !important;
+      overflow: visible !important;
+    }
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(4) [data-baseweb="select"] span,
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(4) [data-baseweb="select"] span {
+      white-space: nowrap !important;
+      overflow: visible !important;
+      font-size: 0.76rem !important;
+    }
+  }
+
+  @media (max-width: 360px) {
+    [class*="st-key-it-controls-row-"] [data-testid="stHorizontalBlock"],
+    [class*="st-key-saved-controls-row-"] [data-testid="stHorizontalBlock"] {
+      grid-template-columns: 34px 42px 78px minmax(94px, 1fr) !important;
+      column-gap: 4px !important;
+    }
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(3) [data-testid="stTextInput"],
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(3) [data-testid="stTextInput"],
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(3) .stTextInput,
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(3) .stTextInput,
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(3) [data-baseweb="input"],
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(3) [data-baseweb="input"],
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(3) [data-baseweb="base-input"],
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(3) [data-baseweb="base-input"] {
+      width: 78px !important;
+      min-width: 78px !important;
+      max-width: 78px !important;
+    }
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(4) [data-baseweb="select"],
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(4) [data-baseweb="select"],
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(4) [data-baseweb="select"] > div,
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(4) [data-baseweb="select"] > div {
+      min-width: 94px !important;
+    }
+  }
+
 </style>
 """, unsafe_allow_html=True)
 
