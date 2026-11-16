@@ -5137,7 +5137,7 @@ if seccion_principal == "📎Guardados":
                         guardar_itinerario_disco(st.session_state.lugares)
                         st.rerun()
             with c_day:
-                opts_dia_pool = ["- Día -"] + [f"Día {d}" for d in range(1, 11)]
+                opts_dia_pool = ["📌 Bandeja de Guardados"] + [etiqueta_dia_corta(d) for d in range(1, 11)]
                 idx_sel_pool = dia_p if 1 <= dia_p <= 10 else 0
                 asig_dia = selectbox_sin_teclado(
                     "Día",
@@ -5146,7 +5146,7 @@ if seccion_principal == "📎Guardados":
                     key=f"asig_dia_pool_{p_spot['id']}",
                     label_visibility="collapsed"
                 )
-                if asig_dia != "- Día -" and idx_sp_real is not None:
+                if asig_dia != "📌 Bandeja de Guardados" and idx_sp_real is not None:
                     d_num = int(re.search(r"Día (\d+)", asig_dia).group(1))
                     if d_num != dia_p:
                         st.session_state.lugares[idx_sp_real]["dia"] = d_num
