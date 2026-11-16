@@ -342,6 +342,16 @@ st.markdown("""
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08) !important;
   }
 
+  /* Botón de edición en pestañas (Itinerario, Guardados, Listas) */
+  [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(1) [data-testid="stButton"] > button,
+  [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(1) [data-testid="stButton"] > button,
+  [class*="st-key-btn_edit_list_"] > button {
+    min-height: 37px !important;
+    height: 37px !important;
+    font-size: 1.05rem !important;
+    padding: 0 0.65rem !important;
+  }
+
   /* Botones generales limpios */
   .stButton > button, .stFormSubmitButton > button, [data-testid="stLinkButton"] > a {
     border-radius: 9px !important;
@@ -370,13 +380,13 @@ st.markdown("""
     justify-content: flex-end !important;
   }
   .edit-mini-btn button {
-    min-height: 34px !important;
-    height: 34px !important;
-    width: 34px !important;
-    min-width: 34px !important;
-    max-width: 34px !important;
+    min-height: 38px !important;
+    height: 38px !important;
+    width: 38px !important;
+    min-width: 38px !important;
+    max-width: 38px !important;
     padding: 0 !important;
-    font-size: 1.05rem !important;
+    font-size: 1.18rem !important;
     line-height: 1.1 !important;
     font-family: 'Apple Color Emoji', 'Segoe UI Emoji', 'Noto Color Emoji', sans-serif !important;
     border-radius: 7px !important;
@@ -2680,7 +2690,7 @@ st.markdown("""
     [class*="st-key-saved-controls-row-"] [data-testid="stHorizontalBlock"] {
       display: grid !important;
       grid-template-columns:
-        minmax(40px, 0.90fr)
+        minmax(44px, 1.02fr)
         minmax(40px, 0.90fr)
         minmax(76px, 1.7fr)
         minmax(84px, 1.9fr) !important;
@@ -2729,18 +2739,18 @@ st.markdown("""
       width: 100% !important;
       min-width: 0 !important;
       max-width: 100% !important;
-      height: 36px !important;
-      min-height: 36px !important;
-      max-height: 36px !important;
+      height: 40px !important;
+      min-height: 40px !important;
+      max-height: 40px !important;
       margin: 0 !important;
       padding: 0 !important;
       border: 1.5px solid #94A3B8 !important;
       border-radius: 8px !important;
       background-color: #FFFFFF !important;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%23334155' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m16 4 4 4'/%3E%3Cpath d='M4 20l4-.9L19 8a2.1 2.1 0 0 0-3-3L5 16z'/%3E%3C/svg%3E") !important;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='22' height='22' viewBox='0 0 24 24' fill='none' stroke='%23334155' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m16 4 4 4'/%3E%3Cpath d='M4 20l4-.9L19 8a2.1 2.1 0 0 0-3-3L5 16z'/%3E%3C/svg%3E") !important;
       background-repeat: no-repeat !important;
       background-position: center center !important;
-      background-size: 21px 21px !important;
+      background-size: 23px 23px !important;
       color: transparent !important;
       font-size: 0 !important;
       line-height: 0 !important;
@@ -2982,21 +2992,21 @@ st.markdown("""
 
   /* El lápiz del itinerario conserva todo su contorno y no recorta la punta. */
   [class*="st-key-it-edit-btn-"] [data-testid="stButton"] > button {
-    width: 40px !important;
-    min-width: 40px !important;
-    max-width: 40px !important;
-    height: 38px !important;
-    min-height: 38px !important;
-    max-height: 38px !important;
+    width: 44px !important;
+    min-width: 44px !important;
+    max-width: 44px !important;
+    height: 41px !important;
+    min-height: 41px !important;
+    max-height: 41px !important;
     padding: 0 2px !important;
     overflow: visible !important;
     text-overflow: clip !important;
     line-height: 1.25 !important;
-    font-size: 1.12rem !important;
+    font-size: 1.24rem !important;
   }
   [class*="st-key-it-edit-btn-"] [data-testid="stButton"] {
     overflow: visible !important;
-    min-width: 40px !important;
+    min-width: 44px !important;
   }
   /* Corrección adicional: Streamlit puede reservar espacio aunque su toolbar esté oculta. */
   [data-testid="stHeader"],
