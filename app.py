@@ -4301,25 +4301,7 @@ def ejecutar_sincronizacion_listas_gmaps():
         prev_nuevos = st.session_state.get("nuevos_lugares_ids", [])
         st.session_state.nuevos_lugares_ids = list(dict.fromkeys(nuevos_ids + prev_nuevos))
 
-    if total_nuevos or total_actualizados:
-        if guardar_itinerario_disco(st.session_state.lugares):
-            st.toast(f"Sincronizados: {total_nuevos} nuevos, {total_actualizados} actualizados.", icon="🔄")
-            st.session_state["_msg_sync_guardados"] = (
-                "success",
-                f"Sincronización terminada: {total_nuevos} lugares nuevos añadidos y "
-                f"{total_actualizados} lugares reclasificados/actualizados."
-            )
-        else:
-            st.session_state["_msg_sync_guardados"] = (
-                "error",
-                "No se pudieron guardar los lugares sincronizados en el archivo compartido."
-            )
-    else:
-        st.toast("Listas al día. No hay sitios nuevos.", icon="✅")
-        st.session_state["_msg_sync_guardados"] = (
-            "info",
-            f"Sincronización terminada, {total_descargados} resultados recibidos."
-        )
+    
     if errores_sync:
         st.session_state["_errores_sync_guardados"] = errores_sync
     st.rerun()
