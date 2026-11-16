@@ -1390,5 +1390,19 @@
     "tipo": "Interior",
     "lista_origen": "Food (NY food)",
     "visitado": false
+  },
+  {
+    "id": 102,
+    "nombre": "Little Luxuries by BEAUTYSPACE",
+    "lat": 40.737600799999996,
+    "lon": -73.9899805,
+    "dia": 0,
+    "hora": "",
+    "direccion": "872 Broadway, New York, NY 10003, United States",
+    "nota": "",
+    "categoria": "🛍️ Compras",
+    "tipo": "Interior",
+    "lista_origen": "Tiendas & Outlets (NY shopping)",
+    "visitado": false
   }
 ]
