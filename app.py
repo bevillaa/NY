@@ -4880,11 +4880,43 @@ st.markdown("""
     }
   }
 
-/* Corrección visual final: reduce SOLO el enlace del mapa al tamaño visible del lápiz. */
-  [class*="st-key-it-map-button-wrap-"] a.place-map-link-direct,
-  [class*="st-key-saved-map-button-wrap-"] a.place-map-link-direct {
-    transform: scale(0.76) !important;
+/* Corrección final: ambos botones comparten exactamente la misma caja.
+   No aplicar transform al mapa: alteraba su tamaño visible y su alineación. */
+  [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stButton"] > button,
+  [class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stButton"] > button,
+  [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(3) a.place-map-link-direct,
+  [class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(3) a.place-map-link-direct {
+    box-sizing: border-box !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 38px !important;
+    min-width: 38px !important;
+    max-width: 38px !important;
+    height: 38px !important;
+    min-height: 38px !important;
+    max-height: 38px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border-width: 1px !important;
+    transform: none !important;
     transform-origin: center center !important;
+  }
+  [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2),
+  [class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(2),
+  [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(3),
+  [class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(3) {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 38px !important;
+    min-width: 38px !important;
+    max-width: 38px !important;
+    height: 38px !important;
+    min-height: 38px !important;
+    max-height: 38px !important;
+    margin: 0 !important;
+    padding: 0 !important;
   }
 
 </style>
