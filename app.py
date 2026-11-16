@@ -4379,58 +4379,6 @@ st.markdown("""
 
 
 
-
-  /* Ajuste solicitado: botón Mapa sin fondo azul, igual de grande que Editar (38×38). */
-  [class*="st-key-it-map-button-wrap-"] [data-testid="stLinkButton"] a,
-  [class*="st-key-it-map-button-wrap-"] [data-testid="stLinkButton"] a:hover,
-  [class*="st-key-it-map-button-wrap-"] [data-testid="stLinkButton"] a:focus,
-  [class*="st-key-it-map-button-wrap-"] [data-testid="stLinkButton"] a:active,
-  [class*="st-key-saved-map-button-wrap-"] [data-testid="stLinkButton"] a,
-  [class*="st-key-saved-map-button-wrap-"] [data-testid="stLinkButton"] a:hover,
-  [class*="st-key-saved-map-button-wrap-"] [data-testid="stLinkButton"] a:focus,
-  [class*="st-key-saved-map-button-wrap-"] [data-testid="stLinkButton"] a:active {
-    box-sizing: border-box !important;
-    display: inline-flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    flex: 0 0 38px !important;
-    width: 38px !important;
-    min-width: 38px !important;
-    max-width: 38px !important;
-    height: 38px !important;
-    min-height: 38px !important;
-    max-height: 38px !important;
-    padding: 0 !important;
-    margin: 0 !important;
-    background: #FFFFFF !important;
-    background-color: #FFFFFF !important;
-    background-image: none !important;
-    box-shadow: none !important;
-  }
-  [class*="st-key-it-map-button-wrap-"],
-  [class*="st-key-saved-map-button-wrap-"] {
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    width: 38px !important;
-    min-width: 38px !important;
-    max-width: 38px !important;
-    height: 38px !important;
-    min-height: 38px !important;
-    max-height: 38px !important;
-  }
-  [class*="st-key-it-map-button-wrap-"] [data-testid="stLinkButton"] a::before,
-  [class*="st-key-saved-map-button-wrap-"] [data-testid="stLinkButton"] a::before {
-    position: absolute !important;
-    left: 50% !important;
-    top: 50% !important;
-    transform: translate(-50%, -50%) !important;
-    flex: 0 0 13px !important;
-    width: 13px !important;
-    height: 13px !important;
-    margin: 0 !important;
-  }
-
 </style>
 """, unsafe_allow_html=True)
 
