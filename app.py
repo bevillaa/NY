@@ -4203,7 +4203,7 @@ def ejecutar_sincronizacion_listas_gmaps():
             pass
     max_id_sync = max(ids_sync, default=0)
 
-    with st.spinner("Sincronizando todas tus listas de Google Maps y clasificando categorías..."):
+    with st.spinner("Sincronizando y clasificando lugares..."):
         for i_lista, datos_lista in enumerate(listas_config):
             nom_lista = str(datos_lista.get("nombre", f"Lista {i_lista + 1}"))
             url_lista_sync = str(datos_lista.get("url", "")).strip()
@@ -4296,14 +4296,17 @@ def ejecutar_sincronizacion_listas_gmaps():
 
     if total_nuevos or total_actualizados:
         if guardar_itinerario_disco(st.session_state.lugares):
-            st.toast(f"Sincronización terminada: {total_nuevos} lugares nuevos añadidos.", icon="✅")
+            st.toast(f"Sincronizados: {total_nuevos} nuevos, {total_actualizados} actualizados.", icon="🔄")Í:
+            # st.session_state["_msg_sync_guardados"] = ("success", ...)
         else:
             st.session_state["_msg_sync_guardados"] = (
                 "error",
                 "No se pudieron guardar los lugares sincronizados en el archivo compartido."
             )
     else:
-        st.toast(f"No había cambios nuevos, {total_descargados} lugares revisados.", icon="✅")
+        st.toast("No hay sitios nuevos.", icon="✅")
+        # st.session_state["_msg_sync_guardados"] = ("info", ...)
+    
     if errores_sync:
         st.session_state["_errores_sync_guardados"] = errores_sync
     st.rerun()
