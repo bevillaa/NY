@@ -3433,7 +3433,7 @@ st.markdown("""
 
   [class*="st-key-it-controls-row-"] [data-testid="stHorizontalBlock"],
   [class*="st-key-saved-controls-row-"] [data-testid="stHorizontalBlock"] {
-    grid-template-columns: 0px 0px 95px 130px !important;
+    grid-template-columns: 0px 0px 95px 150px !important;
     column-gap: 5px !important;
   }
 
@@ -3472,7 +3472,7 @@ st.markdown("""
 
     [class*="st-key-it-controls-row-"] [data-testid="stHorizontalBlock"],
     [class*="st-key-saved-controls-row-"] [data-testid="stHorizontalBlock"] {
-      grid-template-columns: 0px 0px 95px 130px !important;
+      grid-template-columns: 0px 0px 95px 150px !important;
       gap: 4px !important;
     }
   }
@@ -3480,7 +3480,7 @@ st.markdown("""
   @media (max-width: 320px) {
     [class*="st-key-it-controls-row-"] [data-testid="stHorizontalBlock"],
     [class*="st-key-saved-controls-row-"] [data-testid="stHorizontalBlock"] {
-      grid-template-columns: 0px 0px 95px 130px !important;
+      grid-template-columns: 0px 0px 95px 150px !important;
       gap: 3px !important;
     }
   }
@@ -3488,7 +3488,7 @@ st.markdown("""
   @media (max-width: 320px) {
     [class*="st-key-it-controls-row-"] [data-testid="stHorizontalBlock"],
     [class*="st-key-saved-controls-row-"] [data-testid="stHorizontalBlock"] {
-      grid-template-columns: 0px 0px 95px 130px !important;
+      grid-template-columns: 0px 0px 95px 150px !important;
       gap: 3px !important;
     }
   }
