@@ -4556,7 +4556,7 @@ def render_editor_sitio_panel(spot: dict, idx_real: int, key_ctx: str):
 
 def render_formulario_agregar_lugar(key_sufijo: str = "gen"):
     """Módulo desplegable para añadir sitios desde Google Maps o a mano."""
-    with st.expander("➕ Añadir Nuevo Lugar", expanded=False):
+    with st.expander("➕ Añadir", expanded=False):
         tab_gm, tab_man = st.tabs(["🌐 Google Maps", "✏️ A Mano"])
         dias_asig_opts = ["📌 Bandeja de Guardados"] + [etiqueta_dia(d) for d in range(1, 11)]
 
@@ -4768,8 +4768,7 @@ if seccion_principal == "🗺️Mapa":
     with c_m1:
         opciones_vista = [
             "🌐 Todos los Sitios",
-            "📅 Sitios en Itinerario (Días 1 a 10)",
-            "🏨 Solo Hotel"
+            "📅 Todos los Días)"
         ] + [etiqueta_dia(d) for d in range(1, 11)]
         sel_vista = selectbox_sin_teclado("Vista en el mapa:", opciones_vista, label_visibility="collapsed")
     # Se fija una única capa de Google Maps para evitar el desplegable de estilos.
@@ -4782,8 +4781,6 @@ if seccion_principal == "🗺️Mapa":
         sitios_mapa = list(st.session_state.lugares)
     elif "Solo Sitios en Itinerario" in sel_vista:
         sitios_mapa = [l for l in st.session_state.lugares if l.get("dia", 0) > 0]
-    elif "Solo Hotel" in sel_vista:
-        sitios_mapa = []
     else:
         m_dia = re.search(r"Día (\d+):", sel_vista)
         num_d = int(m_dia.group(1)) if m_dia else 1
@@ -5062,7 +5059,7 @@ if seccion_principal == "📎Guardados":
         for err_s in st.session_state.pop("_errores_sync_guardados"):
             st.warning(err_s)
 
-    ver_todos_edicion = st.checkbox("Mostrar también los lugares ya asignados a días", value=False, key="chk_ver_todos_guardados")
+    ver_todos_edicion = st.checkbox("Mostrar también los lugares ya asignados", value=False, key="chk_ver_todos_guardados")
 
     if ver_todos_edicion:
         pool_guardados = list(st.session_state.lugares)
