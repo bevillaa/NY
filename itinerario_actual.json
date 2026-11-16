@@ -450,7 +450,7 @@
     "lon": -74.0094,
     "dia": 0,
     "direccion": "200 Broadway, New York, NY 10007",
-    "categoria": "🍪 Dulces",
+    "categoria": "🎷 Ocio",
     "tipo": "Interior",
     "visitado": false,
     "hora": "",
@@ -1204,7 +1204,7 @@
     "hora": "09:00",
     "direccion": "151 E 58th St, New York, NY 10022, United States",
     "nota": "Free Tour - Wilson Silver",
-    "categoria": "🏛️ Cultura",
+    "categoria": "📍 Otros",
     "tipo": "Exterior",
     "lista_origen": "Places (NY places)",
     "visitado": false
@@ -1232,9 +1232,23 @@
     "hora": "",
     "direccion": "185 Greenwich St GROUND FLOOR, New York, NY 10007, United States",
     "nota": "Souvenir➡️https://vm.tiktok.com/ZN85ph9yT/",
-    "categoria": "🛍️ Compras",
+    "categoria": "☀️ Spots",
     "tipo": "Exterior",
     "lista_origen": "Places (NY places)",
+    "visitado": false
+  },
+  {
+    "id": 91,
+    "nombre": "Ralph's Coffee",
+    "lat": 40.771658599999995,
+    "lon": -73.9657658,
+    "dia": 0,
+    "hora": "",
+    "direccion": "888 Madison Ave, New York, NY 10021, United States",
+    "nota": "",
+    "categoria": "🍪 Dulces",
+    "tipo": "Interior",
+    "lista_origen": "NY Sweets",
     "visitado": false
   }
 ]
