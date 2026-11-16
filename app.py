@@ -3,6 +3,7 @@ import folium
 from streamlit_folium import st_folium
 import json
 import urllib.request
+import urllib.error
 import urllib.parse
 import os
 import re
@@ -3272,13 +3273,134 @@ def traducir_codigo_clima(code: int) -> tuple[str, str]:
 # =============================================================================
 # 5. CARGA Y GESTIÓN DE DATOS DEL VIAJE
 # =============================================================================
-def cargar_config_viaje():
-    if os.path.exists(ARCH_CONFIG):
+def _github_configuracion():
+    """Lee la configuración opcional de persistencia desde Streamlit Secrets."""
+    try:
+        token = str(st.secrets.get("GITHUB_TOKEN", "")).strip()
+        repo = str(st.secrets.get("GITHUB_REPO", "")).strip()
+        branch = str(st.secrets.get("GITHUB_BRANCH", "main")).strip() or "main"
+        return token, repo, branch
+    except Exception:
+        return "", "", "main"
+
+
+def _github_request(ruta_repo: str, metodo: str = "GET", datos=None):
+    """Accede a un archivo del repositorio mediante GitHub Contents API."""
+    import base64
+
+    token, repo, branch = _github_configuracion()
+    if not token or not repo or "/" not in repo:
+        return None
+
+    ruta = urllib.parse.quote(ruta_repo, safe="/")
+    url = f"https://api.github.com/repos/{repo}/contents/{ruta}"
+    if metodo == "GET":
+        url += "?ref=" + urllib.parse.quote(branch)
+    payload = None
+    if datos is not None:
+        payload = json.dumps(datos, ensure_ascii=False).encode("utf-8")
+
+    req = urllib.request.Request(
+        url,
+        data=payload,
+        method=metodo,
+        headers={
+            "Authorization": f"Bearer {token}",
+            "Accept": "application/vnd.github+json",
+            "X-GitHub-Api-Version": "2022-11-28",
+            "User-Agent": "streamlit-itinerario-viaje",
+            **({"Content-Type": "application/json"} if payload is not None else {})
+        }
+    )
+    try:
+        with urllib.request.urlopen(req, timeout=15) as response:
+            resultado = json.loads(response.read().decode("utf-8"))
+        if metodo == "GET":
+            contenido = base64.b64decode(resultado["content"]).decode("utf-8")
+            return json.loads(contenido), resultado.get("sha")
+        return True
+    except urllib.error.HTTPError as exc:
+        if metodo == "GET" and exc.code == 404:
+            return None, None
+        detalle = exc.read().decode("utf-8", errors="replace")[:500]
+        raise RuntimeError(f"GitHub respondió {exc.code}: {detalle}") from exc
+
+
+def _cargar_json_persistente(ruta: str):
+    """Prioriza GitHub (persistente entre despliegues); usa disco como respaldo."""
+    token, repo, _ = _github_configuracion()
+    if token and repo:
         try:
-            with open(ARCH_CONFIG, "r", encoding="utf-8") as f:
+            remoto = _github_request(ruta, "GET")
+            if remoto is not None and remoto[0] is not None:
+                datos, _ = remoto
+                _guardar_json_atomico(ruta, datos)
+                return datos
+            # Primera migración: si GitHub aún no tiene el JSON, conserva y
+            # sube automáticamente la copia local existente.
+            if remoto is not None and remoto[0] is None and os.path.exists(ruta):
+                with open(ruta, "r", encoding="utf-8") as f:
+                    datos_locales = json.load(f)
+                _guardar_json_persistente(ruta, datos_locales)
+                return datos_locales
+        except Exception as exc:
+            st.warning(f"No se pudo leer {ruta} desde GitHub; se intentará la copia local. Detalle: {exc}")
+    if os.path.exists(ruta):
+        try:
+            with open(ruta, "r", encoding="utf-8") as f:
                 return json.load(f)
-        except Exception:
-            pass
+        except Exception as exc:
+            st.warning(f"No se pudo leer {ruta}: {exc}")
+    return None
+
+
+def _guardar_json_persistente(ruta: str, datos):
+    """Guarda localmente y, si está configurado, confirma el cambio en GitHub."""
+    local_ok = _guardar_json_atomico(ruta, datos)
+    token, repo, branch = _github_configuracion()
+    if not (token and repo):
+        return local_ok
+
+    import base64
+    try:
+        remoto = _github_request(ruta, "GET")
+        sha = remoto[1] if remoto else None
+        contenido = base64.b64encode(
+            json.dumps(datos, ensure_ascii=False, indent=2).encode("utf-8")
+        ).decode("ascii")
+        url = f"https://api.github.com/repos/{repo}/contents/{urllib.parse.quote(ruta, safe='/')}"
+        cuerpo = {
+            "message": f"Actualizar datos del viaje: {os.path.basename(ruta)}",
+            "content": contenido,
+            "branch": branch
+        }
+        if sha:
+            cuerpo["sha"] = sha
+        req = urllib.request.Request(
+            url, data=json.dumps(cuerpo).encode("utf-8"), method="PUT",
+            headers={
+                "Authorization": f"Bearer {token}",
+                "Accept": "application/vnd.github+json",
+                "X-GitHub-Api-Version": "2022-11-28",
+                "User-Agent": "streamlit-itinerario-viaje",
+                "Content-Type": "application/json"
+            }
+        )
+        with urllib.request.urlopen(req, timeout=20) as response:
+            response.read()
+        return True
+    except Exception as exc:
+        st.error(
+            f"El cambio se guardó en la sesión local, pero NO en GitHub ({os.path.basename(ruta)}). "
+            f"No está protegido frente a un redeploy. Revisa GITHUB_TOKEN, GITHUB_REPO y permisos de escritura. Detalle: {exc}"
+        )
+        return False
+
+
+def cargar_config_viaje():
+    datos = _cargar_json_persistente(ARCH_CONFIG)
+    if isinstance(datos, dict):
+        return datos
     return {
         "vuelo_ida": {"aerolinea": "Aer Lingus", "fecha": "26 Dic", "hora": "15:30", "vuelo": "Aer Lingus · EI583, EI107", "aeropuerto": "JFK / Nueva York"},
         "vuelo_vuelta": {"aerolinea": "Aer Lingus", "fecha": "4 Ene", "hora": "20:45", "vuelo": "Aer Lingus · EI104, EI582", "aeropuerto": "JFK / Nueva York"},
@@ -3290,8 +3412,9 @@ def cargar_config_viaje():
         "listas_gmaps": []
     }
 
+
 def _guardar_json_atomico(ruta: str, datos):
-    """Escribe JSON atómicamente y con temporal único por escritura/sesión."""
+    """Escribe JSON atómicamente en el disco local como caché/respaldo."""
     temporal = None
     try:
         carpeta = os.path.dirname(os.path.abspath(ruta))
@@ -3312,44 +3435,41 @@ def _guardar_json_atomico(ruta: str, datos):
                 os.remove(temporal)
         except Exception:
             pass
-        # No ocultamos fallos de escritura: sin esto no habría sincronización real.
         try:
-            st.error(f"No se pudieron guardar los datos compartidos ({os.path.basename(ruta)}): {exc}")
+            st.error(f"No se pudieron guardar los datos locales ({os.path.basename(ruta)}): {exc}")
         except Exception:
             pass
         return False
 
 
 def guardar_config_viaje(cfg):
-    return _guardar_json_atomico(ARCH_CONFIG, cfg)
+    return _guardar_json_persistente(ARCH_CONFIG, cfg)
+
 
 def cargar_itinerario_disco():
-    if os.path.exists(ARCH_ITINERARIO):
-        try:
-            with open(ARCH_ITINERARIO, "r", encoding="utf-8") as f:
-                datos = json.load(f)
-                modificado = False
-                for p in datos:
-                    cat_norm = normalizar_categoria(p.get("categoria", ""))
-                    if p.get("categoria") != cat_norm:
-                        p["categoria"] = cat_norm
-                        modificado = True
-                    if "hora" not in p:
-                        p["hora"] = ""
-                        modificado = True
-                    if "nota" not in p:
-                        p["nota"] = ""
-                        modificado = True
-                if modificado:
-                    guardar_itinerario_disco(datos)
-                return datos
-        except Exception:
-            pass
+    datos = _cargar_json_persistente(ARCH_ITINERARIO)
+    if isinstance(datos, list):
+        modificado = False
+        for p in datos:
+            cat_norm = normalizar_categoria(p.get("categoria", ""))
+            if p.get("categoria") != cat_norm:
+                p["categoria"] = cat_norm
+                modificado = True
+            if "hora" not in p:
+                p["hora"] = ""
+                modificado = True
+            if "nota" not in p:
+                p["nota"] = ""
+                modificado = True
+        if modificado:
+            guardar_itinerario_disco(datos)
+        return datos
     return []
 
+
 def guardar_itinerario_disco(lugares):
-    """Guarda el itinerario que comparten las sesiones de esta publicación."""
-    return _guardar_json_atomico(ARCH_ITINERARIO, lugares)
+    """Guarda el itinerario en disco y en GitHub si se configuró persistencia."""
+    return _guardar_json_persistente(ARCH_ITINERARIO, lugares)
 
 
 def _huella_datos(datos) -> str:
@@ -3417,9 +3537,6 @@ def sincronizar_lugares_desde_disco():
     return True
 
 
-# =============================================================================
-# 6. SINCRONIZADOR DE LISTAS DE GOOGLE MAPS
-# =============================================================================
 # =============================================================================
 # 6. SINCRONIZADOR DE LISTAS DE GOOGLE MAPS
 # =============================================================================
@@ -3958,6 +4075,17 @@ if "lugar_activo_id" not in st.session_state:
 
 if "editando_spot_key" not in st.session_state:
     st.session_state.editando_spot_key = None
+
+
+# En Streamlit Cloud el disco local no es persistente entre ciertos redeploys.
+# Avisamos una sola vez por sesión si todavía no se configuró almacenamiento remoto.
+if not all(_github_configuracion()[:2]) and not st.session_state.get("_aviso_persistencia_mostrado"):
+    st.warning(
+        "⚠️ Persistencia remota no configurada: los cambios se guardan en el disco de esta instancia, "
+        "pero podrían perderse al reiniciar o desplegar la app. Configura GITHUB_TOKEN y GITHUB_REPO "
+        "en Streamlit → Settings → Secrets para conservar notas, lugares y días entre despliegues."
+    )
+    st.session_state["_aviso_persistencia_mostrado"] = True
 
 
 def _vigilar_cambios_de_otros_dispositivos():
