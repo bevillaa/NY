@@ -4246,12 +4246,12 @@ st.markdown("""
   }
 
 
-  /* AJUSTE FINAL LOCAL: botones editar/mapa en encabezados de lugares.
-     Se limita a las filas de encabezado de Itinerario y Guardados. */
-  div[class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"],
-  div[class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"] {
+  /* Correccion consolidada de botones Editar/Mapa.
+     Una sola regla final para evitar conflictos entre estilos acumulados. */
+  [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"],
+  [class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"] {
     display: grid !important;
-    grid-template-columns: minmax(0, 1fr) 28px 28px 24px !important;
+    grid-template-columns: minmax(0, 1fr) 38px 38px 28px !important;
     align-items: center !important;
     justify-content: start !important;
     column-gap: 4px !important;
@@ -4259,954 +4259,136 @@ st.markdown("""
     width: 100% !important;
     min-width: 0 !important;
   }
-  div[class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"] {
-    grid-template-columns: minmax(0, 1fr) 28px 28px !important;
+  [class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"] {
+    grid-template-columns: minmax(0, 1fr) 38px 38px !important;
   }
-  div[class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"],
-  div[class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"] {
-    box-sizing: border-box !important;
-    min-width: 0 !important;
-    max-width: 100% !important;
-    margin: 0 !important;
-    padding: 0 !important;
-  }
-  div[class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2),
-  div[class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(3),
-  div[class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(2),
-  div[class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(3) {
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    width: 28px !important;
-    min-width: 28px !important;
-    max-width: 28px !important;
-    align-self: center !important;
-  }
-
-  /* Mismo tamaño, fondo blanco y centrado exacto para los dos controles. */
-  div[class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stButton"] > button,
-  div[class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stButton"] > button,
-  div[class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(3) [data-testid="stLinkButton"] > a,
-  div[class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(3) [data-testid="stLinkButton"] > a {
-    box-sizing: border-box !important;
-    display: inline-flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    vertical-align: middle !important;
-    position: relative !important;
-    width: 27px !important;
-    min-width: 27px !important;
-    max-width: 27px !important;
-    height: 27px !important;
-    min-height: 27px !important;
-    max-height: 27px !important;
-    padding: 0 !important;
-    margin: 0 auto !important;
-    border: 1px solid #D1D5DB !important;
-    border-radius: 6px !important;
-    background: #FFFFFF !important;
-    background-color: #FFFFFF !important;
-    background-image: none !important;
-    box-shadow: none !important;
-    color: transparent !important;
-    -webkit-text-fill-color: transparent !important;
-    font-size: 0 !important;
-    line-height: 0 !important;
-    overflow: hidden !important;
-    text-decoration: none !important;
-  }
-  div[class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stButton"] > button:hover,
-  div[class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stButton"] > button:focus,
-  div[class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stButton"] > button:active,
-  div[class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stButton"] > button:hover,
-  div[class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stButton"] > button:focus,
-  div[class*="st-key-saved-heading-row-"] [data-testid="stButton"] > button:active,
-  div[class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(3) [data-testid="stLinkButton"] > a:hover,
-  div[class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(3) [data-testid="stLinkButton"] > a:focus,
-  div[class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(3) [data-testid="stLinkButton"] > a:active,
-  div[class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(3) [data-testid="stLinkButton"] > a:hover,
-  div[class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(3) [data-testid="stLinkButton"] > a:focus,
-  div[class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(3) [data-testid="stLinkButton"] > a:active {
-    background: #FFFFFF !important;
-    background-color: #FFFFFF !important;
-    background-image: none !important;
-    border-color: #D1D5DB !important;
-    box-shadow: none !important;
-  }
-
-  /* Iconos lineales monocromáticos del mismo tamaño y centrados. */
-  div[class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2) button::before,
-  div[class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(2) button::before {
-    content: "" !important;
-    display: block !important;
-    position: absolute !important;
-    inset: 0 !important;
-    width: 12px !important;
-    height: 12px !important;
-    margin: auto !important;
-    background: transparent center / 12px 12px no-repeat url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23334155' stroke-width='2.1' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m16 4 4 4'/%3E%3Cpath d='M4 20l4-.9L19 8a2.1 2.1 0 0 0-3-3L5 16z'/%3E%3C/svg%3E") !important;
-  }
-  div[class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(3) a::before,
-  div[class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(3) a::before {
-    content: "" !important;
-    display: block !important;
-    position: absolute !important;
-    inset: 0 !important;
-    width: 12px !important;
-    height: 12px !important;
-    margin: auto !important;
-    background: transparent center / 12px 12px no-repeat url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23334155' stroke-width='2.1' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m3 6 6-3 6 3 6-3v15l-6 3-6-3-6 3z'/%3E%3Cpath d='M9 3v15'/%3E%3Cpath d='M15 6v15'/%3E%3C/svg%3E") !important;
-  }
-  div[class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2) button > *,
-  div[class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(2) button > *,
-  div[class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(3) a > *,
-  div[class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(3) a > * {
-    display: none !important;
-    visibility: hidden !important;
-  }
-  @media (max-width: 768px) {
-    div[class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"],
-    div[class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"] {
-      column-gap: 3px !important;
-    }
-  }
-
-
-  /* Última prioridad para los iconos: misma especificidad que las reglas antiguas. */
-  div[class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stButton"] > button::after,
-  div[class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stButton"] > button::after {
-    content: "" !important;
-    display: block !important;
-    position: absolute !important;
-    inset: 0 !important;
-    width: 11px !important;
-    height: 11px !important;
-    margin: auto !important;
-    flex: none !important;
-    background: transparent center / 11px 11px no-repeat url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23334155' stroke-width='2.1' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m16 4 4 4'/%3E%3Cpath d='M4 20l4-.9L19 8a2.1 2.1 0 0 0-3-3L5 16z'/%3E%3C/svg%3E") !important;
-  }
-  div[class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(3) [data-testid="stLinkButton"] > a[href*="google.com/maps"]::before,
-  div[class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(3) [data-testid="stLinkButton"] > a[href*="google.com/maps"]::before {
-    content: "" !important;
-    display: block !important;
-    position: absolute !important;
-    inset: 0 !important;
-    width: 11px !important;
-    height: 11px !important;
-    margin: auto !important;
-    flex: none !important;
-    background: transparent center / 11px 11px no-repeat url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23334155' stroke-width='2.1' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m3 6 6-3 6 3 6-3v15l-6 3-6-3-6 3z'/%3E%3Cpath d='M9 3v15'/%3E%3Cpath d='M15 6v15'/%3E%3C/svg%3E") !important;
-  }
-  div[class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(3) [data-testid="stLinkButton"] > a[href*="google.com/maps"]::after,
-  div[class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(3) [data-testid="stLinkButton"] > a[href*="google.com/maps"]::after {
-    content: none !important;
-    display: none !important;
-  }
-  div[class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(3) [data-testid="stLinkButton"] > a[href*="google.com/maps"],
-  div[class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(3) [data-testid="stLinkButton"] > a[href*="google.com/maps"]:hover,
-  div[class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(3) [data-testid="stLinkButton"] > a[href*="google.com/maps"]:focus,
-  div[class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(3) [data-testid="stLinkButton"] > a[href*="google.com/maps"]:active,
-  div[class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(3) [data-testid="stLinkButton"] > a[href*="google.com/maps"],
-  div[class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(3) [data-testid="stLinkButton"] > a[href*="google.com/maps"]:hover,
-  div[class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(3) [data-testid="stLinkButton"] > a[href*="google.com/maps"]:focus,
-  div[class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(3) [data-testid="stLinkButton"] > a[href*="google.com/maps"]:active {
-    background: #FFFFFF !important;
-    background-color: #FFFFFF !important;
-    background-image: none !important;
-    box-shadow: none !important;
-  }
-
-
-
-  /* AJUSTE AISLADO Y FINAL: controles de encabezado en escritorio y móvil.
-     El mapa es un enlace HTML propio para que Streamlit no le aplique el tema azul. */
-  div[class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"],
-  div[class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"] {
-    display: grid !important;
-    grid-template-columns: minmax(0, 1fr) 27px 27px 24px !important;
-    align-items: center !important;
-    justify-content: start !important;
-    column-gap: 3px !important;
-    row-gap: 0 !important;
-    width: 100% !important;
-    min-width: 0 !important;
-  }
-  div[class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"] {
-    grid-template-columns: minmax(0, 1fr) 27px 27px !important;
-  }
-  div[class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"],
-  div[class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"] {
+  [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"],
+  [class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"] {
     box-sizing: border-box !important;
     flex: none !important;
     width: auto !important;
     min-width: 0 !important;
-    max-width: 100% !important;
+    max-width: none !important;
     margin: 0 !important;
     padding: 0 !important;
   }
-  div[class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2),
-  div[class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(3),
-  div[class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(2),
-  div[class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(3) {
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    width: 27px !important;
-    min-width: 27px !important;
-    max-width: 27px !important;
-  }
-  div[class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2) button,
-  div[class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(2) button {
-    box-sizing: border-box !important;
-    display: inline-flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    width: 26px !important;
-    min-width: 26px !important;
-    max-width: 26px !important;
-    height: 26px !important;
-    min-height: 26px !important;
-    max-height: 26px !important;
-    padding: 0 !important;
-    margin: 0 !important;
-    border: 1px solid #D1D5DB !important;
-    border-radius: 6px !important;
-    background: #FFFFFF !important;
-    background-color: #FFFFFF !important;
-    background-image: none !important;
-    box-shadow: none !important;
-    color: #334155 !important;
-    -webkit-text-fill-color: #334155 !important;
-    font-family: Arial, sans-serif !important;
-    font-size: 12px !important;
-    line-height: 1 !important;
-    overflow: visible !important;
-  }
-  div[class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2) button:hover,
-  div[class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2) button:focus,
-  div[class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2) button:active,
-  div[class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(2) button:hover,
-  div[class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(2) button:focus,
-  div[class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(2) button:active {
-    background: #FFFFFF !important;
-    background-color: #FFFFFF !important;
-    color: #334155 !important;
-  }
-  .place-map-icon-button {
-    box-sizing: border-box !important;
-    display: inline-flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    vertical-align: middle !important;
-    width: 26px !important;
-    min-width: 26px !important;
-    max-width: 26px !important;
-    height: 26px !important;
-    min-height: 26px !important;
-    max-height: 26px !important;
-    padding: 0 !important;
-    margin: 0 auto !important;
-    border: 1px solid #D1D5DB !important;
-    border-radius: 6px !important;
-    background: #FFFFFF !important;
-    background-color: #FFFFFF !important;
-    box-shadow: none !important;
-    text-decoration: none !important;
-    line-height: 0 !important;
-  }
-  .place-map-icon-button:hover,
-  .place-map-icon-button:focus,
-  .place-map-icon-button:active {
-    background: #FFFFFF !important;
-    background-color: #FFFFFF !important;
-    border-color: #D1D5DB !important;
-    box-shadow: none !important;
-  }
-  .place-map-icon-button svg {
-    display: block !important;
-    width: 13px !important;
-    height: 13px !important;
-    flex: 0 0 13px !important;
-    fill: none !important;
-    stroke: #334155 !important;
-    stroke-width: 1.8 !important;
-    stroke-linecap: round !important;
-    stroke-linejoin: round !important;
-  }
-  @media (max-width: 768px) {
-    div[class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] {
-      grid-template-columns: minmax(0, 1fr) 27px 27px 24px !important;
-      column-gap: 3px !important;
-    }
-    div[class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"] {
-      grid-template-columns: minmax(0, 1fr) 27px 27px !important;
-      column-gap: 3px !important;
-    }
-    div[class*="st-key-it-heading-row-"] [data-testid="column"],
-    div[class*="st-key-saved-heading-row-"] [data-testid="column"] {
-      flex: none !important;
-      min-width: 0 !important;
-      margin: 0 !important;
-      padding: 0 !important;
-    }
-  }
-
-
-  /* AJUSTE PUNTUAL: lápiz y mapa a la misma altura en escritorio y móvil. */
-  div[class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"],
-  div[class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"] {
-    align-items: center !important;
-  }
-  div[class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2),
-  div[class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(3),
-  div[class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(2),
-  div[class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(3) {
-    align-self: center !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    height: 30px !important;
-    min-height: 30px !important;
-    max-height: 30px !important;
-    padding: 0 !important;
-    margin: 0 !important;
-  }
-  div[class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stElementContainer"],
-  div[class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(3) [data-testid="stElementContainer"],
-  div[class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stElementContainer"],
-  div[class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(3) [data-testid="stElementContainer"] {
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    width: 30px !important;
-    height: 30px !important;
-    min-height: 30px !important;
-    margin: 0 !important;
-    padding: 0 !important;
-  }
-  div[class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2) .stButton,
-  div[class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(3) .stMarkdown,
-  div[class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(2) .stButton,
-  div[class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(3) .stMarkdown {
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    width: 30px !important;
-    height: 30px !important;
-    min-height: 30px !important;
-    margin: 0 !important;
-    padding: 0 !important;
-  }
-  div[class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2) button,
-  div[class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(2) button,
-  div[class*="st-key-it-heading-row-"] .place-map-icon-button,
-  div[class*="st-key-saved-heading-row-"] .place-map-icon-button {
-    box-sizing: border-box !important;
-    display: inline-flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    vertical-align: middle !important;
-    width: 26px !important;
-    min-width: 26px !important;
-    max-width: 26px !important;
-    height: 26px !important;
-    min-height: 26px !important;
-    max-height: 26px !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    transform: none !important;
-  }
-  div[class*="st-key-it-heading-row-"] .place-map-icon-button svg,
-  div[class*="st-key-saved-heading-row-"] .place-map-icon-button svg {
-    display: block !important;
-    width: 13px !important;
-    height: 13px !important;
-    margin: 0 !important;
-  }
-  @media (max-width: 768px) {
-    div[class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] {
-      grid-template-columns: minmax(0, 1fr) 30px 30px 24px !important;
-      align-items: center !important;
-      column-gap: 3px !important;
-    }
-    div[class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"] {
-      grid-template-columns: minmax(0, 1fr) 30px 30px !important;
-      align-items: center !important;
-      column-gap: 3px !important;
-    }
-  }
-
-
-  /* Corrección geométrica única para los botones reales de editar y mapa.
-     Se conserva el tamaño del mapa como referencia y se igualan las dos cajas. */
-  div[class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"],
-  div[class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"] {
-    align-items: center !important;
-  }
-  div[class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] {
-    grid-template-columns: minmax(0, 1fr) 30px 30px 24px !important;
-    column-gap: 5px !important;
-  }
-  div[class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"] {
-    grid-template-columns: minmax(0, 1fr) 30px 30px !important;
-    column-gap: 5px !important;
-  }
-  div[class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2),
-  div[class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(3),
-  div[class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(2),
-  div[class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(3) {
+  [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2),
+  [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(3),
+  [class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(2),
+  [class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(3) {
     box-sizing: border-box !important;
     display: flex !important;
+    flex: 0 0 38px !important;
     align-items: center !important;
     justify-content: center !important;
     align-self: center !important;
-    width: 30px !important;
-    min-width: 30px !important;
-    max-width: 30px !important;
-    height: 30px !important;
-    min-height: 30px !important;
-    max-height: 30px !important;
+    width: 38px !important;
+    min-width: 38px !important;
+    max-width: 38px !important;
+    height: 38px !important;
+    min-height: 38px !important;
+    max-height: 38px !important;
     margin: 0 !important;
     padding: 0 !important;
   }
-  div[class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stElementContainer"],
-  div[class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(3) [data-testid="stElementContainer"],
-  div[class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stElementContainer"],
-  div[class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(3) [data-testid="stElementContainer"],
-  div[class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2) .stButton,
-  div[class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(3) .stMarkdown,
-  div[class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(2) .stButton,
-  div[class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(3) .stMarkdown,
-  div[class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(3) .stMarkdownContainer,
-  div[class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(3) .stMarkdownContainer {
+
+  /* Wrapper del lápiz: no añade una segunda caja/borde. */
+  [class*="st-key-it-edit-button-wrap-"],
+  [class*="st-key-saved-edit-button-wrap-"] {
     box-sizing: border-box !important;
     display: flex !important;
+    flex: 0 0 38px !important;
     align-items: center !important;
     justify-content: center !important;
-    width: 30px !important;
-    min-width: 30px !important;
-    max-width: 30px !important;
-    height: 30px !important;
-    min-height: 30px !important;
-    max-height: 30px !important;
+    width: 38px !important;
+    min-width: 38px !important;
+    max-width: 38px !important;
+    height: 38px !important;
+    min-height: 38px !important;
+    max-height: 38px !important;
     margin: 0 !important;
     padding: 0 !important;
+    border: 0 !important;
+    background: transparent !important;
   }
-  div[class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(3) p,
-  div[class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(3) p {
-    margin: 0 !important;
-    padding: 0 !important;
-    line-height: 0 !important;
-  }
-  div[class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stButton"] > button,
-  div[class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stButton"] > button,
-  div[class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(3) .place-map-icon-button,
-  div[class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(3) .place-map-icon-button {
-    box-sizing: border-box !important;
-    display: inline-flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    vertical-align: middle !important;
-    position: relative !important;
-    width: 30px !important;
-    min-width: 30px !important;
-    max-width: 30px !important;
-    height: 30px !important;
-    min-height: 30px !important;
-    max-height: 30px !important;
-    flex: 0 0 30px !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    border: 1px solid #D1D5DB !important;
-    border-radius: 7px !important;
-    background: #FFFFFF !important;
-    background-color: #FFFFFF !important;
-    background-image: none !important;
-    box-shadow: none !important;
-    line-height: 0 !important;
-    overflow: hidden !important;
-  }
-  div[class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stButton"] > button {
-    color: transparent !important;
-    -webkit-text-fill-color: transparent !important;
-    font-size: 0 !important;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23334155' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m16 4 4 4'/%3E%3Cpath d='M4 20l4-.9L19 8a2.1 2.1 0 0 0-3-3L5 16z'/%3E%3C/svg%3E") !important;
-    background-repeat: no-repeat !important;
-    background-position: center center !important;
-    background-size: 14px 14px !important;
-  }
-  div[class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(3) .place-map-icon-button,
-  div[class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(3) .place-map-icon-button {
-    text-decoration: none !important;
-  }
-  div[class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(3) .place-map-icon-button svg,
-  div[class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(3) .place-map-icon-button svg {
-    display: block !important;
-    width: 14px !important;
-    height: 14px !important;
-    flex: 0 0 14px !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    fill: none !important;
-    stroke: #334155 !important;
-    stroke-width: 1.8 !important;
-    stroke-linecap: round !important;
-    stroke-linejoin: round !important;
-  }
-  div[class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stButton"] > button:hover,
-  div[class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stButton"] > button:focus,
-  div[class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stButton"] > button:active,
-  div[class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stButton"] > button:hover,
-  div[class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stButton"] > button:focus,
-  div[class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stButton"] > button:active,
-  div[class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(3) .place-map-icon-button:hover,
-  div[class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(3) .place-map-icon-button:focus,
-  div[class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(3) .place-map-icon-button:active,
-  div[class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(3) .place-map-icon-button:hover,
-  div[class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(3) .place-map-icon-button:focus,
-  div[class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(3) .place-map-icon-button:active {
-    background: #FFFFFF !important;
-    background-color: #FFFFFF !important;
-    border-color: #D1D5DB !important;
-    box-shadow: none !important;
-  }
-  @media (max-width: 768px) {
-    div[class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"],
-    div[class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"] {
-      align-items: center !important;
-    }
-    div[class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2),
-    div[class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(3),
-    div[class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(2),
-    div[class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(3) {
-      align-self: center !important;
-    }
-  }
-
-
-  /* Corrección definitiva de geometría: ambos controles usan la caja del mapa
-     como referencia y se centran en la misma línea, en móvil y escritorio. */
-  [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"],
-  [class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"] {
-    display: grid !important;
-    grid-template-columns: minmax(0, 1fr) 36px 36px 28px !important;
-    align-items: center !important;
-    justify-content: start !important;
-    column-gap: 5px !important;
-    row-gap: 0 !important;
-    width: 100% !important;
-    min-width: 0 !important;
-  }
-  [class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"] {
-    grid-template-columns: minmax(0, 1fr) 36px 36px !important;
-  }
-
-  [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(2),
-  [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(3),
-  [class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(2),
-  [class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(3) {
+  [class*="st-key-it-edit-button-wrap-"] [data-testid="stElementContainer"],
+  [class*="st-key-saved-edit-button-wrap-"] [data-testid="stElementContainer"],
+  [class*="st-key-it-edit-button-wrap-"] [data-testid="stButton"],
+  [class*="st-key-saved-edit-button-wrap-"] [data-testid="stButton"] {
     box-sizing: border-box !important;
     display: flex !important;
-    flex: 0 0 36px !important;
+    flex: 0 0 38px !important;
     align-items: center !important;
     justify-content: center !important;
-    align-self: center !important;
-    width: 36px !important;
-    min-width: 36px !important;
-    max-width: 36px !important;
-    height: 36px !important;
-    min-height: 36px !important;
-    max-height: 36px !important;
+    width: 38px !important;
+    min-width: 38px !important;
+    max-width: 38px !important;
+    height: 38px !important;
+    min-height: 38px !important;
+    max-height: 38px !important;
     margin: 0 !important;
     padding: 0 !important;
   }
-
-  [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stElementContainer"],
-  [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(3) [data-testid="stElementContainer"],
-  [class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stElementContainer"],
-  [class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(3) [data-testid="stElementContainer"],
-  [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2) .stButton,
-  [class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(2) .stButton {
-    box-sizing: border-box !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    width: 36px !important;
-    min-width: 36px !important;
-    max-width: 36px !important;
-    height: 36px !important;
-    min-height: 36px !important;
-    max-height: 36px !important;
-    margin: 0 !important;
-    padding: 0 !important;
-  }
-
-  [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stButton"] > button,
-  [class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stButton"] > button,
-  [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(3) .place-map-icon-button,
-  [class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(3) .place-map-icon-button {
+  [class*="st-key-it-edit-button-wrap-"] [data-testid="stButton"] > button,
+  [class*="st-key-saved-edit-button-wrap-"] [data-testid="stButton"] > button {
     box-sizing: border-box !important;
     position: relative !important;
     display: inline-flex !important;
-    flex: 0 0 36px !important;
+    flex: 0 0 38px !important;
     align-items: center !important;
     justify-content: center !important;
-    vertical-align: middle !important;
-    width: 36px !important;
-    min-width: 36px !important;
-    max-width: 36px !important;
-    height: 36px !important;
-    min-height: 36px !important;
-    max-height: 36px !important;
-    padding: 0 !important;
+    width: 38px !important;
+    min-width: 38px !important;
+    max-width: 38px !important;
+    height: 38px !important;
+    min-height: 38px !important;
+    max-height: 38px !important;
     margin: 0 !important;
+    padding: 0 !important;
     border: 1px solid #CBD5E1 !important;
     border-radius: 9px !important;
     background: #FFFFFF !important;
     background-color: #FFFFFF !important;
     background-image: none !important;
     box-shadow: none !important;
-    line-height: 0 !important;
-    transform: none !important;
-  }
-
-  [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stButton"] > button,
-  [class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stButton"] > button {
-    overflow: hidden !important;
-    color: transparent !important;
-    -webkit-text-fill-color: transparent !important;
-    font-size: 0 !important;
-  }
-  [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stButton"] > button::before,
-  [class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stButton"] > button::before {
-    content: "" !important;
-    position: absolute !important;
-    inset: 0 !important;
-    width: 14px !important;
-    height: 14px !important;
-    margin: auto !important;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23334155' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m16 4 4 4'/%3E%3Cpath d='M4 20l4-.9L19 8a2.1 2.1 0 0 0-3-3L5 16z'/%3E%3C/svg%3E") !important;
-    background-repeat: no-repeat !important;
-    background-position: center center !important;
-    background-size: 14px 14px !important;
-  }
-  [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stButton"] > button::after,
-  [class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stButton"] > button::after {
-    content: none !important;
-    display: none !important;
-  }
-
-  [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(3) .place-map-icon-button,
-  [class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(3) .place-map-icon-button {
-    padding: 0 !important;
-    overflow: hidden !important;
-  }
-  [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(3) .place-map-icon-button svg,
-  [class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(3) .place-map-icon-button svg {
-    display: block !important;
-    position: absolute !important;
-    left: 50% !important;
-    top: 50% !important;
-    width: 14px !important;
-    height: 14px !important;
-    min-width: 14px !important;
-    min-height: 14px !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    transform: translate(-50%, -50%) !important;
-    fill: none !important;
-    stroke: #334155 !important;
-    stroke-width: 1.8 !important;
-    stroke-linecap: round !important;
-    stroke-linejoin: round !important;
-  }
-
-  [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stButton"] > button:hover,
-  [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stButton"] > button:focus,
-  [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stButton"] > button:active,
-  [class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stButton"] > button:hover,
-  [class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stButton"] > button:focus,
-  [class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stButton"] > button:active,
-  [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(3) .place-map-icon-button:hover,
-  [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(3) .place-map-icon-button:focus,
-  [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(3) .place-map-icon-button:active,
-  [class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(3) .place-map-icon-button:hover,
-  [class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(3) .place-map-icon-button:focus,
-  [class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(3) .place-map-icon-button:active {
-    background: #FFFFFF !important;
-    background-color: #FFFFFF !important;
-    border-color: #CBD5E1 !important;
-    box-shadow: none !important;
-  }
-
-  @media (max-width: 768px) {
-    [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] {
-      grid-template-columns: minmax(0, 1fr) 36px 36px 28px !important;
-      align-items: center !important;
-      column-gap: 5px !important;
-    }
-    [class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"] {
-      grid-template-columns: minmax(0, 1fr) 36px 36px !important;
-      align-items: center !important;
-      column-gap: 5px !important;
-    }
-  }
-
-
-
-  /* Corrección localizada y explícita de los dos botones de cada lugar.
-     Se identifican por contenedores propios, no por el orden de columnas. */
-  [class*="st-key-it-edit-button-wrap-"],
-  [class*="st-key-it-map-button-wrap-"],
-  [class*="st-key-saved-edit-button-wrap-"],
-  [class*="st-key-saved-map-button-wrap-"] {
-    box-sizing: border-box !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    width: 30px !important;
-    min-width: 30px !important;
-    max-width: 30px !important;
-    height: 30px !important;
-    min-height: 30px !important;
-    max-height: 30px !important;
-    margin: 0 auto !important;
-    padding: 0 !important;
-    align-self: center !important;
-    overflow: visible !important;
-  }
-  [class*="st-key-it-edit-button-wrap-"] [data-testid="stElementContainer"],
-  [class*="st-key-it-map-button-wrap-"] [data-testid="stElementContainer"],
-  [class*="st-key-saved-edit-button-wrap-"] [data-testid="stElementContainer"],
-  [class*="st-key-saved-map-button-wrap-"] [data-testid="stElementContainer"] {
-    box-sizing: border-box !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    width: 30px !important;
-    min-width: 30px !important;
-    max-width: 30px !important;
-    height: 30px !important;
-    min-height: 30px !important;
-    max-height: 30px !important;
-    margin: 0 !important;
-    padding: 0 !important;
-  }
-  [class*="st-key-it-edit-button-wrap-"] [data-testid="stButton"],
-  [class*="st-key-saved-edit-button-wrap-"] [data-testid="stButton"],
-  [class*="st-key-it-edit-button-wrap-"] [data-testid="stButton"] > button,
-  [class*="st-key-saved-edit-button-wrap-"] [data-testid="stButton"] > button,
-  [class*="st-key-it-map-button-wrap-"] .place-map-icon-button,
-  [class*="st-key-saved-map-button-wrap-"] .place-map-icon-button {
-    box-sizing: border-box !important;
-    display: inline-flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    vertical-align: middle !important;
-    position: relative !important;
-    width: 30px !important;
-    min-width: 30px !important;
-    max-width: 30px !important;
-    height: 30px !important;
-    min-height: 30px !important;
-    max-height: 30px !important;
-    flex: 0 0 30px !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    border: 1px solid #CBD5E1 !important;
-    border-radius: 7px !important;
-    background: #FFFFFF !important;
-    background-color: #FFFFFF !important;
-    background-image: none !important;
-    box-shadow: none !important;
-    overflow: hidden !important;
-    line-height: 0 !important;
-  }
-  [class*="st-key-it-edit-button-wrap-"] [data-testid="stButton"] > button,
-  [class*="st-key-saved-edit-button-wrap-"] [data-testid="stButton"] > button {
     color: transparent !important;
     -webkit-text-fill-color: transparent !important;
     font-size: 0 !important;
     line-height: 0 !important;
+    overflow: hidden !important;
   }
   [class*="st-key-it-edit-button-wrap-"] [data-testid="stButton"] > button::before,
   [class*="st-key-saved-edit-button-wrap-"] [data-testid="stButton"] > button::before {
     content: "" !important;
-    display: block !important;
     position: absolute !important;
     left: 50% !important;
     top: 50% !important;
     width: 13px !important;
     height: 13px !important;
+    margin: 0 !important;
+    padding: 0 !important;
     transform: translate(-50%, -50%) !important;
     background: center / contain no-repeat url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23334155' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m16 4 4 4'/%3E%3Cpath d='M4 20l4-.9L19 8a2.1 2.1 0 0 0-3-3L5 16z'/%3E%3C/svg%3E") !important;
   }
-  [class*="st-key-it-map-button-wrap-"] .place-map-icon-button svg,
-  [class*="st-key-saved-map-button-wrap-"] .place-map-icon-button svg {
-    display: block !important;
-    position: absolute !important;
-    left: 50% !important;
-    top: 50% !important;
-    width: 13px !important;
-    height: 13px !important;
-    min-width: 13px !important;
-    min-height: 13px !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    transform: translate(-50%, -50%) !important;
-  }
-  [class*="st-key-it-edit-button-wrap-"] button:hover,
-  [class*="st-key-it-edit-button-wrap-"] button:focus,
-  [class*="st-key-it-edit-button-wrap-"] button:active,
-  [class*="st-key-it-map-button-wrap-"] .place-map-icon-button:hover,
-  [class*="st-key-it-map-button-wrap-"] .place-map-icon-button:focus,
-  [class*="st-key-it-map-button-wrap-"] .place-map-icon-button:active,
-  [class*="st-key-saved-edit-button-wrap-"] button:hover,
-  [class*="st-key-saved-edit-button-wrap-"] button:focus,
-  [class*="st-key-saved-edit-button-wrap-"] button:active,
-  [class*="st-key-saved-map-button-wrap-"] .place-map-icon-button:hover,
-  [class*="st-key-saved-map-button-wrap-"] .place-map-icon-button:focus,
-  [class*="st-key-saved-map-button-wrap-"] .place-map-icon-button:active {
-    background: #FFFFFF !important;
-    background-color: #FFFFFF !important;
-    border-color: #CBD5E1 !important;
-    box-shadow: none !important;
-  }
-  [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"],
-  [class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"] {
-    align-items: center !important;
-  }
-  @media (max-width: 768px) {
-    [class*="st-key-it-edit-button-wrap-"],
-    [class*="st-key-it-map-button-wrap-"],
-    [class*="st-key-saved-edit-button-wrap-"],
-    [class*="st-key-saved-map-button-wrap-"] {
-      width: 30px !important;
-      min-width: 30px !important;
-      max-width: 30px !important;
-      height: 30px !important;
-      min-height: 30px !important;
-      max-height: 30px !important;
-      margin-left: auto !important;
-      margin-right: auto !important;
-    }
-  }
 
-
-  /* Corrección puntual del icono de mapa: no altera el botón del lápiz
-     ni las dimensiones que ya tenía en esta versión anterior. */
-  [class*="st-key-it-map-button-wrap-"] .place-map-icon-button,
-  [class*="st-key-saved-map-button-wrap-"] .place-map-icon-button {
-    position: relative !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    padding: 0 !important;
-    line-height: 0 !important;
-    text-align: center !important;
-  }
-  [class*="st-key-it-map-button-wrap-"] .place-map-icon-button svg,
-  [class*="st-key-saved-map-button-wrap-"] .place-map-icon-button svg {
-    position: absolute !important;
-    left: 50% !important;
-    top: 50% !important;
-    display: block !important;
-    width: 13px !important;
-    height: 13px !important;
-    min-width: 13px !important;
-    min-height: 13px !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    transform: translate(-50%, -50%) !important;
-    transform-origin: center center !important;
-  }
-
-
-  /* Ajuste final: el lápiz toma exactamente la caja del botón de mapa.
-     Se fijan ambas cajas en 36x36 px para neutralizar reglas anteriores. */
-  [class*="st-key-it-heading-row-"] [class*="st-key-it-edit-button-wrap-"] [data-testid="stButton"] > button,
-  [class*="st-key-it-heading-row-"] [class*="st-key-it-map-button-wrap-"] .place-map-icon-button,
-  [class*="st-key-saved-heading-row-"] [class*="st-key-saved-edit-button-wrap-"] [data-testid="stButton"] > button,
-  [class*="st-key-saved-heading-row-"] [class*="st-key-saved-map-button-wrap-"] .place-map-icon-button {
-    box-sizing: border-box !important;
-    display: inline-flex !important;
-    flex: 0 0 36px !important;
-    width: 36px !important;
-    min-width: 36px !important;
-    max-width: 36px !important;
-    height: 36px !important;
-    min-height: 36px !important;
-    max-height: 36px !important;
-    padding: 0 !important;
-    margin: 0 !important;
-    align-items: center !important;
-    justify-content: center !important;
-    vertical-align: middle !important;
-  }
-  [class*="st-key-it-heading-row-"] [class*="st-key-it-edit-button-wrap-"] [data-testid="stButton"],
-  [class*="st-key-it-heading-row-"] [class*="st-key-it-map-button-wrap-"],
-  [class*="st-key-saved-heading-row-"] [class*="st-key-saved-edit-button-wrap-"] [data-testid="stButton"],
-  [class*="st-key-saved-heading-row-"] [class*="st-key-saved-map-button-wrap-"] {
-    box-sizing: border-box !important;
-    width: 36px !important;
-    min-width: 36px !important;
-    max-width: 36px !important;
-    height: 36px !important;
-    min-height: 36px !important;
-    max-height: 36px !important;
-    margin: 0 !important;
-    padding: 0 !important;
-  }
-  [class*="st-key-it-heading-row-"] [class*="st-key-it-edit-button-wrap-"] [data-testid="stButton"] > button::before,
-  [class*="st-key-saved-heading-row-"] [class*="st-key-saved-edit-button-wrap-"] [data-testid="stButton"] > button::before,
-  [class*="st-key-it-heading-row-"] [class*="st-key-it-map-button-wrap-"] .place-map-icon-button svg,
-  [class*="st-key-saved-heading-row-"] [class*="st-key-saved-map-button-wrap-"] .place-map-icon-button svg {
-    position: absolute !important;
-    left: 50% !important;
-    top: 50% !important;
-    width: 13px !important;
-    height: 13px !important;
-    min-width: 13px !important;
-    min-height: 13px !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    transform: translate(-50%, -50%) !important;
-  }
-  @media (max-width: 768px) {
-    [class*="st-key-it-heading-row-"] [class*="st-key-it-edit-button-wrap-"] [data-testid="stButton"] > button,
-    [class*="st-key-it-heading-row-"] [class*="st-key-it-map-button-wrap-"] .place-map-icon-button,
-    [class*="st-key-saved-heading-row-"] [class*="st-key-saved-edit-button-wrap-"] [data-testid="stButton"] > button,
-    [class*="st-key-saved-heading-row-"] [class*="st-key-saved-map-button-wrap-"] .place-map-icon-button {
-      width: 36px !important;
-      min-width: 36px !important;
-      max-width: 36px !important;
-      height: 36px !important;
-      min-height: 36px !important;
-      max-height: 36px !important;
-      flex-basis: 36px !important;
-    }
-  }
-
-
-  /* MAPA: igualar su caja exterior al botón nativo del lápiz.
-     Se fijan también los wrappers de Streamlit para que el enlace no crezca
-     por el ancho automático de st.markdown. El lápiz no se modifica. */
+  /* Wrapper del mapa y enlace: exactamente la misma caja que el lápiz. */
   [class*="st-key-it-map-button-wrap-"],
   [class*="st-key-saved-map-button-wrap-"] {
     box-sizing: border-box !important;
     display: flex !important;
-    flex: 0 0 36px !important;
-    width: 36px !important;
-    min-width: 36px !important;
-    max-width: 36px !important;
-    height: 36px !important;
-    min-height: 36px !important;
-    max-height: 36px !important;
-    padding: 0 !important;
-    margin: 0 !important;
+    flex: 0 0 38px !important;
     align-items: center !important;
     justify-content: center !important;
-    overflow: hidden !important;
+    width: 38px !important;
+    min-width: 38px !important;
+    max-width: 38px !important;
+    height: 38px !important;
+    min-height: 38px !important;
+    max-height: 38px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+    background: transparent !important;
   }
   [class*="st-key-it-map-button-wrap-"] [data-testid="stElementContainer"],
   [class*="st-key-saved-map-button-wrap-"] [data-testid="stElementContainer"],
@@ -5218,57 +4400,58 @@ st.markdown("""
   [class*="st-key-saved-map-button-wrap-"] .stMarkdownContainer {
     box-sizing: border-box !important;
     display: flex !important;
-    flex: 0 0 36px !important;
-    width: 36px !important;
-    min-width: 36px !important;
-    max-width: 36px !important;
-    height: 36px !important;
-    min-height: 36px !important;
-    max-height: 36px !important;
-    margin: 0 !important;
-    padding: 0 !important;
+    flex: 0 0 38px !important;
     align-items: center !important;
     justify-content: center !important;
-    overflow: hidden !important;
+    width: 38px !important;
+    min-width: 38px !important;
+    max-width: 38px !important;
+    height: 38px !important;
+    min-height: 38px !important;
+    max-height: 38px !important;
+    margin: 0 !important;
+    padding: 0 !important;
   }
   [class*="st-key-it-map-button-wrap-"] a.place-map-icon-button,
   [class*="st-key-saved-map-button-wrap-"] a.place-map-icon-button {
     box-sizing: border-box !important;
-    display: flex !important;
-    flex: 0 0 36px !important;
-    width: 36px !important;
-    min-width: 36px !important;
-    max-width: 36px !important;
-    height: 36px !important;
-    min-height: 36px !important;
-    max-height: 36px !important;
-    margin: 0 !important;
-    padding: 0 !important;
     position: relative !important;
     inset: auto !important;
+    display: inline-flex !important;
+    flex: 0 0 38px !important;
     align-items: center !important;
     justify-content: center !important;
+    vertical-align: middle !important;
+    width: 38px !important;
+    min-width: 38px !important;
+    max-width: 38px !important;
+    height: 38px !important;
+    min-height: 38px !important;
+    max-height: 38px !important;
+    margin: 0 !important;
+    padding: 0 !important;
     border: 1px solid #CBD5E1 !important;
-    border-radius: 8px !important;
+    border-radius: 9px !important;
     background: #FFFFFF !important;
     background-color: #FFFFFF !important;
+    background-image: none !important;
     box-shadow: none !important;
     line-height: 0 !important;
+    text-decoration: none !important;
     overflow: hidden !important;
   }
   [class*="st-key-it-map-button-wrap-"] a.place-map-icon-button svg,
   [class*="st-key-saved-map-button-wrap-"] a.place-map-icon-button svg {
-    position: absolute !important;
-    left: 50% !important;
-    top: 50% !important;
+    position: static !important;
     display: block !important;
+    flex: 0 0 13px !important;
     width: 13px !important;
     min-width: 13px !important;
     height: 13px !important;
     min-height: 13px !important;
     margin: 0 !important;
     padding: 0 !important;
-    transform: translate(-50%, -50%) !important;
+    transform: none !important;
   }
   [class*="st-key-it-map-button-wrap-"] a.place-map-icon-button:hover,
   [class*="st-key-it-map-button-wrap-"] a.place-map-icon-button:focus,
@@ -5281,20 +4464,15 @@ st.markdown("""
     border-color: #CBD5E1 !important;
     box-shadow: none !important;
   }
+
   @media (max-width: 768px) {
-    [class*="st-key-it-map-button-wrap-"],
-    [class*="st-key-saved-map-button-wrap-"],
-    [class*="st-key-it-map-button-wrap-"] [data-testid="stElementContainer"],
-    [class*="st-key-saved-map-button-wrap-"] [data-testid="stElementContainer"],
-    [class*="st-key-it-map-button-wrap-"] a.place-map-icon-button,
-    [class*="st-key-saved-map-button-wrap-"] a.place-map-icon-button {
-      flex-basis: 36px !important;
-      width: 36px !important;
-      min-width: 36px !important;
-      max-width: 36px !important;
-      height: 36px !important;
-      min-height: 36px !important;
-      max-height: 36px !important;
+    [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] {
+      grid-template-columns: minmax(0, 1fr) 38px 38px 28px !important;
+      column-gap: 4px !important;
+    }
+    [class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"] {
+      grid-template-columns: minmax(0, 1fr) 38px 38px !important;
+      column-gap: 4px !important;
     }
   }
 
