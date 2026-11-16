@@ -4313,6 +4313,12 @@ st.markdown("""
     max-height: 38px !important;
     margin: 0 !important;
     padding: 0 !important;
+    background: #FFFFFF !important;
+    background-color: #FFFFFF !important;
+    border: 1px solid #CBD5E1 !important;
+    border-radius: 9px !important;
+    cursor: pointer !important;
+    box-shadow: none !important;
   }
   /* Solo el enlace del mapa: misma caja exterior que el botón lápiz existente. */
   [class*="st-key-it-map-button-wrap-"],
