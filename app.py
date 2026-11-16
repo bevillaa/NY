@@ -3375,7 +3375,7 @@ st.markdown("""
   [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"],
   [class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"] {
     display: grid !important;
-    grid-template-columns: minmax(0, 1fr) 30px 30px 28px !important;
+    grid-template-columns: minmax(0, 1fr) 30px 30px 30px !important;
     align-items: start !important;
     column-gap: 5px !important;
     width: 100% !important;
