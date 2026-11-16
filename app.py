@@ -21,8 +21,8 @@ ARCH_CONFIG     = "config_viaje.json"
 # 1. CONFIGURACIÓN DE PÁGINA & ESTILO NAVIDEÑO EDITORIAL (MÓVIL + WEB)
 # =============================================================================
 st.set_page_config(
-    page_title="Navidad en Nueva York 🎄❄️",
-    page_icon="🎄",
+    page_title="Nueva York · Travel Journal",
+    page_icon="🗽",
     layout="wide",
     initial_sidebar_state="collapsed"
 )
@@ -41,7 +41,7 @@ st.markdown("""
     min-height: 0 !important;
   }
 
-  @import url('https://fonts.googleapis.com/css2?family=Carlito:ital,wght@0,400;0,700;1,400;1,700&family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Carlito:ital,wght@0,400;0,700;1,400;1,700&family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap');
 
   :root {
     color-scheme: light !important;
@@ -3029,6 +3029,178 @@ st.markdown("""
       margin-top: 0 !important;
     }
   }
+
+  /* ================================================================
+     REDISEÑO EDITORIAL AESTHETIC · solo presentación, sin tocar lógica
+     ================================================================ */
+  :root {
+    --ivory: #F7F5F0;
+    --paper: #FFFEFC;
+    --ink: #373B35;
+    --muted: #85877D;
+    --sage: #899681;
+    --sage-dark: #68765F;
+    --sage-pale: #EEF0E9;
+    --line: #E7E4DC;
+    --clay: #B78E7A;
+  }
+  html, body, .stApp, [data-testid="stAppViewContainer"],
+  [data-testid="stMain"], section.main {
+    background: var(--ivory) !important;
+    color: var(--ink) !important;
+  }
+  html, body, .stApp, p, label, input, button, select, textarea,
+  .stMarkdown, [data-testid="stMarkdownContainer"], [data-testid="stText"], small {
+    font-family: 'DM Sans', 'Avenir Next', sans-serif !important;
+    color: var(--ink) !important;
+  }
+  .block-container {
+    max-width: 1220px !important;
+    padding-left: clamp(1rem, 3vw, 2.6rem) !important;
+    padding-right: clamp(1rem, 3vw, 2.6rem) !important;
+    padding-bottom: 3rem !important;
+  }
+  h1, h2, h3, h4, .hero-title {
+    font-family: 'Playfair Display', Georgia, serif !important;
+    color: var(--ink) !important;
+    letter-spacing: -0.025em !important;
+  }
+  .hero-container {
+    background: var(--paper) !important;
+    border: 1px solid var(--line) !important;
+    border-top: 0 !important;
+    border-radius: 5px 5px 18px 18px !important;
+    padding: 25px 28px !important;
+    margin: 8px 0 22px !important;
+    box-shadow: 0 10px 35px rgba(66, 65, 54, .045) !important;
+    position: relative;
+  }
+  .hero-container:before {
+    content: '';
+    position: absolute;
+    top: 0; left: 28px; right: 28px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--sage), #C8B9A8, transparent);
+  }
+  .hero-eyebrow {
+    color: var(--sage-dark) !important;
+    font-size: .68rem !important;
+    font-weight: 700 !important;
+    letter-spacing: .19em !important;
+  }
+  .hero-title {
+    font-size: clamp(1.8rem, 3vw, 2.55rem) !important;
+    font-weight: 600 !important;
+    line-height: 1.18 !important;
+    margin: 8px 0 10px !important;
+  }
+  .hero-pill, .hero-stat-box {
+    background: var(--sage-pale) !important;
+    border: 1px solid #E2E6DA !important;
+    color: var(--sage-dark) !important;
+    border-radius: 999px !important;
+  }
+  .hero-stat-box {
+    border-radius: 12px !important;
+    min-width: 86px !important;
+    padding: 10px 15px !important;
+    background: #F8F7F2 !important;
+  }
+  .hero-stat-val { color: var(--sage-dark) !important; font-weight: 600 !important; }
+  .hero-stat-lbl { color: var(--muted) !important; font-size: .62rem !important; letter-spacing: .12em !important; }
+  .ny-card, .place-sheet, [data-testid="stExpander"] {
+    background: var(--paper) !important;
+    border: 1px solid var(--line) !important;
+    border-radius: 14px !important;
+    box-shadow: 0 5px 18px rgba(66, 65, 54, .035) !important;
+  }
+  .ny-card { padding: 18px 20px !important; }
+  .place-sheet { border-width: 1px !important; padding: 16px 18px !important; }
+  .ny-card-header {
+    color: var(--sage-dark) !important;
+    font-size: .7rem !important;
+    letter-spacing: .15em !important;
+    font-weight: 700 !important;
+  }
+  [data-testid="stTabs"] [role="tablist"] {
+    gap: 7px !important;
+    border-bottom: 1px solid var(--line) !important;
+  }
+  [data-testid="stTabs"] button[role="tab"] {
+    background: transparent !important;
+    border: 1px solid transparent !important;
+    border-radius: 10px 10px 0 0 !important;
+    color: var(--muted) !important;
+    font-weight: 600 !important;
+    padding: .65rem .9rem !important;
+  }
+  [data-testid="stTabs"] button[role="tab"] p { color: inherit !important; }
+  [data-testid="stTabs"] button[role="tab"][aria-selected="true"] {
+    color: var(--sage-dark) !important;
+    background: #F0F1EB !important;
+    border-color: var(--line) !important;
+    border-bottom-color: #F0F1EB !important;
+  }
+  [data-testid="stButton"] > button, [data-testid="stDownloadButton"] > button {
+    border: 1px solid #D9DED2 !important;
+    border-radius: 10px !important;
+    background: #F1F2EC !important;
+    color: #596650 !important;
+    font-weight: 600 !important;
+    box-shadow: none !important;
+    transition: background .18s ease, border-color .18s ease, transform .18s ease !important;
+  }
+  [data-testid="stButton"] > button:hover, [data-testid="stDownloadButton"] > button:hover {
+    background: #E7EADF !important;
+    border-color: #BFC9B5 !important;
+    color: #46523F !important;
+    transform: translateY(-1px);
+  }
+  [data-testid="stButton"] > button[kind="primary"] {
+    background: var(--sage-dark) !important;
+    border-color: var(--sage-dark) !important;
+    color: white !important;
+  }
+  [data-testid="stButton"] > button[kind="primary"] * { color: white !important; }
+  input, textarea, [data-baseweb="select"] > div, [data-baseweb="input"] > div {
+    background: #FFFEFC !important;
+    border-color: #DFDED6 !important;
+    border-radius: 9px !important;
+  }
+  input:focus, textarea:focus, [data-baseweb="select"] > div:focus-within,
+  [data-baseweb="input"] > div:focus-within {
+    border-color: #9AA68F !important;
+    box-shadow: 0 0 0 1px #9AA68F !important;
+  }
+  [data-testid="stExpander"] { overflow: hidden !important; }
+  [data-testid="stExpander"] details summary {
+    background: #FBFAF6 !important;
+    color: var(--ink) !important;
+    font-weight: 600 !important;
+    padding: 13px 16px !important;
+  }
+  [data-testid="stExpander"] details summary:hover { background: #F3F3ED !important; }
+  [data-testid="stAlert"] { border-radius: 11px !important; }
+  [data-testid="stCaptionContainer"] p, .stCaption { color: var(--muted) !important; }
+  hr { border-color: var(--line) !important; }
+  div[role="radiogroup"] label {
+    background: #FFFEFC !important;
+    border: 1px solid var(--line) !important;
+    border-radius: 9px !important;
+  }
+  div[role="radiogroup"] label:has(input:checked) {
+    background: var(--sage-pale) !important;
+    border-color: #B8C2AE !important;
+  }
+  [data-testid="stCheckbox"] label p { color: var(--ink) !important; }
+  @media (max-width: 768px) {
+    .hero-container { padding: 22px 17px 17px !important; border-radius: 5px 5px 14px 14px !important; }
+    .hero-container:before { left: 17px; right: 17px; }
+    .hero-title { font-size: 1.8rem !important; }
+    .ny-card, .place-sheet { padding: 13px !important; }
+    [data-testid="stTabs"] [role="tablist"] { gap: 2px !important; }
+    [data-testid="stTabs"] button[role="tab"] { padding: .55rem .5rem !important; }
+  }
 </style>
 """, unsafe_allow_html=True)
 
@@ -4232,11 +4404,11 @@ st.markdown(f"""
 <div class="hero-container">
   <div style="display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:10px;">
     <div>
-      <div class="hero-eyebrow">✨ 26 DIC 2026 - 4 ENE 2027 ✨</div>
-      <div class="hero-title"> 🎄Navidad en Nueva York 🗽</div>
+      <div class="hero-eyebrow">NEW YORK CITY &nbsp;·&nbsp; 26 DIC 2026 — 4 ENE 2027</div>
+      <div class="hero-title">Navidad en Nueva York</div>
       <div style="display:flex; gap:12px; flex-wrap:wrap; margin-top:7px; font-size:0.82rem; font-weight:700; color:#475569;">
-        <span>🕒 Madrid: {ahora_madrid}</span>
-        <span>🕒 Nueva York: {ahora_nueva_york}</span>
+        <span>Madrid&nbsp; · &nbsp;{ahora_madrid}</span>
+        <span>New York&nbsp; · &nbsp;{ahora_nueva_york}</span>
       </div>
     </div>
     <div style="display:flex; gap:8px; flex-wrap:wrap; width:auto;">
