@@ -4296,22 +4296,14 @@ def ejecutar_sincronizacion_listas_gmaps():
 
     if total_nuevos or total_actualizados:
         if guardar_itinerario_disco(st.session_state.lugares):
-            st.toast(f"Sincronizados: {total_nuevos} nuevos, {total_actualizados} actualizados.", icon="🔄")
-            st.session_state["_msg_sync_guardados"] = (
-                "success",
-                f"Sincronización terminada: {total_nuevos} lugares nuevos añadidos"
-            )
+            st.toast(f"Sincronización terminada: {total_nuevos} lugares nuevos añadidos.", icon="✅")
         else:
             st.session_state["_msg_sync_guardados"] = (
                 "error",
                 "No se pudieron guardar los lugares sincronizados en el archivo compartido."
             )
     else:
-        st.toast("Listas al día. No hay sitios nuevos.", icon="✅")
-        st.session_state["_msg_sync_guardados"] = (
-            "info",
-            f"Sincronización terminada. No había cambios nuevos. ({total_descargados} resultados recibidos)."
-        )
+        st.toast(f"No había cambios nuevos, {total_descargados} lugares revisados.", icon="✅")
     if errores_sync:
         st.session_state["_errores_sync_guardados"] = errores_sync
     st.rerun()
@@ -5062,15 +5054,9 @@ if seccion_principal == "📎Guardados":
         ejecutar_sincronizacion_listas_gmaps()
 
     if "_msg_sync_guardados" in st.session_state:
-        tipo_msg, txt_msg = st.session_state["_msg_sync_guardados"]
-        del st.session_state["_msg_sync_guardados"]
-        
-        if tipo_msg == "success":
-            st.success(txt_msg)
-        elif tipo_msg == "error":
+        tipo_msg, txt_msg = st.session_state.pop("_msg_sync_guardados")
+        if tipo_msg == "error":
             st.error(txt_msg)
-        else:
-            st.info(txt_msg)
 
     if "_errores_sync_guardados" in st.session_state:
         errores_temp = st.session_state.pop("_errores_sync_guardados")
