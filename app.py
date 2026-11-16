@@ -3377,25 +3377,25 @@ st.markdown("""
 # 2. DEFINICIÓN DEL VIAJE NAVIDEÑO (26 DIC 2026 - 4 ENE 2027)
 # =============================================================================
 DIAS_VIAJE = {
-    1:  {"fecha": "26 Diciembre", "dia": "Sábado"},
-    2:  {"fecha": "27 Diciembre", "dia": "Domingo"},
-    3:  {"fecha": "28 Diciembre", "dia": "Lunes"},
-    4:  {"fecha": "29 Diciembre", "dia": "Martes"},
-    5:  {"fecha": "30 Diciembre", "dia": "Miércoles"},
-    6:  {"fecha": "31 Diciembre", "dia": "Jueves"},
-    7:  {"fecha": "01 Enero", "dia": "Viernes"},
-    8:  {"fecha": "02 Enero", "dia": "Sábado"},
-    9:  {"fecha": "03 Enero", "dia": "Domingo"},
-    10: {"fecha": "04 Enero", "dia": "Lunes"},
+    1:  {"fecha": "26-Dic", "dia": "Sábado"},
+    2:  {"fecha": "27-Dic", "dia": "Domingo"},
+    3:  {"fecha": "28-Dic", "dia": "Lunes"},
+    4:  {"fecha": "29-Dic", "dia": "Martes"},
+    5:  {"fecha": "30-Dic", "dia": "Miércoles"},
+    6:  {"fecha": "31-Dic", "dia": "Jueves"},
+    7:  {"fecha": "01-Ene", "dia": "Viernes"},
+    8:  {"fecha": "02-Ene", "dia": "Sábado"},
+    9:  {"fecha": "03-Ene", "dia": "Domingo"},
+    10: {"fecha": "04-Ene", "dia": "Lunes"},
 }
 
 def etiqueta_dia(d: int) -> str:
     info = DIAS_VIAJE.get(d, {})
-    return f"Día {d}: {info.get('fecha', '')} - {info.get('dia', '')}".strip()
+    return f"Día{d}:{info.get('fecha', '')} - {info.get('dia', '')}".strip()
 
 def etiqueta_dia_corta(d: int) -> str:
     info = DIAS_VIAJE.get(d, {})
-    return f"Día {d} · {info.get('fecha', '')}".strip()
+    return f"Día{d}·{info.get('fecha', '')}".strip()
 
 
 def linkificar_nota(nota: str) -> str:
@@ -4558,7 +4558,7 @@ def render_formulario_agregar_lugar(key_sufijo: str = "gen"):
     """Módulo desplegable para añadir sitios desde Google Maps o a mano."""
     with st.expander("➕ Añadir", expanded=False):
         tab_gm, tab_man = st.tabs(["🌐 Google Maps", "✏️ A Mano"])
-        dias_asig_opts = ["📌 Bandeja de Guardados"] + [etiqueta_dia(d) for d in range(1, 11)]
+        dias_asig_opts = ["📌Guardados"] + [etiqueta_dia(d) for d in range(1, 11)]
 
         with tab_gm:
             st.caption("Pega el enlace de Google Maps de un sitio o lista:")
@@ -4745,8 +4745,8 @@ st.markdown(f"""
 # Así evitamos renderizar el mapa y el resto de pestañas en cada cambio.
 SECCIONES_PRINCIPALES = [
     "🗺️Mapa",
-    "📍Ruta",
-    "📎Guardados",
+    "🗽Ruta",
+    "📌Guardados",
     "💸Divisas",
     "✈️Info",
     "🗒️Listas",
@@ -4891,7 +4891,7 @@ if seccion_principal == "🗺️Mapa":
 # ─────────────────────────────────────────────────────────────────────────────
 # TAB 2: ITINERARIO COMPLETO
 # ─────────────────────────────────────────────────────────────────────────────
-if seccion_principal == "📍Ruta":
+if seccion_principal == "🗽Ruta":
     total_itinerario = [l for l in st.session_state.lugares if l.get("dia", 0) > 0]
     total_visitados = [l for l in total_itinerario if l.get("visitado", False)]
     pct_progreso = int((len(total_visitados) / max(1, len(total_itinerario))) * 100) if total_itinerario else 0
@@ -5031,7 +5031,7 @@ if seccion_principal == "📍Ruta":
 # ─────────────────────────────────────────────────────────────────────────────
 # TAB 3: BANDEJA DE GUARDADOS (CON BOTÓN DE HORA, DÍA, MAPS Y EDITAR PEQUEÑO)
 # ─────────────────────────────────────────────────────────────────────────────
-if seccion_principal == "📎Guardados":
+if seccion_principal == "📌Guardados":
     render_formulario_agregar_lugar("guardados")
     st.markdown("<div style='height: 6px;'></div>", unsafe_allow_html=True)
     pulsado_sync = False
@@ -5137,7 +5137,7 @@ if seccion_principal == "📎Guardados":
                         guardar_itinerario_disco(st.session_state.lugares)
                         st.rerun()
             with c_day:
-                opts_dia_pool = ["📌 Bandeja de Guardados"] + [etiqueta_dia_corta(d) for d in range(1, 11)]
+                opts_dia_pool = ["📌Guardados"] + [etiqueta_dia_corta(d) for d in range(1, 11)]
                 idx_sel_pool = dia_p if 1 <= dia_p <= 10 else 0
                 asig_dia = selectbox_sin_teclado(
                     "Día",
@@ -5146,7 +5146,7 @@ if seccion_principal == "📎Guardados":
                     key=f"asig_dia_pool_{p_spot['id']}",
                     label_visibility="collapsed"
                 )
-                if asig_dia != "📌 Bandeja de Guardados" and idx_sp_real is not None:
+                if asig_dia != "📌Guardados" and idx_sp_real is not None:
                     d_num = int(re.search(r"Día (\d+)", asig_dia).group(1))
                     if d_num != dia_p:
                         st.session_state.lugares[idx_sp_real]["dia"] = d_num
