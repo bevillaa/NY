@@ -3369,6 +3369,97 @@ st.markdown("""
     }
   }
 
+
+  /* Acciones compactas alineadas a la derecha del nombre del lugar. */
+  [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"],
+  [class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"] {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) 30px 30px 28px !important;
+    align-items: start !important;
+    column-gap: 5px !important;
+    width: 100% !important;
+  }
+  [class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"] {
+    grid-template-columns: minmax(0, 1fr) 30px 30px !important;
+  }
+  [class*="st-key-it-heading-row-"] [data-testid="column"],
+  [class*="st-key-saved-heading-row-"] [data-testid="column"] {
+    min-width: 0 !important;
+    width: 100% !important;
+    padding: 0 !important;
+  }
+  [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2) button,
+  [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(3) a,
+  [class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(2) button,
+  [class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(3) a {
+    box-sizing: border-box !important;
+    width: 28px !important;
+    min-width: 28px !important;
+    max-width: 28px !important;
+    height: 28px !important;
+    min-height: 28px !important;
+    max-height: 28px !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-size: 0.82rem !important;
+    line-height: 1 !important;
+    overflow: visible !important;
+  }
+  [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(4) {
+    display: flex !important;
+    justify-content: flex-end !important;
+  }
+  [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(1),
+  [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(2),
+  [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(1),
+  [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(2) {
+    display: block !important;
+    width: 0 !important;
+    min-width: 0 !important;
+    max-width: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    visibility: hidden !important;
+    overflow: hidden !important;
+  }
+  [class*="st-key-it-controls-row-"] [data-testid="stHorizontalBlock"],
+  [class*="st-key-saved-controls-row-"] [data-testid="stHorizontalBlock"] {
+    grid-template-columns: 0px 0px 76px 88px !important;
+    column-gap: 5px !important;
+  }
+  @media (max-width: 768px) {
+    [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] {
+      grid-template-columns: minmax(0, 1fr) 28px 28px 26px !important;
+      gap: 4px !important;
+    }
+    [class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"] {
+      grid-template-columns: minmax(0, 1fr) 28px 28px !important;
+      gap: 4px !important;
+    }
+    [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2) button,
+    [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(3) a,
+    [class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(2) button,
+    [class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(3) a {
+      width: 27px !important; min-width: 27px !important; max-width: 27px !important;
+      height: 27px !important; min-height: 27px !important; max-height: 27px !important;
+      font-size: 0.76rem !important;
+    }
+    [class*="st-key-it-controls-row-"] [data-testid="stHorizontalBlock"],
+    [class*="st-key-saved-controls-row-"] [data-testid="stHorizontalBlock"] {
+      grid-template-columns: 0px 0px 76px 88px !important;
+      gap: 4px !important;
+    }
+  }
+  @media (max-width: 320px) {
+    [class*="st-key-it-controls-row-"] [data-testid="stHorizontalBlock"],
+    [class*="st-key-saved-controls-row-"] [data-testid="stHorizontalBlock"] {
+      grid-template-columns: 0px 0px 72px 84px !important;
+      gap: 3px !important;
+    }
+  }
 </style>
 """, unsafe_allow_html=True)
 
@@ -3396,6 +3487,20 @@ def etiqueta_dia(d: int) -> str:
 def etiqueta_dia_corta(d: int) -> str:
     info = DIAS_VIAJE.get(d, {})
     return f"Día {d} · {info.get('fecha', '')}".strip()
+
+
+def etiqueta_dia_guardados(d: int) -> str:
+    """Etiqueta compacta del selector de Guardados: Día 1 · 26/12 · S."""
+    info = DIAS_VIAJE.get(d, {})
+    fecha = str(info.get("fecha", "")).strip()
+    dia_semana = str(info.get("dia", "")).strip()
+    meses = {"Diciembre": "12", "Enero": "01"}
+    m = re.search(r"(\d{1,2})\s+(Diciembre|Enero)", fecha, re.IGNORECASE)
+    fecha_corta = f"{int(m.group(1)):02d}/{meses[m.group(2).capitalize()]}" if m else fecha
+    iniciales = {"Sábado": "S", "Domingo": "D", "Lunes": "L", "Martes": "M",
+                 "Miércoles": "X", "Jueves": "J", "Viernes": "V"}
+    inicial = iniciales.get(dia_semana, dia_semana[:1].upper())
+    return f"Día {d} · {fecha_corta} · {inicial}"
 
 
 def linkificar_nota(nota: str) -> str:
@@ -4480,7 +4585,7 @@ def render_editor_sitio_panel(spot: dict, idx_real: int, key_ctx: str):
                 tipo_act = spot.get("tipo", "Interior")
                 ed_tipo = selectbox_sin_teclado("Entorno:", ["Interior", "Exterior"], index=0 if tipo_act == "Interior" else 1)
 
-                dias_opts = ["📌 Bandeja de Guardados"] + [etiqueta_dia(d) for d in range(1, 11)]
+                dias_opts = ["📌Guardados"] + [etiqueta_dia(d) for d in range(1, 11)]
                 dia_act = spot.get("dia", 0)
                 ed_dia_str = selectbox_sin_teclado("Día asignado:", dias_opts, index=dia_act if 0 <= dia_act <= 10 else 0)
 
@@ -4515,7 +4620,7 @@ def render_editor_sitio_panel(spot: dict, idx_real: int, key_ctx: str):
                 else:
                     if hora_limpia and len(hora_limpia) == 4:
                         hora_limpia = "0" + hora_limpia
-                    nuevo_dia = 0 if "Bandeja" in ed_dia_str else int(re.search(r"Día (\d+)", ed_dia_str).group(1))
+                    nuevo_dia = 0 if "Guardados" in ed_dia_str else int(re.search(r"Día (\d+)", ed_dia_str).group(1))
                     st.session_state.lugares[idx_guardar].update({
                         "nombre": ed_nom.strip() or spot["nombre"],
                         "direccion": ed_dir.strip(),
@@ -4558,7 +4663,7 @@ def render_formulario_agregar_lugar(key_sufijo: str = "gen"):
     """Módulo desplegable para añadir sitios desde Google Maps o a mano."""
     with st.expander("➕ Añadir", expanded=False):
         tab_gm, tab_man = st.tabs(["🌐 Google Maps", "✏️ A Mano"])
-        dias_asig_opts = ["📌 Bandeja de Guardados"] + [etiqueta_dia(d) for d in range(1, 11)]
+        dias_asig_opts = ["📌Guardados"] + [etiqueta_dia(d) for d in range(1, 11)]
 
         with tab_gm:
             st.caption("Pega el enlace de Google Maps de un sitio o lista:")
@@ -4571,7 +4676,7 @@ def render_formulario_agregar_lugar(key_sufijo: str = "gen"):
                     hora_gm = st.text_input("Hora (opcional, HH:MM):", placeholder="11:00", key=f"hora_gm_{key_sufijo}")
                 nota_gm = st.text_input("Nota manual (opcional):", placeholder="Ej: Reserva a las 20:00, probar pastrami...", key=f"nota_gm_{key_sufijo}")
 
-                val_dia_gm = 0 if "Bandeja" in dia_dest_gm else int(re.search(r"Día (\d+)", dia_dest_gm).group(1))
+                val_dia_gm = 0 if "Guardados" in dia_dest_gm else int(re.search(r"Día (\d+)", dia_dest_gm).group(1))
 
                 if st.form_submit_button("📥 Importar", use_container_width=True):
                     if url_input:
@@ -4605,7 +4710,7 @@ def render_formulario_agregar_lugar(key_sufijo: str = "gen"):
                 c_m3, c_m4 = st.columns(2)
                 with c_m3:
                     dia_dest_m = selectbox_sin_teclado("Asignar a:", dias_asig_opts, key=f"sel_dia_m_{key_sufijo}")
-                    val_dia_m = 0 if "Bandeja" in dia_dest_m else int(re.search(r"Día (\d+)", dia_dest_m).group(1))
+                    val_dia_m = 0 if "Guardados" in dia_dest_m else int(re.search(r"Día (\d+)", dia_dest_m).group(1))
                 with c_m4:
                     hora_m = st.text_input("Hora (opcional, HH:MM):", placeholder="16:00", key=f"hora_m_{key_sufijo}")
 
@@ -4745,8 +4850,8 @@ st.markdown(f"""
 # Así evitamos renderizar el mapa y el resto de pestañas en cada cambio.
 SECCIONES_PRINCIPALES = [
     "🗺️Mapa",
-    "📍Ruta",
-    "📎Guardados",
+    "🗽Ruta",
+    "📌Guardados",
     "💸Divisas",
     "✈️Info",
     "🗒️Listas",
@@ -4891,7 +4996,7 @@ if seccion_principal == "🗺️Mapa":
 # ─────────────────────────────────────────────────────────────────────────────
 # TAB 2: ITINERARIO COMPLETO
 # ─────────────────────────────────────────────────────────────────────────────
-if seccion_principal == "📍Ruta":
+if seccion_principal == "🗽Ruta":
     total_itinerario = [l for l in st.session_state.lugares if l.get("dia", 0) > 0]
     total_visitados = [l for l in total_itinerario if l.get("visitado", False)]
     pct_progreso = int((len(total_visitados) / max(1, len(total_itinerario))) * 100) if total_itinerario else 0
@@ -4960,7 +5065,7 @@ if seccion_principal == "📍Ruta":
                 # Información completa del lugar: nombre, categoría, entorno,
                 # dirección y nota. Los cuatro controles van debajo, en una sola fila.
                 with st.container(key=f"it-heading-row-{item['id']}"):
-                    c_info, c_chk = st.columns([9.55, 0.45], gap="small")
+                    c_info, c_edit_head, c_map_head, c_chk = st.columns([8.7, 0.55, 0.55, 0.45], gap="small")
                     with c_info:
                         txt_c = "#334155" if is_visited else "#0F172A"
                         strike = "text-decoration: line-through; opacity: 0.78;" if is_visited else ""
@@ -4976,6 +5081,13 @@ if seccion_principal == "📍Ruta":
                         {nota_html}
                         """, unsafe_allow_html=True)
 
+                    with c_edit_head:
+                        if st.button("✏️", key=f"btn_ed_it_{d}_{item['id']}", help="Editar sitio"):
+                            ek = f"it_{d}_{item['id']}"
+                            st.session_state.editando_spot_key = None if st.session_state.editando_spot_key == ek else ek
+                            st.rerun()
+                    with c_map_head:
+                        st.link_button("🗺️", gmaps_url, key=f"map_it_{item['id']}", help="Abrir en Google Maps")
                     with c_chk:
                         chk_val = st.checkbox("", value=is_visited, key=f"chk_it_{d}_{item['id']}")
                         if chk_val != is_visited and idx_real is not None:
@@ -4986,14 +5098,6 @@ if seccion_principal == "📍Ruta":
                 # Los cuatro controles, siempre en el mismo orden: Editar | Mapa | Hora | Día.
                 with st.container(key=f"it-controls-row-{item['id']}"):
                     c_edit, c_map, c_hr, c_day = st.columns([0.8, 0.9, 1.7, 1.9], gap="small")
-                    with c_edit:
-                        with st.container(key=f"it-edit-btn-{item['id']}"):
-                            if st.button("✏️", key=f"btn_ed_it_{d}_{item['id']}", help="Editar sitio", use_container_width=True):
-                                ek = f"it_{d}_{item['id']}"
-                                st.session_state.editando_spot_key = None if st.session_state.editando_spot_key == ek else ek
-                                st.rerun()
-                    with c_map:
-                        st.link_button("🗺️", gmaps_url, use_container_width=True, key=f"map_it_{item['id']}", help="Abrir en Google Maps")
                     with c_hr:
                         nueva_h = st.text_input(
                             "Hora",
@@ -5031,7 +5135,7 @@ if seccion_principal == "📍Ruta":
 # ─────────────────────────────────────────────────────────────────────────────
 # TAB 3: BANDEJA DE GUARDADOS (CON BOTÓN DE HORA, DÍA, MAPS Y EDITAR PEQUEÑO)
 # ─────────────────────────────────────────────────────────────────────────────
-if seccion_principal == "📎Guardados":
+if seccion_principal == "📌Guardados":
     render_formulario_agregar_lugar("guardados")
     st.markdown("<div style='height: 6px;'></div>", unsafe_allow_html=True)
     pulsado_sync = False
@@ -5100,26 +5204,28 @@ if seccion_principal == "📎Guardados":
 
         # Toda la información se presenta antes de los controles.
         with st.container(key=f"saved-heading-row-{p_spot['id']}"):
-            st.markdown(f"""
-            <div class="place-list-title">{obtener_emoji_categoria(cat_p)} {p_spot['nombre']}</div>
-            <div style="margin-top:4px; display:flex; flex-wrap:wrap; gap:4px;">
-              <span class="badge-cat">{cat_p}</span>{tipo_p_html}
-            </div>
-            {dir_p_html}
-            {nota_p_html}
-            """, unsafe_allow_html=True)
+            c_saved_info, c_saved_edit, c_saved_map = st.columns([8.8, 0.6, 0.6], gap="small")
+            with c_saved_info:
+                st.markdown(f"""
+                <div class="place-list-title">{obtener_emoji_categoria(cat_p)} {p_spot['nombre']}</div>
+                <div style="margin-top:4px; display:flex; flex-wrap:wrap; gap:4px;">
+                  <span class="badge-cat">{cat_p}</span>{tipo_p_html}
+                </div>
+                {dir_p_html}
+                {nota_p_html}
+                """, unsafe_allow_html=True)
+            with c_saved_edit:
+                if st.button("✏️", key=f"btn_ed_pool_{p_spot['id']}", help="Editar sitio"):
+                    ek = f"pool_{p_spot['id']}"
+                    st.session_state.editando_spot_key = None if st.session_state.editando_spot_key == ek else ek
+                    st.rerun()
+            with c_saved_map:
+                g_url_sp = f"https://www.google.com/maps/search/?api=1&query={urllib.parse.quote(p_spot['nombre'] + ' New York')}"
+                st.link_button("🗺️", g_url_sp, key=f"map_saved_{p_spot['id']}", help="Abrir en Google Maps")
 
         # Cuatro controles uniformes debajo del nombre y de toda su subinformación.
         with st.container(key=f"saved-controls-row-{p_spot['id']}"):
             c_edit, c_map, c_hr, c_day = st.columns([0.8, 0.9, 1.7, 1.9], gap="small")
-            with c_edit:
-                if st.button("✏️", key=f"btn_ed_pool_{p_spot['id']}", help="Editar sitio", use_container_width=True):
-                    ek = f"pool_{p_spot['id']}"
-                    st.session_state.editando_spot_key = None if st.session_state.editando_spot_key == ek else ek
-                    st.rerun()
-            with c_map:
-                g_url_sp = f"https://www.google.com/maps/search/?api=1&query={urllib.parse.quote(p_spot['nombre'] + ' New York')}"
-                st.link_button("🗺️", g_url_sp, use_container_width=True, key=f"map_saved_{p_spot['id']}", help="Abrir en Google Maps")
             with c_hr:
                 nueva_h_pool = st.text_input(
                     "Hora",
@@ -5137,7 +5243,7 @@ if seccion_principal == "📎Guardados":
                         guardar_itinerario_disco(st.session_state.lugares)
                         st.rerun()
             with c_day:
-                opts_dia_pool = ["- Día -"] + [f"Día {d}" for d in range(1, 11)]
+                opts_dia_pool = ["- Día -"] + [etiqueta_dia_guardados(d) for d in range(1, 11)]
                 idx_sel_pool = dia_p if 1 <= dia_p <= 10 else 0
                 asig_dia = selectbox_sin_teclado(
                     "Día",
