@@ -2268,7 +2268,7 @@ st.markdown("""
     [class*="st-key-it-controls-row-"] [data-testid="stHorizontalBlock"],
     [class*="st-key-saved-controls-row-"] [data-testid="stHorizontalBlock"] {
       display: grid !important;
-      grid-template-columns: 40px 40px 92px minmax(102px, 1fr) !important;
+      grid-template-columns: 30px 30px 92px minmax(102px, 1fr) !important;
       grid-auto-flow: column !important;
       justify-content: stretch !important;
       align-items: center !important;
@@ -3375,14 +3375,14 @@ st.markdown("""
   [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"],
   [class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"] {
     display: grid !important;
-    grid-template-columns: minmax(0, 1fr) 40px 40px 28px !important;
+    grid-template-columns: minmax(0, 1fr) 30px 30px 28px !important;
     align-items: start !important;
     column-gap: 5px !important;
     width: 100% !important;
   }
 
   [class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"] {
-    grid-template-columns: minmax(0, 1fr) 40px 40px !important;
+    grid-template-columns: minmax(0, 1fr) 30px 30px !important;
   }
 
   [class*="st-key-it-heading-row-"] [data-testid="column"],
@@ -3433,7 +3433,7 @@ st.markdown("""
 
   [class*="st-key-it-controls-row-"] [data-testid="stHorizontalBlock"],
   [class*="st-key-saved-controls-row-"] [data-testid="stHorizontalBlock"] {
-    grid-template-columns: 0px 0px 95px 100px !important;
+    grid-template-columns: 0px 0px 95px 130px !important;
     column-gap: 5px !important;
   }
 
@@ -3452,12 +3452,12 @@ st.markdown("""
     [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(3) a,
     [class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(2) button,
     [class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(3) a {
-      width: 50px !important;
-      min-width: 50px !important;
-      max-width: 50px !important;
+      width: 40px !important;
+      min-width: 40px !important;
+      max-width: 40px !important;
       height: 32px !important;
-      min-height: 50px !important;
-      max-height: 50px !important;
+      min-height: 40px !important;
+      max-height: 40px !important;
     }
 
     /* Reducir el tamaño del dibujo, no el área pulsable del botón. */
@@ -3465,20 +3465,14 @@ st.markdown("""
     [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(3) a p,
     [class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(2) button p,
     [class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(3) a p {
-      font-size: 0.50rem !important;
+      font-size: 0.60rem !important;
       line-height: 1 !important;
       margin: 0 !important;
     }
-    [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2) button svg,
-    [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(3) a svg,
-    [class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(2) button svg,
-    [class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(3) a svg {
-    width: 14px !important;
-    height: 14px !important;
 
     [class*="st-key-it-controls-row-"] [data-testid="stHorizontalBlock"],
     [class*="st-key-saved-controls-row-"] [data-testid="stHorizontalBlock"] {
-      grid-template-columns: 0px 0px 95px 100px !important;
+      grid-template-columns: 0px 0px 95px 130px !important;
       gap: 4px !important;
     }
   }
@@ -3486,7 +3480,7 @@ st.markdown("""
   @media (max-width: 320px) {
     [class*="st-key-it-controls-row-"] [data-testid="stHorizontalBlock"],
     [class*="st-key-saved-controls-row-"] [data-testid="stHorizontalBlock"] {
-      grid-template-columns: 0px 0px 95px 100px !important;
+      grid-template-columns: 0px 0px 95px 130px !important;
       gap: 3px !important;
     }
   }
@@ -3494,7 +3488,7 @@ st.markdown("""
   @media (max-width: 320px) {
     [class*="st-key-it-controls-row-"] [data-testid="stHorizontalBlock"],
     [class*="st-key-saved-controls-row-"] [data-testid="stHorizontalBlock"] {
-      grid-template-columns: 0px 0px 95px 100px !important;
+      grid-template-columns: 0px 0px 95px 130px !important;
       gap: 3px !important;
     }
   }
