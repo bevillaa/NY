@@ -1447,5 +1447,33 @@
     "tipo": "Interior",
     "lista_origen": "NY Sweets",
     "visitado": false
+  },
+  {
+    "id": 107,
+    "nombre": "2 W 18th St",
+    "lat": 40.7386923,
+    "lon": -73.9924834,
+    "dia": 0,
+    "hora": "",
+    "direccion": "New York, NY 10011, United States",
+    "nota": "",
+    "categoria": "🍪 Dulces",
+    "tipo": "Interior",
+    "lista_origen": "NY Sweets",
+    "visitado": false
+  },
+  {
+    "id": 108,
+    "nombre": "Cheese Wheel Pastas",
+    "lat": 40.7305944,
+    "lon": -74.0020052,
+    "dia": 0,
+    "hora": "",
+    "direccion": "5 Carmine St, New York, NY 10014, United States",
+    "nota": "",
+    "categoria": "🍽️ Gastronomía",
+    "tipo": "Interior",
+    "lista_origen": "Food (NY food)",
+    "visitado": false
   }
 ]
