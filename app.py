@@ -3494,49 +3494,29 @@ st.markdown("""
   }
 
 
-  /* ICONOS DE EDITAR Y MAPA: se aplican a los botones reales de la fila
-     del nombre del lugar. Solo cambia el dibujo; no altera sus dimensiones. */
-  [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stButton"] > button,
-  [class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stButton"] > button {
-    position: relative !important;
-    color: transparent !important;
-    -webkit-text-fill-color: transparent !important;
-    font-size: 0 !important;
+  /* RESTAURAR LOS EMOJIS NATIVOS DE EDITAR Y MAPA.
+     Los controles ya contienen ✏️ y 🗺️ desde Python; reglas CSS anteriores
+     los estaban dejando transparentes/invisibles. No se toca su geometría. */
+  [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2) button,
+  [class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(2) button,
+  [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(3) a,
+  [class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(3) a {
     background-image: none !important;
+    color: #1f2937 !important;
+    -webkit-text-fill-color: #1f2937 !important;
+    font-size: 1rem !important;
+    line-height: 1 !important;
   }
-  [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stButton"] > button::before,
-  [class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stButton"] > button::before {
-    content: "" !important;
-    display: block !important;
-    width: 25px !important;
-    height: 25px !important;
-    flex: 0 0 25px !important;
-    background: no-repeat center / contain url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 20 20' fill='none' stroke='%23334155' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m16 4 4 4'/%3E%3Cpath d='M4 20l4-.9L19 8a2.1 2.1 0 0 0-3-3L5 16z'/%3E%3C/svg%3E") !important;
-  }
-  [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stButton"] > button p,
-  [class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stButton"] > button p {
-    display: none !important;
-  }
-  [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(3) [data-testid="stLinkButton"] > a,
-  [class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(3) [data-testid="stLinkButton"] > a {
-    position: relative !important;
-    color: transparent !important;
-    -webkit-text-fill-color: transparent !important;
-    font-size: 0 !important;
-    background-image: none !important;
-  }
-  [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(3) [data-testid="stLinkButton"] > a::before,
-  [class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(3) [data-testid="stLinkButton"] > a::before {
-    content: "" !important;
-    display: block !important;
-    width: 25px !important;
-    height: 25px !important;
-    flex: 0 0 25px !important;
-    background: no-repeat center / contain url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 20 20' fill='none' stroke='%231D4ED8' stroke-width='1.9' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m3 6 6-3 6 3 6-3v15l-6 3-6-3-6 3z'/%3E%3Cpath d='M9 3v15'/%3E%3Cpath d='M15 6v15'/%3E%3C/svg%3E") !important;
-  }
-  [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(3) [data-testid="stLinkButton"] > a p,
-  [class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(3) [data-testid="stLinkButton"] > a p {
-    display: none !important;
+  [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2) button *,
+  [class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(2) button *,
+  [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(3) a *,
+  [class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(3) a * {
+    visibility: visible !important;
+    opacity: 1 !important;
+    color: #1f2937 !important;
+    -webkit-text-fill-color: #1f2937 !important;
+    font-size: 1rem !important;
+    line-height: 1 !important;
   }
 
 </style>
