@@ -5025,6 +5025,81 @@ st.markdown("""
     }
   }
 
+
+
+  /* AJUSTE ÚNICO Y DEFINITIVO: misma caja exterior para lápiz y mapa.
+     Se fija también el wrapper de cada widget para neutralizar los estilos de Streamlit. */
+  [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2),
+  [class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(2),
+  [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(3),
+  [class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(3),
+  [class*="st-key-it-edit-button-wrap-"],
+  [class*="st-key-saved-edit-button-wrap-"],
+  [class*="st-key-it-map-button-wrap-"],
+  [class*="st-key-saved-map-button-wrap-"] {
+    box-sizing: border-box !important;
+    width: 38px !important;
+    min-width: 38px !important;
+    max-width: 38px !important;
+    height: 38px !important;
+    min-height: 38px !important;
+    max-height: 38px !important;
+    flex: 0 0 38px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  [class*="st-key-it-edit-button-wrap-"] [data-testid="stButton"],
+  [class*="st-key-saved-edit-button-wrap-"] [data-testid="stButton"],
+  [class*="st-key-it-edit-button-wrap-"] button,
+  [class*="st-key-saved-edit-button-wrap-"] button,
+  [class*="st-key-it-map-button-wrap-"] a.place-map-link-direct,
+  [class*="st-key-saved-map-button-wrap-"] a.place-map-link-direct {
+    box-sizing: border-box !important;
+    width: 38px !important;
+    min-width: 38px !important;
+    max-width: 38px !important;
+    height: 38px !important;
+    min-height: 38px !important;
+    max-height: 38px !important;
+    flex: 0 0 38px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: 1.5px solid #CBD5E1 !important;
+    border-radius: 9px !important;
+    background-color: #FFFFFF !important;
+    box-shadow: none !important;
+    transform: none !important;
+    line-height: 0 !important;
+    overflow: hidden !important;
+  }
+  [class*="st-key-it-map-button-wrap-"] a.place-map-link-direct svg,
+  [class*="st-key-saved-map-button-wrap-"] a.place-map-link-direct svg {
+    display: block !important;
+    width: 13px !important;
+    min-width: 13px !important;
+    max-width: 13px !important;
+    height: 13px !important;
+    min-height: 13px !important;
+    max-height: 13px !important;
+    flex: 0 0 13px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    transform: none !important;
+  }
+  @media (max-width: 768px) {
+    [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"],
+    [class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"] {
+      align-items: center !important;
+      column-gap: 8px !important;
+    }
+  }
+
 </style>
 """, unsafe_allow_html=True)
 
