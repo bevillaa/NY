@@ -4296,7 +4296,7 @@ def ejecutar_sincronizacion_listas_gmaps():
 
     if total_nuevos or total_actualizados:
         if guardar_itinerario_disco(st.session_state.lugares):
-            st.toast(f"Sincronizados: {total_nuevos} nuevos, {total_actualizados} actualizados.", icon="🔄")Í:
+            st.toast(f"Sincronizados: {total_nuevos} nuevos, {total_actualizados} actualizados.", icon="🔄"):
         else:
             st.session_state["_msg_sync_guardados"] = (
                 "error",
