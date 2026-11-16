@@ -4633,6 +4633,29 @@ st.markdown("""
     transform: none !important;
   }
 
+
+  /* Ajuste solicitado: lápiz y mapa con exactamente la misma caja cuadrada. */
+  [class*="st-key-it-edit-button-wrap-"],
+  [class*="st-key-saved-edit-button-wrap-"],
+  [class*="st-key-it-map-button-wrap-"],
+  [class*="st-key-saved-map-button-wrap-"] {
+    box-sizing: border-box !important;
+    width: 38px !important; min-width: 38px !important; max-width: 38px !important;
+    height: 38px !important; min-height: 38px !important; max-height: 38px !important;
+    flex: 0 0 38px !important;
+  }
+  [class*="st-key-it-edit-button-wrap-"] [data-testid="stButton"],
+  [class*="st-key-saved-edit-button-wrap-"] [data-testid="stButton"],
+  [class*="st-key-it-edit-button-wrap-"] [data-testid="stButton"] > button,
+  [class*="st-key-saved-edit-button-wrap-"] [data-testid="stButton"] > button,
+  [class*="st-key-it-map-button-wrap-"] a.place-map-link-direct,
+  [class*="st-key-saved-map-button-wrap-"] a.place-map-link-direct {
+    box-sizing: border-box !important;
+    width: 38px !important; min-width: 38px !important; max-width: 38px !important;
+    height: 38px !important; min-height: 38px !important; max-height: 38px !important;
+    padding: 0 !important; margin: 0 !important;
+  }
+
 </style>
 """, unsafe_allow_html=True)
 
