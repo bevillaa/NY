@@ -9,7 +9,8 @@
     "categoria": "🏛️ Cultura",
     "tipo": "Exterior",
     "visitado": false,
-    "hora": ""
+    "hora": "",
+    "nota": ""
   },
   {
     "id": 2,
@@ -21,7 +22,8 @@
     "categoria": "🛍️ Compras",
     "tipo": "Interior",
     "visitado": false,
-    "hora": ""
+    "hora": "",
+    "nota": ""
   },
   {
     "id": 3,
@@ -33,7 +35,8 @@
     "categoria": "🏙️ Miradores",
     "tipo": "Interior",
     "visitado": false,
-    "hora": ""
+    "hora": "",
+    "nota": ""
   },
   {
     "id": 4,
@@ -45,7 +48,8 @@
     "categoria": "🏛️ Cultura",
     "tipo": "Interior",
     "visitado": false,
-    "hora": ""
+    "hora": "",
+    "nota": ""
   },
   {
     "id": 5,
@@ -57,7 +61,8 @@
     "categoria": "🛍️ Compras",
     "tipo": "Interior",
     "visitado": false,
-    "hora": ""
+    "hora": "",
+    "nota": ""
   },
   {
     "id": 6,
@@ -69,7 +74,8 @@
     "categoria": "🏙️ Miradores",
     "tipo": "Interior",
     "visitado": false,
-    "hora": ""
+    "hora": "",
+    "nota": ""
   },
   {
     "id": 7,
@@ -78,10 +84,11 @@
     "lon": -73.9665,
     "dia": 3,
     "direccion": "Central Park, New York, NY",
-    "categoria": "🌲 Parques",
+    "categoria": "☀️ Spots",
     "tipo": "Exterior",
     "visitado": false,
-    "hora": ""
+    "hora": "",
+    "nota": ""
   },
   {
     "id": 8,
@@ -93,7 +100,8 @@
     "categoria": "🍪 Dulces",
     "tipo": "Interior",
     "visitado": false,
-    "hora": ""
+    "hora": "",
+    "nota": ""
   },
   {
     "id": 9,
@@ -105,7 +113,8 @@
     "categoria": "🏛️ Cultura",
     "tipo": "Interior",
     "visitado": false,
-    "hora": ""
+    "hora": "",
+    "nota": ""
   },
   {
     "id": 10,
@@ -114,10 +123,11 @@
     "lon": -74.0048,
     "dia": 4,
     "direccion": "New York, NY 10011",
-    "categoria": "🌲 Parques",
+    "categoria": "☀️ Spots",
     "tipo": "Exterior",
     "visitado": false,
-    "hora": ""
+    "hora": "",
+    "nota": ""
   },
   {
     "id": 11,
@@ -126,10 +136,11 @@
     "lon": -74.0062,
     "dia": 4,
     "direccion": "75 9th Ave, New York, NY 10011",
-    "categoria": "🍕 Gastronomía",
+    "categoria": "🍽️ Gastronomía",
     "tipo": "Interior",
     "visitado": false,
-    "hora": ""
+    "hora": "",
+    "nota": ""
   },
   {
     "id": 12,
@@ -138,10 +149,11 @@
     "lon": -74.01,
     "dia": 4,
     "direccion": "Pier 55, Hudson River Park, New York, NY",
-    "categoria": "🌲 Parques",
+    "categoria": "☀️ Spots",
     "tipo": "Exterior",
     "visitado": false,
-    "hora": ""
+    "hora": "",
+    "nota": ""
   },
   {
     "id": 13,
@@ -153,7 +165,8 @@
     "categoria": "🛍️ Compras",
     "tipo": "Interior",
     "visitado": false,
-    "hora": ""
+    "hora": "",
+    "nota": ""
   },
   {
     "id": 14,
@@ -165,7 +178,8 @@
     "categoria": "🛍️ Compras",
     "tipo": "Interior",
     "visitado": false,
-    "hora": ""
+    "hora": "",
+    "nota": ""
   },
   {
     "id": 15,
@@ -174,10 +188,11 @@
     "lon": -73.9874,
     "dia": 5,
     "direccion": "205 E Houston St, New York, NY 10002",
-    "categoria": "🍕 Gastronomía",
+    "categoria": "🍽️ Gastronomía",
     "tipo": "Interior",
     "visitado": false,
-    "hora": ""
+    "hora": "",
+    "nota": ""
   },
   {
     "id": 16,
@@ -186,10 +201,11 @@
     "lon": -73.9969,
     "dia": 6,
     "direccion": "Brooklyn Bridge, New York, NY 10038",
-    "categoria": "🌲 Parques",
+    "categoria": "☀️ Spots",
     "tipo": "Exterior",
     "visitado": false,
-    "hora": ""
+    "hora": "",
+    "nota": ""
   },
   {
     "id": 17,
@@ -198,10 +214,11 @@
     "lon": -73.9922,
     "dia": 6,
     "direccion": "5183 Water St, Brooklyn, NY 11201",
-    "categoria": "🌲 Parques",
+    "categoria": "☀️ Spots",
     "tipo": "Exterior",
     "visitado": false,
-    "hora": ""
+    "hora": "",
+    "nota": ""
   },
   {
     "id": 18,
@@ -210,10 +227,11 @@
     "lon": -73.9958,
     "dia": 6,
     "direccion": "55 Water St, Brooklyn, NY 11201",
-    "categoria": "🍕 Gastronomía",
+    "categoria": "🍽️ Gastronomía",
     "tipo": "Interior",
     "visitado": false,
-    "hora": ""
+    "hora": "",
+    "nota": ""
   },
   {
     "id": 19,
@@ -225,7 +243,8 @@
     "categoria": "🏛️ Cultura",
     "tipo": "Interior",
     "visitado": false,
-    "hora": ""
+    "hora": "",
+    "nota": ""
   },
   {
     "id": 20,
@@ -237,7 +256,8 @@
     "categoria": "🍪 Dulces",
     "tipo": "Interior",
     "visitado": false,
-    "hora": ""
+    "hora": "",
+    "nota": ""
   },
   {
     "id": 21,
@@ -249,7 +269,8 @@
     "categoria": "🏛️ Cultura",
     "tipo": "Interior",
     "visitado": false,
-    "hora": ""
+    "hora": "",
+    "nota": ""
   },
   {
     "id": 22,
@@ -261,7 +282,8 @@
     "categoria": "🏛️ Cultura",
     "tipo": "Interior",
     "visitado": false,
-    "hora": ""
+    "hora": "",
+    "nota": ""
   },
   {
     "id": 23,
@@ -273,7 +295,8 @@
     "categoria": "🛍️ Compras",
     "tipo": "Interior",
     "visitado": false,
-    "hora": ""
+    "hora": "",
+    "nota": ""
   },
   {
     "id": 24,
@@ -285,7 +308,8 @@
     "categoria": "🛍️ Compras",
     "tipo": "Interior",
     "visitado": false,
-    "hora": ""
+    "hora": "",
+    "nota": ""
   },
   {
     "id": 25,
@@ -294,10 +318,11 @@
     "lon": -73.9664,
     "dia": 9,
     "direccion": "15 River St, Brooklyn, NY 11249",
-    "categoria": "🌲 Parques",
+    "categoria": "☀️ Spots",
     "tipo": "Exterior",
     "visitado": false,
-    "hora": ""
+    "hora": "",
+    "nota": ""
   },
   {
     "id": 26,
@@ -309,7 +334,8 @@
     "categoria": "🍪 Dulces",
     "tipo": "Interior",
     "visitado": false,
-    "hora": ""
+    "hora": "",
+    "nota": ""
   },
   {
     "id": 27,
@@ -321,7 +347,8 @@
     "categoria": "🛍️ Compras",
     "tipo": "Interior",
     "visitado": false,
-    "hora": ""
+    "hora": "",
+    "nota": ""
   },
   {
     "id": 28,
@@ -333,7 +360,8 @@
     "categoria": "🛍️ Compras",
     "tipo": "Interior",
     "visitado": false,
-    "hora": ""
+    "hora": "",
+    "nota": ""
   },
   {
     "id": 29,
@@ -345,7 +373,8 @@
     "categoria": "🛍️ Compras",
     "tipo": "Interior",
     "visitado": false,
-    "hora": ""
+    "hora": "",
+    "nota": ""
   },
   {
     "id": 30,
@@ -357,7 +386,8 @@
     "categoria": "🛍️ Compras",
     "tipo": "Interior",
     "visitado": false,
-    "hora": ""
+    "hora": "",
+    "nota": ""
   },
   {
     "id": 31,
@@ -369,7 +399,8 @@
     "categoria": "🏛️ Cultura",
     "tipo": "Interior",
     "visitado": false,
-    "hora": ""
+    "hora": "",
+    "nota": ""
   },
   {
     "id": 32,
@@ -381,7 +412,8 @@
     "categoria": "🏛️ Cultura",
     "tipo": "Interior",
     "visitado": false,
-    "hora": ""
+    "hora": "",
+    "nota": ""
   },
   {
     "id": 33,
@@ -393,7 +425,8 @@
     "categoria": "🍪 Dulces",
     "tipo": "Interior",
     "visitado": false,
-    "hora": ""
+    "hora": "",
+    "nota": ""
   },
   {
     "id": 34,
@@ -405,7 +438,8 @@
     "categoria": "🍪 Dulces",
     "tipo": "Interior",
     "visitado": false,
-    "hora": ""
+    "hora": "",
+    "nota": ""
   },
   {
     "id": 35,
@@ -414,10 +448,11 @@
     "lon": -74.0049,
     "dia": 0,
     "direccion": "233 Spring St, New York, NY 10013",
-    "categoria": "🍕 Gastronomía",
+    "categoria": "🍽️ Gastronomía",
     "tipo": "Interior",
     "visitado": false,
-    "hora": ""
+    "hora": "",
+    "nota": ""
   },
   {
     "id": 36,
@@ -429,7 +464,8 @@
     "categoria": "🛍️ Compras",
     "tipo": "Interior",
     "visitado": false,
-    "hora": ""
+    "hora": "",
+    "nota": ""
   },
   {
     "id": 37,
@@ -441,7 +477,8 @@
     "categoria": "🛍️ Compras",
     "tipo": "Interior",
     "visitado": false,
-    "hora": ""
+    "hora": "",
+    "nota": ""
   },
   {
     "id": 38,
@@ -453,7 +490,8 @@
     "categoria": "🛍️ Compras",
     "tipo": "Interior",
     "visitado": false,
-    "hora": ""
+    "hora": "",
+    "nota": ""
   },
   {
     "id": 39,
@@ -465,7 +503,8 @@
     "categoria": "🛍️ Compras",
     "tipo": "Interior",
     "visitado": false,
-    "hora": ""
+    "hora": "",
+    "nota": ""
   },
   {
     "id": 40,
@@ -477,7 +516,8 @@
     "categoria": "🎷 Ocio",
     "tipo": "Interior",
     "visitado": false,
-    "hora": ""
+    "hora": "",
+    "nota": ""
   },
   {
     "id": 41,
@@ -489,7 +529,8 @@
     "categoria": "🍸 Copas",
     "tipo": "Interior",
     "visitado": false,
-    "hora": ""
+    "hora": "",
+    "nota": ""
   },
   {
     "id": 42,
@@ -498,10 +539,11 @@
     "lon": -74.0008343,
     "dia": 0,
     "direccion": "55 Greenwich Ave,  New York,  NY 10014,  United States",
-    "categoria": "🍕 Gastronomía",
+    "categoria": "🍽️ Gastronomía",
     "tipo": "Interior",
     "visitado": false,
-    "hora": ""
+    "hora": "",
+    "nota": ""
   },
   {
     "id": 43,
@@ -510,10 +552,11 @@
     "lon": -73.9965632,
     "dia": 0,
     "direccion": "25B Henry St B,  New York,  NY 10002,  United States",
-    "categoria": "🍕 Gastronomía",
+    "categoria": "🍽️ Gastronomía",
     "tipo": "Interior",
     "visitado": false,
-    "hora": ""
+    "hora": "",
+    "nota": ""
   },
   {
     "id": 44,
@@ -522,10 +565,11 @@
     "lon": -73.9892784,
     "dia": 0,
     "direccion": "928 Broadway,  New York,  NY 10010,  United States",
-    "categoria": "🍕 Gastronomía",
+    "categoria": "🍽️ Gastronomía",
     "tipo": "Interior",
     "visitado": false,
-    "hora": ""
+    "hora": "",
+    "nota": ""
   },
   {
     "id": 45,
@@ -534,10 +578,11 @@
     "lon": -73.9348074,
     "dia": 0,
     "direccion": "2287 1st Ave,  New York,  NY 10035,  United States",
-    "categoria": "🍕 Gastronomía",
+    "categoria": "🍽️ Gastronomía",
     "tipo": "Interior",
     "visitado": false,
-    "hora": ""
+    "hora": "",
+    "nota": ""
   },
   {
     "id": 46,
@@ -546,10 +591,11 @@
     "lon": -73.9876852,
     "dia": 0,
     "direccion": "150 E 14th St,  New York,  NY 10003,  United States",
-    "categoria": "🍕 Gastronomía",
+    "categoria": "🍽️ Gastronomía",
     "tipo": "Interior",
     "visitado": false,
-    "hora": ""
+    "hora": "",
+    "nota": ""
   },
   {
     "id": 47,
@@ -558,10 +604,11 @@
     "lon": -74.007677,
     "dia": 0,
     "direccion": "124 Fulton St,  New York,  NY 10038,  United States",
-    "categoria": "🍕 Gastronomía",
+    "categoria": "🍽️ Gastronomía",
     "tipo": "Interior",
     "visitado": false,
-    "hora": ""
+    "hora": "",
+    "nota": ""
   },
   {
     "id": 48,
@@ -570,10 +617,11 @@
     "lon": -74.0006172,
     "dia": 0,
     "direccion": "110 MacDougal St,  New York,  NY 10012,  United States",
-    "categoria": "🍕 Gastronomía",
+    "categoria": "🍽️ Gastronomía",
     "tipo": "Interior",
     "visitado": false,
-    "hora": ""
+    "hora": "",
+    "nota": ""
   },
   {
     "id": 49,
@@ -585,7 +633,8 @@
     "categoria": "🍸 Copas",
     "tipo": "Interior",
     "visitado": false,
-    "hora": ""
+    "hora": "",
+    "nota": ""
   },
   {
     "id": 50,
@@ -597,7 +646,8 @@
     "categoria": "🍸 Copas",
     "tipo": "Interior",
     "visitado": false,
-    "hora": ""
+    "hora": "",
+    "nota": ""
   },
   {
     "id": 51,
@@ -609,7 +659,8 @@
     "categoria": "🍸 Copas",
     "tipo": "Interior",
     "visitado": false,
-    "hora": ""
+    "hora": "",
+    "nota": ""
   },
   {
     "id": 52,
@@ -621,7 +672,8 @@
     "categoria": "🍸 Copas",
     "tipo": "Interior",
     "visitado": false,
-    "hora": ""
+    "hora": "",
+    "nota": ""
   },
   {
     "id": 53,
@@ -633,7 +685,8 @@
     "categoria": "🍸 Copas",
     "tipo": "Interior",
     "visitado": false,
-    "hora": ""
+    "hora": "",
+    "nota": ""
   },
   {
     "id": 54,
@@ -645,7 +698,8 @@
     "categoria": "🍸 Copas",
     "tipo": "Interior",
     "visitado": false,
-    "hora": ""
+    "hora": "",
+    "nota": ""
   },
   {
     "id": 55,
@@ -657,7 +711,8 @@
     "categoria": "🍸 Copas",
     "tipo": "Interior",
     "visitado": false,
-    "hora": ""
+    "hora": "",
+    "nota": ""
   },
   {
     "id": 56,
@@ -666,10 +721,11 @@
     "lon": -74.00194739999999,
     "dia": 0,
     "direccion": "89 South St,  New York,  NY 10038,  United States",
-    "categoria": "🌲 Parques",
+    "categoria": "☀️ Spots",
     "tipo": "Exterior",
     "visitado": false,
-    "hora": ""
+    "hora": "",
+    "nota": ""
   },
   {
     "id": 57,
@@ -678,10 +734,11 @@
     "lon": -74.00901209999999,
     "dia": 0,
     "direccion": "25 11th Ave,  New York,  NY 10011,  United States",
-    "categoria": "🌲 Parques",
+    "categoria": "☀️ Spots",
     "tipo": "Exterior",
     "visitado": false,
-    "hora": ""
+    "hora": "",
+    "nota": ""
   },
   {
     "id": 58,
@@ -690,10 +747,11 @@
     "lon": -73.99057119999999,
     "dia": 0,
     "direccion": "65 Plymouth St,  Brooklyn,  NY 11201,  United States",
-    "categoria": "🌲 Parques",
+    "categoria": "☀️ Spots",
     "tipo": "Exterior",
     "visitado": false,
-    "hora": ""
+    "hora": "",
+    "nota": ""
   },
   {
     "id": 59,
@@ -702,10 +760,11 @@
     "lon": -73.9704982,
     "dia": 0,
     "direccion": "399-321 E 42nd St,  New York,  NY 10017,  United States",
-    "categoria": "🌲 Parques",
+    "categoria": "☀️ Spots",
     "tipo": "Exterior",
     "visitado": false,
-    "hora": ""
+    "hora": "",
+    "nota": ""
   },
   {
     "id": 60,
@@ -717,7 +776,8 @@
     "categoria": "🏛️ Cultura",
     "tipo": "Exterior",
     "visitado": false,
-    "hora": ""
+    "hora": "",
+    "nota": ""
   },
   {
     "id": 61,
@@ -729,7 +789,8 @@
     "categoria": "🏛️ Cultura",
     "tipo": "Interior",
     "visitado": false,
-    "hora": ""
+    "hora": "",
+    "nota": ""
   },
   {
     "id": 62,
@@ -738,10 +799,11 @@
     "lon": -73.9884141,
     "dia": 0,
     "direccion": "FDR Dr,  New York,  NY 10002,  United States",
-    "categoria": "🌲 Parques",
+    "categoria": "☀️ Spots",
     "tipo": "Exterior",
     "visitado": false,
-    "hora": ""
+    "hora": "",
+    "nota": ""
   },
   {
     "id": 63,
@@ -753,7 +815,8 @@
     "categoria": "🏛️ Cultura",
     "tipo": "Exterior",
     "visitado": false,
-    "hora": ""
+    "hora": "",
+    "nota": ""
   },
   {
     "id": 64,
@@ -762,10 +825,11 @@
     "lon": -73.9963321,
     "dia": 0,
     "direccion": "Brooklyn,  NY 11201,  United States",
-    "categoria": "🌲 Parques",
+    "categoria": "☀️ Spots",
     "tipo": "Exterior",
     "visitado": false,
-    "hora": ""
+    "hora": "",
+    "nota": ""
   },
   {
     "id": 65,
@@ -777,7 +841,8 @@
     "categoria": "🎷 Ocio",
     "tipo": "Interior",
     "visitado": false,
-    "hora": ""
+    "hora": "",
+    "nota": ""
   },
   {
     "id": 66,
@@ -789,7 +854,8 @@
     "categoria": "🎷 Ocio",
     "tipo": "Interior",
     "visitado": false,
-    "hora": ""
+    "hora": "",
+    "nota": ""
   },
   {
     "id": 67,
@@ -801,7 +867,8 @@
     "categoria": "🎷 Ocio",
     "tipo": "Interior",
     "visitado": false,
-    "hora": ""
+    "hora": "",
+    "nota": ""
   },
   {
     "id": 68,
@@ -813,7 +880,8 @@
     "categoria": "🎷 Ocio",
     "tipo": "Interior",
     "visitado": false,
-    "hora": ""
+    "hora": "",
+    "nota": ""
   },
   {
     "id": 69,
@@ -825,7 +893,8 @@
     "categoria": "🎷 Ocio",
     "tipo": "Interior",
     "visitado": false,
-    "hora": ""
+    "hora": "",
+    "nota": ""
   },
   {
     "id": 70,
@@ -837,7 +906,8 @@
     "categoria": "📍 Otros",
     "tipo": "Interior",
     "visitado": false,
-    "hora": ""
+    "hora": "",
+    "nota": ""
   },
   {
     "id": 71,
@@ -846,10 +916,11 @@
     "lon": -73.98343559999999,
     "dia": 0,
     "direccion": "1650 Broadway,  New York,  NY 10019,  United States",
-    "categoria": "🍕 Gastronomía",
+    "categoria": "🍽️ Gastronomía",
     "tipo": "Interior",
     "visitado": false,
-    "hora": ""
+    "hora": "",
+    "nota": ""
   },
   {
     "id": 72,
@@ -858,9 +929,10 @@
     "lon": -73.9968921,
     "dia": 0,
     "direccion": "192 Grand St,  New York,  NY 10013,  United States",
-    "categoria": "🍕 Gastronomía",
+    "categoria": "🍽️ Gastronomía",
     "tipo": "Interior",
     "visitado": false,
-    "hora": ""
+    "hora": "",
+    "nota": ""
   }
 ]
