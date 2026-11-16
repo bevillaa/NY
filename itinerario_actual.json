@@ -1461,5 +1461,33 @@
     "tipo": "Interior",
     "lista_origen": "Food (NY food)",
     "visitado": false
+  },
+  {
+    "id": 109,
+    "nombre": "2 W 18th St",
+    "lat": 40.7386923,
+    "lon": -73.9924834,
+    "dia": 0,
+    "hora": "",
+    "direccion": "New York, NY 10011, United States",
+    "nota": "",
+    "categoria": "🍪 Dulces",
+    "tipo": "Interior",
+    "lista_origen": "NY Sweets",
+    "visitado": false
+  },
+  {
+    "id": 110,
+    "nombre": "Giant Red Ornaments (Christmas)",
+    "lat": 40.759737,
+    "lon": -73.9809787,
+    "dia": 0,
+    "hora": "",
+    "direccion": "1251 6th Ave, New York, NY 10020, United States",
+    "nota": "",
+    "categoria": "📍 Otros",
+    "tipo": "Exterior",
+    "lista_origen": "NY",
+    "visitado": false
   }
 ]
