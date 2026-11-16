@@ -4656,6 +4656,64 @@ st.markdown("""
     padding: 0 !important; margin: 0 !important;
   }
 
+  /* SOBRESCRITURA ÚNICA Y FINAL: lápiz y mapa comparten caja exacta 38×38. */
+  [class*="st-key-it-edit-button-wrap-"],
+  [class*="st-key-saved-edit-button-wrap-"],
+  [class*="st-key-it-map-button-wrap-"],
+  [class*="st-key-saved-map-button-wrap-"] {
+    box-sizing: border-box !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 38px !important;
+    min-width: 38px !important;
+    max-width: 38px !important;
+    height: 38px !important;
+    min-height: 38px !important;
+    max-height: 38px !important;
+    flex: 0 0 38px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  [class*="st-key-it-edit-button-wrap-"] [data-testid="stButton"],
+  [class*="st-key-saved-edit-button-wrap-"] [data-testid="stButton"],
+  [class*="st-key-it-edit-button-wrap-"] [data-testid="stButton"] > button,
+  [class*="st-key-saved-edit-button-wrap-"] [data-testid="stButton"] > button,
+  [class*="st-key-it-map-button-wrap-"] [data-testid="stElementContainer"],
+  [class*="st-key-saved-map-button-wrap-"] [data-testid="stElementContainer"],
+  [class*="st-key-it-map-button-wrap-"] [data-testid="stMarkdownContainer"],
+  [class*="st-key-saved-map-button-wrap-"] [data-testid="stMarkdownContainer"],
+  [class*="st-key-it-map-button-wrap-"] a.place-map-link-direct,
+  [class*="st-key-saved-map-button-wrap-"] a.place-map-link-direct {
+    box-sizing: border-box !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 38px !important;
+    min-width: 38px !important;
+    max-width: 38px !important;
+    height: 38px !important;
+    min-height: 38px !important;
+    max-height: 38px !important;
+    flex: 0 0 38px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  [class*="st-key-it-map-button-wrap-"] [data-testid="stMarkdownContainer"] p,
+  [class*="st-key-saved-map-button-wrap-"] [data-testid="stMarkdownContainer"] p {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 38px !important;
+    min-width: 38px !important;
+    max-width: 38px !important;
+    height: 38px !important;
+    min-height: 38px !important;
+    max-height: 38px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
 </style>
 """, unsafe_allow_html=True)
 
@@ -6286,7 +6344,7 @@ if seccion_principal == "🗽Ruta":
                                 f"""<a class="place-map-link-direct" href="{html.escape(gmaps_url, quote=True)}"
                                 target="_blank" rel="noopener noreferrer" title="Abrir en Google Maps"
                                 aria-label="Abrir en Google Maps"
-                                style="box-sizing:border-box!important;display:flex!important;align-items:center!important;justify-content:center!important;width:38px!important;min-width:38px!important;max-width:38px!important;height:38px!important;min-height:38px!important;max-height:38px!important;margin:0!important;padding:0!important;border:1px solid #CBD5E1!important;border-radius:9px!important;background:#FFFFFF!important;background-color:#FFFFFF!important;background-image:none!important;box-shadow:none!important;text-decoration:none!important;line-height:0!important;overflow:hidden!important;">
+                                style="box-sizing:border-box!important;display:flex!important;align-items:center!important;justify-content:center!important;box-sizing:border-box!important;display:flex!important;align-items:center!important;justify-content:center!important;width:38px!important;min-width:38px!important;max-width:38px!important;height:38px!important;min-height:38px!important;max-height:38px!important;margin:0!important;padding:0!important;border:1px solid #CBD5E1!important;border-radius:9px!important;background:#FFFFFF!important;background-color:#FFFFFF!important;background-image:none!important;box-shadow:none!important;text-decoration:none!important;line-height:0!important;overflow:hidden!important;">
                                   <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24"
                                   fill="none" stroke="#334155" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                                   style="display:block!important;width:13px!important;height:13px!important;min-width:13px!important;min-height:13px!important;flex:0 0 13px!important;margin:0!important;padding:0!important;">
@@ -6438,7 +6496,7 @@ if seccion_principal == "📌Guardados":
                             f"""<a class="place-map-link-direct" href="{html.escape(g_url_sp, quote=True)}"
                             target="_blank" rel="noopener noreferrer" title="Abrir en Google Maps"
                             aria-label="Abrir en Google Maps"
-                            style="box-sizing:border-box!important;display:flex!important;align-items:center!important;justify-content:center!important;width:38px!important;min-width:38px!important;max-width:38px!important;height:38px!important;min-height:38px!important;max-height:38px!important;margin:0!important;padding:0!important;border:1px solid #CBD5E1!important;border-radius:9px!important;background:#FFFFFF!important;background-color:#FFFFFF!important;background-image:none!important;box-shadow:none!important;text-decoration:none!important;line-height:0!important;overflow:hidden!important;">
+                            style="box-sizing:border-box!important;display:flex!important;align-items:center!important;justify-content:center!important;box-sizing:border-box!important;display:flex!important;align-items:center!important;justify-content:center!important;width:38px!important;min-width:38px!important;max-width:38px!important;height:38px!important;min-height:38px!important;max-height:38px!important;margin:0!important;padding:0!important;border:1px solid #CBD5E1!important;border-radius:9px!important;background:#FFFFFF!important;background-color:#FFFFFF!important;background-image:none!important;box-shadow:none!important;text-decoration:none!important;line-height:0!important;overflow:hidden!important;">
                               <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24"
                               fill="none" stroke="#334155" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                               style="display:block!important;width:13px!important;height:13px!important;min-width:13px!important;min-height:13px!important;flex:0 0 13px!important;margin:0!important;padding:0!important;">
