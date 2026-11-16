@@ -3258,6 +3258,18 @@ st.markdown("""
       width: 36px !important; min-width: 36px !important; max-width: 36px !important;
     }
   }
+  /* Ajuste solicitado: solo el icono de Mapa crece ligeramente.
+     Lápiz, hora y día conservan exactamente sus tamaños actuales. */
+  @media (max-width: 768px) {
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(2) [data-testid="stLinkButton"] > a,
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(2) [data-testid="stLinkButton"] > a {
+      font-size: 1.12rem !important;
+    }
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(2) [data-testid="stLinkButton"] > a *,
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(2) [data-testid="stLinkButton"] > a * {
+      font-size: inherit !important;
+    }
+  }
 </style>
 """, unsafe_allow_html=True)
 
@@ -4493,12 +4505,12 @@ st.markdown(f"""
 # Navegación bajo demanda: solo se construye la sección elegida.
 # Así evitamos renderizar el mapa y el resto de pestañas en cada cambio.
 SECCIONES_PRINCIPALES = [
-    "🗺️ Mapa",
-    "📅 Itinerario",
-    "📍 Guardados",
-    "💵 Divisas & Tip",
-    "✈️ Vuelos & Hotel",
-    "📋 Listas Google",
+    "Mapa",
+    "Ruta",
+    "Guardados",
+    "Divisas",
+    "Info",
+    "Listas",
 ]
 seccion_principal = st.radio(
     "Sección del viaje",
@@ -4512,7 +4524,7 @@ seccion_principal = st.radio(
 # ─────────────────────────────────────────────────────────────────────────────
 # TAB 1: MAPA GOOGLE
 # ─────────────────────────────────────────────────────────────────────────────
-if seccion_principal == "🗺️ Mapa":
+if seccion_principal == "Mapa":
     c_m1, c_m3 = st.columns([3, 2])
     with c_m1:
         opciones_vista = [
@@ -4643,7 +4655,7 @@ if seccion_principal == "🗺️ Mapa":
 # ─────────────────────────────────────────────────────────────────────────────
 # TAB 2: ITINERARIO COMPLETO
 # ─────────────────────────────────────────────────────────────────────────────
-if seccion_principal == "📅 Itinerario":
+if seccion_principal == "Ruta":
     total_itinerario = [l for l in st.session_state.lugares if l.get("dia", 0) > 0]
     total_visitados = [l for l in total_itinerario if l.get("visitado", False)]
     pct_progreso = int((len(total_visitados) / max(1, len(total_itinerario))) * 100) if total_itinerario else 0
@@ -4783,7 +4795,7 @@ if seccion_principal == "📅 Itinerario":
 # ─────────────────────────────────────────────────────────────────────────────
 # TAB 3: BANDEJA DE GUARDADOS (CON BOTÓN DE HORA, DÍA, MAPS Y EDITAR PEQUEÑO)
 # ─────────────────────────────────────────────────────────────────────────────
-if seccion_principal == "📍 Guardados":
+if seccion_principal == "Guardados":
     render_formulario_agregar_lugar("guardados")
     st.markdown("<div style='height: 6px;'></div>", unsafe_allow_html=True)
     st.markdown('<div class="ny-card-header">Lugares Guardados & Gestión de Sitios</div>', unsafe_allow_html=True)
@@ -5013,7 +5025,7 @@ if seccion_principal == "🌧️ Clima":
 # ─────────────────────────────────────────────────────────────────────────────
 # TAB 5: DIVISAS EN TIEMPO REAL & CALCULADORA TAX Y PROPINAS NY
 # ─────────────────────────────────────────────────────────────────────────────
-if seccion_principal == "💵 Divisas & Tip":
+if seccion_principal == "Divisas":
     st.markdown('<div class="ny-card-header">💵 Calculadora</div>', unsafe_allow_html=True)
 
     tasa_eur, fecha_tasa = obtener_tasa_usd_eur()
@@ -5112,7 +5124,7 @@ if seccion_principal == "💵 Divisas & Tip":
 def extraer_codigos_vuelo(texto_vuelo: str) -> list:
     return re.findall(r"\b([A-Z]{2}\d{2,4})\b", (texto_vuelo or "").upper())
 
-if seccion_principal == "✈️ Vuelos & Hotel":
+if seccion_principal == "Info":
     c_vl1, c_vl2 = st.columns(2)
 
     with c_vl1:
@@ -5211,7 +5223,7 @@ if seccion_principal == "✈️ Vuelos & Hotel":
 # NUEVA PESTAÑA: LISTAS DE GOOGLE MAPS
 # Se conserva íntegro el código de gestión y sincronización existente.
 # ─────────────────────────────────────────────────────────────────────────────
-if seccion_principal == "📋 Listas Google":
+if seccion_principal == "Listas":
     st.markdown("---")
     st.markdown('<div class="ny-card-header">🔄 Sincronización de Listas de Google Maps</div>', unsafe_allow_html=True)
     st.caption("Puedes cambiar el nombre o la URL compartida de cualquier lista aquí mismo. Después pulsa sincronizar para importar los lugares nuevos.")
