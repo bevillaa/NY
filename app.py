@@ -5069,6 +5069,11 @@ if seccion_principal == "📎Guardados":
             st.error(txt_msg)
         else:
             st.info(txt_msg)
+
+    if "_errores_sync_guardados" in st.session_state:
+        errores_temp = st.session_state.pop("_errores_sync_guardados")
+        for err_s in errores_temp:
+            st.warning(err_s)
     if "_errores_sync_guardados" in st.session_state:
         for err_s in st.session_state.pop("_errores_sync_guardados"):
             st.warning(err_s)
