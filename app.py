@@ -4265,6 +4265,8 @@ def ejecutar_sincronizacion_listas_gmaps():
         for lugar_reg in st.session_state.lugares:
             if not isinstance(lugar_reg, dict):
                 continue
+            if lugar_reg.get("manual", False):
+                continue
             cat_actual = lugar_reg.get("categoria", "")
             if not cat_actual:  # Solo autocalasifica si está totalmente vacío
                 cat_auto, tipo_auto = clasificar_lugar(
@@ -4534,7 +4536,8 @@ def render_editor_sitio_panel(spot: dict, idx_real: int, key_ctx: str):
                         "tipo": ed_tipo,
                         "dia": nuevo_dia,
                         "lat": float(ed_lat),
-                        "lon": float(ed_lon)
+                        "lon": float(ed_lon),
+                        "manual": True
                     })
                     guardar_itinerario_disco(st.session_state.lugares)
                     st.session_state.editando_spot_key = None
