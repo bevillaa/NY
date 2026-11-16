@@ -4237,12 +4237,6 @@ def ejecutar_sincronizacion_listas_gmaps():
                         if origen_sync and existente.get("lista_origen") != origen_sync:
                             existente["lista_origen"] = origen_sync
                             cambio_item = True
-                        if existente.get("categoria") != cat_final:
-                            existente["categoria"] = cat_final
-                            cambio_item = True
-                        if existente.get("tipo") != tipo_clasif:
-                            existente["tipo"] = tipo_clasif
-                            cambio_item = True
                         if cambio_item:
                             total_actualizados += 1
                         continue
@@ -4272,18 +4266,15 @@ def ejecutar_sincronizacion_listas_gmaps():
             if not isinstance(lugar_reg, dict):
                 continue
             cat_actual = lugar_reg.get("categoria", "")
-            cat_norm = normalizar_categoria(cat_actual)
-            origen_reg = str(lugar_reg.get("lista_origen", "")).strip()
-            if origen_reg:
+            if not cat_actual:  # Solo autocalasifica si está totalmente vacío
                 cat_auto, tipo_auto = clasificar_lugar(
                     lugar_reg.get("nombre", ""),
                     lugar_reg.get("direccion", ""),
-                    origen_reg
+                    str(lugar_reg.get("lista_origen", ""))
                 )
-                cat_norm = normalizar_categoria(cat_auto)
-                if lugar_reg.get("tipo") != tipo_auto:
-                    lugar_reg["tipo"] = tipo_auto
-                    total_actualizados += 1
+                lugar_reg["categoria"] = normalizar_categoria(cat_auto)
+                lugar_reg["tipo"] = tipo_auto
+                total_actualizados += 1
             elif cat_norm in ("📍 Otros", "☀️ Spots") and not cat_actual:
                 cat_auto, tipo_auto = clasificar_lugar(
                     lugar_reg.get("nombre", ""),
