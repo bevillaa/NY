@@ -23,7 +23,8 @@
     "tipo": "Interior",
     "visitado": false,
     "hora": "",
-    "nota": ""
+    "nota": "",
+    "lista_origen": "Tiendas & Outlets (NY shopping)"
   },
   {
     "id": 3,
@@ -49,7 +50,8 @@
     "tipo": "Interior",
     "visitado": false,
     "hora": "",
-    "nota": ""
+    "nota": "",
+    "lista_origen": "NY"
   },
   {
     "id": 5,
@@ -153,7 +155,8 @@
     "tipo": "Exterior",
     "visitado": false,
     "hora": "",
-    "nota": ""
+    "nota": "",
+    "lista_origen": "Spots (NY spots)"
   },
   {
     "id": 13,
@@ -166,7 +169,8 @@
     "tipo": "Interior",
     "visitado": false,
     "hora": "",
-    "nota": ""
+    "nota": "",
+    "lista_origen": "Tiendas & Outlets (NY shopping)"
   },
   {
     "id": 14,
@@ -179,7 +183,8 @@
     "tipo": "Interior",
     "visitado": false,
     "hora": "",
-    "nota": ""
+    "nota": "",
+    "lista_origen": "Tiendas & Outlets (NY shopping)"
   },
   {
     "id": 15,
@@ -192,7 +197,8 @@
     "tipo": "Interior",
     "visitado": false,
     "hora": "",
-    "nota": ""
+    "nota": "",
+    "lista_origen": "Food (NY food)"
   },
   {
     "id": 16,
@@ -218,7 +224,8 @@
     "tipo": "Exterior",
     "visitado": false,
     "hora": "",
-    "nota": ""
+    "nota": "",
+    "lista_origen": "Spots (NY spots)"
   },
   {
     "id": 18,
@@ -257,7 +264,8 @@
     "tipo": "Interior",
     "visitado": false,
     "hora": "",
-    "nota": ""
+    "nota": "",
+    "lista_origen": "NY Sweets"
   },
   {
     "id": 21,
@@ -296,7 +304,8 @@
     "tipo": "Interior",
     "visitado": false,
     "hora": "",
-    "nota": ""
+    "nota": "",
+    "lista_origen": "Tiendas & Outlets (NY shopping)"
   },
   {
     "id": 24,
@@ -309,7 +318,8 @@
     "tipo": "Interior",
     "visitado": false,
     "hora": "",
-    "nota": ""
+    "nota": "",
+    "lista_origen": "Tiendas & Outlets (NY shopping)"
   },
   {
     "id": 25,
@@ -335,7 +345,8 @@
     "tipo": "Interior",
     "visitado": false,
     "hora": "",
-    "nota": ""
+    "nota": "",
+    "lista_origen": "NY Sweets"
   },
   {
     "id": 27,
@@ -348,7 +359,8 @@
     "tipo": "Interior",
     "visitado": false,
     "hora": "",
-    "nota": ""
+    "nota": "",
+    "lista_origen": "NY"
   },
   {
     "id": 28,
@@ -361,7 +373,8 @@
     "tipo": "Interior",
     "visitado": false,
     "hora": "",
-    "nota": ""
+    "nota": "",
+    "lista_origen": "Tiendas & Outlets (NY shopping)"
   },
   {
     "id": 29,
@@ -374,7 +387,8 @@
     "tipo": "Interior",
     "visitado": false,
     "hora": "",
-    "nota": ""
+    "nota": "",
+    "lista_origen": "Tiendas & Outlets (NY shopping)"
   },
   {
     "id": 30,
@@ -426,7 +440,8 @@
     "tipo": "Interior",
     "visitado": false,
     "hora": "",
-    "nota": ""
+    "nota": "",
+    "lista_origen": "NY Sweets"
   },
   {
     "id": 34,
@@ -435,11 +450,12 @@
     "lon": -74.0094,
     "dia": 0,
     "direccion": "200 Broadway, New York, NY 10007",
-    "categoria": "🍪 Dulces",
+    "categoria": "🎷 Ocio",
     "tipo": "Interior",
     "visitado": false,
     "hora": "",
-    "nota": ""
+    "nota": "",
+    "lista_origen": "NY"
   },
   {
     "id": 35,
@@ -448,11 +464,12 @@
     "lon": -74.0049,
     "dia": 0,
     "direccion": "233 Spring St, New York, NY 10013",
-    "categoria": "🍽️ Gastronomía",
+    "categoria": "🛍️ Compras",
     "tipo": "Interior",
     "visitado": false,
     "hora": "",
-    "nota": ""
+    "nota": "",
+    "lista_origen": "Tiendas & Outlets (NY shopping)"
   },
   {
     "id": 36,
@@ -465,7 +482,8 @@
     "tipo": "Interior",
     "visitado": false,
     "hora": "",
-    "nota": ""
+    "nota": "",
+    "lista_origen": "Tiendas & Outlets (NY shopping)"
   },
   {
     "id": 37,
@@ -478,7 +496,8 @@
     "tipo": "Interior",
     "visitado": false,
     "hora": "",
-    "nota": ""
+    "nota": "",
+    "lista_origen": "Tiendas & Outlets (NY shopping)"
   },
   {
     "id": 38,
@@ -543,7 +562,8 @@
     "tipo": "Interior",
     "visitado": false,
     "hora": "",
-    "nota": ""
+    "nota": "",
+    "lista_origen": "Food (NY food)"
   },
   {
     "id": 43,
@@ -556,7 +576,8 @@
     "tipo": "Interior",
     "visitado": false,
     "hora": "",
-    "nota": ""
+    "nota": "",
+    "lista_origen": "Food (NY food)"
   },
   {
     "id": 44,
@@ -569,7 +590,8 @@
     "tipo": "Interior",
     "visitado": false,
     "hora": "",
-    "nota": ""
+    "nota": "",
+    "lista_origen": "Food (NY food)"
   },
   {
     "id": 45,
@@ -582,7 +604,8 @@
     "tipo": "Interior",
     "visitado": false,
     "hora": "",
-    "nota": ""
+    "nota": "",
+    "lista_origen": "Food (NY food)"
   },
   {
     "id": 46,
@@ -595,7 +618,8 @@
     "tipo": "Interior",
     "visitado": false,
     "hora": "",
-    "nota": ""
+    "nota": "",
+    "lista_origen": "Food (NY food)"
   },
   {
     "id": 47,
@@ -608,7 +632,8 @@
     "tipo": "Interior",
     "visitado": false,
     "hora": "",
-    "nota": ""
+    "nota": "",
+    "lista_origen": "NY"
   },
   {
     "id": 48,
@@ -621,7 +646,8 @@
     "tipo": "Interior",
     "visitado": false,
     "hora": "",
-    "nota": ""
+    "nota": "",
+    "lista_origen": "Food (NY food)"
   },
   {
     "id": 49,
@@ -634,7 +660,8 @@
     "tipo": "Interior",
     "visitado": false,
     "hora": "",
-    "nota": ""
+    "nota": "",
+    "lista_origen": "Rooftop (NY rooftop)"
   },
   {
     "id": 50,
@@ -647,7 +674,8 @@
     "tipo": "Interior",
     "visitado": false,
     "hora": "",
-    "nota": ""
+    "nota": "",
+    "lista_origen": "Rooftop (NY rooftop)"
   },
   {
     "id": 51,
@@ -660,7 +688,8 @@
     "tipo": "Interior",
     "visitado": false,
     "hora": "",
-    "nota": ""
+    "nota": "",
+    "lista_origen": "Rooftop (NY rooftop)"
   },
   {
     "id": 52,
@@ -673,7 +702,8 @@
     "tipo": "Interior",
     "visitado": false,
     "hora": "",
-    "nota": ""
+    "nota": "",
+    "lista_origen": "Rooftop (NY rooftop)"
   },
   {
     "id": 53,
@@ -686,7 +716,8 @@
     "tipo": "Interior",
     "visitado": false,
     "hora": "",
-    "nota": ""
+    "nota": "",
+    "lista_origen": "Rooftop (NY rooftop)"
   },
   {
     "id": 54,
@@ -699,7 +730,8 @@
     "tipo": "Interior",
     "visitado": false,
     "hora": "",
-    "nota": ""
+    "nota": "",
+    "lista_origen": "Rooftop (NY rooftop)"
   },
   {
     "id": 55,
@@ -712,7 +744,8 @@
     "tipo": "Interior",
     "visitado": false,
     "hora": "",
-    "nota": ""
+    "nota": "",
+    "lista_origen": "Rooftop (NY rooftop)"
   },
   {
     "id": 56,
@@ -725,7 +758,8 @@
     "tipo": "Exterior",
     "visitado": false,
     "hora": "",
-    "nota": ""
+    "nota": "",
+    "lista_origen": "Spots (NY spots)"
   },
   {
     "id": 57,
@@ -738,7 +772,8 @@
     "tipo": "Exterior",
     "visitado": false,
     "hora": "",
-    "nota": ""
+    "nota": "",
+    "lista_origen": "Spots (NY spots)"
   },
   {
     "id": 58,
@@ -751,7 +786,8 @@
     "tipo": "Exterior",
     "visitado": false,
     "hora": "",
-    "nota": ""
+    "nota": "",
+    "lista_origen": "Spots (NY spots)"
   },
   {
     "id": 59,
@@ -764,7 +800,8 @@
     "tipo": "Exterior",
     "visitado": false,
     "hora": "",
-    "nota": ""
+    "nota": "",
+    "lista_origen": "Spots (NY spots)"
   },
   {
     "id": 60,
@@ -773,11 +810,12 @@
     "lon": -73.9865555,
     "dia": 0,
     "direccion": "1475 Broadway,  New York,  NY 10036,  United States",
-    "categoria": "🏛️ Cultura",
+    "categoria": "☀️ Spots",
     "tipo": "Exterior",
     "visitado": false,
     "hora": "",
-    "nota": ""
+    "nota": "",
+    "lista_origen": "Spots (NY spots)"
   },
   {
     "id": 61,
@@ -790,7 +828,8 @@
     "tipo": "Interior",
     "visitado": false,
     "hora": "",
-    "nota": ""
+    "nota": "",
+    "lista_origen": "NY"
   },
   {
     "id": 62,
@@ -803,7 +842,8 @@
     "tipo": "Exterior",
     "visitado": false,
     "hora": "",
-    "nota": ""
+    "nota": "",
+    "lista_origen": "Spots (NY spots)"
   },
   {
     "id": 63,
@@ -816,7 +856,8 @@
     "tipo": "Exterior",
     "visitado": false,
     "hora": "",
-    "nota": ""
+    "nota": "",
+    "lista_origen": "NY"
   },
   {
     "id": 64,
@@ -829,7 +870,8 @@
     "tipo": "Exterior",
     "visitado": false,
     "hora": "",
-    "nota": ""
+    "nota": "",
+    "lista_origen": "NY"
   },
   {
     "id": 65,
@@ -842,7 +884,8 @@
     "tipo": "Interior",
     "visitado": false,
     "hora": "",
-    "nota": ""
+    "nota": "",
+    "lista_origen": "Life Out (NY life out)"
   },
   {
     "id": 66,
@@ -855,7 +898,8 @@
     "tipo": "Interior",
     "visitado": false,
     "hora": "",
-    "nota": ""
+    "nota": "",
+    "lista_origen": "Life Out (NY life out)"
   },
   {
     "id": 67,
@@ -868,7 +912,8 @@
     "tipo": "Interior",
     "visitado": false,
     "hora": "",
-    "nota": ""
+    "nota": "",
+    "lista_origen": "Life Out (NY life out)"
   },
   {
     "id": 68,
@@ -881,7 +926,8 @@
     "tipo": "Interior",
     "visitado": false,
     "hora": "",
-    "nota": ""
+    "nota": "",
+    "lista_origen": "Life Out (NY life out)"
   },
   {
     "id": 69,
@@ -894,7 +940,8 @@
     "tipo": "Interior",
     "visitado": false,
     "hora": "",
-    "nota": ""
+    "nota": "",
+    "lista_origen": "Life Out (NY life out)"
   },
   {
     "id": 70,
@@ -903,11 +950,12 @@
     "lon": -74.0018896,
     "dia": 0,
     "direccion": "10 Hudson Yards,  New York,  NY 10001,  United States",
-    "categoria": "📍 Otros",
+    "categoria": "🍽️ Gastronomía",
     "tipo": "Interior",
     "visitado": false,
     "hora": "",
-    "nota": ""
+    "nota": "",
+    "lista_origen": "Food (NY food)"
   },
   {
     "id": 71,
@@ -920,7 +968,8 @@
     "tipo": "Interior",
     "visitado": false,
     "hora": "",
-    "nota": ""
+    "nota": "",
+    "lista_origen": "Food (NY food)"
   },
   {
     "id": 72,
@@ -933,6 +982,259 @@
     "tipo": "Interior",
     "visitado": false,
     "hora": "",
-    "nota": ""
+    "nota": "",
+    "lista_origen": "Food (NY food)"
+  },
+  {
+    "id": 73,
+    "nombre": "KO'LLECTION OUTLET",
+    "lat": 40.746991799999996,
+    "lon": -73.9853108,
+    "dia": 0,
+    "hora": "",
+    "direccion": "315 5th Ave Ste#1, New York, NY 10016, United States",
+    "nota": "",
+    "categoria": "🛍️ Compras",
+    "tipo": "Interior",
+    "lista_origen": "Tiendas & Outlets (NY shopping)",
+    "visitado": false
+  },
+  {
+    "id": 74,
+    "nombre": "Macy's",
+    "lat": 40.7504817,
+    "lon": -73.9882938,
+    "dia": 0,
+    "hora": "",
+    "direccion": "151 W 34th St., New York, NY 10001, United States",
+    "nota": "",
+    "categoria": "🛍️ Compras",
+    "tipo": "Interior",
+    "lista_origen": "Tiendas & Outlets (NY shopping)",
+    "visitado": false
+  },
+  {
+    "id": 75,
+    "nombre": "Goodwill NYNJ Store & Donation Center",
+    "lat": 40.7367387,
+    "lon": -73.9949898,
+    "dia": 0,
+    "hora": "",
+    "direccion": "17 W 14th St, New York, NY 10011, United States",
+    "nota": "",
+    "categoria": "🛍️ Compras",
+    "tipo": "Interior",
+    "lista_origen": "Tiendas & Outlets (NY shopping)",
+    "visitado": false
+  },
+  {
+    "id": 76,
+    "nombre": "Tanger Outlets Deer Park",
+    "lat": 40.763052099999996,
+    "lon": -73.3062812,
+    "dia": 0,
+    "hora": "",
+    "direccion": "152 The Arches Cir, Deer Park, NY 11729, United States",
+    "nota": "",
+    "categoria": "🛍️ Compras",
+    "tipo": "Interior",
+    "lista_origen": "Tiendas & Outlets (NY shopping)",
+    "visitado": false
+  },
+  {
+    "id": 77,
+    "nombre": "COZY FOOD COF'E",
+    "lat": 40.7035062,
+    "lon": -74.0130073,
+    "dia": 0,
+    "hora": "",
+    "direccion": "27 Whitehall St, New York, NY 10004, United States",
+    "nota": "",
+    "categoria": "🍽️ Gastronomía",
+    "tipo": "Interior",
+    "lista_origen": "Food (NY food)",
+    "visitado": false
+  },
+  {
+    "id": 78,
+    "nombre": "Brooklyn Dumpling Shop",
+    "lat": 40.7709198,
+    "lon": -73.9511136,
+    "dia": 0,
+    "hora": "",
+    "direccion": "453 E 78th St, New York, NY 10075, United States",
+    "nota": "",
+    "categoria": "🍽️ Gastronomía",
+    "tipo": "Interior",
+    "lista_origen": "Food (NY food)",
+    "visitado": false
+  },
+  {
+    "id": 79,
+    "nombre": "Manhattan Bridge Pedestrian Path",
+    "lat": 40.7088056,
+    "lon": -73.99165529999999,
+    "dia": 0,
+    "hora": "",
+    "direccion": "Brooklyn Heights, NY 11201, United States",
+    "nota": "",
+    "categoria": "☀️ Spots",
+    "tipo": "Exterior",
+    "lista_origen": "Spots (NY spots)",
+    "visitado": false
+  },
+  {
+    "id": 80,
+    "nombre": "Madison Square Park",
+    "lat": 40.742195099999996,
+    "lon": -73.98799919999999,
+    "dia": 0,
+    "hora": "",
+    "direccion": "11 Madison Ave, New York, NY 10010, United States",
+    "nota": "",
+    "categoria": "☀️ Spots",
+    "tipo": "Exterior",
+    "lista_origen": "NY",
+    "visitado": false
+  },
+  {
+    "id": 81,
+    "nombre": "Whitehall St-South Ferry",
+    "lat": 40.7017398,
+    "lon": -74.0129544,
+    "dia": 0,
+    "hora": "",
+    "direccion": "South St, Whitehall St, New York, 10004, United States",
+    "nota": "",
+    "categoria": "☀️ Spots",
+    "tipo": "Exterior",
+    "lista_origen": "NY",
+    "visitado": false
+  },
+  {
+    "id": 82,
+    "nombre": "Staten Island",
+    "lat": 40.6131714,
+    "lon": -74.12141919999999,
+    "dia": 0,
+    "hora": "",
+    "direccion": "NY, USA",
+    "nota": "",
+    "categoria": "📍 Otros",
+    "tipo": "Exterior",
+    "lista_origen": "NY",
+    "visitado": false
+  },
+  {
+    "id": 83,
+    "nombre": "Bethesda Terrace",
+    "lat": 40.773952799999996,
+    "lon": -73.9709657,
+    "dia": 0,
+    "hora": "",
+    "direccion": "New York, NY 10024, United States",
+    "nota": "",
+    "categoria": "📍 Otros",
+    "tipo": "Exterior",
+    "lista_origen": "NY",
+    "visitado": false
+  },
+  {
+    "id": 84,
+    "nombre": "Columbus Circle Holiday Market by Urbanspace",
+    "lat": 40.7680532,
+    "lon": -73.98133589999999,
+    "dia": 0,
+    "hora": "",
+    "direccion": "Columbus Cir &, Central Park S, New York, NY 10019, United States",
+    "nota": "",
+    "categoria": "🎄 Christmas markets",
+    "tipo": "Exterior",
+    "lista_origen": "Markets (Christmas market)",
+    "visitado": false
+  },
+  {
+    "id": 85,
+    "nombre": "Bryant Park Winter Village",
+    "lat": 40.7535021,
+    "lon": -73.98358499999999,
+    "dia": 0,
+    "hora": "",
+    "direccion": "42nd Street and, 6th Ave, New York, NY 10018, United States",
+    "nota": "",
+    "categoria": "🎄 Christmas markets",
+    "tipo": "Exterior",
+    "lista_origen": "Markets (Christmas market)",
+    "visitado": false
+  },
+  {
+    "id": 86,
+    "nombre": "Union Square",
+    "lat": 40.7358633,
+    "lon": -73.9910835,
+    "dia": 0,
+    "hora": "",
+    "direccion": "New York, NY 10003, USA",
+    "nota": "",
+    "categoria": "🎄 Christmas markets",
+    "tipo": "Exterior",
+    "lista_origen": "Markets (Christmas market)",
+    "visitado": false
+  },
+  {
+    "id": 87,
+    "nombre": "The FRIENDS™ Experience: The One in New York City",
+    "lat": 40.7394044,
+    "lon": -73.98516699999999,
+    "dia": 0,
+    "hora": "",
+    "direccion": "The Friends Experience, 130 E 23rd St, New York, NY 10010, United States",
+    "nota": "",
+    "categoria": "📍 Otros",
+    "tipo": "Exterior",
+    "lista_origen": "Places (NY places)",
+    "visitado": false
+  },
+  {
+    "id": 88,
+    "nombre": "One Beacon Court Condominium",
+    "lat": 40.7614899,
+    "lon": -73.9678642,
+    "dia": 0,
+    "hora": "",
+    "direccion": "151 E 58th St, New York, NY 10022, United States",
+    "nota": "",
+    "categoria": "📍 Otros",
+    "tipo": "Exterior",
+    "lista_origen": "Places (NY places)",
+    "visitado": false
+  },
+  {
+    "id": 89,
+    "nombre": "Roosevelt Island",
+    "lat": 40.7605031,
+    "lon": -73.9509934,
+    "dia": 0,
+    "hora": "",
+    "direccion": "New York, NY 10044, USA",
+    "nota": "",
+    "categoria": "☀️ Spots",
+    "tipo": "Exterior",
+    "lista_origen": "Places (NY places)",
+    "visitado": false
+  },
+  {
+    "id": 90,
+    "nombre": "A LITTLE SHOP IN NYC",
+    "lat": 40.7110759,
+    "lon": -74.0120239,
+    "dia": 0,
+    "hora": "",
+    "direccion": "185 Greenwich St GROUND FLOOR, New York, NY 10007, United States",
+    "nota": "",
+    "categoria": "☀️ Spots",
+    "tipo": "Exterior",
+    "lista_origen": "Places (NY places)",
+    "visitado": false
   }
 ]
