@@ -1432,5 +1432,19 @@
     "tipo": "Interior",
     "lista_origen": "Tiendas & Outlets (NY shopping)",
     "visitado": false
+  },
+  {
+    "id": 105,
+    "nombre": "Kiko Milano",
+    "lat": 40.7255143,
+    "lon": -74.00144139999999,
+    "dia": 0,
+    "hora": "",
+    "direccion": "430 W Broadway, New York, NY 10012, United States",
+    "nota": "",
+    "categoria": "🛍️ Compras",
+    "tipo": "Interior",
+    "lista_origen": "Tiendas & Outlets (NY shopping)",
+    "visitado": false
   }
 ]
