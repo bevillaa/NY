@@ -3704,26 +3704,47 @@ st.markdown("""
     justify-content: center !important;
     text-decoration: none !important;
   }
-  /* Hora y día empiezan en el mismo borde izquierdo que el texto del lugar. */
+  /* Hora y día recuperan el ancho previo, pero comienzan alineados a la izquierda. */
   [class*="st-key-it-controls-row-"] [data-testid="stHorizontalBlock"],
   [class*="st-key-saved-controls-row-"] [data-testid="stHorizontalBlock"] {
     display: grid !important;
-    grid-template-columns: minmax(105px, 140px) minmax(105px, 1fr) !important;
-    justify-content: start !important;
-    align-items: center !important;
-    column-gap: 7px !important;
+    grid-template-columns: minmax(0, 1.7fr) minmax(0, 1.9fr) minmax(0, 1.7fr) !important;
+    column-gap: 1rem !important;
     row-gap: 0 !important;
     width: 100% !important;
     min-width: 0 !important;
+    align-items: center !important;
   }
   [class*="st-key-it-controls-row-"] [data-testid="column"],
   [class*="st-key-saved-controls-row-"] [data-testid="column"] {
+    box-sizing: border-box !important;
     width: auto !important;
     min-width: 0 !important;
     max-width: none !important;
     flex: none !important;
     margin: 0 !important;
     padding: 0 !important;
+  }
+
+
+  /* Ajuste solicitado: ambos botones blancos y lápiz algo menor para que no se recorte. */
+  [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stButton"] > button,
+  [class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stButton"] > button {
+    background: #FFFFFF !important;
+    background-color: #FFFFFF !important;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23334155' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m16 4 4 4'/%3E%3Cpath d='M4 20l4-.9L19 8a2.1 2.1 0 0 0-3-3L5 16z'/%3E%3C/svg%3E") !important;
+    background-repeat: no-repeat !important;
+    background-position: center !important;
+    background-size: 15px 15px !important;
+  }
+  [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(3) [data-testid="stLinkButton"] > a,
+  [class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(3) [data-testid="stLinkButton"] > a {
+    background: #FFFFFF !important;
+    background-color: #FFFFFF !important;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231D4ED8' stroke-width='1.9' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m3 6 6-3 6 3 6-3v15l-6 3-6-3-6 3z'/%3E%3Cpath d='M9 3v15'/%3E%3Cpath d='M15 6v15'/%3E%3C/svg%3E") !important;
+    background-repeat: no-repeat !important;
+    background-position: center !important;
+    background-size: 17px 17px !important;
   }
 
 </style>
