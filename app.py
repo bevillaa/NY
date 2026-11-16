@@ -5121,6 +5121,72 @@ st.markdown("""
     transform-origin: center center !important;
   }
 
+
+  /* Ajuste final: el lápiz toma exactamente la caja del botón de mapa.
+     Se fijan ambas cajas en 36x36 px para neutralizar reglas anteriores. */
+  [class*="st-key-it-heading-row-"] [class*="st-key-it-edit-button-wrap-"] [data-testid="stButton"] > button,
+  [class*="st-key-it-heading-row-"] [class*="st-key-it-map-button-wrap-"] .place-map-icon-button,
+  [class*="st-key-saved-heading-row-"] [class*="st-key-saved-edit-button-wrap-"] [data-testid="stButton"] > button,
+  [class*="st-key-saved-heading-row-"] [class*="st-key-saved-map-button-wrap-"] .place-map-icon-button {
+    box-sizing: border-box !important;
+    display: inline-flex !important;
+    flex: 0 0 36px !important;
+    width: 36px !important;
+    min-width: 36px !important;
+    max-width: 36px !important;
+    height: 36px !important;
+    min-height: 36px !important;
+    max-height: 36px !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    align-items: center !important;
+    justify-content: center !important;
+    vertical-align: middle !important;
+  }
+  [class*="st-key-it-heading-row-"] [class*="st-key-it-edit-button-wrap-"] [data-testid="stButton"],
+  [class*="st-key-it-heading-row-"] [class*="st-key-it-map-button-wrap-"],
+  [class*="st-key-saved-heading-row-"] [class*="st-key-saved-edit-button-wrap-"] [data-testid="stButton"],
+  [class*="st-key-saved-heading-row-"] [class*="st-key-saved-map-button-wrap-"] {
+    box-sizing: border-box !important;
+    width: 36px !important;
+    min-width: 36px !important;
+    max-width: 36px !important;
+    height: 36px !important;
+    min-height: 36px !important;
+    max-height: 36px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  [class*="st-key-it-heading-row-"] [class*="st-key-it-edit-button-wrap-"] [data-testid="stButton"] > button::before,
+  [class*="st-key-saved-heading-row-"] [class*="st-key-saved-edit-button-wrap-"] [data-testid="stButton"] > button::before,
+  [class*="st-key-it-heading-row-"] [class*="st-key-it-map-button-wrap-"] .place-map-icon-button svg,
+  [class*="st-key-saved-heading-row-"] [class*="st-key-saved-map-button-wrap-"] .place-map-icon-button svg {
+    position: absolute !important;
+    left: 50% !important;
+    top: 50% !important;
+    width: 13px !important;
+    height: 13px !important;
+    min-width: 13px !important;
+    min-height: 13px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    transform: translate(-50%, -50%) !important;
+  }
+  @media (max-width: 768px) {
+    [class*="st-key-it-heading-row-"] [class*="st-key-it-edit-button-wrap-"] [data-testid="stButton"] > button,
+    [class*="st-key-it-heading-row-"] [class*="st-key-it-map-button-wrap-"] .place-map-icon-button,
+    [class*="st-key-saved-heading-row-"] [class*="st-key-saved-edit-button-wrap-"] [data-testid="stButton"] > button,
+    [class*="st-key-saved-heading-row-"] [class*="st-key-saved-map-button-wrap-"] .place-map-icon-button {
+      width: 36px !important;
+      min-width: 36px !important;
+      max-width: 36px !important;
+      height: 36px !important;
+      min-height: 36px !important;
+      max-height: 36px !important;
+      flex-basis: 36px !important;
+    }
+  }
+
 </style>
 """, unsafe_allow_html=True)
 
