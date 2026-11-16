@@ -24,7 +24,7 @@
     "visitado": false,
     "hora": "",
     "nota": "Tienda souvenir 1$",
-    "lista_origen": "Tiendas & Outlets (NY shopping)"
+    "lista_origen": "Tiendas & Outlets"
   },
   {
     "id": 3,
@@ -143,7 +143,7 @@
     "visitado": false,
     "hora": "",
     "nota": "",
-    "lista_origen": "Spots (NY spots)"
+    "lista_origen": "Spots"
   },
   {
     "id": 13,
@@ -157,7 +157,7 @@
     "visitado": false,
     "hora": "",
     "nota": "",
-    "lista_origen": "Tiendas & Outlets (NY shopping)"
+    "lista_origen": "Tiendas & Outlets"
   },
   {
     "id": 14,
@@ -171,7 +171,7 @@
     "visitado": false,
     "hora": "",
     "nota": "",
-    "lista_origen": "Tiendas & Outlets (NY shopping)"
+    "lista_origen": "Tiendas & Outlets"
   },
   {
     "id": 15,
@@ -185,7 +185,7 @@
     "visitado": false,
     "hora": "",
     "nota": "Bocadillo de pastrami",
-    "lista_origen": "Food (NY food)"
+    "lista_origen": "Food"
   },
   {
     "id": 16,
@@ -212,7 +212,7 @@
     "visitado": false,
     "hora": "",
     "nota": "",
-    "lista_origen": "Spots (NY spots)"
+    "lista_origen": "Spots"
   },
   {
     "id": 18,
@@ -292,7 +292,7 @@
     "visitado": false,
     "hora": "",
     "nota": "",
-    "lista_origen": "Tiendas & Outlets (NY shopping)"
+    "lista_origen": "Tiendas & Outlets"
   },
   {
     "id": 24,
@@ -306,7 +306,7 @@
     "visitado": false,
     "hora": "",
     "nota": "",
-    "lista_origen": "Tiendas & Outlets (NY shopping)"
+    "lista_origen": "Tiendas & Outlets"
   },
   {
     "id": 25,
@@ -361,7 +361,7 @@
     "visitado": false,
     "hora": "",
     "nota": "",
-    "lista_origen": "Tiendas & Outlets (NY shopping)"
+    "lista_origen": "Tiendas & Outlets"
   },
   {
     "id": 29,
@@ -375,7 +375,7 @@
     "visitado": false,
     "hora": "",
     "nota": "",
-    "lista_origen": "Tiendas & Outlets (NY shopping)"
+    "lista_origen": "Tiendas & Outlets"
   },
   {
     "id": 30,
@@ -424,7 +424,7 @@
     "lon": -74.0094,
     "dia": 0,
     "direccion": "200 Broadway, New York, NY 10007",
-    "categoria": "🍪 Dulces",
+    "categoria": "🎷 Ocio",
     "tipo": "Interior",
     "visitado": false,
     "hora": "",
@@ -443,7 +443,7 @@
     "visitado": false,
     "hora": "",
     "nota": "",
-    "lista_origen": "Tiendas & Outlets (NY shopping)"
+    "lista_origen": "Tiendas & Outlets"
   },
   {
     "id": 36,
@@ -457,7 +457,7 @@
     "visitado": false,
     "hora": "",
     "nota": "",
-    "lista_origen": "Tiendas & Outlets (NY shopping)"
+    "lista_origen": "Tiendas & Outlets"
   },
   {
     "id": 37,
@@ -471,7 +471,7 @@
     "visitado": false,
     "hora": "",
     "nota": "",
-    "lista_origen": "Tiendas & Outlets (NY shopping)"
+    "lista_origen": "Tiendas & Outlets"
   },
   {
     "id": 38,
@@ -537,7 +537,7 @@
     "visitado": false,
     "hora": "",
     "nota": "",
-    "lista_origen": "Food (NY food)"
+    "lista_origen": "Food"
   },
   {
     "id": 43,
@@ -551,7 +551,7 @@
     "visitado": false,
     "hora": "",
     "nota": "",
-    "lista_origen": "Food (NY food)"
+    "lista_origen": "Food"
   },
   {
     "id": 44,
@@ -565,7 +565,7 @@
     "visitado": false,
     "hora": "",
     "nota": "",
-    "lista_origen": "Food (NY food)"
+    "lista_origen": "Food"
   },
   {
     "id": 45,
@@ -579,7 +579,7 @@
     "visitado": false,
     "hora": "",
     "nota": "",
-    "lista_origen": "Food (NY food)"
+    "lista_origen": "Food"
   },
   {
     "id": 46,
@@ -593,7 +593,7 @@
     "visitado": false,
     "hora": "",
     "nota": "",
-    "lista_origen": "Food (NY food)"
+    "lista_origen": "Food"
   },
   {
     "id": 47,
@@ -621,7 +621,7 @@
     "visitado": false,
     "hora": "",
     "nota": "",
-    "lista_origen": "Food (NY food)"
+    "lista_origen": "Food"
   },
   {
     "id": 49,
@@ -635,7 +635,7 @@
     "visitado": false,
     "hora": "",
     "nota": "",
-    "lista_origen": "Rooftop (NY rooftop)"
+    "lista_origen": "Rooftop"
   },
   {
     "id": 50,
@@ -649,7 +649,7 @@
     "visitado": false,
     "hora": "",
     "nota": "",
-    "lista_origen": "Rooftop (NY rooftop)"
+    "lista_origen": "Rooftop"
   },
   {
     "id": 51,
@@ -663,7 +663,7 @@
     "visitado": false,
     "hora": "",
     "nota": "",
-    "lista_origen": "Rooftop (NY rooftop)"
+    "lista_origen": "Rooftop"
   },
   {
     "id": 52,
@@ -677,7 +677,7 @@
     "visitado": false,
     "hora": "",
     "nota": "",
-    "lista_origen": "Rooftop (NY rooftop)"
+    "lista_origen": "Rooftop"
   },
   {
     "id": 53,
@@ -691,7 +691,7 @@
     "visitado": false,
     "hora": "",
     "nota": "",
-    "lista_origen": "Rooftop (NY rooftop)"
+    "lista_origen": "Rooftop"
   },
   {
     "id": 54,
@@ -705,7 +705,7 @@
     "visitado": false,
     "hora": "",
     "nota": "",
-    "lista_origen": "Rooftop (NY rooftop)"
+    "lista_origen": "Rooftop"
   },
   {
     "id": 55,
@@ -719,7 +719,7 @@
     "visitado": false,
     "hora": "",
     "nota": "",
-    "lista_origen": "Rooftop (NY rooftop)"
+    "lista_origen": "Rooftop"
   },
   {
     "id": 56,
@@ -733,7 +733,7 @@
     "visitado": false,
     "hora": "",
     "nota": "",
-    "lista_origen": "Spots (NY spots)"
+    "lista_origen": "Spots"
   },
   {
     "id": 57,
@@ -747,7 +747,7 @@
     "visitado": false,
     "hora": "",
     "nota": "",
-    "lista_origen": "Spots (NY spots)"
+    "lista_origen": "Spots"
   },
   {
     "id": 58,
@@ -761,7 +761,7 @@
     "visitado": false,
     "hora": "",
     "nota": "",
-    "lista_origen": "Spots (NY spots)"
+    "lista_origen": "Spots"
   },
   {
     "id": 59,
@@ -775,7 +775,7 @@
     "visitado": false,
     "hora": "",
     "nota": "",
-    "lista_origen": "Spots (NY spots)"
+    "lista_origen": "Spots"
   },
   {
     "id": 60,
@@ -789,7 +789,7 @@
     "visitado": false,
     "hora": "",
     "nota": "Deseos para fin de año",
-    "lista_origen": "Spots (NY spots)"
+    "lista_origen": "Spots"
   },
   {
     "id": 61,
@@ -817,7 +817,7 @@
     "visitado": false,
     "hora": "",
     "nota": "",
-    "lista_origen": "Spots (NY spots)"
+    "lista_origen": "Spots"
   },
   {
     "id": 63,
@@ -859,7 +859,7 @@
     "visitado": false,
     "hora": "",
     "nota": "",
-    "lista_origen": "Life Out (NY life out)"
+    "lista_origen": "Life Out"
   },
   {
     "id": 66,
@@ -873,7 +873,7 @@
     "visitado": false,
     "hora": "",
     "nota": "",
-    "lista_origen": "Life Out (NY life out)"
+    "lista_origen": "Life Out"
   },
   {
     "id": 67,
@@ -887,7 +887,7 @@
     "visitado": false,
     "hora": "",
     "nota": "",
-    "lista_origen": "Life Out (NY life out)"
+    "lista_origen": "Life Out"
   },
   {
     "id": 68,
@@ -901,7 +901,7 @@
     "visitado": false,
     "hora": "",
     "nota": "",
-    "lista_origen": "Life Out (NY life out)"
+    "lista_origen": "Life Out"
   },
   {
     "id": 69,
@@ -915,7 +915,7 @@
     "visitado": false,
     "hora": "",
     "nota": "",
-    "lista_origen": "Life Out (NY life out)"
+    "lista_origen": "Life Out"
   },
   {
     "id": 70,
@@ -929,7 +929,7 @@
     "visitado": false,
     "hora": "",
     "nota": "",
-    "lista_origen": "Food (NY food)"
+    "lista_origen": "Food"
   },
   {
     "id": 71,
@@ -943,7 +943,7 @@
     "visitado": false,
     "hora": "",
     "nota": "Cenas con fiestas ➡️ https://www.instagram.com/reel/DfETuPzsNBj/?vrfl=MWI0amJxZ2w5ZGl3dQ==",
-    "lista_origen": "Food (NY food)"
+    "lista_origen": "Food"
   },
   {
     "id": 72,
@@ -957,7 +957,7 @@
     "visitado": false,
     "hora": "",
     "nota": "",
-    "lista_origen": "Food (NY food)"
+    "lista_origen": "Food"
   },
   {
     "id": 73,
@@ -970,7 +970,7 @@
     "nota": "Outlet K-Beauty",
     "categoria": "🛍️ Compras",
     "tipo": "Interior",
-    "lista_origen": "Tiendas & Outlets (NY shopping)",
+    "lista_origen": "Tiendas & Outlets",
     "visitado": false
   },
   {
@@ -984,7 +984,7 @@
     "nota": "Centro Comercial",
     "categoria": "🛍️ Compras",
     "tipo": "Interior",
-    "lista_origen": "Tiendas & Outlets (NY shopping)",
+    "lista_origen": "Tiendas & Outlets",
     "visitado": false
   },
   {
@@ -998,7 +998,7 @@
     "nota": "Tienda de segunda mano",
     "categoria": "🛍️ Compras",
     "tipo": "Interior",
-    "lista_origen": "Tiendas & Outlets (NY shopping)",
+    "lista_origen": "Tiendas & Outlets",
     "visitado": false
   },
   {
@@ -1012,7 +1012,7 @@
     "nota": "",
     "categoria": "🛍️ Compras",
     "tipo": "Interior",
-    "lista_origen": "Tiendas & Outlets (NY shopping)",
+    "lista_origen": "Tiendas & Outlets",
     "visitado": false
   },
   {
@@ -1026,7 +1026,7 @@
     "nota": "",
     "categoria": "🍽️ Gastronomía",
     "tipo": "Interior",
-    "lista_origen": "Food (NY food)",
+    "lista_origen": "Food",
     "visitado": false
   },
   {
@@ -1040,7 +1040,7 @@
     "nota": "",
     "categoria": "🍽️ Gastronomía",
     "tipo": "Interior",
-    "lista_origen": "Food (NY food)",
+    "lista_origen": "Food",
     "visitado": false
   },
   {
@@ -1054,7 +1054,7 @@
     "nota": "vistas ➡️https://www.instagram.com/glamofnyc/reel/DYnMtomRngt/",
     "categoria": "☀️ Spots",
     "tipo": "Exterior",
-    "lista_origen": "Spots (NY spots)",
+    "lista_origen": "Spots",
     "visitado": false
   },
   {
@@ -1124,7 +1124,7 @@
     "nota": "",
     "categoria": "🎄 Christmas markets",
     "tipo": "Exterior",
-    "lista_origen": "Markets (Christmas market)",
+    "lista_origen": "Markets",
     "visitado": false
   },
   {
@@ -1138,7 +1138,7 @@
     "nota": "",
     "categoria": "🎄 Christmas markets",
     "tipo": "Exterior",
-    "lista_origen": "Markets (Christmas market)",
+    "lista_origen": "Markets",
     "visitado": false
   },
   {
@@ -1150,9 +1150,9 @@
     "hora": "",
     "direccion": "New York, NY 10003, USA",
     "nota": "",
-    "categoria": "🎄 Christmas markets",
+    "categoria": "📍 Otros",
     "tipo": "Exterior",
-    "lista_origen": "Markets (Christmas market)",
+    "lista_origen": "Markets",
     "visitado": false
   },
   {
@@ -1166,7 +1166,7 @@
     "nota": "",
     "categoria": "📍 Otros",
     "tipo": "Exterior",
-    "lista_origen": "Places (NY places)",
+    "lista_origen": "Places",
     "visitado": false
   },
   {
@@ -1180,7 +1180,7 @@
     "nota": "Free Tour - Wilson Silver",
     "categoria": "📍 Otros",
     "tipo": "Exterior",
-    "lista_origen": "Places (NY places)",
+    "lista_origen": "Places",
     "visitado": false
   },
   {
@@ -1194,7 +1194,7 @@
     "nota": "",
     "categoria": "☀️ Spots",
     "tipo": "Exterior",
-    "lista_origen": "Places (NY places)",
+    "lista_origen": "Places",
     "visitado": false
   },
   {
@@ -1208,7 +1208,7 @@
     "nota": "Souvenir➡️https://vm.tiktok.com/ZN85ph9yT/",
     "categoria": "☀️ Spots",
     "tipo": "Exterior",
-    "lista_origen": "Places (NY places)",
+    "lista_origen": "Places",
     "visitado": false
   },
   {
@@ -1236,7 +1236,7 @@
     "nota": "Hamburguesas 6$➡️ https://www.instagram.com/reel/DfR60jgOfmY/?rpxt=MWRnYmExamRkMzd6Mw==",
     "categoria": "🍽️ Gastronomía",
     "tipo": "Interior",
-    "lista_origen": "Food (NY food)",
+    "lista_origen": "Food",
     "visitado": false
   },
   {
@@ -1250,7 +1250,7 @@
     "nota": "Happy hour 2-6 p.m ➡️ https://www.instagram.com/reel/DderlUxTRmo/?psln=MTR5a2Jqb2l5aGwwbg==",
     "categoria": "🍽️ Gastronomía",
     "tipo": "Interior",
-    "lista_origen": "Food (NY food)",
+    "lista_origen": "Food",
     "visitado": false
   },
   {
@@ -1264,7 +1264,7 @@
     "nota": "Banco con vistas ➡️ https://www.instagram.com/reel/De1Vb5WAXZ-/?psln=MTBjeWYxeGczcTIzMg==",
     "categoria": "☀️ Spots",
     "tipo": "Exterior",
-    "lista_origen": "Spots (NY spots)",
+    "lista_origen": "Spots",
     "visitado": false
   },
   {
@@ -1320,7 +1320,7 @@
     "nota": "Menos de 10$ - hay varios",
     "categoria": "🍽️ Gastronomía",
     "tipo": "Interior",
-    "lista_origen": "Food (NY food)",
+    "lista_origen": "Food",
     "visitado": false
   },
   {
@@ -1334,7 +1334,7 @@
     "nota": "Gratis los miércoles",
     "categoria": "🎷 Ocio",
     "tipo": "Interior",
-    "lista_origen": "Life Out (NY life out)",
+    "lista_origen": "Life Out",
     "visitado": false
   },
   {
@@ -1348,7 +1348,7 @@
     "nota": "Rooftop ➡️ https://www.instagram.com/reel/DfyEE8GsHpc/?obrf=a3l1eGlsMTA4MGty",
     "categoria": "🍸 Copas",
     "tipo": "Interior",
-    "lista_origen": "Rooftop (NY rooftop)",
+    "lista_origen": "Rooftop",
     "visitado": false
   },
   {
@@ -1362,7 +1362,7 @@
     "nota": "Raclette barata",
     "categoria": "🍽️ Gastronomía",
     "tipo": "Interior",
-    "lista_origen": "Food (NY food)",
+    "lista_origen": "Food",
     "visitado": false
   },
   {
@@ -1376,7 +1376,7 @@
     "nota": "Tienda de miniaturas",
     "categoria": "🛍️ Compras",
     "tipo": "Interior",
-    "lista_origen": "Tiendas & Outlets (NY shopping)",
+    "lista_origen": "Tiendas & Outlets",
     "visitado": false
   },
   {
@@ -1404,7 +1404,7 @@
     "nota": "En la planta 2 hay un fotomatón gratis ➡️ https://www.instagram.com/reel/DeKfbhBpiHR/?srtk=OG15YzFjczM1bWpo",
     "categoria": "🛍️ Compras",
     "tipo": "Interior",
-    "lista_origen": "Tiendas & Outlets (NY shopping)",
+    "lista_origen": "Tiendas & Outlets",
     "visitado": false
   },
   {
@@ -1418,7 +1418,7 @@
     "nota": "Grabado de gloss",
     "categoria": "🛍️ Compras",
     "tipo": "Interior",
-    "lista_origen": "Tiendas & Outlets (NY shopping)",
+    "lista_origen": "Tiendas & Outlets",
     "visitado": false
   },
   {
@@ -1446,7 +1446,7 @@
     "nota": "Pasta 5$ los martes",
     "categoria": "🍽️ Gastronomía",
     "tipo": "Interior",
-    "lista_origen": "Food (NY food)",
+    "lista_origen": "Food",
     "visitado": false
   },
   {
@@ -1489,6 +1489,20 @@
     "categoria": "📍 Otros",
     "tipo": "Exterior",
     "lista_origen": "NY",
+    "visitado": false
+  },
+  {
+    "id": 114,
+    "nombre": "Jack's Market",
+    "lat": 40.7486575,
+    "lon": -73.9895684,
+    "dia": 0,
+    "hora": "",
+    "direccion": "110 W 32nd St, New York, NY 10001, United States",
+    "nota": "",
+    "categoria": "🍽️ Gastronomía",
+    "tipo": "Interior",
+    "lista_origen": "Food",
     "visitado": false
   }
 ]
