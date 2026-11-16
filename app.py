@@ -4788,6 +4788,98 @@ st.markdown("""
     }
   }
 
+
+
+  /* FIX FINAL: encabezados de Itinerario y Guardados.
+     Ambos controles ocupan 38x38 px, iconos ópticos de 13x13 px y 8 px entre sí.
+     Esta regla va al final de la hoja para prevalecer sobre ajustes anteriores. */
+  div[class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"],
+  div[class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"] {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) 38px 38px 30px !important;
+    column-gap: 8px !important;
+    row-gap: 0 !important;
+    align-items: center !important;
+    width: 100% !important;
+    min-width: 0 !important;
+  }
+  div[class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"] {
+    grid-template-columns: minmax(0, 1fr) 38px 38px !important;
+  }
+  div[class*="st-key-it-heading-row-"] [data-testid="column"],
+  div[class*="st-key-saved-heading-row-"] [data-testid="column"] {
+    box-sizing: border-box !important;
+    min-width: 0 !important;
+    width: auto !important;
+    max-width: none !important;
+    flex: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: visible !important;
+  }
+  div[class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stButton"],
+  div[class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stButton"],
+  div[class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stButton"] > button,
+  div[class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stButton"] > button,
+  div[class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(3) .place-map-link-direct,
+  div[class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(3) .place-map-link-direct {
+    box-sizing: border-box !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 38px !important;
+    min-width: 38px !important;
+    max-width: 38px !important;
+    height: 38px !important;
+    min-height: 38px !important;
+    max-height: 38px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: 1px solid #CBD5E1 !important;
+    border-radius: 9px !important;
+    background-color: #FFFFFF !important;
+    box-shadow: none !important;
+    line-height: 0 !important;
+    overflow: hidden !important;
+  }
+  div[class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stButton"] > button,
+  div[class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stButton"] > button {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23334155' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m16 4 4 4'/%3E%3Cpath d='M4 20l4-.9L19 8a2.1 2.1 0 0 0-3-3L5 16z'/%3E%3C/svg%3E") !important;
+    background-repeat: no-repeat !important;
+    background-position: center center !important;
+    background-size: 13px 13px !important;
+    color: transparent !important;
+    -webkit-text-fill-color: transparent !important;
+    font-size: 0 !important;
+  }
+  div[class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stButton"] > button span,
+  div[class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stButton"] > button span,
+  div[class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stButton"] > button p,
+  div[class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stButton"] > button p {
+    display: none !important;
+  }
+  div[class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(3) .place-map-link-direct svg,
+  div[class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(3) .place-map-link-direct svg {
+    display: block !important;
+    box-sizing: border-box !important;
+    width: 13px !important;
+    min-width: 13px !important;
+    max-width: 13px !important;
+    height: 13px !important;
+    min-height: 13px !important;
+    max-height: 13px !important;
+    flex: 0 0 13px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    transform: none !important;
+  }
+  @media (max-width: 768px) {
+    div[class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"],
+    div[class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"] {
+      column-gap: 8px !important;
+    }
+  }
+
 </style>
 """, unsafe_allow_html=True)
 
