@@ -4767,8 +4767,8 @@ if seccion_principal == "🗺️Mapa":
     c_m1, c_m3 = st.columns([3, 2])
     with c_m1:
         opciones_vista = [
-            "🌐 Todos los Sitios",
-            "📅 Todos los Días)"
+            "🗽 Todos los Sitios",
+            "✨ Todos los Días"
         ] + [etiqueta_dia(d) for d in range(1, 11)]
         sel_vista = selectbox_sin_teclado("Vista en el mapa:", opciones_vista, label_visibility="collapsed")
     # Se fija una única capa de Google Maps para evitar el desplegable de estilos.
