@@ -584,9 +584,9 @@ st.markdown("""
       display: flex !important;
       align-items: center !important;
       justify-content: center !important;
-      width: 40px !important;
-      min-width: 40px !important;
-      max-width: 40px !important;
+      width: 30px !important;
+      min-width: 30px !important;
+      max-width: 30px !important;
       padding: 0 !important;
       font-size: 1rem !important;
       line-height: 1 !important;
@@ -1478,9 +1478,9 @@ st.markdown("""
   }
   [class*="st-key-it-controls-row-"] [data-testid="column"]:first-child [data-testid="stTextInput"],
   [class*="st-key-saved-controls-row-"] [data-testid="column"]:first-child [data-testid="stTextInput"] {
-    width: 120px !important;
-    min-width: 120px !important;
-    max-width: 120px !important;
+    width: 99px !important;
+    min-width: 99px !important;
+    max-width: 99px !important;
     margin: 0 !important;
   }
   [class*="st-key-it-controls-row-"] [data-testid="column"]:first-child [data-baseweb="input"],
@@ -1488,12 +1488,12 @@ st.markdown("""
   [class*="st-key-it-controls-row-"] [data-testid="column"]:first-child [data-baseweb="base-input"],
   [class*="st-key-saved-controls-row-"] [data-testid="column"]:first-child [data-baseweb="base-input"] {
     box-sizing: border-box !important;
-    width: 120px !important;
-    min-width: 120px !important;
-    max-width: 120px !important;
-    height: 40px !important;
-    min-height: 40px !important;
-    max-height: 40px !important;
+    width: 99px !important;
+    min-width: 99px !important;
+    max-width: 99px !important;
+    height: 30px !important;
+    min-height: 30px !important;
+    max-height: 30px !important;
     padding: 0 3px !important;
     border-radius: 8px !important;
   }
@@ -1525,9 +1525,9 @@ st.markdown("""
     width: 125px !important;
     min-width: 125px !important;
     max-width: 125px !important;
-    height: 40px !important;
-    min-height: 40px !important;
-    max-height: 40px !important;
+    height: 30px !important;
+    min-height: 30px !important;
+    max-height: 30px !important;
     padding-left: 6px !important;
     padding-right: 18px !important;
     border-radius: 8px !important;
@@ -1655,9 +1655,9 @@ st.markdown("""
       width: 125px !important;
       min-width: 125px !important;
       max-width: 125px !important;
-      height: 30px !important;
-      min-height: 30px !important;
-      max-height: 30px !important;
+      height: 34px !important;
+      min-height: 34px !important;
+      max-height: 34px !important;
     }
     [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(2) [data-baseweb="select"] span,
     [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(2) [data-baseweb="select"] span {
