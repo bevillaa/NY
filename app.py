@@ -1712,7 +1712,7 @@ st.markdown("""
     grid-auto-flow: column !important;
     align-items: center !important;
     justify-content: stretch !important;
-    column-gap: 3px !important;
+    column-gap: 2px !important;
     row-gap: 0 !important;
     width: 100% !important;
     min-width: 0 !important;
@@ -1840,7 +1840,7 @@ st.markdown("""
       flex-wrap: nowrap !important;
       align-items: center !important;
       justify-content: flex-start !important;
-      gap: 3px !important;
+      gap: 2px !important;
       width: 100% !important;
       min-width: 0 !important;
       max-width: 100% !important;
@@ -1857,10 +1857,10 @@ st.markdown("""
 
     /* Ruta: hora compacta, información flexible, tres acciones juntas. */
     [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(1) {
-      flex: 0 0 66px !important;
-      width: 66px !important;
-      min-width: 66px !important;
-      max-width: 66px !important;
+      flex: 0 0 100px !important;
+      width: 100px !important;
+      min-width: 100px !important;
+      max-width: 100px !important;
     }
     [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(2) {
       display: block !important;
@@ -1970,9 +1970,9 @@ st.markdown("""
     [class*="st-key-it-heading-row-"] [data-testid="column"]:first-child [data-baseweb="input"],
     [class*="st-key-it-heading-row-"] [data-testid="column"]:first-child [data-baseweb="base-input"] {
       box-sizing: border-box !important;
-      width: 66px !important;
-      min-width: 66px !important;
-      max-width: 66px !important;
+      width: 100px !important;
+      min-width: 100px !important;
+      max-width: 100px !important;
     }
   }
 
@@ -2001,10 +2001,10 @@ st.markdown("""
       padding: 0 !important;
     }
     [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(1) {
-      flex: 0 0 54px !important;
-      width: 54px !important;
-      min-width: 54px !important;
-      max-width: 54px !important;
+      flex: 0 0 100px !important;
+      width: 100px !important;
+      min-width: 100px !important;
+      max-width: 100px !important;
     }
     [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(2) {
       flex: 1 1 0% !important;
@@ -2106,10 +2106,10 @@ st.markdown("""
       max-width: 54px !important;
     }
     [class*="st-key-saved-controls-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(2) {
-      flex: 0 0 68px !important;
-      width: 68px !important;
-      min-width: 68px !important;
-      max-width: 68px !important;
+      flex: 0 0 54px !important;
+      width: 54px !important;
+      min-width: 54px !important;
+      max-width: 54px !important;
     }
     [class*="st-key-saved-controls-row-"] [data-testid="column"]:first-child [data-testid="stTextInput"],
     [class*="st-key-saved-controls-row-"] [data-testid="column"]:first-child [data-baseweb="input"],
@@ -2181,10 +2181,10 @@ st.markdown("""
     }
     [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(1) {
       display: block !important;
-      flex: 0 0 54px !important;
-      width: 54px !important;
-      min-width: 54px !important;
-      max-width: 54px !important;
+      flex: 0 0 100px !important;
+      width: 100px !important;
+      min-width: 100px !important;
+      max-width: 100px !important;
     }
     [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(2) {
       display: block !important;
@@ -2263,9 +2263,9 @@ st.markdown("""
     [class*="st-key-it-heading-row-"] [data-testid="column"]:first-child [data-baseweb="input"],
     [class*="st-key-it-heading-row-"] [data-testid="column"]:first-child [data-baseweb="base-input"] {
       box-sizing: border-box !important;
-      width: 54px !important;
-      min-width: 54px !important;
-      max-width: 54px !important;
+      width: 100px !important;
+      min-width: 100px !important;
+      max-width: 100px !important;
       margin: 0 !important;
     }
 
@@ -2349,7 +2349,7 @@ st.markdown("""
       flex-flow: row nowrap !important;
       align-items: center !important;
       justify-content: flex-start !important;
-      gap: 1px !important;
+      gap: 2px !important;
       width: 100% !important;
     }
     [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"] {
@@ -2358,9 +2358,9 @@ st.markdown("""
       padding: 0 !important;
     }
     [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(1) {
-      flex: 0 0 54px !important;
-      width: 54px !important;
-      max-width: 54px !important;
+      flex: 0 0 100px !important;
+      width: 100px !important;
+      max-width: 100px !important;
     }
     [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(2) {
       flex: 1 1 0% !important;
@@ -2416,7 +2416,7 @@ st.markdown("""
       display: flex !important;
       flex-flow: row nowrap !important;
       align-items: center !important;
-      gap: 1px !important;
+      gap: 2px !important;
       width: 100% !important;
     }
     [class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"] {
@@ -2509,7 +2509,7 @@ st.markdown("""
       display: grid !important;
       grid-template-columns: 84px minmax(0, 1fr) 30px 30px 30px !important;
       grid-auto-flow: column !important;
-      column-gap: 1px !important;
+      column-gap: 2px !important;
       align-items: stretch !important;
       justify-content: stretch !important;
       width: 100% !important;
@@ -4183,8 +4183,8 @@ if seccion_principal == "🗽Ruta":
                     # Streamlit crea únicamente los cinco contenedores; la distribución
                     # horizontal se define en un único lugar: las reglas flex de Ruta.
                     c_hr_head, c_info, c_edit_head, c_map_head, c_chk = st.columns(
-                        5,
-                        gap="small",
+                        [0.8, 6.0, 0.55, 0.55, 0.55],
+                        gap=None,
                         vertical_alignment="center"
                     )
 
@@ -4307,7 +4307,7 @@ if seccion_principal == "📌Guardados":
 
         # Toda la información se presenta antes de los controles.
         with st.container(key=f"saved-heading-row-{p_spot['id']}"):
-            c_saved_info, c_saved_edit, c_saved_map = st.columns([8.8, 0.6, 0.6], gap="small")
+            c_saved_info, c_saved_edit, c_saved_map = st.columns([8.8, 0.6, 0.6], gap=None)
             with c_saved_info:
                 st.markdown(f"""
                 <div style="width:100%; min-width:0; overflow-wrap:anywhere;">
