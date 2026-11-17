@@ -812,7 +812,7 @@ st.markdown("""
   @media (max-width: 380px) {
     .block-container { padding-left: 0.45rem !important; padding-right: 0.45rem !important; }
     .hero-title { font-size: 1.2rem !important; }
-    .stTabs [data-baseweb="tab"] { font-size: 0.69rem !important; padding: 6px 2px !important; }
+    .stTabs [data-baseweb="tab"] { font-size: 0.69rem !important; padding: 4px 2px !important; }
     
     
   }
@@ -2487,7 +2487,7 @@ st.markdown("""
      hacia arriba y a la derecha para alinearlo visualmente con Mapa y Editar. */
   @media (max-width: 768px) {
     [class*="st-key-it-visit-checkbox-wrap-"] {
-      transform: translate(10px, -3px) !important;
+      transform: translate(11.5px, -4.5px) !important;
     }
   }
 </style>
