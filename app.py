@@ -2541,6 +2541,12 @@ st.markdown("""
       max-width: 100% !important;
       white-space: normal !important;
       overflow-wrap: anywhere !important;
+    }    
+    [class*="st-key-it-heading-row-"] .place-list-title,
+    [class*="st-key-it-heading-row-"] .place-list-address,
+    [class*="st-key-it-heading-row-"] .place-note {
+      position: relative !important;
+      left: -20px !important;
     }
   }
 
