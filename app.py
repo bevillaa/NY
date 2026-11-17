@@ -3470,7 +3470,7 @@ if seccion_principal == "🗽Ruta":
             {etiqueta_dia(d)}
           </div>
           <div style="font-weight:800; font-size:0.78rem; color:#0F172A; background:#F8FAFC; border:1.5px solid #CBD5E1; border-radius:20px; padding:2px 9px;">
-            📍 {len(paradas_dia)} lugares ({len(visitados_dia)} visitados)
+            📍 {len(paradas_dia)} - {len(visitados_dia)} ✔️
           </div>
         </div>
         """, unsafe_allow_html=True)
