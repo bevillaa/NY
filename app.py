@@ -2501,13 +2501,46 @@ st.markdown("""
     }
   }
 
-  /* MÓVIL: desplazar el contenido visible de Ruta, no la columna de Streamlit. */
-  @media (max-width: 768px) {
-    [class*="st-key-it-heading-row-"] .place-list-title,
-    [class*="st-key-it-heading-row-"] .place-list-address,
-    [class*="st-key-it-heading-row-"] .place-note {
-      position: relative !important;
-      left: -17px !important;
+  /* MÓVIL: desplazar completa la columna de información de Ruta.
+     Mueve juntos título, dirección y nota, sin tocar hora ni botones. */
+  @media screen and (max-width: 768px) {
+    /* La columna de información ocupa TODO el espacio libre hasta el primer icono. */
+    [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] {
+      display: grid !important;
+      grid-template-columns: 84px minmax(0, 1fr) 30px 30px 30px !important;
+      grid-auto-flow: column !important;
+      column-gap: 1px !important;
+      align-items: stretch !important;
+      justify-content: stretch !important;
+      width: 100% !important;
+      min-width: 0 !important;
+      max-width: 100% !important;
+    }
+    [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(2) {
+      grid-column: 2 !important;
+      justify-self: stretch !important;
+      align-self: stretch !important;
+      display: block !important;
+      box-sizing: border-box !important;
+      width: 100% !important;
+      min-width: 0 !important;
+      max-width: 100% !important;
+      transform: none !important;
+      overflow: visible !important;
+    }
+    [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stMarkdown"],
+    [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stMarkdown"] > div,
+    [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stElementContainer"],
+    [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2) .place-list-title,
+    [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2) .place-list-address,
+    [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2) .place-note {
+      display: block !important;
+      box-sizing: border-box !important;
+      width: 100% !important;
+      min-width: 0 !important;
+      max-width: 100% !important;
+      white-space: normal !important;
+      overflow-wrap: anywhere !important;
     }
   }
 
