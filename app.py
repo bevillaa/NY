@@ -2113,24 +2113,105 @@ st.markdown("""
   }
   [class*="st-key-it-visit-checkbox-wrap-"] [data-testid="stCheckbox"] label p { display: none !important; }
 
-  /* La fila inferior solo contiene Hora y Día; no se altera su disposición. */
+  /* Hora y Día: recuperar los tamaños compactos anteriores.
+     Escritorio: hora 88 px; selector de día desde 96 px.
+     Móvil: hora 80 px; selector de día 94 px. */
   [class*="st-key-it-controls-row-"] [data-testid="stHorizontalBlock"],
   [class*="st-key-saved-controls-row-"] [data-testid="stHorizontalBlock"] {
-    display: flex !important;
-    flex-flow: row nowrap !important;
+    display: grid !important;
+    grid-template-columns: 88px max-content !important;
+    justify-content: start !important;
     align-items: center !important;
-    gap: 8px !important;
+    column-gap: 8px !important;
+    row-gap: 0 !important;
     width: 100% !important;
     min-width: 0 !important;
   }
   [class*="st-key-it-controls-row-"] [data-testid="column"],
   [class*="st-key-saved-controls-row-"] [data-testid="column"] {
-    flex: 1 1 0% !important;
+    display: block !important;
+    flex: none !important;
     width: auto !important;
     min-width: 0 !important;
     max-width: none !important;
     margin: 0 !important;
     padding: 0 !important;
+  }
+  [class*="st-key-it-controls-row-"] [data-testid="column"]:first-child [data-testid="stTextInput"],
+  [class*="st-key-saved-controls-row-"] [data-testid="column"]:first-child [data-testid="stTextInput"] {
+    width: 88px !important;
+    min-width: 88px !important;
+    max-width: 88px !important;
+    margin: 0 !important;
+  }
+  [class*="st-key-it-controls-row-"] [data-testid="column"]:first-child [data-baseweb="input"],
+  [class*="st-key-saved-controls-row-"] [data-testid="column"]:first-child [data-baseweb="input"],
+  [class*="st-key-it-controls-row-"] [data-testid="column"]:first-child [data-baseweb="base-input"],
+  [class*="st-key-saved-controls-row-"] [data-testid="column"]:first-child [data-baseweb="base-input"] {
+    height: 30px !important;
+    min-height: 30px !important;
+    max-height: 30px !important;
+  }
+  [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(2) [data-testid="stSelectbox"],
+  [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(2) [data-testid="stSelectbox"],
+  [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(2) [data-baseweb="select"],
+  [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(2) [data-baseweb="select"] {
+    width: max-content !important;
+    min-width: 96px !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+  }
+  [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(2) [data-baseweb="select"] > div,
+  [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(2) [data-baseweb="select"] > div {
+    min-width: 96px !important;
+    height: 30px !important;
+    min-height: 30px !important;
+    max-height: 30px !important;
+  }
+
+  @media (max-width: 768px) {
+    [class*="st-key-it-controls-row-"] [data-testid="stHorizontalBlock"],
+    [class*="st-key-saved-controls-row-"] [data-testid="stHorizontalBlock"] {
+      grid-template-columns: 80px 94px !important;
+      column-gap: 6px !important;
+    }
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:first-child [data-testid="stTextInput"],
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:first-child [data-testid="stTextInput"] {
+      width: 80px !important;
+      min-width: 80px !important;
+      max-width: 80px !important;
+    }
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:first-child [data-baseweb="input"],
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:first-child [data-baseweb="input"],
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:first-child [data-baseweb="base-input"],
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:first-child [data-baseweb="base-input"],
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(2) [data-baseweb="select"] > div,
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(2) [data-baseweb="select"] > div {
+      height: 36px !important;
+      min-height: 36px !important;
+      max-height: 36px !important;
+    }
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(2) [data-testid="stSelectbox"],
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(2) [data-testid="stSelectbox"],
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(2) [data-baseweb="select"],
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(2) [data-baseweb="select"] {
+      width: 94px !important;
+      min-width: 94px !important;
+      max-width: 94px !important;
+    }
+
+    /* Más espacio inferior y scroll libre para que los últimos iconos no queden cortados. */
+    [data-testid="stMainBlockContainer"],
+    .block-container {
+      padding-bottom: calc(6rem + env(safe-area-inset-bottom)) !important;
+      overflow: visible !important;
+    }
+    [data-testid="stMain"],
+    section.main,
+    [data-testid="stAppViewContainer"] {
+      overflow-y: visible !important;
+      overflow-x: hidden !important;
+    }
   }
 </style>
 """, unsafe_allow_html=True)
