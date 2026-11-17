@@ -2166,12 +2166,45 @@ st.markdown("""
   [class*="st-key-it-visit-checkbox-wrap-"] [data-testid="stCheckbox"] label p {
     display: none !important;
   }
+  /* Alineación geométrica del checkbox con los centros de Editar y Mapa. */
+  [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(4) {
+    display: flex !important;
+    align-self: center !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+  [class*="st-key-it-visit-checkbox-wrap-"] {
+    display: flex !important;
+    align-self: center !important;
+    align-items: center !important;
+    justify-content: center !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    transform: none !important;
+  }
+  [class*="st-key-it-visit-checkbox-wrap-"] [data-testid="stElementContainer"],
+  [class*="st-key-it-visit-checkbox-wrap-"] [data-testid="stCheckbox"] {
+    display: flex !important;
+    align-self: center !important;
+    align-items: center !important;
+    justify-content: center !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    transform: none !important;
+  }
+  [class*="st-key-it-visit-checkbox-wrap-"] [data-testid="stCheckbox"] > label {
+    position: relative !important;
+    top: 0 !important;
+    align-self: center !important;
+    margin: 0 !important;
+    transform: none !important;
+  }
 
   /* Hora y Día: dimensiones originales compactas (sin agrandarlos). */
   [class*="st-key-it-controls-row-"] [data-testid="stHorizontalBlock"],
   [class*="st-key-saved-controls-row-"] [data-testid="stHorizontalBlock"] {
     display: grid !important;
-    grid-template-columns: 88px 96px !important;
+    grid-template-columns: 90px 98px !important;
     justify-content: start !important;
     align-items: center !important;
     column-gap: 6px !important;
@@ -2192,9 +2225,9 @@ st.markdown("""
   }
   [class*="st-key-it-controls-row-"] [data-testid="column"]:first-child [data-testid="stTextInput"],
   [class*="st-key-saved-controls-row-"] [data-testid="column"]:first-child [data-testid="stTextInput"] {
-    width: 88px !important;
-    min-width: 88px !important;
-    max-width: 88px !important;
+    width: 90px !important;
+    min-width: 90px !important;
+    max-width: 90px !important;
     margin: 0 !important;
   }
   [class*="st-key-it-controls-row-"] [data-testid="column"]:first-child [data-baseweb="input"],
@@ -2202,12 +2235,12 @@ st.markdown("""
   [class*="st-key-it-controls-row-"] [data-testid="column"]:first-child [data-baseweb="base-input"],
   [class*="st-key-saved-controls-row-"] [data-testid="column"]:first-child [data-baseweb="base-input"] {
     box-sizing: border-box !important;
-    width: 88px !important;
-    min-width: 88px !important;
-    max-width: 88px !important;
-    height: 30px !important;
-    min-height: 30px !important;
-    max-height: 30px !important;
+    width: 90px !important;
+    min-width: 90px !important;
+    max-width: 90px !important;
+    height: 32px !important;
+    min-height: 32px !important;
+    max-height: 32px !important;
     padding: 0 3px !important;
     border-radius: 8px !important;
   }
@@ -2216,8 +2249,8 @@ st.markdown("""
     box-sizing: border-box !important;
     width: 100% !important;
     min-width: 0 !important;
-    height: 28px !important;
-    min-height: 28px !important;
+    height: 30px !important;
+    min-height: 30px !important;
     padding: 0 4px !important;
     font-size: 0.77rem !important;
     font-weight: 700 !important;
@@ -2228,20 +2261,20 @@ st.markdown("""
   [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(2) [data-testid="stSelectbox"],
   [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(2) [data-baseweb="select"],
   [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(2) [data-baseweb="select"] {
-    width: 96px !important;
-    min-width: 96px !important;
-    max-width: 96px !important;
+    width: 98px !important;
+    min-width: 98px !important;
+    max-width: 98px !important;
     margin: 0 !important;
   }
   [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(2) [data-baseweb="select"] > div,
   [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(2) [data-baseweb="select"] > div {
     box-sizing: border-box !important;
-    width: 96px !important;
-    min-width: 96px !important;
-    max-width: 96px !important;
-    height: 30px !important;
-    min-height: 30px !important;
-    max-height: 30px !important;
+    width: 98px !important;
+    min-width: 98px !important;
+    max-width: 98px !important;
+    height: 32px !important;
+    min-height: 32px !important;
+    max-height: 32px !important;
     padding-left: 6px !important;
     padding-right: 18px !important;
     border-radius: 8px !important;
@@ -2314,7 +2347,7 @@ st.markdown("""
     [class*="st-key-it-controls-row-"] [data-testid="stHorizontalBlock"],
     [class*="st-key-saved-controls-row-"] [data-testid="stHorizontalBlock"] {
       display: grid !important;
-      grid-template-columns: 80px 94px !important;
+      grid-template-columns: 82px 96px !important;
       column-gap: 6px !important;
       align-items: center !important;
       justify-content: start !important;
@@ -2339,12 +2372,12 @@ st.markdown("""
     [class*="st-key-it-controls-row-"] [data-testid="column"]:first-child [data-baseweb="base-input"],
     [class*="st-key-saved-controls-row-"] [data-testid="column"]:first-child [data-baseweb="base-input"] {
       box-sizing: border-box !important;
-      width: 80px !important;
-      min-width: 80px !important;
-      max-width: 80px !important;
-      height: 34px !important;
-      min-height: 34px !important;
-      max-height: 34px !important;
+      width: 82px !important;
+      min-width: 82px !important;
+      max-width: 82px !important;
+      height: 36px !important;
+      min-height: 36px !important;
+      max-height: 36px !important;
       margin: 0 !important;
       padding: 0 3px !important;
     }
@@ -2353,8 +2386,8 @@ st.markdown("""
       box-sizing: border-box !important;
       width: 100% !important;
       min-width: 0 !important;
-      height: 32px !important;
-      min-height: 32px !important;
+      height: 34px !important;
+      min-height: 34px !important;
       padding: 0 2px !important;
       font-size: 0.78rem !important;
       font-weight: 700 !important;
@@ -2367,12 +2400,12 @@ st.markdown("""
     [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(2) [data-baseweb="select"] > div,
     [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(2) [data-baseweb="select"] > div {
       box-sizing: border-box !important;
-      width: 94px !important;
-      min-width: 94px !important;
-      max-width: 94px !important;
-      height: 34px !important;
-      min-height: 34px !important;
-      max-height: 34px !important;
+      width: 96px !important;
+      min-width: 96px !important;
+      max-width: 96px !important;
+      height: 36px !important;
+      min-height: 36px !important;
+      max-height: 36px !important;
     }
     [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(2) [data-baseweb="select"] span,
     [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(2) [data-baseweb="select"] span {
