@@ -1652,8 +1652,12 @@ st.markdown("""
   }
   [class*="st-key-it-controls-row-"] [data-testid="column"]:first-child [data-baseweb="input"],
   [class*="st-key-saved-controls-row-"] [data-testid="column"]:first-child [data-baseweb="input"],
+  [class*="st-key-it-controls-row-"] [data-testid="column"]:first-child [data-baseweb="input"] > div,
+  [class*="st-key-saved-controls-row-"] [data-testid="column"]:first-child [data-baseweb="input"] > div,
   [class*="st-key-it-controls-row-"] [data-testid="column"]:first-child [data-baseweb="base-input"],
-  [class*="st-key-saved-controls-row-"] [data-testid="column"]:first-child [data-baseweb="base-input"] {
+  [class*="st-key-saved-controls-row-"] [data-testid="column"]:first-child [data-baseweb="base-input"],
+  [class*="st-key-it-controls-row-"] [data-testid="column"]:first-child [data-baseweb="base-input"] > div,
+  [class*="st-key-saved-controls-row-"] [data-testid="column"]:first-child [data-baseweb="base-input"] > div {
     box-sizing: border-box !important;
     width: 99px !important;
     min-width: 99px !important;
@@ -1792,12 +1796,13 @@ st.markdown("""
     [class*="st-key-saved-controls-row-"] [data-testid="column"]:first-child [data-testid="stTextInput"],
     [class*="st-key-it-controls-row-"] [data-testid="column"]:first-child [data-baseweb="input"],
     [class*="st-key-saved-controls-row-"] [data-testid="column"]:first-child [data-baseweb="input"],
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:first-child [data-baseweb="input"] > div,
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:first-child [data-baseweb="input"] > div,
     [class*="st-key-it-controls-row-"] [data-testid="column"]:first-child [data-baseweb="base-input"],
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:first-child [data-baseweb="base-input"] {
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:first-child [data-baseweb="base-input"],
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:first-child [data-baseweb="base-input"] > div,
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:first-child [data-baseweb="base-input"] > div {
       box-sizing: border-box !important;
-      height: 35px !important;
-      min-height: 35px !important;
-      max-height: 35px !important;
       width: 100px !important;
       min-width: 100px !important;
       max-width: 100px !important;
@@ -1905,80 +1910,6 @@ st.markdown("""
       transform: translate(4px,0px) !important;
     }
   }
-  /* Altura de Hora y Día aplicada directamente a cada widget por su key real.
-     Evita depender de la estructura intermedia de columnas/contenedores. */
-  [class*="st-key-hora_it_"],
-  [class*="st-key-hora_pool_"] {
-    height: 35px !important;
-    min-height: 35px !important;
-    max-height: 35px !important;
-  }
-  [class*="st-key-hora_it_"] [data-testid="stTextInput"],
-  [class*="st-key-hora_pool_"] [data-testid="stTextInput"],
-  [class*="st-key-hora_it_"] [data-baseweb="input"],
-  [class*="st-key-hora_pool_"] [data-baseweb="input"],
-  [class*="st-key-hora_it_"] [data-baseweb="base-input"],
-  [class*="st-key-hora_pool_"] [data-baseweb="base-input"] {
-    box-sizing: border-box !important;
-    height: 35px !important;
-    min-height: 35px !important;
-    max-height: 35px !important;
-  }
-  [class*="st-key-hora_it_"] input,
-  [class*="st-key-hora_pool_"] input {
-    box-sizing: border-box !important;
-    height: 25px !important;
-    min-height: 25px !important;
-  }
-  [class*="st-key-mvd_it_"],
-  [class*="st-key-asig_dia_pool_"] {
-    height: 35px !important;
-    min-height: 35px !important;
-    max-height: 35px !important;
-  }
-  [class*="st-key-mvd_it_"] [data-testid="stSelectbox"],
-  [class*="st-key-asig_dia_pool_"] [data-testid="stSelectbox"],
-  [class*="st-key-mvd_it_"] [data-baseweb="select"],
-  [class*="st-key-asig_dia_pool_"] [data-baseweb="select"],
-  [class*="st-key-mvd_it_"] [data-baseweb="select"] > div,
-  [class*="st-key-asig_dia_pool_"] [data-baseweb="select"] > div {
-    box-sizing: border-box !important;
-    height: 35px !important;
-    min-height: 35px !important;
-    max-height: 35px !important;
-  }
-  @media (max-width: 768px) {
-    [class*="st-key-hora_it_"],
-    [class*="st-key-hora_pool_"],
-    [class*="st-key-hora_it_"] [data-testid="stTextInput"],
-    [class*="st-key-hora_pool_"] [data-testid="stTextInput"],
-    [class*="st-key-hora_it_"] [data-baseweb="input"],
-    [class*="st-key-hora_pool_"] [data-baseweb="input"],
-    [class*="st-key-hora_it_"] [data-baseweb="base-input"],
-    [class*="st-key-hora_pool_"] [data-baseweb="base-input"] {
-      height: 35px !important;
-      min-height: 35px !important;
-      max-height: 35px !important;
-    }
-    [class*="st-key-hora_it_"] input,
-    [class*="st-key-hora_pool_"] input {
-      height: 29px !important;
-      min-height: 29px !important;
-    }
-    [class*="st-key-mvd_it_"],
-    [class*="st-key-asig_dia_pool_"],
-    [class*="st-key-mvd_it_"] [data-testid="stSelectbox"],
-    [class*="st-key-asig_dia_pool_"] [data-testid="stSelectbox"],
-    [class*="st-key-mvd_it_"] [data-baseweb="select"],
-    [class*="st-key-asig_dia_pool_"] [data-baseweb="select"],
-    [class*="st-key-mvd_it_"] [data-baseweb="select"] > div,
-    [class*="st-key-asig_dia_pool_"] [data-baseweb="select"] > div {
-      height: 40px !important;
-      min-height: 40px !important;
-      max-height: 40px !important;
-    }
-  }
-
 </style>
 """, unsafe_allow_html=True)
 
