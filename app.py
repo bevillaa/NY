@@ -1542,8 +1542,9 @@ st.markdown("""
   /* En móvil, se neutraliza el apilado global SOLO en estas filas. */
   @media (max-width: 768px) {
     [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] {
-      display: flex !important;
-      flex-flow: row nowrap !important;
+      display: grid !important;
+      grid-template-columns: minmax(0, 1fr) 30px 30px 30px !important;
+      grid-auto-flow: column !important;
       align-items: center !important;
       justify-content: stretch !important;
       column-gap: 4px !important;
@@ -1716,13 +1717,14 @@ st.markdown("""
     [class*="st-key-it-edit-button-wrap-"] { transform: translate(4px, 0px) !important; }
   }
 
-  /* RUTA: una única distribución flex para escritorio y móvil.
-     st.columns crea cinco contenedores neutros; aquí se asignan sus proporciones. */
+  /* RUTA: hora delante del nombre en una única fila horizontal.
+     Guardados conserva su estructura y sus dimensiones originales. */
   [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] {
-    display: flex !important;
-    flex-flow: row nowrap !important;
+    display: grid !important;
+    grid-template-columns: 84px minmax(0, 1fr) 30px 30px 30px !important;
+    grid-auto-flow: column !important;
     align-items: center !important;
-    justify-content: flex-start !important;
+    justify-content: stretch !important;
     column-gap: 3px !important;
     row-gap: 0 !important;
     width: 100% !important;
@@ -1733,56 +1735,28 @@ st.markdown("""
   [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"] {
     box-sizing: border-box !important;
     display: flex !important;
+    flex: none !important;
     min-width: 0 !important;
-    max-width: none !important;
+    max-width: 100% !important;
     margin: 0 !important;
     padding: 0 !important;
     align-items: center !important;
     justify-content: center !important;
     overflow: visible !important;
   }
-  /* Hora: ancho fijo como en la versión estable; la información ocupa
-     todo el espacio restante tanto en escritorio como en móvil. */
-  [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(1) {
-    box-sizing: border-box !important;
-    display: flex !important;
-    flex: 0 0 84px !important;
+  [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:first-child {
     width: 84px !important;
     min-width: 84px !important;
     max-width: 84px !important;
-    align-items: center !important;
-    justify-content: center !important;
   }
   [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(2) {
-    box-sizing: border-box !important;
-    display: flex !important;
-    flex: 1 1 0% !important;
     width: auto !important;
     min-width: 0 !important;
     max-width: none !important;
     justify-content: flex-start !important;
     overflow: visible !important;
   }
-  [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(3) {
-    flex: 0.55 0 30px !important;
-    width: 30px !important;
-    min-width: 30px !important;
-    max-width: 30px !important;
-    height: 30px !important;
-    min-height: 30px !important;
-    max-height: 30px !important;
-  }
-  [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(4) {
-    flex: 0.55 0 30px !important;
-    width: 30px !important;
-    min-width: 30px !important;
-    max-width: 30px !important;
-    height: 30px !important;
-    min-height: 30px !important;
-    max-height: 30px !important;
-  }
-  [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(5) {
-    flex: 0.45 0 30px !important;
+  [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(n+3) {
     width: 30px !important;
     min-width: 30px !important;
     max-width: 30px !important;
@@ -1794,9 +1768,9 @@ st.markdown("""
   [class*="st-key-it-heading-row-"] [data-testid="column"]:first-child [data-baseweb="input"],
   [class*="st-key-it-heading-row-"] [data-testid="column"]:first-child [data-baseweb="base-input"] {
     box-sizing: border-box !important;
-    width: 84px !important;
-    min-width: 84px !important;
-    max-width: 84px !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
     height: 40px !important;
     min-height: 40px !important;
     max-height: 40px !important;
@@ -1830,7 +1804,7 @@ st.markdown("""
     word-break: normal !important;
     white-space: normal !important;
   }
-  /* El checkbox permanece en la quinta columna de Ruta. */
+  /* El checkbox ahora está en la quinta columna de Ruta. */
   [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(5),
   [class*="st-key-it-visit-checkbox-wrap-"],
   [class*="st-key-it-visit-checkbox-wrap-"] [data-testid="stElementContainer"],
@@ -1843,6 +1817,26 @@ st.markdown("""
   /* Título de los lugares de Ruta: 1,5 puntos menos. */
   [class*="st-key-it-heading-row-"] .place-list-title {
     font-size: calc(1.25rem - 1.5pt) !important;
+  }
+  @media (max-width: 768px) {
+    [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] {
+      display: grid !important;
+      grid-template-columns: 84px minmax(0, 1fr) 30px 30px 30px !important;
+      column-gap: 4px !important;
+      align-items: center !important;
+      justify-content: stretch !important;
+      width: 100% !important;
+      min-width: 0 !important;
+      max-width: 100% !important;
+    }
+    [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:first-child,
+    [class*="st-key-it-heading-row-"] [data-testid="column"]:first-child [data-testid="stTextInput"],
+    [class*="st-key-it-heading-row-"] [data-testid="column"]:first-child [data-baseweb="input"],
+    [class*="st-key-it-heading-row-"] [data-testid="column"]:first-child [data-baseweb="base-input"] {
+      width: 100% !important;
+      min-width: 0 !important;
+      max-width: 100% !important;
+    }
   }
 </style>
 """, unsafe_allow_html=True)
@@ -3443,10 +3437,8 @@ if seccion_principal == "🗽Ruta":
 
                 # Fila de Ruta: hora | nombre | editar | mapa | visitado.
                 with st.container(key=f"it-heading-row-{item['id']}"):
-                    # Streamlit crea únicamente los cinco contenedores; la distribución
-                    # horizontal se define en un único lugar: las reglas flex de Ruta.
                     c_hr_head, c_info, c_edit_head, c_map_head, c_chk = st.columns(
-                        5,
+                        [1.35, 8.35, 0.55, 0.55, 0.45],
                         gap="small",
                         vertical_alignment="center"
                     )
@@ -3466,9 +3458,6 @@ if seccion_principal == "🗽Ruta":
                                     hl = "0" + hl
                                 st.session_state.lugares[idx_real]["hora"] = hl
                                 guardar_itinerario_disco(st.session_state.lugares)
-                                # La lista se había ordenado antes de leer este cambio.
-                                # Reejecutar permite recalcular el orden con la hora guardada.
-                                st.rerun()
 
                     with c_info:
                         txt_c = "#334155" if is_visited else "#0F172A"
