@@ -1721,7 +1721,7 @@ st.markdown("""
      Guardados conserva su estructura y sus dimensiones originales. */
   [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] {
     display: grid !important;
-    grid-template-columns: 100px minmax(0, 1fr) 30px 30px 30px !important;
+    grid-template-columns: 84px minmax(0, 1fr) 30px 30px 30px !important;
     grid-auto-flow: column !important;
     align-items: center !important;
     justify-content: stretch !important;
@@ -1745,9 +1745,9 @@ st.markdown("""
     overflow: visible !important;
   }
   [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:first-child {
-    width: 100px !important;
-    min-width: 100px !important;
-    max-width: 100px !important;
+    width: 84px !important;
+    min-width: 84px !important;
+    max-width: 84px !important;
   }
   [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(2) {
     width: auto !important;
@@ -1768,9 +1768,9 @@ st.markdown("""
   [class*="st-key-it-heading-row-"] [data-testid="column"]:first-child [data-baseweb="input"],
   [class*="st-key-it-heading-row-"] [data-testid="column"]:first-child [data-baseweb="base-input"] {
     box-sizing: border-box !important;
-    width: 100px !important;
-    min-width: 100px !important;
-    max-width: 100px !important;
+    width: 84px !important;
+    min-width: 84px !important;
+    max-width: 84px !important;
     height: 40px !important;
     min-height: 40px !important;
     max-height: 40px !important;
@@ -1821,7 +1821,7 @@ st.markdown("""
   @media (max-width: 768px) {
     [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] {
       display: grid !important;
-      grid-template-columns: 100px minmax(0, 1fr) 30px 30px 30px !important;
+      grid-template-columns: 84px minmax(0, 1fr) 30px 30px 30px !important;
       column-gap: 4px !important;
       align-items: center !important;
       justify-content: stretch !important;
@@ -1833,9 +1833,9 @@ st.markdown("""
     [class*="st-key-it-heading-row-"] [data-testid="column"]:first-child [data-testid="stTextInput"],
     [class*="st-key-it-heading-row-"] [data-testid="column"]:first-child [data-baseweb="input"],
     [class*="st-key-it-heading-row-"] [data-testid="column"]:first-child [data-baseweb="base-input"] {
-      width: 100px !important;
-      min-width: 100px !important;
-      max-width: 100px !important;
+      width: 84px !important;
+      min-width: 84px !important;
+      max-width: 84px !important;
     }
   }
 </style>
@@ -3465,7 +3465,7 @@ if seccion_principal == "🗽Ruta":
                         dir_html = f'<div class="place-list-address">📍 {html.escape(str(dir_i))}</div>' if dir_i else ''
                         nota_html = bloque_nota_html(nota_i)
                         st.markdown(
-                            f'<div style="{strike}; position:relative; left:-8px; width:calc(100% + 8px); min-width:0; overflow-wrap:anywhere;">'
+                            f'<div style="{strike}; min-width:0; width:100%; overflow-wrap:anywhere;">'
                             f'<div class="place-list-title" style="color:{txt_c};">{emoji_i} {item["nombre"]}</div>'
                             f'{dir_html}{nota_html}</div>',
                             unsafe_allow_html=True
