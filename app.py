@@ -1478,9 +1478,9 @@ st.markdown("""
   }
   [class*="st-key-it-controls-row-"] [data-testid="column"]:first-child [data-testid="stTextInput"],
   [class*="st-key-saved-controls-row-"] [data-testid="column"]:first-child [data-testid="stTextInput"] {
-    width: 99px !important;
-    min-width: 99px !important;
-    max-width: 99px !important;
+    width: 120px !important;
+    min-width: 120px !important;
+    max-width: 120px !important;
     margin: 0 !important;
   }
   [class*="st-key-it-controls-row-"] [data-testid="column"]:first-child [data-baseweb="input"],
@@ -1488,9 +1488,9 @@ st.markdown("""
   [class*="st-key-it-controls-row-"] [data-testid="column"]:first-child [data-baseweb="base-input"],
   [class*="st-key-saved-controls-row-"] [data-testid="column"]:first-child [data-baseweb="base-input"] {
     box-sizing: border-box !important;
-    width: 99px !important;
-    min-width: 99px !important;
-    max-width: 99px !important;
+    width: 120px !important;
+    min-width: 120px !important;
+    max-width: 120px !important;
     height: 40px !important;
     min-height: 40px !important;
     max-height: 40px !important;
@@ -1627,9 +1627,9 @@ st.markdown("""
       width: 100px !important;
       min-width: 100px !important;
       max-width: 100px !important;
-      height: 40px !important;
-      min-height: 40px !important;
-      max-height: 40px !important;
+      height: 30px !important;
+      min-height: 30px !important;
+      max-height: 30px !important;
       margin: 0 !important;
       padding: 0 3px !important;
     }
@@ -1655,9 +1655,9 @@ st.markdown("""
       width: 125px !important;
       min-width: 125px !important;
       max-width: 125px !important;
-      height: 45px !important;
-      min-height: 45px !important;
-      max-height: 45px !important;
+      height: 30px !important;
+      min-height: 30px !important;
+      max-height: 30px !important;
     }
     [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(2) [data-baseweb="select"] span,
     [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(2) [data-baseweb="select"] span {
