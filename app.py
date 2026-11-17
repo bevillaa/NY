@@ -1768,9 +1768,9 @@ st.markdown("""
   [class*="st-key-it-heading-row-"] [data-testid="column"]:first-child [data-baseweb="input"],
   [class*="st-key-it-heading-row-"] [data-testid="column"]:first-child [data-baseweb="base-input"] {
     box-sizing: border-box !important;
-    width: 100% !important;
-    min-width: 0 !important;
-    max-width: 100% !important;
+    width: 70px !important;
+    min-width: 70px !important;
+    max-width: 70px !important;
     height: 40px !important;
     min-height: 40px !important;
     max-height: 40px !important;
@@ -1833,9 +1833,9 @@ st.markdown("""
     [class*="st-key-it-heading-row-"] [data-testid="column"]:first-child [data-testid="stTextInput"],
     [class*="st-key-it-heading-row-"] [data-testid="column"]:first-child [data-baseweb="input"],
     [class*="st-key-it-heading-row-"] [data-testid="column"]:first-child [data-baseweb="base-input"] {
-      width: 100% !important;
-      min-width: 0 !important;
-      max-width: 100% !important;
+      width: 70px !important;
+      min-width: 70px !important;
+      max-width: 70px !important;
     }
   }
 </style>
@@ -3438,7 +3438,7 @@ if seccion_principal == "🗽Ruta":
                 # Fila de Ruta: hora | nombre | editar | mapa | visitado.
                 with st.container(key=f"it-heading-row-{item['id']}"):
                     c_hr_head, c_info, c_edit_head, c_map_head, c_chk = st.columns(
-                        [1.35, 8.35, 0.55, 0.55, 0.45],
+                        [1.7, 8, 0.55, 0.55, 0.45],
                         gap="small",
                         vertical_alignment="center"
                     )
