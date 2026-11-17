@@ -2231,7 +2231,7 @@ st.markdown("""
     grid-template-columns: 100px 125px !important;
     justify-content: start !important;
     align-items: center !important;
-    column-gap: 6px !important;
+    column-gap: 4px !important;
     row-gap: 0 !important;
     width: 100% !important;
     min-width: 0 !important;
