@@ -1707,11 +1707,11 @@ st.markdown("""
   @media (max-width: 768px) {
     [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] {
       display: grid !important;
-      grid-template-columns: minmax(0, 1fr) 38px 38px 30px !important;
+      grid-template-columns: minmax(0, 1fr) 30px 30px 30px !important;
       grid-auto-flow: column !important;
       align-items: center !important;
       justify-content: stretch !important;
-      column-gap: 3px !important;
+      column-gap: 6px !important;
       row-gap: 0 !important;
       width: 100% !important;
       min-width: 0 !important;
@@ -1877,10 +1877,10 @@ st.markdown("""
     margin-bottom: 0 !important;
   }
   /* Ajuste exclusivo para móvil: desplaza el checkbox de Ruta ligeramente
-     hacia arriba y a la derecha para alinearlo visualmente con Mapa y Editar. */
+     hacia arriba para alinearlo verticalmente con Mapa y Editar. */
   @media (max-width: 768px) {
     [class*="st-key-it-visit-checkbox-wrap-"] {
-      transform: translate(3px, -4.5px) !important;
+      transform: translateY(-4.5px) !important;
     }
   }
 </style>
