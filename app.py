@@ -41,7 +41,7 @@ st.markdown("""
     min-height: 0 !important;
   }
 
-  @import url('https://fonts.googleapis.com/css2?family=Carlito:ital,wght@0,400;0,700;1,400;1,700&family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap');
+  @import url("https://fonts.googleapis.com/css2?family=Carlito:ital,wght@0,400;0,700;1,400;1,700&family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap");
 
   :root {
     color-scheme: light !important;
@@ -53,7 +53,7 @@ st.markdown("""
 
   html, body, .stApp, p, h1, h2, h3, h4, h5, h6, label, input, button, select, textarea,
   .stMarkdown, [data-testid="stMarkdownContainer"], [data-testid="stText"], .stCaption, small {
-    font-family: 'Calibri', 'Carlito', 'Segoe UI', Candara, -apple-system, BlinkMacSystemFont, Arial, sans-serif !important;
+    font-family: "Calibri", "Carlito", "Segoe UI", Candara, -apple-system, BlinkMacSystemFont, Arial, sans-serif !important;
     color: #0F172A !important;
   }
 
@@ -69,7 +69,7 @@ st.markdown("""
   [class*="material-symbols"],
   [data-baseweb="icon"],
   span.e1vmumty0 {
-    font-family: 'Material Symbols Rounded', 'Material Symbols Outlined', 'Material Icons' !important;
+    font-family: "Material Symbols Rounded", "Material Symbols Outlined", "Material Icons" !important;
     font-weight: normal !important;
     font-style: normal !important;
     font-size: 20px !important;
@@ -82,8 +82,8 @@ st.markdown("""
     white-space: nowrap !important;
     word-wrap: normal !important;
     direction: ltr !important;
-    -webkit-font-feature-settings: 'liga' !important;
-    font-feature-settings: 'liga' !important;
+    -webkit-font-feature-settings: "liga" !important;
+    font-feature-settings: "liga" !important;
     -webkit-font-smoothing: antialiased !important;
     color: #0F172A !important;
   }
@@ -424,7 +424,7 @@ st.markdown("""
     padding: 0 !important;
     font-size: 1.18rem !important;
     line-height: 1.1 !important;
-    font-family: 'Apple Color Emoji', 'Segoe UI Emoji', 'Noto Color Emoji', sans-serif !important;
+    font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif !important;
     border-radius: 7px !important;
     border: 1px solid #CBD5E1 !important;
     background: #F8FAFC !important;
@@ -603,34 +603,9 @@ st.markdown("""
     }
 
     /* Filas de nombre dentro de contenedores con identidad CSS propia. */
-    [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] {
-      display: grid !important;
-      grid-template-columns: minmax(0, 1fr) 36px !important;
-      column-gap: 6px !important;
-      row-gap: 0 !important;
-      align-items: start !important;
-      width: 100% !important;
-      min-width: 0 !important;
-    }
-    [class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"] {
-      display: grid !important;
-      grid-template-columns: minmax(0, 1fr) 36px !important;
-      column-gap: 6px !important;
-      row-gap: 0 !important;
-      align-items: start !important;
-      width: 100% !important;
-      min-width: 0 !important;
-    }
-    [class*="st-key-it-heading-row-"] [data-testid="column"],
-    [class*="st-key-saved-heading-row-"] [data-testid="column"] {
-      display: block !important;
-      flex: none !important;
-      width: 100% !important;
-      min-width: 0 !important;
-      max-width: 100% !important;
-      margin: 0 !important;
-      padding: 0 !important;
-    }
+    
+    
+    
     .edit-mini-btn { display: flex !important; justify-content: flex-end !important; width: 100% !important; }
     .edit-mini-btn button,
     [data-testid="column"]:has(.edit-mini-btn) .stButton > button {
@@ -747,7 +722,7 @@ st.markdown("""
       white-space: nowrap !important;
       overflow: visible !important;
       text-overflow: clip !important;
-      font-family: 'Apple Color Emoji', 'Segoe UI Emoji', 'Noto Color Emoji', sans-serif !important;
+      font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif !important;
     }
 
     /* Botón lápiz: suficiente área táctil y glifo siempre visible. */
@@ -763,7 +738,7 @@ st.markdown("""
       font-size: 1.05rem !important;
       line-height: 1.1 !important;
       overflow: visible !important;
-      font-family: 'Apple Color Emoji', 'Segoe UI Emoji', 'Noto Color Emoji', sans-serif !important;
+      font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif !important;
     }
 
     /* Acciones de seguimiento de vuelos y listas Google: dos botones alineados. */
@@ -864,14 +839,8 @@ st.markdown("""
     .block-container { padding-left: 0.45rem !important; padding-right: 0.45rem !important; }
     .hero-title { font-size: 1.2rem !important; }
     .stTabs [data-baseweb="tab"] { font-size: 0.69rem !important; padding: 6px 2px !important; }
-    [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] {
-      grid-template-columns: minmax(0, 1fr) 38px !important;
-      column-gap: 5px !important;
-    }
-    [class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"] {
-      grid-template-columns: minmax(0, 1fr) 38px !important;
-      column-gap: 5px !important;
-    }
+    
+    
   }
 
   /* -----------------------------------------------------------------------
@@ -944,7 +913,7 @@ st.markdown("""
       padding: 0 2px !important;
       color: #0F172A !important;
       -webkit-text-fill-color: #0F172A !important;
-      font-family: 'Calibri', 'Carlito', Arial, sans-serif !important;
+      font-family: "Calibri", "Carlito", Arial, sans-serif !important;
       font-size: 0.82rem !important;
       font-weight: 800 !important;
       letter-spacing: 0 !important;
@@ -1032,37 +1001,8 @@ st.markdown("""
     }
 
     /* Lápiz visible y de tamaño táctil suficiente; SVG no depende de emojis. */
-    [class*="st-key-it-heading-row-"] [data-testid="column"]:last-child [data-testid="stButton"] > button,
-    [class*="st-key-saved-heading-row-"] [data-testid="column"]:last-child [data-testid="stButton"] > button {
-      box-sizing: border-box !important;
-      display: flex !important;
-      align-items: center !important;
-      justify-content: center !important;
-      width: 36px !important;
-      min-width: 36px !important;
-      max-width: 36px !important;
-      height: 36px !important;
-      min-height: 36px !important;
-      max-height: 36px !important;
-      margin: 0 !important;
-      padding: 0 !important;
-      border: 1.5px solid #94A3B8 !important;
-      border-radius: 8px !important;
-      background-color: #F8FAFC !important;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%23334155' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m16 4 4 4'/%3E%3Cpath d='M4 20l4-.9L19 8a2.1 2.1 0 0 0-3-3L5 16z'/%3E%3C/svg%3E") !important;
-      background-repeat: no-repeat !important;
-      background-position: center center !important;
-      background-size: 19px 19px !important;
-      color: transparent !important;
-      font-size: 0 !important;
-      line-height: 0 !important;
-      overflow: visible !important;
-      opacity: 1 !important;
-    }
-    [class*="st-key-it-heading-row-"] [data-testid="column"]:last-child [data-testid="stButton"] > button span,
-    [class*="st-key-saved-heading-row-"] [data-testid="column"]:last-child [data-testid="stButton"] > button span {
-      display: none !important;
-    }
+    
+    
   }
 
   @media (max-width: 320px) {
@@ -1201,7 +1141,7 @@ st.markdown("""
       box-sizing: border-box !important; display: block !important; width: 100% !important; min-width: 0 !important;
       height: 34px !important; min-height: 34px !important; padding: 0 2px !important;
       color: #0F172A !important; -webkit-text-fill-color: #0F172A !important;
-      font: 700 0.78rem/1 'Calibri', 'Carlito', Arial, sans-serif !important;
+      font: 700 0.78rem/1 "Calibri", "Carlito", Arial, sans-serif !important;
       text-align: center !important; letter-spacing: 0 !important; opacity: 1 !important;
     }
 
@@ -1228,24 +1168,11 @@ st.markdown("""
     [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(4) [data-baseweb="select"] svg { width: 13px !important; min-width: 13px !important; }
 
     /* La fila informativa utiliza todo el ancho; la fila de cuatro controles va debajo. */
-    [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] {
-      display: grid !important; grid-template-columns: minmax(0, 1fr) 36px !important;
-      gap: 5px !important; align-items: start !important; width: 100% !important;
-    }
-    [class*="st-key-it-heading-row-"] [data-testid="column"] { min-width: 0 !important; width: 100% !important; padding: 0 !important; }
-    [class*="st-key-it-heading-row-"] [data-testid="column"]:last-child {
-      display: flex !important;
-      justify-content: flex-end !important;
-      align-items: flex-start !important;
-    }
-    [class*="st-key-it-heading-row-"] [data-testid="column"]:last-child [data-testid="stCheckbox"] {
-      width: 36px !important;
-      min-width: 36px !important;
-      display: flex !important;
-      justify-content: flex-end !important;
-      margin-top: 1px !important;
-    }
-    [class*="st-key-saved-heading-row-"] { width: 100% !important; min-width: 0 !important; }
+    
+    
+    
+    
+    
 
     /* No permitir que los estilos globales de Streamlit vuelvan a ensanchar los widgets. */
     [class*="st-key-it-controls-row-"] .stButton,
@@ -1424,7 +1351,7 @@ st.markdown("""
       padding: 0 1px !important;
       color: #0F172A !important;
       -webkit-text-fill-color: #0F172A !important;
-      font-family: 'Calibri', 'Carlito', Arial, sans-serif !important;
+      font-family: "Calibri", "Carlito", Arial, sans-serif !important;
       font-size: clamp(0.68rem, 2.8vw, 0.82rem) !important;
       font-weight: 800 !important;
       letter-spacing: 0 !important;
@@ -1971,7 +1898,7 @@ st.markdown("""
       background-color: #FFFFFF !important;
       color: #334155 !important;
       -webkit-text-fill-color: #334155 !important;
-      font-family: 'Apple Color Emoji', 'Segoe UI Emoji', 'Noto Color Emoji', sans-serif !important;
+      font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif !important;
       font-size: 1.05rem !important;
       line-height: 1 !important;
       font-weight: 400 !important;
@@ -1989,7 +1916,7 @@ st.markdown("""
       opacity: 1 !important;
       color: inherit !important;
       -webkit-text-fill-color: currentColor !important;
-      font-family: 'Apple Color Emoji', 'Segoe UI Emoji', 'Noto Color Emoji', sans-serif !important;
+      font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif !important;
       font-size: inherit !important;
       line-height: 1 !important;
       margin: 0 !important;
@@ -2158,7 +2085,7 @@ st.markdown("""
       background-image: none !important;
       color: #334155 !important;
       -webkit-text-fill-color: #334155 !important;
-      font-family: 'Apple Color Emoji', 'Segoe UI Emoji', 'Noto Color Emoji', sans-serif !important;
+      font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif !important;
       font-size: 1rem !important;
       line-height: 1 !important;
       text-decoration: none !important;
@@ -2175,7 +2102,7 @@ st.markdown("""
       opacity: 1 !important;
       color: inherit !important;
       -webkit-text-fill-color: currentColor !important;
-      font-family: 'Apple Color Emoji', 'Segoe UI Emoji', 'Noto Color Emoji', sans-serif !important;
+      font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif !important;
       font-size: inherit !important;
       line-height: 1 !important;
       margin: 0 !important;
@@ -3013,17 +2940,9 @@ st.markdown("""
 
 
   /* Itinerario: lugares ligeramente indentados bajo la cabecera de cada día. */
-  [class*="st-key-it-heading-row-"],
-  [class*="st-key-it-controls-row-"] {
-    margin-left: 18px !important;
-    width: calc(100% - 18px) !important;
-  }
+  
   @media (max-width: 768px) {
-    [class*="st-key-it-heading-row-"],
-    [class*="st-key-it-controls-row-"] {
-      margin-left: 12px !important;
-      width: calc(100% - 12px) !important;
-    }
+    
   }
 
   /* El lápiz del itinerario conserva todo su contorno y no recorta la punta. */
@@ -3097,7 +3016,7 @@ st.markdown("""
   }
   html, body, .stApp, p, label, input, button, select, textarea,
   .stMarkdown, [data-testid="stMarkdownContainer"], [data-testid="stText"], small {
-    font-family: 'DM Sans', 'Avenir Next', sans-serif !important;
+    font-family: "DM Sans", "Avenir Next", sans-serif !important;
     color: var(--ink) !important;
   }
   .block-container {
@@ -3107,7 +3026,7 @@ st.markdown("""
     padding-bottom: 3rem !important;
   }
   h1, h2, h3, h4, .hero-title {
-    font-family: 'Playfair Display', Georgia, serif !important;
+    font-family: "Playfair Display", Georgia, serif !important;
     color: var(--ink) !important;
     letter-spacing: -0.025em !important;
   }
@@ -3122,7 +3041,7 @@ st.markdown("""
     position: relative;
   }
   .hero-container:before {
-    content: '';
+    content: "";
     position: absolute;
     top: 0; left: 28px; right: 28px;
     height: 3px;
@@ -3372,60 +3291,15 @@ st.markdown("""
 
   
   /* Acciones compactas alineadas a la derecha del nombre del lugar. */
-  [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"],
-  [class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"] {
-    display: grid !important;
-    grid-template-columns: minmax(0, 1fr) 30px 30px 30px !important;
-    align-items: start !important;
-    column-gap: 5px !important;
-    width: 100% !important;
-  }
+  
 
-  [class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"] {
-    grid-template-columns: minmax(0, 1fr) 30px 30px !important;
-  }
+  
 
-  [class*="st-key-it-heading-row-"] [data-testid="column"],
-  [class*="st-key-saved-heading-row-"] [data-testid="column"] {
-    min-width: 0 !important;
-    width: 100% !important;
-    padding: 0 !important;
-  }
+  
 
-  [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2) button,
-  [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(3) a,
-  [class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(2) button,
-  [class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(3) a {
-    box-sizing: border-box !important;
-    width: 35px !important;
-    min-width: 35px !important;
-    max-width: 35px !important;
-    height: 35px !important;
-    min-height: 35px !important;
-    max-height: 35px !important;
-    padding: 0 !important;
-    margin: 0 !important;
-    display: inline-flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    line-height: 1 !important;
-    overflow: visible !important;
-  }
+  
 
-  [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(4) {
-    box-sizing: border-box !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    width: 38px !important;
-    min-width: 38px !important;
-    max-width: 38px !important;
-    height: 38px !important;
-    min-height: 38px !important;
-    max-height: 38px !important;
-    margin: 0 !important;
-    padding: 0 !important;
-  }
+  
 
   [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(1),
   [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(2),
@@ -3448,37 +3322,14 @@ st.markdown("""
   }
 
   @media (max-width: 768px) {
-    [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] {
-      grid-template-columns: minmax(0, 1fr) 34px 34px 26px !important;
-      gap: 2px !important;
-    }
+    
 
-    [class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"] {
-      grid-template-columns: minmax(0, 1fr) 34px 34px !important;
-      gap: 2px !important;
-    }
+    
 
-    [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2) button,
-    [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(3) a,
-    [class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(2) button,
-    [class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(3) a {
-      width: 40px !important;
-      min-width: 40px !important;
-      max-width: 40px !important;
-      height: 32px !important;
-      min-height: 40px !important;
-      max-height: 40px !important;
-    }
+    
 
     /* Reducir el tamaño del dibujo, no el área pulsable del botón. */
-    [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2) button p,
-    [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(3) a p,
-    [class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(2) button p,
-    [class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(3) a p {
-      font-size: 0.60rem !important;
-      line-height: 1 !important;
-      margin: 0 !important;
-    }
+    
 
     [class*="st-key-it-controls-row-"] [data-testid="stHorizontalBlock"],
     [class*="st-key-saved-controls-row-"] [data-testid="stHorizontalBlock"] {
@@ -3507,213 +3358,37 @@ st.markdown("""
   /* ICONOS VISIBLES EN LOS CONTROLES REALES DE LA FILA DEL NOMBRE.
      Se usan pseudo-elementos para no depender de cómo Streamlit renderice
      el texto/emoji interno. No se altera la geometría de los botones. */
-  [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stButton"] > button,
-  [class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stButton"] > button,
-  [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(3) [data-testid="stLinkButton"] > a,
-  [class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(3) [data-testid="stLinkButton"] > a {
-    position: relative !important;
-    color: transparent !important;
-    -webkit-text-fill-color: transparent !important;
-    font-size: 0 !important;
-    background-image: none !important;
-    overflow: hidden !important;
-  }
+  
 
-  [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stButton"] > button::after,
-  [class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stButton"] > button::after {
-    content: "" !important;
-    display: block !important;
-    width: 20px !important;
-    height: 20px !important;
-    flex: 0 0 20px !important;
-    background: center / contain no-repeat url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23334155' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m16 4 4 4'/%3E%3Cpath d='M4 20l4-.9L19 8a2.1 2.1 0 0 0-3-3L5 16z'/%3E%3C/svg%3E") !important;
-  }
+  
 
-  [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(3) [data-testid="stLinkButton"] > a::after,
-  [class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(3) [data-testid="stLinkButton"] > a::after {
-    content: "" !important;
-    display: block !important;
-    width: 21px !important;
-    height: 21px !important;
-    flex: 0 0 21px !important;
-    background: center / contain no-repeat url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231D4ED8' stroke-width='1.9' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m3 6 6-3 6 3 6-3v15l-6 3-6-3-6 3z'/%3E%3Cpath d='M9 3v15'/%3E%3Cpath d='M15 6v15'/%3E%3C/svg%3E") !important;
-  }
+  
 
-  [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stButton"] > button *,
-  [class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stButton"] > button *,
-  [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(3) [data-testid="stLinkButton"] > a *,
-  [class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(3) [data-testid="stLinkButton"] > a * {
-    display: none !important;
-    visibility: hidden !important;
-  }
+  
 
 
 
   /* Corrección final: lápiz y mapa visibles junto al nombre en ambas listas. */
-  [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] {
-    display: grid !important;
-    grid-template-columns: minmax(0, 1fr) 38px 38px 30px !important;
-    align-items: start !important;
-    column-gap: 6px !important;
-    width: 100% !important;
-  }
-  [class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"] {
-    display: grid !important;
-    grid-template-columns: minmax(0, 1fr) 38px 38px !important;
-    align-items: start !important;
-    column-gap: 6px !important;
-    width: 100% !important;
-  }
-  [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"],
-  [class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"] {
-    width: auto !important;
-    min-width: 0 !important;
-    max-width: none !important;
-    flex: none !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    overflow: visible !important;
-  }
-  [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stButton"] > button,
-  [class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stButton"] > button,
-  [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(3) [data-testid="stLinkButton"] > a,
-  [class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(3) [data-testid="stLinkButton"] > a {
-    box-sizing: border-box !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    width: 38px !important;
-    min-width: 38px !important;
-    max-width: 38px !important;
-    height: 38px !important;
-    min-height: 38px !important;
-    max-height: 38px !important;
-    padding: 0 !important;
-    margin: 0 !important;
-    border: 1.5px solid #94A3B8 !important;
-    border-radius: 8px !important;
-    background-color: #F8FAFC !important;
-    background-repeat: no-repeat !important;
-    background-position: center !important;
-    background-size: 20px 20px !important;
-    color: transparent !important;
-    -webkit-text-fill-color: transparent !important;
-    font-size: 0 !important;
-    line-height: 0 !important;
-    overflow: hidden !important;
-    text-decoration: none !important;
-  }
-  [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stButton"] > button,
-  [class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stButton"] > button {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23334155' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m16 4 4 4'/%3E%3Cpath d='M4 20l4-.9L19 8a2.1 2.1 0 0 0-3-3L5 16z'/%3E%3C/svg%3E") !important;
-  }
-  [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(3) [data-testid="stLinkButton"] > a,
-  [class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(3) [data-testid="stLinkButton"] > a {
-    background-color: #FFFFFF !important;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231D4ED8' stroke-width='1.9' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m3 6 6-3 6 3 6-3v15l-6 3-6-3-6 3z'/%3E%3Cpath d='M9 3v15'/%3E%3Cpath d='M15 6v15'/%3E%3C/svg%3E") !important;
-  }
-  [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2) button *,
-  [class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(2) button *,
-  [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(3) a *,
-  [class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(3) a * {
-    display: none !important;
-    visibility: hidden !important;
-  }
+  
+  
+  
+  
+  
+  
+  
 
 
 
 
   /* Ajustes estrictamente limitados a las filas de lugares (itinerario y guardados). */
-  [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] {
-    display: grid !important;
-    grid-template-columns: minmax(0, 1fr) 30px 30px 24px !important;
-    column-gap: 3px !important;
-    row-gap: 0 !important;
-    width: 100% !important;
-    min-width: 0 !important;
-    align-items: start !important;
-  }
-  [class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"] {
-    display: grid !important;
-    grid-template-columns: minmax(0, 1fr) 30px 30px !important;
-    column-gap: 3px !important;
-    row-gap: 0 !important;
-    width: 100% !important;
-    min-width: 0 !important;
-    align-items: start !important;
-  }
-  [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"],
-  [class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"] {
-    box-sizing: border-box !important;
-    width: auto !important;
-    min-width: 0 !important;
-    max-width: none !important;
-    flex: none !important;
-    margin: 0 !important;
-    padding: 0 !important;
-  }
-  [class*="st-key-it-heading-row-"] [data-testid="column"]:first-child,
-  [class*="st-key-saved-heading-row-"] [data-testid="column"]:first-child {
-    min-width: 0 !important;
-    max-width: none !important;
-    overflow: visible !important;
-  }
-  [class*="st-key-it-heading-row-"] [data-testid="column"]:first-child [data-testid="stMarkdownContainer"],
-  [class*="st-key-saved-heading-row-"] [data-testid="column"]:first-child [data-testid="stMarkdownContainer"] {
-    width: 100% !important;
-    max-width: none !important;
-    min-width: 0 !important;
-  }
+  
+  
+  
+  
+  
   /* Selectores deliberadamente amplios: Streamlit cambia los wrappers internos entre versiones. */
-  div[class*="st-key-it-heading-row-"] button,
-  div[class*="st-key-saved-heading-row-"] button {
-    box-sizing: border-box !important;
-    width: 30px !important;
-    min-width: 30px !important;
-    max-width: 30px !important;
-    height: 30px !important;
-    min-height: 30px !important;
-    max-height: 30px !important;
-    padding: 0 !important;
-    margin: 0 !important;
-    border: 1px solid #94A3B8 !important;
-    border-radius: 7px !important;
-    background: #DCE4EE !important;
-    background-color: #DCE4EE !important;
-    color: #1E293B !important;
-    -webkit-text-fill-color: #1E293B !important;
-    box-shadow: none !important;
-    font-size: 15px !important;
-    line-height: 1 !important;
-    display: inline-flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-  }
-  div[class*="st-key-it-heading-row-"] [data-testid="stLinkButton"] a,
-  div[class*="st-key-saved-heading-row-"] [data-testid="stLinkButton"] a {
-    box-sizing: border-box !important;
-    width: 30px !important;
-    min-width: 30px !important;
-    max-width: 30px !important;
-    height: 30px !important;
-    min-height: 30px !important;
-    max-height: 30px !important;
-    padding: 0 !important;
-    margin: 0 !important;
-    border: 1px solid #93B4E8 !important;
-    border-radius: 7px !important;
-    background: #FFFFFF !important;
-    background-color: #FFFFFF !important;
-    color: #1D4ED8 !important;
-    -webkit-text-fill-color: #1D4ED8 !important;
-    box-shadow: none !important;
-    font-size: 15px !important;
-    line-height: 1 !important;
-    display: inline-flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    text-decoration: none !important;
-  }
+  
+  
   /* Hora y día recuperan el ancho previo, pero comienzan alineados a la izquierda. */
   [class*="st-key-it-controls-row-"] [data-testid="stHorizontalBlock"],
   [class*="st-key-saved-controls-row-"] [data-testid="stHorizontalBlock"] {
@@ -3738,168 +3413,36 @@ st.markdown("""
 
 
   /* Ajuste solicitado: ambos botones blancos y lápiz algo menor para que no se recorte. */
-  [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stButton"] > button,
-  [class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stButton"] > button {
-    background: #FFFFFF !important;
-    background-color: #FFFFFF !important;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23334155' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m16 4 4 4'/%3E%3Cpath d='M4 20l4-.9L19 8a2.1 2.1 0 0 0-3-3L5 16z'/%3E%3C/svg%3E") !important;
-    background-repeat: no-repeat !important;
-    background-position: center !important;
-    background-size: 15px 15px !important;
-  }
-  [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(3) [data-testid="stLinkButton"] > a,
-  [class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(3) [data-testid="stLinkButton"] > a {
-    background: #FFFFFF !important;
-    background-color: #FFFFFF !important;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231D4ED8' stroke-width='1.9' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m3 6 6-3 6 3 6-3v15l-6 3-6-3-6 3z'/%3E%3Cpath d='M9 3v15'/%3E%3Cpath d='M15 6v15'/%3E%3C/svg%3E") !important;
-    background-repeat: no-repeat !important;
-    background-position: center !important;
-    background-size: 17px 17px !important;
-  }
+  
+  
 
 
   /* AJUSTE FINAL ACOTADO: iconos y ancho de dirección/notas en ambas listas. */
-  [class*="st-key-it-heading-row-"],
-  [class*="st-key-saved-heading-row-"] {
-    width: 100% !important;
-    max-width: 100% !important;
-    min-width: 0 !important;
-  }
-  [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] {
-    display: grid !important;
-    grid-template-columns: minmax(0, 1fr) 30px 30px 24px !important;
-    column-gap: 3px !important;
-    width: 100% !important;
-    min-width: 0 !important;
-  }
-  [class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"] {
-    display: grid !important;
-    grid-template-columns: minmax(0, 1fr) 30px 30px !important;
-    column-gap: 3px !important;
-    width: 100% !important;
-    min-width: 0 !important;
-  }
-  [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"],
-  [class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"] {
-    min-width: 0 !important;
-    max-width: none !important;
-    width: auto !important;
-    padding: 0 !important;
-    margin: 0 !important;
-  }
-  [class*="st-key-it-heading-row-"] [data-testid="column"]:first-child,
-  [class*="st-key-saved-heading-row-"] [data-testid="column"]:first-child,
-  [class*="st-key-it-heading-row-"] [data-testid="column"]:first-child > div,
-  [class*="st-key-saved-heading-row-"] [data-testid="column"]:first-child > div,
-  [class*="st-key-it-heading-row-"] [data-testid="column"]:first-child [data-testid="stMarkdownContainer"],
-  [class*="st-key-saved-heading-row-"] [data-testid="column"]:first-child [data-testid="stMarkdownContainer"] {
-    width: 100% !important;
-    max-width: none !important;
-    min-width: 0 !important;
-    box-sizing: border-box !important;
-  }
-  [class*="st-key-it-heading-row-"] .place-list-address,
-  [class*="st-key-saved-heading-row-"] .place-list-address,
-  [class*="st-key-it-heading-row-"] .place-note,
-  [class*="st-key-saved-heading-row-"] .place-note {
-    display: block !important;
-    width: 100% !important;
-    max-width: none !important;
-    min-width: 0 !important;
-    box-sizing: border-box !important;
-    overflow-wrap: anywhere !important;
-    word-break: normal !important;
-  }
+  
+  
+  
+  
+  
+  
   /* Fondo blanco sólido para los dos controles, con iconos dibujados en CSS. */
-  [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stButton"] > button,
-  [class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stButton"] > button,
-  [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(3) [data-testid="stLinkButton"] > a,
-  [class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(3) [data-testid="stLinkButton"] > a {
-    background-color: #FFFFFF !important;
-    background-image: none !important;
-    border: 1px solid #D7DEE8 !important;
-    box-shadow: none !important;
-    overflow: visible !important;
-  }
-  [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stButton"] > button::after,
-  [class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stButton"] > button::after {
-    content: "" !important;
-    display: block !important;
-    width: 12px !important;
-    height: 12px !important;
-    flex: 0 0 12px !important;
-    background: center / contain no-repeat url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23334155' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m16 4 4 4'/%3E%3Cpath d='M4 20l4-.9L19 8a2.1 2.1 0 0 0-3-3L5 16z'/%3E%3C/svg%3E") !important;
-  }
-  [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(3) [data-testid="stLinkButton"] > a::after,
-  [class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(3) [data-testid="stLinkButton"] > a::after {
-    content: "" !important;
-    display: block !important;
-    width: 16px !important;
-    height: 16px !important;
-    flex: 0 0 16px !important;
-    background: center / contain no-repeat url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231D4ED8' stroke-width='1.9' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m3 6 6-3 6 3 6-3v15l-6 3-6-3-6 3z'/%3E%3Cpath d='M9 3v15'/%3E%3Cpath d='M15 6v15'/%3E%3C/svg%3E") !important;
-  }
+  
+  
+  
   @media (max-width: 768px) {
-    [class*="st-key-it-heading-row-"],
-    [class*="st-key-saved-heading-row-"] { width: 100% !important; max-width: 100% !important; }
-    [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] {
-      grid-template-columns: minmax(0, 1fr) 30px 30px 24px !important;
-      column-gap: 3px !important;
-    }
-    [class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"] {
-      grid-template-columns: minmax(0, 1fr) 30px 30px !important;
-      column-gap: 3px !important;
-    }
-    [class*="st-key-it-heading-row-"] .place-list-address,
-    [class*="st-key-saved-heading-row-"] .place-list-address,
-    [class*="st-key-it-heading-row-"] .place-note,
-    [class*="st-key-saved-heading-row-"] .place-note {
-      width: 100% !important;
-      max-width: 100% !important;
-    }
+    
+    
+    
+    
   }
 
 
   /* Corrección estructural final: botones compactos y contenido informativo a ancho completo. */
-  div[class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"],
-  div[class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"] {
-    display: grid !important;
-    grid-template-columns: minmax(0, 1fr) 30px 30px 24px !important;
-    column-gap: 3px !important;
-    width: 100% !important;
-    min-width: 0 !important;
-  }
-  div[class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"] {
-    grid-template-columns: minmax(0, 1fr) 30px 30px !important;
-  }
-  div[class*="st-key-it-heading-row-"] [data-testid="column"],
-  div[class*="st-key-saved-heading-row-"] [data-testid="column"] {
-    min-width: 0 !important; width: auto !important; max-width: none !important;
-    flex: none !important; padding: 0 !important; margin: 0 !important;
-  }
-  div[class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2) button,
-  div[class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(2) button,
-  div[class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(3) a,
-  div[class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(3) a {
-    width: 30px !important; min-width: 30px !important; max-width: 30px !important;
-    height: 30px !important; min-height: 30px !important; max-height: 30px !important;
-    padding: 0 !important; margin: 0 !important; box-sizing: border-box !important;
-    background-color: #FFFFFF !important; background-repeat: no-repeat !important;
-    background-position: center !important; background-size: 13px 13px !important;
-    border: 1px solid #CBD5E1 !important; border-radius: 7px !important;
-    box-shadow: none !important; font-size: 0 !important; color: transparent !important;
-    -webkit-text-fill-color: transparent !important; overflow: hidden !important;
-    display: inline-flex !important; align-items: center !important; justify-content: center !important;
-  }
-  div[class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2) button,
-  div[class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(2) button {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23334155' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m16 4 4 4'/%3E%3Cpath d='M4 20l4-.9L19 8a2.1 2.1 0 0 0-3-3L5 16z'/%3E%3C/svg%3E") !important;
-  }
-  div[class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(3) a,
-  div[class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(3) a {
-    background-size: 16px 16px !important;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231D4ED8' stroke-width='1.9' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m3 6 6-3 6 3 6-3v15l-6 3-6-3-6 3z'/%3E%3Cpath d='M9 3v15'/%3E%3Cpath d='M15 6v15'/%3E%3C/svg%3E") !important;
-  }
+  
+  
+  
+  
+  
+  
   .place-full-width-info, .place-full-width-info .place-list-address,
   .place-full-width-info .place-note {
     display: block !important; width: 100% !important; max-width: 100% !important;
@@ -3908,76 +3451,20 @@ st.markdown("""
   }
   .place-full-width-info { flex: 1 1 100% !important; }
   @media (max-width: 768px) {
-    div[class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"],
-    div[class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"] {
-      column-gap: 3px !important; width: 100% !important;
-    }
+    
     .place-full-width-info, .place-full-width-info .place-list-address,
     .place-full-width-info .place-note { width: 100% !important; max-width: 100% !important; }
   }
 
 
   /* Corrección definitiva de los dos botones de cada lugar: fondo blanco real y lápiz sin recorte. */
-  div[class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stButton"] button,
-  div[class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stButton"] button,
-  div[class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(3) [data-testid="stLinkButton"] a,
-  div[class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(3) [data-testid="stLinkButton"] a,
-  div[class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stButton"] button:hover,
-  div[class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stButton"] button:hover,
-  div[class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(3) [data-testid="stLinkButton"] a:hover,
-  div[class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(3) [data-testid="stLinkButton"] a:hover {
-    background: #FFFFFF !important;
-    background-color: #FFFFFF !important;
-    background-image: none !important;
-    border: 1px solid #CBD5E1 !important;
-    box-shadow: none !important;
-    opacity: 1 !important;
-    filter: none !important;
-    overflow: visible !important;
-  }
-  div[class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stButton"] button,
-  div[class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stButton"] button {
-    width: 30px !important; min-width: 30px !important; max-width: 30px !important;
-    height: 30px !important; min-height: 30px !important; max-height: 30px !important;
-    padding: 0 !important; margin: 0 !important;
-    color: #334155 !important; -webkit-text-fill-color: #334155 !important;
-    font-family: Arial, sans-serif !important;
-    font-size: 17px !important; font-weight: 600 !important;
-    line-height: 1 !important; white-space: nowrap !important;
-    display: inline-flex !important; align-items: center !important; justify-content: center !important;
-  }
-  div[class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stButton"] button p,
-  div[class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stButton"] button p {
-    color: #334155 !important; -webkit-text-fill-color: #334155 !important;
-    font-size: 17px !important; line-height: 1 !important; margin: 0 !important;
-  }
-  div[class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stButton"] button::before,
-  div[class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stButton"] button::after,
-  div[class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stButton"] button::before,
-  div[class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stButton"] button::after {
-    content: none !important; display: none !important; background: none !important;
-  }
-  div[class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(3) [data-testid="stLinkButton"] a,
-  div[class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(3) [data-testid="stLinkButton"] a {
-    width: 30px !important; min-width: 30px !important; max-width: 30px !important;
-    height: 30px !important; min-height: 30px !important; max-height: 30px !important;
-    padding: 0 !important; margin: 0 !important;
-    color: #334155 !important; -webkit-text-fill-color: #334155 !important;
-    font-size: 14px !important; line-height: 1 !important;
-    display: inline-flex !important; align-items: center !important; justify-content: center !important;
-    text-decoration: none !important;
-  }
-  div[class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(3) [data-testid="stLinkButton"] a p,
-  div[class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(3) [data-testid="stLinkButton"] a p {
-    color: #334155 !important; -webkit-text-fill-color: #334155 !important;
-    font-size: 14px !important; line-height: 1 !important; margin: 0 !important;
-  }
-  div[class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(3) [data-testid="stLinkButton"] a::before,
-  div[class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(3) [data-testid="stLinkButton"] a::after,
-  div[class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(3) [data-testid="stLinkButton"] a::before,
-  div[class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(3) [data-testid="stLinkButton"] a::after {
-    content: none !important; display: none !important; background: none !important;
-  }
+  
+  
+  
+  
+  
+  
+  
 
 
   /* Sobrescritura final por clave de widget: fondo blanco real e iconos monocromos alineados. */
@@ -4048,447 +3535,91 @@ st.markdown("""
   /* CORRECCIÓN DEFINITIVA ACOTADA A LOS BOTONES DE ACCIÓN DE LOS LUGARES.
      Se fuerza el blanco en todos los estados y se dibujan ambos iconos
      como pseudo-elementos centrados, sin depender del contenido de Streamlit. */
-  div[class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stButton"] > button,
-  div[class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stButton"] > button {
-    box-sizing: border-box !important;
-    display: inline-flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    position: relative !important;
-    width: 30px !important;
-    min-width: 30px !important;
-    max-width: 30px !important;
-    height: 30px !important;
-    min-height: 30px !important;
-    max-height: 30px !important;
-    padding: 0 !important;
-    margin: 0 !important;
-    background: #FFFFFF !important;
-    background-color: #FFFFFF !important;
-    background-image: none !important;
-    border: 1px solid #D1D5DB !important;
-    border-radius: 7px !important;
-    color: transparent !important;
-    -webkit-text-fill-color: transparent !important;
-    box-shadow: none !important;
-    font-size: 0 !important;
-    line-height: 0 !important;
-    overflow: visible !important;
-  }
-  div[class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stButton"] > button:hover,
-  div[class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stButton"] > button:focus,
-  div[class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stButton"] > button:active,
-  div[class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stButton"] > button:hover,
-  div[class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stButton"] > button:focus,
-  div[class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stButton"] > button:active {
-    background: #FFFFFF !important;
-    background-color: #FFFFFF !important;
-    background-image: none !important;
-    color: transparent !important;
-    -webkit-text-fill-color: transparent !important;
-  }
-  div[class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stButton"] > button::before,
-  div[class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stButton"] > button::before {
-    content: none !important;
-    display: none !important;
-  }
-  div[class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stButton"] > button::after,
-  div[class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stButton"] > button::after {
-    content: "" !important;
-    display: block !important;
-    flex: 0 0 14px !important;
-    width: 14px !important;
-    height: 14px !important;
-    margin: 0 !important;
-    background: transparent center / 14px 14px no-repeat url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23334155' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m16 4 4 4'/%3E%3Cpath d='M4 20l4-.9L19 8a2.1 2.1 0 0 0-3-3L5 16z'/%3E%3C/svg%3E") !important;
-  }
-  div[class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stButton"] > button > *,
-  div[class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stButton"] > button > * {
-    display: none !important;
-    visibility: hidden !important;
-  }
+  
+  
+  
+  
+  
 
   /* Los dos controles comparten exactamente la misma caja y centro visual. */
-  div[class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2),
-  div[class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(3),
-  div[class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(2),
-  div[class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(3) {
-    display: flex !important;
-    align-items: flex-start !important;
-    justify-content: center !important;
-    width: 30px !important;
-    min-width: 30px !important;
-    max-width: 30px !important;
-    padding: 0 !important;
-    margin: 0 !important;
-  }
+  
 
 
   /* Correccion consolidada de botones Editar/Mapa.
      Una sola regla final para evitar conflictos entre estilos acumulados. */
-  [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"],
-  [class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"] {
-    display: grid !important;
-    grid-template-columns: minmax(0, 1fr) 38px 38px 38px !important;
-    align-items: center !important;
-    justify-content: start !important;
-    column-gap: 4px !important;
-    row-gap: 0 !important;
-    width: 100% !important;
-    min-width: 0 !important;
-  }
-  [class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"] {
-    grid-template-columns: minmax(0, 1fr) 38px 38px !important;
-  }
-  [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"],
-  [class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"] {
-    box-sizing: border-box !important;
-    flex: none !important;
-    width: auto !important;
-    min-width: 0 !important;
-    max-width: none !important;
-    margin: 0 !important;
-    padding: 0 !important;
-  }
-  [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2),
-  [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(3),
-  [class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(2),
-  [class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(3) {
-    box-sizing: border-box !important;
-    display: flex !important;
-    flex: 0 0 38px !important;
-    align-items: center !important;
-    justify-content: center !important;
-    align-self: center !important;
-    width: 38px !important;
-    min-width: 38px !important;
-    max-width: 38px !important;
-    height: 38px !important;
-    min-height: 38px !important;
-    max-height: 38px !important;
-    margin: 0 !important;
-    padding: 0 !important;
-  }
+  
+  
+  
+  
 
   /* Wrapper del lápiz: no añade una segunda caja/borde. */
-  [class*="st-key-it-edit-button-wrap-"],
-  [class*="st-key-saved-edit-button-wrap-"] {
-    box-sizing: border-box !important;
-    display: flex !important;
-    flex: 0 0 38px !important;
-    align-items: center !important;
-    justify-content: center !important;
-    width: 38px !important;
-    min-width: 38px !important;
-    max-width: 38px !important;
-    height: 38px !important;
-    min-height: 38px !important;
-    max-height: 38px !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    border: 0 !important;
-    background: transparent !important;
-  }
-  [class*="st-key-it-edit-button-wrap-"] [data-testid="stElementContainer"],
-  [class*="st-key-saved-edit-button-wrap-"] [data-testid="stElementContainer"],
-  [class*="st-key-it-edit-button-wrap-"] [data-testid="stButton"],
-  [class*="st-key-saved-edit-button-wrap-"] [data-testid="stButton"] {
-    box-sizing: border-box !important;
-    display: flex !important;
-    flex: 0 0 38px !important;
-    align-items: center !important;
-    justify-content: center !important;
-    width: 38px !important;
-    min-width: 38px !important;
-    max-width: 38px !important;
-    height: 38px !important;
-    min-height: 38px !important;
-    max-height: 38px !important;
-    margin: 0 !important;
-    padding: 0 !important;
-  }
-  [class*="st-key-it-edit-button-wrap-"] [data-testid="stButton"] > button,
-  [class*="st-key-saved-edit-button-wrap-"] [data-testid="stButton"] > button {
-    box-sizing: border-box !important;
-    position: relative !important;
-    display: inline-flex !important;
-    flex: 0 0 38px !important;
-    align-items: center !important;
-    justify-content: center !important;
-    width: 38px !important;
-    min-width: 38px !important;
-    max-width: 38px !important;
-    height: 38px !important;
-    min-height: 38px !important;
-    max-height: 38px !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    border: 1px solid #CBD5E1 !important;
-    border-radius: 9px !important;
-    background: #FFFFFF !important;
-    background-color: #FFFFFF !important;
-    background-image: none !important;
-    box-shadow: none !important;
-    color: transparent !important;
-    -webkit-text-fill-color: transparent !important;
-    font-size: 0 !important;
-    line-height: 0 !important;
-    overflow: hidden !important;
-  }
-  [class*="st-key-it-edit-button-wrap-"] [data-testid="stButton"] > button::before,
-  [class*="st-key-saved-edit-button-wrap-"] [data-testid="stButton"] > button::before {
-    content: "" !important;
-    position: absolute !important;
-    left: 50% !important;
-    top: 50% !important;
-    width: 13px !important;
-    height: 13px !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    transform: translate(-50%, -50%) !important;
-    background: center / contain no-repeat url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23334155' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m16 4 4 4'/%3E%3Cpath d='M4 20l4-.9L19 8a2.1 2.1 0 0 0-3-3L5 16z'/%3E%3C/svg%3E") !important;
-  }
+  
+  
+  
+  
 
   /* Ajuste final del MAPA y de la fila Ruta. El lápiz conserva sus reglas existentes. */
-  [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"],
-  [class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"] {
-    display: grid !important;
-    grid-template-columns: minmax(0, 1fr) 38px 38px 38px !important;
-    align-items: center !important;
-    justify-content: start !important;
-    column-gap: 6px !important;
-    row-gap: 0 !important;
-    width: 100% !important;
-    min-width: 0 !important;
-  }
-  [class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"] {
-    grid-template-columns: minmax(0, 1fr) 38px 38px !important;
-  }
-  [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"],
-  [class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"] {
-    box-sizing: border-box !important;
-    min-width: 0 !important;
-    margin: 0 !important;
-    padding: 0 !important;
-  }
+  
+  
+  
   /* La tercera acción de Ruta es el checkbox: reserva su propia columna para que no invada Mapa. */
-  [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(4) {
-    box-sizing: border-box !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    width: 38px !important;
-    min-width: 38px !important;
-    max-width: 38px !important;
-    height: 38px !important;
-    min-height: 38px !important;
-    max-height: 38px !important;
-    margin: 0 !important;
-    padding: 0 !important;
-  }
-  [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(4) [data-testid="stCheckbox"] {
-    box-sizing: border-box !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    width: 38px !important;
-    min-width: 38px !important;
-    max-width: 38px !important;
-    height: 38px !important;
-    min-height: 38px !important;
-    max-height: 38px !important;
-    margin: 0 !important;
-    padding: 0 !important;
-  }
-  [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(4) [data-testid="stCheckbox"] label {
-    box-sizing: border-box !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    width: 38px !important;
-    min-width: 38px !important;
-    max-width: 38px !important;
-    height: 38px !important;
-    min-height: 38px !important;
-    max-height: 38px !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    background: #FFFFFF !important;
-    background-color: #FFFFFF !important;
-    border: 1px solid #CBD5E1 !important;
-    border-radius: 9px !important;
-    cursor: pointer !important;
-    box-shadow: none !important;
-  }
+  
+  
+  
   /* Solo el enlace del mapa: misma caja exterior que el botón lápiz existente. */
-  [class*="st-key-it-map-button-wrap-"],
-  [class*="st-key-saved-map-button-wrap-"] {
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    width: 38px !important;
-    min-width: 38px !important;
-    max-width: 38px !important;
-    height: 38px !important;
-    min-height: 38px !important;
-    max-height: 38px !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    background: transparent !important;
-  }
-  [class*="st-key-it-map-button-wrap-"] [data-testid="stElementContainer"],
-  [class*="st-key-saved-map-button-wrap-"] [data-testid="stElementContainer"],
-  [class*="st-key-it-map-button-wrap-"] [data-testid="stLinkButton"],
-  [class*="st-key-saved-map-button-wrap-"] [data-testid="stLinkButton"] {
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    box-sizing: border-box !important;
-    width: 38px !important;
-    min-width: 38px !important;
-    max-width: 38px !important;
-    height: 38px !important;
-    min-height: 38px !important;
-    max-height: 38px !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    background: transparent !important;
-  }
-  [class*="st-key-it-map-button-wrap-"] [data-testid="stLinkButton"] a,
-  [class*="st-key-saved-map-button-wrap-"] [data-testid="stLinkButton"] a,
-  [class*="st-key-it-map-button-wrap-"] [data-testid="stLinkButton"] a:hover,
-  [class*="st-key-it-map-button-wrap-"] [data-testid="stLinkButton"] a:focus,
-  [class*="st-key-it-map-button-wrap-"] [data-testid="stLinkButton"] a:active,
-  [class*="st-key-saved-map-button-wrap-"] [data-testid="stLinkButton"] a:hover,
-  [class*="st-key-saved-map-button-wrap-"] [data-testid="stLinkButton"] a:focus,
-  [class*="st-key-saved-map-button-wrap-"] [data-testid="stLinkButton"] a:active {
-    display: inline-flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    flex: 0 0 38px !important;
-    box-sizing: border-box !important;
-    width: 38px !important;
-    min-width: 38px !important;
-    max-width: 38px !important;
-    height: 38px !important;
-    min-height: 38px !important;
-    max-height: 38px !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    border: 1px solid #CBD5E1 !important;
-    border-radius: 9px !important;
-    background: #FFFFFF !important;
-    background-color: #FFFFFF !important;
-    background-image: none !important;
-    box-shadow: none !important;
-    color: transparent !important;
-    -webkit-text-fill-color: transparent !important;
-    font-size: 0 !important;
-    line-height: 0 !important;
-    text-decoration: none !important;
-    overflow: hidden !important;
-  }
-  [class*="st-key-it-map-button-wrap-"] [data-testid="stLinkButton"] a > *,
-  [class*="st-key-saved-map-button-wrap-"] [data-testid="stLinkButton"] a > * {
-    display: none !important;
-  }
-  [class*="st-key-it-map-button-wrap-"] [data-testid="stLinkButton"] a::before,
-  [class*="st-key-saved-map-button-wrap-"] [data-testid="stLinkButton"] a::before {
-    content: "" !important;
-    display: block !important;
-    flex: 0 0 13px !important;
-    width: 13px !important;
-    height: 13px !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    background: center / contain no-repeat url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23334155' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m3 6 6-3 6 3 6-3v15l-6 3-6-3-6 3z'/%3E%3Cpath d='M9 3v15M15 6v15'/%3E%3C/svg%3E") !important;
-  }
+  
+  
+  
+  
+  
 
 
 
 
   /* Ajuste puntual: acciones de Ruta alineadas y con caja idéntica. */
-  [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] {
-    grid-template-columns: minmax(0, 1fr) 38px 38px 38px !important;
-    align-items: center !important;
-    column-gap: 6px !important;
-  }
-  [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2),
-  [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(3),
-  [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(4) {
-    box-sizing: border-box !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    align-self: center !important;
-    width: 38px !important;
-    min-width: 38px !important;
-    max-width: 38px !important;
-    height: 38px !important;
-    min-height: 38px !important;
-    max-height: 38px !important;
-    margin: 0 !important;
-    padding: 0 !important;
-  }
-  [class*="st-key-it-edit-button-wrap-"] [data-testid="stButton"],
-  [class*="st-key-it-edit-button-wrap-"] [data-testid="stButton"] > button,
-  [class*="st-key-it-map-button-wrap-"] [data-testid="stLinkButton"],
-  [class*="st-key-it-map-button-wrap-"] [data-testid="stLinkButton"] > a,
-  [class*="st-key-saved-map-button-wrap-"] [data-testid="stLinkButton"],
-  [class*="st-key-saved-map-button-wrap-"] [data-testid="stLinkButton"] > a {
-    box-sizing: border-box !important;
-    width: 38px !important;
-    min-width: 38px !important;
-    max-width: 38px !important;
-    height: 38px !important;
-    min-height: 38px !important;
-    max-height: 38px !important;
-    margin: 0 !important;
-  }
-  [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(4) [data-testid="stCheckbox"],
-  [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(4) [data-testid="stCheckbox"] label {
-    box-sizing: border-box !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    width: 38px !important;
-    min-width: 38px !important;
-    max-width: 38px !important;
-    height: 38px !important;
-    min-height: 38px !important;
-    max-height: 38px !important;
-    margin: 0 !important;
-  }
+  
+  
+  
+  
 
   /* El mapa mantiene el mismo borde neutro que el lápiz, incluso con foco. */
-  [class*="st-key-it-map-button-wrap-"] [data-testid="stLinkButton"] a,
-  [class*="st-key-it-map-button-wrap-"] [data-testid="stLinkButton"] a:link,
-  [class*="st-key-it-map-button-wrap-"] [data-testid="stLinkButton"] a:visited,
-  [class*="st-key-it-map-button-wrap-"] [data-testid="stLinkButton"] a:hover,
-  [class*="st-key-it-map-button-wrap-"] [data-testid="stLinkButton"] a:focus,
-  [class*="st-key-it-map-button-wrap-"] [data-testid="stLinkButton"] a:active,
-  [class*="st-key-saved-map-button-wrap-"] [data-testid="stLinkButton"] a,
-  [class*="st-key-saved-map-button-wrap-"] [data-testid="stLinkButton"] a:link,
-  [class*="st-key-saved-map-button-wrap-"] [data-testid="stLinkButton"] a:visited,
-  [class*="st-key-saved-map-button-wrap-"] [data-testid="stLinkButton"] a:hover,
-  [class*="st-key-saved-map-button-wrap-"] [data-testid="stLinkButton"] a:focus,
-  [class*="st-key-saved-map-button-wrap-"] [data-testid="stLinkButton"] a:active {
-    border: 1px solid #CBD5E1 !important;
-    outline: none !important;
-    box-shadow: none !important;
-    background: #FFFFFF !important;
-    background-color: #FFFFFF !important;
-    transform: none !important;
-  }
+  
 
 
 
   /* ===== AJUSTE CONSOLIDADO FINAL: ACCIONES DE RUTA Y MAPA =====
      Esta única regla prevalece sobre las definiciones antiguas duplicadas.
      Editar, Mapa y Visitado comparten una caja de 38 x 38 px. */
-  [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] {
+  
+  
+
+  /* Lápiz y mapa: idéntico tamaño, borde neutro y centrado real. */
+  
+  
+
+  /* El check de visitado ocupa la misma caja exterior que los otros dos. */
+  
+
+  /* Dirección y nota pegadas al título, sin un bloque Streamlit intermedio. */
+  
+  
+
+  @media (max-width: 768px) {
+    
+    
+    
+  }
+
+
+
+  /* ================================================================
+     CONTROLES DE LUGAR: ÚNICA DEFINICIÓN PARA RUTA Y GUARDADOS
+     Lápiz y mapa comparten caja y centrado; Ruta añade el checkbox.
+     ================================================================ */
+  [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"],
+  [class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"] {
     display: grid !important;
-    grid-template-columns: minmax(0, 1fr) 38px 38px 38px !important;
+    grid-template-columns: minmax(0, 1fr) 38px 38px !important;
     align-items: center !important;
     justify-content: start !important;
     column-gap: 6px !important;
@@ -4496,30 +3627,50 @@ st.markdown("""
     width: 100% !important;
     min-width: 0 !important;
   }
-  [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(n+2) {
+  [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] {
+    grid-template-columns: minmax(0, 1fr) 38px 38px 38px !important;
+  }
+  [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"],
+  [class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"] {
     box-sizing: border-box !important;
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
+    min-width: 0 !important;
     width: 38px !important;
-    min-width: 38px !important;
     max-width: 38px !important;
-    height: 38px !important;
     min-height: 38px !important;
+    height: 38px !important;
     max-height: 38px !important;
     margin: 0 !important;
     padding: 0 !important;
   }
+  [class*="st-key-it-heading-row-"] [data-testid="column"]:first-child,
+  [class*="st-key-saved-heading-row-"] [data-testid="column"]:first-child {
+    display: block !important;
+    width: auto !important;
+    max-width: none !important;
+    height: auto !important;
+    max-height: none !important;
+    min-height: 0 !important;
+    justify-self: stretch !important;
+    align-self: start !important;
+  }
 
-  /* Lápiz y mapa: idéntico tamaño, borde neutro y centrado real. */
+  /* Contenedor del lápiz y botón real: dimensiones exteriores idénticas. */
   [class*="st-key-it-edit-button-wrap-"],
+  [class*="st-key-saved-edit-button-wrap-"],
   [class*="st-key-it-edit-button-wrap-"] [data-testid="stButton"],
+  [class*="st-key-saved-edit-button-wrap-"] [data-testid="stButton"],
   [class*="st-key-it-map-button-wrap-"],
-  [class*="st-key-it-map-button-wrap-"] [data-testid="stLinkButton"] {
+  [class*="st-key-saved-map-button-wrap-"],
+  [class*="st-key-it-map-button-wrap-"] [data-testid="stLinkButton"],
+  [class*="st-key-saved-map-button-wrap-"] [data-testid="stLinkButton"] {
     box-sizing: border-box !important;
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
+    flex: 0 0 38px !important;
     width: 38px !important;
     min-width: 38px !important;
     max-width: 38px !important;
@@ -4533,13 +3684,12 @@ st.markdown("""
     box-shadow: none !important;
   }
   [class*="st-key-it-edit-button-wrap-"] [data-testid="stButton"] > button,
+  [class*="st-key-saved-edit-button-wrap-"] [data-testid="stButton"] > button,
   [class*="st-key-it-map-button-wrap-"] [data-testid="stLinkButton"] > a,
-  [class*="st-key-it-map-button-wrap-"] [data-testid="stLinkButton"] > a:link,
-  [class*="st-key-it-map-button-wrap-"] [data-testid="stLinkButton"] > a:visited,
+  [class*="st-key-saved-map-button-wrap-"] [data-testid="stLinkButton"] > a,
   [class*="st-key-it-map-button-wrap-"] [data-testid="stLinkButton"] > a:hover,
   [class*="st-key-it-map-button-wrap-"] [data-testid="stLinkButton"] > a:focus,
   [class*="st-key-it-map-button-wrap-"] [data-testid="stLinkButton"] > a:active,
-  [class*="st-key-saved-map-button-wrap-"] [data-testid="stLinkButton"] > a,
   [class*="st-key-saved-map-button-wrap-"] [data-testid="stLinkButton"] > a:hover,
   [class*="st-key-saved-map-button-wrap-"] [data-testid="stLinkButton"] > a:focus,
   [class*="st-key-saved-map-button-wrap-"] [data-testid="stLinkButton"] > a:active {
@@ -4547,6 +3697,7 @@ st.markdown("""
     display: inline-flex !important;
     align-items: center !important;
     justify-content: center !important;
+    flex: 0 0 38px !important;
     width: 38px !important;
     min-width: 38px !important;
     max-width: 38px !important;
@@ -4559,12 +3710,39 @@ st.markdown("""
     border-radius: 9px !important;
     outline: none !important;
     box-shadow: none !important;
-    background: #FFFFFF !important;
     background-color: #FFFFFF !important;
+    background-repeat: no-repeat !important;
+    background-position: center center !important;
     transform: none !important;
+    text-decoration: none !important;
+    overflow: hidden !important;
+  }
+  [class*="st-key-it-edit-button-wrap-"] [data-testid="stButton"] > button,
+  [class*="st-key-saved-edit-button-wrap-"] [data-testid="stButton"] > button {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23334155' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m16 4 4 4'/%3E%3Cpath d='M4 20l4-.9L19 8a2.1 2.1 0 0 0-3-3L5 16z'/%3E%3C/svg%3E") !important;
+    background-size: 19px 19px !important;
+    color: transparent !important;
+    -webkit-text-fill-color: transparent !important;
+    font-size: 0 !important;
+    line-height: 0 !important;
+  }
+  [class*="st-key-it-map-button-wrap-"] [data-testid="stLinkButton"] > a,
+  [class*="st-key-saved-map-button-wrap-"] [data-testid="stLinkButton"] > a {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23334155' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m3 6 6-3 6 3 6-3v15l-6 3-6-3-6 3z'/%3E%3Cpath d='M9 3v15M15 6v15'/%3E%3C/svg%3E") !important;
+    background-size: 20px 20px !important;
+    color: transparent !important;
+    -webkit-text-fill-color: transparent !important;
+    font-size: 0 !important;
+    line-height: 0 !important;
+  }
+  [class*="st-key-it-edit-button-wrap-"] button > *,
+  [class*="st-key-saved-edit-button-wrap-"] button > *,
+  [class*="st-key-it-map-button-wrap-"] a > *,
+  [class*="st-key-saved-map-button-wrap-"] a > * {
+    display: none !important;
   }
 
-  /* El check de visitado ocupa la misma caja exterior que los otros dos. */
+  /* Checkbox de visitado: caja exterior 38 × 38 px, igual que lápiz y mapa. */
   [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(4) [data-testid="stCheckbox"],
   [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(4) [data-testid="stCheckbox"] label {
     box-sizing: border-box !important;
@@ -4584,19 +3762,15 @@ st.markdown("""
     background: #FFFFFF !important;
     box-shadow: none !important;
   }
-
-  /* Dirección y nota pegadas al título, sin un bloque Streamlit intermedio. */
-  [class*="st-key-it-heading-row-"] .place-list-address {
-    display: block !important;
-    margin: 2px 0 0 !important;
+  [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(4) [data-testid="stCheckbox"] label > div {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    margin: 0 !important;
     padding: 0 !important;
-    line-height: 1.25 !important;
   }
-  [class*="st-key-it-heading-row-"] .place-note {
-    display: block !important;
-    margin: 2px 0 0 !important;
-    padding: 0 0 0 2px !important;
-    line-height: 1.25 !important;
+  [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(4) [data-testid="stCheckbox"] label p {
+    display: none !important;
   }
 
   @media (max-width: 768px) {
@@ -4604,21 +3778,10 @@ st.markdown("""
       grid-template-columns: minmax(0, 1fr) 38px 38px 38px !important;
       column-gap: 5px !important;
     }
-    [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(n+2) {
-      width: 38px !important;
-      min-width: 38px !important;
-      max-width: 38px !important;
-      height: 38px !important;
-      min-height: 38px !important;
-      max-height: 38px !important;
-    }
-    [class*="st-key-it-heading-row-"] .place-list-address,
-    [class*="st-key-it-heading-row-"] .place-note {
-      margin-top: 2px !important;
-      line-height: 1.25 !important;
+    [class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"] {
+      grid-template-columns: minmax(0, 1fr) 38px 38px !important;
     }
   }
-
 </style>
 """, unsafe_allow_html=True)
 
