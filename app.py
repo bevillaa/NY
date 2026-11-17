@@ -1547,7 +1547,7 @@ st.markdown("""
       grid-auto-flow: column !important;
       align-items: center !important;
       justify-content: stretch !important;
-      column-gap: 6px !important;
+      column-gap: 4px !important;
       row-gap: 0 !important;
       width: 100% !important;
       min-width: 0 !important;
@@ -1560,7 +1560,7 @@ st.markdown("""
       grid-auto-flow: column !important;
       align-items: center !important;
       justify-content: stretch !important;
-      column-gap: 4px !important;
+      column-gap: 2px !important;
       row-gap: 0 !important;
       width: 100% !important;
       min-width: 0 !important;
@@ -1725,7 +1725,7 @@ st.markdown("""
     grid-auto-flow: column !important;
     align-items: center !important;
     justify-content: stretch !important;
-    column-gap: 6px !important;
+    column-gap: 3px !important;
     row-gap: 0 !important;
     width: 100% !important;
     min-width: 0 !important;
@@ -1813,6 +1813,10 @@ st.markdown("""
     align-items: center !important;
     justify-content: center !important;
     align-self: center !important;
+  }
+  /* Título de los lugares de Ruta: 1,5 puntos menos. */
+  [class*="st-key-it-heading-row-"] .place-list-title {
+    font-size: calc(1.25rem - 1.5pt) !important;
   }
   @media (max-width: 768px) {
     [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] {
