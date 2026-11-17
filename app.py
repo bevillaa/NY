@@ -2228,7 +2228,7 @@ st.markdown("""
   [class*="st-key-it-controls-row-"] [data-testid="stHorizontalBlock"],
   [class*="st-key-saved-controls-row-"] [data-testid="stHorizontalBlock"] {
     display: grid !important;
-    grid-template-columns: 100px 120px !important;
+    grid-template-columns: 100px 125px !important;
     justify-content: start !important;
     align-items: center !important;
     column-gap: 6px !important;
@@ -2285,17 +2285,17 @@ st.markdown("""
   [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(2) [data-testid="stSelectbox"],
   [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(2) [data-baseweb="select"],
   [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(2) [data-baseweb="select"] {
-    width: 120px !important;
-    min-width: 120px !important;
-    max-width: 120px !important;
+    width: 125px !important;
+    min-width: 125px !important;
+    max-width: 125px !important;
     margin: 0 !important;
   }
   [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(2) [data-baseweb="select"] > div,
   [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(2) [data-baseweb="select"] > div {
     box-sizing: border-box !important;
-    width: 120px !important;
-    min-width: 120px !important;
-    max-width: 120px !important;
+    width: 125px !important;
+    min-width: 125px !important;
+    max-width: 125px !important;
     height: 40px !important;
     min-height: 40px !important;
     max-height: 40px !important;
@@ -2371,7 +2371,7 @@ st.markdown("""
     [class*="st-key-it-controls-row-"] [data-testid="stHorizontalBlock"],
     [class*="st-key-saved-controls-row-"] [data-testid="stHorizontalBlock"] {
       display: grid !important;
-      grid-template-columns: 100px 120px !important;
+      grid-template-columns: 100px 125px !important;
       column-gap: 6px !important;
       align-items: center !important;
       justify-content: start !important;
@@ -2424,9 +2424,9 @@ st.markdown("""
     [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(2) [data-baseweb="select"] > div,
     [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(2) [data-baseweb="select"] > div {
       box-sizing: border-box !important;
-      width: 120px !important;
-      min-width: 120px !important;
-      max-width: 120px !important;
+      width: 125px !important;
+      min-width: 125px !important;
+      max-width: 125px !important;
       height: 45px !important;
       min-height: 45px !important;
       max-height: 45px !important;
