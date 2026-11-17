@@ -371,7 +371,7 @@ st.markdown("""
   /* Input de hora compacto y cuadrado (web y móvil) */
   [data-testid="column"]:has(.compact-hora) [data-testid="stTextInput"] {
     max-width: 88px !important;
-    width: 70px !important;
+    width: 100% !important;
     margin: 0 !important;
   }
   [data-testid="column"]:has(.compact-hora) [data-baseweb="input"],
@@ -457,13 +457,13 @@ st.markdown("""
     html, body, .stApp, [data-testid="stAppViewContainer"],
     [data-testid="stMain"], section.main {
       margin: 0 !important;
-      width: 70px !important;
-      max-width: 70px !important;
+      width: 100% !important;
+      max-width: 100% !important;
       overflow-x: hidden !important;
     }
     .block-container {
-      width: 70px !important;
-      max-width: 70px !important;
+      width: 100% !important;
+      max-width: 100% !important;
       padding: 0.55rem 0.65rem 2rem !important;
       margin: 0 auto !important;
       overflow-x: clip !important;
@@ -471,7 +471,7 @@ st.markdown("""
     /* Evita que nombres, notas o URL largas empujen la página fuera del móvil. */
     [data-testid="stMarkdownContainer"], [data-testid="stText"],
     .stCaption, p, a, code, pre, label {
-      max-width: 70px !important;
+      max-width: 100% !important;
       min-width: 0 !important;
       overflow-wrap: anywhere !important;
       word-break: break-word !important;
@@ -482,7 +482,7 @@ st.markdown("""
     .hero-title {  line-height: 1.18 !important; }
     .hero-pill {
       display: inline-flex !important;
-      max-width: 70px !important;
+      max-width: 100% !important;
       white-space: normal !important;
       overflow-wrap: anywhere !important;
       font-size: 0.71rem !important;
@@ -500,19 +500,19 @@ st.markdown("""
       flex-wrap: wrap !important;
       align-items: flex-start !important;
       gap: 0.5rem !important;
-      width: 70px !important;
+      width: 100% !important;
       min-width: 0 !important;
     }
     [data-testid="stHorizontalBlock"] > [data-testid="column"] {
       flex: 1 1 100% !important;
-      width: 70px !important;
+      width: 100% !important;
       min-width: 0 !important;
-      max-width: 70px !important;
+      max-width: 100% !important;
       margin: 0 !important;
       padding: 0 !important;
     }
     /* Filas de nombre dentro de contenedores con identidad CSS propia. */
-    .edit-mini-btn { display: flex !important; justify-content: flex-end !important; width: 70px !important; }
+    .edit-mini-btn { display: flex !important; justify-content: flex-end !important; width: 100% !important; }
     .edit-mini-btn button,
     [data-testid="column"]:has(.edit-mini-btn) .stButton > button {
       display: inline-flex !important;
@@ -533,8 +533,8 @@ st.markdown("""
     [data-testid="column"]:has(.compact-hora) [data-baseweb="input"],
     [data-testid="column"]:has(.compact-hora) [data-baseweb="base-input"],
     [data-testid="column"]:has(.compact-maps) [data-testid="stLinkButton"] {
-      width: 70px !important;
-      max-width: 70px !important;
+      width: 100% !important;
+      max-width: 100% !important;
       min-width: 0 !important;
       margin: 0 !important;
       transform: none !important;
@@ -543,7 +543,7 @@ st.markdown("""
     [data-testid="column"]:has(.compact-dia) [data-baseweb="select"] {
       width: max-content !important;
       min-width: 96px !important;
-      max-width: 70px !important;
+      max-width: 100% !important;
       margin: 0 !important;
       transform: none !important;
     }
@@ -558,7 +558,7 @@ st.markdown("""
     }
     [data-testid="column"]:has(.compact-hora) input {
       min-width: 0 !important;
-      width: 70px !important;
+      width: 100% !important;
       height: 32px !important;
       min-height: 32px !important;
       padding: 0 4px !important;
@@ -577,7 +577,7 @@ st.markdown("""
       padding-right: 18px !important;
       width: max-content !important;
       min-width: 96px !important;
-      max-width: 70px !important;
+      max-width: 100% !important;
     }
     [data-testid="column"]:has(.compact-dia) [data-baseweb="select"] input { caret-color: transparent !important; }
     [data-testid="column"]:has(.compact-maps) [data-testid="stLinkButton"] > a {
@@ -617,15 +617,15 @@ st.markdown("""
       grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
       align-items: stretch !important;
       gap: 7px !important;
-      width: 70px !important;
+      width: 100% !important;
     }
     [class*="st-key-flight-links-"] [data-testid="column"],
     [class*="st-key-gmaps-actions-"] [data-testid="column"] {
       display: block !important;
       flex: none !important;
-      width: 70px !important;
+      width: 100% !important;
       min-width: 0 !important;
-      max-width: 70px !important;
+      max-width: 100% !important;
       margin: 0 !important;
       padding: 0 !important;
     }
@@ -652,7 +652,7 @@ st.markdown("""
       display: flex !important;
       justify-content: center !important;
       align-items: center !important;
-      width: 70px !important;
+      width: 100% !important;
       min-width: 0 !important;
       min-height: 34px !important;
       height: auto !important;
@@ -667,14 +667,14 @@ st.markdown("""
     .stButton, .stFormSubmitButton, [data-testid="stLinkButton"],
     .stSelectbox, .stTextInput, .stNumberInput, .stDateInput,
     .stMultiSelect, .stSlider, [data-testid="stFileUploader"] {
-      width: 70px !important;
-      max-width: 70px !important;
+      width: 100% !important;
+      max-width: 100% !important;
       min-width: 0 !important;
     }
     .stButton > button, .stFormSubmitButton > button,
     [data-testid="stLinkButton"] > a {
-      width: 70px !important;
-      max-width: 70px !important;
+      width: 100% !important;
+      max-width: 100% !important;
       min-width: 0 !important;
       min-height: 36px !important;
       height: auto !important;
@@ -685,14 +685,14 @@ st.markdown("""
       font-size: 0.76rem !important;
     }
     [data-baseweb="select"], [data-baseweb="input"], [data-baseweb="base-input"] {
-      max-width: 70px !important;
+      max-width: 100% !important;
       min-width: 0 !important;
     }
     .stRadio > div { flex-wrap: wrap !important; gap: 0.45rem !important; }
     iframe {
       display: block !important;
-      width: 70px !important;
-      max-width: 70px !important;
+      width: 100% !important;
+      max-width: 100% !important;
       height: 365px !important;
     }
     /* URL de listas: línea partida, no fuerza scroll horizontal. */
@@ -710,13 +710,13 @@ st.markdown("""
     .hero-container > div > div:last-child {
       display: grid !important;
       gap: 6px !important;
-      width: 70px !important;
-      max-width: 70px !important;
+      width: 100% !important;
+      max-width: 100% !important;
       min-width: 0 !important;
     }
     .hero-stat-box {
       box-sizing: border-box !important;
-      width: 70px !important;
+      width: 100% !important;
       overflow: visible !important;
     }
     .hero-stat-lbl {
@@ -829,11 +829,11 @@ st.markdown("""
     }
     .hero-container > div {
       min-width: 0 !important;
-      width: 70px !important;
+      width: 100% !important;
     }
     .hero-container > div > div:first-child {
       min-width: 0 !important;
-      width: 70px !important;
+      width: 100% !important;
     }
     [data-testid="stTabs"],
     [data-testid="stTabContent"],
@@ -1088,7 +1088,7 @@ st.markdown("""
     align-items: stretch !important;
     justify-content: space-between !important;
     gap: 6px !important;
-    width: 70px !important;
+    width: 100% !important;
     margin: 0 !important;
     padding: 0 !important;
     overflow-x: auto !important;
@@ -1170,14 +1170,14 @@ st.markdown("""
   }
   .place-full-width-info, .place-full-width-info .place-list-address,
   .place-full-width-info .place-note {
-    display: block !important; width: 70px !important; max-width: 70px !important;
+    display: block !important; width: 100% !important; max-width: 100% !important;
     min-width: 0 !important; box-sizing: border-box !important;
     overflow-wrap: anywhere !important; white-space: pre-wrap !important;
   }
   .place-full-width-info { flex: 1 1 100% !important; }
   @media (max-width: 768px) {
     .place-full-width-info, .place-full-width-info .place-list-address,
-    .place-full-width-info .place-note { width: 70px !important; max-width: 70px !important; }
+    .place-full-width-info .place-note { width: 100% !important; max-width: 100% !important; }
   }
   /* ================================================================
      CONTROLES DE LUGARES — BLOQUE ÚNICO Y CONSOLIDADO
@@ -1193,9 +1193,9 @@ st.markdown("""
     align-items: center !important;
     justify-content: flex-start !important;
     gap: 6px !important;
-    width: 70px !important;
+    width: 100% !important;
     min-width: 0 !important;
-    max-width: 70px !important;
+    max-width: 100% !important;
     overflow: visible !important;
   }
   [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"],
@@ -1441,9 +1441,9 @@ st.markdown("""
       justify-content: stretch !important;
       column-gap: 2px !important;
       row-gap: 0 !important;
-      width: 70px !important;
+      width: 100% !important;
       min-width: 0 !important;
-      max-width: 70px !important;
+      max-width: 100% !important;
       overflow: visible !important;
     }
     [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"],
@@ -1451,7 +1451,7 @@ st.markdown("""
       box-sizing: border-box !important;
       display: flex !important;
       min-width: 0 !important;
-      max-width: 70px !important;
+      max-width: 100% !important;
       margin: 0 !important;
       padding: 0 !important;
       overflow: visible !important;
@@ -1482,9 +1482,9 @@ st.markdown("""
       column-gap: 4px !important;
       align-items: center !important;
       justify-content: start !important;
-      width: 70px !important;
+      width: 100% !important;
       min-width: 0 !important;
-      max-width: 70px !important;
+      max-width: 100% !important;
     }
     [class*="st-key-it-controls-row-"] [data-testid="column"],
     [class*="st-key-saved-controls-row-"] [data-testid="column"] {
@@ -1492,7 +1492,7 @@ st.markdown("""
       flex: none !important;
       width: auto !important;
       min-width: 0 !important;
-      max-width: 70px !important;
+      max-width: 100% !important;
       margin: 0 !important;
       padding: 0 !important;
     }
@@ -1515,7 +1515,7 @@ st.markdown("""
     [class*="st-key-it-controls-row-"] [data-testid="column"]:first-child input,
     [class*="st-key-saved-controls-row-"] [data-testid="column"]:first-child input {
       box-sizing: border-box !important;
-      width: 70px !important;
+      width: 100% !important;
       min-width: 0 !important;
       height: 34px !important;
       min-height: 34px !important;
