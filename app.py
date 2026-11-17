@@ -1883,7 +1883,7 @@ st.markdown("""
       transform: translate(3px, -4.5px) !important;
     }
   }
-  [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(2) {
+  [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(1) {
       margin-right: 3px !important;
     }
 </style>
