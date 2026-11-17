@@ -2487,7 +2487,7 @@ st.markdown("""
      hacia arriba y a la derecha para alinearlo visualmente con Mapa y Editar. */
   @media (max-width: 768px) {
     [class*="st-key-it-visit-checkbox-wrap-"] {
-      transform: translate(13px, -4px) !important;
+      transform: translate(12px, -4px) !important;
     }
   }
 </style>
