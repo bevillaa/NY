@@ -1884,7 +1884,8 @@ st.markdown("""
   }
   /* Ajuste hacia arriba para alinearlo con Mapa y Editar. */
   @media (max-width: 768px) {
-    [class*="st-key-it-edit-button-wrap-"]{
+    [class*="st-key-it-edit-button-wrap-"],
+    [class*="st-key-saved-edit-button-wrap-"]]{
       transform: translate(3px,0px) !important;
     }
   }
