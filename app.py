@@ -1857,10 +1857,10 @@ st.markdown("""
 
     /* Ruta: hora compacta, información flexible, tres acciones juntas. */
     [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(1) {
-      flex: 0 0 100px !important;
-      width: 100px !important;
-      min-width: 100px !important;
-      max-width: 100px !important;
+      flex: 0 0 120px !important;
+      width: 120px !important;
+      min-width: 120px !important;
+      max-width: 120px !important;
     }
     [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(2) {
       display: block !important;
@@ -1970,9 +1970,9 @@ st.markdown("""
     [class*="st-key-it-heading-row-"] [data-testid="column"]:first-child [data-baseweb="input"],
     [class*="st-key-it-heading-row-"] [data-testid="column"]:first-child [data-baseweb="base-input"] {
       box-sizing: border-box !important;
-      width: 100px !important;
-      min-width: 100px !important;
-      max-width: 100px !important;
+      width: 120px !important;
+      min-width: 120px !important;
+      max-width: 120px !important;
     }
   }
 
@@ -2001,10 +2001,10 @@ st.markdown("""
       padding: 0 !important;
     }
     [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(1) {
-      flex: 0 0 100px !important;
-      width: 100px !important;
-      min-width: 100px !important;
-      max-width: 100px !important;
+      flex: 0 0 120px !important;
+      width: 120px !important;
+      min-width: 120px !important;
+      max-width: 120px !important;
     }
     [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(2) {
       flex: 1 1 0% !important;
@@ -2106,10 +2106,10 @@ st.markdown("""
       max-width: 54px !important;
     }
     [class*="st-key-saved-controls-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(2) {
-      flex: 0 0 54px !important;
-      width: 54px !important;
-      min-width: 54px !important;
-      max-width: 54px !important;
+      flex: 0 0 44px !important;
+      width: 44px !important;
+      min-width: 44px !important;
+      max-width: 44px !important;
     }
     [class*="st-key-saved-controls-row-"] [data-testid="column"]:first-child [data-testid="stTextInput"],
     [class*="st-key-saved-controls-row-"] [data-testid="column"]:first-child [data-baseweb="input"],
@@ -2181,10 +2181,10 @@ st.markdown("""
     }
     [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(1) {
       display: block !important;
-      flex: 0 0 100px !important;
-      width: 100px !important;
-      min-width: 100px !important;
-      max-width: 100px !important;
+      flex: 0 0 120px !important;
+      width: 120px !important;
+      min-width: 120px !important;
+      max-width: 120px !important;
     }
     [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(2) {
       display: block !important;
@@ -2263,9 +2263,9 @@ st.markdown("""
     [class*="st-key-it-heading-row-"] [data-testid="column"]:first-child [data-baseweb="input"],
     [class*="st-key-it-heading-row-"] [data-testid="column"]:first-child [data-baseweb="base-input"] {
       box-sizing: border-box !important;
-      width: 100px !important;
-      min-width: 100px !important;
-      max-width: 100px !important;
+      width: 120px !important;
+      min-width: 120px !important;
+      max-width: 120px !important;
       margin: 0 !important;
     }
 
@@ -2358,9 +2358,9 @@ st.markdown("""
       padding: 0 !important;
     }
     [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(1) {
-      flex: 0 0 100px !important;
-      width: 100px !important;
-      max-width: 100px !important;
+      flex: 0 0 120px !important;
+      width: 120px !important;
+      max-width: 120px !important;
     }
     [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(2) {
       flex: 1 1 0% !important;
