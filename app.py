@@ -1889,7 +1889,7 @@ st.markdown("""
     }
   }@media (max-width: 768px) {
     [class*="st-key-saved-edit-button-wrap-"]{
-      transform: translate(6px,0px) !important;
+      transform: translate(7px,0px) !important;
     }
   }
 </style>
