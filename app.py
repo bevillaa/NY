@@ -2341,171 +2341,169 @@ st.markdown("""
   }
 
 
-  /* Correcciones finales solicitadas: solo filas de Ruta/Guardados. */
-  @media screen and (min-width: 769px) {
-    /* Ruta: reloj estrecho, texto flexible y acciones contiguas. */
-    div[class*="st-key-it-heading-row"] [data-testid="stHorizontalBlock"] {
+  /* AJUSTE VISUAL FINAL: conservar las columnas nativas de Streamlit. */
+  @media (min-width: 769px) {
+    /* RUTA: hora | información flexible | editar | mapa | visitado */
+    [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] {
       display: flex !important;
       flex-flow: row nowrap !important;
       align-items: center !important;
       justify-content: flex-start !important;
-      column-gap: 1px !important;
+      gap: 1px !important;
       width: 100% !important;
-      min-width: 0 !important;
     }
-    div[class*="st-key-it-heading-row"] [data-testid="stHorizontalBlock"] > [data-testid="column"] {
-      box-sizing: border-box !important;
+    [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"] {
       min-width: 0 !important;
       margin: 0 !important;
       padding: 0 !important;
     }
-    div[class*="st-key-it-heading-row"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(1) {
-      flex: 0 0 66px !important;
-      width: 66px !important;
-      min-width: 66px !important;
-      max-width: 66px !important;
+    [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(1) {
+      flex: 0 0 54px !important;
+      width: 54px !important;
+      max-width: 54px !important;
     }
-    div[class*="st-key-it-heading-row"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(2) {
+    [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(2) {
       flex: 1 1 0% !important;
       width: auto !important;
+      max-width: none !important;
       min-width: 0 !important;
+    }
+    [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(n+3) {
+      flex: 0 0 30px !important;
+      width: 30px !important;
+      max-width: 30px !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+    }
+    [class*="st-key-it-heading-row-"] [data-testid="column"]:first-child [data-testid="stTextInput"],
+    [class*="st-key-it-heading-row-"] [data-testid="column"]:first-child [data-baseweb="input"],
+    [class*="st-key-it-heading-row-"] [data-testid="column"]:first-child [data-baseweb="base-input"] {
+      width: 100% !important;
+      min-width: 0 !important;
+      max-width: 100% !important;
+    }
+    [class*="st-key-it-heading-row-"] [data-testid="column"]:first-child input {
+      width: 100% !important;
+      min-width: 0 !important;
+      box-sizing: border-box !important;
+      text-align: center !important;
+    }
+    [class*="st-key-it-edit-button-wrap-"],
+    [class*="st-key-it-map-button-wrap-"],
+    [class*="st-key-it-visit-checkbox-wrap-"] {
+      width: 30px !important;
+      min-width: 30px !important;
+      max-width: 30px !important;
+      margin: 0 !important;
+      padding: 0 !important;
+    }
+    [class*="st-key-it-edit-button-wrap-"] [data-testid="stButton"] > button,
+    [class*="st-key-it-map-button-wrap-"] a,
+    [class*="st-key-it-visit-checkbox-wrap-"] [data-testid="stCheckbox"] > label {
+      width: 30px !important;
+      min-width: 30px !important;
+      max-width: 30px !important;
+      height: 30px !important;
+      min-height: 30px !important;
+      box-sizing: border-box !important;
+      margin: 0 !important;
+      padding: 0 !important;
+    }
+
+    /* GUARDADOS: texto flexible y botones juntos. */
+    [class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"] {
+      display: flex !important;
+      flex-flow: row nowrap !important;
+      align-items: center !important;
+      gap: 1px !important;
+      width: 100% !important;
+    }
+    [class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"] {
+      min-width: 0 !important;
+      margin: 0 !important;
+      padding: 0 !important;
+    }
+    [class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:first-child {
+      flex: 1 1 0% !important;
+      width: auto !important;
       max-width: none !important;
     }
-    div[class*="st-key-it-heading-row"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(n+3) {
-      display: flex !important;
+    [class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(n+2) {
       flex: 0 0 30px !important;
       width: 30px !important;
-      min-width: 30px !important;
       max-width: 30px !important;
-      align-items: center !important;
+      display: flex !important;
       justify-content: center !important;
     }
-    div[class*="st-key-it-heading-row"] [data-testid="column"]:first-child [data-testid="stTextInput"],
-    div[class*="st-key-it-heading-row"] [data-testid="column"]:first-child [data-baseweb="input"],
-    div[class*="st-key-it-heading-row"] [data-testid="column"]:first-child [data-baseweb="base-input"] {
-      box-sizing: border-box !important;
-      width: 66px !important;
-      min-width: 66px !important;
-      max-width: 66px !important;
-    }
-    div[class*="st-key-it-edit-button-wrap"],
-    div[class*="st-key-it-map-button-wrap"],
-    div[class*="st-key-it-visit-checkbox-wrap"] {
+    [class*="st-key-saved-edit-button-wrap-"],
+    [class*="st-key-saved-map-button-wrap-"] {
       width: 30px !important;
       min-width: 30px !important;
       max-width: 30px !important;
       margin: 0 !important;
       padding: 0 !important;
     }
-    div[class*="st-key-it-edit-button-wrap"] button,
-    div[class*="st-key-it-map-button-wrap"] a {
-      box-sizing: border-box !important;
+    [class*="st-key-saved-edit-button-wrap-"] [data-testid="stButton"] > button,
+    [class*="st-key-saved-map-button-wrap-"] a {
       width: 30px !important;
       min-width: 30px !important;
       max-width: 30px !important;
       height: 30px !important;
       min-height: 30px !important;
-      margin: 0 !important;
-      padding: 0 !important;
-    }
-
-    /* Guardados: botones contiguos en el extremo derecho. */
-    div[class*="st-key-saved-heading-row"] [data-testid="stHorizontalBlock"] {
-      display: flex !important;
-      flex-flow: row nowrap !important;
-      align-items: center !important;
-      column-gap: 1px !important;
-      width: 100% !important;
-    }
-    div[class*="st-key-saved-heading-row"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:first-child {
-      flex: 1 1 0% !important;
-      min-width: 0 !important;
-    }
-    div[class*="st-key-saved-heading-row"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(n+2) {
-      display: flex !important;
-      flex: 0 0 30px !important;
-      width: 30px !important;
-      min-width: 30px !important;
-      max-width: 30px !important;
-      justify-content: center !important;
-    }
-    div[class*="st-key-saved-edit-button-wrap"],
-    div[class*="st-key-saved-map-button-wrap"] {
-      width: 30px !important;
-      min-width: 30px !important;
-      max-width: 30px !important;
-      margin: 0 !important;
-      padding: 0 !important;
-    }
-    div[class*="st-key-saved-edit-button-wrap"] button,
-    div[class*="st-key-saved-map-button-wrap"] a {
       box-sizing: border-box !important;
-      width: 30px !important;
-      min-width: 30px !important;
-      max-width: 30px !important;
-      height: 30px !important;
-      min-height: 30px !important;
       margin: 0 !important;
       padding: 0 !important;
     }
 
-    /* Guardados: campos compactos sin ocupar media pantalla. */
-    div[class*="st-key-saved-controls-row"] [data-testid="stHorizontalBlock"] {
+    /* Controles de hora y día compactos, sin estirar las columnas. */
+    [class*="st-key-saved-controls-row-"] [data-testid="stHorizontalBlock"] {
       display: flex !important;
       flex-flow: row nowrap !important;
       justify-content: flex-start !important;
       align-items: center !important;
-      gap: 3px !important;
-      width: auto !important;
+      gap: 4px !important;
+      width: max-content !important;
+      max-width: 100% !important;
     }
-    div[class*="st-key-saved-controls-row"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:first-child {
-      flex: 0 0 48px !important;
-      width: 48px !important;
-      min-width: 48px !important;
-      max-width: 48px !important;
+    [class*="st-key-saved-controls-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"] {
+      min-width: 0 !important;
+      margin: 0 !important;
+      padding: 0 !important;
     }
-    div[class*="st-key-saved-controls-row"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(2) {
-      flex: 0 0 64px !important;
-      width: 64px !important;
-      min-width: 64px !important;
-      max-width: 64px !important;
+    [class*="st-key-saved-controls-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:first-child {
+      flex: 0 0 44px !important;
+      width: 44px !important;
+      max-width: 44px !important;
     }
-    div[class*="st-key-saved-controls-row"] [data-testid="column"]:first-child [data-testid="stTextInput"],
-    div[class*="st-key-saved-controls-row"] [data-testid="column"]:first-child [data-baseweb="input"],
-    div[class*="st-key-saved-controls-row"] [data-testid="column"]:first-child [data-baseweb="base-input"] {
-      box-sizing: border-box !important;
-      width: 48px !important;
-      min-width: 48px !important;
-      max-width: 48px !important;
-      height: 24px !important;
-      min-height: 24px !important;
-      max-height: 24px !important;
+    [class*="st-key-saved-controls-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(2) {
+      flex: 0 0 54px !important;
+      width: 54px !important;
+      max-width: 54px !important;
     }
-    div[class*="st-key-saved-controls-row"] [data-testid="column"]:first-child input {
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:first-child [data-testid="stTextInput"],
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:first-child [data-baseweb="input"],
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:first-child [data-baseweb="base-input"],
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(2) [data-testid="stSelectbox"],
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(2) [data-baseweb="select"],
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(2) [data-baseweb="select"] > div {
       width: 100% !important;
       min-width: 0 !important;
-      height: 22px !important;
-      padding: 0 2px !important;
+      max-width: 100% !important;
+      box-sizing: border-box !important;
+    }
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:first-child input {
+      width: 100% !important;
+      min-width: 0 !important;
+      box-sizing: border-box !important;
       font-size: 0.68rem !important;
       text-align: center !important;
     }
-    div[class*="st-key-saved-controls-row"] [data-testid="column"]:nth-child(2) [data-testid="stSelectbox"],
-    div[class*="st-key-saved-controls-row"] [data-testid="column"]:nth-child(2) [data-baseweb="select"],
-    div[class*="st-key-saved-controls-row"] [data-testid="stSelectbox"] [data-baseweb="select"] > div {
-      box-sizing: border-box !important;
-      width: 64px !important;
-      min-width: 64px !important;
-      max-width: 64px !important;
-      height: 24px !important;
-      min-height: 24px !important;
-      max-height: 24px !important;
-      font-size: 0.65rem !important;
-    }
   }
 
-  /* Móvil: desplazar solo el bloque de texto de Ruta, no hora ni acciones. */
-  @media screen and (max-width: 768px) {
-    div[class*="st-key-it-heading-row"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(2) {
+  /* MÓVIL: mover solo el bloque de texto de Ruta hacia la izquierda. */
+  @media (max-width: 768px) {
+    [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(2) {
       position: relative !important;
       left: -6px !important;
     }
