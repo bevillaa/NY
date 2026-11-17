@@ -2550,66 +2550,6 @@ st.markdown("""
     }
   }
 
-
-  /* AJUSTES SOLICITADOS · solo versión web (móvil intacto). */
-  @media screen and (min-width: 769px) {
-    /* RUTA: hora compacta y acciones (editar, mapa, visitado) separadas 2 px. */
-    [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] {
-      gap: 2px !important;
-    }
-    [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:first-child {
-      flex: 0 0 88px !important;
-      width: 88px !important;
-      min-width: 88px !important;
-      max-width: 88px !important;
-    }
-    [class*="st-key-it-heading-row-"] [data-testid="column"]:first-child [data-testid="stTextInput"],
-    [class*="st-key-it-heading-row-"] [data-testid="column"]:first-child [data-baseweb="input"],
-    [class*="st-key-it-heading-row-"] [data-testid="column"]:first-child [data-baseweb="base-input"],
-    [class*="st-key-it-heading-row-"] [data-testid="column"]:first-child input {
-      box-sizing: border-box !important;
-      width: 88px !important;
-      min-width: 88px !important;
-      max-width: 88px !important;
-    }
-
-    /* GUARDADOS: edición y mapa con exactamente 2 px entre ambos. */
-    [class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"] {
-      gap: 2px !important;
-    }
-
-    /* Selector de hora y día más cortos en los controles de Guardados. */
-    [class*="st-key-saved-controls-row-"] [data-testid="stHorizontalBlock"] {
-      gap: 3px !important;
-    }
-    [class*="st-key-saved-controls-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:first-child {
-      flex: 0 0 64px !important;
-      width: 64px !important;
-      min-width: 64px !important;
-      max-width: 64px !important;
-    }
-    [class*="st-key-saved-controls-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(2) {
-      flex: 0 0 110px !important;
-      width: 110px !important;
-      min-width: 110px !important;
-      max-width: 110px !important;
-    }
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:first-child [data-testid="stTextInput"],
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:first-child [data-baseweb="input"],
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:first-child [data-baseweb="base-input"] {
-      width: 64px !important;
-      min-width: 64px !important;
-      max-width: 64px !important;
-    }
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(2) [data-testid="stSelectbox"],
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(2) [data-baseweb="select"],
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(2) [data-baseweb="select"] > div {
-      width: 110px !important;
-      min-width: 110px !important;
-      max-width: 110px !important;
-    }
-  }
-
 </style>
 """, unsafe_allow_html=True)
 
