@@ -409,11 +409,11 @@ st.markdown("""
     justify-content: flex-end !important;
   }
   .edit-mini-btn button {
-    min-height: 38px !important;
-    height: 38px !important;
-    width: 38px !important;
-    min-width: 38px !important;
-    max-width: 38px !important;
+    min-height: 30px !important;
+    height: 30px !important;
+    width: 30px !important;
+    min-width: 30px !important;
+    max-width: 30px !important;
     padding: 0 !important;
     font-size: 1.18rem !important;
     line-height: 1.1 !important;
@@ -440,8 +440,8 @@ st.markdown("""
   }
   [data-testid="column"]:has(.compact-hora) [data-baseweb="input"],
   [data-testid="column"]:has(.compact-hora) [data-baseweb="base-input"] {
-    height: 38px !important;
-    min-height: 38px !important;
+    height: 30px !important;
+    min-height: 30px !important;
     max-height: 30px !important;
     border-radius: 8px !important;
     border: 1px dashed #94A3B8 !important;
@@ -705,8 +705,8 @@ st.markdown("""
       width: 34px !important;
       min-width: 34px !important;
       max-width: 34px !important;
-      height: 38px !important;
-      min-height: 38px !important;
+      height: 30px !important;
+      min-height: 30px !important;
       max-height: 34px !important;
       padding: 0 !important;
       font-size: 1.05rem !important;
@@ -760,7 +760,7 @@ st.markdown("""
       align-items: center !important;
       width: 100% !important;
       min-width: 0 !important;
-      min-height: 38px !important;
+      min-height: 30px !important;
       height: auto !important;
       padding: 6px 4px !important;
       white-space: normal !important;
@@ -1990,13 +1990,13 @@ st.markdown("""
   [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(n+2),
   [class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(n+2) {
     display: flex !important;
-    flex: 0 0 38px !important;
-    width: 38px !important;
-    min-width: 38px !important;
-    max-width: 38px !important;
-    height: 38px !important;
-    min-height: 38px !important;
-    max-height: 38px !important;
+    flex: 0 0 30px !important;
+    width: 30px !important;
+    min-width: 30px !important;
+    max-width: 30px !important;
+    height: 30px !important;
+    min-height: 30px !important;
+    max-height: 30px !important;
     align-items: center !important;
     justify-content: center !important;
     overflow: visible !important;
@@ -2009,13 +2009,13 @@ st.markdown("""
   [class*="st-key-saved-map-button-wrap-"],
   [class*="st-key-it-visit-checkbox-wrap-"] {
     display: flex !important;
-    flex: 0 0 38px !important;
-    width: 38px !important;
-    min-width: 38px !important;
-    max-width: 38px !important;
-    height: 38px !important;
-    min-height: 38px !important;
-    max-height: 38px !important;
+    flex: 0 0 30px !important;
+    width: 30px !important;
+    min-width: 30px !important;
+    max-width: 30px !important;
+    height: 30px !important;
+    min-height: 30px !important;
+    max-height: 30px !important;
     align-items: center !important;
     justify-content: center !important;
     margin: 0 !important;
@@ -2033,13 +2033,13 @@ st.markdown("""
   [class*="st-key-saved-map-button-wrap-"] [data-testid="stLinkButton"],
   [class*="st-key-it-visit-checkbox-wrap-"] [data-testid="stCheckbox"] {
     display: flex !important;
-    flex: 0 0 38px !important;
-    width: 38px !important;
-    min-width: 38px !important;
-    max-width: 38px !important;
-    height: 38px !important;
-    min-height: 38px !important;
-    max-height: 38px !important;
+    flex: 0 0 30px !important;
+    width: 30px !important;
+    min-width: 30px !important;
+    max-width: 30px !important;
+    height: 30px !important;
+    min-height: 30px !important;
+    max-height: 30px !important;
     align-items: center !important;
     justify-content: center !important;
     margin: 0 !important;
@@ -2056,13 +2056,13 @@ st.markdown("""
     -webkit-appearance: none !important;
     box-sizing: border-box !important;
     display: inline-flex !important;
-    flex: 0 0 38px !important;
-    width: 38px !important;
-    min-width: 38px !important;
-    max-width: 38px !important;
-    height: 38px !important;
-    min-height: 38px !important;
-    max-height: 38px !important;
+    flex: 0 0 30px !important;
+    width: 30px !important;
+    min-width: 30px !important;
+    max-width: 30px !important;
+    height: 30px !important;
+    min-height: 30px !important;
+    max-height: 30px !important;
     align-items: center !important;
     justify-content: center !important;
     margin: 0 !important;
@@ -2114,13 +2114,13 @@ st.markdown("""
   /* Checkbox de Ruta: caja de 38 px y marca centrada exactamente como los otros controles. */
   [class*="st-key-it-visit-checkbox-wrap-"] [data-testid="stCheckbox"] {
     display: flex !important;
-    flex: 0 0 38px !important;
-    width: 38px !important;
-    min-width: 38px !important;
-    max-width: 38px !important;
-    height: 38px !important;
-    min-height: 38px !important;
-    max-height: 38px !important;
+    flex: 0 0 30px !important;
+    width: 30px !important;
+    min-width: 30px !important;
+    max-width: 30px !important;
+    height: 30px !important;
+    min-height: 30px !important;
+    max-height: 30px !important;
     align-items: center !important;
     justify-content: center !important;
     margin: 0 !important;
@@ -2129,13 +2129,13 @@ st.markdown("""
   [class*="st-key-it-visit-checkbox-wrap-"] [data-testid="stCheckbox"] > label {
     box-sizing: border-box !important;
     display: flex !important;
-    flex: 0 0 38px !important;
-    width: 38px !important;
-    min-width: 38px !important;
-    max-width: 38px !important;
-    height: 38px !important;
-    min-height: 38px !important;
-    max-height: 38px !important;
+    flex: 0 0 30px !important;
+    width: 30px !important;
+    min-width: 30px !important;
+    max-width: 30px !important;
+    height: 30px !important;
+    min-height: 30px !important;
+    max-height: 30px !important;
     align-items: center !important;
     justify-content: center !important;
     gap: 0 !important;
@@ -2177,12 +2177,12 @@ st.markdown("""
     justify-content: center !important;
     display: flex !important;
     align-self: center !important;
-    width: 38px !important;
-    min-width: 38px !important;
-    max-width: 38px !important;
-    height: 38px !important;
-    min-height: 38px !important;
-    max-height: 38px !important;
+    width: 30px !important;
+    min-width: 30px !important;
+    max-width: 30px !important;
+    height: 30px !important;
+    min-height: 30px !important;
+    max-height: 30px !important;
     margin: 0 !important;
     padding: 0 !important;
   }
@@ -2193,12 +2193,12 @@ st.markdown("""
     display: flex !important;
     place-items: center !important;
     align-self: center !important;
-    width: 38px !important;
-    min-width: 38px !important;
-    max-width: 38px !important;
-    height: 38px !important;
-    min-height: 38px !important;
-    max-height: 38px !important;
+    width: 30px !important;
+    min-width: 30px !important;
+    max-width: 30px !important;
+    height: 30px !important;
+    min-height: 30px !important;
+    max-height: 30px !important;
     margin: 0 !important;
     padding: 0 !important;
     transform: none !important;
@@ -2208,12 +2208,12 @@ st.markdown("""
     position: relative !important;
     display: grid !important;
     place-items: center !important;
-    width: 38px !important;
-    min-width: 38px !important;
-    max-width: 38px !important;
-    height: 38px !important;
-    min-height: 38px !important;
-    max-height: 38px !important;
+    width: 30px !important;
+    min-width: 30px !important;
+    max-width: 30px !important;
+    height: 30px !important;
+    min-height: 30px !important;
+    max-height: 30px !important;
     margin: 0 !important;
     padding: 0 !important;
     transform: none !important;
@@ -2314,7 +2314,7 @@ st.markdown("""
   @media (max-width: 768px) {
     [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] {
       display: grid !important;
-      grid-template-columns: minmax(0, 1fr) 38px 38px 38px !important;
+      grid-template-columns: minmax(0, 1fr) 30px 30px 30px !important;
       grid-auto-flow: column !important;
       align-items: center !important;
       justify-content: stretch !important;
@@ -2327,7 +2327,7 @@ st.markdown("""
     }
     [class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"] {
       display: grid !important;
-      grid-template-columns: minmax(0, 1fr) 38px 38px !important;
+      grid-template-columns: minmax(0, 1fr) 30px 30px !important;
       grid-auto-flow: column !important;
       align-items: center !important;
       justify-content: stretch !important;
@@ -2356,13 +2356,13 @@ st.markdown("""
     }
     [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(n+2),
     [class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(n+2) {
-      flex: 0 0 38px !important;
-      width: 38px !important;
-      min-width: 38px !important;
-      max-width: 38px !important;
-      height: 38px !important;
-      min-height: 38px !important;
-      max-height: 38px !important;
+      flex: 0 0 30px !important;
+      width: 30px !important;
+      min-width: 30px !important;
+      max-width: 30px !important;
+      height: 30px !important;
+      min-height: 30px !important;
+      max-height: 30px !important;
       align-items: center !important;
       justify-content: center !important;
     }
