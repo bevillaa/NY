@@ -1741,11 +1741,25 @@ st.markdown("""
     justify-content: center !important;
     overflow: visible !important;
   }
+  /* Hora: ancho fijo como en la versión estable; la información ocupa
+     todo el espacio restante tanto en escritorio como en móvil. */
   [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(1) {
-    flex: 1.35 1 0% !important;
+    box-sizing: border-box !important;
+    display: flex !important;
+    flex: 0 0 84px !important;
+    width: 84px !important;
+    min-width: 84px !important;
+    max-width: 84px !important;
+    align-items: center !important;
+    justify-content: center !important;
   }
   [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(2) {
-    flex: 8.35 1 0% !important;
+    box-sizing: border-box !important;
+    display: flex !important;
+    flex: 1 1 0% !important;
+    width: auto !important;
+    min-width: 0 !important;
+    max-width: none !important;
     justify-content: flex-start !important;
     overflow: visible !important;
   }
@@ -1780,9 +1794,9 @@ st.markdown("""
   [class*="st-key-it-heading-row-"] [data-testid="column"]:first-child [data-baseweb="input"],
   [class*="st-key-it-heading-row-"] [data-testid="column"]:first-child [data-baseweb="base-input"] {
     box-sizing: border-box !important;
-    width: 100% !important;
-    min-width: 0 !important;
-    max-width: 100% !important;
+    width: 84px !important;
+    min-width: 84px !important;
+    max-width: 84px !important;
     height: 40px !important;
     min-height: 40px !important;
     max-height: 40px !important;
@@ -3452,6 +3466,9 @@ if seccion_principal == "🗽Ruta":
                                     hl = "0" + hl
                                 st.session_state.lugares[idx_real]["hora"] = hl
                                 guardar_itinerario_disco(st.session_state.lugares)
+                                # La lista se había ordenado antes de leer este cambio.
+                                # Reejecutar permite recalcular el orden con la hora guardada.
+                                st.rerun()
 
                     with c_info:
                         txt_c = "#334155" if is_visited else "#0F172A"
