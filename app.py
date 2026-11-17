@@ -440,8 +440,8 @@ st.markdown("""
   }
   [data-testid="column"]:has(.compact-hora) [data-baseweb="input"],
   [data-testid="column"]:has(.compact-hora) [data-baseweb="base-input"] {
-    height: 30px !important;
-    min-height: 30px !important;
+    height: 34px !important;
+    min-height: 34px !important;
     max-height: 30px !important;
     border-radius: 8px !important;
     border: 1px dashed #94A3B8 !important;
@@ -705,8 +705,8 @@ st.markdown("""
       width: 34px !important;
       min-width: 34px !important;
       max-width: 34px !important;
-      height: 34px !important;
-      min-height: 34px !important;
+      height: 38px !important;
+      min-height: 38px !important;
       max-height: 34px !important;
       padding: 0 !important;
       font-size: 1.05rem !important;
@@ -2166,45 +2166,65 @@ st.markdown("""
   [class*="st-key-it-visit-checkbox-wrap-"] [data-testid="stCheckbox"] label p {
     display: none !important;
   }
-  /* Alineación geométrica del checkbox con los centros de Editar y Mapa. */
+  /* Checkbox: el cuarto slot usa el mismo centro geométrico que Editar y Mapa.
+     Se centra toda la cadena de wrappers de Streamlit, no solo la marca. */
   [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(4) {
-    display: flex !important;
+    box-sizing: border-box !important;
+    display: grid !important;
+    place-items: center !important;
     align-self: center !important;
-    align-items: center !important;
-    justify-content: center !important;
-  }
-  [class*="st-key-it-visit-checkbox-wrap-"] {
-    display: flex !important;
-    align-self: center !important;
-    align-items: center !important;
-    justify-content: center !important;
+    width: 38px !important;
+    min-width: 38px !important;
+    max-width: 38px !important;
+    height: 38px !important;
+    min-height: 38px !important;
+    max-height: 38px !important;
     margin: 0 !important;
     padding: 0 !important;
-    transform: none !important;
   }
+  [class*="st-key-it-visit-checkbox-wrap-"],
   [class*="st-key-it-visit-checkbox-wrap-"] [data-testid="stElementContainer"],
   [class*="st-key-it-visit-checkbox-wrap-"] [data-testid="stCheckbox"] {
-    display: flex !important;
+    box-sizing: border-box !important;
+    display: grid !important;
+    place-items: center !important;
     align-self: center !important;
-    align-items: center !important;
-    justify-content: center !important;
+    width: 38px !important;
+    min-width: 38px !important;
+    max-width: 38px !important;
+    height: 38px !important;
+    min-height: 38px !important;
+    max-height: 38px !important;
     margin: 0 !important;
     padding: 0 !important;
     transform: none !important;
   }
   [class*="st-key-it-visit-checkbox-wrap-"] [data-testid="stCheckbox"] > label {
-    position: relative !important;
-    top: 0 !important;
+    box-sizing: border-box !important;
+    position: static !important;
+    display: grid !important;
+    place-items: center !important;
+    width: 38px !important;
+    min-width: 38px !important;
+    max-width: 38px !important;
+    height: 38px !important;
+    min-height: 38px !important;
+    max-height: 38px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    transform: none !important;
+  }
+  [class*="st-key-it-visit-checkbox-wrap-"] [data-testid="stCheckbox"] label > div:first-of-type {
+    justify-self: center !important;
     align-self: center !important;
     margin: 0 !important;
-    transform: none !important;
   }
 
   /* Hora y Día: dimensiones originales compactas (sin agrandarlos). */
   [class*="st-key-it-controls-row-"] [data-testid="stHorizontalBlock"],
   [class*="st-key-saved-controls-row-"] [data-testid="stHorizontalBlock"] {
     display: grid !important;
-    grid-template-columns: 90px 98px !important;
+    grid-template-columns: 94px 102px !important;
     justify-content: start !important;
     align-items: center !important;
     column-gap: 6px !important;
@@ -2225,9 +2245,9 @@ st.markdown("""
   }
   [class*="st-key-it-controls-row-"] [data-testid="column"]:first-child [data-testid="stTextInput"],
   [class*="st-key-saved-controls-row-"] [data-testid="column"]:first-child [data-testid="stTextInput"] {
-    width: 90px !important;
-    min-width: 90px !important;
-    max-width: 90px !important;
+    width: 94px !important;
+    min-width: 94px !important;
+    max-width: 94px !important;
     margin: 0 !important;
   }
   [class*="st-key-it-controls-row-"] [data-testid="column"]:first-child [data-baseweb="input"],
@@ -2235,12 +2255,12 @@ st.markdown("""
   [class*="st-key-it-controls-row-"] [data-testid="column"]:first-child [data-baseweb="base-input"],
   [class*="st-key-saved-controls-row-"] [data-testid="column"]:first-child [data-baseweb="base-input"] {
     box-sizing: border-box !important;
-    width: 90px !important;
-    min-width: 90px !important;
-    max-width: 90px !important;
-    height: 32px !important;
-    min-height: 32px !important;
-    max-height: 32px !important;
+    width: 94px !important;
+    min-width: 94px !important;
+    max-width: 94px !important;
+    height: 36px !important;
+    min-height: 36px !important;
+    max-height: 36px !important;
     padding: 0 3px !important;
     border-radius: 8px !important;
   }
@@ -2261,20 +2281,20 @@ st.markdown("""
   [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(2) [data-testid="stSelectbox"],
   [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(2) [data-baseweb="select"],
   [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(2) [data-baseweb="select"] {
-    width: 98px !important;
-    min-width: 98px !important;
-    max-width: 98px !important;
+    width: 102px !important;
+    min-width: 102px !important;
+    max-width: 102px !important;
     margin: 0 !important;
   }
   [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(2) [data-baseweb="select"] > div,
   [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(2) [data-baseweb="select"] > div {
     box-sizing: border-box !important;
-    width: 98px !important;
-    min-width: 98px !important;
-    max-width: 98px !important;
-    height: 32px !important;
-    min-height: 32px !important;
-    max-height: 32px !important;
+    width: 102px !important;
+    min-width: 102px !important;
+    max-width: 102px !important;
+    height: 36px !important;
+    min-height: 36px !important;
+    max-height: 36px !important;
     padding-left: 6px !important;
     padding-right: 18px !important;
     border-radius: 8px !important;
@@ -2347,7 +2367,7 @@ st.markdown("""
     [class*="st-key-it-controls-row-"] [data-testid="stHorizontalBlock"],
     [class*="st-key-saved-controls-row-"] [data-testid="stHorizontalBlock"] {
       display: grid !important;
-      grid-template-columns: 82px 96px !important;
+      grid-template-columns: 86px 100px !important;
       column-gap: 6px !important;
       align-items: center !important;
       justify-content: start !important;
@@ -2372,12 +2392,12 @@ st.markdown("""
     [class*="st-key-it-controls-row-"] [data-testid="column"]:first-child [data-baseweb="base-input"],
     [class*="st-key-saved-controls-row-"] [data-testid="column"]:first-child [data-baseweb="base-input"] {
       box-sizing: border-box !important;
-      width: 82px !important;
-      min-width: 82px !important;
-      max-width: 82px !important;
-      height: 36px !important;
-      min-height: 36px !important;
-      max-height: 36px !important;
+      width: 86px !important;
+      min-width: 86px !important;
+      max-width: 86px !important;
+      height: 40px !important;
+      min-height: 40px !important;
+      max-height: 40px !important;
       margin: 0 !important;
       padding: 0 3px !important;
     }
@@ -2400,12 +2420,12 @@ st.markdown("""
     [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(2) [data-baseweb="select"] > div,
     [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(2) [data-baseweb="select"] > div {
       box-sizing: border-box !important;
-      width: 96px !important;
-      min-width: 96px !important;
-      max-width: 96px !important;
-      height: 36px !important;
-      min-height: 36px !important;
-      max-height: 36px !important;
+      width: 100px !important;
+      min-width: 100px !important;
+      max-width: 100px !important;
+      height: 40px !important;
+      min-height: 40px !important;
+      max-height: 40px !important;
     }
     [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(2) [data-baseweb="select"] span,
     [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(2) [data-baseweb="select"] span {
