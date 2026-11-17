@@ -1518,5 +1518,19 @@
     "tipo": "Interior",
     "lista_origen": "Food",
     "visitado": false
+  },
+  {
+    "id": 116,
+    "nombre": "St. Patrick's Cathedral",
+    "lat": 40.758611699999996,
+    "lon": -73.9761953,
+    "dia": 0,
+    "hora": "",
+    "direccion": "5th Ave, New York, NY 10022, United States",
+    "nota": "",
+    "categoria": "🏛️ Cultura",
+    "tipo": "Interior",
+    "lista_origen": "NY",
+    "visitado": false
   }
 ]
