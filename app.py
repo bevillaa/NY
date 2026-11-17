@@ -2507,7 +2507,7 @@ st.markdown("""
     [class*="st-key-it-heading-row-"] .place-list-address,
     [class*="st-key-it-heading-row-"] .place-note {
       position: relative !important;
-      left: -8px !important;
+      left: -13px !important;
     }
   }
 
