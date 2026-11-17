@@ -41,7 +41,7 @@ st.markdown("""
     min-height: 0 !important;
   }
 
-  @import url("https://fonts.googleapis.com/css2?family=Carlito:ital,wght@0,400;0,700;1,400;1,700&family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap");
+  @import url("https://fonts.googleapis.com/css2?family=Carlito:ital,wght@0,400;0,700;1,400;1,700&family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap");
 
   :root {
     color-scheme: light !important;
@@ -94,26 +94,14 @@ st.markdown("""
     margin: 0.15rem 0 0.8rem 0 !important;
   }
   div[role="radiogroup"] label {
-    border: 1px solid #E2E8F0 !important;
-    border-radius: 10px !important;
     padding: 0.35rem 0.7rem !important;
-    background: #FFFFFF !important;
   }
 
-  [data-testid="stExpander"] {
-    border: 1.5px solid #CBD5E1 !important;
-    border-radius: 14px !important;
-    background: #FFFFFF !important;
-    overflow: hidden !important;
-  }
+  [data-testid="stExpander"] { overflow: hidden !important; }
   [data-testid="stExpander"] details summary {
     display: flex !important;
     align-items: center !important;
     gap: 10px !important;
-    padding: 10px 14px !important;
-    background: #FFFFFF !important;
-    color: #0F172A !important;
-    font-weight: 800 !important;
     font-size: 0.94rem !important;
     cursor: pointer !important;
     list-style: none !important;
@@ -143,45 +131,20 @@ st.markdown("""
   }
   .block-container {
     padding-top: 1rem !important;
-    padding-bottom: 2.5rem !important;
-    max-width: 1180px !important;
   }
 
   .hero-container {
-    background: #FFFFFF !important;
-    border-radius: 18px;
-    padding: 16px 20px;
     color: #0F172A !important;
-    margin-bottom: 12px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
-    border: 1.5px solid #CBD5E1;
-    border-top: 5px solid #15803D;
   }
   .hero-eyebrow {
-    font-size: 0.78rem;
-    font-weight: 800;
     text-transform: uppercase;
-    letter-spacing: 1.1px;
-    color: #15803D !important;
   }
-  .hero-title {
-    font-size: 1.9rem;
-    font-weight: 800;
-    margin: 4px 0 8px 0;
-    color: #0F172A !important;
-    letter-spacing: -0.5px;
-    line-height: 1.15;
-  }
-  .hero-pill {
+.hero-pill {
     display: inline-flex;
     align-items: center;
     gap: 5px;
-    background: #F8FAFC !important;
-    border: 1.5px solid #CBD5E1 !important;
-    border-radius: 30px;
     padding: 4px 11px;
     font-size: 0.82rem;
-    color: #0F172A !important;
     font-weight: 700;
     margin-right: 5px;
     margin-bottom: 4px;
@@ -189,52 +152,28 @@ st.markdown("""
     word-break: break-word;
   }
   .hero-stat-box {
-    background: #F8FAFC !important;
-    border: 1.5px solid #CBD5E1 !important;
-    border-radius: 12px;
-    padding: 7px 12px;
     text-align: center;
-    min-width: 72px;
     flex: 1 1 auto;
   }
   .hero-stat-val {
     font-size: 1.4rem;
-    font-weight: 900;
-    color: #0F172A !important;
   }
   .hero-stat-lbl {
-    font-size: 0.68rem;
     font-weight: 800;
     text-transform: uppercase;
-    letter-spacing: 0.8px;
-    color: #0F172A !important;
   }
 
   .ny-card {
-    background: #FFFFFF !important;
-    border: 1.5px solid #CBD5E1 !important;
-    border-radius: 16px;
-    padding: 15px 17px;
     margin-bottom: 12px;
-    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.03);
     color: #0F172A !important;
   }
   .ny-card-header {
-    font-size: 0.82rem;
-    font-weight: 800;
     text-transform: uppercase;
-    letter-spacing: 1.1px;
-    color: #0F172A !important;
     margin-bottom: 8px;
   }
 
   .place-sheet {
-    background: #FFFFFF !important;
-    border: 2px solid #CBD5E1 !important;
-    border-radius: 16px;
-    padding: 13px 15px;
     margin: 10px 0;
-    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.08);
     color: #0F172A !important;
   }
 
@@ -341,9 +280,6 @@ st.markdown("""
     color: #0F172A !important;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08) !important;
   }
-
-  /* Botón de edición en pestañas (Itinerario, Guardados, Listas) */
-  
 
   /* Botones generales limpios */
   .stButton > button, .stFormSubmitButton > button, [data-testid="stLinkButton"] > a {
@@ -525,7 +461,6 @@ st.markdown("""
       max-width: 100% !important;
       overflow-x: hidden !important;
     }
-
     .block-container {
       width: 100% !important;
       max-width: 100% !important;
@@ -533,7 +468,6 @@ st.markdown("""
       margin: 0 auto !important;
       overflow-x: clip !important;
     }
-
     /* Evita que nombres, notas o URL largas empujen la página fuera del móvil. */
     [data-testid="stMarkdownContainer"], [data-testid="stText"],
     .stCaption, p, a, code, pre, label {
@@ -542,19 +476,10 @@ st.markdown("""
       overflow-wrap: anywhere !important;
       word-break: break-word !important;
     }
-
     .hero-container {
-      padding: 11px 12px !important;
-      border-radius: 14px !important;
-      margin-bottom: 9px !important;
       min-width: 0 !important;
     }
-    .hero-title { font-size: 1.32rem !important; line-height: 1.18 !important; }
-    .hero-eyebrow {
-      font-size: 0.64rem !important;
-      letter-spacing: 0.65px !important;
-      line-height: 1.35 !important;
-    }
+    .hero-title {  line-height: 1.18 !important; }
     .hero-pill {
       display: inline-flex !important;
       max-width: 100% !important;
@@ -564,19 +489,11 @@ st.markdown("""
       line-height: 1.25 !important;
       padding: 4px 8px !important;
     }
-    .hero-stat-box { min-width: 0 !important; flex: 1 1 28% !important; padding: 5px 4px !important; }
+    .hero-stat-box {  flex: 1 1 28% !important;  }
     .hero-stat-val { font-size: 1.25rem !important; }
-    .hero-stat-lbl {
-      font-size: 0.58rem !important;
-      letter-spacing: 0.35px !important;
-      overflow-wrap: anywhere !important;
-    }
-
-    .ny-card { padding: 10px 11px !important; border-radius: 13px !important; min-width: 0 !important; }
-    .ny-card-header { font-size: 0.76rem !important; letter-spacing: 0.7px !important; line-height: 1.3 !important; }
-    .place-sheet { padding: 10px 11px !important; border-radius: 13px !important; min-width: 0 !important; }
-    .place-note { font-size: 0.76rem !important; line-height: 1.35 !important; overflow-wrap: anywhere !important; }
-
+.ny-card {   min-width: 0 !important; }
+    .ny-card-header {   line-height: 1.3 !important; }
+    .place-sheet {   min-width: 0 !important; }
     /* Regla segura por defecto: filas de formulario y filtros se apilan. */
     [data-testid="stHorizontalBlock"] {
       display: flex !important;
@@ -594,34 +511,15 @@ st.markdown("""
       margin: 0 !important;
       padding: 0 !important;
     }
-
     /* Filas de nombre dentro de contenedores con identidad CSS propia. */
-    
-    
-    
     .edit-mini-btn { display: flex !important; justify-content: flex-end !important; width: 100% !important; }
     .edit-mini-btn button,
     [data-testid="column"]:has(.edit-mini-btn) .stButton > button {
       display: inline-flex !important;
       align-items: center !important;
       justify-content: center !important;
-      width: 27px !important;
-      min-width: 27px !important;
-      max-width: 27px !important;
-      height: 27px !important;
-      min-height: 27px !important;
-      max-height: 27px !important;
-      padding: 0 !important;
-      font-size: 0.72rem !important;
-      line-height: 1 !important;
     }
-
-    /* Hora | Día | Maps: la hora tiene anchura suficiente para HH:MM,
-       el día ocupa solo el ancho natural de su opción más larga y Maps es icono. */
-    
-    
-
-    /* Marcadores HTML sin altura; solo sirven para identificar cada columna. */
+/* Marcadores HTML sin altura; solo sirven para identificar cada columna. */
     .mobile-control-marker { display: block !important; width: 0 !important; height: 0 !important; margin: 0 !important; padding: 0 !important; line-height: 0 !important; overflow: hidden !important; }
     [data-testid="stElementContainer"]:has(.mobile-control-marker) {
       height: 0 !important;
@@ -630,7 +528,6 @@ st.markdown("""
       padding: 0 !important;
       overflow: hidden !important;
     }
-
     /* Anchos compactos de los widgets de hora, día y mapa. */
     [data-testid="column"]:has(.compact-hora) [data-testid="stTextInput"],
     [data-testid="column"]:has(.compact-hora) [data-baseweb="input"],
@@ -698,7 +595,6 @@ st.markdown("""
       text-overflow: clip !important;
       font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif !important;
     }
-
     /* Botón lápiz: suficiente área táctil y glifo siempre visible. */
     .edit-mini-btn button,
     [data-testid="column"]:has(.edit-mini-btn) .stButton > button {
@@ -714,7 +610,6 @@ st.markdown("""
       overflow: visible !important;
       font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif !important;
     }
-
     /* Acciones de seguimiento de vuelos y listas Google: dos botones alineados. */
     [class*="st-key-flight-links-"] [data-testid="stHorizontalBlock"],
     [class*="st-key-gmaps-actions-"] [data-testid="stHorizontalBlock"] {
@@ -744,7 +639,6 @@ st.markdown("""
       line-height: 1.15 !important;
       overflow-wrap: anywhere !important;
     }
-
     /* Pestañas en dos columnas: nada se oculta ni necesita scroll horizontal. */
     .stTabs [data-baseweb="tab-list"] {
       display: grid !important;
@@ -769,7 +663,6 @@ st.markdown("""
       font-size: 0.75rem !important;
       overflow-wrap: anywhere !important;
     }
-
     /* Botones y campos: contenidos en su columna y con texto envolvente. */
     .stButton, .stFormSubmitButton, [data-testid="stLinkButton"],
     .stSelectbox, .stTextInput, .stNumberInput, .stDateInput,
@@ -796,31 +689,26 @@ st.markdown("""
       min-width: 0 !important;
     }
     .stRadio > div { flex-wrap: wrap !important; gap: 0.45rem !important; }
-
     iframe {
       display: block !important;
       width: 100% !important;
       max-width: 100% !important;
       height: 380px !important;
     }
-
     /* URL de listas: línea partida, no fuerza scroll horizontal. */
     .gmaps-list-url { overflow-wrap: anywhere !important; word-break: break-all !important; }
   }
 
-  /* Teléfonos estrechos: se conserva el mismo grid de 3 controles, más compacto. */
+  /* Ajustes para teléfonos estrechos. */
   @media (max-width: 380px) {
     .block-container { padding-left: 0.45rem !important; padding-right: 0.45rem !important; }
-    .hero-title { font-size: 1.2rem !important; }
     .stTabs [data-baseweb="tab"] { font-size: 0.69rem !important; padding: 4px 2px !important; }
-    
-    
-  }    
+  }
 
+  @media (max-width: 768px) {
     /* Estadística superior: reservar más ancho a la tarjeta "Guardados". */
     .hero-container > div > div:last-child {
       display: grid !important;
-      grid-template-columns: minmax(0, 1fr) minmax(80px, 1.12fr) minmax(0, 1fr) !important;
       gap: 6px !important;
       width: 100% !important;
       max-width: 100% !important;
@@ -829,27 +717,20 @@ st.markdown("""
     .hero-stat-box {
       box-sizing: border-box !important;
       width: 100% !important;
-      min-width: 0 !important;
-      padding: 6px 3px !important;
       overflow: visible !important;
     }
     .hero-stat-lbl {
       white-space: nowrap !important;
       word-break: normal !important;
       overflow-wrap: normal !important;
-      font-size: clamp(0.52rem, 2.35vw, 0.62rem) !important;
-      letter-spacing: 0.1px !important;
     }
   }
 
   @media (max-width: 320px) {
-    
-    
     .hero-stat-lbl { font-size: 0.51rem !important; letter-spacing: 0 !important; }
   }
 
-
-  /* ===== CORRECCIÓN DEFINITIVA MÓVIL: ICONOS REALES + DÍA LEGIBLE ===== */
+  /* Tipografía y datos de las fichas de lugares. */
   .place-list-title {
     font-size: 1.25rem !important;
     font-weight: 900 !important;
@@ -881,17 +762,15 @@ st.markdown("""
     .place-note {
       font-size: 0.70rem !important;
       line-height: 1.28 !important;
-      margin-top: 2px !important;
     }
     .badge-cat, .badge-indoor, .badge-outdoor {
       font-size: 0.66rem !important;
       line-height: 1.18 !important;
       padding: 1px 5px !important;
     }
+    }
 
   @media (max-width: 320px) {
-    
-    .place-list-title { font-size: 1.25rem !important; }
     .place-list-address, .place-note { font-size: 0.68rem !important; }
   }
 
@@ -915,7 +794,6 @@ st.markdown("""
       overflow-y: auto !important;
       overscroll-behavior-y: auto !important;
     }
-
     .stApp,
     [data-testid="stAppViewContainer"],
     [data-testid="stMain"],
@@ -926,28 +804,21 @@ st.markdown("""
       overflow-y: visible !important;
       overflow-x: hidden !important;
     }
-
     [data-testid="stMainBlockContainer"],
     .block-container {
       height: auto !important;
       min-height: 0 !important;
       max-height: none !important;
-      overflow: visible !important;
       padding-top: max(1.4rem, calc(env(safe-area-inset-top) + 0.7rem)) !important;
-      padding-bottom: calc(3.5rem + env(safe-area-inset-bottom)) !important;
     }
-
     /* La cabecera tenía una altura fija de 30px que podía cortar su contenido. */
     .hero-container {
       height: auto !important;
       min-height: 0 !important;
       max-height: none !important;
       overflow: visible !important;
-      padding: 18px 12px 12px !important;
-      margin-top: 8px !important;
       margin-bottom: 12px !important;
     }
-
     .hero-container .hero-eyebrow {
       display: block !important;
       height: auto !important;
@@ -956,17 +827,14 @@ st.markdown("""
       line-height: 1.4 !important;
       padding-top: 2px !important;
     }
-
     .hero-container > div {
       min-width: 0 !important;
       width: 100% !important;
     }
-
     .hero-container > div > div:first-child {
       min-width: 0 !important;
       width: 100% !important;
     }
-
     [data-testid="stTabs"],
     [data-testid="stTabContent"],
     [data-testid="stVerticalBlock"] {
@@ -974,7 +842,6 @@ st.markdown("""
       max-height: none !important;
       overflow: visible !important;
     }
-
     footer, [data-testid="stFooter"] {
       display: block !important;
       visibility: visible !important;
@@ -983,15 +850,7 @@ st.markdown("""
       padding-bottom: env(safe-area-inset-bottom) !important;
     }
   }
-
-
-  /* Itinerario: lugares ligeramente indentados bajo la cabecera de cada día. */
-  
-  @media (max-width: 768px) {
-    
-  }
-
-  /* El lápiz del itinerario conserva todo su contorno y no recorta la punta. */
+/* El lápiz del itinerario conserva todo su contorno y no recorta la punta. */
   [class*="st-key-it-edit-btn-"] [data-testid="stButton"] > button {
     width: 44px !important;
     min-width: 44px !important;
@@ -1062,7 +921,6 @@ st.markdown("""
   }
   html, body, .stApp, p, label, input, button, select, textarea,
   .stMarkdown, [data-testid="stMarkdownContainer"], [data-testid="stText"], small {
-    font-family: "DM Sans", "Avenir Next", sans-serif !important;
     color: var(--ink) !important;
   }
   .block-container {
@@ -1072,9 +930,7 @@ st.markdown("""
     padding-bottom: 3rem !important;
   }
   h1, h2, h3, h4, .hero-title {
-    font-family: "Playfair Display", Georgia, serif !important;
     color: var(--ink) !important;
-    letter-spacing: -0.025em !important;
   }
   .hero-container {
     background: var(--paper) !important;
@@ -1183,7 +1039,6 @@ st.markdown("""
     border-color: #9AA68F !important;
     box-shadow: 0 0 0 1px #9AA68F !important;
   }
-  [data-testid="stExpander"] { overflow: hidden !important; }
   [data-testid="stExpander"] details summary {
     background: #FBFAF6 !important;
     color: var(--ink) !important;
@@ -1235,8 +1090,6 @@ st.markdown("""
     font-weight: 600 !important;
     letter-spacing: -0.018em !important;
   }
-
-
 
   /* ===== Navegación principal: pestañas editoriales ===== */
   .st-key-seccion_principal_activa {
@@ -1341,7 +1194,6 @@ st.markdown("""
   }
   .place-full-width-info { flex: 1 1 100% !important; }
   @media (max-width: 768px) {
-    
     .place-full-width-info, .place-full-width-info .place-list-address,
     .place-full-width-info .place-note { width: 100% !important; max-width: 100% !important; }
   }
@@ -1351,7 +1203,7 @@ st.markdown("""
      Guardados: información | editar | mapa
      ================================================================ */
 
-  /* Fila superior: la información se adapta; las acciones conservan 38 px. */
+  /* Fila superior: la información se adapta y las acciones conservan su caja compacta. */
   [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"],
   [class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"] {
     display: flex !important;
@@ -1504,7 +1356,7 @@ st.markdown("""
     box-shadow: none !important;
   }
 
-  /* Checkbox de Ruta: caja de 38 px y marca centrada exactamente como los otros controles. */
+  /* Checkbox de Ruta: caja de 30 px y marca centrada. */
   [class*="st-key-it-visit-checkbox-wrap-"] [data-testid="stCheckbox"] {
     display: flex !important;
     flex: 0 0 30px !important;
@@ -1520,20 +1372,8 @@ st.markdown("""
     padding: 0 !important;
   }
   [class*="st-key-it-visit-checkbox-wrap-"] [data-testid="stCheckbox"] > label {
-    box-sizing: border-box !important;
-    display: flex !important;
     flex: 0 0 30px !important;
-    width: 30px !important;
-    min-width: 30px !important;
-    max-width: 30px !important;
-    height: 30px !important;
-    min-height: 30px !important;
-    max-height: 30px !important;
-    align-items: center !important;
-    justify-content: center !important;
     gap: 0 !important;
-    margin: 0 auto !important;
-    padding: 0 !important;
     border: 1px solid #CBD5E1 !important;
     border-radius: 9px !important;
     background: #FFFFFF !important;
@@ -1548,7 +1388,6 @@ st.markdown("""
     min-height: 18px !important;
     align-items: center !important;
     justify-content: center !important;
-    margin: 0 !important;
     padding: 0 !important;
   }
   [class*="st-key-it-visit-checkbox-wrap-"] [data-testid="stCheckbox"] input[type="checkbox"] {
@@ -1563,9 +1402,7 @@ st.markdown("""
      Se centra toda la cadena de wrappers de Streamlit, no solo la marca. */
   [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(4) {
     box-sizing: border-box !important;
-    display: flex !important;
     place-items: center !important;
-    align-self: center !important;
     align-items: center !important;
     justify-content: center !important;
     display: flex !important;
@@ -1597,9 +1434,7 @@ st.markdown("""
     transform: none !important;
   }
   [class*="st-key-it-visit-checkbox-wrap-"] [data-testid="stCheckbox"] > label {
-    box-sizing: border-box !important;
     position: relative !important;
-    display: grid !important;
     place-items: center !important;
     width: 30px !important;
     min-width: 30px !important;
@@ -1607,9 +1442,6 @@ st.markdown("""
     height: 30px !important;
     min-height: 30px !important;
     max-height: 30px !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    transform: none !important;
   }
   [class*="st-key-it-visit-checkbox-wrap-"] [data-testid="stCheckbox"] label > div:first-of-type {
     justify-self: center !important;
@@ -1617,7 +1449,7 @@ st.markdown("""
     margin: 0 !important;
   }
 
-  /* Hora y Día: dimensiones originales compactas (sin agrandarlos). */
+  /* Dimensiones de los controles Hora y Día en escritorio. */
   [class*="st-key-it-controls-row-"],
   [class*="st-key-saved-controls-row-"] {
     margin-top: 5px !important;
@@ -1710,12 +1542,11 @@ st.markdown("""
   /* En móvil, se neutraliza el apilado global SOLO en estas filas. */
   @media (max-width: 768px) {
     [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] {
-      display: grid !important;
-      grid-template-columns: minmax(0, 1fr) 30px 30px 30px !important;
-      grid-auto-flow: column !important;
+      display: flex !important;
+      flex-flow: row nowrap !important;
       align-items: center !important;
       justify-content: stretch !important;
-      column-gap: 6px !important;
+      column-gap: 4px !important;
       row-gap: 0 !important;
       width: 100% !important;
       min-width: 0 !important;
@@ -1728,7 +1559,7 @@ st.markdown("""
       grid-auto-flow: column !important;
       align-items: center !important;
       justify-content: stretch !important;
-      column-gap: 4px !important;
+      column-gap: 2px !important;
       row-gap: 0 !important;
       width: 100% !important;
       min-width: 0 !important;
@@ -1763,8 +1594,7 @@ st.markdown("""
       align-items: center !important;
       justify-content: center !important;
     }
-
-    /* En móvil se recuperan los tamaños compactos originales: hora 80x36 y día 94x36. */
+    /* En móvil: hora de 100×40 px y selector de día de 125×45 px. */
     [class*="st-key-it-controls-row-"] [data-testid="stHorizontalBlock"],
     [class*="st-key-saved-controls-row-"] [data-testid="stHorizontalBlock"] {
       display: grid !important;
@@ -1834,7 +1664,6 @@ st.markdown("""
       line-height: 1.1 !important;
       white-space: nowrap !important;
     }
-
     /* Evita recortes de las últimas filas y respeta el área segura del teléfono. */
     [data-testid="stMainBlockContainer"],
     .block-container {
@@ -1880,25 +1709,126 @@ st.markdown("""
     margin-top: 0 !important;
     margin-bottom: 0 !important;
   }
-  /* Ajuste exclusivo para móvil: desplaza el checkbox de Ruta ligeramente hacia arriba para alinearlo con Mapa y Editar. */
+  /* Ajustes finales de alineación móvil para los controles de las filas. */
   @media (max-width: 768px) {
-    [class*="st-key-it-visit-checkbox-wrap-"] {
-      transform: translate(3px, -4.5px) !important;
-    }
+    [class*="st-key-it-visit-checkbox-wrap-"] { transform: translate(3px, -4.5px) !important; }
+    [class*="st-key-saved-edit-button-wrap-"] { transform: translate(11px, 0px) !important; }
+    [class*="st-key-it-edit-button-wrap-"] { transform: translate(4px, 0px) !important; }
   }
-  /* Ajuste hacia arriba para alinearlo con Mapa y Editar. */
-  @media (max-width: 768px) {
-    [class*="st-key-it-edit-button-wrap-"]{
-      transform: translate(3px,0px) !important;
-    }
-  }@media (max-width: 768px) {
-    [class*="st-key-saved-edit-button-wrap-"]{
-      transform: translate(11px,0px) !important;
-    }
-  }@media (max-width: 768px) {
-    [class*="st-key-it-edit-button-wrap-"]{
-      transform: translate(4px,0px) !important;
-    }
+
+  /* RUTA: una única distribución flex para escritorio y móvil.
+     st.columns crea cinco contenedores neutros; aquí se asignan sus proporciones. */
+  [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] {
+    display: flex !important;
+    flex-flow: row nowrap !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    column-gap: 3px !important;
+    row-gap: 0 !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    overflow: visible !important;
+  }
+  [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"] {
+    box-sizing: border-box !important;
+    display: flex !important;
+    min-width: 0 !important;
+    max-width: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    align-items: center !important;
+    justify-content: center !important;
+    overflow: visible !important;
+  }
+  [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(1) {
+    flex: 1.35 1 0% !important;
+  }
+  [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(2) {
+    flex: 8.35 1 0% !important;
+    justify-content: flex-start !important;
+    overflow: visible !important;
+  }
+  [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(3) {
+    flex: 0.55 0 30px !important;
+    width: 30px !important;
+    min-width: 30px !important;
+    max-width: 30px !important;
+    height: 30px !important;
+    min-height: 30px !important;
+    max-height: 30px !important;
+  }
+  [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(4) {
+    flex: 0.55 0 30px !important;
+    width: 30px !important;
+    min-width: 30px !important;
+    max-width: 30px !important;
+    height: 30px !important;
+    min-height: 30px !important;
+    max-height: 30px !important;
+  }
+  [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(5) {
+    flex: 0.45 0 30px !important;
+    width: 30px !important;
+    min-width: 30px !important;
+    max-width: 30px !important;
+    height: 30px !important;
+    min-height: 30px !important;
+    max-height: 30px !important;
+  }
+  [class*="st-key-it-heading-row-"] [data-testid="column"]:first-child [data-testid="stTextInput"],
+  [class*="st-key-it-heading-row-"] [data-testid="column"]:first-child [data-baseweb="input"],
+  [class*="st-key-it-heading-row-"] [data-testid="column"]:first-child [data-baseweb="base-input"] {
+    box-sizing: border-box !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    height: 40px !important;
+    min-height: 40px !important;
+    max-height: 40px !important;
+    margin: 0 !important;
+  }
+  [class*="st-key-it-heading-row-"] [data-testid="column"]:first-child input {
+    box-sizing: border-box !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    height: 30px !important;
+    min-height: 30px !important;
+    padding: 0 4px !important;
+    text-align: center !important;
+    font-weight: 700 !important;
+    font-variant-numeric: tabular-nums !important;
+  }
+  [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stMarkdown"],
+  [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stElementContainer"] {
+    box-sizing: border-box !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+  }
+  [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2) .place-list-title,
+  [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2) .place-list-address {
+    display: block !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    overflow-wrap: anywhere !important;
+    word-break: normal !important;
+    white-space: normal !important;
+  }
+  /* El checkbox permanece en la quinta columna de Ruta. */
+  [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(5),
+  [class*="st-key-it-visit-checkbox-wrap-"],
+  [class*="st-key-it-visit-checkbox-wrap-"] [data-testid="stElementContainer"],
+  [class*="st-key-it-visit-checkbox-wrap-"] [data-testid="stCheckbox"] {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    align-self: center !important;
+  }
+  /* Título de los lugares de Ruta: 1,5 puntos menos. */
+  [class*="st-key-it-heading-row-"] .place-list-title {
+    font-size: calc(1.25rem - 1.5pt) !important;
   }
 </style>
 """, unsafe_allow_html=True)
@@ -3497,43 +3427,17 @@ if seccion_principal == "🗽Ruta":
                 maps_q = urllib.parse.quote(f"{item['nombre']}, New York")
                 gmaps_url = f"https://www.google.com/maps/search/?api=1&query={maps_q}"
 
-                # Información completa del lugar: nombre, categoría, entorno,
-                # dirección y nota. Los cuatro controles van debajo, en una sola fila.
+                # Fila de Ruta: hora | nombre | editar | mapa | visitado.
                 with st.container(key=f"it-heading-row-{item['id']}"):
-                    c_info, c_edit_head, c_map_head, c_chk = st.columns([8.7, 0.55, 0.55, 0.45], gap="small")
-                    with c_info:
-                        txt_c = "#334155" if is_visited else "#0F172A"
-                        strike = "text-decoration: line-through; opacity: 0.78;" if is_visited else ""
-                        dir_html = f'<div class="place-list-address">📍 {html.escape(str(dir_i))}</div>' if dir_i else ''
-                        nota_html = bloque_nota_html(nota_i)
-                        st.markdown(f"""
-                        <div style="{strike}; min-width:0; width:100%; overflow-wrap:anywhere;">
-                          <div class="place-list-title" style="color:{txt_c};">{emoji_i} {item['nombre']}</div>
-                          {dir_html}
-                          {nota_html}
-                        </div>
-                        """, unsafe_allow_html=True)
+                    # Streamlit crea únicamente los cinco contenedores; la distribución
+                    # horizontal se define en un único lugar: las reglas flex de Ruta.
+                    c_hr_head, c_info, c_edit_head, c_map_head, c_chk = st.columns(
+                        5,
+                        gap="small",
+                        vertical_alignment="center"
+                    )
 
-                    with c_edit_head:
-                        with st.container(key=f"it-edit-button-wrap-{item['id']}"):
-                            if st.button(" ", key=f"btn_ed_it_{d}_{item['id']}", help="Editar sitio"):
-                                ek = f"it_{d}_{item['id']}"
-                                st.session_state.editando_spot_key = None if st.session_state.editando_spot_key == ek else ek
-                                st.rerun()
-                    with c_map_head:
-                        with st.container(key=f"it-map-button-wrap-{item['id']}"):
-                            st.link_button(" ", gmaps_url, help="Abrir en Google Maps")
-                    with c_chk:
-                        with st.container(key=f"it-visit-checkbox-wrap-{item['id']}"):
-                            chk_val = st.checkbox("", value=is_visited, key=f"chk_it_{d}_{item['id']}")
-                        if chk_val != is_visited and idx_real is not None:
-                            st.session_state.lugares[idx_real]["visitado"] = chk_val
-                            guardar_itinerario_disco(st.session_state.lugares)
-                            st.rerun()
-                # Los cuatro controles, siempre en el mismo orden: Editar | Mapa | Hora | Día.
-                with st.container(key=f"it-controls-row-{item['id']}"):
-                    c_hr, c_day = st.columns([1.7, 1.9], gap="small")
-                    with c_hr:
+                    with c_hr_head:
                         nueva_h = st.text_input(
                             "Hora",
                             value=hora_i,
@@ -3548,19 +3452,37 @@ if seccion_principal == "🗽Ruta":
                                     hl = "0" + hl
                                 st.session_state.lugares[idx_real]["hora"] = hl
                                 guardar_itinerario_disco(st.session_state.lugares)
-                    with c_day:
-                        dest_d = selectbox_sin_teclado(
-                            "Día",
-                            ["Guardados"] + [f"Día {x}" for x in range(1, 11)],
-                            index=d,
-                            key=f"mvd_it_{d}_{item['id']}",
-                            label_visibility="collapsed"
-                        )
-                        val_dest = 0 if dest_d == "Guardados" else int(re.search(r"Día (\d+)", dest_d).group(1))
-                        if val_dest != d and idx_real is not None:
-                            st.session_state.lugares[idx_real]["dia"] = val_dest
-                            guardar_itinerario_disco(st.session_state.lugares)
 
+                    with c_info:
+                        txt_c = "#334155" if is_visited else "#0F172A"
+                        strike = "text-decoration: line-through; opacity: 0.78;" if is_visited else ""
+                        dir_html = f'<div class="place-list-address">📍 {html.escape(str(dir_i))}</div>' if dir_i else ''
+                        nota_html = bloque_nota_html(nota_i)
+                        st.markdown(
+                            f'<div style="{strike}; min-width:0; width:100%; overflow-wrap:anywhere;">'
+                            f'<div class="place-list-title" style="color:{txt_c};">{emoji_i} {item["nombre"]}</div>'
+                            f'{dir_html}{nota_html}</div>',
+                            unsafe_allow_html=True
+                        )
+
+                    with c_edit_head:
+                        with st.container(key=f"it-edit-button-wrap-{item['id']}"):
+                            if st.button(" ", key=f"btn_ed_it_{d}_{item['id']}", help="Editar sitio"):
+                                ek = f"it_{d}_{item['id']}"
+                                st.session_state.editando_spot_key = None if st.session_state.editando_spot_key == ek else ek
+                                st.rerun()
+
+                    with c_map_head:
+                        with st.container(key=f"it-map-button-wrap-{item['id']}"):
+                            st.link_button(" ", gmaps_url, help="Abrir en Google Maps")
+
+                    with c_chk:
+                        with st.container(key=f"it-visit-checkbox-wrap-{item['id']}"):
+                            chk_val = st.checkbox("", value=is_visited, key=f"chk_it_{d}_{item['id']}")
+                        if chk_val != is_visited and idx_real is not None:
+                            st.session_state.lugares[idx_real]["visitado"] = chk_val
+                            guardar_itinerario_disco(st.session_state.lugares)
+                            st.rerun()
                 if idx_real is not None:
                     render_editor_sitio_panel(item, idx_real, f"it_{d}")
 
