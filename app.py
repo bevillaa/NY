@@ -1953,11 +1953,12 @@ st.markdown("""
 
 
   /* ================================================================
-     ACCIONES DE LUGARES — DEFINICIÓN ÚNICA
+     CONTROLES DE LUGARES — BLOQUE ÚNICO Y CONSOLIDADO
      Ruta: información | editar | mapa | visitado
      Guardados: información | editar | mapa
-     Cada control mide 38 × 38 px, sin estirar ni alterar el tamaño.
      ================================================================ */
+
+  /* Fila superior: la información se adapta; las acciones conservan 38 px. */
   [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"],
   [class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"] {
     display: flex !important;
@@ -1967,6 +1968,8 @@ st.markdown("""
     gap: 6px !important;
     width: 100% !important;
     min-width: 0 !important;
+    max-width: 100% !important;
+    overflow: visible !important;
   }
   [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"],
   [class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"] {
@@ -1975,10 +1978,11 @@ st.markdown("""
     margin: 0 !important;
     padding: 0 !important;
     align-self: center !important;
+    overflow: visible !important;
   }
   [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:first-child,
   [class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:first-child {
-    flex: 1 1 auto !important;
+    flex: 1 1 0% !important;
     width: auto !important;
     min-width: 0 !important;
     max-width: none !important;
@@ -1995,7 +1999,10 @@ st.markdown("""
     max-height: 38px !important;
     align-items: center !important;
     justify-content: center !important;
+    overflow: visible !important;
   }
+
+  /* Contenedores Streamlit internos: no se permite que colapsen ni se estiren. */
   [class*="st-key-it-edit-button-wrap-"],
   [class*="st-key-saved-edit-button-wrap-"],
   [class*="st-key-it-map-button-wrap-"],
@@ -2013,6 +2020,7 @@ st.markdown("""
     justify-content: center !important;
     margin: 0 !important;
     padding: 0 !important;
+    overflow: visible !important;
   }
   [class*="st-key-it-edit-button-wrap-"] [data-testid="stElementContainer"],
   [class*="st-key-saved-edit-button-wrap-"] [data-testid="stElementContainer"],
@@ -2036,7 +2044,10 @@ st.markdown("""
     justify-content: center !important;
     margin: 0 !important;
     padding: 0 !important;
+    overflow: visible !important;
   }
+
+  /* Lápiz y mapa: misma caja, iconos dibujados por CSS para que nunca desaparezcan. */
   [class*="st-key-it-edit-button-wrap-"] button,
   [class*="st-key-saved-edit-button-wrap-"] button,
   [class*="st-key-it-map-button-wrap-"] a,
@@ -2083,9 +2094,24 @@ st.markdown("""
   [class*="st-key-it-edit-button-wrap-"] button > *,
   [class*="st-key-saved-edit-button-wrap-"] button > *,
   [class*="st-key-it-map-button-wrap-"] a > *,
-  [class*="st-key-saved-map-button-wrap-"] a > * { display: none !important; }
+  [class*="st-key-saved-map-button-wrap-"] a > * {
+    display: none !important;
+  }
+  [class*="st-key-it-edit-button-wrap-"] button:hover,
+  [class*="st-key-saved-edit-button-wrap-"] button:hover,
+  [class*="st-key-it-map-button-wrap-"] a:hover,
+  [class*="st-key-saved-map-button-wrap-"] a:hover,
+  [class*="st-key-it-edit-button-wrap-"] button:focus,
+  [class*="st-key-saved-edit-button-wrap-"] button:focus,
+  [class*="st-key-it-map-button-wrap-"] a:focus,
+  [class*="st-key-saved-map-button-wrap-"] a:focus {
+    border-color: #CBD5E1 !important;
+    background-color: #F8FAFC !important;
+    outline: none !important;
+    box-shadow: none !important;
+  }
 
-  /* El checkbox se presenta como una tercera caja exterior de 38 × 38 px. */
+  /* Checkbox de Ruta: misma caja exterior de 38 × 38 px. */
   [class*="st-key-it-visit-checkbox-wrap-"] [data-testid="stCheckbox"] > label {
     box-sizing: border-box !important;
     display: flex !important;
@@ -2111,106 +2137,170 @@ st.markdown("""
     margin: 0 !important;
     padding: 0 !important;
   }
-  [class*="st-key-it-visit-checkbox-wrap-"] [data-testid="stCheckbox"] label p { display: none !important; }
+  [class*="st-key-it-visit-checkbox-wrap-"] [data-testid="stCheckbox"] label p {
+    display: none !important;
+  }
 
-  /* Hora y Día: recuperar los tamaños compactos anteriores.
-     Escritorio: hora 88 px; selector de día desde 96 px.
-     Móvil: hora 80 px; selector de día 94 px. */
+  /* Hora y Día: se conserva la fila de dos columnas y se evita recortar texto.
+     Ambos controles recuperan altura de 38 px y usan el espacio disponible. */
   [class*="st-key-it-controls-row-"] [data-testid="stHorizontalBlock"],
   [class*="st-key-saved-controls-row-"] [data-testid="stHorizontalBlock"] {
     display: grid !important;
-    grid-template-columns: 88px max-content !important;
+    grid-template-columns: minmax(96px, 0.9fr) minmax(120px, 1.1fr) !important;
     justify-content: start !important;
     align-items: center !important;
     column-gap: 8px !important;
     row-gap: 0 !important;
     width: 100% !important;
     min-width: 0 !important;
+    max-width: 100% !important;
   }
   [class*="st-key-it-controls-row-"] [data-testid="column"],
   [class*="st-key-saved-controls-row-"] [data-testid="column"] {
     display: block !important;
-    flex: none !important;
+    flex: initial !important;
     width: auto !important;
     min-width: 0 !important;
-    max-width: none !important;
+    max-width: 100% !important;
     margin: 0 !important;
     padding: 0 !important;
   }
-  [class*="st-key-it-controls-row-"] [data-testid="column"]:first-child [data-testid="stTextInput"],
-  [class*="st-key-saved-controls-row-"] [data-testid="column"]:first-child [data-testid="stTextInput"] {
-    width: 88px !important;
-    min-width: 88px !important;
-    max-width: 88px !important;
-    margin: 0 !important;
-  }
-  [class*="st-key-it-controls-row-"] [data-testid="column"]:first-child [data-baseweb="input"],
-  [class*="st-key-saved-controls-row-"] [data-testid="column"]:first-child [data-baseweb="input"],
-  [class*="st-key-it-controls-row-"] [data-testid="column"]:first-child [data-baseweb="base-input"],
-  [class*="st-key-saved-controls-row-"] [data-testid="column"]:first-child [data-baseweb="base-input"] {
-    height: 30px !important;
-    min-height: 30px !important;
-    max-height: 30px !important;
-  }
-  [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(2) [data-testid="stSelectbox"],
-  [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(2) [data-testid="stSelectbox"],
-  [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(2) [data-baseweb="select"],
-  [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(2) [data-baseweb="select"] {
-    width: max-content !important;
-    min-width: 96px !important;
+  [class*="st-key-it-controls-row-"] [data-testid="column"] [data-testid="stTextInput"],
+  [class*="st-key-saved-controls-row-"] [data-testid="column"] [data-testid="stTextInput"],
+  [class*="st-key-it-controls-row-"] [data-testid="column"] [data-testid="stSelectbox"],
+  [class*="st-key-saved-controls-row-"] [data-testid="column"] [data-testid="stSelectbox"] {
+    display: block !important;
+    width: 100% !important;
+    min-width: 0 !important;
     max-width: 100% !important;
     margin: 0 !important;
   }
-  [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(2) [data-baseweb="select"] > div,
-  [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(2) [data-baseweb="select"] > div {
-    min-width: 96px !important;
-    height: 30px !important;
-    min-height: 30px !important;
-    max-height: 30px !important;
+  [class*="st-key-it-controls-row-"] [data-testid="column"] [data-baseweb="input"],
+  [class*="st-key-saved-controls-row-"] [data-testid="column"] [data-baseweb="input"],
+  [class*="st-key-it-controls-row-"] [data-testid="column"] [data-baseweb="base-input"],
+  [class*="st-key-saved-controls-row-"] [data-testid="column"] [data-baseweb="base-input"],
+  [class*="st-key-it-controls-row-"] [data-testid="column"] [data-baseweb="select"] > div,
+  [class*="st-key-saved-controls-row-"] [data-testid="column"] [data-baseweb="select"] > div {
+    box-sizing: border-box !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    height: 38px !important;
+    min-height: 38px !important;
+    max-height: 38px !important;
+    border-radius: 8px !important;
+    overflow: visible !important;
+  }
+  [class*="st-key-it-controls-row-"] [data-testid="column"] input,
+  [class*="st-key-saved-controls-row-"] [data-testid="column"] input {
+    box-sizing: border-box !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    height: 36px !important;
+    min-height: 36px !important;
+    padding: 0 7px !important;
+    font-size: 0.84rem !important;
+    line-height: 1.2 !important;
+    text-align: center !important;
+    font-variant-numeric: tabular-nums !important;
+  }
+  [class*="st-key-it-controls-row-"] [data-testid="column"] [data-baseweb="select"] span,
+  [class*="st-key-saved-controls-row-"] [data-testid="column"] [data-baseweb="select"] span {
+    font-size: 0.82rem !important;
+    line-height: 1.2 !important;
+    white-space: nowrap !important;
   }
 
+  /* En móvil, se neutraliza el apilado global SOLO en estas filas. */
   @media (max-width: 768px) {
-    [class*="st-key-it-controls-row-"] [data-testid="stHorizontalBlock"],
-    [class*="st-key-saved-controls-row-"] [data-testid="stHorizontalBlock"] {
-      grid-template-columns: 80px 94px !important;
-      column-gap: 6px !important;
+    [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] {
+      display: grid !important;
+      grid-template-columns: minmax(0, 1fr) 38px 38px 38px !important;
+      grid-auto-flow: column !important;
+      align-items: center !important;
+      justify-content: stretch !important;
+      column-gap: 5px !important;
+      row-gap: 0 !important;
+      width: 100% !important;
+      min-width: 0 !important;
+      max-width: 100% !important;
+      overflow: visible !important;
     }
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:first-child [data-testid="stTextInput"],
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:first-child [data-testid="stTextInput"] {
-      width: 80px !important;
-      min-width: 80px !important;
-      max-width: 80px !important;
+    [class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"] {
+      display: grid !important;
+      grid-template-columns: minmax(0, 1fr) 38px 38px !important;
+      grid-auto-flow: column !important;
+      align-items: center !important;
+      justify-content: stretch !important;
+      column-gap: 5px !important;
+      row-gap: 0 !important;
+      width: 100% !important;
+      min-width: 0 !important;
+      max-width: 100% !important;
+      overflow: visible !important;
     }
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:first-child [data-baseweb="input"],
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:first-child [data-baseweb="input"],
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:first-child [data-baseweb="base-input"],
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:first-child [data-baseweb="base-input"],
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(2) [data-baseweb="select"] > div,
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(2) [data-baseweb="select"] > div {
-      height: 36px !important;
-      min-height: 36px !important;
-      max-height: 36px !important;
+    [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"],
+    [class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"] {
+      box-sizing: border-box !important;
+      display: flex !important;
+      min-width: 0 !important;
+      max-width: 100% !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      overflow: visible !important;
     }
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(2) [data-testid="stSelectbox"],
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(2) [data-testid="stSelectbox"],
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(2) [data-baseweb="select"],
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(2) [data-baseweb="select"] {
-      width: 94px !important;
-      min-width: 94px !important;
-      max-width: 94px !important;
+    [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:first-child,
+    [class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:first-child {
+      flex: 1 1 0% !important;
+      width: auto !important;
+      min-width: 0 !important;
+    }
+    [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(n+2),
+    [class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(n+2) {
+      flex: 0 0 38px !important;
+      width: 38px !important;
+      min-width: 38px !important;
+      max-width: 38px !important;
+      height: 38px !important;
+      min-height: 38px !important;
+      max-height: 38px !important;
+      align-items: center !important;
+      justify-content: center !important;
     }
 
-    /* Más espacio inferior y scroll libre para que los últimos iconos no queden cortados. */
+    /* Hora y Día mantienen dos controles grandes, sin estrecharse ni cortarse. */
+    [class*="st-key-it-controls-row-"] [data-testid="stHorizontalBlock"],
+    [class*="st-key-saved-controls-row-"] [data-testid="stHorizontalBlock"] {
+      display: grid !important;
+      grid-template-columns: minmax(112px, 0.9fr) minmax(132px, 1.1fr) !important;
+      column-gap: 8px !important;
+      align-items: center !important;
+      width: 100% !important;
+      min-width: 0 !important;
+      max-width: 100% !important;
+    }
+    [class*="st-key-it-controls-row-"] [data-testid="column"],
+    [class*="st-key-saved-controls-row-"] [data-testid="column"] {
+      display: block !important;
+      flex: initial !important;
+      width: auto !important;
+      min-width: 0 !important;
+      max-width: 100% !important;
+      margin: 0 !important;
+      padding: 0 !important;
+    }
+
+    /* Evita recortes de las últimas filas y respeta el área segura del teléfono. */
     [data-testid="stMainBlockContainer"],
     .block-container {
-      padding-bottom: calc(6rem + env(safe-area-inset-bottom)) !important;
+      padding-bottom: calc(5rem + env(safe-area-inset-bottom)) !important;
       overflow: visible !important;
     }
     [data-testid="stMain"],
     section.main,
     [data-testid="stAppViewContainer"] {
-      overflow-y: visible !important;
       overflow-x: hidden !important;
+      overflow-y: auto !important;
     }
   }
 </style>
