@@ -1650,7 +1650,13 @@ st.markdown("""
   [class*="st-key-it-controls-row-"] [data-testid="column"]:first-child [data-baseweb="input"],
   [class*="st-key-saved-controls-row-"] [data-testid="column"]:first-child [data-baseweb="input"],
   [class*="st-key-it-controls-row-"] [data-testid="column"]:first-child [data-baseweb="base-input"],
-  [class*="st-key-saved-controls-row-"] [data-testid="column"]:first-child [data-baseweb="base-input"] {
+  [class*="st-key-saved-controls-row-"] [data-testid="column"]:first-child [data-baseweb="base-input"] ,
+  [class*="st-key-hora_it_"] [data-baseweb="input"],
+  [class*="st-key-hora_pool_"] [data-baseweb="input"],
+  [class*="st-key-hora_it_"] [data-baseweb="base-input"],
+  [class*="st-key-hora_pool_"] [data-baseweb="base-input"],
+  [class*="st-key-hora_it_"] [data-testid="stTextInput"],
+  [class*="st-key-hora_pool_"] [data-testid="stTextInput"] {
     box-sizing: border-box !important;
     width: 99px !important;
     min-width: 99px !important;
@@ -1684,7 +1690,11 @@ st.markdown("""
     margin: 0 !important;
   }
   [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(2) [data-baseweb="select"] > div,
-  [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(2) [data-baseweb="select"] > div {
+  [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(2) [data-baseweb="select"] > div ,
+  [class*="st-key-mvd_it_"] [data-baseweb="select"] > div,
+  [class*="st-key-asig_dia_pool_"] [data-baseweb="select"] > div,
+  [class*="st-key-mvd_it_"] [data-testid="stSelectbox"],
+  [class*="st-key-asig_dia_pool_"] [data-testid="stSelectbox"] {
     box-sizing: border-box !important;
     width: 125px !important;
     min-width: 125px !important;
@@ -1787,7 +1797,13 @@ st.markdown("""
     [class*="st-key-it-controls-row-"] [data-testid="column"]:first-child [data-baseweb="input"],
     [class*="st-key-saved-controls-row-"] [data-testid="column"]:first-child [data-baseweb="input"],
     [class*="st-key-it-controls-row-"] [data-testid="column"]:first-child [data-baseweb="base-input"],
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:first-child [data-baseweb="base-input"] {
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:first-child [data-baseweb="base-input"] ,
+    [class*="st-key-hora_it_"] [data-baseweb="input"],
+    [class*="st-key-hora_pool_"] [data-baseweb="input"],
+    [class*="st-key-hora_it_"] [data-baseweb="base-input"],
+    [class*="st-key-hora_pool_"] [data-baseweb="base-input"],
+    [class*="st-key-hora_it_"] [data-testid="stTextInput"],
+    [class*="st-key-hora_pool_"] [data-testid="stTextInput"] {
       box-sizing: border-box !important;
       width: 100px !important;
       min-width: 100px !important;
@@ -1815,7 +1831,11 @@ st.markdown("""
     [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(2) [data-baseweb="select"],
     [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(2) [data-baseweb="select"],
     [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(2) [data-baseweb="select"] > div,
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(2) [data-baseweb="select"] > div {
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(2) [data-baseweb="select"] > div ,
+    [class*="st-key-mvd_it_"] [data-baseweb="select"] > div,
+    [class*="st-key-asig_dia_pool_"] [data-baseweb="select"] > div,
+    [class*="st-key-mvd_it_"] [data-testid="stSelectbox"],
+    [class*="st-key-asig_dia_pool_"] [data-testid="stSelectbox"] {
       box-sizing: border-box !important;
       width: 125px !important;
       min-width: 125px !important;
