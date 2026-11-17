@@ -1883,9 +1883,6 @@ st.markdown("""
       transform: translate(3px, -4.5px) !important;
     }
   }
-  [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(2) {
-      margin-left: 4px !important;
-    }
 </style>
 """, unsafe_allow_html=True)
 
