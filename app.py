@@ -1004,6 +1004,7 @@ st.markdown("""
     max-width: none !important;
     justify-self: stretch !important;
     overflow: visible !important;
+    margin-left: 2px !important;
   }
   [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stMarkdown"],
   [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stElementContainer"] {
@@ -1104,6 +1105,8 @@ st.markdown("""
       max-width: 100% !important;
       white-space: normal !important;
       overflow-wrap: anywhere !important;
+      position: relative !important;
+      left: -6px !important;
     }
     [class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:first-child {
       display: block !important;
