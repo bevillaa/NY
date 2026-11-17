@@ -1707,11 +1707,11 @@ st.markdown("""
   @media (max-width: 768px) {
     [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] {
       display: grid !important;
-      grid-template-columns: minmax(0, 1fr) 38px 38px 30px !important;
+      grid-template-columns: minmax(0, 1fr) 30px 30px 30px !important;
       grid-auto-flow: column !important;
       align-items: center !important;
       justify-content: stretch !important;
-      column-gap: 3px !important;
+      column-gap: 6px !important;
       row-gap: 0 !important;
       width: 100% !important;
       min-width: 0 !important;
@@ -1876,11 +1876,24 @@ st.markdown("""
     margin-top: 0 !important;
     margin-bottom: 0 !important;
   }
-  /* Ajuste exclusivo para móvil: desplaza el checkbox de Ruta ligeramente
-     hacia arriba y a la derecha para alinearlo visualmente con Mapa y Editar. */
+  /* Ajuste exclusivo para móvil: desplaza el checkbox de Ruta ligeramente hacia arriba para alinearlo con Mapa y Editar. */
   @media (max-width: 768px) {
     [class*="st-key-it-visit-checkbox-wrap-"] {
       transform: translate(3px, -4.5px) !important;
+    }
+  }
+  /* Ajuste hacia arriba para alinearlo con Mapa y Editar. */
+  @media (max-width: 768px) {
+    [class*="st-key-it-edit-button-wrap-"]{
+      transform: translate(3px,0px) !important;
+    }
+  }@media (max-width: 768px) {
+    [class*="st-key-saved-edit-button-wrap-"]{
+      transform: translate(11px,0px) !important;
+    }
+  }@media (max-width: 768px) {
+    [class*="st-key-it-edit-button-wrap-"]{
+      transform: translate(4px,0px) !important;
     }
   }
 </style>
@@ -3457,7 +3470,7 @@ if seccion_principal == "🗽Ruta":
             {etiqueta_dia(d)}
           </div>
           <div style="font-weight:800; font-size:0.78rem; color:#0F172A; background:#F8FAFC; border:1.5px solid #CBD5E1; border-radius:20px; padding:2px 9px;">
-            📍 {len(paradas_dia)} lugares ({len(visitados_dia)} visitados)
+            {len(visitados_dia)}/{len(paradas_dia)} ✔
           </div>
         </div>
         """, unsafe_allow_html=True)
