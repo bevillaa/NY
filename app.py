@@ -1541,6 +1541,10 @@ st.markdown("""
 
   /* En móvil, se neutraliza el apilado global SOLO en estas filas. */
   @media (max-width: 768px) {
+    [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(2) {
+      position: relative !important;
+      left: 6px !important;
+    }
     [class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"] {
       display: grid !important;
       grid-template-columns: minmax(0, 1fr) 38px 30px !important;
@@ -1569,10 +1573,6 @@ st.markdown("""
       flex: 1 1 0% !important;
       width: auto !important;
       min-width: 0 !important;
-    }
-    [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(2) {
-      position: relative !important;
-      left: 6px !important;
     }
     [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(n+2),
     [class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(n+2) {
@@ -2133,10 +2133,10 @@ st.markdown("""
       box-sizing: border-box !important;
       width: 100% !important;
       min-width: 0 !important;
-      height: 18px !important;
-      min-height: 18px !important;
-      padding: 0 1px !important;
-      font-size: 0.62rem !important;
+      height: 22px !important;
+      min-height: 22px !important;
+      padding: 0 2px !important;
+      font-size: 0.68rem !important;
       text-align: center !important;
     }
     [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(2) [data-testid="stSelectbox"],
@@ -2284,7 +2284,7 @@ st.markdown("""
       flex-flow: row nowrap !important;
       align-items: center !important;
       justify-content: flex-start !important;
-      gap: 1px !important;
+      gap: 4px !important;
       width: auto !important;
       min-width: 0 !important;
       max-width: 100% !important;
@@ -2317,8 +2317,8 @@ st.markdown("""
       box-sizing: border-box !important;
       width: 100% !important;
       min-width: 0 !important;
-      height: 22px !important;
-      min-height: 22px !important;
+      height: 18px !important;
+      min-height: 18px !important;
       padding: 0 2px !important;
       font-size: 0.68rem !important;
       text-align: center !important;
