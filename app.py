@@ -1804,14 +1804,6 @@ st.markdown("""
     word-break: normal !important;
     white-space: normal !important;
   }
-    /* Ruta: adelantar únicamente el inicio visual de nombre, dirección y nota.
-     No modifica las columnas ni el ancho del selector de hora. */
-  [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2) .place-list-title,
-  [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2) .place-list-address,
-  [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2) .place-note {
-    position: relative !important;
-    left: -6px !important;
-  }
   /* El checkbox ahora está en la quinta columna de Ruta. */
   [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(5),
   [class*="st-key-it-visit-checkbox-wrap-"],
@@ -3473,7 +3465,7 @@ if seccion_principal == "🗽Ruta":
                         dir_html = f'<div class="place-list-address">📍 {html.escape(str(dir_i))}</div>' if dir_i else ''
                         nota_html = bloque_nota_html(nota_i)
                         st.markdown(
-                            f'<div style="{strike}; min-width:0; width:100%; overflow-wrap:anywhere;">'
+                            f'<div style="{strike}; position:relative; left:-8px; width:calc(100% + 8px); min-width:0; overflow-wrap:anywhere;">'
                             f'<div class="place-list-title" style="color:{txt_c};">{emoji_i} {item["nombre"]}</div>'
                             f'{dir_html}{nota_html}</div>',
                             unsafe_allow_html=True
