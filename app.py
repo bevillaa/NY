@@ -371,7 +371,7 @@ st.markdown("""
   /* Input de hora compacto y cuadrado (web y móvil) */
   [data-testid="column"]:has(.compact-hora) [data-testid="stTextInput"] {
     max-width: 88px !important;
-    width: 100% !important;
+    width: 70px !important;
     margin: 0 !important;
   }
   [data-testid="column"]:has(.compact-hora) [data-baseweb="input"],
@@ -673,8 +673,8 @@ st.markdown("""
     }
     .stButton > button, .stFormSubmitButton > button,
     [data-testid="stLinkButton"] > a {
-      width: 100% !important;
-      max-width: 100% !important;
+      width: auto !important;
+      max-width: none !important;
       min-width: 0 !important;
       min-height: 36px !important;
       height: auto !important;
