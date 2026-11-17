@@ -343,14 +343,7 @@ st.markdown("""
   }
 
   /* Botón de edición en pestañas (Itinerario, Guardados, Listas) */
-  [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(1) [data-testid="stButton"] > button,
-  [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(1) [data-testid="stButton"] > button,
-  [class*="st-key-btn_edit_list_"] > button {
-    min-height: 37px !important;
-    height: 37px !important;
-    font-size: 1.05rem !important;
-    padding: 0 0.65rem !important;
-  }
+  
 
   /* Botones generales limpios */
   .stButton > button, .stFormSubmitButton > button, [data-testid="stLinkButton"] > a {
@@ -625,27 +618,8 @@ st.markdown("""
 
     /* Hora | Día | Maps: la hora tiene anchura suficiente para HH:MM,
        el día ocupa solo el ancho natural de su opción más larga y Maps es icono. */
-    [class*="st-key-it-controls-row-"] [data-testid="stHorizontalBlock"],
-    [class*="st-key-saved-controls-row-"] [data-testid="stHorizontalBlock"] {
-      display: grid !important;
-      grid-template-columns: 76px max-content 40px !important;
-      justify-content: start !important;
-      align-items: center !important;
-      column-gap: 6px !important;
-      row-gap: 0 !important;
-      width: 100% !important;
-      min-width: 0 !important;
-    }
-    [class*="st-key-it-controls-row-"] [data-testid="column"],
-    [class*="st-key-saved-controls-row-"] [data-testid="column"] {
-      display: block !important;
-      flex: none !important;
-      width: 100% !important;
-      min-width: 0 !important;
-      max-width: 100% !important;
-      margin: 0 !important;
-      padding: 0 !important;
-    }
+    
+    
 
     /* Marcadores HTML sin altura; solo sirven para identificar cada columna. */
     .mobile-control-marker { display: block !important; width: 0 !important; height: 0 !important; margin: 0 !important; padding: 0 !important; line-height: 0 !important; overflow: hidden !important; }
@@ -850,155 +824,25 @@ st.markdown("""
      recortados o con ancho cero cuando Streamlit recalcula las columnas.
      ----------------------------------------------------------------------- */
   @media (max-width: 768px) {
-    [class*="st-key-it-controls-row-"] [data-testid="stHorizontalBlock"],
-    [class*="st-key-saved-controls-row-"] [data-testid="stHorizontalBlock"] {
-      display: grid !important;
-      grid-template-columns: 80px 94px 42px !important;
-      grid-auto-flow: column !important;
-      justify-content: start !important;
-      align-items: center !important;
-      column-gap: 6px !important;
-      row-gap: 0 !important;
-      width: 100% !important;
-      min-width: 0 !important;
-      max-width: 100% !important;
-    }
+    
 
-    [class*="st-key-it-controls-row-"] [data-testid="column"],
-    [class*="st-key-saved-controls-row-"] [data-testid="column"] {
-      display: block !important;
-      flex: none !important;
-      width: auto !important;
-      min-width: 0 !important;
-      max-width: none !important;
-      margin: 0 !important;
-      padding: 0 !important;
-      overflow: visible !important;
-    }
+    
 
     /* Hora: ancho fijo real para que siempre quepa HH:MM. */
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(1) [data-testid="stTextInput"],
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(1) [data-testid="stTextInput"],
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(1) .stTextInput,
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(1) .stTextInput {
-      display: block !important;
-      width: 80px !important;
-      min-width: 80px !important;
-      max-width: 80px !important;
-      margin: 0 !important;
-    }
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(1) [data-baseweb="input"],
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(1) [data-baseweb="input"],
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(1) [data-baseweb="base-input"],
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(1) [data-baseweb="base-input"] {
-      width: 80px !important;
-      min-width: 80px !important;
-      max-width: 80px !important;
-      height: 36px !important;
-      min-height: 36px !important;
-      max-height: 36px !important;
-      padding: 0 3px !important;
-      border: 1.5px solid #94A3B8 !important;
-      background: #FFFFFF !important;
-      border-radius: 8px !important;
-      overflow: visible !important;
-    }
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(1) input,
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(1) input {
-      box-sizing: border-box !important;
-      width: 100% !important;
-      min-width: 0 !important;
-      height: 34px !important;
-      min-height: 34px !important;
-      padding: 0 2px !important;
-      color: #0F172A !important;
-      -webkit-text-fill-color: #0F172A !important;
-      font-family: "Calibri", "Carlito", Arial, sans-serif !important;
-      font-size: 0.82rem !important;
-      font-weight: 800 !important;
-      letter-spacing: 0 !important;
-      text-align: center !important;
-      opacity: 1 !important;
-    }
+    
+    
+    
 
     /* Día: etiqueta corta y ancho ajustado al contenido, sin hueco sobrante. */
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(2) [data-testid="stSelectbox"],
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(2) [data-testid="stSelectbox"],
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(2) .stSelectbox,
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(2) .stSelectbox {
-      display: block !important;
-      width: 94px !important;
-      min-width: 94px !important;
-      max-width: 94px !important;
-      margin: 0 !important;
-    }
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(2) [data-baseweb="select"],
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(2) [data-baseweb="select"],
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(2) [data-baseweb="select"] > div,
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(2) [data-baseweb="select"] > div {
-      box-sizing: border-box !important;
-      width: 94px !important;
-      min-width: 94px !important;
-      max-width: 94px !important;
-      height: 36px !important;
-      min-height: 36px !important;
-      max-height: 36px !important;
-      background: #FFFFFF !important;
-      border: 1.5px solid #94A3B8 !important;
-      border-radius: 8px !important;
-    }
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(2) [data-baseweb="select"] span,
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(2) [data-baseweb="select"] span {
-      color: #0F172A !important;
-      font-size: 0.74rem !important;
-      font-weight: 800 !important;
-      white-space: nowrap !important;
-    }
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(2) [data-baseweb="select"] svg,
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(2) [data-baseweb="select"] svg {
-      width: 15px !important;
-      min-width: 15px !important;
-    }
+    
+    
+    
+    
 
     /* Mapa: botón táctil de 42 px con icono SVG, independiente de fuentes emoji. */
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(3) [data-testid="stLinkButton"],
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(3) [data-testid="stLinkButton"] {
-      display: block !important;
-      width: 42px !important;
-      min-width: 42px !important;
-      max-width: 42px !important;
-      margin: 0 !important;
-    }
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(3) [data-testid="stLinkButton"] > a,
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(3) [data-testid="stLinkButton"] > a {
-      box-sizing: border-box !important;
-      display: flex !important;
-      align-items: center !important;
-      justify-content: center !important;
-      width: 42px !important;
-      min-width: 42px !important;
-      max-width: 42px !important;
-      height: 36px !important;
-      min-height: 36px !important;
-      max-height: 36px !important;
-      padding: 0 !important;
-      border: 1.5px solid #94A3B8 !important;
-      border-radius: 8px !important;
-      background-color: #FFFFFF !important;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='22' height='22' viewBox='0 0 24 24' fill='none' stroke='%231D4ED8' stroke-width='1.9' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m3 6 6-3 6 3 6-3v15l-6 3-6-3-6 3z'/%3E%3Cpath d='M9 3v15'/%3E%3Cpath d='M15 6v15'/%3E%3C/svg%3E") !important;
-      background-repeat: no-repeat !important;
-      background-position: center center !important;
-      background-size: 20px 20px !important;
-      color: transparent !important;
-      font-size: 0 !important;
-      line-height: 0 !important;
-      overflow: visible !important;
-      text-decoration: none !important;
-    }
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(3) [data-testid="stLinkButton"] > a span,
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(3) [data-testid="stLinkButton"] > a span {
-      display: none !important;
-    }
+    
+    
+    
 
     /* Lápiz visible y de tamaño táctil suficiente; SVG no depende de emojis. */
     
@@ -1006,47 +850,11 @@ st.markdown("""
   }
 
   @media (max-width: 320px) {
-    [class*="st-key-it-controls-row-"] [data-testid="stHorizontalBlock"],
-    [class*="st-key-saved-controls-row-"] [data-testid="stHorizontalBlock"] {
-      grid-template-columns: 78px 92px 40px !important;
-      column-gap: 5px !important;
-    }
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(1) [data-testid="stTextInput"],
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(1) .stTextInput,
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(1) [data-testid="stTextInput"],
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(1) .stTextInput {
-      width: 78px !important;
-      min-width: 78px !important;
-      max-width: 78px !important;
-    }
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(1) [data-baseweb="input"],
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(1) [data-baseweb="base-input"],
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(1) [data-baseweb="input"],
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(1) [data-baseweb="base-input"] {
-      width: 78px !important;
-      min-width: 78px !important;
-      max-width: 78px !important;
-    }
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(2) [data-testid="stSelectbox"],
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(2) .stSelectbox,
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(2) [data-testid="stSelectbox"],
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(2) .stSelectbox,
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(2) [data-baseweb="select"],
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(2) [data-baseweb="select"],
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(2) [data-baseweb="select"] > div,
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(2) [data-baseweb="select"] > div {
-      width: 92px !important;
-      min-width: 92px !important;
-      max-width: 92px !important;
-    }
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(3) [data-testid="stLinkButton"],
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(3) [data-testid="stLinkButton"],
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(3) [data-testid="stLinkButton"] > a,
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(3) [data-testid="stLinkButton"] > a {
-      width: 40px !important;
-      min-width: 40px !important;
-      max-width: 40px !important;
-    }
+    
+    
+    
+    
+    
   }
 
 
@@ -1054,118 +862,28 @@ st.markdown("""
      La información del lugar queda encima; estos cuatro controles van
      inmediatamente debajo y mantienen el mismo orden en Itinerario/Guardados. */
   @media (max-width: 768px) {
-    [class*="st-key-it-controls-row-"] [data-testid="stHorizontalBlock"],
-    [class*="st-key-saved-controls-row-"] [data-testid="stHorizontalBlock"] {
-      display: grid !important;
-      grid-template-columns: 36px 38px 76px 88px !important;
-      justify-content: start !important;
-      align-items: center !important;
-      gap: 5px !important;
-      width: 100% !important;
-      min-width: 0 !important;
-      margin-top: 5px !important;
-    }
-    [class*="st-key-it-controls-row-"] [data-testid="column"],
-    [class*="st-key-saved-controls-row-"] [data-testid="column"] {
-      display: block !important;
-      flex: none !important;
-      width: 100% !important;
-      min-width: 0 !important;
-      max-width: 100% !important;
-      margin: 0 !important;
-      padding: 0 !important;
-    }
+    
+    
     /* Editar: 36 px, SVG integrado en CSS, sin depender de fuentes emoji. */
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(1) .stButton,
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(1) .stButton,
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(1) [data-testid="stButton"],
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(1) [data-testid="stButton"] {
-      width: 36px !important; min-width: 36px !important; max-width: 36px !important;
-      margin: 0 !important;
-    }
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(1) button,
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(1) button {
-      box-sizing: border-box !important; display: flex !important;
-      align-items: center !important; justify-content: center !important;
-      width: 36px !important; min-width: 36px !important; max-width: 36px !important;
-      height: 36px !important; min-height: 36px !important; max-height: 36px !important;
-      padding: 0 !important; margin: 0 !important;
-      border: 1.5px solid #94A3B8 !important; border-radius: 8px !important;
-      background: #F8FAFC !important;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%23334155' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m16 4 4 4'/%3E%3Cpath d='M4 20l4-.9L19 8a2.1 2.1 0 0 0-3-3L5 16z'/%3E%3C/svg%3E") !important;
-      background-repeat: no-repeat !important; background-position: center !important; background-size: 19px 19px !important;
-      color: transparent !important; font-size: 0 !important; line-height: 0 !important;
-      overflow: hidden !important;
-    }
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(1) button span,
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(1) button span { display: none !important; }
+    
+    
+    
 
     /* Mapa: zona de 38 px con icono de mapa dibujado en SVG. */
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(2) [data-testid="stLinkButton"],
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(2) [data-testid="stLinkButton"] {
-      display: block !important; width: 38px !important; min-width: 38px !important; max-width: 38px !important;
-      margin: 0 !important;
-    }
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(2) [data-testid="stLinkButton"] > a,
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(2) [data-testid="stLinkButton"] > a {
-      box-sizing: border-box !important; display: flex !important;
-      align-items: center !important; justify-content: center !important;
-      width: 38px !important; min-width: 38px !important; max-width: 38px !important;
-      height: 36px !important; min-height: 36px !important; max-height: 36px !important;
-      padding: 0 !important; margin: 0 !important;
-      border: 1.5px solid #94A3B8 !important; border-radius: 8px !important;
-      background-color: #FFFFFF !important;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='22' height='22' viewBox='0 0 24 24' fill='none' stroke='%231D4ED8' stroke-width='1.9' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m3 6 6-3 6 3 6-3v15l-6 3-6-3-6 3z'/%3E%3Cpath d='M9 3v15'/%3E%3Cpath d='M15 6v15'/%3E%3C/svg%3E") !important;
-      background-repeat: no-repeat !important; background-position: center !important; background-size: 20px 20px !important;
-      color: transparent !important; font-size: 0 !important; line-height: 0 !important; overflow: hidden !important;
-    }
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(2) a span,
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(2) a span { display: none !important; }
+    
+    
+    
 
     /* Hora: anchura fija suficiente para mostrar HH:MM completo. */
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(3) [data-testid="stTextInput"],
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(3) [data-testid="stTextInput"],
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(3) .stTextInput,
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(3) .stTextInput { width: 76px !important; min-width: 76px !important; max-width: 76px !important; margin: 0 !important; }
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(3) [data-baseweb="input"],
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(3) [data-baseweb="input"],
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(3) [data-baseweb="base-input"],
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(3) [data-baseweb="base-input"] {
-      box-sizing: border-box !important; width: 76px !important; min-width: 76px !important; max-width: 76px !important;
-      height: 36px !important; min-height: 36px !important; max-height: 36px !important;
-      padding: 0 3px !important; border: 1.5px solid #94A3B8 !important; border-radius: 8px !important;
-      background: #FFFFFF !important;
-    }
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(3) input,
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(3) input {
-      box-sizing: border-box !important; display: block !important; width: 100% !important; min-width: 0 !important;
-      height: 34px !important; min-height: 34px !important; padding: 0 2px !important;
-      color: #0F172A !important; -webkit-text-fill-color: #0F172A !important;
-      font: 700 0.78rem/1 "Calibri", "Carlito", Arial, sans-serif !important;
-      text-align: center !important; letter-spacing: 0 !important; opacity: 1 !important;
-    }
+    
+    
+    
 
     /* Día: columna y desplegable del mismo ancho, sin relleno sobrante. */
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(4) [data-testid="stSelectbox"],
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(4) [data-testid="stSelectbox"],
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(4) .stSelectbox,
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(4) .stSelectbox,
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(4) [data-baseweb="select"],
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(4) [data-baseweb="select"] { width: 88px !important; min-width: 88px !important; max-width: 88px !important; margin: 0 !important; }
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(4) [data-baseweb="select"] > div,
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(4) [data-baseweb="select"] > div {
-      box-sizing: border-box !important; width: 88px !important; min-width: 88px !important; max-width: 88px !important;
-      height: 36px !important; min-height: 36px !important; max-height: 36px !important;
-      padding: 0 16px 0 6px !important; border: 1.5px solid #94A3B8 !important; border-radius: 8px !important;
-      background: #FFFFFF !important; overflow: hidden !important;
-    }
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(4) [data-baseweb="select"] span,
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(4) [data-baseweb="select"] span {
-      color: #0F172A !important; -webkit-text-fill-color: #0F172A !important;
-      font-size: 0.70rem !important; font-weight: 800 !important; white-space: nowrap !important;
-    }
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(4) [data-baseweb="select"] svg,
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(4) [data-baseweb="select"] svg { width: 13px !important; min-width: 13px !important; }
+    
+    
+    
+    
 
     /* La fila informativa utiliza todo el ancho; la fila de cuatro controles va debajo. */
     
@@ -1175,26 +893,12 @@ st.markdown("""
     
 
     /* No permitir que los estilos globales de Streamlit vuelvan a ensanchar los widgets. */
-    [class*="st-key-it-controls-row-"] .stButton,
-    [class*="st-key-saved-controls-row-"] .stButton,
-    [class*="st-key-it-controls-row-"] [data-testid="stLinkButton"],
-    [class*="st-key-saved-controls-row-"] [data-testid="stLinkButton"] { width: auto !important; min-width: 0 !important; max-width: none !important; }
+    
   }
   @media (max-width: 300px) {
-    [class*="st-key-it-controls-row-"] [data-testid="stHorizontalBlock"],
-    [class*="st-key-saved-controls-row-"] [data-testid="stHorizontalBlock"] {
-      grid-template-columns: 34px 36px 72px 84px !important; gap: 3px !important;
-    }
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(3) [data-testid="stTextInput"],
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(3) [data-testid="stTextInput"],
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(3) [data-baseweb="input"],
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(3) [data-baseweb="input"],
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(3) [data-baseweb="base-input"],
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(3) [data-baseweb="base-input"] { width: 72px !important; min-width: 72px !important; max-width: 72px !important; }
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(4) [data-baseweb="select"],
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(4) [data-baseweb="select"],
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(4) [data-baseweb="select"] > div,
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(4) [data-baseweb="select"] > div { width: 84px !important; min-width: 84px !important; max-width: 84px !important; }
+    
+    
+    
   }
 
 
@@ -1205,200 +909,31 @@ st.markdown("""
      En escritorio no se modifica la distribución.
      ===================================================================== */
   @media (max-width: 768px) {
-    [class*="st-key-it-controls-row-"],
-    [class*="st-key-saved-controls-row-"] {
-      display: block !important;
-      width: 100% !important;
-      max-width: 100% !important;
-      min-width: 0 !important;
-      margin: 6px 0 2px !important;
-      padding: 0 !important;
-    }
+    
 
-    [class*="st-key-it-controls-row-"] [data-testid="stHorizontalBlock"],
-    [class*="st-key-saved-controls-row-"] [data-testid="stHorizontalBlock"] {
-      display: grid !important;
-      grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
-      grid-auto-flow: row !important;
-      justify-content: stretch !important;
-      align-items: center !important;
-      column-gap: 7px !important;
-      row-gap: 0 !important;
-      width: 100% !important;
-      min-width: 0 !important;
-      max-width: 100% !important;
-      margin: 0 !important;
-      padding: 0 !important;
-    }
+    
 
-    [class*="st-key-it-controls-row-"] [data-testid="column"],
-    [class*="st-key-saved-controls-row-"] [data-testid="column"] {
-      display: block !important;
-      flex: none !important;
-      width: 100% !important;
-      min-width: 0 !important;
-      max-width: 100% !important;
-      margin: 0 !important;
-      padding: 0 !important;
-      overflow: visible !important;
-    }
+    
 
-    [class*="st-key-it-controls-row-"] [data-testid="column"] [data-testid="stElementContainer"],
-    [class*="st-key-saved-controls-row-"] [data-testid="column"] [data-testid="stElementContainer"],
-    [class*="st-key-it-controls-row-"] [data-testid="column"] .stButton,
-    [class*="st-key-saved-controls-row-"] [data-testid="column"] .stButton,
-    [class*="st-key-it-controls-row-"] [data-testid="column"] [data-testid="stLinkButton"],
-    [class*="st-key-saved-controls-row-"] [data-testid="column"] [data-testid="stLinkButton"],
-    [class*="st-key-it-controls-row-"] [data-testid="column"] [data-testid="stTextInput"],
-    [class*="st-key-saved-controls-row-"] [data-testid="column"] [data-testid="stTextInput"],
-    [class*="st-key-it-controls-row-"] [data-testid="column"] [data-testid="stSelectbox"],
-    [class*="st-key-saved-controls-row-"] [data-testid="column"] [data-testid="stSelectbox"] {
-      display: block !important;
-      width: 100% !important;
-      min-width: 0 !important;
-      max-width: 100% !important;
-      margin: 0 !important;
-    }
+    
 
     /* EDITAR: ocupa su cuarta parte de la fila; el lápiz se dibuja como SVG. */
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(1) [data-testid="stButton"] > button,
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(1) [data-testid="stButton"] > button {
-      box-sizing: border-box !important;
-      display: flex !important;
-      align-items: center !important;
-      justify-content: center !important;
-      width: 100% !important;
-      min-width: 0 !important;
-      max-width: 100% !important;
-      height: 40px !important;
-      min-height: 40px !important;
-      max-height: 40px !important;
-      padding: 0 !important;
-      border: 1.5px solid #94A3B8 !important;
-      border-radius: 8px !important;
-      background-color: #F8FAFC !important;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='22' height='22' viewBox='0 0 24 24' fill='none' stroke='%23334155' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m16 4 4 4'/%3E%3Cpath d='M4 20l4-.9L19 8a2.1 2.1 0 0 0-3-3L5 16z'/%3E%3C/svg%3E") !important;
-      background-repeat: no-repeat !important;
-      background-position: center !important;
-      background-size: 21px 21px !important;
-      color: transparent !important;
-      font-size: 0 !important;
-      line-height: 0 !important;
-      overflow: hidden !important;
-    }
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(1) button span,
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(1) button span {
-      display: none !important;
-    }
+    
+    
 
     /* MAPA: ocupa la misma anchura que los demás controles; icono centrado. */
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(2) [data-testid="stLinkButton"] > a,
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(2) [data-testid="stLinkButton"] > a {
-      box-sizing: border-box !important;
-      display: flex !important;
-      align-items: center !important;
-      justify-content: center !important;
-      width: 100% !important;
-      min-width: 0 !important;
-      max-width: 100% !important;
-      height: 40px !important;
-      min-height: 40px !important;
-      max-height: 40px !important;
-      padding: 0 !important;
-      border: 1.5px solid #94A3B8 !important;
-      border-radius: 8px !important;
-      background-color: #FFFFFF !important;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='21' height='21' viewBox='0 0 24 24' fill='none' stroke='%231D4ED8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m3 6 6-3 6 3 6-3v15l-6 3-6-3-6 3z'/%3E%3Cpath d='M9 3v15'/%3E%3Cpath d='M15 6v15'/%3E%3C/svg%3E") !important;
-      background-repeat: no-repeat !important;
-      background-position: center !important;
-      background-size: 23px 23px !important;
-      color: transparent !important;
-      font-size: 0 !important;
-      line-height: 0 !important;
-      overflow: hidden !important;
-    }
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(2) a span,
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(2) a span {
-      display: none !important;
-    }
+    
+    
 
     /* HORA: el campo se estira con la pantalla y conserva HH:MM completo. */
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(3) [data-baseweb="input"],
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(3) [data-baseweb="input"],
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(3) [data-baseweb="base-input"],
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(3) [data-baseweb="base-input"] {
-      box-sizing: border-box !important;
-      display: flex !important;
-      width: 100% !important;
-      min-width: 0 !important;
-      max-width: 100% !important;
-      height: 40px !important;
-      min-height: 40px !important;
-      max-height: 40px !important;
-      padding: 0 3px !important;
-      border: 1.5px solid #94A3B8 !important;
-      border-radius: 8px !important;
-      background: #FFFFFF !important;
-    }
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(3) input,
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(3) input {
-      box-sizing: border-box !important;
-      display: block !important;
-      width: 100% !important;
-      min-width: 0 !important;
-      height: 38px !important;
-      min-height: 38px !important;
-      padding: 0 1px !important;
-      color: #0F172A !important;
-      -webkit-text-fill-color: #0F172A !important;
-      font-family: "Calibri", "Carlito", Arial, sans-serif !important;
-      font-size: clamp(0.68rem, 2.8vw, 0.82rem) !important;
-      font-weight: 800 !important;
-      letter-spacing: 0 !important;
-      text-align: center !important;
-      opacity: 1 !important;
-    }
+    
+    
 
     /* DÍA: desplegable ancho completo de su columna, sin anchura fija sobrante. */
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(4) [data-baseweb="select"],
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(4) [data-baseweb="select"] {
-      box-sizing: border-box !important;
-      width: 100% !important;
-      min-width: 0 !important;
-      max-width: 100% !important;
-      margin: 0 !important;
-    }
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(4) [data-baseweb="select"] > div,
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(4) [data-baseweb="select"] > div {
-      box-sizing: border-box !important;
-      display: flex !important;
-      align-items: center !important;
-      width: 100% !important;
-      min-width: 0 !important;
-      max-width: 100% !important;
-      height: 40px !important;
-      min-height: 40px !important;
-      max-height: 40px !important;
-      padding: 0 5px !important;
-      border: 1.5px solid #94A3B8 !important;
-      border-radius: 8px !important;
-      background: #FFFFFF !important;
-      overflow: hidden !important;
-    }
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(4) [data-baseweb="select"] span,
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(4) [data-baseweb="select"] span {
-      color: #0F172A !important;
-      -webkit-text-fill-color: #0F172A !important;
-      font-size: clamp(0.63rem, 2.7vw, 0.76rem) !important;
-      font-weight: 800 !important;
-      white-space: nowrap !important;
-    }
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(4) [data-baseweb="select"] svg,
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(4) [data-baseweb="select"] svg {
-      width: 12px !important;
-      min-width: 12px !important;
-      flex: 0 0 12px !important;
-    }
+    
+    
+    
+    
   }
 
 
@@ -1407,292 +942,52 @@ st.markdown("""
      al estar al final, fuerza también sus contenedores internos a ocupar
      exactamente el ancho de cada una de las cuatro columnas. */
   @media (max-width: 768px) {
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(1) .stButton,
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(1) .stButton,
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(1) [data-testid="stButton"],
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(1) [data-testid="stButton"] {
-      width: 100% !important;
-      min-width: 0 !important;
-      max-width: 100% !important;
-    }
+    
 
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(2) [data-testid="stLinkButton"],
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(2) [data-testid="stLinkButton"] {
-      display: block !important;
-      width: 100% !important;
-      min-width: 0 !important;
-      max-width: 100% !important;
-    }
+    
 
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(3) .stTextInput,
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(3) .stTextInput,
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(3) [data-testid="stTextInput"],
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(3) [data-testid="stTextInput"],
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(3) [data-baseweb="input"],
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(3) [data-baseweb="input"],
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(3) [data-baseweb="base-input"],
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(3) [data-baseweb="base-input"] {
-      box-sizing: border-box !important;
-      width: 100% !important;
-      min-width: 0 !important;
-      max-width: 100% !important;
-      margin: 0 !important;
-    }
+    
 
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(4) .stSelectbox,
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(4) .stSelectbox,
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(4) [data-testid="stSelectbox"],
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(4) [data-testid="stSelectbox"],
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(4) [data-baseweb="select"],
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(4) [data-baseweb="select"],
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(4) [data-baseweb="select"] > div,
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(4) [data-baseweb="select"] > div {
-      box-sizing: border-box !important;
-      width: 100% !important;
-      min-width: 0 !important;
-      max-width: 100% !important;
-      margin: 0 !important;
-    }
+    
 
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(4) [data-baseweb="select"] span,
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(4) [data-baseweb="select"] span {
-      min-width: 0 !important;
-      overflow: hidden !important;
-      text-overflow: clip !important;
-      font-size: clamp(0.60rem, 2.5vw, 0.74rem) !important;
-    }
+    
   }
 
 
   /* ===== AJUSTE FINO FINAL: ICONOS COMPACTOS Y DÍA SIEMPRE LEGIBLE =====
      Solo afecta a móvil; escritorio conserva sus tamaños y etiquetas normales. */
   @media (max-width: 768px) {
-    [class*="st-key-it-controls-row-"],
-    [class*="st-key-saved-controls-row-"] {
-      width: 100% !important;
-      max-width: 100% !important;
-      min-width: 0 !important;
-      box-sizing: border-box !important;
-    }
+    
 
-    [class*="st-key-it-controls-row-"] [data-testid="stHorizontalBlock"],
-    [class*="st-key-saved-controls-row-"] [data-testid="stHorizontalBlock"] {
-      display: grid !important;
-      grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
-      grid-auto-flow: column !important;
-      align-items: center !important;
-      justify-content: stretch !important;
-      gap: 4px !important;
-      width: 100% !important;
-      max-width: 100% !important;
-      min-width: 0 !important;
-      margin: 0 !important;
-      padding: 0 !important;
-      box-sizing: border-box !important;
-    }
+    
 
-    [class*="st-key-it-controls-row-"] [data-testid="column"],
-    [class*="st-key-saved-controls-row-"] [data-testid="column"] {
-      display: block !important;
-      width: 100% !important;
-      min-width: 0 !important;
-      max-width: 100% !important;
-      flex: none !important;
-      margin: 0 !important;
-      padding: 0 !important;
-      overflow: visible !important;
-      box-sizing: border-box !important;
-    }
+    
 
     /* Cuatro widgets compactos y alineados; no heredan mínimos de reglas antiguas. */
-    [class*="st-key-it-controls-row-"] [data-testid="column"] > div,
-    [class*="st-key-saved-controls-row-"] [data-testid="column"] > div,
-    [class*="st-key-it-controls-row-"] [data-testid="column"] [data-testid="stElementContainer"],
-    [class*="st-key-saved-controls-row-"] [data-testid="column"] [data-testid="stElementContainer"] {
-      width: 100% !important;
-      min-width: 0 !important;
-      max-width: 100% !important;
-      margin: 0 !important;
-      padding: 0 !important;
-      box-sizing: border-box !important;
-    }
+    
 
     /* EDITAR: icono lápiz, botón contenido en su columna. */
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(1) [data-testid="stButton"],
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(1) [data-testid="stButton"] {
-      width: 100% !important;
-      min-width: 0 !important;
-      max-width: 100% !important;
-    }
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(1) button,
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(1) button {
-      box-sizing: border-box !important;
-      display: flex !important;
-      align-items: center !important;
-      justify-content: center !important;
-      width: 100% !important;
-      min-width: 0 !important;
-      max-width: 100% !important;
-      height: 34px !important;
-      min-height: 34px !important;
-      max-height: 34px !important;
-      padding: 0 !important;
-      margin: 0 !important;
-      border: 1px solid #94A3B8 !important;
-      border-radius: 7px !important;
-      background-color: #F8FAFC !important;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 24 24' fill='none' stroke='%23334155' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m16 4 4 4'/%3E%3Cpath d='M4 20l4-.9L19 8a2.1 2.1 0 0 0-3-3L5 16z'/%3E%3C/svg%3E") !important;
-      background-repeat: no-repeat !important;
-      background-position: center !important;
-      background-size: 18px 18px !important;
-      color: transparent !important;
-      -webkit-text-fill-color: transparent !important;
-      font-size: 0 !important;
-      line-height: 0 !important;
-      overflow: hidden !important;
-    }
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(1) button *,
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(1) button * {
-      visibility: hidden !important;
-    }
+    
+    
+    
 
     /* MAPA: icono solo, mismo tamaño y altura que Editar. */
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(2) [data-testid="stLinkButton"],
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(2) [data-testid="stLinkButton"] {
-      display: block !important;
-      width: 100% !important;
-      min-width: 0 !important;
-      max-width: 100% !important;
-      margin: 0 !important;
-    }
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(2) [data-testid="stLinkButton"] > a,
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(2) [data-testid="stLinkButton"] > a {
-      box-sizing: border-box !important;
-      display: flex !important;
-      align-items: center !important;
-      justify-content: center !important;
-      width: 100% !important;
-      min-width: 0 !important;
-      max-width: 100% !important;
-      height: 34px !important;
-      min-height: 34px !important;
-      max-height: 34px !important;
-      padding: 0 !important;
-      margin: 0 !important;
-      border: 1px solid #94A3B8 !important;
-      border-radius: 7px !important;
-      background-color: #FFFFFF !important;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='19' height='19' viewBox='0 0 24 24' fill='none' stroke='%231D4ED8' stroke-width='1.9' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m3 6 6-3 6 3 6-3v15l-6 3-6-3-6 3z'/%3E%3Cpath d='M9 3v15'/%3E%3Cpath d='M15 6v15'/%3E%3C/svg%3E") !important;
-      background-repeat: no-repeat !important;
-      background-position: center !important;
-      background-size: 18px 18px !important;
-      color: transparent !important;
-      -webkit-text-fill-color: transparent !important;
-      font-size: 0 !important;
-      line-height: 0 !important;
-      overflow: hidden !important;
-    }
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(2) a *,
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(2) a * {
-      visibility: hidden !important;
-    }
+    
+    
+    
 
     /* HORA: HH:MM completo y centrado, con ancho natural de su cuarta parte. */
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(3) [data-testid="stTextInput"],
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(3) [data-testid="stTextInput"],
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(3) [data-baseweb="input"],
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(3) [data-baseweb="input"],
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(3) [data-baseweb="base-input"],
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(3) [data-baseweb="base-input"] {
-      box-sizing: border-box !important;
-      display: flex !important;
-      width: 100% !important;
-      min-width: 0 !important;
-      max-width: 100% !important;
-      height: 34px !important;
-      min-height: 34px !important;
-      max-height: 34px !important;
-      padding: 0 2px !important;
-      margin: 0 !important;
-      border: 1px solid #94A3B8 !important;
-      border-radius: 7px !important;
-      background: #FFFFFF !important;
-    }
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(3) input,
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(3) input {
-      box-sizing: border-box !important;
-      width: 100% !important;
-      min-width: 0 !important;
-      height: 32px !important;
-      min-height: 32px !important;
-      padding: 0 !important;
-      text-align: center !important;
-      font-size: clamp(0.60rem, 2.35vw, 0.70rem) !important;
-      font-weight: 800 !important;
-      letter-spacing: 0 !important;
-      color: #0F172A !important;
-      -webkit-text-fill-color: #0F172A !important;
-    }
+    
+    
 
     /* DÍA: texto completo "Día 10" y flecha pequeña; no aplicar ellipsis. */
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(4) [data-testid="stSelectbox"],
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(4) [data-testid="stSelectbox"],
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(4) [data-baseweb="select"],
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(4) [data-baseweb="select"] {
-      box-sizing: border-box !important;
-      display: block !important;
-      width: 100% !important;
-      min-width: 0 !important;
-      max-width: 100% !important;
-      margin: 0 !important;
-    }
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(4) [data-baseweb="select"] > div,
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(4) [data-baseweb="select"] > div {
-      box-sizing: border-box !important;
-      display: flex !important;
-      align-items: center !important;
-      width: 100% !important;
-      min-width: 0 !important;
-      max-width: 100% !important;
-      height: 34px !important;
-      min-height: 34px !important;
-      max-height: 34px !important;
-      padding: 0 3px !important;
-      border: 1px solid #94A3B8 !important;
-      border-radius: 7px !important;
-      background: #FFFFFF !important;
-      overflow: visible !important;
-    }
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(4) [data-baseweb="select"] span,
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(4) [data-baseweb="select"] span {
-      display: inline-block !important;
-      min-width: 0 !important;
-      max-width: none !important;
-      overflow: visible !important;
-      text-overflow: clip !important;
-      white-space: nowrap !important;
-      font-size: clamp(0.57rem, 2.25vw, 0.68rem) !important;
-      line-height: 1 !important;
-      font-weight: 800 !important;
-      color: #0F172A !important;
-      -webkit-text-fill-color: #0F172A !important;
-    }
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(4) [data-baseweb="select"] svg,
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(4) [data-baseweb="select"] svg {
-      width: 10px !important;
-      min-width: 10px !important;
-      max-width: 10px !important;
-      flex: 0 0 10px !important;
-    }
+    
+    
+    
+    
 
     /* Evitar que una regla global aumente de nuevo el ancho/alto de los cuatro widgets. */
-    [class*="st-key-it-controls-row-"] button,
-    [class*="st-key-saved-controls-row-"] button,
-    [class*="st-key-it-controls-row-"] [data-testid="stLinkButton"] > a,
-    [class*="st-key-saved-controls-row-"] [data-testid="stLinkButton"] > a {
-      max-width: 100% !important;
-      box-sizing: border-box !important;
-    }
+    
 
     /* Estadística superior: reservar más ancho a la tarjeta "Guardados". */
     .hero-container > div > div:last-child {
@@ -1720,14 +1015,8 @@ st.markdown("""
   }
 
   @media (max-width: 320px) {
-    [class*="st-key-it-controls-row-"] [data-testid="stHorizontalBlock"],
-    [class*="st-key-saved-controls-row-"] [data-testid="stHorizontalBlock"] {
-      gap: 3px !important;
-    }
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(4) [data-baseweb="select"] span,
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(4) [data-baseweb="select"] span {
-      font-size: 0.57rem !important;
-    }
+    
+    
     .hero-stat-lbl { font-size: 0.51rem !important; letter-spacing: 0 !important; }
   }
 
@@ -1735,48 +1024,11 @@ st.markdown("""
   /* Refinamiento final de tamaño: Editar y Mapa son iconos compactos centrados
      en sus columnas; Hora y Día conservan todo el ancho útil para leerse. */
   @media (max-width: 768px) {
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(1) [data-testid="stButton"],
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(1) [data-testid="stButton"] {
-      display: flex !important;
-      align-items: center !important;
-      justify-content: center !important;
-      width: 100% !important;
-      min-width: 0 !important;
-      max-width: 100% !important;
-    }
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(1) [data-testid="stButton"] > button,
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(1) [data-testid="stButton"] > button {
-      box-sizing: border-box !important;
-      width: 36px !important;
-      min-width: 36px !important;
-      max-width: 36px !important;
-      height: 34px !important;
-      min-height: 34px !important;
-      max-height: 34px !important;
-      padding: 0 !important;
-      margin: 0 auto !important;
-    }
+    
+    
 
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(2) [data-testid="stLinkButton"],
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(2) [data-testid="stLinkButton"] {
-      display: flex !important;
-      align-items: center !important;
-      justify-content: center !important;
-      width: 100% !important;
-      min-width: 0 !important;
-      max-width: 100% !important;
-    }
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(2) [data-testid="stLinkButton"] > a,
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(2) [data-testid="stLinkButton"] > a {
-      width: 36px !important;
-      min-width: 36px !important;
-      max-width: 36px !important;
-      height: 34px !important;
-      min-height: 34px !important;
-      max-height: 34px !important;
-      padding: 0 !important;
-      margin: 0 auto !important;
-    }
+    
+    
   }
 
 
@@ -1822,206 +1074,30 @@ st.markdown("""
 
     /* Los cuatro widgets tienen una cuadrícula fija mínima que cabe incluso
        en un móvil de 280 px: Editar, Mapa, Hora y Día. */
-    [class*="st-key-it-controls-row-"],
-    [class*="st-key-saved-controls-row-"] {
-      width: 100% !important;
-      min-width: 0 !important;
-      max-width: 100% !important;
-      box-sizing: border-box !important;
-    }
-    [class*="st-key-it-controls-row-"] [data-testid="stHorizontalBlock"],
-    [class*="st-key-saved-controls-row-"] [data-testid="stHorizontalBlock"] {
-      display: grid !important;
-      grid-template-columns: minmax(34px, 0.72fr) minmax(34px, 0.72fr) minmax(74px, 1fr) minmax(100px, 1.38fr) !important;
-      grid-auto-flow: column !important;
-      align-items: center !important;
-      justify-content: stretch !important;
-      gap: 4px !important;
-      width: 100% !important;
-      min-width: 0 !important;
-      max-width: 100% !important;
-      box-sizing: border-box !important;
-      margin: 0 !important;
-      padding: 0 !important;
-    }
-    [class*="st-key-it-controls-row-"] [data-testid="column"],
-    [class*="st-key-saved-controls-row-"] [data-testid="column"] {
-      display: block !important;
-      width: 100% !important;
-      min-width: 0 !important;
-      max-width: 100% !important;
-      flex: none !important;
-      margin: 0 !important;
-      padding: 0 !important;
-      box-sizing: border-box !important;
-      overflow: visible !important;
-    }
-    [class*="st-key-it-controls-row-"] [data-testid="column"] [data-testid="stElementContainer"],
-    [class*="st-key-saved-controls-row-"] [data-testid="column"] [data-testid="stElementContainer"],
-    [class*="st-key-it-controls-row-"] [data-testid="column"] .stButton,
-    [class*="st-key-saved-controls-row-"] [data-testid="column"] .stButton,
-    [class*="st-key-it-controls-row-"] [data-testid="column"] [data-testid="stLinkButton"],
-    [class*="st-key-saved-controls-row-"] [data-testid="column"] [data-testid="stLinkButton"],
-    [class*="st-key-it-controls-row-"] [data-testid="column"] [data-testid="stTextInput"],
-    [class*="st-key-saved-controls-row-"] [data-testid="column"] [data-testid="stTextInput"],
-    [class*="st-key-it-controls-row-"] [data-testid="column"] [data-testid="stSelectbox"],
-    [class*="st-key-saved-controls-row-"] [data-testid="column"] [data-testid="stSelectbox"] {
-      width: 100% !important;
-      min-width: 0 !important;
-      max-width: 100% !important;
-      box-sizing: border-box !important;
-      margin: 0 !important;
-      padding: 0 !important;
-    }
+    
+    
+    
+    
 
     /* Editar y Mapa llevan ahora emoji como contenido nativo del widget.
        No se oculta ni se sustituye el texto mediante background-image. */
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(1) [data-testid="stButton"] > button,
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(1) [data-testid="stButton"] > button,
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(2) [data-testid="stLinkButton"] > a,
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(2) [data-testid="stLinkButton"] > a {
-      display: flex !important;
-      align-items: center !important;
-      justify-content: center !important;
-      width: 100% !important;
-      min-width: 0 !important;
-      max-width: 100% !important;
-      height: 36px !important;
-      min-height: 36px !important;
-      max-height: 36px !important;
-      box-sizing: border-box !important;
-      padding: 0 !important;
-      margin: 0 !important;
-      border: 1px solid #94A3B8 !important;
-      border-radius: 7px !important;
-      background-image: none !important;
-      background-color: #FFFFFF !important;
-      color: #334155 !important;
-      -webkit-text-fill-color: #334155 !important;
-      font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif !important;
-      font-size: 1.05rem !important;
-      line-height: 1 !important;
-      font-weight: 400 !important;
-      text-decoration: none !important;
-      white-space: nowrap !important;
-      overflow: visible !important;
-      visibility: visible !important;
-    }
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(1) [data-testid="stButton"] > button *,
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(1) [data-testid="stButton"] > button *,
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(2) [data-testid="stLinkButton"] > a *,
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(2) [data-testid="stLinkButton"] > a * {
-      display: inline !important;
-      visibility: visible !important;
-      opacity: 1 !important;
-      color: inherit !important;
-      -webkit-text-fill-color: currentColor !important;
-      font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif !important;
-      font-size: inherit !important;
-      line-height: 1 !important;
-      margin: 0 !important;
-      padding: 0 !important;
-    }
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(1) [data-testid="stButton"] > button p,
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(1) [data-testid="stButton"] > button p,
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(2) [data-testid="stLinkButton"] > a p,
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(2) [data-testid="stLinkButton"] > a p {
-      display: inline !important;
-      margin: 0 !important;
-      font-size: inherit !important;
-      line-height: 1 !important;
-    }
+    
+    
+    
 
     /* Hora: conserva HH:MM y no se estrecha por los iconos. */
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(3) [data-testid="stTextInput"],
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(3) [data-testid="stTextInput"],
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(3) [data-baseweb="input"],
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(3) [data-baseweb="input"],
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(3) [data-baseweb="base-input"],
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(3) [data-baseweb="base-input"] {
-      width: 100% !important;
-      min-width: 0 !important;
-      max-width: 100% !important;
-      height: 36px !important;
-      min-height: 36px !important;
-      max-height: 36px !important;
-      box-sizing: border-box !important;
-      padding: 0 2px !important;
-      margin: 0 !important;
-      border: 1px solid #94A3B8 !important;
-      border-radius: 7px !important;
-      background: #FFFFFF !important;
-    }
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(3) input,
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(3) input {
-      width: 100% !important;
-      min-width: 0 !important;
-      height: 34px !important;
-      box-sizing: border-box !important;
-      padding: 0 1px !important;
-      text-align: center !important;
-      font-size: 0.72rem !important;
-      font-weight: 800 !important;
-      letter-spacing: 0 !important;
-      color: #0F172A !important;
-      -webkit-text-fill-color: #0F172A !important;
-      font-variant-numeric: tabular-nums !important;
-    }
+    
+    
 
     /* Día: se reserva un mínimo real de 100 px para que no se corte "Día 10". */
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(4) [data-testid="stSelectbox"],
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(4) [data-testid="stSelectbox"],
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(4) [data-baseweb="select"],
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(4) [data-baseweb="select"] {
-      width: 100% !important;
-      min-width: 0 !important;
-      max-width: 100% !important;
-      box-sizing: border-box !important;
-      margin: 0 !important;
-    }
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(4) [data-baseweb="select"] > div,
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(4) [data-baseweb="select"] > div {
-      display: flex !important;
-      align-items: center !important;
-      width: 100% !important;
-      min-width: 0 !important;
-      max-width: 100% !important;
-      height: 36px !important;
-      min-height: 36px !important;
-      max-height: 36px !important;
-      box-sizing: border-box !important;
-      padding: 0 4px 0 6px !important;
-      border: 1px solid #94A3B8 !important;
-      border-radius: 7px !important;
-      background: #FFFFFF !important;
-      overflow: visible !important;
-    }
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(4) [data-baseweb="select"] span,
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(4) [data-baseweb="select"] span {
-      white-space: nowrap !important;
-      overflow: visible !important;
-      text-overflow: clip !important;
-      font-size: 0.68rem !important;
-      line-height: 1 !important;
-      font-weight: 800 !important;
-      color: #0F172A !important;
-      -webkit-text-fill-color: #0F172A !important;
-    }
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(4) [data-baseweb="select"] svg,
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(4) [data-baseweb="select"] svg {
-      flex: 0 0 12px !important;
-      width: 12px !important;
-      min-width: 12px !important;
-      max-width: 12px !important;
-    }
+    
+    
+    
+    
   }
 
   @media (max-width: 320px) {
-    [class*="st-key-it-controls-row-"] [data-testid="stHorizontalBlock"],
-    [class*="st-key-saved-controls-row-"] [data-testid="stHorizontalBlock"] {
-      grid-template-columns: minmax(34px, 0.72fr) minmax(34px, 0.72fr) minmax(72px, 1fr) minmax(98px, 1.38fr) !important;
-      gap: 3px !important;
-    }
+    
     .place-list-title { font-size: 1.25rem !important; }
     .place-list-address, .place-note { font-size: 0.68rem !important; }
   }
@@ -2030,149 +1106,20 @@ st.markdown("""
   /* Medidas finales de móvil: los dos iconos ocupan solo su tamaño real,
      hora legible y selector de día suficientemente ancho para "Día 10". */
   @media (max-width: 768px) {
-    [class*="st-key-it-controls-row-"] [data-testid="stHorizontalBlock"],
-    [class*="st-key-saved-controls-row-"] [data-testid="stHorizontalBlock"] {
-      grid-template-columns: 34px 34px 74px 102px !important;
-      grid-auto-flow: column !important;
-      justify-content: start !important;
-      align-items: center !important;
-      column-gap: 4px !important;
-      row-gap: 0 !important;
-      width: 100% !important;
-      min-width: 0 !important;
-      max-width: 100% !important;
-    }
-    [class*="st-key-it-controls-row-"] [data-testid="column"],
-    [class*="st-key-saved-controls-row-"] [data-testid="column"] {
-      width: auto !important;
-      min-width: 0 !important;
-      max-width: none !important;
-      flex: none !important;
-      margin: 0 !important;
-      padding: 0 !important;
-      box-sizing: border-box !important;
-    }
+    
+    
     /* Botones icono: exactamente 34 px, sin textos ni SVG de fondo ocultando
        el contenido real (✏️ y 🗺️ se renderizan como etiqueta de Streamlit). */
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(1) [data-testid="stButton"],
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(1) [data-testid="stButton"],
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(2) [data-testid="stLinkButton"],
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(2) [data-testid="stLinkButton"] {
-      width: 34px !important;
-      min-width: 34px !important;
-      max-width: 34px !important;
-      margin: 0 !important;
-    }
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(1) button,
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(1) button,
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(2) a,
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(2) a {
-      display: flex !important;
-      align-items: center !important;
-      justify-content: center !important;
-      box-sizing: border-box !important;
-      width: 34px !important;
-      min-width: 34px !important;
-      max-width: 34px !important;
-      height: 36px !important;
-      min-height: 36px !important;
-      max-height: 36px !important;
-      padding: 0 !important;
-      margin: 0 !important;
-      border: 1px solid #94A3B8 !important;
-      border-radius: 7px !important;
-      background: #FFFFFF !important;
-      background-image: none !important;
-      color: #334155 !important;
-      -webkit-text-fill-color: #334155 !important;
-      font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif !important;
-      font-size: 1rem !important;
-      line-height: 1 !important;
-      text-decoration: none !important;
-      white-space: nowrap !important;
-      overflow: visible !important;
-      visibility: visible !important;
-    }
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(1) button *,
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(1) button *,
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(2) a *,
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(2) a * {
-      display: inline !important;
-      visibility: visible !important;
-      opacity: 1 !important;
-      color: inherit !important;
-      -webkit-text-fill-color: currentColor !important;
-      font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif !important;
-      font-size: inherit !important;
-      line-height: 1 !important;
-      margin: 0 !important;
-      padding: 0 !important;
-    }
+    
+    
+    
     /* Hora fija para que HH:MM no se corte en pantallas estrechas. */
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(3) [data-testid="stTextInput"],
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(3) [data-testid="stTextInput"],
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(3) [data-baseweb="input"],
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(3) [data-baseweb="input"],
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(3) [data-baseweb="base-input"],
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(3) [data-baseweb="base-input"] {
-      width: 74px !important;
-      min-width: 74px !important;
-      max-width: 74px !important;
-      height: 36px !important;
-      min-height: 36px !important;
-      max-height: 36px !important;
-      box-sizing: border-box !important;
-      padding: 0 2px !important;
-      margin: 0 !important;
-    }
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(3) input,
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(3) input {
-      width: 100% !important;
-      min-width: 0 !important;
-      height: 34px !important;
-      padding: 0 1px !important;
-      font-size: 0.72rem !important;
-      font-weight: 800 !important;
-      text-align: center !important;
-      letter-spacing: 0 !important;
-      color: #0F172A !important;
-      -webkit-text-fill-color: #0F172A !important;
-    }
+    
+    
     /* Desplegable con anchura mínima real de 102 px. */
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(4) [data-testid="stSelectbox"],
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(4) [data-testid="stSelectbox"],
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(4) [data-baseweb="select"],
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(4) [data-baseweb="select"] {
-      width: 102px !important;
-      min-width: 102px !important;
-      max-width: 102px !important;
-      box-sizing: border-box !important;
-      margin: 0 !important;
-    }
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(4) [data-baseweb="select"] > div,
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(4) [data-baseweb="select"] > div {
-      display: flex !important;
-      align-items: center !important;
-      width: 102px !important;
-      min-width: 102px !important;
-      max-width: 102px !important;
-      height: 36px !important;
-      min-height: 36px !important;
-      max-height: 36px !important;
-      box-sizing: border-box !important;
-      padding: 0 4px 0 6px !important;
-      overflow: visible !important;
-    }
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(4) [data-baseweb="select"] span,
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(4) [data-baseweb="select"] span {
-      white-space: nowrap !important;
-      overflow: visible !important;
-      text-overflow: clip !important;
-      font-size: 0.69rem !important;
-      font-weight: 800 !important;
-      color: #0F172A !important;
-      -webkit-text-fill-color: #0F172A !important;
-    }
+    
+    
+    
   }
 
   /* La tarjeta central del resumen siempre muestra GUARDADOS completo. */
@@ -2192,192 +1139,26 @@ st.markdown("""
 
   /* ===== ÚLTIMO AJUSTE MÓVIL: ICONOS SVG FIJOS + HORA LEGIBLE ===== */
   @media (max-width: 768px) {
-    [class*="st-key-it-controls-row-"] [data-testid="stHorizontalBlock"],
-    [class*="st-key-saved-controls-row-"] [data-testid="stHorizontalBlock"] {
-      display: grid !important;
-      grid-template-columns: 30px 30px 92px minmax(102px, 1fr) !important;
-      grid-auto-flow: column !important;
-      justify-content: stretch !important;
-      align-items: center !important;
-      column-gap: 3px !important;
-      row-gap: 0 !important;
-      width: 100% !important;
-      min-width: 0 !important;
-      max-width: 100% !important;
-      box-sizing: border-box !important;
-    }
-    [class*="st-key-it-controls-row-"] [data-testid="column"],
-    [class*="st-key-saved-controls-row-"] [data-testid="column"] {
-      display: block !important;
-      width: 100% !important;
-      min-width: 0 !important;
-      max-width: 100% !important;
-      flex: none !important;
-      margin: 0 !important;
-      padding: 0 !important;
-      box-sizing: border-box !important;
-      overflow: visible !important;
-    }
+    
+    
 
     /* EDITAR: la etiqueta accesible permanece en el HTML, visualmente se
        sustituye siempre por un lápiz SVG independiente de fuentes/emoji. */
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(1) [data-testid="stButton"],
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(1) [data-testid="stButton"] {
-      width: 30px !important;
-      min-width: 30px !important;
-      max-width: 30px !important;
-      margin: 0 !important;
-    }
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(1) button,
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(1) button {
-      position: relative !important;
-      display: flex !important;
-      align-items: center !important;
-      justify-content: center !important;
-      box-sizing: border-box !important;
-      width: 30px !important;
-      min-width: 30px !important;
-      max-width: 30px !important;
-      height: 34px !important;
-      min-height: 34px !important;
-      max-height: 34px !important;
-      padding: 0 !important;
-      margin: 0 !important;
-      border: 1px solid #94A3B8 !important;
-      border-radius: 7px !important;
-      background: #FFFFFF !important;
-      color: transparent !important;
-      -webkit-text-fill-color: transparent !important;
-      font-size: 0 !important;
-      line-height: 0 !important;
-      text-indent: -9999px !important;
-      overflow: hidden !important;
-    }
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(1) button::before,
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(1) button::before {
-      content: "" !important;
-      display: block !important;
-      flex: 0 0 17px !important;
-      width: 17px !important;
-      height: 17px !important;
-      margin: 0 !important;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23334155' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m16 4 4 4'/%3E%3Cpath d='M4 20l4-.9L19 8a2.1 2.1 0 0 0-3-3L5 16z'/%3E%3C/svg%3E") !important;
-      background-repeat: no-repeat !important;
-      background-position: center !important;
-      background-size: contain !important;
-      text-indent: 0 !important;
-    }
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(1) button > *,
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(1) button > * {
-      position: absolute !important;
-      width: 1px !important;
-      height: 1px !important;
-      padding: 0 !important;
-      margin: -1px !important;
-      overflow: hidden !important;
-      clip: rect(0, 0, 0, 0) !important;
-      white-space: nowrap !important;
-      border: 0 !important;
-    }
+    
+    
+    
+    
 
     /* MAPA: enlace real a Google Maps, con icono dibujado por CSS. */
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(2) [data-testid="stLinkButton"],
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(2) [data-testid="stLinkButton"] {
-      width: 30px !important;
-      min-width: 30px !important;
-      max-width: 30px !important;
-      margin: 0 !important;
-    }
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(2) [data-testid="stLinkButton"] > a,
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(2) [data-testid="stLinkButton"] > a {
-      position: relative !important;
-      display: flex !important;
-      align-items: center !important;
-      justify-content: center !important;
-      box-sizing: border-box !important;
-      width: 30px !important;
-      min-width: 30px !important;
-      max-width: 30px !important;
-      height: 34px !important;
-      min-height: 34px !important;
-      max-height: 34px !important;
-      padding: 0 !important;
-      margin: 0 !important;
-      border: 1px solid #94A3B8 !important;
-      border-radius: 7px !important;
-      background: #FFFFFF !important;
-      color: transparent !important;
-      -webkit-text-fill-color: transparent !important;
-      font-size: 0 !important;
-      line-height: 0 !important;
-      text-indent: -9999px !important;
-      text-decoration: none !important;
-      overflow: hidden !important;
-    }
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(2) [data-testid="stLinkButton"] > a::before,
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(2) [data-testid="stLinkButton"] > a::before {
-      content: "" !important;
-      display: block !important;
-      flex: 0 0 18px !important;
-      width: 18px !important;
-      height: 18px !important;
-      margin: 0 !important;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231D4ED8' stroke-width='1.9' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m3 6 6-3 6 3 6-3v15l-6 3-6-3-6 3z'/%3E%3Cpath d='M9 3v15'/%3E%3Cpath d='M15 6v15'/%3E%3C/svg%3E") !important;
-      background-repeat: no-repeat !important;
-      background-position: center !important;
-      background-size: contain !important;
-      text-indent: 0 !important;
-    }
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(2) a > *,
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(2) a > * {
-      position: absolute !important;
-      width: 1px !important;
-      height: 1px !important;
-      padding: 0 !important;
-      margin: -1px !important;
-      overflow: hidden !important;
-      clip: rect(0, 0, 0, 0) !important;
-      white-space: nowrap !important;
-      border: 0 !important;
-    }
+    
+    
+    
+    
 
     /* HORA: 84 px reales para que HH:MM nunca se comprima ni desaparezcan
        los minutos. El campo conserva tamaño de letra legible. */
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(3) [data-testid="stTextInput"],
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(3) [data-testid="stTextInput"],
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(3) [data-baseweb="input"],
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(3) [data-baseweb="input"],
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(3) [data-baseweb="base-input"],
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(3) [data-baseweb="base-input"] {
-      display: flex !important;
-      box-sizing: border-box !important;
-      width: 92px !important;
-      min-width: 92px !important;
-      max-width: 92px !important;
-      height: 34px !important;
-      min-height: 34px !important;
-      max-height: 34px !important;
-      padding: 0 3px !important;
-      margin: 0 !important;
-      border: 1px solid #94A3B8 !important;
-      border-radius: 7px !important;
-      background: #FFFFFF !important;
-    }
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(3) input,
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(3) input {
-      box-sizing: border-box !important;
-      width: 100% !important;
-      min-width: 0 !important;
-      height: 32px !important;
-      padding: 0 2px !important;
-      text-align: center !important;
-      font-size: 0.78rem !important;
-      font-weight: 800 !important;
-      letter-spacing: 0 !important;
-      font-variant-numeric: tabular-nums !important;
-      color: #0F172A !important;
-      -webkit-text-fill-color: #0F172A !important;
-    }
+    
+    
   }
 
 
@@ -2386,190 +1167,28 @@ st.markdown("""
      Los botones llevan símbolos Unicode reales (no iconos de fondo ni fuentes
      externas); el CSS solo controla sus dimensiones y la visibilidad. */
   @media (max-width: 768px) {
-    [class*="st-key-it-controls-row-"] [data-testid="stHorizontalBlock"],
-    [class*="st-key-saved-controls-row-"] [data-testid="stHorizontalBlock"] {
-      display: grid !important;
-      grid-template-columns: 40px 40px 86px 80px !important;
-      grid-auto-flow: column !important;
-      justify-content: start !important;
-      align-items: center !important;
-      column-gap: 3px !important;
-      row-gap: 0 !important;
-      width: 100% !important;
-      min-width: 0 !important;
-      max-width: 100% !important;
-      box-sizing: border-box !important;
-    }
+    
 
-    [class*="st-key-it-controls-row-"] [data-testid="column"],
-    [class*="st-key-saved-controls-row-"] [data-testid="column"] {
-      display: block !important;
-      width: auto !important;
-      min-width: 0 !important;
-      max-width: none !important;
-      flex: none !important;
-      margin: 0 !important;
-      padding: 0 !important;
-      box-sizing: border-box !important;
-      overflow: visible !important;
-    }
+    
 
     /* Editar: icono lápiz real como etiqueta del botón. */
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(1) [data-testid="stButton"],
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(1) [data-testid="stButton"],
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(1) .stButton,
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(1) .stButton {
-      width: 40px !important;
-      min-width: 40px !important;
-      max-width: 40px !important;
-      margin: 0 !important;
-    }
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(1) button,
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(1) button,
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(2) [data-testid="stLinkButton"] > a,
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(2) [data-testid="stLinkButton"] > a {
-      display: flex !important;
-      align-items: center !important;
-      justify-content: center !important;
-      box-sizing: border-box !important;
-      width: 40px !important;
-      min-width: 40px !important;
-      max-width: 40px !important;
-      height: 38px !important;
-      min-height: 38px !important;
-      max-height: 38px !important;
-      padding: 0 !important;
-      margin: 0 !important;
-      border: 1px solid #94A3B8 !important;
-      border-radius: 8px !important;
-      background: #FFFFFF !important;
-      color: #334155 !important;
-      -webkit-text-fill-color: #334155 !important;
-      font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif !important;
-      font-size: 21px !important;
-      line-height: 1 !important;
-      letter-spacing: 0 !important;
-      text-indent: 0 !important;
-      text-decoration: none !important;
-      white-space: nowrap !important;
-      overflow: visible !important;
-      visibility: visible !important;
-      opacity: 1 !important;
-    }
+    
+    
 
     /* Reset reglas antiguas que escondían el texto del botón o dibujaban
        SVG pseudo-elemento encima. El símbolo de la etiqueta queda visible. */
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(1) button::before,
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(1) button::before,
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(2) a::before,
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(2) a::before {
-      content: none !important;
-      display: none !important;
-      background-image: none !important;
-    }
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(1) button span,
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(1) button span,
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(2) a span,
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(2) a span {
-      display: inline !important;
-      position: static !important;
-      width: auto !important;
-      min-width: 0 !important;
-      height: auto !important;
-      min-height: 0 !important;
-      margin: 0 !important;
-      padding: 0 !important;
-      overflow: visible !important;
-      clip: auto !important;
-      clip-path: none !important;
-      white-space: nowrap !important;
-      visibility: visible !important;
-      opacity: 1 !important;
-      color: #334155 !important;
-      -webkit-text-fill-color: #334155 !important;
-      font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif !important;
-      font-size: 21px !important;
-      line-height: 1 !important;
-    }
+    
+    
 
     /* Hora: mantiene los cinco caracteres HH:MM legibles. */
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(3) [data-testid="stTextInput"],
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(3) [data-testid="stTextInput"],
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(3) [data-baseweb="input"],
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(3) [data-baseweb="input"],
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(3) [data-baseweb="base-input"],
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(3) [data-baseweb="base-input"] {
-      display: flex !important;
-      box-sizing: border-box !important;
-      width: 86px !important;
-      min-width: 86px !important;
-      max-width: 86px !important;
-      height: 38px !important;
-      min-height: 38px !important;
-      max-height: 38px !important;
-      padding: 0 3px !important;
-      margin: 0 !important;
-    }
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(3) input,
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(3) input {
-      box-sizing: border-box !important;
-      width: 100% !important;
-      min-width: 0 !important;
-      height: 36px !important;
-      padding: 0 2px !important;
-      text-align: center !important;
-      font-size: 0.78rem !important;
-      font-weight: 800 !important;
-      font-variant-numeric: tabular-nums !important;
-      letter-spacing: 0 !important;
-      color: #0F172A !important;
-      -webkit-text-fill-color: #0F172A !important;
-    }
+    
+    
 
     /* Día: más compacto que antes, pero con espacio para "Día 10" y la flecha. */
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(4) [data-testid="stSelectbox"],
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(4) [data-testid="stSelectbox"],
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(4) [data-baseweb="select"],
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(4) [data-baseweb="select"] {
-      display: block !important;
-      width: 80px !important;
-      min-width: 80px !important;
-      max-width: 80px !important;
-      margin: 0 !important;
-      box-sizing: border-box !important;
-    }
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(4) [data-baseweb="select"] > div,
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(4) [data-baseweb="select"] > div {
-      display: flex !important;
-      align-items: center !important;
-      box-sizing: border-box !important;
-      width: 80px !important;
-      min-width: 80px !important;
-      max-width: 80px !important;
-      height: 38px !important;
-      min-height: 38px !important;
-      max-height: 38px !important;
-      padding: 0 3px 0 5px !important;
-      overflow: hidden !important;
-    }
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(4) [data-baseweb="select"] span,
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(4) [data-baseweb="select"] span {
-      display: inline !important;
-      min-width: 0 !important;
-      font-size: 0.68rem !important;
-      line-height: 1 !important;
-      font-weight: 800 !important;
-      white-space: nowrap !important;
-      color: #0F172A !important;
-      -webkit-text-fill-color: #0F172A !important;
-    }
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(4) [data-baseweb="select"] svg,
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(4) [data-baseweb="select"] svg {
-      flex: 0 0 11px !important;
-      width: 11px !important;
-      min-width: 11px !important;
-      max-width: 11px !important;
-    }
+    
+    
+    
+    
   }
 
 
@@ -2578,68 +1197,13 @@ st.markdown("""
      un div. Se restablece ese contenedor para que no herede el recorte usado
      por las reglas antiguas de iconos CSS. */
   @media (max-width: 768px) {
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(1) [data-testid="stButton"] > button > div,
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(1) [data-testid="stButton"] > button > div {
-      position: static !important;
-      display: flex !important;
-      align-items: center !important;
-      justify-content: center !important;
-      inset: auto !important;
-      width: 100% !important;
-      min-width: 0 !important;
-      max-width: 100% !important;
-      height: 100% !important;
-      min-height: 0 !important;
-      max-height: 100% !important;
-      margin: 0 !important;
-      padding: 0 !important;
-      overflow: visible !important;
-      clip: auto !important;
-      clip-path: none !important;
-      transform: none !important;
-      white-space: nowrap !important;
-      visibility: visible !important;
-      opacity: 1 !important;
-    }
+    
 
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(1) [data-testid="stButton"] > button > div > span,
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(1) [data-testid="stButton"] > button > div > span,
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(2) [data-testid="stLinkButton"] > a > span,
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(2) [data-testid="stLinkButton"] > a > span {
-      position: static !important;
-      display: inline !important;
-      inset: auto !important;
-      width: auto !important;
-      min-width: 0 !important;
-      max-width: none !important;
-      height: auto !important;
-      min-height: 0 !important;
-      max-height: none !important;
-      margin: 0 !important;
-      padding: 0 !important;
-      overflow: visible !important;
-      clip: auto !important;
-      clip-path: none !important;
-      transform: none !important;
-      white-space: nowrap !important;
-      visibility: visible !important;
-      opacity: 1 !important;
-      color: #334155 !important;
-      -webkit-text-fill-color: #334155 !important;
-      font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif !important;
-      font-size: 22px !important;
-      line-height: 1 !important;
-    }
+    
 
     /* Desactiva las pseudo-imágenes SVG antiguas del enlace; el icono visible
        es el emoji que forma parte de la propia etiqueta accesible del enlace. */
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(2) [data-testid="stLinkButton"] > a::before,
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(2) [data-testid="stLinkButton"] > a::before {
-      content: none !important;
-      display: none !important;
-      background: none !important;
-      background-image: none !important;
-    }
+    
   }
 
 
@@ -2649,216 +1213,35 @@ st.markdown("""
      Orden real del código Python: Editar | Mapa | Hora | Día.
      ====================================================================== */
   @media (max-width: 768px) {
-    [class*="st-key-it-controls-row-"] [data-testid="stHorizontalBlock"],
-    [class*="st-key-saved-controls-row-"] [data-testid="stHorizontalBlock"] {
-      display: grid !important;
-      grid-template-columns:
-        minmax(44px, 1.02fr)
-        minmax(40px, 0.90fr)
-        minmax(76px, 1.7fr)
-        minmax(84px, 1.9fr) !important;
-      grid-auto-flow: column !important;
-      grid-auto-columns: minmax(0, 1fr) !important;
-      justify-content: stretch !important;
-      align-items: stretch !important;
-      column-gap: 5px !important;
-      row-gap: 0 !important;
-      width: 100% !important;
-      min-width: 0 !important;
-      max-width: 100% !important;
-      box-sizing: border-box !important;
-    }
+    
 
-    [class*="st-key-it-controls-row-"] [data-testid="column"],
-    [class*="st-key-saved-controls-row-"] [data-testid="column"] {
-      display: block !important;
-      flex: none !important;
-      width: 100% !important;
-      min-width: 0 !important;
-      max-width: 100% !important;
-      margin: 0 !important;
-      padding: 0 !important;
-      box-sizing: border-box !important;
-      overflow: visible !important;
-    }
+    
 
     /* Editar (columna 1): icono SVG, botón ocupa toda su columna. */
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(1) .stButton,
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(1) .stButton,
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(1) [data-testid="stButton"],
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(1) [data-testid="stButton"] {
-      display: block !important;
-      width: 100% !important;
-      min-width: 0 !important;
-      max-width: 100% !important;
-      margin: 0 !important;
-    }
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(1) .stButton > button,
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(1) .stButton > button {
-      box-sizing: border-box !important;
-      display: flex !important;
-      align-items: center !important;
-      justify-content: center !important;
-      width: 100% !important;
-      min-width: 0 !important;
-      max-width: 100% !important;
-      height: 40px !important;
-      min-height: 40px !important;
-      max-height: 40px !important;
-      margin: 0 !important;
-      padding: 0 !important;
-      border: 1.5px solid #94A3B8 !important;
-      border-radius: 8px !important;
-      background-color: #FFFFFF !important;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='22' height='22' viewBox='0 0 24 24' fill='none' stroke='%23334155' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m16 4 4 4'/%3E%3Cpath d='M4 20l4-.9L19 8a2.1 2.1 0 0 0-3-3L5 16z'/%3E%3C/svg%3E") !important;
-      background-repeat: no-repeat !important;
-      background-position: center center !important;
-      background-size: 23px 23px !important;
-      color: transparent !important;
-      font-size: 0 !important;
-      line-height: 0 !important;
-      overflow: hidden !important;
-      box-shadow: none !important;
-    }
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(1) .stButton > button span,
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(1) .stButton > button span {
-      display: none !important;
-    }
+    
+    
+    
 
     /* Mapa (columna 2): icono SVG y ancho completo de su pista. */
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(2) [data-testid="stLinkButton"],
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(2) [data-testid="stLinkButton"] {
-      display: block !important;
-      width: 100% !important;
-      min-width: 0 !important;
-      max-width: 100% !important;
-      margin: 0 !important;
-    }
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(2) [data-testid="stLinkButton"] > a,
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(2) [data-testid="stLinkButton"] > a {
-      box-sizing: border-box !important;
-      display: flex !important;
-      align-items: center !important;
-      justify-content: center !important;
-      width: 100% !important;
-      min-width: 0 !important;
-      max-width: 100% !important;
-      height: 36px !important;
-      min-height: 36px !important;
-      max-height: 36px !important;
-      margin: 0 !important;
-      padding: 0 !important;
-      border: 1.5px solid #94A3B8 !important;
-      border-radius: 8px !important;
-      background-color: #FFFFFF !important;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='22' height='22' viewBox='0 0 24 24' fill='none' stroke='%231D4ED8' stroke-width='1.9' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m3 6 6-3 6 3 6-3v15l-6 3-6-3-6 3z'/%3E%3Cpath d='M9 3v15'/%3E%3Cpath d='M15 6v15'/%3E%3C/svg%3E") !important;
-      background-repeat: no-repeat !important;
-      background-position: center center !important;
-      background-size: 20px 20px !important;
-      color: transparent !important;
-      font-size: 0 !important;
-      line-height: 0 !important;
-      overflow: hidden !important;
-      text-decoration: none !important;
-      box-shadow: none !important;
-    }
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(2) [data-testid="stLinkButton"] > a span,
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(2) [data-testid="stLinkButton"] > a span {
-      display: none !important;
-    }
+    
+    
+    
 
     /* Hora (columna 3): el campo rellena la tercera pista y muestra HH:MM. */
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(3) [data-testid="stTextInput"],
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(3) [data-testid="stTextInput"],
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(3) .stTextInput,
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(3) .stTextInput,
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(3) [data-baseweb="input"],
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(3) [data-baseweb="input"],
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(3) [data-baseweb="base-input"],
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(3) [data-baseweb="base-input"] {
-      box-sizing: border-box !important;
-      display: block !important;
-      width: 100% !important;
-      min-width: 0 !important;
-      max-width: 100% !important;
-      height: 36px !important;
-      min-height: 36px !important;
-      max-height: 36px !important;
-      margin: 0 !important;
-      border-radius: 8px !important;
-    }
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(3) input,
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(3) input {
-      box-sizing: border-box !important;
-      width: 100% !important;
-      min-width: 0 !important;
-      height: 34px !important;
-      min-height: 34px !important;
-      padding: 0 2px !important;
-      font-size: 0.76rem !important;
-      font-weight: 800 !important;
-      text-align: center !important;
-      letter-spacing: 0 !important;
-      font-variant-numeric: tabular-nums !important;
-      color: #0F172A !important;
-      -webkit-text-fill-color: #0F172A !important;
-    }
+    
+    
 
     /* Día (columna 4): rellena el ancho sobrante y deja íntegro "Día 10". */
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(4) [data-testid="stSelectbox"],
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(4) [data-testid="stSelectbox"],
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(4) .stSelectbox,
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(4) .stSelectbox,
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(4) [data-baseweb="select"],
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(4) [data-baseweb="select"] {
-      display: block !important;
-      box-sizing: border-box !important;
-      width: 100% !important;
-      min-width: 0 !important;
-      max-width: 100% !important;
-      margin: 0 !important;
-    }
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(4) [data-baseweb="select"] > div,
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(4) [data-baseweb="select"] > div {
-      display: flex !important;
-      align-items: center !important;
-      box-sizing: border-box !important;
-      width: 100% !important;
-      min-width: 0 !important;
-      max-width: 100% !important;
-      height: 36px !important;
-      min-height: 36px !important;
-      max-height: 36px !important;
-      padding-left: 6px !important;
-      padding-right: 17px !important;
-      border-radius: 8px !important;
-    }
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(4) [data-baseweb="select"] span,
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(4) [data-baseweb="select"] span {
-      font-size: 0.70rem !important;
-      line-height: 1 !important;
-      font-weight: 800 !important;
-      white-space: nowrap !important;
-    }
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(4) [data-baseweb="select"] svg,
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(4) [data-baseweb="select"] svg {
-      width: 13px !important;
-      min-width: 13px !important;
-    }
+    
+    
+    
+    
   }
 
   /* En móviles muy estrechos la pista de hora y el día conservan sus mínimos;
      los iconos reducen solo lo imprescindible y el grid sigue llenando la fila. */
   @media (max-width: 320px) {
-    [class*="st-key-it-controls-row-"] [data-testid="stHorizontalBlock"],
-    [class*="st-key-saved-controls-row-"] [data-testid="stHorizontalBlock"] {
-      grid-template-columns:
-        minmax(38px, 0.90fr)
-        minmax(38px, 0.90fr)
-        minmax(74px, 1.75fr)
-        minmax(82px, 1.95fr) !important;
-      column-gap: 4px !important;
-    }
+    
   }
 
   /* Ajustes finales para que la página completa pueda desplazarse en móvil. */
@@ -3301,25 +1684,9 @@ st.markdown("""
 
   
 
-  [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(1),
-  [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(2),
-  [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(1),
-  [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(2) {
-    display: block !important;
-    width: 0 !important;
-    min-width: 0 !important;
-    max-width: 0 !important;
-    padding: 0 !important;
-    margin: 0 !important;
-    visibility: hidden !important;
-    overflow: hidden !important;
-  }
+  
 
-  [class*="st-key-it-controls-row-"] [data-testid="stHorizontalBlock"],
-  [class*="st-key-saved-controls-row-"] [data-testid="stHorizontalBlock"] {
-    grid-template-columns: 0px 0px 95px 150px !important;
-    column-gap: 5px !important;
-  }
+  
 
   @media (max-width: 768px) {
     
@@ -3331,27 +1698,15 @@ st.markdown("""
     /* Reducir el tamaño del dibujo, no el área pulsable del botón. */
     
 
-    [class*="st-key-it-controls-row-"] [data-testid="stHorizontalBlock"],
-    [class*="st-key-saved-controls-row-"] [data-testid="stHorizontalBlock"] {
-      grid-template-columns: 0px 0px 95px 150px !important;
-      gap: 4px !important;
-    }
+    
   }
 
   @media (max-width: 320px) {
-    [class*="st-key-it-controls-row-"] [data-testid="stHorizontalBlock"],
-    [class*="st-key-saved-controls-row-"] [data-testid="stHorizontalBlock"] {
-      grid-template-columns: 0px 0px 95px 150px !important;
-      gap: 3px !important;
-    }
+    
   }
 
   @media (max-width: 320px) {
-    [class*="st-key-it-controls-row-"] [data-testid="stHorizontalBlock"],
-    [class*="st-key-saved-controls-row-"] [data-testid="stHorizontalBlock"] {
-      grid-template-columns: 0px 0px 95px 150px !important;
-      gap: 3px !important;
-    }
+    
   }
 
 
@@ -3390,26 +1745,8 @@ st.markdown("""
   
   
   /* Hora y día recuperan el ancho previo, pero comienzan alineados a la izquierda. */
-  [class*="st-key-it-controls-row-"] [data-testid="stHorizontalBlock"],
-  [class*="st-key-saved-controls-row-"] [data-testid="stHorizontalBlock"] {
-    display: grid !important;
-    grid-template-columns: minmax(0, 1.7fr) minmax(0, 1.9fr) minmax(0, 1.7fr) !important;
-    column-gap: 1rem !important;
-    row-gap: 0 !important;
-    width: 100% !important;
-    min-width: 0 !important;
-    align-items: center !important;
-  }
-  [class*="st-key-it-controls-row-"] [data-testid="column"],
-  [class*="st-key-saved-controls-row-"] [data-testid="column"] {
-    box-sizing: border-box !important;
-    width: auto !important;
-    min-width: 0 !important;
-    max-width: none !important;
-    flex: none !important;
-    margin: 0 !important;
-    padding: 0 !important;
-  }
+  
+  
 
 
   /* Ajuste solicitado: ambos botones blancos y lápiz algo menor para que no se recorte. */
@@ -3468,69 +1805,10 @@ st.markdown("""
 
 
   /* Sobrescritura final por clave de widget: fondo blanco real e iconos monocromos alineados. */
-  div[class*="st-key-btn_ed_it_"] [data-testid="stButton"] > button,
-  div[class*="st-key-btn_ed_pool_"] [data-testid="stButton"] > button,
-  /* Reglas originales del lápiz conservadas sin cambios; se retiran solo sus antiguos selectores de mapa. */
-  div[class*="st-key-btn_ed_it_"] [data-testid="stButton"] > button,
-  div[class*="st-key-btn_ed_pool_"] [data-testid="stButton"] > button,
-  div[class*="st-key-btn_ed_it_"] button,
-  div[class*="st-key-btn_ed_pool_"] button {
-    appearance: none !important;
-    -webkit-appearance: none !important;
-    box-sizing: border-box !important;
-    width: 30px !important;
-    min-width: 30px !important;
-    max-width: 30px !important;
-    height: 30px !important;
-    min-height: 30px !important;
-    max-height: 30px !important;
-    padding: 0 !important;
-    margin: 0 !important;
-    border: 1px solid #CBD5E1 !important;
-    border-radius: 7px !important;
-    background: #FFFFFF !important;
-    background-color: #FFFFFF !important;
-    background-repeat: no-repeat !important;
-    background-position: center center !important;
-    background-size: 13px 13px !important;
-    box-shadow: none !important;
-    color: transparent !important;
-    -webkit-text-fill-color: transparent !important;
-    font-size: 0 !important;
-    line-height: 0 !important;
-    text-decoration: none !important;
-    display: inline-flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    overflow: hidden !important;
-    opacity: 1 !important;
-    filter: none !important;
-  }
-  div[class*="st-key-btn_ed_it_"] button,
-  div[class*="st-key-btn_ed_pool_"] button {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23334155' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m15 5 4 4'/%3E%3Cpath d='M4 20l4-.8L19 8a2 2 0 0 0-3-3L5 16z'/%3E%3Cpath d='m4 20 1-4'/%3E%3C/svg%3E") !important;
-    background-size: 12px 12px !important;
-  }
-  div[class*="st-key-btn_ed_it_"] button:hover,
-  div[class*="st-key-btn_ed_it_"] button:focus,
-  div[class*="st-key-btn_ed_it_"] button:active,
-  div[class*="st-key-btn_ed_pool_"] button:hover,
-  div[class*="st-key-btn_ed_pool_"] button:focus,
-  div[class*="st-key-btn_ed_pool_"] button:active {
-    background-color: #FFFFFF !important;
-    background-repeat: no-repeat !important;
-    border-color: #CBD5E1 !important;
-    box-shadow: none !important;
-    color: transparent !important;
-    -webkit-text-fill-color: transparent !important;
-  }
-  div[class*="st-key-btn_ed_it_"] button p,
-  div[class*="st-key-btn_ed_pool_"] button p,
-  div[class*="st-key-btn_ed_it_"] button span,
-  div[class*="st-key-btn_ed_pool_"] button span {
-    display: none !important;
-    visibility: hidden !important;
-  }
+  
+  
+  
+  
 
   /* CORRECCIÓN DEFINITIVA ACOTADA A LOS BOTONES DE ACCIÓN DE LOS LUGARES.
      Se fuerza el blanco en todos los estados y se dibujan ambos iconos
@@ -3616,7 +1894,45 @@ st.markdown("""
      CONTROLES DE LUGAR: ÚNICA DEFINICIÓN PARA RUTA Y GUARDADOS
      Lápiz y mapa comparten caja y centrado; Ruta añade el checkbox.
      ================================================================ */
-  [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"],
+  
+  
+  
+  
+
+  /* Contenedor del lápiz y botón real: dimensiones exteriores idénticas. */
+  
+  
+  
+  
+  
+
+  /* Checkbox de visitado: caja exterior 38 × 38 px, igual que lápiz y mapa. */
+  
+  
+  
+
+  @media (max-width: 768px) {
+    
+    
+  }
+
+  /* ================================================================
+     FILAS DE LUGAR: ACCIONES CON UNA SOLA DEFINICIÓN CSS
+     Ruta: información | editar | mapa | visitado
+     Guardados: información | editar | mapa
+     ================================================================ */
+
+  /* La información ocupa el espacio flexible; cada acción reserva 38 px. */
+  [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) 38px 38px 38px !important;
+    align-items: center !important;
+    justify-content: start !important;
+    column-gap: 6px !important;
+    row-gap: 0 !important;
+    width: 100% !important;
+    min-width: 0 !important;
+  }
   [class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"] {
     display: grid !important;
     grid-template-columns: minmax(0, 1fr) 38px 38px !important;
@@ -3627,50 +1943,48 @@ st.markdown("""
     width: 100% !important;
     min-width: 0 !important;
   }
-  [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] {
-    grid-template-columns: minmax(0, 1fr) 38px 38px 38px !important;
-  }
   [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"],
   [class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"] {
     box-sizing: border-box !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
     min-width: 0 !important;
-    width: 38px !important;
-    max-width: 38px !important;
-    min-height: 38px !important;
-    height: 38px !important;
-    max-height: 38px !important;
     margin: 0 !important;
     padding: 0 !important;
+    align-self: center !important;
   }
   [class*="st-key-it-heading-row-"] [data-testid="column"]:first-child,
   [class*="st-key-saved-heading-row-"] [data-testid="column"]:first-child {
     display: block !important;
     width: auto !important;
     max-width: none !important;
-    height: auto !important;
-    max-height: none !important;
     min-height: 0 !important;
+    height: auto !important;
     justify-self: stretch !important;
     align-self: start !important;
   }
+  [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(n+2),
+  [class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(n+2) {
+    display: flex !important;
+    flex: 0 0 38px !important;
+    align-items: center !important;
+    justify-content: center !important;
+    justify-self: center !important;
+    width: 38px !important;
+    min-width: 38px !important;
+    max-width: 38px !important;
+    height: 38px !important;
+    min-height: 38px !important;
+    max-height: 38px !important;
+  }
 
-  /* Contenedor del lápiz y botón real: dimensiones exteriores idénticas. */
+  /* Los wrappers no añaden altura, margen ni desplazamiento. */
   [class*="st-key-it-edit-button-wrap-"],
   [class*="st-key-saved-edit-button-wrap-"],
-  [class*="st-key-it-edit-button-wrap-"] [data-testid="stButton"],
-  [class*="st-key-saved-edit-button-wrap-"] [data-testid="stButton"],
   [class*="st-key-it-map-button-wrap-"],
-  [class*="st-key-saved-map-button-wrap-"],
-  [class*="st-key-it-map-button-wrap-"] [data-testid="stLinkButton"],
-  [class*="st-key-saved-map-button-wrap-"] [data-testid="stLinkButton"] {
+  [class*="st-key-saved-map-button-wrap-"] {
     box-sizing: border-box !important;
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
-    flex: 0 0 38px !important;
     width: 38px !important;
     min-width: 38px !important;
     max-width: 38px !important;
@@ -3683,6 +1997,29 @@ st.markdown("""
     background: transparent !important;
     box-shadow: none !important;
   }
+  [class*="st-key-it-edit-button-wrap-"] [data-testid="stElementContainer"],
+  [class*="st-key-saved-edit-button-wrap-"] [data-testid="stElementContainer"],
+  [class*="st-key-it-edit-button-wrap-"] [data-testid="stButton"],
+  [class*="st-key-saved-edit-button-wrap-"] [data-testid="stButton"],
+  [class*="st-key-it-map-button-wrap-"] [data-testid="stElementContainer"],
+  [class*="st-key-saved-map-button-wrap-"] [data-testid="stElementContainer"],
+  [class*="st-key-it-map-button-wrap-"] [data-testid="stLinkButton"],
+  [class*="st-key-saved-map-button-wrap-"] [data-testid="stLinkButton"] {
+    box-sizing: border-box !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 38px !important;
+    min-width: 38px !important;
+    max-width: 38px !important;
+    height: 38px !important;
+    min-height: 38px !important;
+    max-height: 38px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  /* Botón lápiz y enlace mapa: idénticas dimensiones y centro geométrico. */
   [class*="st-key-it-edit-button-wrap-"] [data-testid="stButton"] > button,
   [class*="st-key-saved-edit-button-wrap-"] [data-testid="stButton"] > button,
   [class*="st-key-it-map-button-wrap-"] [data-testid="stLinkButton"] > a,
@@ -3693,6 +2030,8 @@ st.markdown("""
   [class*="st-key-saved-map-button-wrap-"] [data-testid="stLinkButton"] > a:hover,
   [class*="st-key-saved-map-button-wrap-"] [data-testid="stLinkButton"] > a:focus,
   [class*="st-key-saved-map-button-wrap-"] [data-testid="stLinkButton"] > a:active {
+    appearance: none !important;
+    -webkit-appearance: none !important;
     box-sizing: border-box !important;
     display: inline-flex !important;
     align-items: center !important;
@@ -3716,24 +2055,20 @@ st.markdown("""
     transform: none !important;
     text-decoration: none !important;
     overflow: hidden !important;
+    color: transparent !important;
+    -webkit-text-fill-color: transparent !important;
+    font-size: 0 !important;
+    line-height: 0 !important;
   }
   [class*="st-key-it-edit-button-wrap-"] [data-testid="stButton"] > button,
   [class*="st-key-saved-edit-button-wrap-"] [data-testid="stButton"] > button {
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23334155' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m16 4 4 4'/%3E%3Cpath d='M4 20l4-.9L19 8a2.1 2.1 0 0 0-3-3L5 16z'/%3E%3C/svg%3E") !important;
     background-size: 19px 19px !important;
-    color: transparent !important;
-    -webkit-text-fill-color: transparent !important;
-    font-size: 0 !important;
-    line-height: 0 !important;
   }
   [class*="st-key-it-map-button-wrap-"] [data-testid="stLinkButton"] > a,
   [class*="st-key-saved-map-button-wrap-"] [data-testid="stLinkButton"] > a {
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23334155' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m3 6 6-3 6 3 6-3v15l-6 3-6-3-6 3z'/%3E%3Cpath d='M9 3v15M15 6v15'/%3E%3C/svg%3E") !important;
     background-size: 20px 20px !important;
-    color: transparent !important;
-    -webkit-text-fill-color: transparent !important;
-    font-size: 0 !important;
-    line-height: 0 !important;
   }
   [class*="st-key-it-edit-button-wrap-"] button > *,
   [class*="st-key-saved-edit-button-wrap-"] button > *,
@@ -3742,7 +2077,7 @@ st.markdown("""
     display: none !important;
   }
 
-  /* Checkbox de visitado: caja exterior 38 × 38 px, igual que lápiz y mapa. */
+  /* Checkbox visitado en Ruta: también ocupa una caja completa de 38 x 38 px. */
   [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(4) [data-testid="stCheckbox"],
   [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(4) [data-testid="stCheckbox"] label {
     box-sizing: border-box !important;
@@ -3761,6 +2096,7 @@ st.markdown("""
     border-radius: 9px !important;
     background: #FFFFFF !important;
     box-shadow: none !important;
+    cursor: pointer !important;
   }
   [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(4) [data-testid="stCheckbox"] label > div {
     display: flex !important;
@@ -3773,15 +2109,39 @@ st.markdown("""
     display: none !important;
   }
 
-  @media (max-width: 768px) {
-    [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] {
-      grid-template-columns: minmax(0, 1fr) 38px 38px 38px !important;
-      column-gap: 5px !important;
-    }
-    [class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"] {
-      grid-template-columns: minmax(0, 1fr) 38px 38px !important;
-    }
+  /* Hora y día siguen siendo los dos únicos controles de esta fila. */
+  [class*="st-key-it-controls-row-"] [data-testid="stHorizontalBlock"],
+  [class*="st-key-saved-controls-row-"] [data-testid="stHorizontalBlock"] {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1.7fr) minmax(0, 1.9fr) !important;
+    align-items: center !important;
+    column-gap: 8px !important;
+    row-gap: 0 !important;
+    width: 100% !important;
+    min-width: 0 !important;
   }
+  [class*="st-key-it-controls-row-"] [data-testid="column"],
+  [class*="st-key-saved-controls-row-"] [data-testid="column"] {
+    box-sizing: border-box !important;
+    display: block !important;
+    flex: none !important;
+    width: auto !important;
+    min-width: 0 !important;
+    max-width: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  [class*="st-key-it-controls-row-"] [data-testid="stTextInput"],
+  [class*="st-key-saved-controls-row-"] [data-testid="stTextInput"],
+  [class*="st-key-it-controls-row-"] [data-testid="stSelectbox"],
+  [class*="st-key-saved-controls-row-"] [data-testid="stSelectbox"] {
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+  }
+
+
 </style>
 """, unsafe_allow_html=True)
 
