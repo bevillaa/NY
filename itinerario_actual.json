@@ -1598,9 +1598,23 @@
     "hora": "",
     "direccion": "17 Smith St, Brooklyn, NY 11201, United States",
     "nota": "Coro gospel gratis",
-    "categoria": "🏛️ Cultura",
+    "categoria": "📍 Otros",
     "tipo": "Exterior",
     "lista_origen": "NY",
+    "visitado": false
+  },
+  {
+    "id": 122,
+    "nombre": "Lexington Candy Shop",
+    "lat": 40.777515799999996,
+    "lon": -73.9572118,
+    "dia": 0,
+    "hora": "",
+    "direccion": "1226 Lexington Ave, New York, NY 10028, United States",
+    "nota": "",
+    "categoria": "🍪 Dulces",
+    "tipo": "Interior",
+    "lista_origen": "NY Sweets",
     "visitado": false
   }
 ]
