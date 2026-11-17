@@ -2318,7 +2318,7 @@ st.markdown("""
       grid-auto-flow: column !important;
       align-items: center !important;
       justify-content: stretch !important;
-      column-gap: 4px !important;
+      column-gap: 3px !important;
       row-gap: 0 !important;
       width: 100% !important;
       min-width: 0 !important;
@@ -2487,7 +2487,7 @@ st.markdown("""
      hacia arriba y a la derecha para alinearlo visualmente con Mapa y Editar. */
   @media (max-width: 768px) {
     [class*="st-key-it-visit-checkbox-wrap-"] {
-      transform: translate(11.5px, -4.5px) !important;
+      transform: translate(3px, -4.5px) !important;
     }
   }
 </style>
