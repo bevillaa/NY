@@ -4481,6 +4481,144 @@ st.markdown("""
     transform: none !important;
   }
 
+
+
+  /* ===== AJUSTE CONSOLIDADO FINAL: ACCIONES DE RUTA Y MAPA =====
+     Esta única regla prevalece sobre las definiciones antiguas duplicadas.
+     Editar, Mapa y Visitado comparten una caja de 38 x 38 px. */
+  [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) 38px 38px 38px !important;
+    align-items: center !important;
+    justify-content: start !important;
+    column-gap: 6px !important;
+    row-gap: 0 !important;
+    width: 100% !important;
+    min-width: 0 !important;
+  }
+  [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(n+2) {
+    box-sizing: border-box !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 38px !important;
+    min-width: 38px !important;
+    max-width: 38px !important;
+    height: 38px !important;
+    min-height: 38px !important;
+    max-height: 38px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  /* Lápiz y mapa: idéntico tamaño, borde neutro y centrado real. */
+  [class*="st-key-it-edit-button-wrap-"],
+  [class*="st-key-it-edit-button-wrap-"] [data-testid="stButton"],
+  [class*="st-key-it-map-button-wrap-"],
+  [class*="st-key-it-map-button-wrap-"] [data-testid="stLinkButton"] {
+    box-sizing: border-box !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 38px !important;
+    min-width: 38px !important;
+    max-width: 38px !important;
+    height: 38px !important;
+    min-height: 38px !important;
+    max-height: 38px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+  }
+  [class*="st-key-it-edit-button-wrap-"] [data-testid="stButton"] > button,
+  [class*="st-key-it-map-button-wrap-"] [data-testid="stLinkButton"] > a,
+  [class*="st-key-it-map-button-wrap-"] [data-testid="stLinkButton"] > a:link,
+  [class*="st-key-it-map-button-wrap-"] [data-testid="stLinkButton"] > a:visited,
+  [class*="st-key-it-map-button-wrap-"] [data-testid="stLinkButton"] > a:hover,
+  [class*="st-key-it-map-button-wrap-"] [data-testid="stLinkButton"] > a:focus,
+  [class*="st-key-it-map-button-wrap-"] [data-testid="stLinkButton"] > a:active,
+  [class*="st-key-saved-map-button-wrap-"] [data-testid="stLinkButton"] > a,
+  [class*="st-key-saved-map-button-wrap-"] [data-testid="stLinkButton"] > a:hover,
+  [class*="st-key-saved-map-button-wrap-"] [data-testid="stLinkButton"] > a:focus,
+  [class*="st-key-saved-map-button-wrap-"] [data-testid="stLinkButton"] > a:active {
+    box-sizing: border-box !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 38px !important;
+    min-width: 38px !important;
+    max-width: 38px !important;
+    height: 38px !important;
+    min-height: 38px !important;
+    max-height: 38px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: 1px solid #CBD5E1 !important;
+    border-radius: 9px !important;
+    outline: none !important;
+    box-shadow: none !important;
+    background: #FFFFFF !important;
+    background-color: #FFFFFF !important;
+    transform: none !important;
+  }
+
+  /* El check de visitado ocupa la misma caja exterior que los otros dos. */
+  [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(4) [data-testid="stCheckbox"],
+  [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(4) [data-testid="stCheckbox"] label {
+    box-sizing: border-box !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 38px !important;
+    min-width: 38px !important;
+    max-width: 38px !important;
+    height: 38px !important;
+    min-height: 38px !important;
+    max-height: 38px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: 1px solid #CBD5E1 !important;
+    border-radius: 9px !important;
+    background: #FFFFFF !important;
+    box-shadow: none !important;
+  }
+
+  /* Dirección y nota pegadas al título, sin un bloque Streamlit intermedio. */
+  [class*="st-key-it-heading-row-"] .place-list-address {
+    display: block !important;
+    margin: 2px 0 0 !important;
+    padding: 0 !important;
+    line-height: 1.25 !important;
+  }
+  [class*="st-key-it-heading-row-"] .place-note {
+    display: block !important;
+    margin: 2px 0 0 !important;
+    padding: 0 0 0 2px !important;
+    line-height: 1.25 !important;
+  }
+
+  @media (max-width: 768px) {
+    [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] {
+      grid-template-columns: minmax(0, 1fr) 38px 38px 38px !important;
+      column-gap: 5px !important;
+    }
+    [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(n+2) {
+      width: 38px !important;
+      min-width: 38px !important;
+      max-width: 38px !important;
+      height: 38px !important;
+      min-height: 38px !important;
+      max-height: 38px !important;
+    }
+    [class*="st-key-it-heading-row-"] .place-list-address,
+    [class*="st-key-it-heading-row-"] .place-note {
+      margin-top: 2px !important;
+      line-height: 1.25 !important;
+    }
+  }
+
 </style>
 """, unsafe_allow_html=True)
 
@@ -6090,7 +6228,8 @@ if seccion_principal == "🗽Ruta":
                         st.markdown(f"""
                         <div style="{strike}; min-width:0; width:100%; overflow-wrap:anywhere;">
                           <div class="place-list-title" style="color:{txt_c};">{emoji_i} {item['nombre']}</div>
-                          <div style="margin-top:4px; display:flex; flex-wrap:wrap; gap:4px;"></div>
+                          {dir_html}
+                          {nota_html}
                         </div>
                         """, unsafe_allow_html=True)
 
@@ -6109,10 +6248,6 @@ if seccion_principal == "🗽Ruta":
                             st.session_state.lugares[idx_real]["visitado"] = chk_val
                             guardar_itinerario_disco(st.session_state.lugares)
                             st.rerun()
-                    # Dirección y nota fuera de la fila de botones: ancho completo.
-                    if dir_html or nota_html:
-                        st.markdown(f'<div class="place-full-width-info">{dir_html}{nota_html}</div>', unsafe_allow_html=True)
-
                 # Los cuatro controles, siempre en el mismo orden: Editar | Mapa | Hora | Día.
                 with st.container(key=f"it-controls-row-{item['id']}"):
                     c_hr, c_day = st.columns([1.7, 1.9], gap="small")
