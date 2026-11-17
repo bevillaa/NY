@@ -2950,7 +2950,7 @@ def render_editor_sitio_panel(spot: dict, idx_real: int, key_ctx: str):
                     placeholder="Ej: Pedir galleta de chocolate, ir antes de las 18h..."
                 )
             with ce2:
-                ed_hora = st.text_input("Hora (HH:MM, ej. 10:30):", value=spot.get("hora", ""), placeholder="HH:MM")
+                ed_hora = st.text_input("Hora (hh:mm, ej. 10:30):", value=spot.get("hora", ""), placeholder="hh:mm")
                 cat_act = normalizar_categoria(spot.get("categoria", "📍 Otros"))
                 idx_c = CATEGORIAS_CANONICAS.index(cat_act) if cat_act in CATEGORIAS_CANONICAS else 0
                 ed_cat = selectbox_sin_teclado("Categoría:", CATEGORIAS_CANONICAS, index=idx_c)
@@ -2989,7 +2989,7 @@ def render_editor_sitio_panel(spot: dict, idx_real: int, key_ctx: str):
                     st.stop()
                 hora_limpia = ed_hora.strip()
                 if hora_limpia and not re.match(r"^([01]?\d|2[0-3]):[0-5]\d$", hora_limpia):
-                    st.error("Formato de hora inválido. Usa HH:MM (ej. 09:30) o déjalo vacío.")
+                    st.error("Formato de hora inválido. Usa hh:mm (ej. 09:30) o déjalo vacío.")
                 else:
                     if hora_limpia and len(hora_limpia) == 4:
                         hora_limpia = "0" + hora_limpia
@@ -3046,7 +3046,7 @@ def render_formulario_agregar_lugar(key_sufijo: str = "gen"):
                 with cg1:
                     dia_dest_gm = selectbox_sin_teclado("Asignar a:", dias_asig_opts, key=f"sel_dia_gm_{key_sufijo}")
                 with cg2:
-                    hora_gm = st.text_input("Hora (opcional, HH:MM):", placeholder="11:00", key=f"hora_gm_{key_sufijo}")
+                    hora_gm = st.text_input("Hora (opcional, hh:mm):", placeholder="11:00", key=f"hora_gm_{key_sufijo}")
                 nota_gm = st.text_input("Nota manual (opcional):", placeholder="Ej: Reserva a las 20:00, probar pastrami...", key=f"nota_gm_{key_sufijo}")
 
                 val_dia_gm = 0 if "Guardados" in dia_dest_gm else int(re.search(r"Día (\d+)", dia_dest_gm).group(1))
@@ -3055,7 +3055,7 @@ def render_formulario_agregar_lugar(key_sufijo: str = "gen"):
                     if url_input:
                         h_limpia = hora_gm.strip()
                         if h_limpia and not re.match(r"^([01]?\d|2[0-3]):[0-5]\d$", h_limpia):
-                            st.error("Usa formato HH:MM (ej. 14:30).")
+                            st.error("Usa formato hh:mm (ej. 14:30).")
                         else:
                             if h_limpia and len(h_limpia) == 4:
                                 h_limpia = "0" + h_limpia
@@ -3085,7 +3085,7 @@ def render_formulario_agregar_lugar(key_sufijo: str = "gen"):
                     dia_dest_m = selectbox_sin_teclado("Asignar a:", dias_asig_opts, key=f"sel_dia_m_{key_sufijo}")
                     val_dia_m = 0 if "Guardados" in dia_dest_m else int(re.search(r"Día (\d+)", dia_dest_m).group(1))
                 with c_m4:
-                    hora_m = st.text_input("Hora (opcional, HH:MM):", placeholder="16:00", key=f"hora_m_{key_sufijo}")
+                    hora_m = st.text_input("Hora (opcional, hh:mm):", placeholder="16:00", key=f"hora_m_{key_sufijo}")
 
                 nota_m = st.text_input("Nota manual (opcional):", placeholder="Ej: Llevar efectivo, entrada gratuita los viernes...", key=f"nota_m_{key_sufijo}")
 
@@ -3102,7 +3102,7 @@ def render_formulario_agregar_lugar(key_sufijo: str = "gen"):
                     if nom_m:
                         h_limpia = hora_m.strip()
                         if h_limpia and not re.match(r"^([01]?\d|2[0-3]):[0-5]\d$", h_limpia):
-                            st.error("Usa formato HH:MM (ej. 16:00).")
+                            st.error("Usa formato hh:mm (ej. 16:00).")
                         else:
                             if h_limpia and len(h_limpia) == 4:
                                 h_limpia = "0" + h_limpia
@@ -3447,7 +3447,7 @@ if seccion_principal == "🗽Ruta":
                         nueva_h = st.text_input(
                             "Hora",
                             value=hora_i,
-                            placeholder="HH:MM",
+                            placeholder="hh:mm",
                             key=f"hora_it_{d}_{item['id']}",
                             label_visibility="collapsed"
                         )
@@ -3598,7 +3598,7 @@ if seccion_principal == "📌Guardados":
                 nueva_h_pool = st.text_input(
                     "Hora",
                     value=hora_p,
-                    placeholder="HH:MM",
+                    placeholder="hh:mm",
                     key=f"hora_pool_{p_spot['id']}",
                     label_visibility="collapsed"
                 )
