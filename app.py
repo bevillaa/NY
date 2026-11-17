@@ -29,89 +29,34 @@ st.set_page_config(
 
 st.markdown("""
 <style>
-  /* =========================================================================
-     1. VARIABLES & CONFIGURACIÓN BASE
-     ========================================================================= */
+  /* Oculta la barra superior propia de Streamlit (GitHub, menú, editar y compartir),
+     sin ocultar la cabecera personalizada de la aplicación. */
+  [data-testid="stToolbar"],
+  [data-testid="stAppToolbar"],
+  .stAppToolbar,
+  .stAppDeployButton {
+    display: none !important;
+    visibility: hidden !important;
+    height: 0 !important;
+    min-height: 0 !important;
+  }
+
   @import url("https://fonts.googleapis.com/css2?family=Carlito:ital,wght@0,400;0,700;1,400;1,700&family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap");
 
   :root {
     color-scheme: light !important;
-    --ivory: #F7F5F0;
-    --paper: #FFFEFC;
-    --ink: #373B35;
-    --muted: #85877D;
-    --sage: #899681;
-    --sage-dark: #68765F;
-    --sage-pale: #EEF0E9;
-    --line: #E7E4DC;
-    --clay: #B78E7A;
   }
 
   * {
     box-sizing: border-box;
   }
 
-  /* Reset tipográfico y de fondo aesthetic */
-  html, body, .stApp, [data-testid="stAppViewContainer"], [data-testid="stMain"], section.main {
-    background: var(--ivory) !important;
-    color: var(--ink) !important;
+  html, body, .stApp, p, h1, h2, h3, h4, h5, h6, label, input, button, select, textarea,
+  .stMarkdown, [data-testid="stMarkdownContainer"], [data-testid="stText"], .stCaption, small {
+    font-family: "Calibri", "Carlito", "Segoe UI", Candara, -apple-system, BlinkMacSystemFont, Arial, sans-serif !important;
+    color: #0F172A !important;
   }
 
-  html, body, .stApp, p, label, input, button, select, textarea,
-  .stMarkdown, [data-testid="stMarkdownContainer"], [data-testid="stText"],
-  .stCaption, [data-testid="stCaptionContainer"], small, li, td, th,
-  .stApp [data-baseweb="select"] *, .stApp [data-baseweb="input"] *, .stApp [data-baseweb="textarea"] * {
-    font-family: Calibri, Carlito, "Segoe UI", Candara, -apple-system, BlinkMacSystemFont, Arial, sans-serif !important;
-    color: var(--ink) !important;
-  }
-
-  h1, h2, h3, h4, h5, h6, .hero-title,
-  .stApp [data-testid="stMarkdownContainer"] h1,
-  .stApp [data-testid="stMarkdownContainer"] h2,
-  .stApp [data-testid="stMarkdownContainer"] h3 {
-    font-family: Calibri, Carlito, "Segoe UI", Arial, sans-serif !important;
-    font-weight: 600 !important;
-    letter-spacing: -0.018em !important;
-    color: var(--ink) !important;
-  }
-
-  /* =========================================================================
-     2. OCULTAR BARRA SUPERIOR & HEADER DE STREAMLIT
-     ========================================================================= */
-  [data-testid="stToolbar"],
-  [data-testid="stAppToolbar"],
-  .stAppToolbar,
-  .stAppDeployButton,
-  [data-testid="stHeader"],
-  header[data-testid="stHeader"],
-  [data-testid="stDecoration"] {
-    display: none !important;
-    visibility: hidden !important;
-    height: 0 !important;
-    min-height: 0 !important;
-    max-height: 0 !important;
-    padding: 0 !important;
-    margin: 0 !important;
-    border: 0 !important;
-  }
-
-  [data-testid="stMain"], section.main {
-    padding-top: 0 !important;
-    margin-top: 0 !important;
-  }
-
-  [data-testid="stMainBlockContainer"], .block-container {
-    max-width: 1220px !important;
-    padding-top: 0.45rem !important;
-    padding-left: clamp(1rem, 3vw, 2.6rem) !important;
-    padding-right: clamp(1rem, 3vw, 2.6rem) !important;
-    padding-bottom: 3rem !important;
-    margin-top: 0 !important;
-  }
-
-  /* =========================================================================
-     3. ICONOS MATERIAL & ELEMENTOS DE INTERFAZ
-     ========================================================================= */
   [data-testid="stIconMaterial"],
   [data-testid="stIconEmoji"],
   [data-testid*="Icon"],
@@ -143,7 +88,6 @@ st.markdown("""
     color: #0F172A !important;
   }
 
-  /* Radiogroup general */
   div[role="radiogroup"] {
     gap: 0.35rem !important;
     flex-wrap: wrap !important;
@@ -151,24 +95,9 @@ st.markdown("""
   }
   div[role="radiogroup"] label {
     padding: 0.35rem 0.7rem !important;
-    background: #FFFEFC !important;
-    border: 1px solid var(--line) !important;
-    border-radius: 99px !important;
   }
-  div[role="radiogroup"] label:has(input:checked) {
-    background: var(--sage-pale) !important;
-    border-color: #B8C2AE !important;
-  }
-  [data-testid="stCheckbox"] label p { color: var(--ink) !important; }
 
-  /* Expanders */
-  [data-testid="stExpander"] { 
-    overflow: hidden !important; 
-    background: var(--paper) !important;
-    border: 1px solid var(--line) !important;
-    border-radius: 14px !important;
-    box-shadow: 0 5px 18px rgba(66, 65, 54, .035) !important;
-  }
+  [data-testid="stExpander"] { overflow: hidden !important; }
   [data-testid="stExpander"] details summary {
     display: flex !important;
     align-items: center !important;
@@ -176,13 +105,10 @@ st.markdown("""
     font-size: 0.94rem !important;
     cursor: pointer !important;
     list-style: none !important;
-    background: #FBFAF6 !important;
-    color: var(--ink) !important;
-    font-weight: 600 !important;
-    padding: 13px 16px !important;
   }
-  [data-testid="stExpander"] details summary:hover { background: #F3F3ED !important; }
-  [data-testid="stExpander"] details summary::-webkit-details-marker { display: none !important; }
+  [data-testid="stExpander"] details summary::-webkit-details-marker {
+    display: none !important;
+  }
   [data-testid="stExpander"] details summary > span,
   [data-testid="stExpander"] details summary > div {
     display: inline-flex !important;
@@ -199,41 +125,21 @@ st.markdown("""
     margin-right: 4px !important;
   }
 
-  /* =========================================================================
-     4. CABECERA HERO & CARDS
-     ========================================================================= */
+  .stApp, html, body, [data-testid="stAppViewContainer"], [data-testid="stHeader"] {
+    background-color: #F8F9FA !important;
+    color: #0F172A !important;
+  }
+  .block-container {
+    padding-top: 1rem !important;
+  }
+
   .hero-container {
     color: #0F172A !important;
-    background: var(--paper) !important;
-    border: 1px solid var(--line) !important;
-    border-top: 0 !important;
-    border-radius: 5px 5px 18px 18px !important;
-    padding: 25px 28px !important;
-    margin: 8px 0 22px !important;
-    box-shadow: 0 10px 35px rgba(66, 65, 54, .045) !important;
-    position: relative;
-  }
-  .hero-container:before {
-    content: "";
-    position: absolute;
-    top: 0; left: 28px; right: 28px;
-    height: 3px;
-    background: linear-gradient(90deg, var(--sage), #C8B9A8, transparent);
   }
   .hero-eyebrow {
     text-transform: uppercase;
-    color: var(--sage-dark) !important;
-    font-size: .68rem !important;
-    font-weight: 700 !important;
-    letter-spacing: .19em !important;
   }
-  .hero-title {
-    font-size: clamp(1.8rem, 3vw, 2.55rem) !important;
-    font-weight: 600 !important;
-    line-height: 1.18 !important;
-    margin: 8px 0 10px !important;
-  }
-  .hero-pill {
+.hero-pill {
     display: inline-flex;
     align-items: center;
     gap: 5px;
@@ -244,62 +150,34 @@ st.markdown("""
     margin-bottom: 4px;
     max-width: 100%;
     word-break: break-word;
-    background: var(--sage-pale) !important;
-    border: 1px solid #E2E6DA !important;
-    color: var(--sage-dark) !important;
-    border-radius: 999px !important;
   }
   .hero-stat-box {
     text-align: center;
     flex: 1 1 auto;
-    background: #F8F7F2 !important;
-    border: 1px solid #E2E6DA !important;
-    color: var(--sage-dark) !important;
-    border-radius: 12px !important;
-    min-width: 86px !important;
-    padding: 10px 15px !important;
   }
   .hero-stat-val {
     font-size: 1.4rem;
-    color: var(--sage-dark) !important; 
-    font-weight: 600 !important;
   }
   .hero-stat-lbl {
     font-weight: 800;
     text-transform: uppercase;
-    color: var(--muted) !important; 
-    font-size: .62rem !important; 
-    letter-spacing: .12em !important;
   }
 
   .ny-card {
     margin-bottom: 12px;
     color: #0F172A !important;
-    background: var(--paper) !important;
-    border: 1px solid var(--line) !important;
-    border-radius: 14px !important;
-    box-shadow: 0 5px 18px rgba(66, 65, 54, .035) !important;
-    padding: 18px 20px !important;
   }
   .ny-card-header {
     text-transform: uppercase;
     margin-bottom: 8px;
-    color: var(--sage-dark) !important;
-    font-size: .7rem !important;
-    letter-spacing: .15em !important;
-    font-weight: 700 !important;
   }
 
   .place-sheet {
     margin: 10px 0;
     color: #0F172A !important;
-    background: var(--paper) !important;
-    border: 1px solid var(--line) !important;
-    border-radius: 14px !important;
-    box-shadow: 0 5px 18px rgba(66, 65, 54, .035) !important;
-    padding: 16px 18px !important;
   }
 
+  /* Nota manual fina y discreta debajo de la dirección */
   .place-note {
     font-size: 0.76rem !important;
     font-weight: 400 !important;
@@ -307,11 +185,12 @@ st.markdown("""
     color: #475569 !important;
     line-height: 1.3 !important;
     margin-top: 2px !important;
-    padding-left: -2px !important;
+    padding-left: 2px !important;
     word-break: break-word !important;
     overflow-wrap: anywhere !important;
     white-space: pre-wrap !important;
   }
+
   .place-note a {
     color: #1D4ED8 !important;
     text-decoration: underline !important;
@@ -319,147 +198,112 @@ st.markdown("""
     font-weight: 400 !important;
   }
 
-  .place-list-title {
-    font-size: 1.25rem !important;
-    font-weight: 900 !important;
-    line-height: 1.2 !important;
-    overflow-wrap: anywhere !important;
-    color: #0F172A;
-  }
-  .place-list-address {
-    margin-top: 3px !important;
-    margin-left: -4px !important;
-    color: #475569 !important;
-    font-size: 0.76rem !important;
-    line-height: 1.25 !important;
-    font-weight: 600 !important;
-    overflow-wrap: anywhere !important;
-  }
-  .place-full-width-info, .place-full-width-info .place-list-address,
-  .place-full-width-info .place-note {
-    display: block !important; width: 100% !important; max-width: 100% !important;
-    min-width: 0 !important; box-sizing: border-box !important;
-    overflow-wrap: anywhere !important; white-space: pre-wrap !important;
-  }
-  .place-full-width-info { flex: 1 1 100% !important; }
-
-  /* Badges */
-  .badge-cat, .badge-hora, .badge-indoor, .badge-outdoor, .badge-dia {
+  .badge-cat {
     display: inline-block;
+    background: #F1F5F9 !important;
+    color: #0F172A !important;
     font-size: 0.74rem;
+    font-weight: 800;
     padding: 1px 7px;
     border-radius: 6px;
+    border: 1px solid #CBD5E1;
   }
-  .badge-cat { background: #F1F5F9 !important; color: #0F172A !important; font-weight: 800; border: 1px solid #CBD5E1; }
-  .badge-hora { background: #EFF6FF !important; color: #1D4ED8 !important; font-weight: 900; border: 1px solid #93C5FD; }
-  .badge-indoor { background: #EFF6FF !important; color: #1E3A8A !important; font-size: 0.72rem; font-weight: 800; border: 1px solid #BFDBFE; }
-  .badge-outdoor { background: #ECFDF5 !important; color: #064E3B !important; font-size: 0.72rem; font-weight: 800; border: 1px solid #A7F3D0; }
-  .badge-dia { background: #FEF3C7 !important; color: #78350F !important; font-size: 0.72rem; font-weight: 800; border: 1px solid #FDE68A; }
+  .badge-hora {
+    display: inline-block;
+    background: #EFF6FF !important;
+    color: #1D4ED8 !important;
+    font-size: 0.74rem;
+    font-weight: 900;
+    padding: 1px 7px;
+    border-radius: 6px;
+    border: 1px solid #93C5FD;
+  }
+  .badge-indoor {
+    display: inline-block;
+    background: #EFF6FF !important;
+    color: #1E3A8A !important;
+    font-size: 0.72rem;
+    font-weight: 800;
+    padding: 1px 7px;
+    border-radius: 6px;
+    border: 1px solid #BFDBFE;
+  }
+  .badge-outdoor {
+    display: inline-block;
+    background: #ECFDF5 !important;
+    color: #064E3B !important;
+    font-size: 0.72rem;
+    font-weight: 800;
+    padding: 1px 7px;
+    border-radius: 6px;
+    border: 1px solid #A7F3D0;
+  }
+  .badge-dia {
+    display: inline-block;
+    background: #FEF3C7 !important;
+    color: #78350F !important;
+    font-size: 0.72rem;
+    font-weight: 800;
+    padding: 1px 7px;
+    border-radius: 6px;
+    border: 1px solid #FDE68A;
+  }
 
-  /* =========================================================================
-     5. PESTAÑAS (STTABS)
-     ========================================================================= */
-  .stTabs [data-baseweb="tab-list"], [data-testid="stTabs"] [role="tablist"] {
-    gap: 7px;
+  /* Pestañas adaptadas a táctil y móvil sin solapamientos */
+  .stTabs [data-baseweb="tab-list"] {
+    gap: 4px;
     background: #E2E8F0 !important;
     padding: 4px;
     border-radius: 14px;
     border: 1px solid #CBD5E1;
-    border-bottom: 1px solid var(--line) !important;
     overflow-x: auto !important;
     flex-wrap: nowrap !important;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
   }
-  .stTabs [data-baseweb="tab-list"]::-webkit-scrollbar { display: none; }
-
-  .stTabs [data-baseweb="tab"], [data-testid="stTabs"] button[role="tab"] {
-    border-radius: 10px 10px 0 0 !important;
+  .stTabs [data-baseweb="tab-list"]::-webkit-scrollbar {
+    display: none;
+  }
+  .stTabs [data-baseweb="tab"] {
+    border-radius: 10px !important;
     font-size: 0.86rem !important;
-    font-weight: 600 !important;
-    color: var(--muted) !important;
-    padding: .65rem .9rem !important;
-    border: 1px solid transparent !important;
+    font-weight: 800 !important;
+    color: #0F172A !important;
+    padding: 6px 11px !important;
+    border: none !important;
     background: transparent !important;
     white-space: nowrap !important;
     flex-shrink: 0 !important;
   }
-  [data-testid="stTabs"] button[role="tab"] p { color: inherit !important; }
-  .stTabs [aria-selected="true"], [data-testid="stTabs"] button[role="tab"][aria-selected="true"] {
-    color: var(--sage-dark) !important;
-    background: #F0F1EB !important;
-    border-color: var(--line) !important;
-    border-bottom-color: #F0F1EB !important;
+  .stTabs [aria-selected="true"] {
+    background: #FFFFFF !important;
+    color: #0F172A !important;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08) !important;
   }
 
-  /* =========================================================================
-     6. BOTONES E INPUTS GENERALES
-     ========================================================================= */
-  .stButton > button, .stFormSubmitButton > button, [data-testid="stLinkButton"] > a, [data-testid="stDownloadButton"] > button {
-    border-radius: 10px !important;
-    font-weight: 600 !important;
+  /* Botones generales limpios */
+  .stButton > button, .stFormSubmitButton > button, [data-testid="stLinkButton"] > a {
+    border-radius: 9px !important;
+    font-weight: 800 !important;
     font-size: 0.82rem !important;
     min-height: 32px !important;
     height: 32px !important;
     padding: 0 0.55rem !important;
-    border: 1px solid #D9DED2 !important;
-    background: #F1F2EC !important;
-    color: #596650 !important;
+    border: 1.5px solid #94A3B8 !important;
+    background: #FFFFFF !important;
+    color: #0F172A !important;
     white-space: nowrap !important;
     overflow: hidden !important;
     text-overflow: ellipsis !important;
-    box-shadow: none !important;
-    transition: background .18s ease, border-color .18s ease, transform .18s ease !important;
+    transition: all 0.15s ease-in-out !important;
   }
-  .stButton > button:hover, .stFormSubmitButton > button:hover, [data-testid="stLinkButton"] > a:hover, [data-testid="stDownloadButton"] > button:hover {
-    background: #E7EADF !important;
-    border-color: #BFC9B5 !important;
-    color: #46523F !important;
-    transform: translateY(-1px);
-  }
-  [data-testid="stButton"] > button[kind="primary"] {
-    background: var(--sage-dark) !important;
-    border-color: var(--sage-dark) !important;
-    color: white !important;
-  }
-  [data-testid="stButton"] > button[kind="primary"] * { color: white !important; }
-
-  /* Inputs & Selects */
-  .stSelectbox > div > div, .stTextInput > div > div, .stNumberInput > div > div,
-  input, textarea, [data-baseweb="select"] > div, [data-baseweb="input"] > div {
-    background: #FFFEFC !important;
-    border-color: #DFDED6 !important;
-    border-radius: 9px !important;
-    font-size: 0.85rem !important;
-    color: #0F172A !important;
-    min-height: 34px !important;
-  }
-  input:focus, textarea:focus, [data-baseweb="select"] > div:focus-within, [data-baseweb="input"] > div:focus-within {
-    border-color: #9AA68F !important;
-    box-shadow: 0 0 0 1px #9AA68F !important;
-  }
-  [data-baseweb="select"] span, [data-baseweb="select"] div {
-    color: #0F172A !important;
-    font-weight: 700 !important;
-  }
-  ul[role="listbox"], ul[role="listbox"] li {
-    background-color: #FFFFFF !important;
+  .stButton > button:hover, .stFormSubmitButton > button:hover, [data-testid="stLinkButton"] > a:hover {
+    background: #F1F5F9 !important;
+    border-color: #0F172A !important;
     color: #0F172A !important;
   }
 
-  iframe {
-    border-radius: 16px !important;
-    border: 1.5px solid #CBD5E1 !important;
-  }
-  [data-testid="stAlert"] { border-radius: 11px !important; }
-  [data-testid="stCaptionContainer"] p, .stCaption { color: var(--muted) !important; }
-  hr { border-color: var(--line) !important; }
-
-  /* =========================================================================
-     7. COMPONENTES ESPECÍFICOS & BOTONES MINIS
-     ========================================================================= */
-  /* Sincronización */
+  /* Botón pequeño de sincronizar listas en Guardados */
   [class*="st-key-btn_sync_guardados_wrap"] {
     display: flex !important;
     justify-content: flex-end !important;
@@ -473,8 +317,29 @@ st.markdown("""
     width: auto !important;
     white-space: nowrap !important;
   }
+  @media (max-width: 768px) {
+    [class*="st-key-guardados-header-row"] [data-testid="stHorizontalBlock"] {
+      display: grid !important;
+      grid-template-columns: minmax(0, 1fr) auto !important;
+      align-items: center !important;
+      gap: 6px !important;
+    }
+    [class*="st-key-guardados-header-row"] [data-testid="column"] {
+      width: auto !important;
+      min-width: 0 !important;
+      flex: none !important;
+    }
+    [class*="st-key-btn_sync_guardados_wrap"] button {
+      min-height: 30px !important;
+      height: 30px !important;
+      padding: 0 9px !important;
+      font-size: 0.74rem !important;
+      white-space: nowrap !important;
+      width: auto !important;
+    }
+  }
 
-  /* Botón lápiz genérico */
+  /* Botón pequeño de edición ✏️ junto al nombre */
   .edit-mini-btn {
     display: flex !important;
     justify-content: flex-end !important;
@@ -503,26 +368,7 @@ st.markdown("""
     border-color: #64748B !important;
   }
 
-  /* Lápiz del itinerario */
-  [class*="st-key-it-edit-btn-"] [data-testid="stButton"] {
-    overflow: visible !important;
-    min-width: 44px !important;
-  }
-  [class*="st-key-it-edit-btn-"] [data-testid="stButton"] > button {
-    width: 44px !important;
-    min-width: 44px !important;
-    max-width: 44px !important;
-    height: 41px !important;
-    min-height: 41px !important;
-    max-height: 41px !important;
-    padding: 0 2px !important;
-    overflow: visible !important;
-    text-overflow: clip !important;
-    line-height: 1.25 !important;
-    font-size: 1.24rem !important;
-  }
-
-  /* Inputs compactos */
+  /* Input de hora compacto y cuadrado (web y móvil) */
   [data-testid="column"]:has(.compact-hora) [data-testid="stTextInput"] {
     max-width: 88px !important;
     width: 100% !important;
@@ -555,6 +401,7 @@ st.markdown("""
     border: 1.5px solid #2563EB !important;
   }
 
+  /* Controles compactos: el marcador identifica la columna del widget. */
   [data-testid="column"]:has(.compact-dia) [data-baseweb="select"] > div {
     min-height: 30px !important;
     height: 30px !important;
@@ -579,9 +426,672 @@ st.markdown("""
     border-radius: 8px !important;
   }
 
+  iframe {
+    border-radius: 16px !important;
+    border: 1.5px solid #CBD5E1 !important;
+  }
+
+  .stSelectbox > div > div, .stTextInput > div > div, .stNumberInput > div > div {
+    border-radius: 9px !important;
+    border: 1.5px solid #94A3B8 !important;
+    background: #FFFFFF !important;
+    font-size: 0.85rem !important;
+    color: #0F172A !important;
+    min-height: 34px !important;
+  }
+  [data-baseweb="select"] span, [data-baseweb="select"] div {
+    color: #0F172A !important;
+    font-weight: 700 !important;
+  }
+  ul[role="listbox"], ul[role="listbox"] li {
+    background-color: #FFFFFF !important;
+    color: #0F172A !important;
+  }
+
   /* =========================================================================
-     8. NAVEGACIÓN PRINCIPAL (PESTAÑAS EDITORIALES)
+     DISEÑO RESPONSIVE PARA MÓVILES
+     Las filas con Hora/Día/Maps se identifican de forma explícita; el resto
+     de columnas se apila para que nunca se compriman ni se solapen.
      ========================================================================= */
+  @media (max-width: 768px) {
+    html, body, .stApp, [data-testid="stAppViewContainer"],
+    [data-testid="stMain"], section.main {
+      margin: 0 !important;
+      width: 100% !important;
+      max-width: 100% !important;
+      overflow-x: hidden !important;
+    }
+    .block-container {
+      width: 100% !important;
+      max-width: 100% !important;
+      padding: 0.55rem 0.65rem 2rem !important;
+      margin: 0 auto !important;
+      overflow-x: clip !important;
+    }
+    /* Evita que nombres, notas o URL largas empujen la página fuera del móvil. */
+    [data-testid="stMarkdownContainer"], [data-testid="stText"],
+    .stCaption, p, a, code, pre, label {
+      max-width: 100% !important;
+      min-width: 0 !important;
+      overflow-wrap: anywhere !important;
+      word-break: break-word !important;
+    }
+    .hero-container {
+      min-width: 0 !important;
+    }
+    .hero-title {  line-height: 1.18 !important; }
+    .hero-pill {
+      display: inline-flex !important;
+      max-width: 100% !important;
+      white-space: normal !important;
+      overflow-wrap: anywhere !important;
+      font-size: 0.71rem !important;
+      line-height: 1.25 !important;
+      padding: 4px 8px !important;
+    }
+    .hero-stat-box {  flex: 1 1 28% !important;  }
+    .hero-stat-val { font-size: 1.25rem !important; }
+.ny-card {   min-width: 0 !important; }
+    .ny-card-header {   line-height: 1.3 !important; }
+    .place-sheet {   min-width: 0 !important; }
+    /* Regla segura por defecto: filas de formulario y filtros se apilan. */
+    [data-testid="stHorizontalBlock"] {
+      display: flex !important;
+      flex-wrap: wrap !important;
+      align-items: flex-start !important;
+      gap: 0.5rem !important;
+      width: 100% !important;
+      min-width: 0 !important;
+    }
+    [data-testid="stHorizontalBlock"] > [data-testid="column"] {
+      flex: 1 1 100% !important;
+      width: 100% !important;
+      min-width: 0 !important;
+      max-width: 100% !important;
+      margin: 0 !important;
+      padding: 0 !important;
+    }
+    /* Filas de nombre dentro de contenedores con identidad CSS propia. */
+    .edit-mini-btn { display: flex !important; justify-content: flex-end !important; width: 100% !important; }
+    .edit-mini-btn button,
+    [data-testid="column"]:has(.edit-mini-btn) .stButton > button {
+      display: inline-flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+    }
+/* Marcadores HTML sin altura; solo sirven para identificar cada columna. */
+    .mobile-control-marker { display: block !important; width: 0 !important; height: 0 !important; margin: 0 !important; padding: 0 !important; line-height: 0 !important; overflow: hidden !important; }
+    [data-testid="stElementContainer"]:has(.mobile-control-marker) {
+      height: 0 !important;
+      min-height: 0 !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      overflow: hidden !important;
+    }
+    /* Anchos compactos de los widgets de hora, día y mapa. */
+    [data-testid="column"]:has(.compact-hora) [data-testid="stTextInput"],
+    [data-testid="column"]:has(.compact-hora) [data-baseweb="input"],
+    [data-testid="column"]:has(.compact-hora) [data-baseweb="base-input"],
+    [data-testid="column"]:has(.compact-maps) [data-testid="stLinkButton"] {
+      width: 100% !important;
+      max-width: 100% !important;
+      min-width: 0 !important;
+      margin: 0 !important;
+      transform: none !important;
+    }
+    [data-testid="column"]:has(.compact-dia) [data-testid="stSelectbox"],
+    [data-testid="column"]:has(.compact-dia) [data-baseweb="select"] {
+      width: max-content !important;
+      min-width: 96px !important;
+      max-width: 100% !important;
+      margin: 0 !important;
+      transform: none !important;
+    }
+    [data-testid="column"]:has(.compact-hora) [data-baseweb="input"],
+    [data-testid="column"]:has(.compact-hora) [data-baseweb="base-input"],
+    [data-testid="column"]:has(.compact-dia) [data-baseweb="select"] > div,
+    [data-testid="column"]:has(.compact-maps) [data-testid="stLinkButton"] > a {
+      min-height: 34px !important;
+      height: 34px !important;
+      max-height: 34px !important;
+      border-radius: 8px !important;
+    }
+    [data-testid="column"]:has(.compact-hora) input {
+      min-width: 0 !important;
+      width: 100% !important;
+      height: 32px !important;
+      min-height: 32px !important;
+      padding: 0 4px !important;
+      font-size: 0.78rem !important;
+      letter-spacing: 0 !important;
+      text-align: center !important;
+      font-variant-numeric: tabular-nums !important;
+    }
+    [data-testid="column"]:has(.compact-dia) [data-baseweb="select"] span,
+    [data-testid="column"]:has(.compact-dia) [data-baseweb="select"] div {
+      font-size: 0.72rem !important;
+      line-height: 1.1 !important;
+    }
+    [data-testid="column"]:has(.compact-dia) [data-baseweb="select"] > div {
+      padding-left: 6px !important;
+      padding-right: 18px !important;
+      width: max-content !important;
+      min-width: 96px !important;
+      max-width: 100% !important;
+    }
+    [data-testid="column"]:has(.compact-dia) [data-baseweb="select"] input { caret-color: transparent !important; }
+    [data-testid="column"]:has(.compact-maps) [data-testid="stLinkButton"] > a {
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      width: 40px !important;
+      min-width: 40px !important;
+      max-width: 40px !important;
+      padding: 0 !important;
+      font-size: 1rem !important;
+      line-height: 1 !important;
+      white-space: nowrap !important;
+      overflow: visible !important;
+      text-overflow: clip !important;
+      font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif !important;
+    }
+    /* Botón lápiz: suficiente área táctil y glifo siempre visible. */
+    .edit-mini-btn button,
+    [data-testid="column"]:has(.edit-mini-btn) .stButton > button {
+      width: 34px !important;
+      min-width: 34px !important;
+      max-width: 34px !important;
+      height: 30px !important;
+      min-height: 30px !important;
+      max-height: 34px !important;
+      padding: 0 !important;
+      font-size: 1.05rem !important;
+      line-height: 1.1 !important;
+      overflow: visible !important;
+      font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif !important;
+    }
+    /* Acciones de seguimiento de vuelos y listas Google: dos botones alineados. */
+    [class*="st-key-flight-links-"] [data-testid="stHorizontalBlock"],
+    [class*="st-key-gmaps-actions-"] [data-testid="stHorizontalBlock"] {
+      display: grid !important;
+      grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+      align-items: stretch !important;
+      gap: 7px !important;
+      width: 100% !important;
+    }
+    [class*="st-key-flight-links-"] [data-testid="column"],
+    [class*="st-key-gmaps-actions-"] [data-testid="column"] {
+      display: block !important;
+      flex: none !important;
+      width: 100% !important;
+      min-width: 0 !important;
+      max-width: 100% !important;
+      margin: 0 !important;
+      padding: 0 !important;
+    }
+    [class*="st-key-flight-links-"] .stLinkButton > a,
+    [class*="st-key-gmaps-actions-"] .stButton > button {
+      min-height: 36px !important;
+      height: auto !important;
+      padding: 6px 5px !important;
+      font-size: 0.72rem !important;
+      white-space: normal !important;
+      line-height: 1.15 !important;
+      overflow-wrap: anywhere !important;
+    }
+    /* Pestañas en dos columnas: nada se oculta ni necesita scroll horizontal. */
+    .stTabs [data-baseweb="tab-list"] {
+      display: grid !important;
+      grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+      gap: 4px !important;
+      padding: 4px !important;
+      overflow: visible !important;
+      white-space: normal !important;
+    }
+    .stTabs [data-baseweb="tab"] {
+      display: flex !important;
+      justify-content: center !important;
+      align-items: center !important;
+      width: 100% !important;
+      min-width: 0 !important;
+      min-height: 30px !important;
+      height: auto !important;
+      padding: 6px 4px !important;
+      white-space: normal !important;
+      text-align: center !important;
+      line-height: 1.15 !important;
+      font-size: 0.75rem !important;
+      overflow-wrap: anywhere !important;
+    }
+    /* Botones y campos: contenidos en su columna y con texto envolvente. */
+    .stButton, .stFormSubmitButton, [data-testid="stLinkButton"],
+    .stSelectbox, .stTextInput, .stNumberInput, .stDateInput,
+    .stMultiSelect, .stSlider, [data-testid="stFileUploader"] {
+      width: 100% !important;
+      max-width: 100% !important;
+      min-width: 0 !important;
+    }
+    .stButton > button, .stFormSubmitButton > button,
+    [data-testid="stLinkButton"] > a {
+      width: 100% !important;
+      max-width: 100% !important;
+      min-width: 0 !important;
+      min-height: 36px !important;
+      height: auto !important;
+      padding: 7px 8px !important;
+      white-space: normal !important;
+      line-height: 1.15 !important;
+      overflow-wrap: anywhere !important;
+      font-size: 0.76rem !important;
+    }
+    [data-baseweb="select"], [data-baseweb="input"], [data-baseweb="base-input"] {
+      max-width: 100% !important;
+      min-width: 0 !important;
+    }
+    .stRadio > div { flex-wrap: wrap !important; gap: 0.45rem !important; }
+    iframe {
+      display: block !important;
+      width: 100% !important;
+      max-width: 100% !important;
+      height: 380px !important;
+    }
+    /* URL de listas: línea partida, no fuerza scroll horizontal. */
+    .gmaps-list-url { overflow-wrap: anywhere !important; word-break: break-all !important; }
+  }
+
+  /* Ajustes para teléfonos estrechos. */
+  @media (max-width: 380px) {
+    .block-container { padding-left: 0.45rem !important; padding-right: 0.45rem !important; }
+    .stTabs [data-baseweb="tab"] { font-size: 0.69rem !important; padding: 4px 2px !important; }
+  }
+
+  @media (max-width: 768px) {
+    /* Estadística superior: reservar más ancho a la tarjeta "Guardados". */
+    .hero-container > div > div:last-child {
+      display: grid !important;
+      gap: 6px !important;
+      width: 100% !important;
+      max-width: 100% !important;
+      min-width: 0 !important;
+    }
+    .hero-stat-box {
+      box-sizing: border-box !important;
+      width: 100% !important;
+      overflow: visible !important;
+    }
+    .hero-stat-lbl {
+      white-space: nowrap !important;
+      word-break: normal !important;
+      overflow-wrap: normal !important;
+    }
+  }
+
+  @media (max-width: 320px) {
+    .hero-stat-lbl { font-size: 0.51rem !important; letter-spacing: 0 !important; }
+  }
+
+  /* Tipografía y datos de las fichas de lugares. */
+  .place-list-title {
+    font-size: 1.25rem !important;
+    font-weight: 900 !important;
+    line-height: 1.2 !important;
+    overflow-wrap: anywhere !important;
+    color: #0F172A;
+  }
+  .place-list-address {
+    margin-top: 3px !important;
+    color: #475569 !important;
+    font-size: 0.76rem !important;
+    line-height: 1.25 !important;
+    font-weight: 600 !important;
+    overflow-wrap: anywhere !important;
+  }
+
+  @media (max-width: 768px) {
+    /* Nombre dominante; categoría, entorno, dirección y nota siempre menores. */
+    .place-list-title {
+      font-size: 1.25rem !important;
+      line-height: 1.22 !important;
+      letter-spacing: 0 !important;
+    }
+    .place-list-address {
+      font-size: 0.72rem !important;
+      line-height: 1.28 !important;
+      margin-top: 2px !important;
+    }
+    .place-note {
+      font-size: 0.70rem !important;
+      line-height: 1.28 !important;
+    }
+    .badge-cat, .badge-indoor, .badge-outdoor {
+      font-size: 0.66rem !important;
+      line-height: 1.18 !important;
+      padding: 1px 5px !important;
+    }
+    }
+
+  @media (max-width: 320px) {
+    .place-list-address, .place-note { font-size: 0.68rem !important; }
+  }
+
+  /* La tarjeta central del resumen siempre muestra GUARDADOS completo. */
+  @media (max-width: 768px) {
+    .hero-container > div > div:last-child {
+      grid-template-columns: minmax(0, 1fr) minmax(88px, 1.18fr) minmax(0, 1fr) !important;
+    }
+    .hero-container .hero-stat-box:nth-child(2) .hero-stat-lbl {
+      white-space: nowrap !important;
+      overflow: visible !important;
+      font-size: 0.58rem !important;
+      letter-spacing: 0 !important;
+    }
+  }
+  /* Ajustes finales para que la página completa pueda desplazarse en móvil. */
+  @media (max-width: 768px) {
+    html, body {
+      height: auto !important;
+      min-height: 100% !important;
+      overflow-y: auto !important;
+      overscroll-behavior-y: auto !important;
+    }
+    .stApp,
+    [data-testid="stAppViewContainer"],
+    [data-testid="stMain"],
+    section.main {
+      height: auto !important;
+      min-height: 100dvh !important;
+      max-height: none !important;
+      overflow-y: visible !important;
+      overflow-x: hidden !important;
+    }
+    [data-testid="stMainBlockContainer"],
+    .block-container {
+      height: auto !important;
+      min-height: 0 !important;
+      max-height: none !important;
+      padding-top: max(1.4rem, calc(env(safe-area-inset-top) + 0.7rem)) !important;
+    }
+    /* La cabecera tenía una altura fija de 30px que podía cortar su contenido. */
+    .hero-container {
+      height: auto !important;
+      min-height: 0 !important;
+      max-height: none !important;
+      overflow: visible !important;
+      margin-bottom: 12px !important;
+    }
+    .hero-container .hero-eyebrow {
+      display: block !important;
+      height: auto !important;
+      max-height: none !important;
+      overflow: visible !important;
+      line-height: 1.4 !important;
+      padding-top: 2px !important;
+    }
+    .hero-container > div {
+      min-width: 0 !important;
+      width: 100% !important;
+    }
+    .hero-container > div > div:first-child {
+      min-width: 0 !important;
+      width: 100% !important;
+    }
+    [data-testid="stTabs"],
+    [data-testid="stTabContent"],
+    [data-testid="stVerticalBlock"] {
+      min-height: 0 !important;
+      max-height: none !important;
+      overflow: visible !important;
+    }
+    footer, [data-testid="stFooter"] {
+      display: block !important;
+      visibility: visible !important;
+      height: auto !important;
+      min-height: 2rem !important;
+      padding-bottom: env(safe-area-inset-bottom) !important;
+    }
+  }
+/* El lápiz del itinerario conserva todo su contorno y no recorta la punta. */
+  [class*="st-key-it-edit-btn-"] [data-testid="stButton"] > button {
+    width: 44px !important;
+    min-width: 44px !important;
+    max-width: 44px !important;
+    height: 41px !important;
+    min-height: 41px !important;
+    max-height: 41px !important;
+    padding: 0 2px !important;
+    overflow: visible !important;
+    text-overflow: clip !important;
+    line-height: 1.25 !important;
+    font-size: 1.24rem !important;
+  }
+  [class*="st-key-it-edit-btn-"] [data-testid="stButton"] {
+    overflow: visible !important;
+    min-width: 44px !important;
+  }
+  /* Corrección adicional: Streamlit puede reservar espacio aunque su toolbar esté oculta. */
+  [data-testid="stHeader"],
+  header[data-testid="stHeader"] {
+    display: none !important;
+    height: 0 !important;
+    min-height: 0 !important;
+    max-height: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    border: 0 !important;
+  }
+  [data-testid="stDecoration"] {
+    display: none !important;
+    height: 0 !important;
+  }
+  [data-testid="stMain"], section.main {
+    padding-top: 0 !important;
+    margin-top: 0 !important;
+  }
+  [data-testid="stMainBlockContainer"], .block-container {
+    padding-top: 0.45rem !important;
+    margin-top: 0 !important;
+  }
+  @media (max-width: 768px) {
+    [data-testid="stMainBlockContainer"], .block-container {
+      padding-top: max(0.25rem, env(safe-area-inset-top)) !important;
+    }
+    .hero-container {
+      margin-top: 0 !important;
+    }
+  }
+
+  /* ================================================================
+     REDISEÑO EDITORIAL AESTHETIC · solo presentación, sin tocar lógica
+     ================================================================ */
+  :root {
+    --ivory: #F7F5F0;
+    --paper: #FFFEFC;
+    --ink: #373B35;
+    --muted: #85877D;
+    --sage: #899681;
+    --sage-dark: #68765F;
+    --sage-pale: #EEF0E9;
+    --line: #E7E4DC;
+    --clay: #B78E7A;
+  }
+  html, body, .stApp, [data-testid="stAppViewContainer"],
+  [data-testid="stMain"], section.main {
+    background: var(--ivory) !important;
+    color: var(--ink) !important;
+  }
+  html, body, .stApp, p, label, input, button, select, textarea,
+  .stMarkdown, [data-testid="stMarkdownContainer"], [data-testid="stText"], small {
+    color: var(--ink) !important;
+  }
+  .block-container {
+    max-width: 1220px !important;
+    padding-left: clamp(1rem, 3vw, 2.6rem) !important;
+    padding-right: clamp(1rem, 3vw, 2.6rem) !important;
+    padding-bottom: 3rem !important;
+  }
+  h1, h2, h3, h4, .hero-title {
+    color: var(--ink) !important;
+  }
+  .hero-container {
+    background: var(--paper) !important;
+    border: 1px solid var(--line) !important;
+    border-top: 0 !important;
+    border-radius: 5px 5px 18px 18px !important;
+    padding: 25px 28px !important;
+    margin: 8px 0 22px !important;
+    box-shadow: 0 10px 35px rgba(66, 65, 54, .045) !important;
+    position: relative;
+  }
+  .hero-container:before {
+    content: "";
+    position: absolute;
+    top: 0; left: 28px; right: 28px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--sage), #C8B9A8, transparent);
+  }
+  .hero-eyebrow {
+    color: var(--sage-dark) !important;
+    font-size: .68rem !important;
+    font-weight: 700 !important;
+    letter-spacing: .19em !important;
+  }
+  .hero-title {
+    font-size: clamp(1.8rem, 3vw, 2.55rem) !important;
+    font-weight: 600 !important;
+    line-height: 1.18 !important;
+    margin: 8px 0 10px !important;
+  }
+  .hero-pill, .hero-stat-box {
+    background: var(--sage-pale) !important;
+    border: 1px solid #E2E6DA !important;
+    color: var(--sage-dark) !important;
+    border-radius: 999px !important;
+  }
+  .hero-stat-box {
+    border-radius: 12px !important;
+    min-width: 86px !important;
+    padding: 10px 15px !important;
+    background: #F8F7F2 !important;
+  }
+  .hero-stat-val { color: var(--sage-dark) !important; font-weight: 600 !important; }
+  .hero-stat-lbl { color: var(--muted) !important; font-size: .62rem !important; letter-spacing: .12em !important; }
+  .ny-card, .place-sheet, [data-testid="stExpander"] {
+    background: var(--paper) !important;
+    border: 1px solid var(--line) !important;
+    border-radius: 14px !important;
+    box-shadow: 0 5px 18px rgba(66, 65, 54, .035) !important;
+  }
+  .ny-card { padding: 18px 20px !important; }
+  .place-sheet { border-width: 1px !important; padding: 16px 18px !important; }
+  .ny-card-header {
+    color: var(--sage-dark) !important;
+    font-size: .7rem !important;
+    letter-spacing: .15em !important;
+    font-weight: 700 !important;
+  }
+  [data-testid="stTabs"] [role="tablist"] {
+    gap: 7px !important;
+    border-bottom: 1px solid var(--line) !important;
+  }
+  [data-testid="stTabs"] button[role="tab"] {
+    background: transparent !important;
+    border: 1px solid transparent !important;
+    border-radius: 10px 10px 0 0 !important;
+    color: var(--muted) !important;
+    font-weight: 600 !important;
+    padding: .65rem .9rem !important;
+  }
+  [data-testid="stTabs"] button[role="tab"] p { color: inherit !important; }
+  [data-testid="stTabs"] button[role="tab"][aria-selected="true"] {
+    color: var(--sage-dark) !important;
+    background: #F0F1EB !important;
+    border-color: var(--line) !important;
+    border-bottom-color: #F0F1EB !important;
+  }
+  [data-testid="stButton"] > button, [data-testid="stDownloadButton"] > button {
+    border: 1px solid #D9DED2 !important;
+    border-radius: 10px !important;
+    background: #F1F2EC !important;
+    color: #596650 !important;
+    font-weight: 600 !important;
+    box-shadow: none !important;
+    transition: background .18s ease, border-color .18s ease, transform .18s ease !important;
+  }
+  [data-testid="stButton"] > button:hover, [data-testid="stDownloadButton"] > button:hover {
+    background: #E7EADF !important;
+    border-color: #BFC9B5 !important;
+    color: #46523F !important;
+    transform: translateY(-1px);
+  }
+  [data-testid="stButton"] > button[kind="primary"] {
+    background: var(--sage-dark) !important;
+    border-color: var(--sage-dark) !important;
+    color: white !important;
+  }
+  [data-testid="stButton"] > button[kind="primary"] * { color: white !important; }
+  input, textarea, [data-baseweb="select"] > div, [data-baseweb="input"] > div {
+    background: #FFFEFC !important;
+    border-color: #DFDED6 !important;
+    border-radius: 9px !important;
+  }
+  input:focus, textarea:focus, [data-baseweb="select"] > div:focus-within,
+  [data-baseweb="input"] > div:focus-within {
+    border-color: #9AA68F !important;
+    box-shadow: 0 0 0 1px #9AA68F !important;
+  }
+  [data-testid="stExpander"] details summary {
+    background: #FBFAF6 !important;
+    color: var(--ink) !important;
+    font-weight: 600 !important;
+    padding: 13px 16px !important;
+  }
+  [data-testid="stExpander"] details summary:hover { background: #F3F3ED !important; }
+  [data-testid="stAlert"] { border-radius: 11px !important; }
+  [data-testid="stCaptionContainer"] p, .stCaption { color: var(--muted) !important; }
+  hr { border-color: var(--line) !important; }
+  div[role="radiogroup"] label {
+    background: #FFFEFC !important;
+    border: 1px solid var(--line) !important;
+    border-radius: 9px !important;
+  }
+  div[role="radiogroup"] label:has(input:checked) {
+    background: var(--sage-pale) !important;
+    border-color: #B8C2AE !important;
+  }
+  [data-testid="stCheckbox"] label p { color: var(--ink) !important; }
+  @media (max-width: 768px) {
+    .hero-container { padding: 22px 17px 17px !important; border-radius: 5px 5px 14px 14px !important; }
+    .hero-container:before { left: 17px; right: 17px; }
+    .hero-title { font-size: 1.8rem !important; }
+    .ny-card, .place-sheet { padding: 13px !important; }
+    [data-testid="stTabs"] [role="tablist"] { gap: 2px !important; }
+    [data-testid="stTabs"] button[role="tab"] { padding: .55rem .5rem !important; }
+  }
+
+  /* TIPOGRAFÍA CALIBRI · mantiene intactos los iconos y símbolos */
+  html, body, .stApp,
+  .stApp p, .stApp label, .stApp input, .stApp textarea,
+  .stApp select, .stApp button,
+  .stApp [data-testid="stMarkdownContainer"],
+  .stApp [data-testid="stText"],
+  .stApp [data-testid="stCaptionContainer"],
+  .stApp .stCaption,
+  .stApp small, .stApp li, .stApp td, .stApp th,
+  .stApp [data-baseweb="select"] *,
+  .stApp [data-baseweb="input"] *,
+  .stApp [data-baseweb="textarea"] * {
+    font-family: Calibri, Carlito, "Segoe UI", Arial, sans-serif !important;
+  }
+  .stApp h1, .stApp h2, .stApp h3, .stApp h4,
+  .stApp .hero-title, .stApp [data-testid="stMarkdownContainer"] h1,
+  .stApp [data-testid="stMarkdownContainer"] h2,
+  .stApp [data-testid="stMarkdownContainer"] h3 {
+    font-family: Calibri, Carlito, "Segoe UI", Arial, sans-serif !important;
+    font-weight: 600 !important;
+    letter-spacing: -0.018em !important;
+  }
+
+  /* ===== Navegación principal: pestañas editoriales ===== */
   .st-key-seccion_principal_activa {
     margin: 14px 0 22px 0 !important;
     padding: 7px !important;
@@ -602,7 +1112,9 @@ st.markdown("""
     overflow-x: auto !important;
     scrollbar-width: none !important;
   }
-  .st-key-seccion_principal_activa [role="radiogroup"]::-webkit-scrollbar { display: none !important; }
+  .st-key-seccion_principal_activa [role="radiogroup"]::-webkit-scrollbar {
+    display: none !important;
+  }
   .st-key-seccion_principal_activa [role="radiogroup"] label {
     position: relative !important;
     display: flex !important;
@@ -631,7 +1143,9 @@ st.markdown("""
     letter-spacing: .005em !important;
     line-height: 1.15 !important;
   }
-  .st-key-seccion_principal_activa [role="radiogroup"] label > div:first-child { display: none !important; }
+  .st-key-seccion_principal_activa [role="radiogroup"] label > div:first-child {
+    display: none !important;
+  }
   .st-key-seccion_principal_activa [role="radiogroup"] label:has(input:checked) {
     background: #244C38 !important;
     border-color: #244C38 !important;
@@ -639,7 +1153,9 @@ st.markdown("""
     box-shadow: 0 3px 9px rgba(36, 76, 56, .18) !important;
   }
   .st-key-seccion_principal_activa [role="radiogroup"] label:has(input:checked) p,
-  .st-key-seccion_principal_activa [role="radiogroup"] label:has(input:checked) span { color: #FFFFFF !important; }
+  .st-key-seccion_principal_activa [role="radiogroup"] label:has(input:checked) span {
+    color: #FFFFFF !important;
+  }
   .st-key-seccion_principal_activa [role="radiogroup"] label:hover:not(:has(input:checked)) {
     background: rgba(255, 255, 255, .78) !important;
     border-color: #DCE5DD !important;
@@ -649,10 +1165,45 @@ st.markdown("""
     outline: 2px solid #91B49B !important;
     outline-offset: 2px !important;
   }
+  @media (max-width: 680px) {
+    .st-key-seccion_principal_activa {
+      margin: 10px -2px 18px -2px !important;
+      padding: 5px !important;
+      border-radius: 14px !important;
+    }
+    .st-key-seccion_principal_activa [role="radiogroup"] {
+      justify-content: flex-start !important;
+      gap: 5px !important;
+    }
+    .st-key-seccion_principal_activa [role="radiogroup"] label {
+      flex: 0 0 auto !important;
+      min-width: max-content !important;
+      min-height: 43px !important;
+      padding: 8px 13px !important;
+    }
+    .st-key-seccion_principal_activa [role="radiogroup"] label p,
+    .st-key-seccion_principal_activa [role="radiogroup"] label span:not([data-testid]) {
+      font-size: 0.86rem !important;
+    }
+  }
+  .place-full-width-info, .place-full-width-info .place-list-address,
+  .place-full-width-info .place-note {
+    display: block !important; width: 100% !important; max-width: 100% !important;
+    min-width: 0 !important; box-sizing: border-box !important;
+    overflow-wrap: anywhere !important; white-space: pre-wrap !important;
+  }
+  .place-full-width-info { flex: 1 1 100% !important; }
+  @media (max-width: 768px) {
+    .place-full-width-info, .place-full-width-info .place-list-address,
+    .place-full-width-info .place-note { width: 100% !important; max-width: 100% !important; }
+  }
+  /* ================================================================
+     CONTROLES DE LUGARES — BLOQUE ÚNICO Y CONSOLIDADO
+     Ruta: información | editar | mapa | visitado
+     Guardados: información | editar | mapa
+     ================================================================ */
 
-  /* =========================================================================
-     9. CONTROLES DE LUGARES (BLOQUE CONSOLIDADO BASE)
-     ========================================================================= */
+  /* Fila superior: la información se adapta y las acciones conservan su caja compacta. */
   [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"],
   [class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"] {
     display: flex !important;
@@ -696,10 +1247,26 @@ st.markdown("""
     overflow: visible !important;
   }
 
-  /* Wrappers Streamlit de 30px */
-  [class*="st-key-it-edit-button-wrap-"], [class*="st-key-saved-edit-button-wrap-"],
-  [class*="st-key-it-map-button-wrap-"], [class*="st-key-saved-map-button-wrap-"],
-  [class*="st-key-it-visit-checkbox-wrap-"],
+  /* Contenedores Streamlit internos: no se permite que colapsen ni se estiren. */
+  [class*="st-key-it-edit-button-wrap-"],
+  [class*="st-key-saved-edit-button-wrap-"],
+  [class*="st-key-it-map-button-wrap-"],
+  [class*="st-key-saved-map-button-wrap-"],
+  [class*="st-key-it-visit-checkbox-wrap-"] {
+    display: flex !important;
+    flex: 0 0 30px !important;
+    width: 30px !important;
+    min-width: 30px !important;
+    max-width: 30px !important;
+    height: 30px !important;
+    min-height: 30px !important;
+    max-height: 30px !important;
+    align-items: center !important;
+    justify-content: center !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: visible !important;
+  }
   [class*="st-key-it-edit-button-wrap-"] [data-testid="stElementContainer"],
   [class*="st-key-saved-edit-button-wrap-"] [data-testid="stElementContainer"],
   [class*="st-key-it-map-button-wrap-"] [data-testid="stElementContainer"],
@@ -725,9 +1292,11 @@ st.markdown("""
     overflow: visible !important;
   }
 
-  /* Botones SVG de Editar y Mapa */
-  [class*="st-key-it-edit-button-wrap-"] button, [class*="st-key-saved-edit-button-wrap-"] button,
-  [class*="st-key-it-map-button-wrap-"] a, [class*="st-key-saved-map-button-wrap-"] a {
+  /* Lápiz y mapa: misma caja, iconos dibujados por CSS para que nunca desaparezcan. */
+  [class*="st-key-it-edit-button-wrap-"] button,
+  [class*="st-key-saved-edit-button-wrap-"] button,
+  [class*="st-key-it-map-button-wrap-"] a,
+  [class*="st-key-saved-map-button-wrap-"] a {
     appearance: none !important;
     -webkit-appearance: none !important;
     box-sizing: border-box !important;
@@ -759,43 +1328,56 @@ st.markdown("""
     overflow: hidden !important;
     transform: none !important;
   }
-  [class*="st-key-it-edit-button-wrap-"] button, [class*="st-key-saved-edit-button-wrap-"] button {
+  [class*="st-key-it-edit-button-wrap-"] button,
+  [class*="st-key-saved-edit-button-wrap-"] button {
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23334155' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m16 4 4 4'/%3E%3Cpath d='M4 20l4-.9L19 8a2.1 2.1 0 0 0-3-3L5 16z'/%3E%3C/svg%3E") !important;
   }
-  [class*="st-key-it-map-button-wrap-"] a, [class*="st-key-saved-map-button-wrap-"] a {
+  [class*="st-key-it-map-button-wrap-"] a,
+  [class*="st-key-saved-map-button-wrap-"] a {
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23334155' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m3 6 6-3 6 3 6-3v15l-6 3-6-3-6 3z'/%3E%3Cpath d='M9 3v15M15 6v15'/%3E%3C/svg%3E") !important;
   }
-  [class*="st-key-it-edit-button-wrap-"] button > *, [class*="st-key-saved-edit-button-wrap-"] button > *,
-  [class*="st-key-it-map-button-wrap-"] a > *, [class*="st-key-saved-map-button-wrap-"] a > * { display: none !important; }
-  
-  [class*="st-key-it-edit-button-wrap-"] button:hover, [class*="st-key-saved-edit-button-wrap-"] button:hover,
-  [class*="st-key-it-map-button-wrap-"] a:hover, [class*="st-key-saved-map-button-wrap-"] a:hover,
-  [class*="st-key-it-edit-button-wrap-"] button:focus, [class*="st-key-saved-edit-button-wrap-"] button:focus,
-  [class*="st-key-it-map-button-wrap-"] a:focus, [class*="st-key-saved-map-button-wrap-"] a:focus {
+  [class*="st-key-it-edit-button-wrap-"] button > *,
+  [class*="st-key-saved-edit-button-wrap-"] button > *,
+  [class*="st-key-it-map-button-wrap-"] a > *,
+  [class*="st-key-saved-map-button-wrap-"] a > * {
+    display: none !important;
+  }
+  [class*="st-key-it-edit-button-wrap-"] button:hover,
+  [class*="st-key-saved-edit-button-wrap-"] button:hover,
+  [class*="st-key-it-map-button-wrap-"] a:hover,
+  [class*="st-key-saved-map-button-wrap-"] a:hover,
+  [class*="st-key-it-edit-button-wrap-"] button:focus,
+  [class*="st-key-saved-edit-button-wrap-"] button:focus,
+  [class*="st-key-it-map-button-wrap-"] a:focus,
+  [class*="st-key-saved-map-button-wrap-"] a:focus {
     border-color: #CBD5E1 !important;
     background-color: #F8FAFC !important;
     outline: none !important;
     box-shadow: none !important;
   }
 
-  /* Checkbox de Ruta */
-  [class*="st-key-it-visit-checkbox-wrap-"] [data-testid="stCheckbox"] > label {
+  /* Checkbox de Ruta: caja de 30 px y marca centrada. */
+  [class*="st-key-it-visit-checkbox-wrap-"] [data-testid="stCheckbox"] {
+    display: flex !important;
     flex: 0 0 30px !important;
-    display: flex !important;align-items: center !important;
-    justify-content: center !important;
-    gap: 0 !important;
-    border: 1px solid #CBD5E1 !important;
-    border-radius: 9px !important;
-    background: #FFFFFF !important;
-    box-shadow: none !important;
-    position: relative !important;
-    place-items: center !important;
     width: 30px !important;
     min-width: 30px !important;
     max-width: 30px !important;
     height: 30px !important;
     min-height: 30px !important;
     max-height: 30px !important;
+    align-items: center !important;
+    justify-content: center !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  [class*="st-key-it-visit-checkbox-wrap-"] [data-testid="stCheckbox"] > label {
+    flex: 0 0 30px !important;
+    gap: 0 !important;
+    border: 1px solid #CBD5E1 !important;
+    border-radius: 9px !important;
+    background: #FFFFFF !important;
+    box-shadow: none !important;
   }
   [class*="st-key-it-visit-checkbox-wrap-"] [data-testid="stCheckbox"] label > div:first-of-type {
     display: flex !important;
@@ -806,9 +1388,6 @@ st.markdown("""
     min-height: 18px !important;
     align-items: center !important;
     justify-content: center !important;
-    justify-self: center !important;
-    align-self: center !important;
-    margin: 0 !important;
     padding: 0 !important;
   }
   [class*="st-key-it-visit-checkbox-wrap-"] [data-testid="stCheckbox"] input[type="checkbox"] {
@@ -816,8 +1395,11 @@ st.markdown("""
     height: 16px !important;
     margin: 0 !important;
   }
-  [class*="st-key-it-visit-checkbox-wrap-"] [data-testid="stCheckbox"] label p { display: none !important; }
-
+  [class*="st-key-it-visit-checkbox-wrap-"] [data-testid="stCheckbox"] label p {
+    display: none !important;
+  }
+  /* Checkbox: el cuarto slot usa el mismo centro geométrico que Editar y Mapa.
+     Se centra toda la cadena de wrappers de Streamlit, no solo la marca. */
   [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(4) {
     box-sizing: border-box !important;
     place-items: center !important;
@@ -839,8 +1421,7 @@ st.markdown("""
   [class*="st-key-it-visit-checkbox-wrap-"] [data-testid="stCheckbox"] {
     box-sizing: border-box !important;
     display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
+    place-items: center !important;
     align-self: center !important;
     width: 30px !important;
     min-width: 30px !important;
@@ -852,9 +1433,27 @@ st.markdown("""
     padding: 0 !important;
     transform: none !important;
   }
+  [class*="st-key-it-visit-checkbox-wrap-"] [data-testid="stCheckbox"] > label {
+    position: relative !important;
+    place-items: center !important;
+    width: 30px !important;
+    min-width: 30px !important;
+    max-width: 30px !important;
+    height: 30px !important;
+    min-height: 30px !important;
+    max-height: 30px !important;
+  }
+  [class*="st-key-it-visit-checkbox-wrap-"] [data-testid="stCheckbox"] label > div:first-of-type {
+    justify-self: center !important;
+    align-self: center !important;
+    margin: 0 !important;
+  }
 
-  /* Filas de controles */
-  [class*="st-key-it-controls-row-"], [class*="st-key-saved-controls-row-"] { margin-top: 5px !important; }
+  /* Dimensiones de los controles Hora y Día en escritorio. */
+  [class*="st-key-it-controls-row-"],
+  [class*="st-key-saved-controls-row-"] {
+    margin-top: 5px !important;
+  }
   [class*="st-key-it-controls-row-"] [data-testid="stHorizontalBlock"],
   [class*="st-key-saved-controls-row-"] [data-testid="stHorizontalBlock"] {
     display: grid !important;
@@ -940,7 +1539,176 @@ st.markdown("""
     white-space: nowrap !important;
   }
 
-  /* Grid Ruta */
+  /* En móvil, se neutraliza el apilado global SOLO en estas filas. */
+  @media (max-width: 768px) {
+    [class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"] {
+      display: grid !important;
+      grid-template-columns: minmax(0, 1fr) 38px 30px !important;
+      grid-auto-flow: column !important;
+      align-items: center !important;
+      justify-content: stretch !important;
+      column-gap: 2px !important;
+      row-gap: 0 !important;
+      width: 100% !important;
+      min-width: 0 !important;
+      max-width: 100% !important;
+      overflow: visible !important;
+    }
+    [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"],
+    [class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"] {
+      box-sizing: border-box !important;
+      display: flex !important;
+      min-width: 0 !important;
+      max-width: 100% !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      overflow: visible !important;
+    }
+    [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:first-child,
+    [class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:first-child {
+      flex: 1 1 0% !important;
+      width: auto !important;
+      min-width: 0 !important;
+    }
+    [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(n+2),
+    [class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(n+2) {
+      flex: 0 0 30px !important;
+      width: 30px !important;
+      min-width: 30px !important;
+      max-width: 30px !important;
+      height: 30px !important;
+      min-height: 30px !important;
+      max-height: 30px !important;
+      align-items: center !important;
+      justify-content: center !important;
+    }
+    /* En móvil: hora de 100×40 px y selector de día de 125×45 px. */
+    [class*="st-key-it-controls-row-"] [data-testid="stHorizontalBlock"],
+    [class*="st-key-saved-controls-row-"] [data-testid="stHorizontalBlock"] {
+      display: grid !important;
+      grid-template-columns: 80px 125px !important;
+      column-gap: 4px !important;
+      align-items: center !important;
+      justify-content: start !important;
+      width: 100% !important;
+      min-width: 0 !important;
+      max-width: 100% !important;
+    }
+    [class*="st-key-it-controls-row-"] [data-testid="column"],
+    [class*="st-key-saved-controls-row-"] [data-testid="column"] {
+      display: block !important;
+      flex: none !important;
+      width: auto !important;
+      min-width: 0 !important;
+      max-width: 100% !important;
+      margin: 0 !important;
+      padding: 0 !important;
+    }
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:first-child [data-testid="stTextInput"],
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:first-child [data-testid="stTextInput"],
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:first-child [data-baseweb="input"],
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:first-child [data-baseweb="input"],
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:first-child [data-baseweb="base-input"],
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:first-child [data-baseweb="base-input"] {
+      box-sizing: border-box !important;
+      width: 80px !important;
+      min-width: 80px !important;
+      max-width: 80px !important;
+      height: 40px !important;
+      min-height: 40px !important;
+      max-height: 40px !important;
+      margin: 0 !important;
+      padding: 0 3px !important;
+    }
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:first-child input,
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:first-child input {
+      box-sizing: border-box !important;
+      width: 100% !important;
+      min-width: 0 !important;
+      height: 34px !important;
+      min-height: 34px !important;
+      padding: 0 2px !important;
+      font-size: 0.78rem !important;
+      font-weight: 700 !important;
+      text-align: center !important;
+    }
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(2) [data-testid="stSelectbox"],
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(2) [data-testid="stSelectbox"],
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(2) [data-baseweb="select"],
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(2) [data-baseweb="select"],
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(2) [data-baseweb="select"] > div,
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(2) [data-baseweb="select"] > div {
+      box-sizing: border-box !important;
+      width: 125px !important;
+      min-width: 125px !important;
+      max-width: 125px !important;
+      height: 45px !important;
+      min-height: 45px !important;
+      max-height: 45px !important;
+    }
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(2) [data-baseweb="select"] span,
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(2) [data-baseweb="select"] span {
+      font-size: 0.72rem !important;
+      line-height: 1.1 !important;
+      white-space: nowrap !important;
+    }
+    /* Evita recortes de las últimas filas y respeta el área segura del teléfono. */
+    [data-testid="stMainBlockContainer"],
+    .block-container {
+      padding-bottom: calc(5rem + env(safe-area-inset-bottom)) !important;
+      overflow: visible !important;
+    }
+    [data-testid="stMain"],
+    section.main,
+    [data-testid="stAppViewContainer"] {
+      overflow-x: hidden !important;
+      overflow-y: auto !important;
+    }
+  }
+  /* Ajuste exclusivo: centra vertical y horizontalmente el checkbox de Ruta
+     respecto a los botones Editar y Mapa, sin modificar sus dimensiones. */
+  [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(4),
+  [class*="st-key-it-visit-checkbox-wrap-"],
+  [class*="st-key-it-visit-checkbox-wrap-"] [data-testid="stElementContainer"],
+  [class*="st-key-it-visit-checkbox-wrap-"] [data-testid="stCheckbox"] {
+    box-sizing: border-box !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    align-self: center !important;
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    transform: none !important;
+  }
+  [class*="st-key-it-visit-checkbox-wrap-"] [data-testid="stCheckbox"] > label {
+    box-sizing: border-box !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    align-self: center !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    transform: none !important;
+  }
+  [class*="st-key-it-visit-checkbox-wrap-"] [data-testid="stCheckbox"] > label > div {
+    align-self: center !important;
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+  }
+  /* Ajustes finales de alineación móvil para los controles de las filas. */
+  @media (max-width: 768px) {
+    [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(2) {
+      transform: translateX(6px) !important;
+    }
+    [class*="st-key-it-visit-checkbox-wrap-"] { transform: translate(3px, -4.5px) !important; }
+    [class*="st-key-saved-edit-button-wrap-"] { transform: translate(11px, 0px) !important; }
+    [class*="st-key-it-edit-button-wrap-"] { transform: translate(4px, 0px) !important; }
+  }
+
+  /* RUTA: distribución única y estable en escritorio y móvil.
+     Las cinco columnas se definen aquí; st.columns solo crea los contenedores. */
   [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] {
     display: grid !important;
     grid-template-columns: 84px minmax(0, 1fr) 30px 30px 30px !important;
@@ -967,6 +1735,7 @@ st.markdown("""
     justify-content: center !important;
     overflow: visible !important;
   }
+  /* Hora: columna y campo compactos; no pueden crecer ni encogerse. */
   [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(1),
   [class*="st-key-it-heading-row-"] [data-testid="column"]:first-child [data-testid="stTextInput"],
   [class*="st-key-it-heading-row-"] [data-testid="column"]:first-child [data-baseweb="input"],
@@ -997,6 +1766,7 @@ st.markdown("""
     text-align: center !important;
     font-variant-numeric: tabular-nums !important;
   }
+  /* Información: recibe todo el ancho sobrante y nunca empuja los botones. */
   [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(2) {
     display: block !important;
     width: auto !important;
@@ -1004,7 +1774,6 @@ st.markdown("""
     max-width: none !important;
     justify-self: stretch !important;
     overflow: visible !important;
-    margin-left: 2px !important;
   }
   [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stMarkdown"],
   [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stElementContainer"] {
@@ -1012,7 +1781,6 @@ st.markdown("""
     width: 100% !important;
     min-width: 0 !important;
     max-width: 100% !important;
-    left: -6px !important;
   }
   [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2) .place-list-title,
   [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2) .place-list-address {
@@ -1024,8 +1792,11 @@ st.markdown("""
     word-break: normal !important;
     white-space: normal !important;
   }
+  /* Editar, mapa y visitado: tres columnas idénticas de 30 px. */
   [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(n+3),
-  [class*="st-key-it-edit-button-wrap-"], [class*="st-key-it-map-button-wrap-"], [class*="st-key-it-visit-checkbox-wrap-"] {
+  [class*="st-key-it-edit-button-wrap-"],
+  [class*="st-key-it-map-button-wrap-"],
+  [class*="st-key-it-visit-checkbox-wrap-"] {
     box-sizing: border-box !important;
     display: flex !important;
     flex: none !important;
@@ -1054,13 +1825,16 @@ st.markdown("""
     margin: 0 !important;
     padding: 0 !important;
   }
+  /* Título de los lugares de Ruta: conserva el tamaño reducido existente. */
   [class*="st-key-it-heading-row-"] .place-list-title {
     font-size: calc(1.25rem - 1.5pt) !important;
   }
 
-  /* =========================================================================
-     10. MEDIA QUERIES (DESKTOP >= 769px)
-     ========================================================================= */
+  /* ================================================================
+     SOLO ESCRITORIO: igualar la apariencia compacta del móvil.
+     IMPORTANTE: este bloque solo actúa desde 769 px; no modifica móvil.
+     Flexbox es el único sistema de distribución para estas filas.
+     ================================================================ */
   @media (min-width: 769px) {
     [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"],
     [class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"] {
@@ -1069,11 +1843,12 @@ st.markdown("""
       flex-wrap: nowrap !important;
       align-items: center !important;
       justify-content: flex-start !important;
-      gap: 2px !important;
+      gap: 1px !important;
       width: 100% !important;
       min-width: 0 !important;
       max-width: 100% !important;
     }
+
     [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"],
     [class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"] {
       box-sizing: border-box !important;
@@ -1082,11 +1857,13 @@ st.markdown("""
       padding: 0 !important;
       align-self: center !important;
     }
+
+    /* Ruta: hora compacta, información flexible, tres acciones juntas. */
     [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(1) {
-      flex: 0 0 54px !important;
-      width: 54px !important;
-      min-width: 54px !important;
-      max-width: 54px !important;
+      flex: 0 0 66px !important;
+      width: 66px !important;
+      min-width: 66px !important;
+      max-width: 66px !important;
     }
     [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(2) {
       display: block !important;
@@ -1105,9 +1882,9 @@ st.markdown("""
       max-width: 100% !important;
       white-space: normal !important;
       overflow-wrap: anywhere !important;
-      position: relative !important;
-      left: -6px !important;
     }
+
+    /* Guardados: información flexible y acciones al extremo derecho. */
     [class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:first-child {
       display: block !important;
       flex: 1 1 0% !important;
@@ -1115,6 +1892,8 @@ st.markdown("""
       min-width: 0 !important;
       max-width: none !important;
     }
+
+    /* Solo las columnas de acción: 30 × 30 px, igual que el móvil. */
     [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(n+3),
     [class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(n+2) {
       display: flex !important;
@@ -1128,8 +1907,11 @@ st.markdown("""
       align-items: center !important;
       justify-content: center !important;
     }
-    [class*="st-key-it-edit-button-wrap-"], [class*="st-key-saved-edit-button-wrap-"],
-    [class*="st-key-it-map-button-wrap-"], [class*="st-key-saved-map-button-wrap-"],
+
+    [class*="st-key-it-edit-button-wrap-"],
+    [class*="st-key-saved-edit-button-wrap-"],
+    [class*="st-key-it-map-button-wrap-"],
+    [class*="st-key-saved-map-button-wrap-"],
     [class*="st-key-it-visit-checkbox-wrap-"] {
       box-sizing: border-box !important;
       display: flex !important;
@@ -1146,8 +1928,11 @@ st.markdown("""
       padding: 0 !important;
       transform: none !important;
     }
-    [class*="st-key-it-edit-button-wrap-"] button, [class*="st-key-saved-edit-button-wrap-"] button,
-    [class*="st-key-it-map-button-wrap-"] a, [class*="st-key-saved-map-button-wrap-"] a {
+
+    [class*="st-key-it-edit-button-wrap-"] button,
+    [class*="st-key-saved-edit-button-wrap-"] button,
+    [class*="st-key-it-map-button-wrap-"] a,
+    [class*="st-key-saved-map-button-wrap-"] a {
       box-sizing: border-box !important;
       display: inline-flex !important;
       flex: 0 0 30px !important;
@@ -1165,6 +1950,7 @@ st.markdown("""
       background-size: 19px 19px !important;
       transform: none !important;
     }
+
     [class*="st-key-it-visit-checkbox-wrap-"] [data-testid="stElementContainer"],
     [class*="st-key-it-visit-checkbox-wrap-"] [data-testid="stCheckbox"],
     [class*="st-key-it-visit-checkbox-wrap-"] [data-testid="stCheckbox"] > label {
@@ -1182,6 +1968,7 @@ st.markdown("""
       margin: 0 !important;
       padding: 0 !important;
     }
+
     [class*="st-key-it-heading-row-"] [data-testid="column"]:first-child [data-testid="stTextInput"],
     [class*="st-key-it-heading-row-"] [data-testid="column"]:first-child [data-baseweb="input"],
     [class*="st-key-it-heading-row-"] [data-testid="column"]:first-child [data-baseweb="base-input"] {
@@ -1190,7 +1977,104 @@ st.markdown("""
       min-width: 66px !important;
       max-width: 66px !important;
     }
+  }
 
+
+  /* ================================================================
+     AJUSTE FINO SOLO ESCRITORIO (>= 769 px)
+     El bloque móvil original permanece intacto.
+     ================================================================ */
+  @media (min-width: 769px) {
+
+    /* RUTA: reloj compacto y acciones agrupadas a 2 px. */
+    [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] {
+      display: flex !important;
+      flex-direction: row !important;
+      flex-wrap: nowrap !important;
+      align-items: center !important;
+      justify-content: flex-start !important;
+      gap: 2px !important;
+      width: 100% !important;
+      min-width: 0 !important;
+    }
+    [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"] {
+      box-sizing: border-box !important;
+      min-width: 0 !important;
+      margin: 0 !important;
+      padding: 0 !important;
+    }
+    [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(1) {
+      flex: 0 0 54px !important;
+      width: 54px !important;
+      min-width: 54px !important;
+      max-width: 54px !important;
+    }
+    [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(2) {
+      flex: 1 1 0% !important;
+      width: auto !important;
+      min-width: 0 !important;
+      max-width: none !important;
+    }
+    [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(n+3) {
+      display: flex !important;
+      flex: 0 0 30px !important;
+      width: 30px !important;
+      min-width: 30px !important;
+      max-width: 30px !important;
+      height: 30px !important;
+      min-height: 30px !important;
+      max-height: 30px !important;
+      align-items: center !important;
+      justify-content: center !important;
+    }
+
+    [class*="st-key-it-edit-button-wrap-"],
+    [class*="st-key-it-map-button-wrap-"],
+    [class*="st-key-it-visit-checkbox-wrap-"] {
+      display: flex !important;
+      flex: 0 0 30px !important;
+      width: 30px !important;
+      min-width: 30px !important;
+      max-width: 30px !important;
+      height: 30px !important;
+      min-height: 30px !important;
+      max-height: 30px !important;
+      align-items: center !important;
+      justify-content: center !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      transform: none !important;
+    }
+    [class*="st-key-it-edit-button-wrap-"] button,
+    [class*="st-key-it-map-button-wrap-"] a {
+      box-sizing: border-box !important;
+      width: 30px !important;
+      min-width: 30px !important;
+      max-width: 30px !important;
+      height: 30px !important;
+      min-height: 30px !important;
+      max-height: 30px !important;
+      margin: 0 !important;
+      padding: 0 !important;
+    }
+    [class*="st-key-it-visit-checkbox-wrap-"] [data-testid="stCheckbox"],
+    [class*="st-key-it-visit-checkbox-wrap-"] [data-testid="stCheckbox"] > label {
+      box-sizing: border-box !important;
+      display: flex !important;
+      width: 30px !important;
+      min-width: 30px !important;
+      max-width: 30px !important;
+      height: 30px !important;
+      min-height: 30px !important;
+      max-height: 30px !important;
+      align-items: center !important;
+      justify-content: center !important;
+      margin: 0 !important;
+      padding: 0 !important;
+    }
+
+    /* Guardados: reducir ambos controles a menos de la mitad de su tamaño
+       previo (hora 44x20 aprox.; selector 54x21 aprox.). */
     [class*="st-key-saved-controls-row-"] {
       width: 100% !important;
       margin-top: 3px !important;
@@ -1274,361 +2158,46 @@ st.markdown("""
     }
   }
 
-  /* =========================================================================
-     11. MEDIA QUERIES (MÓVIL <= 768px)
-     ========================================================================= */
-  @media (max-width: 768px) {
-    html, body {
-      height: auto !important;
-      min-height: 100% !important;
-      overflow-y: auto !important;
-      overscroll-behavior-y: auto !important;
-      margin: 0 !important;
-      width: 100% !important;
-      max-width: 100% !important;
-      overflow-x: hidden !important;
-    }
-    .stApp, [data-testid="stAppViewContainer"], [data-testid="stMain"], section.main {
-      height: auto !important;
-      min-height: 100dvh !important;
-      max-height: none !important;
-      overflow-y: visible !important;
-      overflow-x: hidden !important;
-      margin: 0 !important;
-      width: 100% !important;
-      max-width: 100% !important;
-    }
 
-    [data-testid="stMainBlockContainer"], .block-container {
-      width: 100% !important;
-      max-width: 100% !important;
-      padding: 0.55rem 0.65rem 2rem !important;
-      padding-top: max(0.25rem, env(safe-area-inset-top)) !important;
-      padding-bottom: calc(5rem + env(safe-area-inset-bottom)) !important;
-      margin: 0 auto !important;
-      overflow-x: clip !important;
-      overflow: visible !important;
-      height: auto !important;
-      min-height: 0 !important;
-      max-height: none !important;
-    }
-
-    [data-testid="stMarkdownContainer"], [data-testid="stText"],
-    .stCaption, p, a, code, pre, label {
-      max-width: 100% !important;
-      min-width: 0 !important;
-      overflow-wrap: anywhere !important;
-      word-break: break-word !important;
-    }
-
-    /* Hero Responsive */
-    .hero-container {
-      min-width: 0 !important;
-      height: auto !important;
-      min-height: 0 !important;
-      max-height: none !important;
-      overflow: visible !important;
-      margin-bottom: 12px !important;
-      margin-top: 0 !important;
-      padding: 22px 17px 17px !important; 
-      border-radius: 5px 5px 14px 14px !important;
-    }
-    .hero-container:before { left: 17px; right: 17px; }
-    .hero-title { font-size: 1.8rem !important; line-height: 1.18 !important; }
-    .hero-eyebrow {
-      display: block !important;
-      height: auto !important;
-      max-height: none !important;
-      overflow: visible !important;
-      line-height: 1.4 !important;
-      padding-top: 2px !important;
-    }
-    .hero-pill {
-      display: inline-flex !important;
-      max-width: 100% !important;
-      white-space: normal !important;
-      overflow-wrap: anywhere !important;
-      font-size: 0.71rem !important;
-      line-height: 1.25 !important;
-      padding: 4px 8px !important;
-    }
-    .hero-stat-box { flex: 1 1 28% !important; box-sizing: border-box !important; width: 100% !important; overflow: visible !important; }
-    .hero-stat-val { font-size: 1.25rem !important; }
-    .hero-stat-lbl { white-space: nowrap !important; word-break: normal !important; overflow-wrap: normal !important; }
-    
-    .hero-container > div, .hero-container > div > div:first-child { min-width: 0 !important; width: 100% !important; }
-    .hero-container > div > div:last-child {
-      display: grid !important;
-      gap: 6px !important;
-      width: 100% !important;
-      max-width: 100% !important;
-      min-width: 0 !important;
-      grid-template-columns: minmax(0, 1fr) minmax(88px, 1.18fr) minmax(0, 1fr) !important;
-    }
-    .hero-container .hero-stat-box:nth-child(2) .hero-stat-lbl {
-      white-space: nowrap !important;
-      overflow: visible !important;
-      font-size: 0.58rem !important;
-      letter-spacing: 0 !important;
-    }
-
-    .ny-card, .place-sheet { min-width: 0 !important; padding: 13px !important; }
-    .ny-card-header { line-height: 1.3 !important; }
-
-    /* Layout Horizontal Flex / Apilamiento móvil */
-    [data-testid="stHorizontalBlock"] {
+  /* ================================================================
+     ESCRITORIO: reglas finales únicas para Ruta y Guardados.
+     No se aplican a móvil (<= 768 px).
+     ================================================================ */
+  @media screen and (min-width: 769px) {
+    /* RUTA: reloj | información flexible | editar | mapa | visitado */
+    [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] {
       display: flex !important;
-      flex-wrap: wrap !important;
-      align-items: flex-start !important;
-      gap: 0.5rem !important;
-      width: 100% !important;
-      min-width: 0 !important;
-    }
-    [data-testid="stHorizontalBlock"] > [data-testid="column"] {
-      flex: 1 1 100% !important;
-      width: 100% !important;
-      min-width: 0 !important;
-      max-width: 100% !important;
-      margin: 0 !important;
-      padding: 0 !important;
-    }
-
-    /* Filas con clase Guardados Header */
-    [class*="st-key-guardados-header-row"] [data-testid="stHorizontalBlock"] {
-      display: grid !important;
-      grid-template-columns: minmax(0, 1fr) auto !important;
+      flex-flow: row nowrap !important;
       align-items: center !important;
-      gap: 6px !important;
-    }
-    [class*="st-key-guardados-header-row"] [data-testid="column"] {
-      width: auto !important;
-      min-width: 0 !important;
-      flex: none !important;
-    }
-    [class*="st-key-btn_sync_guardados_wrap"] button {
-      min-height: 30px !important;
-      height: 30px !important;
-      padding: 0 9px !important;
-      font-size: 0.74rem !important;
-      white-space: nowrap !important;
-      width: auto !important;
-    }
-
-    /* Botón Mini Edit */
-    .edit-mini-btn { display: flex !important; justify-content: flex-end !important; width: 100% !important; }
-    .edit-mini-btn button, [data-testid="column"]:has(.edit-mini-btn) .stButton > button {
-      display: inline-flex !important;
-      align-items: center !important;
-      justify-content: center !important;
-      width: 34px !important;
-      min-width: 34px !important;
-      max-width: 34px !important;
-      height: 30px !important;
-      min-height: 30px !important;
-      max-height: 34px !important;
-      padding: 0 !important;
-      font-size: 1.05rem !important;
-      line-height: 1.1 !important;
-      overflow: visible !important;
-      font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif !important;
-    }
-
-    /* Marcadores HTML */
-    .mobile-control-marker { display: block !important; width: 0 !important; height: 0 !important; margin: 0 !important; padding: 0 !important; line-height: 0 !important; overflow: hidden !important; }
-    [data-testid="stElementContainer"]:has(.mobile-control-marker) {
-      height: 0 !important;
-      min-height: 0 !important;
-      margin: 0 !important;
-      padding: 0 !important;
-      overflow: hidden !important;
-    }
-
-    /* Widgets compactos */
-    [data-testid="column"]:has(.compact-hora) [data-testid="stTextInput"],
-    [data-testid="column"]:has(.compact-hora) [data-baseweb="input"],
-    [data-testid="column"]:has(.compact-hora) [data-baseweb="base-input"],
-    [data-testid="column"]:has(.compact-maps) [data-testid="stLinkButton"] {
-      width: 100% !important;
-      max-width: 100% !important;
-      min-width: 0 !important;
-      margin: 0 !important;
-      transform: none !important;
-    }
-    [data-testid="column"]:has(.compact-dia) [data-testid="stSelectbox"],
-    [data-testid="column"]:has(.compact-dia) [data-baseweb="select"] {
-      width: max-content !important;
-      min-width: 96px !important;
-      max-width: 100% !important;
-      margin: 0 !important;
-      transform: none !important;
-    }
-    [data-testid="column"]:has(.compact-hora) [data-baseweb="input"],
-    [data-testid="column"]:has(.compact-hora) [data-baseweb="base-input"],
-    [data-testid="column"]:has(.compact-dia) [data-baseweb="select"] > div,
-    [data-testid="column"]:has(.compact-maps) [data-testid="stLinkButton"] > a {
-      min-height: 34px !important;
-      height: 34px !important;
-      max-height: 34px !important;
-      border-radius: 8px !important;
-    }
-    [data-testid="column"]:has(.compact-hora) input {
-      min-width: 0 !important;
-      width: 100% !important;
-      height: 32px !important;
-      min-height: 32px !important;
-      padding: 0 4px !important;
-      font-size: 0.78rem !important;
-      letter-spacing: 0 !important;
-      text-align: center !important;
-      font-variant-numeric: tabular-nums !important;
-    }
-    [data-testid="column"]:has(.compact-dia) [data-baseweb="select"] span,
-    [data-testid="column"]:has(.compact-dia) [data-baseweb="select"] div {
-      font-size: 0.72rem !important;
-      line-height: 1.1 !important;
-    }
-    [data-testid="column"]:has(.compact-dia) [data-baseweb="select"] > div {
-      padding-left: 6px !important;
-      padding-right: 18px !important;
-      width: max-content !important;
-      min-width: 96px !important;
-      max-width: 100% !important;
-    }
-    [data-testid="column"]:has(.compact-dia) [data-baseweb="select"] input { caret-color: transparent !important; }
-    [data-testid="column"]:has(.compact-maps) [data-testid="stLinkButton"] > a {
-      display: flex !important;
-      align-items: center !important;
-      justify-content: center !important;
-      width: 40px !important;
-      min-width: 40px !important;
-      max-width: 40px !important;
-      padding: 0 !important;
-      font-size: 1rem !important;
-      line-height: 1 !important;
-      white-space: nowrap !important;
-      overflow: visible !important;
-      text-overflow: clip !important;
-      font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif !important;
-    }
-
-    /* Grids en 2 columnas */
-    [class*="st-key-flight-links-"] [data-testid="stHorizontalBlock"],
-    [class*="st-key-gmaps-actions-"] [data-testid="stHorizontalBlock"] {
-      display: grid !important;
-      grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-      align-items: stretch !important;
-      gap: 7px !important;
-      width: 100% !important;
-    }
-    [class*="st-key-flight-links-"] [data-testid="column"],
-    [class*="st-key-gmaps-actions-"] [data-testid="column"] {
-      display: block !important;
-      flex: none !important;
+      justify-content: flex-start !important;
+      gap: 1px !important;
       width: 100% !important;
       min-width: 0 !important;
       max-width: 100% !important;
-      margin: 0 !important;
-      padding: 0 !important;
     }
-    [class*="st-key-flight-links-"] .stLinkButton > a,
-    [class*="st-key-gmaps-actions-"] .stButton > button {
-      min-height: 36px !important;
-      height: auto !important;
-      padding: 6px 5px !important;
-      font-size: 0.72rem !important;
-      white-space: normal !important;
-      line-height: 1.15 !important;
-      overflow-wrap: anywhere !important;
-    }
-
-    /* Pestañas móvil */
-    .stTabs [data-baseweb="tab-list"], [data-testid="stTabs"] [role="tablist"] {
-      display: grid !important;
-      grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-      gap: 4px !important;
-      padding: 4px !important;
-      overflow: visible !important;
-      white-space: normal !important;
-    }
-    .stTabs [data-baseweb="tab"], [data-testid="stTabs"] button[role="tab"] {
-      display: flex !important;
-      justify-content: center !important;
-      align-items: center !important;
-      width: 100% !important;
-      min-width: 0 !important;
-      min-height: 30px !important;
-      height: auto !important;
-      padding: .55rem .5rem !important;
-      white-space: normal !important;
-      text-align: center !important;
-      line-height: 1.15 !important;
-      font-size: 0.75rem !important;
-      overflow-wrap: anywhere !important;
-    }
-
-    /* Adaptación general de inputs y botones a pantalla completa */
-    .stButton, .stFormSubmitButton, [data-testid="stLinkButton"],
-    .stSelectbox, .stTextInput, .stNumberInput, .stDateInput,
-    .stMultiSelect, .stSlider, [data-testid="stFileUploader"],
-    [data-baseweb="select"], [data-baseweb="input"], [data-baseweb="base-input"] {
-      width: 100% !important;
-      max-width: 100% !important;
-      min-width: 0 !important;
-    }
-    .stButton > button, .stFormSubmitButton > button, [data-testid="stLinkButton"] > a {
-      width: 100% !important;
-      max-width: 100% !important;
-      min-width: 0 !important;
-      min-height: 36px !important;
-      height: auto !important;
-      padding: 7px 8px !important;
-      white-space: normal !important;
-      line-height: 1.15 !important;
-      overflow-wrap: anywhere !important;
-      font-size: 0.76rem !important;
-    }
-    .stRadio > div { flex-wrap: wrap !important; gap: 0.45rem !important; }
-    iframe { display: block !important; width: 100% !important; max-width: 100% !important; height: 380px !important; }
-    .gmaps-list-url { overflow-wrap: anywhere !important; word-break: break-all !important; }
-
-    /* Estilos de fichas en móvil */
-    .place-list-title { font-size: 1.25rem !important; line-height: 1.22 !important; letter-spacing: 0 !important; }
-    .place-list-address { font-size: 0.72rem !important; line-height: 1.28 !important; margin-top: 2px !important; }
-    .place-note { font-size: 0.70rem !important; line-height: 1.28 !important; }
-    .badge-cat, .badge-indoor, .badge-outdoor { font-size: 0.66rem !important; line-height: 1.18 !important; padding: 1px 5px !important; }
-
-    /* Override flex-wrap para filas específicas */
-    [class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"] {
-      display: grid !important;
-      grid-template-columns: minmax(0, 1fr) 38px 30px !important;
-      grid-auto-flow: column !important;
-      align-items: center !important;
-      justify-content: stretch !important;
-      column-gap: 2px !important;
-      row-gap: 0 !important;
-      width: 100% !important;
-      min-width: 0 !important;
-      max-width: 100% !important;
-      overflow: visible !important;
-    }
-    [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"],
-    [class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"] {
+    [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"] {
       box-sizing: border-box !important;
-      display: flex !important;
       min-width: 0 !important;
-      max-width: 100% !important;
       margin: 0 !important;
       padding: 0 !important;
-      overflow: visible !important;
+      align-self: center !important;
     }
-    [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:first-child,
-    [class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:first-child {
+    [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(1) {
+      display: block !important;
+      flex: 0 0 44px !important;
+      width: 44px !important;
+      min-width: 44px !important;
+      max-width: 44px !important;
+    }
+    [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(2) {
+      display: block !important;
       flex: 1 1 0% !important;
       width: auto !important;
       min-width: 0 !important;
+      max-width: none !important;
     }
-    [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(n+2),
-    [class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(n+2) {
+    [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(n+3) {
+      display: flex !important;
       flex: 0 0 30px !important;
       width: 30px !important;
       min-width: 30px !important;
@@ -1639,130 +2208,140 @@ st.markdown("""
       align-items: center !important;
       justify-content: center !important;
     }
-
-    [class*="st-key-it-controls-row-"] [data-testid="stHorizontalBlock"],
-    [class*="st-key-saved-controls-row-"] [data-testid="stHorizontalBlock"] {
-      display: grid !important;
-      grid-template-columns: 80px 125px !important;
-      column-gap: 4px !important;
-      align-items: center !important;
-      justify-content: start !important;
+    [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stMarkdown"],
+    [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stElementContainer"],
+    [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2) .place-list-title,
+    [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2) .place-list-address {
       width: 100% !important;
       min-width: 0 !important;
       max-width: 100% !important;
+      white-space: normal !important;
+      overflow-wrap: anywhere !important;
     }
-    [class*="st-key-it-controls-row-"] [data-testid="column"],
-    [class*="st-key-saved-controls-row-"] [data-testid="column"] {
-      display: block !important;
-      flex: none !important;
-      width: auto !important;
-      min-width: 0 !important;
-      max-width: 100% !important;
+    [class*="st-key-it-edit-button-wrap-"],
+    [class*="st-key-it-map-button-wrap-"],
+    [class*="st-key-it-visit-checkbox-wrap-"] {
+      box-sizing: border-box !important;
+      display: flex !important;
+      flex: 0 0 30px !important;
+      width: 30px !important;
+      min-width: 30px !important;
+      max-width: 30px !important;
+      height: 30px !important;
+      min-height: 30px !important;
+      max-height: 30px !important;
+      align-items: center !important;
+      justify-content: center !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      transform: none !important;
+    }
+    [class*="st-key-it-edit-button-wrap-"] button,
+    [class*="st-key-it-map-button-wrap-"] a {
+      box-sizing: border-box !important;
+      width: 30px !important;
+      min-width: 30px !important;
+      max-width: 30px !important;
+      height: 30px !important;
+      min-height: 30px !important;
+      max-height: 30px !important;
       margin: 0 !important;
       padding: 0 !important;
     }
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:first-child [data-testid="stTextInput"],
+    [class*="st-key-it-visit-checkbox-wrap-"] [data-testid="stCheckbox"],
+    [class*="st-key-it-visit-checkbox-wrap-"] [data-testid="stCheckbox"] > label {
+      display: flex !important;
+      width: 30px !important;
+      min-width: 30px !important;
+      max-width: 30px !important;
+      height: 30px !important;
+      min-height: 30px !important;
+      max-height: 30px !important;
+      align-items: center !important;
+      justify-content: center !important;
+      margin: 0 !important;
+      padding: 0 !important;
+    }
+    [class*="st-key-it-heading-row-"] [data-testid="column"]:first-child [data-testid="stTextInput"],
+    [class*="st-key-it-heading-row-"] [data-testid="column"]:first-child [data-baseweb="input"],
+    [class*="st-key-it-heading-row-"] [data-testid="column"]:first-child [data-baseweb="base-input"] {
+      box-sizing: border-box !important;
+      width: 44px !important;
+      min-width: 44px !important;
+      max-width: 44px !important;
+      margin: 0 !important;
+    }
+
+    /* GUARDADOS: hora y día en una fila compacta, sin columnas sobrantes. */
+    [class*="st-key-saved-controls-row-"] {
+      width: 100% !important;
+      margin-top: 3px !important;
+      overflow: visible !important;
+    }
+    [class*="st-key-saved-controls-row-"] [data-testid="stHorizontalBlock"] {
+      display: flex !important;
+      flex-flow: row nowrap !important;
+      align-items: center !important;
+      justify-content: flex-start !important;
+      gap: 4px !important;
+      width: auto !important;
+      min-width: 0 !important;
+      max-width: 100% !important;
+    }
+    [class*="st-key-saved-controls-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"] {
+      display: block !important;
+      flex: 0 0 auto !important;
+      width: auto !important;
+      min-width: 0 !important;
+      max-width: none !important;
+      margin: 0 !important;
+      padding: 0 !important;
+    }
+    [class*="st-key-saved-controls-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:first-child,
     [class*="st-key-saved-controls-row-"] [data-testid="column"]:first-child [data-testid="stTextInput"],
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:first-child [data-baseweb="input"],
     [class*="st-key-saved-controls-row-"] [data-testid="column"]:first-child [data-baseweb="input"],
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:first-child [data-baseweb="base-input"],
     [class*="st-key-saved-controls-row-"] [data-testid="column"]:first-child [data-baseweb="base-input"] {
       box-sizing: border-box !important;
-      width: 80px !important;
-      min-width: 80px !important;
-      max-width: 80px !important;
-      height: 40px !important;
-      min-height: 40px !important;
-      max-height: 40px !important;
+      flex: 0 0 40px !important;
+      width: 40px !important;
+      min-width: 40px !important;
+      max-width: 40px !important;
+      height: 20px !important;
+      min-height: 20px !important;
+      max-height: 20px !important;
       margin: 0 !important;
-      padding: 0 3px !important;
+      padding: 0 !important;
     }
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:first-child input,
     [class*="st-key-saved-controls-row-"] [data-testid="column"]:first-child input {
       box-sizing: border-box !important;
       width: 100% !important;
       min-width: 0 !important;
-      height: 34px !important;
-      min-height: 34px !important;
+      height: 18px !important;
+      min-height: 18px !important;
       padding: 0 2px !important;
-      font-size: 0.78rem !important;
-      font-weight: 700 !important;
+      font-size: 0.60rem !important;
       text-align: center !important;
     }
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(2) [data-testid="stSelectbox"],
+    [class*="st-key-saved-controls-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(2),
     [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(2) [data-testid="stSelectbox"],
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(2) [data-baseweb="select"],
     [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(2) [data-baseweb="select"],
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(2) [data-baseweb="select"] > div,
     [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(2) [data-baseweb="select"] > div {
       box-sizing: border-box !important;
-      width: 125px !important;
-      min-width: 125px !important;
-      max-width: 125px !important;
-      height: 45px !important;
-      min-height: 45px !important;
-      max-height: 45px !important;
+      flex: 0 0 50px !important;
+      width: 50px !important;
+      min-width: 50px !important;
+      max-width: 50px !important;
+      height: 24px !important;
+      min-height: 20px !important;
+      max-height: 20px !important;
+      margin: 0 !important;
+      font-size: 0.58rem !important;
     }
-    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(2) [data-baseweb="select"] span,
-    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(2) [data-baseweb="select"] span {
-      font-size: 0.72rem !important;
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(2) [data-baseweb="select"] * {
+      font-size: 0.58rem !important;
       line-height: 1.1 !important;
-      white-space: nowrap !important;
-    }
-
-    /* Transformaciones offset móvil */
-    [class*="st-key-it-visit-checkbox-wrap-"] { transform: translate(3px, -4.5px) !important; }
-    [class*="st-key-saved-edit-button-wrap-"] { transform: translate(11px, 0px) !important; }
-    [class*="st-key-it-edit-button-wrap-"] { transform: translate(4px, 0px) !important; }
-
-    /* Contenedores de pestañas y bloques */
-    [data-testid="stTabs"], [data-testid="stTabContent"], [data-testid="stVerticalBlock"] {
-      min-height: 0 !important;
-      max-height: none !important;
-      overflow: visible !important;
-    }
-    footer, [data-testid="stFooter"] {
-      display: block !important;
-      visibility: visible !important;
-      height: auto !important;
-      min-height: 2rem !important;
-      padding-bottom: env(safe-area-inset-bottom) !important;
-    }
-
-    .st-key-seccion_principal_activa {
-      margin: 10px -2px 18px -2px !important;
-      padding: 5px !important;
-      border-radius: 14px !important;
-    }
-    .st-key-seccion_principal_activa [role="radiogroup"] {
-      justify-content: flex-start !important;
-      gap: 5px !important;
-    }
-    .st-key-seccion_principal_activa [role="radiogroup"] label {
-      flex: 0 0 auto !important;
-      min-width: max-content !important;
-      min-height: 43px !important;
-      padding: 8px 13px !important;
-    }
-    .st-key-seccion_principal_activa [role="radiogroup"] label p,
-    .st-key-seccion_principal_activa [role="radiogroup"] label span:not([data-testid]) {
-      font-size: 0.86rem !important;
     }
   }
-
-  /* =========================================================================
-     12. MEDIA QUERIES (PANTALLAS MUY PEQUEÑAS <= 380px y <= 320px)
-     ========================================================================= */
-  @media (max-width: 380px) {
-    .block-container { padding-left: 0.45rem !important; padding-right: 0.45rem !important; }
-    .stTabs [data-baseweb="tab"], [data-testid="stTabs"] button[role="tab"] { font-size: 0.69rem !important; padding: 4px 2px !important; }
-  }
-
-  @media (max-width: 320px) {
-    .hero-stat-lbl { font-size: 0.51rem !important; letter-spacing: 0 !important; }
-    .place-list-address, .place-note { font-size: 0.68rem !important; }
-  }
-  
 
 </style>
 """, unsafe_allow_html=True)
