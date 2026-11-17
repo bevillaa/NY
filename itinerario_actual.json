@@ -1546,5 +1546,47 @@
     "tipo": "Interior",
     "lista_origen": "NY Sweets",
     "visitado": false
+  },
+  {
+    "id": 118,
+    "nombre": "Pasta de Pasta",
+    "lat": 40.7290212,
+    "lon": -73.98450009999999,
+    "dia": 0,
+    "hora": "",
+    "direccion": "165 1st Ave, New York, NY 10003, United States",
+    "nota": "",
+    "categoria": "🍽️ Gastronomía",
+    "tipo": "Interior",
+    "lista_origen": "Food",
+    "visitado": false
+  },
+  {
+    "id": 119,
+    "nombre": "L’industrie Pizzeria - West Village",
+    "lat": 40.7332284,
+    "lon": -74.00491099999999,
+    "dia": 0,
+    "hora": "",
+    "direccion": "104 Christopher St, New York, NY 10014, United States",
+    "nota": "",
+    "categoria": "🍽️ Gastronomía",
+    "tipo": "Interior",
+    "lista_origen": "Food",
+    "visitado": false
+  },
+  {
+    "id": 120,
+    "nombre": "Raising Cane's Chicken Fingers",
+    "lat": 40.757361599999996,
+    "lon": -73.9862806,
+    "dia": 0,
+    "hora": "",
+    "direccion": "1501 Broadway, New York, NY 10036, United States",
+    "nota": "",
+    "categoria": "🍽️ Gastronomía",
+    "tipo": "Interior",
+    "lista_origen": "Food",
+    "visitado": false
   }
 ]
