@@ -1642,6 +1642,9 @@ st.markdown("""
   }
   [class*="st-key-it-controls-row-"] [data-testid="column"]:first-child [data-testid="stTextInput"],
   [class*="st-key-saved-controls-row-"] [data-testid="column"]:first-child [data-testid="stTextInput"] {
+    height: 35px !important;
+    min-height: 35px !important;
+    max-height: 35px !important;
     width: 99px !important;
     min-width: 99px !important;
     max-width: 99px !important;
@@ -1678,6 +1681,9 @@ st.markdown("""
   [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(2) [data-testid="stSelectbox"],
   [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(2) [data-baseweb="select"],
   [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(2) [data-baseweb="select"] {
+    height: 35px !important;
+    min-height: 35px !important;
+    max-height: 35px !important;
     width: 125px !important;
     min-width: 125px !important;
     max-width: 125px !important;
@@ -1789,6 +1795,9 @@ st.markdown("""
     [class*="st-key-it-controls-row-"] [data-testid="column"]:first-child [data-baseweb="base-input"],
     [class*="st-key-saved-controls-row-"] [data-testid="column"]:first-child [data-baseweb="base-input"] {
       box-sizing: border-box !important;
+      height: 35px !important;
+      min-height: 35px !important;
+      max-height: 35px !important;
       width: 100px !important;
       min-width: 100px !important;
       max-width: 100px !important;
