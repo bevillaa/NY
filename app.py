@@ -2501,9 +2501,11 @@ st.markdown("""
     }
   }
 
-  /* MÓVIL: mover solo el bloque de texto de Ruta hacia la izquierda. */
+  /* MÓVIL: desplazar el contenido visible de Ruta, no la columna de Streamlit. */
   @media (max-width: 768px) {
-    [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(2) {
+    [class*="st-key-it-heading-row-"] .place-list-title,
+    [class*="st-key-it-heading-row-"] .place-list-address,
+    [class*="st-key-it-heading-row-"] .place-note {
       position: relative !important;
       left: -6px !important;
     }
