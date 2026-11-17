@@ -2501,33 +2501,46 @@ st.markdown("""
     }
   }
 
-  /* MÓVIL: desplazar completa la columna de información de Ruta.
-     Mueve juntos título, dirección y nota, sin tocar hora ni botones. */
+  /* MÓVIL: texto flexible hasta los tres controles, con botones separados 2 px. */
   @media screen and (max-width: 768px) {
-    /* La columna de información ocupa TODO el espacio libre hasta el primer icono. */
     [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] {
       display: grid !important;
-      grid-template-columns: 84px minmax(0, 1fr) 30px 30px 30px !important;
+      grid-template-columns: 72px minmax(0, 1fr) 30px 30px 30px !important;
       grid-auto-flow: column !important;
-      column-gap: 1px !important;
-      align-items: stretch !important;
+      column-gap: 2px !important;
+      row-gap: 0 !important;
+      align-items: center !important;
       justify-content: stretch !important;
       width: 100% !important;
       min-width: 0 !important;
       max-width: 100% !important;
     }
+
+    [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"] {
+      box-sizing: border-box !important;
+      min-width: 0 !important;
+      margin: 0 !important;
+      padding: 0 !important;
+    }
+
+    [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(1) {
+      grid-column: 1 !important;
+      width: 72px !important;
+      min-width: 72px !important;
+      max-width: 72px !important;
+    }
+
     [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(2) {
       grid-column: 2 !important;
-      justify-self: stretch !important;
-      align-self: stretch !important;
       display: block !important;
-      box-sizing: border-box !important;
       width: 100% !important;
       min-width: 0 !important;
       max-width: 100% !important;
+      justify-self: stretch !important;
       transform: none !important;
       overflow: visible !important;
     }
+
     [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stMarkdown"],
     [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stMarkdown"] > div,
     [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stElementContainer"],
@@ -2541,15 +2554,42 @@ st.markdown("""
       max-width: 100% !important;
       white-space: normal !important;
       overflow-wrap: anywhere !important;
-    }    
-    [class*="st-key-it-heading-row-"] .place-list-title,
-    [class*="st-key-it-heading-row-"] .place-list-address,
-    [class*="st-key-it-heading-row-"] .place-note {
-      position: relative !important;
-      left: -20px !important;
+    }
+
+    [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(n+3),
+    [class*="st-key-it-edit-button-wrap-"],
+    [class*="st-key-it-map-button-wrap-"],
+    [class*="st-key-it-visit-checkbox-wrap-"] {
+      box-sizing: border-box !important;
+      display: flex !important;
+      flex: none !important;
+      width: 30px !important;
+      min-width: 30px !important;
+      max-width: 30px !important;
+      height: 30px !important;
+      min-height: 30px !important;
+      max-height: 30px !important;
+      align-items: center !important;
+      justify-content: center !important;
+      justify-self: center !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      transform: none !important;
+    }
+
+    [class*="st-key-it-edit-button-wrap-"] [data-testid="stButton"] > button,
+    [class*="st-key-it-map-button-wrap-"] a,
+    [class*="st-key-it-visit-checkbox-wrap-"] [data-testid="stCheckbox"] > label {
+      box-sizing: border-box !important;
+      width: 30px !important;
+      min-width: 30px !important;
+      max-width: 30px !important;
+      height: 30px !important;
+      min-height: 30px !important;
+      max-height: 30px !important;
+      margin: 0 !important;
     }
   }
-
 </style>
 """, unsafe_allow_html=True)
 
