@@ -1532,5 +1532,19 @@
     "tipo": "Interior",
     "lista_origen": "NY",
     "visitado": false
+  },
+  {
+    "id": 117,
+    "nombre": "Peter Pan Donut & Pastry Shop",
+    "lat": 40.726104899999996,
+    "lon": -73.952254,
+    "dia": 0,
+    "hora": "",
+    "direccion": "727 Manhattan Ave, Brooklyn, NY 11222, United States",
+    "nota": "",
+    "categoria": "🍪 Dulces",
+    "tipo": "Interior",
+    "lista_origen": "NY Sweets",
+    "visitado": false
   }
 ]
