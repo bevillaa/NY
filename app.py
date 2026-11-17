@@ -1876,8 +1876,7 @@ st.markdown("""
     margin-top: 0 !important;
     margin-bottom: 0 !important;
   }
-  /* Ajuste exclusivo para móvil: desplaza el checkbox de Ruta ligeramente
-     hacia arriba para alinearlo con Mapa y Editar. */
+  /* Ajuste exclusivo para móvil: desplaza el checkbox de Ruta ligeramente hacia arriba para alinearlo con Mapa y Editar. */
   @media (max-width: 768px) {
     [class*="st-key-it-visit-checkbox-wrap-"] {
       transform: translate(3px, -4.5px) !important;
@@ -1885,7 +1884,7 @@ st.markdown("""
   }
   /* Ajuste hacia arriba para alinearlo con Mapa y Editar. */
   @media (max-width: 768px) {
-    [class*="st-key-it-heading-row-"]{
+    [class*="st-key-it-edit-button-wrap-"]{
       transform: translate(3px,0px) !important;
     }
   }
