@@ -1547,7 +1547,7 @@ st.markdown("""
       grid-auto-flow: column !important;
       align-items: center !important;
       justify-content: stretch !important;
-      column-gap: 2px !important;
+      column-gap: 1px !important;
       row-gap: 0 !important;
       width: 100% !important;
       min-width: 0 !important;
@@ -1569,6 +1569,10 @@ st.markdown("""
       flex: 1 1 0% !important;
       width: auto !important;
       min-width: 0 !important;
+    }
+    [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(2) {
+      position: relative !important;
+      left: 6px !important;
     }
     [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(n+2),
     [class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(n+2) {
@@ -1699,9 +1703,6 @@ st.markdown("""
   }
   /* Ajustes finales de alineación móvil para los controles de las filas. */
   @media (max-width: 768px) {
-    [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(2) {
-      transform: translateX(6px) !important;
-    }
     [class*="st-key-it-visit-checkbox-wrap-"] { transform: translate(3px, -4.5px) !important; }
     [class*="st-key-saved-edit-button-wrap-"] { transform: translate(11px, 0px) !important; }
     [class*="st-key-it-edit-button-wrap-"] { transform: translate(4px, 0px) !important; }
@@ -2132,10 +2133,10 @@ st.markdown("""
       box-sizing: border-box !important;
       width: 100% !important;
       min-width: 0 !important;
-      height: 22px !important;
-      min-height: 22px !important;
-      padding: 0 2px !important;
-      font-size: 0.68rem !important;
+      height: 18px !important;
+      min-height: 18px !important;
+      padding: 0 1px !important;
+      font-size: 0.62rem !important;
       text-align: center !important;
     }
     [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(2) [data-testid="stSelectbox"],
@@ -2184,10 +2185,10 @@ st.markdown("""
     }
     [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(1) {
       display: block !important;
-      flex: 0 0 44px !important;
-      width: 44px !important;
-      min-width: 44px !important;
-      max-width: 44px !important;
+      flex: 0 0 42px !important;
+      width: 42px !important;
+      min-width: 42px !important;
+      max-width: 42px !important;
     }
     [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(2) {
       display: block !important;
@@ -2266,9 +2267,9 @@ st.markdown("""
     [class*="st-key-it-heading-row-"] [data-testid="column"]:first-child [data-baseweb="input"],
     [class*="st-key-it-heading-row-"] [data-testid="column"]:first-child [data-baseweb="base-input"] {
       box-sizing: border-box !important;
-      width: 44px !important;
-      min-width: 44px !important;
-      max-width: 44px !important;
+      width: 42px !important;
+      min-width: 42px !important;
+      max-width: 42px !important;
       margin: 0 !important;
     }
 
@@ -2283,7 +2284,7 @@ st.markdown("""
       flex-flow: row nowrap !important;
       align-items: center !important;
       justify-content: flex-start !important;
-      gap: 4px !important;
+      gap: 1px !important;
       width: auto !important;
       min-width: 0 !important;
       max-width: 100% !important;
@@ -2316,10 +2317,10 @@ st.markdown("""
       box-sizing: border-box !important;
       width: 100% !important;
       min-width: 0 !important;
-      height: 18px !important;
-      min-height: 18px !important;
+      height: 22px !important;
+      min-height: 22px !important;
       padding: 0 2px !important;
-      font-size: 0.60rem !important;
+      font-size: 0.68rem !important;
       text-align: center !important;
     }
     [class*="st-key-saved-controls-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(2),
@@ -2331,14 +2332,14 @@ st.markdown("""
       width: 50px !important;
       min-width: 50px !important;
       max-width: 50px !important;
-      height: 24px !important;
+      height: 20px !important;
       min-height: 20px !important;
       max-height: 20px !important;
       margin: 0 !important;
-      font-size: 0.58rem !important;
+      font-size: 0.65rem !important;
     }
     [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(2) [data-baseweb="select"] * {
-      font-size: 0.58rem !important;
+      font-size: 0.65rem !important;
       line-height: 1.1 !important;
     }
   }
