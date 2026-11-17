@@ -1976,6 +1976,246 @@ st.markdown("""
     }
   }
 
+
+  /* ================================================================
+     CORRECCIÓN SOLO WEB (>= 769 px)
+     - Acciones de Ruta agrupadas como en móvil.
+     - Hora y selector de día visibles en Guardados.
+     - No modifica ninguna regla ni dimensión móvil.
+     ================================================================ */
+  @media (min-width: 769px) {
+
+    /* RUTA: hora | información flexible | editar | mapa | checkbox */
+    [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] {
+      display: flex !important;
+      flex-direction: row !important;
+      flex-wrap: nowrap !important;
+      align-items: center !important;
+      justify-content: flex-start !important;
+      gap: 3px !important;
+      width: 100% !important;
+      min-width: 0 !important;
+    }
+
+    [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"] {
+      box-sizing: border-box !important;
+      min-width: 0 !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      align-self: center !important;
+    }
+
+    [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(1) {
+      display: block !important;
+      flex: 0 0 66px !important;
+      width: 66px !important;
+      min-width: 66px !important;
+      max-width: 66px !important;
+    }
+
+    [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(2) {
+      display: block !important;
+      flex: 1 1 0% !important;
+      width: auto !important;
+      min-width: 0 !important;
+      max-width: none !important;
+    }
+
+    [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(n+3) {
+      display: flex !important;
+      flex: 0 0 30px !important;
+      width: 30px !important;
+      min-width: 30px !important;
+      max-width: 30px !important;
+      height: 30px !important;
+      min-height: 30px !important;
+      max-height: 30px !important;
+      align-items: center !important;
+      justify-content: center !important;
+    }
+
+    /* Guardados: información | editar | mapa, con acciones contiguas. */
+    [class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"] {
+      display: flex !important;
+      flex-direction: row !important;
+      flex-wrap: nowrap !important;
+      align-items: center !important;
+      justify-content: flex-start !important;
+      gap: 3px !important;
+      width: 100% !important;
+      min-width: 0 !important;
+    }
+
+    [class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"] {
+      box-sizing: border-box !important;
+      min-width: 0 !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      align-self: center !important;
+    }
+
+    [class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:first-child {
+      display: block !important;
+      flex: 1 1 0% !important;
+      width: auto !important;
+      min-width: 0 !important;
+      max-width: none !important;
+    }
+
+    [class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(n+2) {
+      display: flex !important;
+      flex: 0 0 30px !important;
+      width: 30px !important;
+      min-width: 30px !important;
+      max-width: 30px !important;
+      height: 30px !important;
+      min-height: 30px !important;
+      max-height: 30px !important;
+      align-items: center !important;
+      justify-content: center !important;
+    }
+
+    /* Unifica cajas y controles internos en 30 px; no deja columnas fantasma. */
+    [class*="st-key-it-edit-button-wrap-"],
+    [class*="st-key-it-map-button-wrap-"],
+    [class*="st-key-it-visit-checkbox-wrap-"],
+    [class*="st-key-saved-edit-button-wrap-"],
+    [class*="st-key-saved-map-button-wrap-"] {
+      box-sizing: border-box !important;
+      display: flex !important;
+      flex: 0 0 30px !important;
+      width: 30px !important;
+      min-width: 30px !important;
+      max-width: 30px !important;
+      height: 30px !important;
+      min-height: 30px !important;
+      max-height: 30px !important;
+      align-items: center !important;
+      justify-content: center !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      transform: none !important;
+    }
+
+    [class*="st-key-it-edit-button-wrap-"] button,
+    [class*="st-key-it-map-button-wrap-"] a,
+    [class*="st-key-saved-edit-button-wrap-"] button,
+    [class*="st-key-saved-map-button-wrap-"] a {
+      box-sizing: border-box !important;
+      display: inline-flex !important;
+      flex: 0 0 30px !important;
+      width: 30px !important;
+      min-width: 30px !important;
+      max-width: 30px !important;
+      height: 30px !important;
+      min-height: 30px !important;
+      max-height: 30px !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      transform: none !important;
+    }
+
+    [class*="st-key-it-visit-checkbox-wrap-"] [data-testid="stCheckbox"],
+    [class*="st-key-it-visit-checkbox-wrap-"] [data-testid="stCheckbox"] > label {
+      box-sizing: border-box !important;
+      display: flex !important;
+      flex: 0 0 30px !important;
+      width: 30px !important;
+      min-width: 30px !important;
+      max-width: 30px !important;
+      height: 30px !important;
+      min-height: 30px !important;
+      max-height: 30px !important;
+      align-items: center !important;
+      justify-content: center !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      transform: none !important;
+    }
+
+    /* GUARDADOS: hora y selector de día visibles y en una sola línea. */
+    [class*="st-key-saved-controls-row-"] {
+      display: block !important;
+      width: 100% !important;
+      min-width: 0 !important;
+      margin-top: 5px !important;
+      overflow: visible !important;
+    }
+
+    [class*="st-key-saved-controls-row-"] [data-testid="stHorizontalBlock"] {
+      display: flex !important;
+      flex-direction: row !important;
+      flex-wrap: nowrap !important;
+      align-items: center !important;
+      justify-content: flex-start !important;
+      gap: 6px !important;
+      width: auto !important;
+      min-width: 0 !important;
+      max-width: 100% !important;
+      overflow: visible !important;
+    }
+
+    [class*="st-key-saved-controls-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"] {
+      display: block !important;
+      flex: 0 0 auto !important;
+      width: auto !important;
+      min-width: 0 !important;
+      max-width: none !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      overflow: visible !important;
+    }
+
+    [class*="st-key-saved-controls-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:first-child {
+      flex: 0 0 99px !important;
+      width: 99px !important;
+      min-width: 99px !important;
+      max-width: 99px !important;
+    }
+
+    [class*="st-key-saved-controls-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(2) {
+      flex: 0 0 125px !important;
+      width: 125px !important;
+      min-width: 125px !important;
+      max-width: 125px !important;
+    }
+
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:first-child [data-testid="stTextInput"],
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:first-child [data-baseweb="input"],
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:first-child [data-baseweb="base-input"] {
+      box-sizing: border-box !important;
+      display: flex !important;
+      width: 99px !important;
+      min-width: 99px !important;
+      max-width: 99px !important;
+      height: 40px !important;
+      min-height: 40px !important;
+      max-height: 40px !important;
+      margin: 0 !important;
+    }
+
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:first-child input {
+      box-sizing: border-box !important;
+      width: 100% !important;
+      min-width: 0 !important;
+      height: 34px !important;
+      min-height: 34px !important;
+      text-align: center !important;
+    }
+
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(2) [data-testid="stSelectbox"],
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(2) [data-baseweb="select"],
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(2) [data-baseweb="select"] > div {
+      box-sizing: border-box !important;
+      display: block !important;
+      width: 125px !important;
+      min-width: 125px !important;
+      max-width: 125px !important;
+      min-height: 40px !important;
+      margin: 0 !important;
+    }
+  }
+
 </style>
 """, unsafe_allow_html=True)
 
