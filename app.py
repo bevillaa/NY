@@ -1923,23 +1923,48 @@ st.markdown("""
      ================================================================ */
 
   /* La información ocupa el espacio flexible; cada acción reserva 38 px. */
-  [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] {
-    display: grid !important;
-    grid-template-columns: minmax(0, 1fr) 38px 38px 38px !important;
-    align-items: center !important;
-    justify-content: start !important;
-    column-gap: 6px !important;
-    row-gap: 0 !important;
-    width: 100% !important;
-    min-width: 0 !important;
-  }
+  
+  
+  
+  
+  
+
+  /* Los wrappers no añaden altura, margen ni desplazamiento. */
+  
+  
+
+  /* Botón lápiz y enlace mapa: idénticas dimensiones y centro geométrico. */
+  
+  
+  
+  
+
+  /* Checkbox visitado en Ruta: también ocupa una caja completa de 38 x 38 px. */
+  
+  
+  
+
+  /* Hora y día siguen siendo los dos únicos controles de esta fila. */
+  
+  
+  
+
+
+
+
+  /* ================================================================
+     ACCIONES DE LUGARES — DEFINICIÓN ÚNICA
+     Ruta: información | editar | mapa | visitado
+     Guardados: información | editar | mapa
+     Cada control mide 38 × 38 px, sin estirar ni alterar el tamaño.
+     ================================================================ */
+  [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"],
   [class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"] {
-    display: grid !important;
-    grid-template-columns: minmax(0, 1fr) 38px 38px !important;
+    display: flex !important;
+    flex-flow: row nowrap !important;
     align-items: center !important;
-    justify-content: start !important;
-    column-gap: 6px !important;
-    row-gap: 0 !important;
+    justify-content: flex-start !important;
+    gap: 6px !important;
     width: 100% !important;
     min-width: 0 !important;
   }
@@ -1951,91 +1976,75 @@ st.markdown("""
     padding: 0 !important;
     align-self: center !important;
   }
-  [class*="st-key-it-heading-row-"] [data-testid="column"]:first-child,
-  [class*="st-key-saved-heading-row-"] [data-testid="column"]:first-child {
-    display: block !important;
+  [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:first-child,
+  [class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:first-child {
+    flex: 1 1 auto !important;
     width: auto !important;
+    min-width: 0 !important;
     max-width: none !important;
-    min-height: 0 !important;
-    height: auto !important;
-    justify-self: stretch !important;
-    align-self: start !important;
   }
-  [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(n+2),
-  [class*="st-key-saved-heading-row-"] [data-testid="column"]:nth-child(n+2) {
+  [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(n+2),
+  [class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(n+2) {
     display: flex !important;
     flex: 0 0 38px !important;
-    align-items: center !important;
-    justify-content: center !important;
-    justify-self: center !important;
     width: 38px !important;
     min-width: 38px !important;
     max-width: 38px !important;
     height: 38px !important;
     min-height: 38px !important;
     max-height: 38px !important;
+    align-items: center !important;
+    justify-content: center !important;
   }
-
-  /* Los wrappers no añaden altura, margen ni desplazamiento. */
   [class*="st-key-it-edit-button-wrap-"],
   [class*="st-key-saved-edit-button-wrap-"],
   [class*="st-key-it-map-button-wrap-"],
-  [class*="st-key-saved-map-button-wrap-"] {
-    box-sizing: border-box !important;
+  [class*="st-key-saved-map-button-wrap-"],
+  [class*="st-key-it-visit-checkbox-wrap-"] {
     display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
+    flex: 0 0 38px !important;
     width: 38px !important;
     min-width: 38px !important;
     max-width: 38px !important;
     height: 38px !important;
     min-height: 38px !important;
     max-height: 38px !important;
+    align-items: center !important;
+    justify-content: center !important;
     margin: 0 !important;
     padding: 0 !important;
-    border: 0 !important;
-    background: transparent !important;
-    box-shadow: none !important;
   }
   [class*="st-key-it-edit-button-wrap-"] [data-testid="stElementContainer"],
   [class*="st-key-saved-edit-button-wrap-"] [data-testid="stElementContainer"],
-  [class*="st-key-it-edit-button-wrap-"] [data-testid="stButton"],
-  [class*="st-key-saved-edit-button-wrap-"] [data-testid="stButton"],
   [class*="st-key-it-map-button-wrap-"] [data-testid="stElementContainer"],
   [class*="st-key-saved-map-button-wrap-"] [data-testid="stElementContainer"],
+  [class*="st-key-it-visit-checkbox-wrap-"] [data-testid="stElementContainer"],
+  [class*="st-key-it-edit-button-wrap-"] [data-testid="stButton"],
+  [class*="st-key-saved-edit-button-wrap-"] [data-testid="stButton"],
   [class*="st-key-it-map-button-wrap-"] [data-testid="stLinkButton"],
-  [class*="st-key-saved-map-button-wrap-"] [data-testid="stLinkButton"] {
-    box-sizing: border-box !important;
+  [class*="st-key-saved-map-button-wrap-"] [data-testid="stLinkButton"],
+  [class*="st-key-it-visit-checkbox-wrap-"] [data-testid="stCheckbox"] {
     display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
+    flex: 0 0 38px !important;
     width: 38px !important;
     min-width: 38px !important;
     max-width: 38px !important;
     height: 38px !important;
     min-height: 38px !important;
     max-height: 38px !important;
+    align-items: center !important;
+    justify-content: center !important;
     margin: 0 !important;
     padding: 0 !important;
   }
-
-  /* Botón lápiz y enlace mapa: idénticas dimensiones y centro geométrico. */
-  [class*="st-key-it-edit-button-wrap-"] [data-testid="stButton"] > button,
-  [class*="st-key-saved-edit-button-wrap-"] [data-testid="stButton"] > button,
-  [class*="st-key-it-map-button-wrap-"] [data-testid="stLinkButton"] > a,
-  [class*="st-key-saved-map-button-wrap-"] [data-testid="stLinkButton"] > a,
-  [class*="st-key-it-map-button-wrap-"] [data-testid="stLinkButton"] > a:hover,
-  [class*="st-key-it-map-button-wrap-"] [data-testid="stLinkButton"] > a:focus,
-  [class*="st-key-it-map-button-wrap-"] [data-testid="stLinkButton"] > a:active,
-  [class*="st-key-saved-map-button-wrap-"] [data-testid="stLinkButton"] > a:hover,
-  [class*="st-key-saved-map-button-wrap-"] [data-testid="stLinkButton"] > a:focus,
-  [class*="st-key-saved-map-button-wrap-"] [data-testid="stLinkButton"] > a:active {
+  [class*="st-key-it-edit-button-wrap-"] button,
+  [class*="st-key-saved-edit-button-wrap-"] button,
+  [class*="st-key-it-map-button-wrap-"] a,
+  [class*="st-key-saved-map-button-wrap-"] a {
     appearance: none !important;
     -webkit-appearance: none !important;
     box-sizing: border-box !important;
     display: inline-flex !important;
-    align-items: center !important;
-    justify-content: center !important;
     flex: 0 0 38px !important;
     width: 38px !important;
     min-width: 38px !important;
@@ -2043,105 +2052,86 @@ st.markdown("""
     height: 38px !important;
     min-height: 38px !important;
     max-height: 38px !important;
+    align-items: center !important;
+    justify-content: center !important;
     margin: 0 !important;
     padding: 0 !important;
     border: 1px solid #CBD5E1 !important;
     border-radius: 9px !important;
-    outline: none !important;
-    box-shadow: none !important;
     background-color: #FFFFFF !important;
     background-repeat: no-repeat !important;
     background-position: center center !important;
-    transform: none !important;
-    text-decoration: none !important;
-    overflow: hidden !important;
+    background-size: 19px 19px !important;
+    box-shadow: none !important;
+    outline: none !important;
     color: transparent !important;
     -webkit-text-fill-color: transparent !important;
     font-size: 0 !important;
     line-height: 0 !important;
+    text-decoration: none !important;
+    overflow: hidden !important;
+    transform: none !important;
   }
-  [class*="st-key-it-edit-button-wrap-"] [data-testid="stButton"] > button,
-  [class*="st-key-saved-edit-button-wrap-"] [data-testid="stButton"] > button {
+  [class*="st-key-it-edit-button-wrap-"] button,
+  [class*="st-key-saved-edit-button-wrap-"] button {
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23334155' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m16 4 4 4'/%3E%3Cpath d='M4 20l4-.9L19 8a2.1 2.1 0 0 0-3-3L5 16z'/%3E%3C/svg%3E") !important;
-    background-size: 19px 19px !important;
   }
-  [class*="st-key-it-map-button-wrap-"] [data-testid="stLinkButton"] > a,
-  [class*="st-key-saved-map-button-wrap-"] [data-testid="stLinkButton"] > a {
+  [class*="st-key-it-map-button-wrap-"] a,
+  [class*="st-key-saved-map-button-wrap-"] a {
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23334155' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m3 6 6-3 6 3 6-3v15l-6 3-6-3-6 3z'/%3E%3Cpath d='M9 3v15M15 6v15'/%3E%3C/svg%3E") !important;
-    background-size: 20px 20px !important;
   }
   [class*="st-key-it-edit-button-wrap-"] button > *,
   [class*="st-key-saved-edit-button-wrap-"] button > *,
   [class*="st-key-it-map-button-wrap-"] a > *,
-  [class*="st-key-saved-map-button-wrap-"] a > * {
-    display: none !important;
-  }
+  [class*="st-key-saved-map-button-wrap-"] a > * { display: none !important; }
 
-  /* Checkbox visitado en Ruta: también ocupa una caja completa de 38 x 38 px. */
-  [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(4) [data-testid="stCheckbox"],
-  [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(4) [data-testid="stCheckbox"] label {
+  /* El checkbox se presenta como una tercera caja exterior de 38 × 38 px. */
+  [class*="st-key-it-visit-checkbox-wrap-"] [data-testid="stCheckbox"] > label {
     box-sizing: border-box !important;
     display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
     width: 38px !important;
     min-width: 38px !important;
     max-width: 38px !important;
     height: 38px !important;
     min-height: 38px !important;
     max-height: 38px !important;
+    align-items: center !important;
+    justify-content: center !important;
     margin: 0 !important;
     padding: 0 !important;
     border: 1px solid #CBD5E1 !important;
     border-radius: 9px !important;
     background: #FFFFFF !important;
     box-shadow: none !important;
-    cursor: pointer !important;
   }
-  [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(4) [data-testid="stCheckbox"] label > div {
+  [class*="st-key-it-visit-checkbox-wrap-"] [data-testid="stCheckbox"] label > div {
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
     margin: 0 !important;
     padding: 0 !important;
   }
-  [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(4) [data-testid="stCheckbox"] label p {
-    display: none !important;
-  }
+  [class*="st-key-it-visit-checkbox-wrap-"] [data-testid="stCheckbox"] label p { display: none !important; }
 
-  /* Hora y día siguen siendo los dos únicos controles de esta fila. */
+  /* La fila inferior solo contiene Hora y Día; no se altera su disposición. */
   [class*="st-key-it-controls-row-"] [data-testid="stHorizontalBlock"],
   [class*="st-key-saved-controls-row-"] [data-testid="stHorizontalBlock"] {
-    display: grid !important;
-    grid-template-columns: minmax(0, 1.7fr) minmax(0, 1.9fr) !important;
+    display: flex !important;
+    flex-flow: row nowrap !important;
     align-items: center !important;
-    column-gap: 8px !important;
-    row-gap: 0 !important;
+    gap: 8px !important;
     width: 100% !important;
     min-width: 0 !important;
   }
   [class*="st-key-it-controls-row-"] [data-testid="column"],
   [class*="st-key-saved-controls-row-"] [data-testid="column"] {
-    box-sizing: border-box !important;
-    display: block !important;
-    flex: none !important;
+    flex: 1 1 0% !important;
     width: auto !important;
     min-width: 0 !important;
     max-width: none !important;
     margin: 0 !important;
     padding: 0 !important;
   }
-  [class*="st-key-it-controls-row-"] [data-testid="stTextInput"],
-  [class*="st-key-saved-controls-row-"] [data-testid="stTextInput"],
-  [class*="st-key-it-controls-row-"] [data-testid="stSelectbox"],
-  [class*="st-key-saved-controls-row-"] [data-testid="stSelectbox"] {
-    width: 100% !important;
-    min-width: 0 !important;
-    max-width: 100% !important;
-    margin: 0 !important;
-  }
-
-
 </style>
 """, unsafe_allow_html=True)
 
@@ -3766,7 +3756,8 @@ if seccion_principal == "🗽Ruta":
                         with st.container(key=f"it-map-button-wrap-{item['id']}"):
                             st.link_button(" ", gmaps_url, help="Abrir en Google Maps")
                     with c_chk:
-                        chk_val = st.checkbox("", value=is_visited, key=f"chk_it_{d}_{item['id']}")
+                        with st.container(key=f"it-visit-checkbox-wrap-{item['id']}"):
+                            chk_val = st.checkbox("", value=is_visited, key=f"chk_it_{d}_{item['id']}")
                         if chk_val != is_visited and idx_real is not None:
                             st.session_state.lugares[idx_real]["visitado"] = chk_val
                             guardar_itinerario_disco(st.session_state.lugares)
