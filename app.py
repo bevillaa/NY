@@ -1460,7 +1460,7 @@ st.markdown("""
     grid-template-columns: 125px 155px !important;
     justify-content: start !important;
     align-items: center !important;
-    column-gap: 1.5px !important;
+    column-gap: 6px !important;
     row-gap: 0 !important;
     width: 100% !important;
     min-width: 0 !important;
@@ -1587,7 +1587,7 @@ st.markdown("""
     [class*="st-key-saved-controls-row-"] [data-testid="stHorizontalBlock"] {
       display: grid !important;
       grid-template-columns: 100px 125px !important;
-      column-gap: 2px !important;
+      column-gap: 4px !important;
       align-items: center !important;
       justify-content: start !important;
       width: 100% !important;
