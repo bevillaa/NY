@@ -1746,8 +1746,8 @@ st.markdown("""
   /* =========================================================================
      12. MEDIA QUERIES (PANTALLAS MUY PEQUEÑAS <= 380px y <= 320px)
      ========================================================================= */
-  @media (max-width: 380px) {
-    .block-container { padding-left: 0.45rem !important; padding-right: 0.45rem !important; }
+  @media (max-width: 780px) {
+    .block-container { padding-left: -4rem !important; padding-right: 0.45rem !important; }
     .stTabs [data-baseweb="tab"], [data-testid="stTabs"] button[role="tab"] { font-size: 0.69rem !important; padding: 4px 2px !important; }
   }
 
