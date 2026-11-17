@@ -1617,7 +1617,11 @@ st.markdown("""
     margin: 0 !important;
   }
 
-  /* Hora y Día: dimensiones originales compactas (sin agrandarlos). */
+  /* Hora y Día: menor altura y 2 px más de separación respecto a la nota. */
+  [class*="st-key-it-controls-row-"],
+  [class*="st-key-saved-controls-row-"] {
+    margin-top: 2px !important;
+  }
   [class*="st-key-it-controls-row-"] [data-testid="stHorizontalBlock"],
   [class*="st-key-saved-controls-row-"] [data-testid="stHorizontalBlock"] {
     display: grid !important;
@@ -1655,9 +1659,9 @@ st.markdown("""
     width: 99px !important;
     min-width: 99px !important;
     max-width: 99px !important;
-    height: 40px !important;
-    min-height: 40px !important;
-    max-height: 40px !important;
+    height: 35px !important;
+    min-height: 35px !important;
+    max-height: 35px !important;
     padding: 0 3px !important;
     border-radius: 8px !important;
   }
@@ -1666,8 +1670,8 @@ st.markdown("""
     box-sizing: border-box !important;
     width: 100% !important;
     min-width: 0 !important;
-    height: 30px !important;
-    min-height: 30px !important;
+    height: 25px !important;
+    min-height: 25px !important;
     padding: 0 4px !important;
     font-size: 0.77rem !important;
     font-weight: 700 !important;
@@ -1689,9 +1693,9 @@ st.markdown("""
     width: 125px !important;
     min-width: 125px !important;
     max-width: 125px !important;
-    height: 40px !important;
-    min-height: 40px !important;
-    max-height: 40px !important;
+    height: 35px !important;
+    min-height: 35px !important;
+    max-height: 35px !important;
     padding-left: 6px !important;
     padding-right: 18px !important;
     border-radius: 8px !important;
@@ -1792,9 +1796,9 @@ st.markdown("""
       width: 100px !important;
       min-width: 100px !important;
       max-width: 100px !important;
-      height: 40px !important;
-      min-height: 40px !important;
-      max-height: 40px !important;
+      height: 35px !important;
+      min-height: 35px !important;
+      max-height: 35px !important;
       margin: 0 !important;
       padding: 0 3px !important;
     }
@@ -1803,8 +1807,8 @@ st.markdown("""
       box-sizing: border-box !important;
       width: 100% !important;
       min-width: 0 !important;
-      height: 34px !important;
-      min-height: 34px !important;
+      height: 29px !important;
+      min-height: 29px !important;
       padding: 0 2px !important;
       font-size: 0.78rem !important;
       font-weight: 700 !important;
@@ -1820,9 +1824,9 @@ st.markdown("""
       width: 125px !important;
       min-width: 125px !important;
       max-width: 125px !important;
-      height: 45px !important;
-      min-height: 45px !important;
-      max-height: 45px !important;
+      height: 40px !important;
+      min-height: 40px !important;
+      max-height: 40px !important;
     }
     [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(2) [data-baseweb="select"] span,
     [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(2) [data-baseweb="select"] span {
