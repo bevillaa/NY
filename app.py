@@ -2166,57 +2166,37 @@ st.markdown("""
   [class*="st-key-it-visit-checkbox-wrap-"] [data-testid="stCheckbox"] label p {
     display: none !important;
   }
-  /* Checkbox: el cuarto slot usa el mismo centro geométrico que Editar y Mapa.
-     Se centra toda la cadena de wrappers de Streamlit, no solo la marca. */
-  [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(4) {
-    box-sizing: border-box !important;
-    display: flex !important;
-    place-items: center !important;
-    align-self: center !important;
-    align-items: center !important;
-    justify-content: center !important;
-    display: flex !important;
-    align-self: center !important;
-    width: 38px !important;
-    min-width: 38px !important;
-    max-width: 38px !important;
-    height: 38px !important;
-    min-height: 38px !important;
-    max-height: 38px !important;
-    margin: 0 !important;
-    padding: 0 !important;
-  }
+  /* Ajuste exclusivo: centra vertical y horizontalmente el checkbox de Ruta
+     respecto a los botones Editar y Mapa, sin modificar sus dimensiones. */
+  [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(4),
   [class*="st-key-it-visit-checkbox-wrap-"],
   [class*="st-key-it-visit-checkbox-wrap-"] [data-testid="stElementContainer"],
   [class*="st-key-it-visit-checkbox-wrap-"] [data-testid="stCheckbox"] {
     box-sizing: border-box !important;
     display: flex !important;
-    place-items: center !important;
+    align-items: center !important;
+    justify-content: center !important;
     align-self: center !important;
-    width: 38px !important;
-    min-width: 38px !important;
-    max-width: 38px !important;
-    height: 38px !important;
-    min-height: 38px !important;
-    max-height: 38px !important;
-    margin: 0 !important;
-    padding: 0 !important;
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
     transform: none !important;
   }
   [class*="st-key-it-visit-checkbox-wrap-"] [data-testid="stCheckbox"] > label {
     box-sizing: border-box !important;
-    position: relative !important;
-    display: grid !important;
-    place-items: center !important;
-    width: 38px !important;
-    min-width: 38px !important;
-    max-width: 38px !important;
-    height: 38px !important;
-    min-height: 38px !important;
-    max-height: 38px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    align-self: center !important;
     margin: 0 !important;
     padding: 0 !important;
     transform: none !important;
+  }
+  [class*="st-key-it-visit-checkbox-wrap-"] [data-testid="stCheckbox"] > label > div {
+    align-self: center !important;
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
   }
   [class*="st-key-it-visit-checkbox-wrap-"] [data-testid="stCheckbox"] label > div:first-of-type {
     justify-self: center !important;
@@ -2451,6 +2431,7 @@ st.markdown("""
       overflow-y: auto !important;
     }
   }
+
 </style>
 """, unsafe_allow_html=True)
 
