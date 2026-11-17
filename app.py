@@ -2111,10 +2111,10 @@ st.markdown("""
     box-shadow: none !important;
   }
 
-  /* Checkbox de Ruta: misma caja exterior de 38 × 38 px. */
-  [class*="st-key-it-visit-checkbox-wrap-"] [data-testid="stCheckbox"] > label {
-    box-sizing: border-box !important;
+  /* Checkbox de Ruta: caja de 38 px y marca centrada exactamente como los otros controles. */
+  [class*="st-key-it-visit-checkbox-wrap-"] [data-testid="stCheckbox"] {
     display: flex !important;
+    flex: 0 0 38px !important;
     width: 38px !important;
     min-width: 38px !important;
     max-width: 38px !important;
@@ -2125,31 +2125,56 @@ st.markdown("""
     justify-content: center !important;
     margin: 0 !important;
     padding: 0 !important;
+  }
+  [class*="st-key-it-visit-checkbox-wrap-"] [data-testid="stCheckbox"] > label {
+    box-sizing: border-box !important;
+    display: flex !important;
+    flex: 0 0 38px !important;
+    width: 38px !important;
+    min-width: 38px !important;
+    max-width: 38px !important;
+    height: 38px !important;
+    min-height: 38px !important;
+    max-height: 38px !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 0 !important;
+    margin: 0 auto !important;
+    padding: 0 !important;
     border: 1px solid #CBD5E1 !important;
     border-radius: 9px !important;
     background: #FFFFFF !important;
     box-shadow: none !important;
   }
-  [class*="st-key-it-visit-checkbox-wrap-"] [data-testid="stCheckbox"] label > div {
+  [class*="st-key-it-visit-checkbox-wrap-"] [data-testid="stCheckbox"] label > div:first-of-type {
     display: flex !important;
+    flex: 0 0 18px !important;
+    width: 18px !important;
+    min-width: 18px !important;
+    height: 18px !important;
+    min-height: 18px !important;
     align-items: center !important;
     justify-content: center !important;
     margin: 0 !important;
     padding: 0 !important;
   }
+  [class*="st-key-it-visit-checkbox-wrap-"] [data-testid="stCheckbox"] input[type="checkbox"] {
+    width: 16px !important;
+    height: 16px !important;
+    margin: 0 !important;
+  }
   [class*="st-key-it-visit-checkbox-wrap-"] [data-testid="stCheckbox"] label p {
     display: none !important;
   }
 
-  /* Hora y Día: se conserva la fila de dos columnas y se evita recortar texto.
-     Ambos controles recuperan altura de 38 px y usan el espacio disponible. */
+  /* Hora y Día: dimensiones originales compactas (sin agrandarlos). */
   [class*="st-key-it-controls-row-"] [data-testid="stHorizontalBlock"],
   [class*="st-key-saved-controls-row-"] [data-testid="stHorizontalBlock"] {
     display: grid !important;
-    grid-template-columns: minmax(96px, 0.9fr) minmax(120px, 1.1fr) !important;
+    grid-template-columns: 88px 96px !important;
     justify-content: start !important;
     align-items: center !important;
-    column-gap: 8px !important;
+    column-gap: 6px !important;
     row-gap: 0 !important;
     width: 100% !important;
     min-width: 0 !important;
@@ -2158,56 +2183,73 @@ st.markdown("""
   [class*="st-key-it-controls-row-"] [data-testid="column"],
   [class*="st-key-saved-controls-row-"] [data-testid="column"] {
     display: block !important;
-    flex: initial !important;
+    flex: none !important;
     width: auto !important;
     min-width: 0 !important;
     max-width: 100% !important;
     margin: 0 !important;
     padding: 0 !important;
   }
-  [class*="st-key-it-controls-row-"] [data-testid="column"] [data-testid="stTextInput"],
-  [class*="st-key-saved-controls-row-"] [data-testid="column"] [data-testid="stTextInput"],
-  [class*="st-key-it-controls-row-"] [data-testid="column"] [data-testid="stSelectbox"],
-  [class*="st-key-saved-controls-row-"] [data-testid="column"] [data-testid="stSelectbox"] {
-    display: block !important;
-    width: 100% !important;
-    min-width: 0 !important;
-    max-width: 100% !important;
+  [class*="st-key-it-controls-row-"] [data-testid="column"]:first-child [data-testid="stTextInput"],
+  [class*="st-key-saved-controls-row-"] [data-testid="column"]:first-child [data-testid="stTextInput"] {
+    width: 88px !important;
+    min-width: 88px !important;
+    max-width: 88px !important;
     margin: 0 !important;
   }
-  [class*="st-key-it-controls-row-"] [data-testid="column"] [data-baseweb="input"],
-  [class*="st-key-saved-controls-row-"] [data-testid="column"] [data-baseweb="input"],
-  [class*="st-key-it-controls-row-"] [data-testid="column"] [data-baseweb="base-input"],
-  [class*="st-key-saved-controls-row-"] [data-testid="column"] [data-baseweb="base-input"],
-  [class*="st-key-it-controls-row-"] [data-testid="column"] [data-baseweb="select"] > div,
-  [class*="st-key-saved-controls-row-"] [data-testid="column"] [data-baseweb="select"] > div {
+  [class*="st-key-it-controls-row-"] [data-testid="column"]:first-child [data-baseweb="input"],
+  [class*="st-key-saved-controls-row-"] [data-testid="column"]:first-child [data-baseweb="input"],
+  [class*="st-key-it-controls-row-"] [data-testid="column"]:first-child [data-baseweb="base-input"],
+  [class*="st-key-saved-controls-row-"] [data-testid="column"]:first-child [data-baseweb="base-input"] {
     box-sizing: border-box !important;
-    width: 100% !important;
-    min-width: 0 !important;
-    max-width: 100% !important;
-    height: 38px !important;
-    min-height: 38px !important;
-    max-height: 38px !important;
+    width: 88px !important;
+    min-width: 88px !important;
+    max-width: 88px !important;
+    height: 30px !important;
+    min-height: 30px !important;
+    max-height: 30px !important;
+    padding: 0 3px !important;
     border-radius: 8px !important;
-    overflow: visible !important;
   }
-  [class*="st-key-it-controls-row-"] [data-testid="column"] input,
-  [class*="st-key-saved-controls-row-"] [data-testid="column"] input {
+  [class*="st-key-it-controls-row-"] [data-testid="column"]:first-child input,
+  [class*="st-key-saved-controls-row-"] [data-testid="column"]:first-child input {
     box-sizing: border-box !important;
     width: 100% !important;
     min-width: 0 !important;
-    height: 36px !important;
-    min-height: 36px !important;
-    padding: 0 7px !important;
-    font-size: 0.84rem !important;
-    line-height: 1.2 !important;
+    height: 28px !important;
+    min-height: 28px !important;
+    padding: 0 4px !important;
+    font-size: 0.77rem !important;
+    font-weight: 700 !important;
     text-align: center !important;
     font-variant-numeric: tabular-nums !important;
   }
-  [class*="st-key-it-controls-row-"] [data-testid="column"] [data-baseweb="select"] span,
-  [class*="st-key-saved-controls-row-"] [data-testid="column"] [data-baseweb="select"] span {
-    font-size: 0.82rem !important;
-    line-height: 1.2 !important;
+  [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(2) [data-testid="stSelectbox"],
+  [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(2) [data-testid="stSelectbox"],
+  [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(2) [data-baseweb="select"],
+  [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(2) [data-baseweb="select"] {
+    width: 96px !important;
+    min-width: 96px !important;
+    max-width: 96px !important;
+    margin: 0 !important;
+  }
+  [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(2) [data-baseweb="select"] > div,
+  [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(2) [data-baseweb="select"] > div {
+    box-sizing: border-box !important;
+    width: 96px !important;
+    min-width: 96px !important;
+    max-width: 96px !important;
+    height: 30px !important;
+    min-height: 30px !important;
+    max-height: 30px !important;
+    padding-left: 6px !important;
+    padding-right: 18px !important;
+    border-radius: 8px !important;
+  }
+  [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(2) [data-baseweb="select"] span,
+  [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(2) [data-baseweb="select"] span {
+    font-size: 0.74rem !important;
+    line-height: 1.1 !important;
     white-space: nowrap !important;
   }
 
@@ -2268,13 +2310,14 @@ st.markdown("""
       justify-content: center !important;
     }
 
-    /* Hora y Día mantienen dos controles grandes, sin estrecharse ni cortarse. */
+    /* En móvil se recuperan los tamaños compactos originales: hora 80x36 y día 94x36. */
     [class*="st-key-it-controls-row-"] [data-testid="stHorizontalBlock"],
     [class*="st-key-saved-controls-row-"] [data-testid="stHorizontalBlock"] {
       display: grid !important;
-      grid-template-columns: minmax(112px, 0.9fr) minmax(132px, 1.1fr) !important;
-      column-gap: 8px !important;
+      grid-template-columns: 80px 94px !important;
+      column-gap: 6px !important;
       align-items: center !important;
+      justify-content: start !important;
       width: 100% !important;
       min-width: 0 !important;
       max-width: 100% !important;
@@ -2282,12 +2325,60 @@ st.markdown("""
     [class*="st-key-it-controls-row-"] [data-testid="column"],
     [class*="st-key-saved-controls-row-"] [data-testid="column"] {
       display: block !important;
-      flex: initial !important;
+      flex: none !important;
       width: auto !important;
       min-width: 0 !important;
       max-width: 100% !important;
       margin: 0 !important;
       padding: 0 !important;
+    }
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:first-child [data-testid="stTextInput"],
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:first-child [data-testid="stTextInput"],
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:first-child [data-baseweb="input"],
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:first-child [data-baseweb="input"],
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:first-child [data-baseweb="base-input"],
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:first-child [data-baseweb="base-input"] {
+      box-sizing: border-box !important;
+      width: 80px !important;
+      min-width: 80px !important;
+      max-width: 80px !important;
+      height: 34px !important;
+      min-height: 34px !important;
+      max-height: 34px !important;
+      margin: 0 !important;
+      padding: 0 3px !important;
+    }
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:first-child input,
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:first-child input {
+      box-sizing: border-box !important;
+      width: 100% !important;
+      min-width: 0 !important;
+      height: 32px !important;
+      min-height: 32px !important;
+      padding: 0 2px !important;
+      font-size: 0.78rem !important;
+      font-weight: 700 !important;
+      text-align: center !important;
+    }
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(2) [data-testid="stSelectbox"],
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(2) [data-testid="stSelectbox"],
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(2) [data-baseweb="select"],
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(2) [data-baseweb="select"],
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(2) [data-baseweb="select"] > div,
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(2) [data-baseweb="select"] > div {
+      box-sizing: border-box !important;
+      width: 94px !important;
+      min-width: 94px !important;
+      max-width: 94px !important;
+      height: 34px !important;
+      min-height: 34px !important;
+      max-height: 34px !important;
+    }
+    [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(2) [data-baseweb="select"] span,
+    [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(2) [data-baseweb="select"] span {
+      font-size: 0.72rem !important;
+      line-height: 1.1 !important;
+      white-space: nowrap !important;
     }
 
     /* Evita recortes de las últimas filas y respeta el área segura del teléfono. */
