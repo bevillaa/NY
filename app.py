@@ -307,7 +307,7 @@ st.markdown("""
     color: #475569 !important;
     line-height: 1.3 !important;
     margin-top: 2px !important;
-    padding-left: 2px !important;
+    padding-left: -2px !important;
     word-break: break-word !important;
     overflow-wrap: anywhere !important;
     white-space: pre-wrap !important;
@@ -328,6 +328,7 @@ st.markdown("""
   }
   .place-list-address {
     margin-top: 3px !important;
+    margin-left: -4px !important;
     color: #475569 !important;
     font-size: 0.76rem !important;
     line-height: 1.25 !important;
@@ -1746,8 +1747,8 @@ st.markdown("""
   /* =========================================================================
      12. MEDIA QUERIES (PANTALLAS MUY PEQUEÑAS <= 380px y <= 320px)
      ========================================================================= */
-  @media (max-width: 780px) {
-    .block-container { padding-left: -4rem !important; padding-right: 0.45rem !important; }
+  @media (max-width: 380px) {
+    .block-container { padding-left: 0.45rem !important; padding-right: 0.45rem !important; }
     .stTabs [data-baseweb="tab"], [data-testid="stTabs"] button[role="tab"] { font-size: 0.69rem !important; padding: 4px 2px !important; }
   }
 
