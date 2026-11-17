@@ -1457,10 +1457,10 @@ st.markdown("""
   [class*="st-key-it-controls-row-"] [data-testid="stHorizontalBlock"],
   [class*="st-key-saved-controls-row-"] [data-testid="stHorizontalBlock"] {
     display: grid !important;
-    grid-template-columns: 100px 125px !important;
+    grid-template-columns: 125px 155px !important;
     justify-content: start !important;
     align-items: center !important;
-    column-gap: 4px !important;
+    column-gap: 6px !important;
     row-gap: 0 !important;
     width: 100% !important;
     min-width: 0 !important;
@@ -1478,9 +1478,9 @@ st.markdown("""
   }
   [class*="st-key-it-controls-row-"] [data-testid="column"]:first-child [data-testid="stTextInput"],
   [class*="st-key-saved-controls-row-"] [data-testid="column"]:first-child [data-testid="stTextInput"] {
-    width: 99px !important;
-    min-width: 99px !important;
-    max-width: 99px !important;
+    width: 124px !important;
+    min-width: 124px !important;
+    max-width: 124px !important;
     margin: 0 !important;
   }
   [class*="st-key-it-controls-row-"] [data-testid="column"]:first-child [data-baseweb="input"],
@@ -1488,13 +1488,13 @@ st.markdown("""
   [class*="st-key-it-controls-row-"] [data-testid="column"]:first-child [data-baseweb="base-input"],
   [class*="st-key-saved-controls-row-"] [data-testid="column"]:first-child [data-baseweb="base-input"] {
     box-sizing: border-box !important;
-    width: 99px !important;
-    min-width: 99px !important;
-    max-width: 99px !important;
-    height: 40px !important;
-    min-height: 40px !important;
-    max-height: 40px !important;
-    padding: 0 3px !important;
+    width: 124px !important;
+    min-width: 124px !important;
+    max-width: 124px !important;
+    height: 46px !important;
+    min-height: 46px !important;
+    max-height: 46px !important;
+    padding: 0 5px !important;
     border-radius: 8px !important;
   }
   [class*="st-key-it-controls-row-"] [data-testid="column"]:first-child input,
@@ -1502,10 +1502,10 @@ st.markdown("""
     box-sizing: border-box !important;
     width: 100% !important;
     min-width: 0 !important;
-    height: 30px !important;
-    min-height: 30px !important;
-    padding: 0 4px !important;
-    font-size: 0.77rem !important;
+    height: 36px !important;
+    min-height: 36px !important;
+    padding: 0 5px !important;
+    font-size: 0.84rem !important;
     font-weight: 700 !important;
     text-align: center !important;
     font-variant-numeric: tabular-nums !important;
@@ -1514,27 +1514,27 @@ st.markdown("""
   [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(2) [data-testid="stSelectbox"],
   [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(2) [data-baseweb="select"],
   [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(2) [data-baseweb="select"] {
-    width: 125px !important;
-    min-width: 125px !important;
-    max-width: 125px !important;
+    width: 155px !important;
+    min-width: 155px !important;
+    max-width: 155px !important;
     margin: 0 !important;
   }
   [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(2) [data-baseweb="select"] > div,
   [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(2) [data-baseweb="select"] > div {
     box-sizing: border-box !important;
-    width: 125px !important;
-    min-width: 125px !important;
-    max-width: 125px !important;
-    height: 40px !important;
-    min-height: 40px !important;
-    max-height: 40px !important;
-    padding-left: 6px !important;
-    padding-right: 18px !important;
+    width: 155px !important;
+    min-width: 155px !important;
+    max-width: 155px !important;
+    height: 46px !important;
+    min-height: 46px !important;
+    max-height: 46px !important;
+    padding-left: 8px !important;
+    padding-right: 22px !important;
     border-radius: 8px !important;
   }
   [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(2) [data-baseweb="select"] span,
   [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(2) [data-baseweb="select"] span {
-    font-size: 0.74rem !important;
+    font-size: 0.82rem !important;
     line-height: 1.1 !important;
     white-space: nowrap !important;
   }
@@ -1667,7 +1667,7 @@ st.markdown("""
   }
   /* Ajuste exclusivo: centra vertical y horizontalmente el checkbox de Ruta
      respecto a los botones Editar y Mapa, sin modificar sus dimensiones. */
-  [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(4),
+  [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(5),
   [class*="st-key-it-visit-checkbox-wrap-"],
   [class*="st-key-it-visit-checkbox-wrap-"] [data-testid="stElementContainer"],
   [class*="st-key-it-visit-checkbox-wrap-"] [data-testid="stCheckbox"] {
@@ -1697,13 +1697,6 @@ st.markdown("""
     margin-top: 0 !important;
     margin-bottom: 0 !important;
   }
-  /* Ajustes finales de alineación móvil para los controles de las filas. */
-  @media (max-width: 768px) {
-    [class*="st-key-it-visit-checkbox-wrap-"] { transform: translate(3px, -4.5px) !important; }
-    [class*="st-key-saved-edit-button-wrap-"] { transform: translate(11px, 0px) !important; }
-    [class*="st-key-it-edit-button-wrap-"] { transform: translate(4px, 0px) !important; }
-  }
-
   /* RUTA: distribución única y estable en escritorio y móvil.
      Las cinco columnas se definen aquí; st.columns solo crea los contenedores. */
   [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] {
@@ -1712,7 +1705,7 @@ st.markdown("""
     grid-auto-flow: column !important;
     align-items: center !important;
     justify-content: stretch !important;
-    column-gap: 3px !important;
+    column-gap: 1px !important;
     row-gap: 0 !important;
     width: 100% !important;
     min-width: 0 !important;
