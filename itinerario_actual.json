@@ -21,7 +21,7 @@
     "direccion": "1557 Broadway, New York, NY 10036",
     "categoria": "🛍️ Compras",
     "tipo": "Interior",
-    "visitado": true,
+    "visitado": false,
     "hora": "",
     "nota": "Tienda souvenir 1$",
     "lista_origen": "Tiendas & Outlets"
