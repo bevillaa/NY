@@ -1011,6 +1011,7 @@ st.markdown("""
     width: 100% !important;
     min-width: 0 !important;
     max-width: 100% !important;
+    left: -6px !important;
   }
   [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2) .place-list-title,
   [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2) .place-list-address {
