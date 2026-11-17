@@ -1618,6 +1618,10 @@ st.markdown("""
   }
 
   /* Hora y Día: dimensiones originales compactas (sin agrandarlos). */
+  [class*="st-key-it-controls-row-"],
+  [class*="st-key-saved-controls-row-"] {
+    margin-top: 5px !important;
+  }
   [class*="st-key-it-controls-row-"] [data-testid="stHorizontalBlock"],
   [class*="st-key-saved-controls-row-"] [data-testid="stHorizontalBlock"] {
     display: grid !important;
