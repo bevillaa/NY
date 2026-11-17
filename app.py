@@ -1755,26 +1755,7 @@ st.markdown("""
     .hero-stat-lbl { font-size: 0.51rem !important; letter-spacing: 0 !important; }
     .place-list-address, .place-note { font-size: 0.68rem !important; }
   }
-  /* 1. Corrección para evitar que la grid móvil descuadre el 4º botón o checkbox */
-  @media (max-width: 768px) {
-    [class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"],
-    [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] {
-      display: flex !important;
-      flex-direction: row !important;
-      flex-wrap: nowrap !important;
-      align-items: center !important;
-      justify-content: flex-start !important;
-      gap: 3px !important;
-      width: 100% !important;
-    }
-    
-    /* 2. Mantener las cajas fijas de 30px en botones de acción sin offsets agresivos */
-    [class*="st-key-it-visit-checkbox-wrap-"],
-    [class*="st-key-saved-edit-button-wrap-"],
-    [class*="st-key-it-edit-button-wrap-"] {
-      transform: none !important;
-    }
-  }
+  
 
 </style>
 """, unsafe_allow_html=True)
