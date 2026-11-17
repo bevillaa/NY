@@ -1058,12 +1058,6 @@ st.markdown("""
     background: var(--sage-pale) !important;
     border-color: #B8C2AE !important;
   }
-  
-  /* Acercar el bloque de información al selector sin cambiar su ancho. */
-  [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(2) {
-    position: relative !important;
-    left: -6px !important;
-  }
   [data-testid="stCheckbox"] label p { color: var(--ink) !important; }
   @media (max-width: 768px) {
     .hero-container { padding: 22px 17px 17px !important; border-radius: 5px 5px 14px 14px !important; }
@@ -1809,6 +1803,14 @@ st.markdown("""
     overflow-wrap: anywhere !important;
     word-break: normal !important;
     white-space: normal !important;
+  }
+    /* Ruta: adelantar únicamente el inicio visual de nombre, dirección y nota.
+     No modifica las columnas ni el ancho del selector de hora. */
+  [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2) .place-list-title,
+  [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2) .place-list-address,
+  [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2) .place-note {
+    position: relative !important;
+    left: -6px !important;
   }
   /* El checkbox ahora está en la quinta columna de Ruta. */
   [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(5),
