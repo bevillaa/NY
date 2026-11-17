@@ -1460,7 +1460,7 @@ st.markdown("""
     grid-template-columns: 125px 155px !important;
     justify-content: start !important;
     align-items: center !important;
-    column-gap: 6px !important;
+    column-gap: 1.5px !important;
     row-gap: 0 !important;
     width: 100% !important;
     min-width: 0 !important;
@@ -1587,7 +1587,7 @@ st.markdown("""
     [class*="st-key-saved-controls-row-"] [data-testid="stHorizontalBlock"] {
       display: grid !important;
       grid-template-columns: 100px 125px !important;
-      column-gap: 4px !important;
+      column-gap: 2px !important;
       align-items: center !important;
       justify-content: start !important;
       width: 100% !important;
@@ -1667,7 +1667,7 @@ st.markdown("""
   }
   /* Ajuste exclusivo: centra vertical y horizontalmente el checkbox de Ruta
      respecto a los botones Editar y Mapa, sin modificar sus dimensiones. */
-  [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(5),
+  [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(4),
   [class*="st-key-it-visit-checkbox-wrap-"],
   [class*="st-key-it-visit-checkbox-wrap-"] [data-testid="stElementContainer"],
   [class*="st-key-it-visit-checkbox-wrap-"] [data-testid="stCheckbox"] {
@@ -1696,6 +1696,12 @@ st.markdown("""
     align-self: center !important;
     margin-top: 0 !important;
     margin-bottom: 0 !important;
+  }
+  /* Ajustes finales de alineación móvil para los controles de las filas. */
+  @media (max-width: 768px) {
+    [class*="st-key-it-visit-checkbox-wrap-"] { transform: translate(3px, -4.5px) !important; }
+    [class*="st-key-saved-edit-button-wrap-"] { transform: translate(11px, 0px) !important; }
+    [class*="st-key-it-edit-button-wrap-"] { transform: translate(4px, 0px) !important; }
   }
   /* RUTA: distribución única y estable en escritorio y móvil.
      Las cinco columnas se definen aquí; st.columns solo crea los contenedores. */
