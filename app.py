@@ -781,6 +781,8 @@ st.markdown("""
   /* Checkbox de Ruta */
   [class*="st-key-it-visit-checkbox-wrap-"] [data-testid="stCheckbox"] > label {
     flex: 0 0 30px !important;
+    display: flex !important;align-items: center !important;
+    justify-content: center !important;
     gap: 0 !important;
     border: 1px solid #CBD5E1 !important;
     border-radius: 9px !important;
