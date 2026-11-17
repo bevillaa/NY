@@ -449,9 +449,9 @@ st.markdown("""
     padding: 0 !important;
   }
   [data-testid="column"]:has(.compact-hora) input {
-    height: 23px !important;
-    min-height: 23px !important;
-    max-height: 23px !important;
+    height: 28px !important;
+    min-height: 28px !important;
+    max-height: 28px !important;
     padding: 0 4px !important;
     font-size: 0.77rem !important;
     font-weight: 700 !important;
@@ -462,14 +462,14 @@ st.markdown("""
   }
   [data-testid="column"]:has(.compact-hora) [data-baseweb="input"]:focus-within {
     background: #FFFFFF !important;
-    border: 1.5px solid #F5F5F5 !important;
+    border: 1.5px solid #2563EB !important;
   }
 
   /* Controles compactos: el marcador identifica la columna del widget. */
   [data-testid="column"]:has(.compact-dia) [data-baseweb="select"] > div {
-    min-height: 23px !important;
-    height: 23px !important;
-    max-height: 23px !important;
+    min-height: 30px !important;
+    height: 30px !important;
+    max-height: 30px !important;
     border-radius: 8px !important;
     padding-top: 0 !important;
     padding-bottom: 0 !important;
@@ -654,23 +654,23 @@ st.markdown("""
     [data-testid="column"]:has(.compact-hora) [data-baseweb="base-input"],
     [data-testid="column"]:has(.compact-dia) [data-baseweb="select"] > div,
     [data-testid="column"]:has(.compact-maps) [data-testid="stLinkButton"] > a {
-      min-height: 23px !important;
-      height: 23px !important;
-      max-height: 23px !important;
+      min-height: 34px !important;
+      height: 34px !important;
+      max-height: 34px !important;
       border-radius: 8px !important;
     }
     [data-testid="column"]:has(.compact-hora) input {
       min-width: 0 !important;
       width: 100% !important;
-      height: 23px !important;
-      min-height: 23px !important;
+      height: 32px !important;
+      min-height: 32px !important;
       padding: 0 4px !important;
       font-size: 0.78rem !important;
       letter-spacing: 0 !important;
       text-align: center !important;
       font-variant-numeric: tabular-nums !important;
     }
-    [data-testid="column"]:has(dia) [data-baseweb="select"] span,
+    [data-testid="column"]:has(.compact-dia) [data-baseweb="select"] span,
     [data-testid="column"]:has(.compact-dia) [data-baseweb="select"] div {
       font-size: 0.72rem !important;
       line-height: 1.1 !important;
@@ -1655,9 +1655,9 @@ st.markdown("""
     width: 99px !important;
     min-width: 99px !important;
     max-width: 99px !important;
-    height: 35px !important;
-    min-height: 35px !important;
-    max-height: 35px !important;
+    height: 40px !important;
+    min-height: 40px !important;
+    max-height: 40px !important;
     padding: 0 3px !important;
     border-radius: 8px !important;
   }
@@ -1666,8 +1666,8 @@ st.markdown("""
     box-sizing: border-box !important;
     width: 100% !important;
     min-width: 0 !important;
-    height: 25px !important;
-    min-height: 25px !important;
+    height: 30px !important;
+    min-height: 30px !important;
     padding: 0 4px !important;
     font-size: 0.77rem !important;
     font-weight: 700 !important;
@@ -1689,9 +1689,9 @@ st.markdown("""
     width: 125px !important;
     min-width: 125px !important;
     max-width: 125px !important;
-    height: 35px !important;
-    min-height: 35px !important;
-    max-height: 45px !important;
+    height: 40px !important;
+    min-height: 40px !important;
+    max-height: 40px !important;
     padding-left: 6px !important;
     padding-right: 18px !important;
     border-radius: 8px !important;
@@ -1707,11 +1707,11 @@ st.markdown("""
   @media (max-width: 768px) {
     [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] {
       display: grid !important;
-      grid-template-columns: minmax(0, 1fr) 30px 30px 30px !important;
+      grid-template-columns: minmax(0, 1fr) 38px 38px 30px !important;
       grid-auto-flow: column !important;
       align-items: center !important;
       justify-content: stretch !important;
-      column-gap: 6px !important;
+      column-gap: 3px !important;
       row-gap: 0 !important;
       width: 100% !important;
       min-width: 0 !important;
@@ -1792,9 +1792,9 @@ st.markdown("""
       width: 100px !important;
       min-width: 100px !important;
       max-width: 100px !important;
-      height: 35px !important;
-      min-height: 35px !important;
-      max-height: 35px !important;
+      height: 40px !important;
+      min-height: 40px !important;
+      max-height: 40px !important;
       margin: 0 !important;
       padding: 0 3px !important;
     }
@@ -1820,9 +1820,9 @@ st.markdown("""
       width: 125px !important;
       min-width: 125px !important;
       max-width: 125px !important;
-      height: 40px !important;
-      min-height: 40px !important;
-      max-height: 40px !important;
+      height: 45px !important;
+      min-height: 45px !important;
+      max-height: 45px !important;
     }
     [class*="st-key-it-controls-row-"] [data-testid="column"]:nth-child(2) [data-baseweb="select"] span,
     [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(2) [data-baseweb="select"] span {
@@ -1876,24 +1876,11 @@ st.markdown("""
     margin-top: 0 !important;
     margin-bottom: 0 !important;
   }
-  /* Ajuste exclusivo para móvil: desplaza el checkbox de Ruta ligeramente hacia arriba para alinearlo con Mapa y Editar. */
+  /* Ajuste exclusivo para móvil: desplaza el checkbox de Ruta ligeramente
+     hacia arriba y a la derecha para alinearlo visualmente con Mapa y Editar. */
   @media (max-width: 768px) {
     [class*="st-key-it-visit-checkbox-wrap-"] {
       transform: translate(3px, -4.5px) !important;
-    }
-  }
-  /* Ajuste hacia arriba para alinearlo con Mapa y Editar. */
-  @media (max-width: 768px) {
-    [class*="st-key-it-edit-button-wrap-"]{
-      transform: translate(3px,0px) !important;
-    }
-  }@media (max-width: 768px) {
-    [class*="st-key-saved-edit-button-wrap-"]{
-      transform: translate(11px,0px) !important;
-    }
-  }@media (max-width: 768px) {
-    [class*="st-key-it-edit-button-wrap-"]{
-      transform: translate(4px,0px) !important;
     }
   }
 </style>
@@ -3470,7 +3457,7 @@ if seccion_principal == "🗽Ruta":
             {etiqueta_dia(d)}
           </div>
           <div style="font-weight:800; font-size:0.78rem; color:#0F172A; background:#F8FAFC; border:1.5px solid #CBD5E1; border-radius:20px; padding:2px 9px;">
-            {len(visitados_dia)}/{len(paradas_dia)} ✔
+            📍 {len(paradas_dia)} lugares ({len(visitados_dia)} visitados)
           </div>
         </div>
         """, unsafe_allow_html=True)
