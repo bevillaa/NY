@@ -1541,6 +1541,18 @@ st.markdown("""
 
   /* En móvil, se neutraliza el apilado global SOLO en estas filas. */
   @media (max-width: 768px) {
+    [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] {
+      display: flex !important;
+      flex-flow: row nowrap !important;
+      align-items: center !important;
+      justify-content: stretch !important;
+      column-gap: 4px !important;
+      row-gap: 0 !important;
+      width: 100% !important;
+      min-width: 0 !important;
+      max-width: 100% !important;
+      overflow: visible !important;
+    }
     [class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"] {
       display: grid !important;
       grid-template-columns: minmax(0, 1fr) 38px 30px !important;
@@ -1704,14 +1716,13 @@ st.markdown("""
     [class*="st-key-it-edit-button-wrap-"] { transform: translate(4px, 0px) !important; }
   }
 
-  /* RUTA: distribución única y estable en escritorio y móvil.
-     Las cinco columnas se definen aquí; st.columns solo crea los contenedores. */
+  /* RUTA: una única distribución flex para escritorio y móvil.
+     st.columns crea cinco contenedores neutros; aquí se asignan sus proporciones. */
   [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] {
-    display: grid !important;
-    grid-template-columns: 84px minmax(0, 1fr) 30px 30px 30px !important;
-    grid-auto-flow: column !important;
+    display: flex !important;
+    flex-flow: row nowrap !important;
     align-items: center !important;
-    justify-content: stretch !important;
+    justify-content: flex-start !important;
     column-gap: 3px !important;
     row-gap: 0 !important;
     width: 100% !important;
@@ -1722,18 +1733,63 @@ st.markdown("""
   [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"] {
     box-sizing: border-box !important;
     display: flex !important;
-    flex: none !important;
-    width: auto !important;
     min-width: 0 !important;
-    max-width: 100% !important;
+    max-width: none !important;
     margin: 0 !important;
     padding: 0 !important;
     align-items: center !important;
     justify-content: center !important;
     overflow: visible !important;
   }
-  /* Hora: columna y campo compactos; no pueden crecer ni encogerse. */
-  [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(1),
+  /* Hora: ancho fijo como en la versión estable; la información ocupa
+     todo el espacio restante tanto en escritorio como en móvil. */
+  [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(1) {
+    box-sizing: border-box !important;
+    display: flex !important;
+    flex: 0 0 84px !important;
+    width: 84px !important;
+    min-width: 84px !important;
+    max-width: 84px !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+  [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(2) {
+    box-sizing: border-box !important;
+    display: flex !important;
+    flex: 1 1 0% !important;
+    width: auto !important;
+    min-width: 0 !important;
+    max-width: none !important;
+    justify-content: flex-start !important;
+    overflow: visible !important;
+  }
+  [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(3) {
+    flex: 0.55 0 30px !important;
+    width: 30px !important;
+    min-width: 30px !important;
+    max-width: 30px !important;
+    height: 30px !important;
+    min-height: 30px !important;
+    max-height: 30px !important;
+  }
+  [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(4) {
+    flex: 0.55 0 30px !important;
+    width: 30px !important;
+    min-width: 30px !important;
+    max-width: 30px !important;
+    height: 30px !important;
+    min-height: 30px !important;
+    max-height: 30px !important;
+  }
+  [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(5) {
+    flex: 0.45 0 30px !important;
+    width: 30px !important;
+    min-width: 30px !important;
+    max-width: 30px !important;
+    height: 30px !important;
+    min-height: 30px !important;
+    max-height: 30px !important;
+  }
   [class*="st-key-it-heading-row-"] [data-testid="column"]:first-child [data-testid="stTextInput"],
   [class*="st-key-it-heading-row-"] [data-testid="column"]:first-child [data-baseweb="input"],
   [class*="st-key-it-heading-row-"] [data-testid="column"]:first-child [data-baseweb="base-input"] {
@@ -1741,14 +1797,10 @@ st.markdown("""
     width: 84px !important;
     min-width: 84px !important;
     max-width: 84px !important;
-  }
-  [class*="st-key-it-heading-row-"] [data-testid="column"]:first-child [data-baseweb="input"],
-  [class*="st-key-it-heading-row-"] [data-testid="column"]:first-child [data-baseweb="base-input"] {
     height: 40px !important;
     min-height: 40px !important;
     max-height: 40px !important;
     margin: 0 !important;
-    padding: 0 3px !important;
   }
   [class*="st-key-it-heading-row-"] [data-testid="column"]:first-child input {
     box-sizing: border-box !important;
@@ -1756,21 +1808,10 @@ st.markdown("""
     min-width: 0 !important;
     height: 30px !important;
     min-height: 30px !important;
-    max-height: 30px !important;
     padding: 0 4px !important;
-    font-size: 0.77rem !important;
-    font-weight: 700 !important;
     text-align: center !important;
+    font-weight: 700 !important;
     font-variant-numeric: tabular-nums !important;
-  }
-  /* Información: recibe todo el ancho sobrante y nunca empuja los botones. */
-  [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(2) {
-    display: block !important;
-    width: auto !important;
-    min-width: 0 !important;
-    max-width: none !important;
-    justify-self: stretch !important;
-    overflow: visible !important;
   }
   [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stMarkdown"],
   [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stElementContainer"] {
@@ -1789,28 +1830,9 @@ st.markdown("""
     word-break: normal !important;
     white-space: normal !important;
   }
-  /* Editar, mapa y visitado: tres columnas idénticas de 30 px. */
-  [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(n+3),
-  [class*="st-key-it-edit-button-wrap-"],
-  [class*="st-key-it-map-button-wrap-"],
-  [class*="st-key-it-visit-checkbox-wrap-"] {
-    box-sizing: border-box !important;
-    display: flex !important;
-    flex: none !important;
-    width: 30px !important;
-    min-width: 30px !important;
-    max-width: 30px !important;
-    height: 30px !important;
-    min-height: 30px !important;
-    max-height: 30px !important;
-    align-items: center !important;
-    justify-content: center !important;
-    justify-self: center !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    overflow: visible !important;
-  }
+  /* El checkbox permanece en la quinta columna de Ruta. */
   [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(5),
+  [class*="st-key-it-visit-checkbox-wrap-"],
   [class*="st-key-it-visit-checkbox-wrap-"] [data-testid="stElementContainer"],
   [class*="st-key-it-visit-checkbox-wrap-"] [data-testid="stCheckbox"] {
     display: flex !important;
@@ -1818,11 +1840,7 @@ st.markdown("""
     justify-content: center !important;
     align-self: center !important;
   }
-  [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(5) [data-testid="stCheckbox"] > label {
-    margin: 0 !important;
-    padding: 0 !important;
-  }
-  /* Título de los lugares de Ruta: conserva el tamaño reducido existente. */
+  /* Título de los lugares de Ruta: 1,5 puntos menos. */
   [class*="st-key-it-heading-row-"] .place-list-title {
     font-size: calc(1.25rem - 1.5pt) !important;
   }
@@ -2380,37 +2398,6 @@ def cargar_itinerario_disco():
 def guardar_itinerario_disco(lugares):
     """Guarda el itinerario en disco y en GitHub si se configuró persistencia."""
     return _guardar_json_persistente(ARCH_ITINERARIO, lugares)
-
-
-def actualizar_hora_itinerario(dia: int, lugar_id):
-    """Guarda el cambio de hora desde el evento del widget, antes del rerun."""
-    clave_widget = f"hora_it_{dia}_{lugar_id}"
-    hora_nueva = str(st.session_state.get(clave_widget, "") or "").strip()
-
-    # Mantiene la validación HH:MM y normaliza, por ejemplo, 9:30 a 09:30.
-    if hora_nueva and not re.match(r"^([01]?\d|2[0-3]):[0-5]\d$", hora_nueva):
-        return
-    if hora_nueva and len(hora_nueva) == 4:
-        hora_nueva = "0" + hora_nueva
-
-    lugar = next(
-        (x for x in st.session_state.get("lugares", []) if str(x.get("id")) == str(lugar_id)),
-        None
-    )
-    if lugar is None:
-        return
-
-    hora_anterior = str(lugar.get("hora", "") or "").strip()
-    if hora_nueva == hora_anterior:
-        return
-
-    lugar["hora"] = hora_nueva
-    if guardar_itinerario_disco(st.session_state.lugares):
-        st.session_state[clave_widget] = hora_nueva
-    else:
-        # Si el guardado persistente falla, no dejamos una hora falsa en la sesión.
-        lugar["hora"] = hora_anterior
-        st.session_state[clave_widget] = hora_anterior
 
 
 def _huella_datos(datos) -> str:
@@ -3465,15 +3452,23 @@ if seccion_principal == "🗽Ruta":
                     )
 
                     with c_hr_head:
-                        st.text_input(
+                        nueva_h = st.text_input(
                             "Hora",
                             value=hora_i,
                             placeholder="HH:MM",
                             key=f"hora_it_{d}_{item['id']}",
-                            on_change=actualizar_hora_itinerario,
-                            args=(d, item["id"]),
                             label_visibility="collapsed"
                         )
+                        if nueva_h.strip() != hora_i and idx_real is not None:
+                            hl = nueva_h.strip()
+                            if not hl or re.match(r"^([01]?\d|2[0-3]):[0-5]\d$", hl):
+                                if hl and len(hl) == 4:
+                                    hl = "0" + hl
+                                st.session_state.lugares[idx_real]["hora"] = hl
+                                guardar_itinerario_disco(st.session_state.lugares)
+                                # La lista se había ordenado antes de leer este cambio.
+                                # Reejecutar permite recalcular el orden con la hora guardada.
+                                st.rerun()
 
                     with c_info:
                         txt_c = "#334155" if is_visited else "#0F172A"
