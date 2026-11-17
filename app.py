@@ -1880,7 +1880,7 @@ st.markdown("""
      hacia arriba para alinearlo verticalmente con Mapa y Editar. */
   @media (max-width: 768px) {
     [class*="st-key-it-visit-checkbox-wrap-"] {
-      transform: translateY(-4.5px) !important;
+      transform: translate(3px, -4.5px) !important;
     }
   }
 </style>
