@@ -1210,7 +1210,7 @@ st.markdown("""
     flex-flow: row nowrap !important;
     align-items: center !important;
     justify-content: flex-start !important;
-    gap: 6px !important;
+    gap: 2px !important;
     width: 100% !important;
     min-width: 0 !important;
     max-width: 100% !important;
@@ -1543,7 +1543,7 @@ st.markdown("""
   @media (max-width: 768px) {
     [class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"] {
       display: grid !important;
-      grid-template-columns: minmax(0, 1fr) 38px 30px !important;
+      grid-template-columns: minmax(0, 1fr) 30px 30px !important;
       grid-auto-flow: column !important;
       align-items: center !important;
       justify-content: stretch !important;
