@@ -449,9 +449,9 @@ st.markdown("""
     padding: 0 !important;
   }
   [data-testid="column"]:has(.compact-hora) input {
-    height: 28px !important;
-    min-height: 28px !important;
-    max-height: 28px !important;
+    height: 23px !important;
+    min-height: 23px !important;
+    max-height: 23px !important;
     padding: 0 4px !important;
     font-size: 0.77rem !important;
     font-weight: 700 !important;
@@ -462,14 +462,14 @@ st.markdown("""
   }
   [data-testid="column"]:has(.compact-hora) [data-baseweb="input"]:focus-within {
     background: #FFFFFF !important;
-    border: 1.5px solid #2563EB !important;
+    border: 1.5px solid #F5F5F5 !important;
   }
 
   /* Controles compactos: el marcador identifica la columna del widget. */
   [data-testid="column"]:has(.compact-dia) [data-baseweb="select"] > div {
-    min-height: 30px !important;
-    height: 30px !important;
-    max-height: 30px !important;
+    min-height: 23px !important;
+    height: 23px !important;
+    max-height: 23px !important;
     border-radius: 8px !important;
     padding-top: 0 !important;
     padding-bottom: 0 !important;
@@ -654,23 +654,23 @@ st.markdown("""
     [data-testid="column"]:has(.compact-hora) [data-baseweb="base-input"],
     [data-testid="column"]:has(.compact-dia) [data-baseweb="select"] > div,
     [data-testid="column"]:has(.compact-maps) [data-testid="stLinkButton"] > a {
-      min-height: 34px !important;
-      height: 34px !important;
-      max-height: 34px !important;
+      min-height: 23px !important;
+      height: 23px !important;
+      max-height: 23px !important;
       border-radius: 8px !important;
     }
     [data-testid="column"]:has(.compact-hora) input {
       min-width: 0 !important;
       width: 100% !important;
-      height: 32px !important;
-      min-height: 32px !important;
+      height: 23px !important;
+      min-height: 23px !important;
       padding: 0 4px !important;
       font-size: 0.78rem !important;
       letter-spacing: 0 !important;
       text-align: center !important;
       font-variant-numeric: tabular-nums !important;
     }
-    [data-testid="column"]:has(.compact-dia) [data-baseweb="select"] span,
+    [data-testid="column"]:has(dia) [data-baseweb="select"] span,
     [data-testid="column"]:has(.compact-dia) [data-baseweb="select"] div {
       font-size: 0.72rem !important;
       line-height: 1.1 !important;
