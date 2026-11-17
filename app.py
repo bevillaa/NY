@@ -317,7 +317,7 @@ st.markdown("""
     width: auto !important;
     white-space: nowrap !important;
   }
-  @media (max-width: 760px) {
+  @media (max-width: 768px) {
     [class*="st-key-guardados-header-row"] [data-testid="stHorizontalBlock"] {
       display: grid !important;
       grid-template-columns: minmax(0, 1fr) auto !important;
@@ -453,7 +453,7 @@ st.markdown("""
      Las filas con Hora/Día/Maps se identifican de forma explícita; el resto
      de columnas se apila para que nunca se compriman ni se solapen.
      ========================================================================= */
-  @media (max-width: 760px) {
+  @media (max-width: 768px) {
     html, body, .stApp, [data-testid="stAppViewContainer"],
     [data-testid="stMain"], section.main {
       margin: 0 !important;
@@ -705,7 +705,7 @@ st.markdown("""
     .stTabs [data-baseweb="tab"] { font-size: 0.69rem !important; padding: 4px 2px !important; }
   }
 
-  @media (max-width: 760px) {
+  @media (max-width: 768px) {
     /* Estadística superior: reservar más ancho a la tarjeta "Guardados". */
     .hero-container > div > div:last-child {
       display: grid !important;
@@ -747,7 +747,7 @@ st.markdown("""
     overflow-wrap: anywhere !important;
   }
 
-  @media (max-width: 760px) {
+  @media (max-width: 768px) {
     /* Nombre dominante; categoría, entorno, dirección y nota siempre menores. */
     .place-list-title {
       font-size: 1.25rem !important;
@@ -775,7 +775,7 @@ st.markdown("""
   }
 
   /* La tarjeta central del resumen siempre muestra GUARDADOS completo. */
-  @media (max-width: 760px) {
+  @media (max-width: 768px) {
     .hero-container > div > div:last-child {
       grid-template-columns: minmax(0, 1fr) minmax(88px, 1.18fr) minmax(0, 1fr) !important;
     }
@@ -787,7 +787,7 @@ st.markdown("""
     }
   }
   /* Ajustes finales para que la página completa pueda desplazarse en móvil. */
-  @media (max-width: 760px) {
+  @media (max-width: 768px) {
     html, body {
       height: auto !important;
       min-height: 100% !important;
@@ -891,7 +891,7 @@ st.markdown("""
     padding-top: 0.45rem !important;
     margin-top: 0 !important;
   }
-  @media (max-width: 760px) {
+  @media (max-width: 768px) {
     [data-testid="stMainBlockContainer"], .block-container {
       padding-top: max(0.25rem, env(safe-area-inset-top)) !important;
     }
@@ -1059,7 +1059,7 @@ st.markdown("""
     border-color: #B8C2AE !important;
   }
   [data-testid="stCheckbox"] label p { color: var(--ink) !important; }
-  @media (max-width: 760px) {
+  @media (max-width: 768px) {
     .hero-container { padding: 22px 17px 17px !important; border-radius: 5px 5px 14px 14px !important; }
     .hero-container:before { left: 17px; right: 17px; }
     .hero-title { font-size: 1.8rem !important; }
@@ -1193,7 +1193,7 @@ st.markdown("""
     overflow-wrap: anywhere !important; white-space: pre-wrap !important;
   }
   .place-full-width-info { flex: 1 1 100% !important; }
-  @media (max-width: 760px) {
+  @media (max-width: 768px) {
     .place-full-width-info, .place-full-width-info .place-list-address,
     .place-full-width-info .place-note { width: 100% !important; max-width: 100% !important; }
   }
@@ -1540,7 +1540,7 @@ st.markdown("""
   }
 
   /* En móvil, se neutraliza el apilado global SOLO en estas filas. */
-  @media (max-width: 760px) {
+  @media (max-width: 768px) {
     [class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"] {
       display: grid !important;
       grid-template-columns: minmax(0, 1fr) 38px 30px !important;
@@ -1698,7 +1698,7 @@ st.markdown("""
     margin-bottom: 0 !important;
   }
   /* Ajustes finales de alineación móvil para los controles de las filas. */
-  @media (max-width: 760px) {
+  @media (max-width: 768px) {
     [class*="st-key-it-visit-checkbox-wrap-"] { transform: translate(3px, -4.5px) !important; }
     [class*="st-key-saved-edit-button-wrap-"] { transform: translate(11px, 0px) !important; }
     [class*="st-key-it-edit-button-wrap-"] { transform: translate(4px, 0px) !important; }
@@ -2001,10 +2001,10 @@ st.markdown("""
       padding: 0 !important;
     }
     [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(1) {
-      flex: 0 0 40px !important;
-      width: 40px !important;
-      min-width: 40px !important;
-      max-width: 40px !important;
+      flex: 0 0 54px !important;
+      width: 54px !important;
+      min-width: 54px !important;
+      max-width: 54px !important;
     }
     [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(2) {
       flex: 1 1 0% !important;
@@ -2100,25 +2100,25 @@ st.markdown("""
       overflow: visible !important;
     }
     [class*="st-key-saved-controls-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:first-child {
-      flex: 0 0 40px !important;
-      width: 40px !important;
-      min-width: 40px !important;
-      max-width: 40px !important;
+      flex: 0 0 54px !important;
+      width: 54px !important;
+      min-width: 54px !important;
+      max-width: 54px !important;
     }
     [class*="st-key-saved-controls-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(2) {
-      flex: 0 0 60px !important;
-      width: 60px !important;
-      min-width: 60px !important;
-      max-width: 60px !important;
+      flex: 0 0 68px !important;
+      width: 68px !important;
+      min-width: 68px !important;
+      max-width: 68px !important;
     }
     [class*="st-key-saved-controls-row-"] [data-testid="column"]:first-child [data-testid="stTextInput"],
     [class*="st-key-saved-controls-row-"] [data-testid="column"]:first-child [data-baseweb="input"],
     [class*="st-key-saved-controls-row-"] [data-testid="column"]:first-child [data-baseweb="base-input"] {
       box-sizing: border-box !important;
       display: flex !important;
-      width: 40px !important;
-      min-width: 40px !important;
-      max-width: 40px !important;
+      width: 54px !important;
+      min-width: 54px !important;
+      max-width: 54px !important;
       height: 24px !important;
       min-height: 24px !important;
       max-height: 24px !important;
@@ -2140,9 +2140,9 @@ st.markdown("""
     [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(2) [data-baseweb="select"] > div {
       box-sizing: border-box !important;
       display: block !important;
-      width: 60px !important;
-      min-width: 60px !important;
-      max-width: 60px !important;
+      width: 68px !important;
+      min-width: 68px !important;
+      max-width: 68px !important;
       height: 24px !important;
       min-height: 24px !important;
       max-height: 24px !important;
