@@ -1493,7 +1493,7 @@ st.markdown("""
     border: 0 !important;
     background: transparent !important;
     line-height: 0 !important;
-    transform: translateY(-3px) !important;
+    transform: translateY(-4px) !important;
   }
 
   [class*="st-key-it-visit-checkbox-wrap-"] [data-testid="stCheckbox"] label > div:first-of-type {
@@ -1584,9 +1584,9 @@ st.markdown("""
     width: 100% !important;
     min-width: 0 !important;
     max-width: 100% !important;
-    height: 17px !important;
-    min-height: 17px !important;
-    max-height: 17px !important;
+    height: 10px !important;
+    min-height: 10px !important;
+    max-height: 10px !important;
     padding: 0 4px !important;
     font-size: 0.7rem !important;
     font-weight: 600 !important;
