@@ -1477,8 +1477,8 @@ st.markdown("""
   }
 
   [class*="st-key-it-visit-checkbox-wrap-"] [data-testid="stCheckbox"] > label {
-    box-sizing: border-box !important;
-    box-sizing: border-box !important;
+    box-sizing: border-box !important;    
+    background-size: 16px 16px !important;
     display: inline-flex !important;
     flex: none !important;
     width: 24px !important;
