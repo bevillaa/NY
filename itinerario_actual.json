@@ -1770,19 +1770,5 @@
     "tipo": "Interior",
     "lista_origen": "Markets",
     "visitado": false
-  },
-  {
-    "id": 134,
-    "nombre": "Washington Square Park",
-    "lat": 40.7308838,
-    "lon": -73.997332,
-    "dia": 0,
-    "hora": "",
-    "direccion": "New York, NY 10012, United States",
-    "nota": "",
-    "categoria": "☀️ Spots",
-    "tipo": "Exterior",
-    "lista_origen": "Markets",
-    "visitado": false
   }
 ]
