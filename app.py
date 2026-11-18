@@ -1436,8 +1436,8 @@ st.markdown("""
     margin: 0 !important;
     padding: 0 !important;
     align-self: center !important;
-    position: relative !important;
-    top: -4px !important;
+    position: static !important;
+    top: auto !important;
   }
 
   [class*="st-key-it-visit-checkbox-wrap-"] [data-testid="stCheckbox"] input[type="checkbox"] {
@@ -1491,11 +1491,11 @@ st.markdown("""
   }
 
   [class*="st-key-saved-controls-row-"] [data-testid="stColumn"]:first-child [data-testid="stTextInput"],
+  [class*="st-key-saved-controls-row-"] [data-testid="stColumn"]:nth-child(2) [data-testid="stSelectbox"],
   [class*="st-key-saved-controls-row-"] [data-testid="stColumn"]:first-child [data-testid="stTextInput"] > div,
   [class*="st-key-saved-controls-row-"] [data-testid="stColumn"]:first-child [data-testid="stTextInput"] > div > div,
   [class*="st-key-saved-controls-row-"] [data-testid="stColumn"]:first-child [data-baseweb="input"],
   [class*="st-key-saved-controls-row-"] [data-testid="stColumn"]:first-child [data-baseweb="base-input"],
-  [class*="st-key-saved-controls-row-"] [data-testid="stColumn"]:nth-child(2) [data-testid="stSelectbox"],
   [class*="st-key-saved-controls-row-"] [data-testid="stColumn"]:nth-child(2) [data-testid="stSelectbox"] > div,
   [class*="st-key-saved-controls-row-"] [data-testid="stColumn"]:nth-child(2) [data-baseweb="select"],
   [class*="st-key-saved-controls-row-"] [data-testid="stColumn"]:nth-child(2) [data-baseweb="select"] > div,
@@ -1505,6 +1505,8 @@ st.markdown("""
     width: 100% !important;
     min-width: 0 !important;
     max-width: 100% !important;
+    display: flex !important;
+    align-items: center !important;
     height: 44px !important;
     min-height: 44px !important;
     max-height: 44px !important;
