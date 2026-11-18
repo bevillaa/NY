@@ -1686,5 +1686,33 @@
     "tipo": "Interior",
     "lista_origen": "NY",
     "visitado": false
+  },
+  {
+    "id": 128,
+    "nombre": "Leon's Bagels",
+    "lat": 40.7276755,
+    "lon": -74.0004378,
+    "dia": 0,
+    "hora": "",
+    "direccion": "169 Thompson St Frnt B, New York, NY 10012, United States",
+    "nota": "",
+    "categoria": "🍽️ Gastronomía",
+    "tipo": "Interior",
+    "lista_origen": "Food",
+    "visitado": false
+  },
+  {
+    "id": 129,
+    "nombre": "Farmer in the Deli",
+    "lat": 40.693401099999996,
+    "lon": -73.97174009999999,
+    "dia": 0,
+    "hora": "",
+    "direccion": "357 Myrtle Ave, Brooklyn, NY 11205, United States",
+    "nota": "",
+    "categoria": "🍽️ Gastronomía",
+    "tipo": "Interior",
+    "lista_origen": "Food",
+    "visitado": false
   }
 ]
