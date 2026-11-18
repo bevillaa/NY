@@ -4064,6 +4064,7 @@ def _anadir_pendiente_checklist():
     if guardado:
         st.session_state["checklist_nuevo_texto"] = ""
         st.session_state["checklist_nueva_nota"] = ""
+        st.session_state["checklist_formulario_abierto"] = False
         st.session_state["_checklist_mensaje"] = ("success", f"«{texto}» se ha añadido a la checklist.")
     else:
         # No dejar una tarea que no llegó a persistirse como si estuviera guardada.
@@ -4078,40 +4079,72 @@ def _anadir_pendiente_checklist():
 if seccion_principal == "☑️Checklist":
     st.markdown("---")
     st.markdown('<div class="ny-card-header">☑️ Checklist de pendientes</div>', unsafe_allow_html=True)
-    st.caption("Un sitio para apuntar todo lo que queda falta.")
+    st.caption("Un sitio para apuntar todo lo que falta.")
 
     pendientes = st.session_state.config_viaje.setdefault("checklist_pendientes", [])
     if not isinstance(pendientes, list):
         pendientes = []
         st.session_state.config_viaje["checklist_pendientes"] = pendientes
 
-    with st.container(border=True):
-        st.markdown("**➕ Añadir algo pendiente**")
-        nuevo_pendiente = st.text_input(
-            "¿Qué te falta?",
-            placeholder="Ej: Comprar entradas para el mirador, visitar Central Park...",
-            key="checklist_nuevo_texto"
-        )
-        col_tipo, col_detalle = st.columns([1, 2])
-        with col_tipo:
-            tipo_pendiente = st.selectbox(
-                "Tipo",
-                ["Hacer", "Ver / Visitar", "Comprar", "Revisar", "Reservar", "Otro"],
-                key="checklist_nuevo_tipo"
-            )
-        with col_detalle:
-            detalle_pendiente = st.text_input(
-                "Nota (opcional)",
-                placeholder="Fecha, enlace, detalles...",
-                key="checklist_nueva_nota"
-            )
+    # El formulario permanece oculto hasta que se pulse el botón +.
+    if "checklist_formulario_abierto" not in st.session_state:
+        st.session_state["checklist_formulario_abierto"] = False
 
-        st.button(
-            "＋ Añadir a la checklist",
-            use_container_width=True,
-            key="btn_anadir_checklist",
-            on_click=_anadir_pendiente_checklist
-        )
+    st.markdown("""
+    <style>
+      [class*="st-key-btn_abrir_formulario_checklist"] button {
+        width: 42px !important;
+        min-width: 42px !important;
+        max-width: 42px !important;
+        height: 36px !important;
+        min-height: 36px !important;
+        padding: 0 !important;
+        font-size: 1.15rem !important;
+        line-height: 1 !important;
+      }
+    </style>
+    """, unsafe_allow_html=True)
+
+    with st.container(border=True):
+        if not st.session_state["checklist_formulario_abierto"]:
+            st.button(
+                "＋",
+                key="btn_abrir_formulario_checklist",
+                help="Añadir un pendiente",
+                on_click=lambda: st.session_state.__setitem__("checklist_formulario_abierto", True)
+            )
+        else:
+            with st.expander("Añadir detalle", expanded=True):
+                nuevo_pendiente = st.text_input(
+                    "¿Qué te falta?",
+                    placeholder="Ej: Comprar entradas para el mirador, visitar Central Park...",
+                    key="checklist_nuevo_texto"
+                )
+                col_tipo, col_detalle = st.columns([1, 2])
+                with col_tipo:
+                    tipo_pendiente = st.selectbox(
+                        "Tipo",
+                        ["Hacer", "Ver / Visitar", "Comprar", "Revisar", "Reservar", "Otro"],
+                        key="checklist_nuevo_tipo"
+                    )
+                with col_detalle:
+                    detalle_pendiente = st.text_input(
+                        "Nota (opcional)",
+                        placeholder="Fecha, enlace, detalles...",
+                        key="checklist_nueva_nota"
+                    )
+
+                st.button(
+                    "＋ Añadir a la checklist",
+                    use_container_width=True,
+                    key="btn_anadir_checklist",
+                    on_click=_anadir_pendiente_checklist
+                )
+                st.button(
+                    "Cerrar",
+                    key="btn_cerrar_formulario_checklist",
+                    on_click=lambda: st.session_state.__setitem__("checklist_formulario_abierto", False)
+                )
 
         mensaje_checklist = st.session_state.pop("_checklist_mensaje", None)
         if mensaje_checklist:
