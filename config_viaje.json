@@ -56,5 +56,14 @@
       "nombre": "Places",
       "url": "https://maps.app.goo.gl/N4DYzovnxSrQFoq5A"
     }
+  ],
+  "checklist_pendientes": [
+    {
+      "id": "e18e3aab09ad",
+      "texto": "Papel del Congo",
+      "tipo": "Hacer",
+      "nota": "",
+      "hecho": false
+    }
   ]
 }
