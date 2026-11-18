@@ -4077,8 +4077,8 @@ def _anadir_pendiente_checklist():
 
 if seccion_principal == "☑️Checklist":
     st.markdown("---")
-    st.markdown('<div class="ny-card-header">☑️ Mi checklist de pendientes</div>', unsafe_allow_html=True)
-    st.caption("Un sitio para apuntar todo lo que queda por hacer, ver, revisar o comprar.")
+    st.markdown('<div class="ny-card-header">☑️ Checklist de pendientes</div>', unsafe_allow_html=True)
+    st.caption("Un sitio para apuntar todo lo que queda falta.")
 
     pendientes = st.session_state.config_viaje.setdefault("checklist_pendientes", [])
     if not isinstance(pendientes, list):
