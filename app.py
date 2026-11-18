@@ -1235,19 +1235,19 @@ st.markdown("""
     transform: none !important;
   }
 
-  /* Acciones de Ruta: tres columnas idénticas de 32px. */
+  /* Acciones de Ruta: tres columnas idénticas de 40px, alineadas con sus controles. */
   [class*="st-key-it-heading-row-"] [data-testid="stColumn"]:nth-child(3),
   [class*="st-key-it-heading-row-"] [data-testid="stColumn"]:nth-child(4),
   [class*="st-key-it-heading-row-"] [data-testid="stColumn"]:nth-child(5) {
     box-sizing: border-box !important;
     display: flex !important;
     flex: none !important;
-    width: 32px !important;
-    min-width: 32px !important;
-    max-width: 32px !important;
-    height: 32px !important;
-    min-height: 32px !important;
-    max-height: 32px !important;
+    width: 40px !important;
+    min-width: 40px !important;
+    max-width: 40px !important;
+    height: 40px !important;
+    min-height: 40px !important;
+    max-height: 40px !important;
     align-items: center !important;
     justify-content: center !important;
     align-self: center !important;
@@ -1400,11 +1400,41 @@ st.markdown("""
     display: none !important;
   }
 
-  /* Checkbox: misma caja visible de 40px que los botones de editar y mapa. */
+  /* Checkbox de Ruta: caja de alineación de 40px; control visual de 24px. */
+  [class*="st-key-it-visit-checkbox-wrap-"] {
+    box-sizing: border-box !important;
+    display: flex !important;
+    width: 40px !important;
+    min-width: 40px !important;
+    max-width: 40px !important;
+    height: 40px !important;
+    min-height: 40px !important;
+    max-height: 40px !important;
+    align-items: center !important;
+    justify-content: center !important;
+    align-self: center !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  [class*="st-key-it-visit-checkbox-wrap-"] [data-testid="stCheckbox"] {
+    box-sizing: border-box !important;
+    display: flex !important;
+    width: 40px !important;
+    min-width: 40px !important;
+    max-width: 40px !important;
+    height: 40px !important;
+    min-height: 40px !important;
+    max-height: 40px !important;
+    align-items: center !important;
+    justify-content: center !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
   [class*="st-key-it-visit-checkbox-wrap-"] [data-testid="stCheckbox"] > label {
     box-sizing: border-box !important;
     display: flex !important;
-    flex: none !important;
     width: 40px !important;
     min-width: 40px !important;
     max-width: 40px !important;
@@ -1423,30 +1453,30 @@ st.markdown("""
     transform: none !important;
   }
 
-  [class*="st-key-it-visit-checkbox-wrap-"] [data-testid="stCheckbox"] label > div:first-of-type,
-  [class*="st-key-it-visit-checkbox-wrap-"] [data-testid="stCheckbox"] input[type="checkbox"] {
+  [class*="st-key-it-visit-checkbox-wrap-"] [data-testid="stCheckbox"] label > div:first-of-type {
     box-sizing: border-box !important;
     display: flex !important;
     flex: none !important;
-    width: 40px !important;
-    min-width: 40px !important;
-    max-width: 40px !important;
-    height: 40px !important;
-    min-height: 40px !important;
-    max-height: 40px !important;
+    width: 24px !important;
+    min-width: 24px !important;
+    max-width: 24px !important;
+    height: 24px !important;
+    min-height: 24px !important;
+    max-height: 24px !important;
     align-items: center !important;
     justify-content: center !important;
     margin: 0 !important;
     padding: 0 !important;
     align-self: center !important;
-    position: static !important;
+    position: relative !important;
   }
 
   [class*="st-key-it-visit-checkbox-wrap-"] [data-testid="stCheckbox"] label p {
     display: none !important;
   }
 
-  /* GUARDADOS: Hora y Día ocupan dos columnas exactamente iguales. */
+  /* GUARDADOS: dos columnas iguales. Solo se dimensionan los controles reales,
+     no todos sus contenedores internos (evita capas duplicadas/superpuestas). */
   [class*="st-key-saved-controls-row-"] {
     display: block !important;
     width: 100% !important;
@@ -1459,7 +1489,7 @@ st.markdown("""
     display: grid !important;
     grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) !important;
     grid-auto-flow: row !important;
-    align-items: center !important;
+    align-items: stretch !important;
     justify-content: stretch !important;
     column-gap: 8px !important;
     row-gap: 0 !important;
@@ -1472,7 +1502,6 @@ st.markdown("""
   [class*="st-key-saved-controls-row-"] [data-testid="stHorizontalBlock"] > [data-testid="stColumn"] {
     box-sizing: border-box !important;
     display: block !important;
-    flex: none !important;
     width: 100% !important;
     min-width: 0 !important;
     max-width: 100% !important;
@@ -1481,20 +1510,19 @@ st.markdown("""
     overflow: visible !important;
   }
 
-  [class*="st-key-saved-controls-row-"] [data-testid="stColumn"] [data-testid="stElementContainer"],
   [class*="st-key-saved-controls-row-"] [data-testid="stColumn"] [data-testid="stTextInput"],
-  [class*="st-key-saved-controls-row-"] [data-testid="stColumn"] [data-testid="stSelectbox"],
-  [class*="st-key-saved-controls-row-"] [data-testid="stColumn"] [data-baseweb="input"],
-  [class*="st-key-saved-controls-row-"] [data-testid="stColumn"] [data-baseweb="base-input"],
-  [class*="st-key-saved-controls-row-"] [data-testid="stColumn"] [data-baseweb="select"],
-  [class*="st-key-saved-controls-row-"] [data-testid="stColumn"] [data-baseweb="select"] > div,
-  [class*="st-key-saved-controls-row-"] [data-testid="stColumn"] [data-baseweb="select"] > div > div,
-  [class*="st-key-saved-controls-row-"] [data-testid="stColumn"] [data-baseweb="select"] [role="combobox"],
-  [class*="st-key-saved-controls-row-"] [data-testid="stColumn"] [data-testid="stTextInput"] > div,
-  [class*="st-key-saved-controls-row-"] [data-testid="stColumn"] [data-testid="stTextInput"] > div > div {
+  [class*="st-key-saved-controls-row-"] [data-testid="stColumn"] [data-testid="stSelectbox"] {
     box-sizing: border-box !important;
-    display: flex !important;
-    align-items: center !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+  }
+
+  [class*="st-key-saved-controls-row-"] [data-testid="stColumn"] [data-baseweb="input"],
+  [class*="st-key-saved-controls-row-"] [data-testid="stColumn"] [data-baseweb="select"],
+  [class*="st-key-saved-controls-row-"] [data-testid="stColumn"] [data-baseweb="select"] > div {
+    box-sizing: border-box !important;
     width: 100% !important;
     min-width: 0 !important;
     max-width: 100% !important;
@@ -1502,13 +1530,12 @@ st.markdown("""
     min-height: 44px !important;
     max-height: 44px !important;
     margin: 0 !important;
-    padding: 0 !important;
-    border-width: 1px !important;
   }
 
   [class*="st-key-saved-controls-row-"] [data-testid="stColumn"] input,
   [class*="st-key-saved-controls-row-"] [data-testid="stColumn"] [data-baseweb="select"] [role="combobox"] {
     box-sizing: border-box !important;
+    display: block !important;
     width: 100% !important;
     min-width: 0 !important;
     max-width: 100% !important;
