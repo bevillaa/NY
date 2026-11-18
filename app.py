@@ -4025,8 +4025,8 @@ if seccion_principal == "🗒️Listas":
 # ─────────────────────────────────────────────────────────────────────────────
 if seccion_principal == "☑️Checklist":
     st.markdown("---")
-    st.markdown('<div class="ny-card-header">☑️ Checklist de pendientes</div>', unsafe_allow_html=True)
-    st.caption("✨")
+    st.markdown('<div class="ny-card-header">☑️ Mi checklist de pendientes</div>', unsafe_allow_html=True)
+    st.caption("Un sitio para apuntar todo lo que queda por hacer, ver, revisar o comprar.")
 
     pendientes = st.session_state.config_viaje.setdefault("checklist_pendientes", [])
     if not isinstance(pendientes, list):
@@ -4035,52 +4035,81 @@ if seccion_principal == "☑️Checklist":
 
     with st.container(border=True):
         st.markdown("**➕ Añadir algo pendiente**")
-        with st.form("form_anadir_pendiente_checklist", clear_on_submit=True):
-            nuevo_pendiente = st.text_input(
-                "¿Qué te falta?",
-                placeholder="Ej: Comprar entradas, sacar visa..."
+        nuevo_pendiente = st.text_input(
+            "¿Qué te falta?",
+            placeholder="Ej: Comprar entradas para el mirador, visitar Central Park...",
+            key="checklist_nuevo_texto"
+        )
+        col_tipo, col_detalle = st.columns([1, 2])
+        with col_tipo:
+            tipo_pendiente = st.selectbox(
+                "Tipo",
+                ["Hacer", "Ver / Visitar", "Comprar", "Revisar", "Reservar", "Otro"],
+                key="checklist_nuevo_tipo"
             )
-            col_tipo, col_detalle = st.columns([1, 2])
-            with col_tipo:
-                tipo_pendiente = st.selectbox(
-                    "Tipo",
-                    ["Hacer", "Comprar", "Reservar", "Otro"]
-                )
-            with col_detalle:
-                detalle_pendiente = st.text_input(
-                    "Nota (opcional)",
-                    placeholder="Fecha, enlace, detalles..."
-                )
-            anadir_pendiente = st.form_submit_button("＋ Añadir a la checklist", use_container_width=True)
-            if anadir_pendiente:
-                texto = (nuevo_pendiente or "").strip()
-                if not texto:
-                    st.warning("Escribe qué tienes pendiente.")
+        with col_detalle:
+            detalle_pendiente = st.text_input(
+                "Nota (opcional)",
+                placeholder="Fecha, enlace, detalles...",
+                key="checklist_nueva_nota"
+            )
+
+        if st.button("＋ Añadir a la checklist", use_container_width=True, key="btn_anadir_checklist"):
+            texto = (nuevo_pendiente or "").strip()
+            if not texto:
+                st.warning("Escribe qué tienes pendiente.")
+            else:
+                nuevo_id = hashlib.sha1(
+                    f"{texto}|{datetime.now().isoformat()}|{len(pendientes)}".encode("utf-8")
+                ).hexdigest()[:12]
+                pendientes.append({
+                    "id": nuevo_id,
+                    "texto": texto,
+                    "tipo": tipo_pendiente,
+                    "nota": (detalle_pendiente or "").strip(),
+                    "hecho": False
+                })
+                st.session_state.config_viaje["checklist_pendientes"] = pendientes
+                if guardar_config_viaje(st.session_state.config_viaje):
+                    st.success(f"«{texto}» se ha añadido a la checklist.")
+                    st.session_state["checklist_nuevo_texto"] = ""
+                    st.session_state["checklist_nueva_nota"] = ""
+                    st.rerun()
                 else:
-                    nuevo_id = hashlib.sha1(
-                        f"{texto}|{datetime.now().isoformat()}|{len(pendientes)}".encode("utf-8")
-                    ).hexdigest()[:12]
-                    pendientes.append({
-                        "id": nuevo_id,
-                        "texto": texto,
-                        "tipo": tipo_pendiente,
-                        "nota": (detalle_pendiente or "").strip(),
-                        "hecho": False
-                    })
-                    st.session_state.config_viaje["checklist_pendientes"] = pendientes
-                    if guardar_config_viaje(st.session_state.config_viaje):
-                        st.toast("Añadido a la checklist.", icon="✅")
-                        st.rerun()
+                    # No ocultar el fallo de persistencia: se informa explícitamente.
+                    st.error("No se ha podido guardar el pendiente. Revisa el mensaje de error de guardado mostrado arriba.")
 
     total_pendientes = len(pendientes)
     total_hechos = sum(1 for pnd in pendientes if pnd.get("hecho", False))
     total_abiertos = total_pendientes - total_hechos
     progreso = int(total_hechos / total_pendientes * 100) if total_pendientes else 0
 
-    c_total, c_abiertos, c_hechos = st.columns(3)
-    c_total.metric("Total", total_pendientes)
-    c_abiertos.metric("Pendientes", total_abiertos)
-    c_hechos.metric("Completados", total_hechos)
+    # Resumen compacto: las tres estadísticas permanecen en una única fila.
+    st.markdown(
+        f"""
+        <div style="
+            display:grid;
+            grid-template-columns:repeat(3, minmax(0, 1fr));
+            gap:12px;
+            width:100%;
+            margin:10px 0 14px 0;
+        ">
+          <div style="border:1px solid rgba(128,128,128,.28); border-radius:10px; padding:12px 14px; display:flex; align-items:center; justify-content:space-between; gap:8px; min-width:0;">
+            <span style="font-size:0.95rem; white-space:nowrap;">Total</span>
+            <strong style="font-size:1.35rem; white-space:nowrap;">{total_pendientes}</strong>
+          </div>
+          <div style="border:1px solid rgba(128,128,128,.28); border-radius:10px; padding:12px 14px; display:flex; align-items:center; justify-content:space-between; gap:8px; min-width:0;">
+            <span style="font-size:0.95rem; white-space:nowrap;">Pendientes</span>
+            <strong style="font-size:1.35rem; white-space:nowrap;">{total_abiertos}</strong>
+          </div>
+          <div style="border:1px solid rgba(128,128,128,.28); border-radius:10px; padding:12px 14px; display:flex; align-items:center; justify-content:space-between; gap:8px; min-width:0;">
+            <span style="font-size:0.95rem; white-space:nowrap;">Completados</span>
+            <strong style="font-size:1.35rem; white-space:nowrap;">{total_hechos}</strong>
+          </div>
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
     st.progress(progreso / 100 if total_pendientes else 0, text=f"{progreso}% completado")
 
     filtro_checklist = st.radio(
