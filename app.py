@@ -1131,7 +1131,7 @@ st.markdown("""
     display: grid !important;
     grid-template-columns: 60px minmax(0, 1fr) 32px 32px 32px !important;
     grid-auto-flow: row !important;
-    align-items: start !important;
+    align-items: center !important;
     justify-content: stretch !important;
     column-gap: 1px !important;
     row-gap: 0 !important;
@@ -1419,6 +1419,7 @@ st.markdown("""
     border: 0 !important;
     background: transparent !important;
     line-height: 0 !important;
+    transform: translateY(-5px) !important;
   }
 
   [class*="st-key-it-visit-checkbox-wrap-"] [data-testid="stCheckbox"] label > div:first-of-type {
@@ -1494,6 +1495,7 @@ st.markdown("""
   [class*="st-key-saved-controls-row-"] [data-testid="stColumn"]:nth-child(2) [data-testid="stElementContainer"],
   [class*="st-key-saved-controls-row-"] [data-testid="stColumn"]:first-child [data-testid="stTextInput"],
   [class*="st-key-saved-controls-row-"] [data-testid="stColumn"]:nth-child(2) [data-testid="stSelectbox"],
+  [class*="st-key-saved-controls-row-"] [data-testid="stColumn"]:nth-child(2) [data-baseweb="select"],
   [class*="st-key-saved-controls-row-"] [data-testid="stColumn"]:first-child [data-testid="stTextInput"] > div,
   [class*="st-key-saved-controls-row-"] [data-testid="stColumn"]:first-child [data-testid="stTextInput"] > div > div,
   [class*="st-key-saved-controls-row-"] [data-testid="stColumn"]:first-child [data-baseweb="input"],
