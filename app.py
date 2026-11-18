@@ -1480,6 +1480,7 @@ st.markdown("""
     box-sizing: border-box !important;
     box-sizing: border-box !important;
     display: inline-flex !important;
+    flex: none !important;
     width: 24px !important;
     min-width: 24px !important;
     max-width: 24px !important;
@@ -1488,11 +1489,12 @@ st.markdown("""
     max-height: 24px !important;
     align-items: center !important;
     justify-content: center !important;
-    gap: 0 !important;
     margin: 0 !important;
     padding: 0 !important;
-    border: 0 !important;
-    background: transparent !important;
+    border-radius: 6px !important;
+    font-size: 0 !important;
+    line-height: 0 !important;
+    overflow: hidden !important;portant;
     line-height: 0 !important;
     transform: translateY(-4px) !important;
   }
