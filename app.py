@@ -1322,7 +1322,7 @@ st.markdown("""
   /* Distribución de las filas superiores. */
   [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] {
     display: grid !important;
-    grid-template-columns: 68px minmax(0, 1fr) 27px 27px 27px !important;
+    grid-template-columns: 68px minmax(0, 1fr) 30px 30px 30px !important;
     align-items: center !important;
     column-gap: 2px !important;
     row-gap: 0 !important;
@@ -1346,6 +1346,7 @@ st.markdown("""
   [class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"] {
     box-sizing: border-box !important;
     display: flex !important;
+    flex: none !important;
     min-width: 0 !important;
     max-width: 100% !important;
     margin: 0 !important;
@@ -1368,22 +1369,24 @@ st.markdown("""
     justify-self: stretch !important;
   }
   [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(n+3) {
-    width: 27px !important;
-    min-width: 27px !important;
-    max-width: 27px !important;
-    height: 27px !important;
-    min-height: 27px !important;
-    max-height: 27px !important;
+    width: 30px !important;
+    min-width: 30px !important;
+    max-width: 30px !important;
+    height: 30px !important;
+    min-height: 30px !important;
+    max-height: 30px !important;
     justify-content: center !important;
     justify-self: center !important;
   }
   [class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:first-child {
     display: block !important;
+    flex: none !important;
     width: 100% !important;
     min-width: 0 !important;
     max-width: none !important;
   }
   [class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(n+2) {
+    flex: none !important;
     width: 30px !important;
     min-width: 30px !important;
     max-width: 30px !important;
@@ -1666,33 +1669,53 @@ st.markdown("""
     line-height: 1.05 !important;
   }
 
-  /* En móvil: quitar unos píxeles más a hora e iconos para dar aire al texto. */
+  /* En móvil se conserva la misma estructura de columnas; solo se compactan
+     hora y acciones. Estas reglas prevalecen sobre el apilado general móvil. */
   @media (max-width: 768px) {
     [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] {
-      grid-template-columns: 62px minmax(0, 1fr) 25px 25px 25px !important;
+      display: grid !important;
+      grid-template-columns: 58px minmax(0, 1fr) 26px 26px 26px !important;
+      align-items: center !important;
       column-gap: 2px !important;
+      row-gap: 0 !important;
+      width: 100% !important;
     }
-    [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(n+3),
+    [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"] {
+      flex: none !important;
+      min-width: 0 !important;
+      margin: 0 !important;
+      padding: 0 !important;
+    }
+    [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:first-child {
+      width: 58px !important;
+      max-width: 58px !important;
+    }
+    [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(2) {
+      width: 100% !important;
+      max-width: none !important;
+      min-width: 0 !important;
+    }
+    [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(n+3) {
+      width: 26px !important;
+      min-width: 26px !important;
+      max-width: 26px !important;
+      height: 26px !important;
+      min-height: 26px !important;
+      max-height: 26px !important;
+    }
     [class*="st-key-it-edit-button-wrap-"],
     [class*="st-key-it-map-button-wrap-"],
-    [class*="st-key-it-visit-checkbox-wrap-"] {
-      width: 25px !important;
-      min-width: 25px !important;
-      max-width: 25px !important;
-      height: 25px !important;
-      min-height: 25px !important;
-      max-height: 25px !important;
-    }
+    [class*="st-key-it-visit-checkbox-wrap-"],
     [class*="st-key-it-edit-button-wrap-"] button,
     [class*="st-key-it-map-button-wrap-"] a,
     [class*="st-key-it-visit-checkbox-wrap-"] [data-testid="stCheckbox"],
     [class*="st-key-it-visit-checkbox-wrap-"] [data-testid="stCheckbox"] > label {
-      width: 25px !important;
-      min-width: 25px !important;
-      max-width: 25px !important;
-      height: 25px !important;
-      min-height: 25px !important;
-      max-height: 25px !important;
+      width: 26px !important;
+      min-width: 26px !important;
+      max-width: 26px !important;
+      height: 26px !important;
+      min-height: 26px !important;
+      max-height: 26px !important;
     }
     [class*="st-key-it-heading-row-"] [data-testid="column"]:first-child input {
       font-size: 0.68rem !important;
@@ -1707,12 +1730,40 @@ st.markdown("""
       font-size: 0.68rem !important;
       line-height: 1.25 !important;
     }
+
+    [class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"] {
+      display: grid !important;
+      grid-template-columns: minmax(0, 1fr) 30px 30px !important;
+      align-items: center !important;
+      column-gap: 2px !important;
+      row-gap: 0 !important;
+      width: 100% !important;
+    }
+    [class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"] {
+      flex: none !important;
+      min-width: 0 !important;
+      margin: 0 !important;
+      padding: 0 !important;
+    }
+    [class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:first-child {
+      width: 100% !important;
+      max-width: none !important;
+    }
+    [class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(n+2) {
+      width: 30px !important;
+      min-width: 30px !important;
+      max-width: 30px !important;
+    }
   }
 
   @media (max-width: 380px) {
     [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] {
-      grid-template-columns: 56px minmax(0, 1fr) 24px 24px 24px !important;
+      grid-template-columns: 52px minmax(0, 1fr) 25px 25px 25px !important;
       column-gap: 1px !important;
+    }
+    [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:first-child {
+      width: 52px !important;
+      max-width: 52px !important;
     }
     [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(n+3),
     [class*="st-key-it-edit-button-wrap-"],
@@ -1722,12 +1773,12 @@ st.markdown("""
     [class*="st-key-it-map-button-wrap-"] a,
     [class*="st-key-it-visit-checkbox-wrap-"] [data-testid="stCheckbox"],
     [class*="st-key-it-visit-checkbox-wrap-"] [data-testid="stCheckbox"] > label {
-      width: 24px !important;
-      min-width: 24px !important;
-      max-width: 24px !important;
-      height: 24px !important;
-      min-height: 24px !important;
-      max-height: 24px !important;
+      width: 25px !important;
+      min-width: 25px !important;
+      max-width: 25px !important;
+      height: 25px !important;
+      min-height: 25px !important;
+      max-height: 25px !important;
     }
   }
 </style>
@@ -3391,8 +3442,8 @@ if seccion_principal == "🗽Ruta":
 
                 # Fila de Ruta: hora | nombre | editar | mapa | visitado.
                 with st.container(key=f"it-heading-row-{item['id']}"):
-                    # Streamlit crea únicamente los cinco contenedores; la distribución
-                    # horizontal se define en un único lugar: las reglas flex de Ruta.
+                    # Streamlit crea cinco columnas; la distribución se controla
+                    # mediante la cuadrícula CSS de esta fila.
                     c_hr_head, c_info, c_edit_head, c_map_head, c_chk = st.columns(
                         [0.8, 6.0, 0.55, 0.55, 0.55],
                         gap=None,
