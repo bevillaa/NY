@@ -64,6 +64,13 @@
       "tipo": "Hacer",
       "nota": "",
       "hecho": false
+    },
+    {
+      "id": "1b2f03a92cd7",
+      "texto": "eSIM",
+      "tipo": "Comprar",
+      "nota": "",
+      "hecho": false
     }
   ]
 }
