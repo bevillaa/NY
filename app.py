@@ -1129,7 +1129,7 @@ st.markdown("""
   /* RUTA: hora | información | editar | mapa | visitado */
   [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] {
     display: grid !important;
-    grid-template-columns: 60px minmax(0, 1fr) 32px 32px 32px !important;
+    grid-template-columns: 60px minmax(0, 1fr) 40px 40px 40px !important;
     grid-auto-flow: row !important;
     align-items: center !important;
     justify-content: stretch !important;
@@ -1304,7 +1304,7 @@ st.markdown("""
     margin: 2px 0 0 !important;
   }
 
-  /* Ruta: envoltorios y controles visibles con idéntica caja de 32px. */
+  /* Ruta: envoltorios y controles visibles con idéntica caja de 40px. */
   [class*="st-key-it-edit-button-wrap-"],
   [class*="st-key-it-map-button-wrap-"],
   [class*="st-key-it-visit-checkbox-wrap-"],
@@ -1313,12 +1313,12 @@ st.markdown("""
     box-sizing: border-box !important;
     display: flex !important;
     flex: none !important;
-    width: 32px !important;
-    min-width: 32px !important;
-    max-width: 32px !important;
-    height: 32px !important;
-    min-height: 32px !important;
-    max-height: 32px !important;
+    width: 40px !important;
+    min-width: 40px !important;
+    max-width: 40px !important;
+    height: 40px !important;
+    min-height: 40px !important;
+    max-height: 40px !important;
     align-items: center !important;
     justify-content: center !important;
     margin: 0 !important;
@@ -1340,12 +1340,12 @@ st.markdown("""
     box-sizing: border-box !important;
     display: flex !important;
     flex: none !important;
-    width: 32px !important;
-    min-width: 32px !important;
-    max-width: 32px !important;
-    height: 32px !important;
-    min-height: 32px !important;
-    max-height: 32px !important;
+    width: 40px !important;
+    min-width: 40px !important;
+    max-width: 40px !important;
+    height: 40px !important;
+    min-height: 40px !important;
+    max-height: 40px !important;
     align-items: center !important;
     justify-content: center !important;
     margin: 0 !important;
@@ -1360,12 +1360,12 @@ st.markdown("""
     box-sizing: border-box !important;
     display: inline-flex !important;
     flex: none !important;
-    width: 32px !important;
-    min-width: 32px !important;
-    max-width: 32px !important;
-    height: 32px !important;
-    min-height: 32px !important;
-    max-height: 32px !important;
+    width: 40px !important;
+    min-width: 40px !important;
+    max-width: 40px !important;
+    height: 40px !important;
+    min-height: 40px !important;
+    max-height: 40px !important;
     align-items: center !important;
     justify-content: center !important;
     margin: 0 !important;
@@ -1400,19 +1400,20 @@ st.markdown("""
     display: none !important;
   }
 
-  /* Checkbox: misma caja visible de 32px que los botones de editar y mapa. */
+  /* Checkbox: misma caja visible de 40px que los botones de editar y mapa. */
   [class*="st-key-it-visit-checkbox-wrap-"] [data-testid="stCheckbox"] > label {
     box-sizing: border-box !important;
     display: flex !important;
     flex: none !important;
-    width: 32px !important;
-    min-width: 32px !important;
-    max-width: 32px !important;
-    height: 32px !important;
-    min-height: 32px !important;
-    max-height: 32px !important;
+    width: 40px !important;
+    min-width: 40px !important;
+    max-width: 40px !important;
+    height: 40px !important;
+    min-height: 40px !important;
+    max-height: 40px !important;
     align-items: center !important;
     justify-content: center !important;
+    align-self: center !important;
     gap: 0 !important;
     margin: 0 !important;
     padding: 0 !important;
@@ -1427,12 +1428,12 @@ st.markdown("""
     box-sizing: border-box !important;
     display: flex !important;
     flex: none !important;
-    width: 32px !important;
-    min-width: 32px !important;
-    max-width: 32px !important;
-    height: 32px !important;
-    min-height: 32px !important;
-    max-height: 32px !important;
+    width: 40px !important;
+    min-width: 40px !important;
+    max-width: 40px !important;
+    height: 40px !important;
+    min-height: 40px !important;
+    max-height: 40px !important;
     align-items: center !important;
     justify-content: center !important;
     margin: 0 !important;
@@ -1519,6 +1520,20 @@ st.markdown("""
     font-weight: 600 !important;
     line-height: 1 !important;
     text-align: center !important;
+    border: 1px solid #94A3B8 !important;
+    box-shadow: none !important;
+  }
+
+  [class*="st-key-saved-controls-row-"] [data-baseweb="input"] > div,
+  [class*="st-key-saved-controls-row-"] [data-baseweb="select"] > div,
+  [class*="st-key-saved-controls-row-"] input:focus,
+  [class*="st-key-saved-controls-row-"] [data-baseweb="select"] > div:focus-within,
+  [class*="st-key-saved-controls-row-"] [data-baseweb="input"] > div:focus-within {
+    border-width: 1px !important;
+    border-style: solid !important;
+    border-color: #94A3B8 !important;
+    box-shadow: none !important;
+    outline: none !important;
   }
 
 </style>
