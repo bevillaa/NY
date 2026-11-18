@@ -4108,7 +4108,7 @@ if seccion_principal == "☑️Checklist":
     with st.container(border=True):
         if not st.session_state["checklist_formulario_abierto"]:
             st.button(
-                "＋ Añadir",
+                "＋",
                 key="btn_abrir_formulario_checklist",
                 help="Añadir un pendiente",
                 on_click=lambda: st.session_state.__setitem__("checklist_formulario_abierto", True)
