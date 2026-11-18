@@ -1478,7 +1478,8 @@ st.markdown("""
 
   [class*="st-key-it-visit-checkbox-wrap-"] [data-testid="stCheckbox"] > label {
     box-sizing: border-box !important;
-    display: flex !important;
+    box-sizing: border-box !important;
+    display: inline-flex !important;
     width: 24px !important;
     min-width: 24px !important;
     max-width: 24px !important;
