@@ -1418,6 +1418,7 @@ st.markdown("""
     padding: 0 !important;
     border: 0 !important;
     background: transparent !important;
+    line-height: 0 !important;
   }
 
   [class*="st-key-it-visit-checkbox-wrap-"] [data-testid="stCheckbox"] label > div:first-of-type {
@@ -1434,6 +1435,9 @@ st.markdown("""
     justify-content: center !important;
     margin: 0 !important;
     padding: 0 !important;
+    align-self: center !important;
+    position: relative !important;
+    top: -4px !important;
   }
 
   [class*="st-key-it-visit-checkbox-wrap-"] [data-testid="stCheckbox"] input[type="checkbox"] {
@@ -1495,7 +1499,8 @@ st.markdown("""
   [class*="st-key-saved-controls-row-"] [data-testid="stColumn"]:nth-child(2) [data-testid="stSelectbox"] > div,
   [class*="st-key-saved-controls-row-"] [data-testid="stColumn"]:nth-child(2) [data-baseweb="select"],
   [class*="st-key-saved-controls-row-"] [data-testid="stColumn"]:nth-child(2) [data-baseweb="select"] > div,
-  [class*="st-key-saved-controls-row-"] [data-testid="stColumn"]:nth-child(2) [data-baseweb="select"] > div > div {
+  [class*="st-key-saved-controls-row-"] [data-testid="stColumn"]:nth-child(2) [data-baseweb="select"] > div > div,
+  [class*="st-key-saved-controls-row-"] [data-testid="stColumn"]:nth-child(2) [data-baseweb="select"] [role="combobox"] {
     box-sizing: border-box !important;
     width: 100% !important;
     min-width: 0 !important;
@@ -3353,7 +3358,7 @@ if seccion_principal == "📌Guardados":
 
         # Cuatro controles uniformes debajo del nombre y de toda su subinformación.
         with st.container(key=f"saved-controls-row-{p_spot['id']}"):
-            c_hr, c_day = st.columns([1.7, 1.9], gap="small")
+            c_hr, c_day = st.columns([1, 1], gap="small")
             with c_hr:
                 nueva_h_pool = st.text_input(
                     "Hora",
