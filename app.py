@@ -4133,15 +4133,16 @@ if seccion_principal == "☑️Checklist":
             width:100%;
             margin:10px 0 14px 0;
         ">
-          <div style="border:1px solid rgba(128,128,128,.28); border-radius:10px; padding:12px 14px; display:flex; align-items:center; justify-content:space-between; gap:8px; min-width:0;">
+          <div style="border:1px solid rgba(128,128,128,.28); border-radius:10px; padding:10px 12px; display:flex; align-items:center; justify-content:space-between; gap:8px; min-width:0;
+          transform: translateY(-4px);">
             <span style="font-size:0.95rem; white-space:nowrap;">Total</span>
             <strong style="font-size:1.35rem; white-space:nowrap;">{total_pendientes}</strong>
           </div>
-          <div style="border:1px solid rgba(128,128,128,.28); border-radius:10px; padding:12px 14px; display:flex; align-items:center; justify-content:space-between; gap:8px; min-width:0;">
+          <div style="border:1px solid rgba(128,128,128,.28); border-radius:10px; padding:10px 12px; display:flex; align-items:center; justify-content:space-between; gap:8px; min-width:0;">
             <span style="font-size:0.95rem; white-space:nowrap;">Pendientes</span>
             <strong style="font-size:1.35rem; white-space:nowrap;">{total_abiertos}</strong>
           </div>
-          <div style="border:1px solid rgba(128,128,128,.28); border-radius:10px; padding:12px 14px; display:flex; align-items:center; justify-content:space-between; gap:8px; min-width:0;">
+          <div style="border:1px solid rgba(128,128,128,.28); border-radius:10px; padding:10px 12px; display:flex; align-items:center; justify-content:space-between; gap:8px; min-width:0;">
             <span style="font-size:0.95rem; white-space:nowrap;">Completados</span>
             <strong style="font-size:1.35rem; white-space:nowrap;">{total_hechos}</strong>
           </div>
