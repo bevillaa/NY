@@ -1744,5 +1744,18 @@
     "tipo": "Interior",
     "lista_origen": "Markets",
     "visitado": false
+  },
+  {
+    "id": 134,
+    "nombre": "Limpieza huevo",
+    "lat": 40.758,
+    "lon": -73.9855,
+    "dia": 10,
+    "hora": "10:00",
+    "direccion": "",
+    "nota": "",
+    "categoria": "📍 Otros",
+    "tipo": "Interior",
+    "visitado": false
   }
 ]
