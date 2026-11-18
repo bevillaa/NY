@@ -4124,66 +4124,32 @@ if seccion_principal == "☑️Checklist":
     progreso = int(total_hechos / total_pendientes * 100) if total_pendientes else 0
 
     # Resumen compacto: las tres estadísticas permanecen en una única fila.
-    
-st.markdown(
-    """
-    <style>
-    @media (max-width: 640px) {
-
-        /* Mantener las cuatro columnas en una sola fila */
-        [class*="st-key-checklist_item_"] [data-testid="stHorizontalBlock"]:has(> [data-testid="column"]:nth-child(4)) {
-            display: flex !important;
-            flex-direction: row !important;
-            flex-wrap: nowrap !important;
-            align-items: center !important;
-            gap: 0.15rem !important;
-            width: 100% !important;
-        }
-
-        /* Evitar que Streamlit apile las columnas */
-        [class*="st-key-checklist_item_"] [data-testid="stHorizontalBlock"]:has(> [data-testid="column"]:nth-child(4)) > [data-testid="column"] {
-            min-width: 0 !important;
-            flex-shrink: 0 !important;
-        }
-
-        /* Casilla */
-        [class*="st-key-checklist_item_"] [data-testid="stHorizontalBlock"]:has(> [data-testid="column"]:nth-child(4)) > [data-testid="column"]:nth-child(1) {
-            flex: 0 0 1.65rem !important;
-            width: 1.65rem !important;
-        }
-
-        /* Texto: ocupa todo el espacio disponible */
-        [class*="st-key-checklist_item_"] [data-testid="stHorizontalBlock"]:has(> [data-testid="column"]:nth-child(4)) > [data-testid="column"]:nth-child(2) {
-            flex: 1 1 0% !important;
-            width: auto !important;
-            min-width: 0 !important;
-        }
-
-        /* Espacio reservado para lápiz y papelera */
-        [class*="st-key-checklist_item_"] [data-testid="stHorizontalBlock"]:has(> [data-testid="column"]:nth-child(4)) > [data-testid="column"]:nth-child(3),
-        [class*="st-key-checklist_item_"] [data-testid="stHorizontalBlock"]:has(> [data-testid="column"]:nth-child(4)) > [data-testid="column"]:nth-child(4) {
-            flex: 0 0 1.15rem !important;
-            width: 1.15rem !important;
-        }
-
-        /* Botones 4 px más pequeños */
-        [class*="st-key-checklist_item_"] [data-testid="stHorizontalBlock"]:has(> [data-testid="column"]:nth-child(4)) button {
-            width: 0.9rem !important;
-            min-width: 0.9rem !important;
-            max-width: 0.9rem !important;
-            height: 0.9rem !important;
-            min-height: 0.9rem !important;
-            padding: 0 !important;
-            margin: 0 auto !important;
-            font-size: 0.45rem !important;
-            line-height: 1 !important;
-        }
-    }
-            </style>
-            """,
-            unsafe_allow_html=True
-        )
-
+    st.markdown(
+        f"""
+        <div style="
+            display:grid;
+            grid-template-columns:repeat(3, minmax(0, 1fr));
+            gap:12px;
+            width:100%;
+            margin:10px 0 14px 0;
+        ">
+          <div style="border:1px solid rgba(128,128,128,.28); border-radius:10px; padding:10px 12px; display:flex; align-items:center; justify-content:space-between; gap:8px; min-width:0;
+          transform: translateY(-4px);">
+            <span style="font-size:0.95rem; white-space:nowrap;">Total</span>
+            <strong style="font-size:1.35rem; white-space:nowrap;">{total_pendientes}</strong>
+          </div>
+          <div style="border:1px solid rgba(128,128,128,.28); border-radius:10px; padding:10px 12px; display:flex; align-items:center; justify-content:space-between; gap:8px; min-width:0;">
+            <span style="font-size:0.95rem; white-space:nowrap;">Pendientes</span>
+            <strong style="font-size:1.35rem; white-space:nowrap;">{total_abiertos}</strong>
+          </div>
+          <div style="border:1px solid rgba(128,128,128,.28); border-radius:10px; padding:10px 12px; display:flex; align-items:center; justify-content:space-between; gap:8px; min-width:0;">
+            <span style="font-size:0.95rem; white-space:nowrap;">Completados</span>
+            <strong style="font-size:1.35rem; white-space:nowrap;">{total_hechos}</strong>
+          </div>
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
     st.progress(progreso / 100 if total_pendientes else 0, text=f"{progreso}% completado")
 
     filtro_checklist = st.radio(
@@ -4215,7 +4181,12 @@ st.markdown(
             <style>
             @media (max-width: 640px) {
                 [class*="st-key-checklist_item_"] [data-testid="stHorizontalBlock"]:has(> [data-testid="column"]:nth-child(4)) {
+                    display: flex !important;
+                    flex-direction: row !important;
                     flex-wrap: nowrap !important;
+                    align-items: center !important;
+                    gap: 0.15rem !important;
+                    width: 100% !important;
                     align-items: center !important;
                     gap: 0.15rem !important;
                 }
@@ -4232,24 +4203,25 @@ st.markdown(
 
                 [class*="st-key-checklist_item_"] [data-testid="stHorizontalBlock"]:has(> [data-testid="column"]:nth-child(4)) > [data-testid="column"]:nth-child(2) {
                     flex: 1 1 auto !important;
+                    width: auto !important;
                     min-width: 0 !important;
                 }
 
                 [class*="st-key-checklist_item_"] [data-testid="stHorizontalBlock"]:has(> [data-testid="column"]:nth-child(4)) > [data-testid="column"]:nth-child(3),
                 [class*="st-key-checklist_item_"] [data-testid="stHorizontalBlock"]:has(> [data-testid="column"]:nth-child(4)) > [data-testid="column"]:nth-child(4) {
-                    flex: 0 0 1.35rem !important;
-                    width: 1.35rem !important;
+                    flex: 0 0 1.15rem !important;
+                    width: 1.15rem !important;
                 }
 
                 [class*="st-key-checklist_item_"] [data-testid="stHorizontalBlock"]:has(> [data-testid="column"]:nth-child(4)) button {
-                    width: 1.15rem !important;
-                    min-width: 1.15rem !important;
-                    max-width: 1.15rem !important;
-                    height: 1.15rem !important;
-                    min-height: 1.15rem !important;
+                    width: 0.9rem !important;
+                    min-width: 0.9rem !important;
+                    max-width: 0.9rem !important;
+                    height: 0.9rem !important;
+                    min-height: 0.9rem !important;
                     padding: 0 !important;
                     margin: 0 auto !important;
-                    font-size: 0.58rem !important;
+                    font-size: 0.45rem !important;
                     line-height: 1 !important;
                 }
             }
@@ -4412,4 +4384,3 @@ st.markdown(
                     elif cancelar_edicion:
                         st.session_state.pop("_checklist_edicion_id", None)
                         st.rerun()
-
