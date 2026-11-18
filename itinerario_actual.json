@@ -1725,7 +1725,7 @@
     "direccion": "92 Ludlow St, New York, NY 10002, United States",
     "nota": "",
     "categoria": "🎄 Christmas markets",
-    "tipo": "Exterior",
+    "tipo": "Interior",
     "lista_origen": "Life Out",
     "visitado": false
   },
@@ -1767,7 +1767,7 @@
     "direccion": "Herald Square, New York, NY 10001, United States",
     "nota": "",
     "categoria": "🎄 Christmas markets",
-    "tipo": "Interior",
+    "tipo": "Exterior",
     "lista_origen": "Markets",
     "visitado": false
   }
