@@ -3150,6 +3150,7 @@ SECCIONES_PRINCIPALES = [
     "💸Divisas",
     "✈️Info",
     "🗒️Listas",
+    "☑️Checklist",
 ]
 seccion_principal = st.radio(
     "Sección del viaje",
@@ -4016,3 +4017,125 @@ if seccion_principal == "🗒️Listas":
                     if guardar_config_viaje(st.session_state.config_viaje):
                         st.success("Lista guardada.")
                         st.rerun()
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# TAB EXTRA: CHECKLIST GENERAL DE PENDIENTES
+# Los elementos se guardan en config_viaje.json para mantenerlos entre sesiones.
+# ─────────────────────────────────────────────────────────────────────────────
+if seccion_principal == "☑️Checklist":
+    st.markdown("---")
+    st.markdown('<div class="ny-card-header">☑️ Checklist de pendientes</div>', unsafe_allow_html=True)
+    st.caption("✨")
+
+    pendientes = st.session_state.config_viaje.setdefault("checklist_pendientes", [])
+    if not isinstance(pendientes, list):
+        pendientes = []
+        st.session_state.config_viaje["checklist_pendientes"] = pendientes
+
+    with st.container(border=True):
+        st.markdown("**➕ Añadir algo pendiente**")
+        with st.form("form_anadir_pendiente_checklist", clear_on_submit=True):
+            nuevo_pendiente = st.text_input(
+                "¿Qué te falta?",
+                placeholder="Ej: Comprar entradas, sacar visa..."
+            )
+            col_tipo, col_detalle = st.columns([1, 2])
+            with col_tipo:
+                tipo_pendiente = st.selectbox(
+                    "Tipo",
+                    ["Hacer", "Comprar", "Reservar", "Otro"]
+                )
+            with col_detalle:
+                detalle_pendiente = st.text_input(
+                    "Nota (opcional)",
+                    placeholder="Fecha, enlace, detalles..."
+                )
+            anadir_pendiente = st.form_submit_button("＋ Añadir a la checklist", use_container_width=True)
+            if anadir_pendiente:
+                texto = (nuevo_pendiente or "").strip()
+                if not texto:
+                    st.warning("Escribe qué tienes pendiente.")
+                else:
+                    nuevo_id = hashlib.sha1(
+                        f"{texto}|{datetime.now().isoformat()}|{len(pendientes)}".encode("utf-8")
+                    ).hexdigest()[:12]
+                    pendientes.append({
+                        "id": nuevo_id,
+                        "texto": texto,
+                        "tipo": tipo_pendiente,
+                        "nota": (detalle_pendiente or "").strip(),
+                        "hecho": False
+                    })
+                    st.session_state.config_viaje["checklist_pendientes"] = pendientes
+                    if guardar_config_viaje(st.session_state.config_viaje):
+                        st.toast("Añadido a la checklist.", icon="✅")
+                        st.rerun()
+
+    total_pendientes = len(pendientes)
+    total_hechos = sum(1 for pnd in pendientes if pnd.get("hecho", False))
+    total_abiertos = total_pendientes - total_hechos
+    progreso = int(total_hechos / total_pendientes * 100) if total_pendientes else 0
+
+    c_total, c_abiertos, c_hechos = st.columns(3)
+    c_total.metric("Total", total_pendientes)
+    c_abiertos.metric("Pendientes", total_abiertos)
+    c_hechos.metric("Completados", total_hechos)
+    st.progress(progreso / 100 if total_pendientes else 0, text=f"{progreso}% completado")
+
+    filtro_checklist = st.radio(
+        "Mostrar",
+        ["Todos", "Pendientes", "Completados"],
+        horizontal=True,
+        key="filtro_checklist_pendientes"
+    )
+
+    visibles = [
+        (i, pnd) for i, pnd in enumerate(pendientes)
+        if filtro_checklist == "Todos"
+        or (filtro_checklist == "Pendientes" and not pnd.get("hecho", False))
+        or (filtro_checklist == "Completados" and pnd.get("hecho", False))
+    ]
+
+    if not visibles:
+        if not pendientes:
+            st.info("Todavía no has añadido nada. Escribe arriba todo lo que quieras recordar.")
+        elif filtro_checklist == "Pendientes":
+            st.success("¡Todo hecho! No tienes tareas pendientes.")
+        else:
+            st.info("No hay elementos en esta categoría.")
+    else:
+        for indice, pendiente in visibles:
+            pid = str(pendiente.get("id", indice))
+            hecho_actual = bool(pendiente.get("hecho", False))
+            with st.container(border=True):
+                col_check, col_texto, col_borrar = st.columns([0.65, 5.8, 0.7], vertical_alignment="center")
+                with col_check:
+                    marcado = st.checkbox(
+                        "Completado",
+                        value=hecho_actual,
+                        key=f"check_pendiente_{pid}",
+                        label_visibility="collapsed"
+                    )
+                if marcado != hecho_actual:
+                    pendientes[indice]["hecho"] = marcado
+                    st.session_state.config_viaje["checklist_pendientes"] = pendientes
+                    guardar_config_viaje(st.session_state.config_viaje)
+                    st.rerun()
+                with col_texto:
+                    nombre_pnd = html.escape(str(pendiente.get("texto", "")))
+                    estilo_pnd = "text-decoration:line-through; color:#94A3B8;" if hecho_actual else "color:#0F172A;"
+                    tipo_pnd = html.escape(str(pendiente.get("tipo", "Otro")))
+                    nota_pnd = str(pendiente.get("nota", "") or "").strip()
+                    st.markdown(
+                        f"<div style='font-weight:750; {estilo_pnd}'>{nombre_pnd}</div>"
+                        f"<div style='font-size:0.76rem; color:#64748B; margin-top:2px;'>"
+                        f"{tipo_pnd}{' · ' + html.escape(nota_pnd) if nota_pnd else ''}</div>",
+                        unsafe_allow_html=True
+                    )
+                with col_borrar:
+                    if st.button("🗑️", key=f"borrar_pendiente_{pid}", help="Eliminar de la checklist"):
+                        pendientes.pop(indice)
+                        st.session_state.config_viaje["checklist_pendientes"] = pendientes
+                        if guardar_config_viaje(st.session_state.config_viaje):
+                            st.rerun()
