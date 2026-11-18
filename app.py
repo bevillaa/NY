@@ -1139,10 +1139,10 @@ st.markdown("""
     overflow: visible !important;
   }
   [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(1) {
-    flex: 0 0 46px !important;
-    width: 46px !important;
-    min-width: 46px !important;
-    max-width: 46px !important;
+    flex: 0 0 42px !important;
+    width: 42px !important;
+    min-width: 42px !important;
+    max-width: 42px !important;
   }
   [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(2) {
     display: block !important;
@@ -1154,16 +1154,16 @@ st.markdown("""
     overflow: hidden !important;
   }
   [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(n+3) {
-    flex: 0 0 30px !important;
-    width: 30px !important;
-    min-width: 30px !important;
-    max-width: 30px !important;
-    height: 30px !important;
-    min-height: 30px !important;
-    max-height: 30px !important;
+    flex: 0 0 24px !important;
+    width: 24px !important;
+    min-width: 24px !important;
+    max-width: 24px !important;
+    height: 24px !important;
+    min-height: 24px !important;
+    max-height: 24px !important;
   }
 
-  /* Hora en Ruta: caja real de 74 × 34, no solo ancho del input interior. */
+  /* Hora en Ruta: ancho y alto compactos en columna, widget e input. */
   [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(1) [data-testid="stTextInput"],
   [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(1) [data-baseweb="input"],
   [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(1) [data-baseweb="base-input"] {
@@ -1171,9 +1171,9 @@ st.markdown("""
     width: 100% !important;
     min-width: 0 !important;
     max-width: 100% !important;
-    height: 34px !important;
-    min-height: 34px !important;
-    max-height: 34px !important;
+    height: 28px !important;
+    min-height: 28px !important;
+    max-height: 28px !important;
     margin: 0 !important;
     padding: 0 !important;
   }
@@ -1181,10 +1181,10 @@ st.markdown("""
     box-sizing: border-box !important;
     width: 100% !important;
     min-width: 0 !important;
-    height: 32px !important;
-    min-height: 32px !important;
-    padding: 0 3px !important;
-    font-size: 0.78rem !important;
+    height: 26px !important;
+    min-height: 26px !important;
+    padding: 0 1px !important;
+    font-size: 0.66rem !important;
     line-height: 1 !important;
     text-align: center !important;
     font-variant-numeric: tabular-nums !important;
@@ -1216,7 +1216,7 @@ st.markdown("""
     transform: none !important;
   }
 
-  /* Guardados: información flexible seguida de dos acciones de 30 px. */
+  /* Guardados: información flexible seguida de dos acciones compactas de 24 px. */
   [class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"] {
     display: flex !important;
     flex-flow: row nowrap !important;
@@ -1247,13 +1247,13 @@ st.markdown("""
     max-width: none !important;
   }
   [class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(n+2) {
-    flex: 0 0 30px !important;
-    width: 30px !important;
-    min-width: 30px !important;
-    max-width: 30px !important;
-    height: 30px !important;
-    min-height: 30px !important;
-    max-height: 30px !important;
+    flex: 0 0 24px !important;
+    width: 24px !important;
+    min-width: 24px !important;
+    max-width: 24px !important;
+    height: 24px !important;
+    min-height: 24px !important;
+    max-height: 24px !important;
   }
 
   /* Las tres acciones usan el mismo contenedor y la misma caja física. */
@@ -1264,13 +1264,13 @@ st.markdown("""
   [class*="st-key-saved-map-button-wrap-"] {
     box-sizing: border-box !important;
     display: flex !important;
-    flex: 0 0 30px !important;
-    width: 30px !important;
-    min-width: 30px !important;
-    max-width: 30px !important;
-    height: 30px !important;
-    min-height: 30px !important;
-    max-height: 30px !important;
+    flex: 0 0 24px !important;
+    width: 24px !important;
+    min-width: 24px !important;
+    max-width: 24px !important;
+    height: 24px !important;
+    min-height: 24px !important;
+    max-height: 24px !important;
     align-items: center !important;
     justify-content: center !important;
     margin: 0 !important;
@@ -1290,13 +1290,13 @@ st.markdown("""
   [class*="st-key-it-visit-checkbox-wrap-"] [data-testid="stCheckbox"] {
     box-sizing: border-box !important;
     display: flex !important;
-    flex: 0 0 30px !important;
-    width: 30px !important;
-    min-width: 30px !important;
-    max-width: 30px !important;
-    height: 30px !important;
-    min-height: 30px !important;
-    max-height: 30px !important;
+    flex: 0 0 24px !important;
+    width: 24px !important;
+    min-width: 24px !important;
+    max-width: 24px !important;
+    height: 24px !important;
+    min-height: 24px !important;
+    max-height: 24px !important;
     align-items: center !important;
     justify-content: center !important;
     margin: 0 !important;
@@ -1309,13 +1309,13 @@ st.markdown("""
   [class*="st-key-saved-map-button-wrap-"] a {
     box-sizing: border-box !important;
     display: inline-flex !important;
-    flex: 0 0 30px !important;
-    width: 30px !important;
-    min-width: 30px !important;
-    max-width: 30px !important;
-    height: 30px !important;
-    min-height: 30px !important;
-    max-height: 30px !important;
+    flex: 0 0 24px !important;
+    width: 24px !important;
+    min-width: 24px !important;
+    max-width: 24px !important;
+    height: 24px !important;
+    min-height: 24px !important;
+    max-height: 24px !important;
     align-items: center !important;
     justify-content: center !important;
     margin: 0 !important;
@@ -1331,14 +1331,14 @@ st.markdown("""
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23334155' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m16 4 4 4'/%3E%3Cpath d='M4 20l4-.9L19 8a2.1 2.1 0 0 0-3-3L5 16z'/%3E%3C/svg%3E") !important;
     background-repeat: no-repeat !important;
     background-position: center !important;
-    background-size: 18px 18px !important;
+    background-size: 15px 15px !important;
   }
   [class*="st-key-it-map-button-wrap-"] a,
   [class*="st-key-saved-map-button-wrap-"] a {
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23334155' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m3 6 6-3 6 3 6-3v15l-6 3-6-3-6 3z'/%3E%3Cpath d='M9 3v15M15 6v15'/%3E%3C/svg%3E") !important;
     background-repeat: no-repeat !important;
     background-position: center !important;
-    background-size: 18px 18px !important;
+    background-size: 15px 15px !important;
   }
   [class*="st-key-it-edit-button-wrap-"] button > *,
   [class*="st-key-saved-edit-button-wrap-"] button > *,
@@ -1349,13 +1349,13 @@ st.markdown("""
   [class*="st-key-it-visit-checkbox-wrap-"] [data-testid="stCheckbox"] > label {
     box-sizing: border-box !important;
     display: flex !important;
-    flex: 0 0 30px !important;
-    width: 30px !important;
-    min-width: 30px !important;
-    max-width: 30px !important;
-    height: 30px !important;
-    min-height: 30px !important;
-    max-height: 30px !important;
+    flex: 0 0 24px !important;
+    width: 24px !important;
+    min-width: 24px !important;
+    max-width: 24px !important;
+    height: 24px !important;
+    min-height: 24px !important;
+    max-height: 24px !important;
     align-items: center !important;
     justify-content: center !important;
     gap: 0 !important;
@@ -1368,27 +1368,27 @@ st.markdown("""
   [class*="st-key-it-visit-checkbox-wrap-"] [data-testid="stCheckbox"] label > div:first-child {
     box-sizing: border-box !important;
     display: flex !important;
-    width: 18px !important;
-    min-width: 18px !important;
-    max-width: 18px !important;
-    height: 18px !important;
-    min-height: 18px !important;
-    max-height: 18px !important;
+    width: 16px !important;
+    min-width: 16px !important;
+    max-width: 16px !important;
+    height: 16px !important;
+    min-height: 16px !important;
+    max-height: 16px !important;
     align-items: center !important;
     justify-content: center !important;
     margin: 0 !important;
     padding: 0 !important;
   }
   [class*="st-key-it-visit-checkbox-wrap-"] [data-testid="stCheckbox"] input[type="checkbox"] {
-    width: 16px !important;
-    height: 16px !important;
+    width: 14px !important;
+    height: 14px !important;
     margin: 0 !important;
   }
   [class*="st-key-it-visit-checkbox-wrap-"] [data-testid="stCheckbox"] label p {
     display: none !important;
   }
 
-  /* Guardados: hora y día con tamaño fijo y legible en ambas versiones. */
+  /* Guardados: hora y día con tamaño compacto y legible en web y móvil. */
   [class*="st-key-saved-controls-row-"] {
     width: 100% !important;
     margin-top: 3px !important;
@@ -1399,7 +1399,7 @@ st.markdown("""
     flex-flow: row nowrap !important;
     align-items: center !important;
     justify-content: flex-start !important;
-    gap: 4px !important;
+    gap: 1px !important;
     width: max-content !important;
     max-width: 100% !important;
     min-width: 0 !important;
@@ -1408,24 +1408,34 @@ st.markdown("""
     box-sizing: border-box !important;
     display: block !important;
     flex: 0 0 auto !important;
-    width: auto !important;
     min-width: 0 !important;
-    max-width: none !important;
     margin: 0 !important;
     padding: 0 !important;
+  }
+  [class*="st-key-saved-controls-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:first-child {
+    flex: 0 0 54px !important;
+    width: 54px !important;
+    min-width: 54px !important;
+    max-width: 54px !important;
+  }
+  [class*="st-key-saved-controls-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(2) {
+    flex: 0 0 92px !important;
+    width: 92px !important;
+    min-width: 92px !important;
+    max-width: 92px !important;
   }
   [class*="st-key-saved-controls-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:first-child,
   [class*="st-key-saved-controls-row-"] [data-testid="column"]:first-child [data-testid="stTextInput"],
   [class*="st-key-saved-controls-row-"] [data-testid="column"]:first-child [data-baseweb="input"],
   [class*="st-key-saved-controls-row-"] [data-testid="column"]:first-child [data-baseweb="base-input"] {
     box-sizing: border-box !important;
-    flex: 0 0 64px !important;
-    width: 64px !important;
-    min-width: 64px !important;
-    max-width: 64px !important;
-    height: 30px !important;
-    min-height: 30px !important;
-    max-height: 30px !important;
+    flex: 0 0 54px !important;
+    width: 54px !important;
+    min-width: 54px !important;
+    max-width: 54px !important;
+    height: 28px !important;
+    min-height: 28px !important;
+    max-height: 28px !important;
     margin: 0 !important;
     padding: 0 !important;
   }
@@ -1433,10 +1443,10 @@ st.markdown("""
     box-sizing: border-box !important;
     width: 100% !important;
     min-width: 0 !important;
-    height: 28px !important;
-    min-height: 28px !important;
-    padding: 0 3px !important;
-    font-size: 0.72rem !important;
+    height: 26px !important;
+    min-height: 26px !important;
+    padding: 0 1px !important;
+    font-size: 0.66rem !important;
     line-height: 1 !important;
     text-align: center !important;
   }
@@ -1445,18 +1455,18 @@ st.markdown("""
   [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(2) [data-baseweb="select"],
   [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(2) [data-baseweb="select"] > div {
     box-sizing: border-box !important;
-    flex: 0 0 100px !important;
-    width: 100px !important;
-    min-width: 100px !important;
-    max-width: 100px !important;
-    height: 30px !important;
-    min-height: 30px !important;
-    max-height: 30px !important;
+    flex: 0 0 92px !important;
+    width: 92px !important;
+    min-width: 92px !important;
+    max-width: 92px !important;
+    height: 28px !important;
+    min-height: 28px !important;
+    max-height: 28px !important;
     margin: 0 !important;
     font-size: 0.84rem !important;
   }
   [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(2) [data-baseweb="select"] * {
-    font-size: 0.72rem !important;
+    font-size: 0.66rem !important;
     line-height: 1 !important;
   }
 
