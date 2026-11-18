@@ -611,7 +611,7 @@ st.markdown("""
     .ny-card-header {   line-height: 1.3 !important; }
     .place-sheet {   min-width: 0 !important; }
     /* Regla segura por defecto: filas de formulario y filtros se apilan. */
-    [data-testid="stHorizontalBlock"] {
+    [data-testid="stHorizontalBlock"]:not([class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"]):not([class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"]):not([class*="st-key-saved-controls-row-"] [data-testid="stHorizontalBlock"]) {
       display: flex !important;
       flex-wrap: wrap !important;
       align-items: flex-start !important;
@@ -619,7 +619,7 @@ st.markdown("""
       width: 100% !important;
       min-width: 0 !important;
     }
-    [data-testid="stHorizontalBlock"] > [data-testid="column"] {
+    [data-testid="stHorizontalBlock"]:not([class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"]):not([class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"]):not([class*="st-key-saved-controls-row-"] [data-testid="stHorizontalBlock"]) > [data-testid="column"] {
       flex: 1 1 100% !important;
       width: 100% !important;
       min-width: 0 !important;
@@ -1314,17 +1314,17 @@ st.markdown("""
     .place-full-width-info .place-note { width: 100% !important; max-width: 100% !important; }
   }
   /* ================================================================
-     CONTROLES DE LUGARES — REGLAS CONSOLIDADAS
-     Ruta: hora | información flexible | editar | mapa | visitado
-     Guardados: información flexible | editar | mapa; hora/día debajo
+     CONTROLES DE LUGARES — REGLAS ÚNICAS PARA WEB Y MÓVIL
+     Ruta: hora | información | editar | mapa | visitado
+     Guardados: información | editar | mapa; hora y día debajo
      ================================================================ */
 
-  /* Distribución de las filas superiores. */
+  /* Ruta y Guardados comparten la misma caja de acciones: 30 × 30 px. */
   [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] {
     display: grid !important;
     grid-template-columns: 68px minmax(0, 1fr) 30px 30px 30px !important;
     align-items: center !important;
-    column-gap: 2px !important;
+    column-gap: 1px !important;
     row-gap: 0 !important;
     width: 100% !important;
     min-width: 0 !important;
@@ -1335,7 +1335,7 @@ st.markdown("""
     display: grid !important;
     grid-template-columns: minmax(0, 1fr) 30px 30px !important;
     align-items: center !important;
-    column-gap: 2px !important;
+    column-gap: 1px !important;
     row-gap: 0 !important;
     width: 100% !important;
     min-width: 0 !important;
@@ -1354,11 +1354,13 @@ st.markdown("""
     align-items: center !important;
     overflow: visible !important;
   }
+
+  /* Ruta: 4 px exactos entre hora e información; 1 px entre acciones. */
   [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(1) {
     grid-column: 1 !important;
-    width: 100% !important;
-    min-width: 0 !important;
-    max-width: 100% !important;
+    width: 68px !important;
+    min-width: 68px !important;
+    max-width: 68px !important;
   }
   [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(2) {
     grid-column: 2 !important;
@@ -1367,8 +1369,10 @@ st.markdown("""
     min-width: 0 !important;
     max-width: none !important;
     justify-self: stretch !important;
+    padding-left: 3px !important;
   }
-  [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(n+3) {
+  [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(n+3),
+  [class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(n+2) {
     width: 30px !important;
     min-width: 30px !important;
     max-width: 30px !important;
@@ -1380,24 +1384,12 @@ st.markdown("""
   }
   [class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:first-child {
     display: block !important;
-    flex: none !important;
     width: 100% !important;
     min-width: 0 !important;
     max-width: none !important;
   }
-  [class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(n+2) {
-    flex: none !important;
-    width: 30px !important;
-    min-width: 30px !important;
-    max-width: 30px !important;
-    height: 30px !important;
-    min-height: 30px !important;
-    max-height: 30px !important;
-    justify-content: center !important;
-    justify-self: center !important;
-  }
 
-  /* La hora se ajusta al ancho real de su columna, sin ancho mínimo heredado. */
+  /* El campo de hora ocupa toda su columna sin reducirse en móvil. */
   [class*="st-key-it-heading-row-"] [data-testid="column"]:first-child [data-testid="stTextInput"],
   [class*="st-key-it-heading-row-"] [data-testid="column"]:first-child [data-baseweb="input"],
   [class*="st-key-it-heading-row-"] [data-testid="column"]:first-child [data-baseweb="base-input"] {
@@ -1421,12 +1413,12 @@ st.markdown("""
     height: 28px !important;
     min-height: 28px !important;
     padding: 0 2px !important;
-    font-size: 0.68rem !important;
+    font-size: 0.72rem !important;
     text-align: center !important;
     font-variant-numeric: tabular-nums !important;
   }
 
-  /* Nombre, dirección y nota utilizan todo el ancho de la columna central. */
+  /* La información central puede encogerse y envolver el texto. */
   [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stMarkdown"],
   [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stMarkdown"] > div,
   [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stElementContainer"],
@@ -1452,7 +1444,7 @@ st.markdown("""
     transform: none !important;
   }
 
-  /* Cajas compactas para editar, mapa y checkbox. */
+  /* Botones editar/mapa y casilla visitado: misma caja y mismo centro. */
   [class*="st-key-it-edit-button-wrap-"],
   [class*="st-key-it-map-button-wrap-"],
   [class*="st-key-it-visit-checkbox-wrap-"],
@@ -1559,6 +1551,7 @@ st.markdown("""
     outline: none !important;
     box-shadow: none !important;
   }
+
   [class*="st-key-it-visit-checkbox-wrap-"] [data-testid="stCheckbox"],
   [class*="st-key-it-visit-checkbox-wrap-"] [data-testid="stCheckbox"] > label {
     box-sizing: border-box !important;
@@ -1581,8 +1574,7 @@ st.markdown("""
     background: #FFFFFF !important;
     box-shadow: none !important;
   }
-  [class*="st-key-it-visit-checkbox-wrap-"] [data-testid="stCheckbox"] label > div:first-child,
-  [class*="st-key-it-visit-checkbox-wrap-"] [data-testid="stCheckbox"] [role="checkbox"] {
+  [class*="st-key-it-visit-checkbox-wrap-"] [data-testid="stCheckbox"] label > div:first-child {
     box-sizing: border-box !important;
     display: flex !important;
     width: 18px !important;
@@ -1593,7 +1585,7 @@ st.markdown("""
     max-height: 18px !important;
     align-items: center !important;
     justify-content: center !important;
-    margin: 0 auto !important;
+    margin: 0 !important;
     padding: 0 !important;
   }
   [class*="st-key-it-visit-checkbox-wrap-"] [data-testid="stCheckbox"] input[type="checkbox"] {
@@ -1605,7 +1597,7 @@ st.markdown("""
     display: none !important;
   }
 
-  /* Guardados: hora y día compactos en una sola fila debajo de la ficha. */
+  /* Guardados: controles legibles, sin reducirlos en el breakpoint móvil. */
   [class*="st-key-saved-controls-row-"] {
     width: 100% !important;
     margin-top: 3px !important;
@@ -1613,7 +1605,7 @@ st.markdown("""
   }
   [class*="st-key-saved-controls-row-"] [data-testid="stHorizontalBlock"] {
     display: grid !important;
-    grid-template-columns: 78px 96px !important;
+    grid-template-columns: 88px 112px !important;
     align-items: center !important;
     justify-content: start !important;
     column-gap: 4px !important;
@@ -1623,6 +1615,7 @@ st.markdown("""
   }
   [class*="st-key-saved-controls-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"] {
     display: block !important;
+    flex: none !important;
     width: auto !important;
     min-width: 0 !important;
     max-width: 100% !important;
@@ -1634,12 +1627,12 @@ st.markdown("""
   [class*="st-key-saved-controls-row-"] [data-testid="column"]:first-child [data-baseweb="input"],
   [class*="st-key-saved-controls-row-"] [data-testid="column"]:first-child [data-baseweb="base-input"] {
     box-sizing: border-box !important;
-    width: 78px !important;
-    min-width: 78px !important;
-    max-width: 78px !important;
-    height: 32px !important;
-    min-height: 32px !important;
-    max-height: 32px !important;
+    width: 88px !important;
+    min-width: 88px !important;
+    max-width: 88px !important;
+    height: 34px !important;
+    min-height: 34px !important;
+    max-height: 34px !important;
     margin: 0 !important;
     padding: 0 !important;
   }
@@ -1647,10 +1640,10 @@ st.markdown("""
     box-sizing: border-box !important;
     width: 100% !important;
     min-width: 0 !important;
-    height: 30px !important;
-    min-height: 30px !important;
+    height: 32px !important;
+    min-height: 32px !important;
     padding: 0 4px !important;
-    font-size: 0.76rem !important;
+    font-size: 0.82rem !important;
     line-height: 1.05 !important;
     text-align: center !important;
   }
@@ -1659,23 +1652,44 @@ st.markdown("""
   [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(2) [data-baseweb="select"],
   [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(2) [data-baseweb="select"] > div {
     box-sizing: border-box !important;
-    width: 96px !important;
-    min-width: 96px !important;
-    max-width: 96px !important;
-    height: 32px !important;
-    min-height: 32px !important;
-    max-height: 32px !important;
+    width: 112px !important;
+    min-width: 112px !important;
+    max-width: 112px !important;
+    height: 34px !important;
+    min-height: 34px !important;
+    max-height: 34px !important;
     margin: 0 !important;
-    font-size: 0.76rem !important;
+    font-size: 0.82rem !important;
   }
   [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(2) [data-baseweb="select"] * {
-    font-size: 0.76rem !important;
+    font-size: 0.82rem !important;
     line-height: 1.05 !important;
   }
 
-  /* En móvil se mantiene la misma cuadrícula y el mismo tamaño de acciones.
-     Solo se ajusta la tipografía; no se reducen las columnas ni los controles. */
+  /* En móvil se conservan exactamente las mismas columnas y separaciones. */
   @media (max-width: 768px) {
+    [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] {
+      grid-template-columns: 68px minmax(0, 1fr) 30px 30px 30px !important;
+      column-gap: 1px !important;
+      flex-wrap: nowrap !important;
+    }
+    [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(1) {
+      width: 68px !important;
+      min-width: 68px !important;
+      max-width: 68px !important;
+    }
+    [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(2) {
+      padding-left: 3px !important;
+    }
+    [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(n+3),
+    [class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(n+2) {
+      width: 30px !important;
+      min-width: 30px !important;
+      max-width: 30px !important;
+      height: 30px !important;
+      min-height: 30px !important;
+      max-height: 30px !important;
+    }
     [class*="st-key-it-heading-row-"] .place-list-title {
       font-size: calc(1.25rem - 2pt) !important;
     }
@@ -1683,6 +1697,11 @@ st.markdown("""
     [class*="st-key-it-heading-row-"] .place-note {
       font-size: 0.68rem !important;
       line-height: 1.25 !important;
+    }
+    [class*="st-key-saved-controls-row-"] [data-testid="stHorizontalBlock"] {
+      grid-template-columns: 88px 112px !important;
+      column-gap: 4px !important;
+      width: max-content !important;
     }
   }
 
