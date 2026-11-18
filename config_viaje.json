@@ -3,14 +3,14 @@
     "aerolinea": "Aer Lingus",
     "vuelo": "Aer Lingus · EI583, EI107",
     "fecha": "26 Dic",
-    "hora": "15:30",
+    "hora": "12:30",
     "aeropuerto": "JFK / Nueva York"
   },
   "vuelo_vuelta": {
     "aerolinea": "Aer Lingus",
     "vuelo": "Aer Lingus · EI104, EI582",
     "fecha": "4 Ene",
-    "hora": "20:45",
+    "hora": "17:00",
     "aeropuerto": "JFK / Nueva York"
   },
   "hotel": {
