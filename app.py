@@ -1129,7 +1129,7 @@ st.markdown("""
   /* RUTA: hora | información | editar | mapa | visitado */
   [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] {
     display: grid !important;
-    grid-template-columns: 60px minmax(0, 1fr) 40px 40px 40px !important;
+    grid-template-columns: 60px minmax(0, 1fr) 24px 24px 24px !important;
     grid-auto-flow: row !important;
     align-items: center !important;
     justify-content: stretch !important;
@@ -1235,19 +1235,19 @@ st.markdown("""
     transform: none !important;
   }
 
-  /* Acciones de Ruta: tres columnas idénticas de 40px, alineadas con sus controles. */
+  /* Acciones de Ruta: tres columnas idénticas al checkbox (24px), con 1px entre ellas. */
   [class*="st-key-it-heading-row-"] [data-testid="stColumn"]:nth-child(3),
   [class*="st-key-it-heading-row-"] [data-testid="stColumn"]:nth-child(4),
   [class*="st-key-it-heading-row-"] [data-testid="stColumn"]:nth-child(5) {
     box-sizing: border-box !important;
     display: flex !important;
     flex: none !important;
-    width: 40px !important;
-    min-width: 40px !important;
-    max-width: 40px !important;
-    height: 40px !important;
-    min-height: 40px !important;
-    max-height: 40px !important;
+    width: 24px !important;
+    min-width: 24px !important;
+    max-width: 24px !important;
+    height: 24px !important;
+    min-height: 24px !important;
+    max-height: 24px !important;
     align-items: center !important;
     justify-content: center !important;
     align-self: center !important;
@@ -1293,21 +1293,18 @@ st.markdown("""
 
   [class*="st-key-saved-heading-row-"]:not([class*="st-key-saved-heading-row-list-"]) [data-testid="stColumn"]:nth-child(2),
   [class*="st-key-saved-heading-row-"]:not([class*="st-key-saved-heading-row-list-"]) [data-testid="stColumn"]:nth-child(3) {
-    width: 40px !important;
-    min-width: 40px !important;
-    max-width: 40px !important;
-    height: 40px !important;
-    min-height: 40px !important;
-    max-height: 40px !important;
+    width: 24px !important;
+    min-width: 24px !important;
+    max-width: 24px !important;
+    height: 24px !important;
+    min-height: 24px !important;
+    max-height: 24px !important;
     align-items: center !important;
     justify-content: center !important;
     margin: 0 !important;
   }
 
-  /* Ruta: envoltorios y controles visibles con idéntica caja de 40px. */
-  [class*="st-key-it-edit-button-wrap-"],
-  [class*="st-key-it-map-button-wrap-"],
-  [class*="st-key-it-visit-checkbox-wrap-"],
+  /* Acciones de Guardados conservan sus dimensiones originales de 40px. */
   [class*="st-key-saved-edit-button-wrap-"]:not([class*="st-key-saved-edit-button-wrap-list-"]),
   [class*="st-key-saved-map-button-wrap-"] {
     box-sizing: border-box !important;
@@ -1323,20 +1320,13 @@ st.markdown("""
     justify-content: center !important;
     margin: 0 !important;
     padding: 0 !important;
-    transform: none !important;
     overflow: visible !important;
   }
 
-  [class*="st-key-it-edit-button-wrap-"] [data-testid="stElementContainer"],
   [class*="st-key-saved-edit-button-wrap-"]:not([class*="st-key-saved-edit-button-wrap-list-"]) [data-testid="stElementContainer"],
-  [class*="st-key-it-map-button-wrap-"] [data-testid="stElementContainer"],
   [class*="st-key-saved-map-button-wrap-"] [data-testid="stElementContainer"],
-  [class*="st-key-it-visit-checkbox-wrap-"] [data-testid="stElementContainer"],
-  [class*="st-key-it-edit-button-wrap-"] [data-testid="stButton"],
   [class*="st-key-saved-edit-button-wrap-"]:not([class*="st-key-saved-edit-button-wrap-list-"]) [data-testid="stButton"],
-  [class*="st-key-it-map-button-wrap-"] [data-testid="stLinkButton"],
-  [class*="st-key-saved-map-button-wrap-"] [data-testid="stLinkButton"],
-  [class*="st-key-it-visit-checkbox-wrap-"] [data-testid="stCheckbox"] {
+  [class*="st-key-saved-map-button-wrap-"] [data-testid="stLinkButton"] {
     box-sizing: border-box !important;
     display: flex !important;
     flex: none !important;
@@ -1353,9 +1343,7 @@ st.markdown("""
     overflow: visible !important;
   }
 
-  [class*="st-key-it-edit-button-wrap-"] button,
   [class*="st-key-saved-edit-button-wrap-"]:not([class*="st-key-saved-edit-button-wrap-list-"]) button,
-  [class*="st-key-it-map-button-wrap-"] a,
   [class*="st-key-saved-map-button-wrap-"] a {
     box-sizing: border-box !important;
     display: inline-flex !important;
@@ -1374,10 +1362,8 @@ st.markdown("""
     font-size: 0 !important;
     line-height: 0 !important;
     overflow: hidden !important;
-    transform: none !important;
   }
 
-  [class*="st-key-it-edit-button-wrap-"] button,
   [class*="st-key-saved-edit-button-wrap-"]:not([class*="st-key-saved-edit-button-wrap-list-"]) button {
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23334155' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m16 4 4 4'/%3E%3Cpath d='M4 20l4-.9L19 8a2.1 2.1 0 0 0-3-3L5 16z'/%3E%3C/svg%3E") !important;
     background-repeat: no-repeat !important;
@@ -1385,7 +1371,6 @@ st.markdown("""
     background-size: 19px 19px !important;
   }
 
-  [class*="st-key-it-map-button-wrap-"] a,
   [class*="st-key-saved-map-button-wrap-"] a {
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23334155' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m3 6 6-3 6 3 6-3v15l-6 3-6-3-6 3z'/%3E%3Cpath d='M9 3v15M15 6v15'/%3E%3C/svg%3E") !important;
     background-repeat: no-repeat !important;
@@ -1393,64 +1378,111 @@ st.markdown("""
     background-size: 19px 19px !important;
   }
 
-  [class*="st-key-it-edit-button-wrap-"] button > *,
   [class*="st-key-saved-edit-button-wrap-"]:not([class*="st-key-saved-edit-button-wrap-list-"]) button > *,
-  [class*="st-key-it-map-button-wrap-"] a > *,
   [class*="st-key-saved-map-button-wrap-"] a > * {
     display: none !important;
   }
 
-  /* Checkbox de Ruta: caja de alineación de 40px; control visual de 24px. */
+  /* RUTA: editar, mapa y checkbox tienen exactamente 24x24px. */
+  [class*="st-key-it-edit-button-wrap-"],
+  [class*="st-key-it-map-button-wrap-"],
   [class*="st-key-it-visit-checkbox-wrap-"] {
     box-sizing: border-box !important;
     display: flex !important;
-    width: 40px !important;
-    min-width: 40px !important;
-    max-width: 40px !important;
-    height: 40px !important;
-    min-height: 40px !important;
-    max-height: 40px !important;
+    flex: none !important;
+    width: 24px !important;
+    min-width: 24px !important;
+    max-width: 24px !important;
+    height: 24px !important;
+    min-height: 24px !important;
+    max-height: 24px !important;
     align-items: center !important;
     justify-content: center !important;
     align-self: center !important;
     margin: 0 !important;
     padding: 0 !important;
+    overflow: visible !important;
   }
 
+  [class*="st-key-it-edit-button-wrap-"] [data-testid="stElementContainer"],
+  [class*="st-key-it-edit-button-wrap-"] [data-testid="stButton"],
+  [class*="st-key-it-map-button-wrap-"] [data-testid="stElementContainer"],
+  [class*="st-key-it-map-button-wrap-"] [data-testid="stLinkButton"],
+  [class*="st-key-it-visit-checkbox-wrap-"] [data-testid="stElementContainer"],
   [class*="st-key-it-visit-checkbox-wrap-"] [data-testid="stCheckbox"] {
     box-sizing: border-box !important;
     display: flex !important;
-    width: 40px !important;
-    min-width: 40px !important;
-    max-width: 40px !important;
-    height: 40px !important;
-    min-height: 40px !important;
-    max-height: 40px !important;
+    flex: none !important;
+    width: 24px !important;
+    min-width: 24px !important;
+    max-width: 24px !important;
+    height: 24px !important;
+    min-height: 24px !important;
+    max-height: 24px !important;
     align-items: center !important;
     justify-content: center !important;
     margin: 0 !important;
     padding: 0 !important;
+    overflow: visible !important;
+  }
+
+  [class*="st-key-it-edit-button-wrap-"] button,
+  [class*="st-key-it-map-button-wrap-"] a {
+    box-sizing: border-box !important;
+    display: inline-flex !important;
+    flex: none !important;
+    width: 24px !important;
+    min-width: 24px !important;
+    max-width: 24px !important;
+    height: 24px !important;
+    min-height: 24px !important;
+    max-height: 24px !important;
+    align-items: center !important;
+    justify-content: center !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border-radius: 6px !important;
+    font-size: 0 !important;
+    line-height: 0 !important;
+    overflow: hidden !important;
+  }
+
+  [class*="st-key-it-edit-button-wrap-"] button {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23334155' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m16 4 4 4'/%3E%3Cpath d='M4 20l4-.9L19 8a2.1 2.1 0 0 0-3-3L5 16z'/%3E%3C/svg%3E") !important;
+    background-repeat: no-repeat !important;
+    background-position: center !important;
+    background-size: 16px 16px !important;
+  }
+
+  [class*="st-key-it-map-button-wrap-"] a {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23334155' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m3 6 6-3 6 3 6-3v15l-6 3-6-3-6 3z'/%3E%3Cpath d='M9 3v15M15 6v15'/%3E%3C/svg%3E") !important;
+    background-repeat: no-repeat !important;
+    background-position: center !important;
+    background-size: 16px 16px !important;
+  }
+
+  [class*="st-key-it-edit-button-wrap-"] button > *,
+  [class*="st-key-it-map-button-wrap-"] a > * {
+    display: none !important;
   }
 
   [class*="st-key-it-visit-checkbox-wrap-"] [data-testid="stCheckbox"] > label {
     box-sizing: border-box !important;
     display: flex !important;
-    width: 40px !important;
-    min-width: 40px !important;
-    max-width: 40px !important;
-    height: 40px !important;
-    min-height: 40px !important;
-    max-height: 40px !important;
+    width: 24px !important;
+    min-width: 24px !important;
+    max-width: 24px !important;
+    height: 24px !important;
+    min-height: 24px !important;
+    max-height: 24px !important;
     align-items: center !important;
     justify-content: center !important;
-    align-self: center !important;
     gap: 0 !important;
     margin: 0 !important;
     padding: 0 !important;
     border: 0 !important;
     background: transparent !important;
     line-height: 0 !important;
-    transform: none !important;
   }
 
   [class*="st-key-it-visit-checkbox-wrap-"] [data-testid="stCheckbox"] label > div:first-of-type {
@@ -1467,7 +1499,6 @@ st.markdown("""
     justify-content: center !important;
     margin: 0 !important;
     padding: 0 !important;
-    align-self: center !important;
     position: relative !important;
   }
 
