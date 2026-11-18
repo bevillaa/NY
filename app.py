@@ -2616,10 +2616,14 @@ def agregar_sitio_a_lugares(nombre: str, direccion: str = "", lat: float = None,
     if lat is None or lon is None or (lat == 0 and lon == 0):
         geo_lat, geo_lon, geo_dir = geocodificar_direccion_o_nombre(f"{nom} {direccion}")
         if geo_lat is None or geo_lon is None:
-            return False, "No se pudo localizar este sitio. Comprueba el nombre o la dirección e inténtalo de nuevo."
-        lat, lon = geo_lat, geo_lon
-        if not direccion and geo_dir:
-            direccion = geo_dir
+            # Permite guardar nombres sin una ubicación concreta.
+            # Se usa el centro de referencia de Nueva York para que el registro
+            # siga siendo compatible con el mapa; no se inventa una dirección.
+            lat, lon = 40.7580, -73.9855
+        else:
+            lat, lon = geo_lat, geo_lon
+            if not direccion and geo_dir:
+                direccion = geo_dir
 
     if not categoria or categoria == "⚡ Detección Automática":
         cat_auto, tipo_auto = clasificar_lugar(nom, direccion)
