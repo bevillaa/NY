@@ -4177,11 +4177,9 @@ if seccion_principal == "☑️Checklist":
             pid = str(pendiente.get("id", indice))
             hecho_actual = bool(pendiente.get("hecho", False))
             with st.container(border=True):
-                # Casilla y nombre quedan alineados en la misma fila.
-                # Editar y eliminar ocupan dos columnas estrechas al extremo derecho,
-                # reservando casi todo el ancho disponible para el nombre.
+                # Primera fila: casilla, título y dos controles compactos al extremo derecho.
                 col_check, col_texto, col_editar, col_borrar = st.columns(
-                    [0.55, 8.0, 0.55, 0.55],
+                    [0.55, 8.2, 0.55, 0.55],
                     gap="small",
                     vertical_alignment="center"
                 )
@@ -4197,29 +4195,37 @@ if seccion_principal == "☑️Checklist":
                     st.session_state.config_viaje["checklist_pendientes"] = pendientes
                     guardar_config_viaje(st.session_state.config_viaje)
                     st.rerun()
+
                 with col_texto:
                     nombre_pnd = html.escape(str(pendiente.get("texto", "")))
                     estilo_pnd = "text-decoration:line-through; color:#94A3B8;" if hecho_actual else "color:#0F172A;"
-                    tipo_pnd = html.escape(str(pendiente.get("tipo", "Otro")))
-                    nota_pnd = str(pendiente.get("nota", "") or "").strip()
                     st.markdown(
-                        f"<div style='font-weight:750; line-height:1.25; {estilo_pnd}'>{nombre_pnd}</div>"
-                        f"<div style='font-size:0.76rem; color:#64748B; margin-top:3px;'>"
-                        f"{tipo_pnd}{' · ' + html.escape(nota_pnd) if nota_pnd else ''}</div>",
+                        f"<div style='font-weight:750; line-height:1.25; {estilo_pnd}; overflow-wrap:anywhere;'>{nombre_pnd}</div>",
                         unsafe_allow_html=True
                     )
+
+                # Botones de solo icono, sin ocupar todo el ancho de sus columnas.
                 with col_editar:
-                    if st.button("✏️", key=f"editar_pendiente_{pid}", help="Editar tarea", use_container_width=True):
+                    if st.button("✏️", key=f"editar_pendiente_{pid}", help="Editar tarea", use_container_width=False):
                         st.session_state["_checklist_edicion_id"] = pid
                         st.rerun()
                 with col_borrar:
-                    if st.button("🗑️", key=f"borrar_pendiente_{pid}", help="Eliminar de la checklist", use_container_width=True):
+                    if st.button("🗑️", key=f"borrar_pendiente_{pid}", help="Eliminar de la checklist", use_container_width=False):
                         pendientes.pop(indice)
                         st.session_state.config_viaje["checklist_pendientes"] = pendientes
                         if guardar_config_viaje(st.session_state.config_viaje):
                             if st.session_state.get("_checklist_edicion_id") == pid:
                                 st.session_state.pop("_checklist_edicion_id", None)
                             st.rerun()
+
+                # Categoría y nota van debajo del título, sin competir por espacio con los iconos.
+                tipo_pnd = html.escape(str(pendiente.get("tipo", "Otro")))
+                nota_pnd = str(pendiente.get("nota", "") or "").strip()
+                st.markdown(
+                    f"<div style='font-size:0.76rem; color:#64748B; margin-left:2.55rem; margin-top:-2px; overflow-wrap:anywhere;'>"
+                    f"{tipo_pnd}{' · ' + html.escape(nota_pnd) if nota_pnd else ''}</div>",
+                    unsafe_allow_html=True
+                )
 
                 if st.session_state.get("_checklist_edicion_id") == pid:
                     with st.form(f"form_editar_pendiente_{pid}"):
