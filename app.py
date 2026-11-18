@@ -1119,14 +1119,18 @@ st.markdown("""
      Estas reglas son la única fuente de tamaño/alineación de estos controles.
      ================================================================ */
 
-  /* RUTA: hora | información flexible | editar | mapa | visitado. */
+  /* RUTA: hora | información flexible | editar | mapa | visitado.
+     Grid: 60px hora · 1fr texto · 32px lápiz · 32px mapa · 32px checkbox
+     Los tres iconos van separados entre sí 1 px y el bloque de texto tiene
+     4 px de separación respecto al campo de hora.                        */
   [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] {
     display: grid !important;
-    grid-template-columns: 72px minmax(0, 1fr) 36px 36px 36px !important;
+    grid-template-columns: 60px minmax(0, 1fr) 32px 32px 32px !important;
+    grid-template-rows: auto !important;
     grid-auto-flow: column !important;
-    align-items: center !important;
+    align-items: start !important;
     justify-content: stretch !important;
-    column-gap: 3px !important;
+    column-gap: 1px !important;
     row-gap: 0 !important;
     width: 100% !important;
     min-width: 0 !important;
@@ -1140,21 +1144,25 @@ st.markdown("""
     width: auto !important;
     min-width: 0 !important;
     max-width: none !important;
-    height: 36px !important;
-    min-height: 36px !important;
-    max-height: 36px !important;
     margin: 0 !important;
     padding: 0 !important;
-    align-items: center !important;
+    align-items: flex-start !important;
     justify-content: center !important;
-    align-self: center !important;
+    align-self: start !important;
     overflow: visible !important;
   }
+  /* Col 1: campo de hora — 60px ancho, sin altura fija para no clampear el input */
   [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(1) {
-    width: 72px !important;
-    min-width: 72px !important;
-    max-width: 72px !important;
+    width: 60px !important;
+    min-width: 60px !important;
+    max-width: 60px !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    height: auto !important;
+    align-items: flex-start !important;
+    margin-right: 3px !important; /* gap(1px) + 3px = 4px separación hacia el texto */
   }
+  /* Col 2: bloque de texto — crece para ocupar toda la línea */
   [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2) {
     display: block !important;
     width: auto !important;
@@ -1164,52 +1172,53 @@ st.markdown("""
     min-height: 0 !important;
     max-height: none !important;
     overflow: visible !important;
+    padding-left: 0 !important;
   }
+  /* Cols 3-5: lápiz, mapa y checkbox — 32px cada uno, alineados arriba */
   [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(3),
   [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(4),
   [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(5) {
-    width: 36px !important;
-    min-width: 36px !important;
-    max-width: 36px !important;
-    height: 36px !important;
-    min-height: 36px !important;
-    max-height: 36px !important;
+    width: 32px !important;
+    min-width: 32px !important;
+    max-width: 32px !important;
+    height: 32px !important;
+    min-height: 32px !important;
+    max-height: 32px !important;
+    align-items: center !important;
+    align-self: start !important;
+    margin-top: 2px !important; /* alinear visualmente con la primera línea del texto */
   }
-  [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(1) [data-testid="stTextInput"],
-  [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(1) [data-baseweb="input"],
-  [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(1) [data-baseweb="base-input"],
-  [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(1) input {
-    box-sizing: border-box !important;
-    display: block !important;
-    width: 72px !important;
-    min-width: 72px !important;
-    max-width: 72px !important;
-    height: 40px !important;
-    min-height: 40px !important;
-    max-height: 40px !important;
-    margin: 0 !important;
-    padding: 0 4px !important;
-    font-size: 0.92rem !important;
-    line-height: 1 !important;
-    text-align: center !important;
-    font-variant-numeric: tabular-nums !important;
-  }
+  /* Campo de hora: ancho completo de su columna, altura cómoda */
   [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(1) [data-testid="stTextInput"],
   [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(1) [data-testid="stTextInput"] > div,
   [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(1) [data-testid="stTextInput"] > div > div,
-  [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(1) [data-testid="stTextInput"] input {
+  [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(1) [data-baseweb="input"],
+  [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(1) [data-baseweb="base-input"] {
+    box-sizing: border-box !important;
+    display: block !important;
+    width: 60px !important;
+    min-width: 60px !important;
+    max-width: 60px !important;
+    height: 36px !important;
+    min-height: 36px !important;
+    max-height: 36px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(1) input {
     box-sizing: border-box !important;
     width: 100% !important;
     min-width: 0 !important;
     max-width: 100% !important;
-    height: 40px !important;
-    min-height: 40px !important;
-    max-height: 40px !important;
-    padding: 0 !important;
-    margin: 0 !important;
-  }
-  [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(1) input {
+    height: 36px !important;
+    min-height: 36px !important;
+    max-height: 36px !important;
     padding: 0 4px !important;
+    margin: 0 !important;
+    font-size: 0.88rem !important;
+    line-height: 36px !important;
+    text-align: center !important;
+    font-variant-numeric: tabular-nums !important;
   }
   [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stMarkdown"],
   [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stMarkdown"] > div,
@@ -1236,14 +1245,15 @@ st.markdown("""
     transform: none !important;
   }
 
-  /* GUARDADOS: información flexible | editar | mapa. */
+  /* GUARDADOS: información flexible | editar | mapa.
+     Los iconos de acción alineados entre sí con 1 px de separación. */
   [class*="st-key-saved-heading-row-"]:not([class*="st-key-saved-heading-row-list-"]) [data-testid="stHorizontalBlock"] {
     display: grid !important;
-    grid-template-columns: minmax(0, 1fr) 36px 36px !important;
+    grid-template-columns: minmax(0, 1fr) 32px 32px !important;
     grid-auto-flow: column !important;
-    align-items: center !important;
+    align-items: start !important;
     justify-content: stretch !important;
-    column-gap: 3px !important;
+    column-gap: 1px !important;
     row-gap: 0 !important;
     width: 100% !important;
     min-width: 0 !important;
@@ -1257,14 +1267,11 @@ st.markdown("""
     width: auto !important;
     min-width: 0 !important;
     max-width: none !important;
-    height: 36px !important;
-    min-height: 36px !important;
-    max-height: 36px !important;
     margin: 0 !important;
     padding: 0 !important;
     align-items: center !important;
     justify-content: center !important;
-    align-self: center !important;
+    align-self: start !important;
     overflow: visible !important;
   }
   [class*="st-key-saved-heading-row-"]:not([class*="st-key-saved-heading-row-list-"]) [data-testid="column"]:first-child {
@@ -1276,12 +1283,18 @@ st.markdown("""
   }
   [class*="st-key-saved-heading-row-"]:not([class*="st-key-saved-heading-row-list-"]) [data-testid="column"]:nth-child(2),
   [class*="st-key-saved-heading-row-"]:not([class*="st-key-saved-heading-row-list-"]) [data-testid="column"]:nth-child(3) {
-    width: 36px !important;
-    min-width: 36px !important;
-    max-width: 36px !important;
+    width: 32px !important;
+    min-width: 32px !important;
+    max-width: 32px !important;
+    height: 32px !important;
+    min-height: 32px !important;
+    max-height: 32px !important;
+    margin-top: 2px !important;
   }
 
-  /* Caja de acción común: las tres columnas miden 36px y sus controles 32px. */
+  /* Caja de acción común: columnas de 32px, controles de 30px.
+     Lápiz, mapa y checkbox comparten el mismo tamaño y alineación;
+     entre ellos hay 1 px de separación (column-gap del grid padre). */
   [class*="st-key-it-edit-button-wrap-"],
   [class*="st-key-it-map-button-wrap-"],
   [class*="st-key-it-visit-checkbox-wrap-"],
@@ -1290,15 +1303,15 @@ st.markdown("""
     box-sizing: border-box !important;
     display: flex !important;
     flex: none !important;
-    width: 36px !important;
-    min-width: 36px !important;
-    max-width: 36px !important;
-    height: 36px !important;
-    min-height: 36px !important;
-    max-height: 36px !important;
+    width: 32px !important;
+    min-width: 32px !important;
+    max-width: 32px !important;
+    height: 32px !important;
+    min-height: 32px !important;
+    max-height: 32px !important;
     align-items: center !important;
     justify-content: center !important;
-    align-self: center !important;
+    align-self: start !important;
     margin: 0 !important;
     padding: 0 !important;
     transform: none !important;
@@ -1317,12 +1330,12 @@ st.markdown("""
     box-sizing: border-box !important;
     display: flex !important;
     flex: none !important;
-    width: 36px !important;
-    min-width: 36px !important;
-    max-width: 36px !important;
-    height: 36px !important;
-    min-height: 36px !important;
-    max-height: 36px !important;
+    width: 32px !important;
+    min-width: 32px !important;
+    max-width: 32px !important;
+    height: 32px !important;
+    min-height: 32px !important;
+    max-height: 32px !important;
     align-items: center !important;
     justify-content: center !important;
     align-self: center !important;
@@ -1337,12 +1350,12 @@ st.markdown("""
     box-sizing: border-box !important;
     display: inline-flex !important;
     flex: none !important;
-    width: 32px !important;
-    min-width: 32px !important;
-    max-width: 32px !important;
-    height: 32px !important;
-    min-height: 32px !important;
-    max-height: 32px !important;
+    width: 30px !important;
+    min-width: 30px !important;
+    max-width: 30px !important;
+    height: 30px !important;
+    min-height: 30px !important;
+    max-height: 30px !important;
     align-items: center !important;
     justify-content: center !important;
     align-self: center !important;
@@ -1375,18 +1388,19 @@ st.markdown("""
     display: none !important;
   }
 
-  /* El checkbox nativo usa una caja visual de 32x32, igual que mapa y lápiz.
-     El label completo ocupa 36x36 para centrarlo en la misma columna. */
+  /* El checkbox nativo usa una caja visual de 30x30, igual que mapa y lápiz.
+     El label completo ocupa 32x32 para centrarlo en la misma columna.
+     Se elimina cualquier margen extra que lo desalineara. */
   [class*="st-key-it-visit-checkbox-wrap-"] [data-testid="stCheckbox"] > label {
     box-sizing: border-box !important;
     display: flex !important;
     flex: none !important;
-    width: 36px !important;
-    min-width: 36px !important;
-    max-width: 36px !important;
-    height: 36px !important;
-    min-height: 36px !important;
-    max-height: 36px !important;
+    width: 32px !important;
+    min-width: 32px !important;
+    max-width: 32px !important;
+    height: 32px !important;
+    min-height: 32px !important;
+    max-height: 32px !important;
     align-items: center !important;
     justify-content: center !important;
     align-self: center !important;
@@ -1400,20 +1414,20 @@ st.markdown("""
     box-sizing: border-box !important;
     display: flex !important;
     flex: none !important;
-    width: 32px !important;
-    min-width: 32px !important;
-    max-width: 32px !important;
-    height: 32px !important;
-    min-height: 32px !important;
-    max-height: 32px !important;
+    width: 22px !important;
+    min-width: 22px !important;
+    max-width: 22px !important;
+    height: 22px !important;
+    min-height: 22px !important;
+    max-height: 22px !important;
     align-items: center !important;
     justify-content: center !important;
-    margin: 0 0 0 12px !important;
+    margin: 0 !important;
     padding: 0 !important;
   }
   [class*="st-key-it-visit-checkbox-wrap-"] [data-testid="stCheckbox"] input[type="checkbox"] {
-    width: 32px !important;
-    height: 32px !important;
+    width: 22px !important;
+    height: 22px !important;
     margin: 0 !important;
   }
   [class*="st-key-it-visit-checkbox-wrap-"] [data-testid="stCheckbox"] label p {
