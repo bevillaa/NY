@@ -63,6 +63,54 @@ def _abrir_url_google_maps(url: str, headers=None, timeout=8):
     req = urllib.request.Request(url, headers=headers or {})
     return opener.open(req, timeout=timeout)
 
+
+
+def _google_maps_api_key():
+    """Lee la clave de Places desde el entorno o los secretos de Streamlit."""
+    clave = os.environ.get("GOOGLE_MAPS_API_KEY", "").strip()
+    if not clave:
+        try:
+            clave = str(st.secrets.get("GOOGLE_MAPS_API_KEY", "")).strip()
+        except Exception:
+            clave = ""
+    return clave
+
+def _sugerencias_google_places(texto: str, api_key: str):
+    """Obtiene sugerencias de Google Places (API nueva)."""
+    payload = json.dumps({"input": texto, "languageCode": "es"}).encode("utf-8")
+    req = urllib.request.Request(
+        "https://places.googleapis.com/v1/places:autocomplete",
+        data=payload,
+        headers={"Content-Type": "application/json", "X-Goog-Api-Key": api_key},
+        method="POST"
+    )
+    with urllib.request.urlopen(req, timeout=8) as response:
+        data = json.loads(response.read().decode("utf-8"))
+    opciones = []
+    for item in data.get("suggestions", []):
+        pred = item.get("placePrediction", {})
+        pid = pred.get("placeId")
+        descripcion = (pred.get("text") or {}).get("text", "")
+        if pid and descripcion:
+            opciones.append({"id": pid, "descripcion": descripcion})
+    return opciones
+
+def _detalles_google_place(place_id: str, api_key: str):
+    """Recupera nombre, dirección y coordenadas de un lugar elegido."""
+    url = "https://places.googleapis.com/v1/places/" + urllib.parse.quote(place_id, safe="")
+    req = urllib.request.Request(
+        url,
+        headers={
+            "X-Goog-Api-Key": api_key,
+            "X-Goog-FieldMask": "id,displayName,formattedAddress,location"
+        }
+    )
+    with urllib.request.urlopen(req, timeout=8) as response:
+        data = json.loads(response.read().decode("utf-8"))
+    loc = data.get("location") or {}
+    nombre = (data.get("displayName") or {}).get("text") or ""
+    return nombre, data.get("formattedAddress", ""), loc.get("latitude"), loc.get("longitude")
+
 def _fecha_inicio_viaje(config):
     """Obtiene la fecha de salida desde ISO o desde el formato español existente."""
     valor = (config or {}).get("fecha_inicio_viaje") or (config or {}).get("fecha_inicio")
@@ -2869,7 +2917,50 @@ def render_formulario_agregar_lugar(key_sufijo: str = "gen"):
         dias_asig_opts = ["📌Guardados"] + [etiqueta_dia(d) for d in range(1, 11)]
 
         with tab_gm:
-            st.caption("Pega el enlace de Google Maps de un sitio o lista:")
+            st.caption("Busca un establecimiento en Google Maps o pega un enlace de un sitio o lista:")
+            api_key_places = _google_maps_api_key()
+            busqueda_places = st.text_input(
+                "Buscar sitio en Google Maps:",
+                placeholder="Empieza a escribir el nombre de un restaurante, museo...",
+                key=f"buscar_places_{key_sufijo}"
+            )
+            seleccion_places = None
+            if busqueda_places.strip() and len(busqueda_places.strip()) >= 3 and not _validar_url_google_maps(busqueda_places.strip()):
+                if not api_key_places:
+                    st.info("Configura GOOGLE_MAPS_API_KEY para activar las sugerencias de Google Maps. También puedes pegar un enlace debajo.")
+                else:
+                    try:
+                        with st.spinner("Buscando sugerencias..."):
+                            opciones_places = _sugerencias_google_places(busqueda_places.strip(), api_key_places)
+                        if opciones_places:
+                            etiquetas = {x["descripcion"]: x["id"] for x in opciones_places}
+                            etiqueta_elegida = st.selectbox(
+                                "Selecciona el lugar:", list(etiquetas.keys()),
+                                key=f"sel_places_{key_sufijo}"
+                            )
+                            seleccion_places = etiquetas.get(etiqueta_elegida)
+                        else:
+                            st.caption("No se han encontrado coincidencias. Prueba con otro nombre.")
+                    except Exception as exc:
+                        logger.warning("Error en autocompletado de Google Places: %s", exc)
+                        st.warning("No se pudieron cargar las sugerencias. Comprueba la API key y que Places API (New) esté habilitada.")
+            if seleccion_places and st.button("📍 Añadir lugar seleccionado", key=f"btn_places_{key_sufijo}", use_container_width=True):
+                try:
+                    with st.spinner("Obteniendo datos del lugar..."):
+                        nom_p, dir_p, lat_p, lon_p = _detalles_google_place(seleccion_places, api_key_places)
+                    if not nom_p:
+                        st.error("Google Maps no ha devuelto el nombre del lugar.")
+                    else:
+                        ok, msg = agregar_sitio_a_lugares(nom_p, dir_p, lat_p, lon_p)
+                        if ok:
+                            st.toast(msg, icon="📍")
+                            st.rerun()
+                        else:
+                            st.error(msg)
+                except Exception as exc:
+                    logger.warning("Error obteniendo detalles de Google Place: %s", exc)
+                    st.error("No se pudo añadir el lugar. Comprueba la configuración de Places API.")
+            st.caption("O, si lo prefieres, pega el enlace de Google Maps de un sitio o lista:")
             with st.form(f"form_add_gm_{key_sufijo}"):
                 url_input = st.text_input("Enlace de Google Maps:", placeholder="https://maps.app.goo.gl/...", key=f"inp_gm_{key_sufijo}")
                 cg1, cg2 = st.columns(2)
