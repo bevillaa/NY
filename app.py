@@ -594,15 +594,20 @@ st.markdown("""
       overflow-wrap: anywhere !important;
     }
     /* Botones y campos: contenidos en su columna y con texto envolvente. */
-    .stButton, .stFormSubmitButton, [data-testid="stLinkButton"],
-    .stSelectbox, .stTextInput, .stNumberInput, .stDateInput,
-    .stMultiSelect, .stSlider, [data-testid="stFileUploader"] {
+    .stButton:not([class*="st-key-it-edit-button-wrap-"] *):not([class*="st-key-saved-edit-button-wrap-"] *),
+    .stFormSubmitButton,
+    [data-testid="stLinkButton"]:not([class*="st-key-it-map-button-wrap-"] *):not([class*="st-key-saved-map-button-wrap-"] *),
+    .stSelectbox:not([class*="st-key-saved-controls-row-"] *),
+    .stTextInput:not([class*="st-key-saved-controls-row-"] *):not([class*="st-key-it-heading-row-"] *),
+    .stNumberInput, .stDateInput, .stMultiSelect, .stSlider,
+    [data-testid="stFileUploader"] {
       width: 100% !important;
       max-width: 100% !important;
       min-width: 0 !important;
     }
-    .stButton > button, .stFormSubmitButton > button,
-    [data-testid="stLinkButton"] > a {
+    .stButton:not([class*="st-key-it-edit-button-wrap-"] *):not([class*="st-key-saved-edit-button-wrap-"] *) > button,
+    .stFormSubmitButton > button,
+    [data-testid="stLinkButton"]:not([class*="st-key-it-map-button-wrap-"] *):not([class*="st-key-saved-map-button-wrap-"] *) > a {
       width: 100% !important;
       max-width: 100% !important;
       min-width: 0 !important;
@@ -1110,19 +1115,18 @@ st.markdown("""
     .place-full-width-info .place-note { width: 100% !important; max-width: 100% !important; }
   }
   /* ================================================================
-     CONTROLES DE RUTA Y GUARDADOS — CUADRÍCULA DE MEDIDAS FIJAS
-     Se usa GRID para impedir que las reglas responsive de columnas/botones
-     expandan los controles a todo el ancho en móvil.
+     CONTROLES DE RUTA Y GUARDADOS — MEDIDAS ÚNICAS Y COHERENTES
+     La fila usa GRID; cada columna y cada control comparte la misma caja.
      ================================================================ */
 
-  /* RUTA: hora fija | información flexible | editar | mapa | visitado. */
+  /* RUTA: hora | información flexible | editar | mapa | visitado. */
   [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] {
     display: grid !important;
-    grid-template-columns: 58px minmax(0, 1fr) 32px 32px 32px !important;
+    grid-template-columns: 56px minmax(0, 1fr) 34px 34px 34px !important;
     grid-auto-flow: column !important;
     align-items: center !important;
-    justify-content: start !important;
-    column-gap: 1px !important;
+    justify-content: stretch !important;
+    column-gap: 2px !important;
     row-gap: 0 !important;
     width: 100% !important;
     min-width: 0 !important;
@@ -1137,47 +1141,48 @@ st.markdown("""
     min-width: 0 !important;
     max-width: none !important;
     height: auto !important;
-    min-height: 32px !important;
+    min-height: 34px !important;
     margin: 0 !important;
     padding: 0 !important;
     align-items: center !important;
     justify-content: center !important;
+    align-self: center !important;
     overflow: visible !important;
   }
   [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(1) {
-    width: 58px !important;
-    min-width: 58px !important;
-    max-width: 58px !important;
+    width: 56px !important;
+    min-width: 56px !important;
+    max-width: 56px !important;
   }
   [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2) {
     display: block !important;
     width: auto !important;
     min-width: 0 !important;
     max-width: none !important;
-    overflow: hidden !important;
+    overflow: visible !important;
+  }
+  [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(3),
+  [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(4),
+  [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(5) {
+    width: 34px !important;
+    min-width: 34px !important;
+    max-width: 34px !important;
+    justify-self: center !important;
   }
   [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(1) [data-testid="stTextInput"],
   [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(1) [data-baseweb="input"],
-  [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(1) [data-baseweb="base-input"] {
+  [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(1) [data-baseweb="base-input"],
+  [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(1) input {
     box-sizing: border-box !important;
     display: block !important;
-    width: 58px !important;
-    min-width: 58px !important;
-    max-width: 58px !important;
+    width: 56px !important;
+    min-width: 56px !important;
+    max-width: 56px !important;
     height: 36px !important;
     min-height: 36px !important;
     max-height: 36px !important;
     margin: 0 !important;
-    padding: 0 !important;
-  }
-  [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(1) input {
-    box-sizing: border-box !important;
-    width: 58px !important;
-    min-width: 58px !important;
-    max-width: 58px !important;
-    height: 36px !important;
-    min-height: 36px !important;
-    padding: 0 2px !important;
+    padding: 0 3px !important;
     font-size: 0.82rem !important;
     line-height: 1 !important;
     text-align: center !important;
@@ -1211,11 +1216,11 @@ st.markdown("""
   /* GUARDADOS: información flexible | editar | mapa. */
   [class*="st-key-saved-heading-row-"]:not([class*="st-key-saved-heading-row-list-"]) [data-testid="stHorizontalBlock"] {
     display: grid !important;
-    grid-template-columns: minmax(0, 1fr) 32px 32px !important;
+    grid-template-columns: minmax(0, 1fr) 34px 34px !important;
     grid-auto-flow: column !important;
     align-items: center !important;
-    justify-content: start !important;
-    column-gap: 1px !important;
+    justify-content: stretch !important;
+    column-gap: 2px !important;
     row-gap: 0 !important;
     width: 100% !important;
     min-width: 0 !important;
@@ -1234,14 +1239,22 @@ st.markdown("""
     padding: 0 !important;
     align-items: center !important;
     justify-content: center !important;
+    align-self: center !important;
     overflow: visible !important;
   }
   [class*="st-key-saved-heading-row-"]:not([class*="st-key-saved-heading-row-list-"]) [data-testid="column"]:first-child {
     display: block !important;
     min-width: 0 !important;
   }
+  [class*="st-key-saved-heading-row-"]:not([class*="st-key-saved-heading-row-list-"]) [data-testid="column"]:nth-child(2),
+  [class*="st-key-saved-heading-row-"]:not([class*="st-key-saved-heading-row-list-"]) [data-testid="column"]:nth-child(3) {
+    width: 32px !important;
+    min-width: 32px !important;
+    max-width: 32px !important;
+  }
 
-  /* Acciones de Ruta y Guardados: caja idéntica y sin anchura fluida. */
+  /* Las tres acciones comparten exactamente la misma caja exterior e interior.
+     No se recorta el contenedor de Streamlit: solo el dibujo del propio botón. */
   [class*="st-key-it-edit-button-wrap-"],
   [class*="st-key-it-map-button-wrap-"],
   [class*="st-key-it-visit-checkbox-wrap-"],
@@ -1253,11 +1266,12 @@ st.markdown("""
     width: 32px !important;
     min-width: 32px !important;
     max-width: 32px !important;
-    height: 32px !important;
-    min-height: 32px !important;
-    max-height: 32px !important;
+    height: 34px !important;
+    min-height: 34px !important;
+    max-height: 34px !important;
     align-items: center !important;
     justify-content: center !important;
+    align-self: center !important;
     margin: 0 !important;
     padding: 0 !important;
     transform: none !important;
@@ -1279,14 +1293,15 @@ st.markdown("""
     width: 32px !important;
     min-width: 32px !important;
     max-width: 32px !important;
-    height: 32px !important;
-    min-height: 32px !important;
-    max-height: 32px !important;
+    height: 34px !important;
+    min-height: 34px !important;
+    max-height: 34px !important;
     align-items: center !important;
     justify-content: center !important;
+    align-self: center !important;
     margin: 0 !important;
     padding: 0 !important;
-    overflow: hidden !important;
+    overflow: visible !important;
   }
   [class*="st-key-it-edit-button-wrap-"] button,
   [class*="st-key-saved-edit-button-wrap-"]:not([class*="st-key-saved-edit-button-wrap-list-"]) button,
@@ -1303,9 +1318,10 @@ st.markdown("""
     max-height: 32px !important;
     align-items: center !important;
     justify-content: center !important;
+    align-self: center !important;
     margin: 0 !important;
     padding: 0 !important;
-    border-radius: 6px !important;
+    border-radius: 7px !important;
     font-size: 0 !important;
     line-height: 0 !important;
     overflow: hidden !important;
@@ -1338,21 +1354,22 @@ st.markdown("""
     width: 32px !important;
     min-width: 32px !important;
     max-width: 32px !important;
-    height: 32px !important;
-    min-height: 32px !important;
-    max-height: 32px !important;
+    height: 34px !important;
+    min-height: 34px !important;
+    max-height: 34px !important;
     align-items: center !important;
     justify-content: center !important;
+    align-self: center !important;
     gap: 0 !important;
     margin: 0 !important;
     padding: 0 !important;
-    border: 1px solid #CBD5E1 !important;
-    border-radius: 6px !important;
-    background: #FFFFFF !important;
+    border: 0 !important;
+    background: transparent !important;
   }
   [class*="st-key-it-visit-checkbox-wrap-"] [data-testid="stCheckbox"] label > div:first-child {
     box-sizing: border-box !important;
     display: flex !important;
+    flex: none !important;
     width: 18px !important;
     min-width: 18px !important;
     max-width: 18px !important;
@@ -1373,11 +1390,11 @@ st.markdown("""
     display: none !important;
   }
 
-  /* GUARDADOS: hora y selector de día con anchura fija también en móvil. */
+  /* GUARDADOS: hora y día con controles legibles, sin las medidas globales móviles. */
   [class*="st-key-saved-controls-row-"] {
     width: 100% !important;
     min-width: 0 !important;
-    margin-top: 3px !important;
+    margin-top: 4px !important;
     overflow: visible !important;
   }
   [class*="st-key-saved-controls-row-"] [data-testid="stHorizontalBlock"] {
@@ -1391,6 +1408,7 @@ st.markdown("""
     width: max-content !important;
     max-width: 100% !important;
     min-width: 0 !important;
+    overflow: visible !important;
   }
   [class*="st-key-saved-controls-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"] {
     box-sizing: border-box !important;
@@ -1403,17 +1421,7 @@ st.markdown("""
     padding: 0 !important;
   }
   [class*="st-key-saved-controls-row-"] [data-testid="column"]:first-child,
-  [class*="st-key-saved-controls-row-"] [data-testid="column"]:first-child [data-testid="stTextInput"] {
-    box-sizing: border-box !important;
-    width: 72px !important;
-    min-width: 72px !important;
-    max-width: 72px !important;
-    height: 36px !important;
-    min-height: 36px !important;
-    max-height: 36px !important;
-    margin: 0 !important;
-    padding: 0 !important;
-  }
+  [class*="st-key-saved-controls-row-"] [data-testid="column"]:first-child [data-testid="stTextInput"],
   [class*="st-key-saved-controls-row-"] [data-testid="column"]:first-child [data-baseweb="input"],
   [class*="st-key-saved-controls-row-"] [data-testid="column"]:first-child [data-baseweb="base-input"],
   [class*="st-key-saved-controls-row-"] [data-testid="column"]:first-child input {
@@ -1424,8 +1432,9 @@ st.markdown("""
     height: 36px !important;
     min-height: 36px !important;
     max-height: 36px !important;
-    padding: 0 2px !important;
-    font-size: 0.82rem !important;
+    margin: 0 !important;
+    padding: 0 4px !important;
+    font-size: 0.84rem !important;
     line-height: 1 !important;
     text-align: center !important;
   }
@@ -1441,12 +1450,12 @@ st.markdown("""
     min-height: 36px !important;
     max-height: 36px !important;
     margin: 0 !important;
-    padding: 0 !important;
-    font-size: 0.82rem !important;
+    padding: 0 4px !important;
+    font-size: 0.84rem !important;
   }
   [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(2) [data-baseweb="select"] * {
-    font-size: 0.82rem !important;
-    line-height: 1 !important;
+    font-size: 0.84rem !important;
+    line-height: 1.1 !important;
   }
 
 </style>
