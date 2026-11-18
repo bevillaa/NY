@@ -4023,6 +4023,58 @@ if seccion_principal == "🗒️Listas":
 # TAB EXTRA: CHECKLIST GENERAL DE PENDIENTES
 # Los elementos se guardan en config_viaje.json para mantenerlos entre sesiones.
 # ─────────────────────────────────────────────────────────────────────────────
+def _anadir_pendiente_checklist():
+    """Callback: guarda la tarea antes del rerun y limpia los campos sin tocar
+    el estado de widgets después de que Streamlit los haya renderizado.
+    """
+    texto = str(st.session_state.get("checklist_nuevo_texto", "") or "").strip()
+    nota = str(st.session_state.get("checklist_nueva_nota", "") or "").strip()
+    tipo = st.session_state.get("checklist_nuevo_tipo", "Otro")
+
+    if not texto:
+        st.session_state["_checklist_mensaje"] = ("warning", "Escribe qué tienes pendiente.")
+        return
+
+    config = st.session_state.config_viaje
+    pendientes_actuales = config.setdefault("checklist_pendientes", [])
+    if not isinstance(pendientes_actuales, list):
+        pendientes_actuales = []
+        config["checklist_pendientes"] = pendientes_actuales
+
+    nuevo = {
+        "id": hashlib.sha1(
+            f"{texto}|{datetime.now().isoformat()}|{len(pendientes_actuales)}".encode("utf-8")
+        ).hexdigest()[:12],
+        "texto": texto,
+        "tipo": tipo,
+        "nota": nota,
+        "hecho": False
+    }
+    pendientes_actuales.append(nuevo)
+
+    try:
+        guardado = guardar_config_viaje(config)
+    except Exception as exc:
+        logger.exception("Error al guardar una tarea de la checklist")
+        guardado = False
+        detalle_error = str(exc)
+    else:
+        detalle_error = ""
+
+    if guardado:
+        st.session_state["checklist_nuevo_texto"] = ""
+        st.session_state["checklist_nueva_nota"] = ""
+        st.session_state["_checklist_mensaje"] = ("success", f"«{texto}» se ha añadido a la checklist.")
+    else:
+        # No dejar una tarea que no llegó a persistirse como si estuviera guardada.
+        pendientes_actuales.pop()
+        st.session_state["_checklist_mensaje"] = (
+            "error",
+            "No se ha podido guardar el pendiente. "
+            + (f"Detalle: {detalle_error}" if detalle_error else "Revisa la configuración de persistencia.")
+        )
+
+
 if seccion_principal == "☑️Checklist":
     st.markdown("---")
     st.markdown('<div class="ny-card-header">☑️ Mi checklist de pendientes</div>', unsafe_allow_html=True)
@@ -4054,30 +4106,17 @@ if seccion_principal == "☑️Checklist":
                 key="checklist_nueva_nota"
             )
 
-        if st.button("＋ Añadir a la checklist", use_container_width=True, key="btn_anadir_checklist"):
-            texto = (nuevo_pendiente or "").strip()
-            if not texto:
-                st.warning("Escribe qué tienes pendiente.")
-            else:
-                nuevo_id = hashlib.sha1(
-                    f"{texto}|{datetime.now().isoformat()}|{len(pendientes)}".encode("utf-8")
-                ).hexdigest()[:12]
-                pendientes.append({
-                    "id": nuevo_id,
-                    "texto": texto,
-                    "tipo": tipo_pendiente,
-                    "nota": (detalle_pendiente or "").strip(),
-                    "hecho": False
-                })
-                st.session_state.config_viaje["checklist_pendientes"] = pendientes
-                if guardar_config_viaje(st.session_state.config_viaje):
-                    st.success(f"«{texto}» se ha añadido a la checklist.")
-                    st.session_state["checklist_nuevo_texto"] = ""
-                    st.session_state["checklist_nueva_nota"] = ""
-                    st.rerun()
-                else:
-                    # No ocultar el fallo de persistencia: se informa explícitamente.
-                    st.error("No se ha podido guardar el pendiente. Revisa el mensaje de error de guardado mostrado arriba.")
+        st.button(
+            "＋ Añadir a la checklist",
+            use_container_width=True,
+            key="btn_anadir_checklist",
+            on_click=_anadir_pendiente_checklist
+        )
+
+        mensaje_checklist = st.session_state.pop("_checklist_mensaje", None)
+        if mensaje_checklist:
+            nivel, mensaje = mensaje_checklist
+            getattr(st, nivel)(mensaje)
 
     total_pendientes = len(pendientes)
     total_hechos = sum(1 for pnd in pendientes if pnd.get("hecho", False))
