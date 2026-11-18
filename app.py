@@ -1700,7 +1700,6 @@ CATEGORIAS_CANONICAS = [
     "🛍️ Compras",
     "🎄 Christmas markets",
     "🏛️ Cultura",
-    "🏙️ Miradores",
     "☀️ Spots",
     "📍 Otros",
     "🏨 Hotel"
@@ -1714,7 +1713,6 @@ MAPA_MIGRACION_CAT = {
     "🎷 Jazz, Música & Ocio": "🎷 Ocio",
     "🛍️ Compras & Outlets": "🛍️ Compras",
     "🏛️ Museos & Monumentos": "🏛️ Cultura",
-    "🏙️ Miradores & Observatorios": "🏙️ Miradores",
     "🌲 Parques, Muelles, Rooftops & Puentes": "☀️ Spots",
     "🏨 Hotel Base": "🏨 Hotel",
     "📍 Otros Lugares": "📍 Otros",
@@ -1746,8 +1744,6 @@ def clasificar_lugar(nombre: str, direccion: str = "", lista_origen: str = "") -
         if any(k in orig for k in ['christmas', 'holiday', 'navidad', 'mercadillo', 'winter village']):
             tipo_nav = "Interior" if 'santaland' in texto_busqueda else "Exterior"
             return "🎄 Christmas markets", tipo_nav
-        if any(k in orig for k in ['mirador', 'observator']):
-            return "🏙️ Miradores", "Interior"
         if any(k in orig for k in ['ocio', 'jazz', 'música', 'musica', 'teatro', 'show', 'deporte']):
             return "🎷 Ocio", "Interior"
         if any(k in orig for k in ['copas', 'rooftop', 'bar', 'cocktail', 'pub']):
@@ -1771,10 +1767,6 @@ def clasificar_lugar(nombre: str, direccion: str = "", lista_origen: str = "") -
     if any(k in texto_busqueda for k in ['christmas market', 'holiday market', 'winter village', 'holiday shops', 'mercadillo navideño', 'mercado navideño', 'navidad', 'santa land', 'santaland', 'dyker heights', 'tree lighting', 'rockefeller tree']):
         tipo_nav = "Interior" if 'santaland' in texto_busqueda else "Exterior"
         return "🎄 Christmas markets", tipo_nav
-
-    # 3. Miradores
-    if any(k in texto_busqueda for k in ['summit', 'one vanderbilt', 'empire state', 'top of the rock', 'the edge', 'observatory', 'one world observatory', 'mirador', 'observation deck']):
-        return "🏙️ Miradores", "Interior"
 
     # 4. Ocio
     if any(k in texto_busqueda for k in ['jazz', 'blue note', 'smalls', 'mezzrow', 'dizzy', "arthur's tavern", 'jazzcultural', 'village vanguard', 'broadway', 'radio city', 'comedy cellar', 'lincoln center', 'teatro', 'theatre', 'madison square garden', 'barclays center', 'cinema', 'cine', 'nba', 'knicks', 'nets', 'rangers', 'hockey', 'musical', 'concierto', 'concert', 'show', 'club', 'arcade']):
