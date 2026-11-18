@@ -11,11 +11,127 @@ import tempfile
 import math
 import html
 import hashlib
+import copy
 from datetime import datetime
+from urllib.parse import urlsplit
+import ipaddress
+import socket
+import logging
 from zoneinfo import ZoneInfo
 
 ARCH_ITINERARIO = "itinerario_actual.json"
 ARCH_CONFIG     = "config_viaje.json"
+
+logger = logging.getLogger("ny_travel_app")
+
+_ALLOWED_MAP_HOSTS = ("google.com", "www.google.com", "maps.google.com", "maps.app.goo.gl", "goo.gl")
+
+def _validar_url_google_maps(url: str) -> bool:
+    """Solo permite URLs HTTP(S) de dominios oficiales de Google Maps."""
+    try:
+        parsed = urlsplit(str(url or "").strip())
+        host = (parsed.hostname or "").lower().rstrip(".")
+        if parsed.scheme not in ("http", "https") or not host:
+            return False
+        if parsed.username or parsed.password:
+            return False
+        permitido = host in _ALLOWED_MAP_HOSTS or host.endswith(".google.com")
+        if not permitido:
+            return False
+        # Defensa adicional ante DNS rebinding o subdominios mal configurados.
+        try:
+            for info in socket.getaddrinfo(host, parsed.port or 443, type=socket.SOCK_STREAM):
+                ip = ipaddress.ip_address(info[4][0])
+                if not ip.is_global:
+                    return False
+        except (OSError, ValueError):
+            return False
+        return True
+    except Exception:
+        return False
+
+class _GoogleMapsRedirectHandler(urllib.request.HTTPRedirectHandler):
+    def redirect_request(self, req, fp, code, msg, headers, newurl):
+        if not _validar_url_google_maps(newurl):
+            raise urllib.error.URLError("Redirección fuera de dominios permitidos de Google Maps")
+        return super().redirect_request(req, fp, code, msg, headers, newurl)
+
+def _abrir_url_google_maps(url: str, headers=None, timeout=8):
+    if not _validar_url_google_maps(url):
+        raise ValueError("Solo se permiten enlaces oficiales de Google Maps.")
+    opener = urllib.request.build_opener(_GoogleMapsRedirectHandler())
+    req = urllib.request.Request(url, headers=headers or {})
+    return opener.open(req, timeout=timeout)
+
+def _fecha_inicio_viaje(config):
+    """Obtiene la fecha de salida desde ISO o desde el formato español existente."""
+    valor = (config or {}).get("fecha_inicio_viaje") or (config or {}).get("fecha_inicio")
+    if not valor:
+        valor = ((config or {}).get("vuelo_ida") or {}).get("fecha", "")
+    texto = str(valor or "").strip()
+    if not texto:
+        return None
+    try:
+        return datetime.fromisoformat(texto).date()
+    except ValueError:
+        pass
+    meses = {"ene": 1, "enero": 1, "feb": 2, "febrero": 2, "mar": 3, "marzo": 3,
+             "abr": 4, "abril": 4, "may": 5, "mayo": 5, "jun": 6, "junio": 6,
+             "jul": 7, "julio": 7, "ago": 8, "agosto": 8, "sep": 9, "sept": 9,
+             "septiembre": 9, "oct": 10, "octubre": 10, "nov": 11, "noviembre": 11,
+             "dic": 12, "diciembre": 12}
+    m = re.search(r"(\d{1,2})\s+([A-Za-zÁÉÍÓÚáéíóú]+)(?:\s+(\d{4}))?", texto)
+    if not m:
+        return None
+    dia, mes_txt, anio_txt = m.groups()
+    mes = meses.get(mes_txt.casefold().rstrip("."))
+    if not mes:
+        return None
+    anio = int(anio_txt) if anio_txt else datetime.now().year
+    try:
+        fecha = datetime(anio, mes, int(dia)).date()
+        if not anio_txt and fecha < datetime.now().date():
+            fecha = datetime(anio + 1, mes, int(dia)).date()
+        return fecha
+    except ValueError:
+        return None
+
+
+def _validar_lugar(registro):
+    """Valida y normaliza un registro sin descartar silenciosamente datos recuperables."""
+    if not isinstance(registro, dict):
+        return None
+    nombre = str(registro.get("nombre", "") or "").strip()
+    if not nombre:
+        return None
+    try:
+        lat, lon = float(registro.get("lat")), float(registro.get("lon"))
+        if not (-90 <= lat <= 90 and -180 <= lon <= 180):
+            return None
+    except (TypeError, ValueError):
+        return None
+    try:
+        dia = int(registro.get("dia", 0) or 0)
+    except (TypeError, ValueError):
+        dia = 0
+    if not 0 <= dia <= 10:
+        dia = 0
+    hora = str(registro.get("hora", "") or "").strip()
+    if hora and not re.fullmatch(r"(?:[01]?\d|2[0-3]):[0-5]\d", hora):
+        hora = ""
+    if hora and len(hora) == 4:
+        hora = "0" + hora
+    normalizado = dict(registro)
+    normalizado.update({
+        "id": registro.get("id") if registro.get("id") is not None else hashlib.sha1(nombre.encode("utf-8")).hexdigest()[:12],
+        "nombre": nombre, "lat": lat, "lon": lon, "dia": dia, "hora": hora,
+        "direccion": str(registro.get("direccion", "") or ""),
+        "nota": str(registro.get("nota", "") or ""),
+        "categoria": normalizar_categoria(registro.get("categoria", "")),
+        "tipo": registro.get("tipo") if registro.get("tipo") in ("Interior", "Exterior") else "Interior",
+        "visitado": bool(registro.get("visitado", False)),
+    })
+    return normalizado
 
 # =============================================================================
 # 1. CONFIGURACIÓN DE PÁGINA & ESTILO NAVIDEÑO EDITORIAL (MÓVIL + WEB)
@@ -2791,10 +2907,10 @@ def crear_pin_google_maps(categoria: str, nombre: str = ""):
 def ordenar_por_hora(lista_sitios: list) -> list:
     def clave_orden(item):
         h = (item.get("hora") or "").strip()
-        if re.match(r"^\d{1,2}:\d{2}$", h):
+        if re.fullmatch(r"(?:[01]?\d|2[0-3]):[0-5]\d", h):
             partes = h.split(":")
-            return (0, int(partes[0]) * 60 + int(partes[1]), item.get("id", 0))
-        return (1, 9999, item.get("id", 0))
+            return (0, int(partes[0]) * 60 + int(partes[1]), str(item.get("id", 0)))
+        return (1, 9999, str(item.get("id", 0)))
     return sorted(lista_sitios, key=clave_orden)
 
 
@@ -2918,6 +3034,10 @@ def _cargar_json_persistente(ruta: str):
                     "No se pudo consultar GitHub: revisa GITHUB_TOKEN y GITHUB_REPO."
                 )
             datos_remotos, _sha = remoto
+            try:
+                st.session_state[f"_github_sha_{ruta}"] = _sha
+            except Exception:
+                pass
             if datos_remotos is not None:
                 # Validar la forma esperada antes de aceptar el contenido remoto.
                 if ruta == ARCH_ITINERARIO and not isinstance(datos_remotos, list):
@@ -2978,6 +3098,18 @@ def _guardar_json_persistente(ruta: str, datos):
             )
         datos_remotos, sha = remoto
 
+        # Control optimista: impide que una sesión antigua sobrescriba cambios
+        # remotos realizados desde su última lectura.
+        try:
+            clave_sha = f"_github_sha_{ruta}"
+            sha_conocido = st.session_state.get(clave_sha, None)
+            if clave_sha in st.session_state and sha_conocido != sha:
+                raise RuntimeError("Conflicto de sincronización: el archivo cambió en otro dispositivo. Recarga antes de guardar.")
+        except RuntimeError:
+            raise
+        except Exception:
+            pass
+
         # Evita que una sesión vacía por error borre accidentalmente un itinerario
         # que ya existe en GitHub. El borrado total debe hacerse de forma deliberada
         # desde GitHub, no como efecto secundario de una sesión recién iniciada.
@@ -3016,8 +3148,13 @@ def _guardar_json_persistente(ruta: str, datos):
         )
         with urllib.request.urlopen(req, timeout=20) as response:
             respuesta = json.loads(response.read().decode("utf-8"))
-        if not respuesta.get("content", {}).get("sha"):
+        nuevo_sha = respuesta.get("content", {}).get("sha")
+        if not nuevo_sha:
             raise RuntimeError("GitHub no confirmó el guardado del archivo.")
+        try:
+            st.session_state[f"_github_sha_{ruta}"] = nuevo_sha
+        except Exception:
+            pass
 
         # Actualizar caché local solo después de confirmar la escritura remota.
         _guardar_json_atomico(ruta, datos)
@@ -3083,21 +3220,27 @@ def guardar_config_viaje(cfg):
 def cargar_itinerario_disco():
     datos = _cargar_json_persistente(ARCH_ITINERARIO)
     if isinstance(datos, list):
+        normalizados = []
+        ids_vistos = set()
         modificado = False
-        for p in datos:
-            cat_norm = normalizar_categoria(p.get("categoria", ""))
-            if p.get("categoria") != cat_norm:
-                p["categoria"] = cat_norm
+        for registro in datos:
+            lugar = _validar_lugar(registro)
+            if lugar is None:
                 modificado = True
-            if "hora" not in p:
-                p["hora"] = ""
+                logger.warning("Se omitió un registro de itinerario inválido.")
+                continue
+            base_id = str(lugar.get("id"))
+            if base_id in ids_vistos:
+                lugar["id"] = f"{base_id}-{hashlib.sha1((lugar['nombre'] + str(lugar['lat']) + str(lugar['lon'])).encode()).hexdigest()[:6]}"
                 modificado = True
-            if "nota" not in p:
-                p["nota"] = ""
+            ids_vistos.add(str(lugar["id"]))
+            normalizados.append(lugar)
+            if lugar != registro:
                 modificado = True
         if modificado:
-            guardar_itinerario_disco(datos)
-        return datos
+            # La normalización local no debe sobrescribir automáticamente el remoto.
+            _guardar_json_atomico(ARCH_ITINERARIO, normalizados)
+        return normalizados
     return []
 
 
@@ -3209,7 +3352,7 @@ def extraer_lugares_lista_gmaps(url_lista: str, nombre_lista: str = ""):
     import http.cookiejar
 
     url_limpia = (url_lista or "").strip()
-    if not url_limpia:
+    if not url_limpia or not _validar_url_google_maps(url_limpia):
         return []
 
     cj = http.cookiejar.CookieJar()
@@ -3320,7 +3463,7 @@ def extraer_lugares_lista_gmaps(url_lista: str, nombre_lista: str = ""):
                 endpoint = "https://www.google.com" + (ruta_clean if ruta_clean.startswith("/") else "/" + ruta_clean)
 
             try:
-                with opener.open(endpoint, timeout=12) as respuesta_lista:
+                with _abrir_url_google_maps(endpoint, headers=dict(opener.addheaders), timeout=12) as respuesta_lista:
                     raw = respuesta_lista.read().decode("utf-8", errors="ignore")
                 raw = re.sub(r"^\)\]\}'\s*", "", raw)
                 data = json.loads(raw)
@@ -3390,6 +3533,7 @@ def extraer_lugares_lista_gmaps(url_lista: str, nombre_lista: str = ""):
 
 
 def ejecutar_sincronizacion_listas_gmaps():
+    lugares_antes_sync = copy.deepcopy(st.session_state.get("lugares", []))
     listas_config = st.session_state.config_viaje.get("listas_gmaps", [])
     if not listas_config:
         st.info("Todavía no hay listas de Google Maps guardadas.")
@@ -3516,7 +3660,11 @@ def ejecutar_sincronizacion_listas_gmaps():
 
     # GUARDADO PERSISTENTE EN DISCO / GITHUB AL TERMINAR
     if total_nuevos > 0 or total_actualizados > 0:
-        guardar_itinerario_disco(st.session_state.lugares)
+        if not guardar_itinerario_disco(st.session_state.lugares):
+            st.session_state.lugares = lugares_antes_sync
+            st.session_state["_msg_sync_guardados"] = ("error", "No se pudo guardar la sincronización. Se han restaurado los datos anteriores.")
+            st.rerun()
+            return
 
     if nuevos_ids:
         prev_nuevos = st.session_state.get("nuevos_lugares_ids", [])
@@ -3558,8 +3706,9 @@ def agregar_sitio_a_lugares(nombre: str, direccion: str = "", lat: float = None,
 
     if lat is None or lon is None or (lat == 0 and lon == 0):
         geo_lat, geo_lon, geo_dir = geocodificar_direccion_o_nombre(f"{nom} {direccion}")
-        lat = geo_lat if geo_lat is not None else 40.7580
-        lon = geo_lon if geo_lon is not None else -73.9855
+        if geo_lat is None or geo_lon is None:
+            return False, "No se pudo localizar este sitio. Comprueba el nombre o la dirección e inténtalo de nuevo."
+        lat, lon = geo_lat, geo_lon
         if not direccion and geo_dir:
             direccion = geo_dir
 
@@ -3571,6 +3720,14 @@ def agregar_sitio_a_lugares(nombre: str, direccion: str = "", lat: float = None,
 
     if not tipo:
         tipo = "Interior"
+    try:
+        lat, lon = float(lat), float(lon)
+        if not (-90 <= lat <= 90 and -180 <= lon <= 180):
+            return False, "Las coordenadas están fuera de los rangos geográficos válidos."
+    except (TypeError, ValueError):
+        return False, "Las coordenadas no son válidas."
+    if hora and not re.fullmatch(r"(?:[01]?\d|2[0-3]):[0-5]\d", str(hora).strip()):
+        return False, "Formato de hora inválido. Usa HH:MM."
 
     ids_numericos = []
     for existente in st.session_state.lugares:
@@ -3608,12 +3765,18 @@ def importar_sitio_desde_gmaps(url_o_texto: str, dia_dest: int = 0, hora: str = 
     if not raw:
         return False, "Introduce un enlace de Google Maps válido."
 
-    if "maps" in raw.lower():
+    if _validar_url_google_maps(raw):
         lugares_lst = extraer_lugares_lista_gmaps(raw, "")
         if lugares_lst:
             existentes = {str(x.get("nombre", "")).strip().casefold() for x in st.session_state.lugares}
             nuevos = 0
-            max_id = max([x.get("id", 0) for x in st.session_state.lugares], default=0)
+            ids_numericos = []
+            for existente in st.session_state.lugares:
+                try:
+                    ids_numericos.append(int(existente.get("id", 0)))
+                except (TypeError, ValueError, AttributeError):
+                    continue
+            max_id = max(ids_numericos, default=0)
             for s in lugares_lst:
                 clave_nombre = str(s.get("nombre", "")).strip().casefold()
                 if clave_nombre and clave_nombre not in existentes:
@@ -3641,10 +3804,11 @@ def importar_sitio_desde_gmaps(url_o_texto: str, dia_dest: int = 0, hora: str = 
     dir_ext = ""
 
     if raw.startswith("http://") or raw.startswith("https://"):
+        if not _validar_url_google_maps(raw):
+            return False, "El enlace debe pertenecer a un dominio oficial de Google Maps."
         headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/120.0.0.0 Safari/537.36'}
         try:
-            req = urllib.request.Request(raw, headers=headers)
-            with urllib.request.urlopen(req, timeout=6) as r:
+            with _abrir_url_google_maps(raw, headers=headers, timeout=6) as r:
                 url_final = r.geturl()
                 html = r.read().decode('utf-8', errors='ignore')
 
@@ -3679,7 +3843,7 @@ def render_editor_sitio_panel(spot: dict, idx_real: int, key_ctx: str):
     with st.container():
         st.markdown(
             f"<div style='background:#F8FAFC; border:1.5px solid #94A3B8; border-radius:12px; padding:9px 11px; margin:6px 0 8px 0;'>"
-            f"<b>✏️ Editando: {spot['nombre']}</b></div>",
+            f"<b>✏️ Editando: {html.escape(str(spot.get('nombre', '')))}</b></div>",
             unsafe_allow_html=True
         )
         with st.form(f"form_edit_spot_{edit_key}"):
@@ -3737,21 +3901,28 @@ def render_editor_sitio_panel(spot: dict, idx_real: int, key_ctx: str):
                     if hora_limpia and len(hora_limpia) == 4:
                         hora_limpia = "0" + hora_limpia
                     nuevo_dia = 0 if "Guardados" in ed_dia_str else int(re.search(r"Día (\d+)", ed_dia_str).group(1))
-                    st.session_state.lugares[idx_guardar].update({
-                        "nombre": ed_nom.strip() or spot["nombre"],
-                        "direccion": ed_dir.strip(),
-                        "nota": ed_nota.strip(),
-                        "hora": hora_limpia,
-                        "categoria": ed_cat,
-                        "tipo": ed_tipo,
-                        "dia": nuevo_dia,
-                        "lat": float(ed_lat),
-                        "lon": float(ed_lon)
-                    })
-                    guardar_itinerario_disco(st.session_state.lugares)
-                    st.session_state.editando_spot_key = None
-                    st.toast(f"¡'{ed_nom}' actualizado!", icon="✅")
-                    st.rerun()
+                    if not (-90 <= float(ed_lat) <= 90 and -180 <= float(ed_lon) <= 180):
+                        st.error("Las coordenadas deben estar entre -90/90 de latitud y -180/180 de longitud.")
+                    else:
+                        anterior = dict(st.session_state.lugares[idx_guardar])
+                        st.session_state.lugares[idx_guardar].update({
+                            "nombre": ed_nom.strip() or spot["nombre"],
+                            "direccion": ed_dir.strip(),
+                            "nota": ed_nota.strip(),
+                            "hora": hora_limpia,
+                            "categoria": ed_cat,
+                            "tipo": ed_tipo,
+                            "dia": nuevo_dia,
+                            "lat": float(ed_lat),
+                            "lon": float(ed_lon)
+                        })
+                        if guardar_itinerario_disco(st.session_state.lugares):
+                            st.session_state.editando_spot_key = None
+                            st.toast(f"¡'{ed_nom}' actualizado!", icon="✅")
+                            st.rerun()
+                        else:
+                            st.session_state.lugares[idx_guardar] = anterior
+                            st.error("No se pudo guardar el cambio. Se han restaurado los datos anteriores.")
 
             if eliminar_ed:
                 idx_borrar = next(
@@ -3763,13 +3934,16 @@ def render_editor_sitio_panel(spot: dict, idx_real: int, key_ctx: str):
                     st.error("Este lugar ya no está en el itinerario. Actualiza la página y vuelve a intentarlo.")
                     st.stop()
                 nom_borrado = spot["nombre"]
-                st.session_state.lugares.pop(idx_borrar)
-                if st.session_state.lugar_activo_id == spot["id"]:
-                    st.session_state.lugar_activo_id = None
-                st.session_state.editando_spot_key = None
-                guardar_itinerario_disco(st.session_state.lugares)
-                st.toast(f"Sitio '{nom_borrado}' eliminado.", icon="🗑️")
-                st.rerun()
+                eliminado = st.session_state.lugares.pop(idx_borrar)
+                if guardar_itinerario_disco(st.session_state.lugares):
+                    if st.session_state.lugar_activo_id == spot["id"]:
+                        st.session_state.lugar_activo_id = None
+                    st.session_state.editando_spot_key = None
+                    st.toast(f"Sitio '{nom_borrado}' eliminado.", icon="🗑️")
+                    st.rerun()
+                else:
+                    st.session_state.lugares.insert(idx_borrar, eliminado)
+                    st.error("No se pudo eliminar el sitio. Se han restaurado los datos anteriores.")
 
             if cerrar_ed:
                 st.session_state.editando_spot_key = None
@@ -3908,7 +4082,7 @@ def _vigilar_cambios_de_otros_dispositivos():
 
 
 if hasattr(st, "fragment"):
-    @st.fragment(run_every="15s")
+    @st.fragment(run_every="60s")
     def _sincronizador_automatico_dispositivos():
         _vigilar_cambios_de_otros_dispositivos()
 
@@ -4226,9 +4400,13 @@ if seccion_principal == "🗽Ruta":
                         with st.container(key=f"it-visit-checkbox-wrap-{item['id']}"):
                             chk_val = st.checkbox("", value=is_visited, key=f"chk_it_{d}_{item['id']}")
                         if chk_val != is_visited and idx_real is not None:
+                            anterior_visitado = st.session_state.lugares[idx_real].get("visitado", False)
                             st.session_state.lugares[idx_real]["visitado"] = chk_val
-                            guardar_itinerario_disco(st.session_state.lugares)
-                            st.rerun()
+                            if guardar_itinerario_disco(st.session_state.lugares):
+                                st.rerun()
+                            else:
+                                st.session_state.lugares[idx_real]["visitado"] = anterior_visitado
+                                st.error("No se pudo guardar el estado de visita.")
                 if idx_real is not None:
                     render_editor_sitio_panel(item, idx_real, f"it_{d}")
 
@@ -4287,7 +4465,7 @@ if seccion_principal == "📌Guardados":
     visibles_pool = [
         l for l in pool_guardados
         if (flt_cat_g == "Todas" or normalizar_categoria(l.get("categoria", "")) == flt_cat_g)
-        and (not busq_g.strip() or busq_g.strip().lower() in l.get("nombre", "").lower())
+        and (not busq_g.strip() or busq_g.strip().lower() in str(l.get("nombre", "")).lower())
     ]
     visibles_pool.sort(key=lambda l: int(l.get("id", 0)), reverse=True)
 
@@ -4311,7 +4489,7 @@ if seccion_principal == "📌Guardados":
             with c_saved_info:
                 st.markdown(f"""
                 <div style="width:100%; min-width:0; overflow-wrap:anywhere;">
-                  <div class="place-list-title">{obtener_emoji_categoria(cat_p)} {p_spot['nombre']}</div>
+                  <div class="place-list-title">{obtener_emoji_categoria(cat_p)} {html.escape(str(p_spot.get('nombre', '')))}</div>
                   <div style="margin-top:4px; display:flex; flex-wrap:wrap; gap:4px;">
                     <span class="badge-cat">{cat_p}</span>{tipo_p_html}
                   </div>
@@ -4347,9 +4525,13 @@ if seccion_principal == "📌Guardados":
                     if not hl or re.match(r"^([01]?\d|2[0-3]):[0-5]\d$", hl):
                         if hl and len(hl) == 4:
                             hl = "0" + hl
+                        hora_anterior_pool = st.session_state.lugares[idx_sp_real].get("hora", "")
                         st.session_state.lugares[idx_sp_real]["hora"] = hl
-                        guardar_itinerario_disco(st.session_state.lugares)
-                        st.rerun()
+                        if guardar_itinerario_disco(st.session_state.lugares):
+                            st.rerun()
+                        else:
+                            st.session_state.lugares[idx_sp_real]["hora"] = hora_anterior_pool
+                            st.error("No se pudo guardar la hora.")
             with c_day:
                 opts_dia_pool = ["- Día -"] + [etiqueta_dia_guardados(d) for d in range(1, 11)]
                 idx_sel_pool = dia_p if 1 <= dia_p <= 10 else 0
@@ -4363,9 +4545,13 @@ if seccion_principal == "📌Guardados":
                 if asig_dia != "- Día -" and idx_sp_real is not None:
                     d_num = int(re.search(r"Día (\d+)", asig_dia).group(1))
                     if d_num != dia_p:
+                        dia_anterior_pool = st.session_state.lugares[idx_sp_real].get("dia", 0)
                         st.session_state.lugares[idx_sp_real]["dia"] = d_num
-                        guardar_itinerario_disco(st.session_state.lugares)
-                        st.rerun()
+                        if guardar_itinerario_disco(st.session_state.lugares):
+                            st.rerun()
+                        else:
+                            st.session_state.lugares[idx_sp_real]["dia"] = dia_anterior_pool
+                            st.error("No se pudo guardar la asignación del día.")
 
         if idx_sp_real is not None:
             render_editor_sitio_panel(p_spot, idx_sp_real, "pool")
@@ -4415,23 +4601,38 @@ if seccion_principal == "🌧️ Clima":
         )
         num_dia_c = int(re.search(r"Día (\d+):", dia_sel_clima).group(1))
 
-        prob_lluvia = 15
-        precip_mm = 0.0
-        temp_max_est, temp_min_est = 6.0, -1.0
-        desc_dia = "☀️ Día despejado y fresco"
+        prob_lluvia = precip_mm = temp_max_est = temp_min_est = None
+        desc_dia = "Pronóstico no disponible"
         alerta_lluvia = False
+        pronostico_disponible = False
 
         if clima_data and "daily" in clima_data:
             d_time = clima_data["daily"].get("time", [])
-            idx_pronostico = (num_dia_c - 1) if (num_dia_c - 1) < len(d_time) else 0
-            if idx_pronostico < len(d_time):
-                p_code = clima_data["daily"]["weather_code"][idx_pronostico]
-                desc_dia, _ = traducir_codigo_clima(p_code)
-                prob_lluvia = clima_data["daily"]["precipitation_probability_max"][idx_pronostico] or 0
-                precip_mm = clima_data["daily"]["precipitation_sum"][idx_pronostico] or 0.0
-                temp_max_est = clima_data["daily"]["temperature_2m_max"][idx_pronostico] or 5.0
-                temp_min_est = clima_data["daily"]["temperature_2m_min"][idx_pronostico] or -1.0
-                alerta_lluvia = (prob_lluvia >= 40) or (precip_mm > 1.0) or ("Lluvia" in desc_dia) or ("Nieve" in desc_dia)
+            # No asociar Día N al índice N-1: la API entrega fechas de calendario.
+            # Si la fecha real del viaje no está disponible, no mostrar un pronóstico falso.
+            fecha_viaje = None
+            cfg_clima = st.session_state.get("config_viaje", {})
+            fecha_base = _fecha_inicio_viaje(cfg_clima)
+            if fecha_base:
+                from datetime import timedelta
+                fecha_viaje = (fecha_base + timedelta(days=num_dia_c - 1)).isoformat()
+            if fecha_viaje and fecha_viaje in d_time:
+                idx_pronostico = d_time.index(fecha_viaje)
+                daily = clima_data["daily"]
+                campos = ("weather_code", "precipitation_probability_max", "precipitation_sum", "temperature_2m_max", "temperature_2m_min")
+                if all(idx_pronostico < len(daily.get(campo, [])) for campo in campos):
+                    p_code = daily["weather_code"][idx_pronostico]
+                    desc_dia, _ = traducir_codigo_clima(p_code)
+                    prob_lluvia = daily["precipitation_probability_max"][idx_pronostico] or 0
+                    precip_mm = daily["precipitation_sum"][idx_pronostico] or 0.0
+                    temp_max_est = daily["temperature_2m_max"][idx_pronostico] if daily["temperature_2m_max"][idx_pronostico] is not None else 5.0
+                    temp_min_est = daily["temperature_2m_min"][idx_pronostico] if daily["temperature_2m_min"][idx_pronostico] is not None else -1.0
+                    alerta_lluvia = (prob_lluvia >= 40) or (precip_mm > 1.0) or ("Lluvia" in desc_dia) or ("Nieve" in desc_dia)
+                    pronostico_disponible = True
+                else:
+                    desc_dia = "Pronóstico no disponible"
+            else:
+                desc_dia = "Pronóstico no disponible"
 
         color_card = "#FEF2F2" if alerta_lluvia else "#F0FDF4"
         border_card = "#EF4444" if alerta_lluvia else "#10B981"
@@ -4439,11 +4640,11 @@ if seccion_principal == "🌧️ Clima":
         <div style="background:{color_card}; border: 1.5px solid {border_card}; border-radius:14px; padding:14px 16px;">
           <div style="font-weight:800; font-size:1.05rem; color:#0F172A;">{etiqueta_dia(num_dia_c)} · {desc_dia}</div>
           <div style="font-size:0.84rem; color:#0F172A; margin-top:4px;">
-            🌡️ Temperaturas: <b>{temp_min_est:.0f} °C a {temp_max_est:.0f} °C</b><br>
-            🌧️ Probabilidad de Precipitación: <b>{prob_lluvia}%</b> ({precip_mm:.1f} mm)
+            🌡️ Temperaturas: <b>{f'{temp_min_est:.0f} °C a {temp_max_est:.0f} °C' if pronostico_disponible else 'No disponible'}</b><br>
+            🌧️ Probabilidad de Precipitación: <b>{f'{prob_lluvia}%' if pronostico_disponible else 'No disponible'}</b> ({f'{precip_mm:.1f} mm' if pronostico_disponible else '—'})
           </div>
           <div style="font-size:0.8rem; font-weight:700; color:{'#B91C1C' if alerta_lluvia else '#047857'}; margin-top:6px;">
-            {'⚠️ ALERTA DE LLUVIA / NIEVE: Recomendable activar sustituciones a cubierto' if alerta_lluvia else '✓ Tiempo favorable para paseos al aire libre'}
+            {'⚠️ ALERTA DE LLUVIA / NIEVE: Recomendable activar sustituciones a cubierto' if alerta_lluvia else ('✓ Tiempo favorable para paseos al aire libre' if pronostico_disponible else 'Pronóstico aún no disponible para esta fecha')}
           </div>
         </div>
         """, unsafe_allow_html=True)
@@ -4467,11 +4668,11 @@ if seccion_principal == "🌧️ Clima":
             distancias.sort(key=lambda x: x[0])
             top_cercanos = distancias[:5]
 
-            dir_ext_txt = f" · 📍 {spot_ext['direccion']}" if spot_ext.get("direccion") else ""
+            dir_ext_txt = f" · 📍 {html.escape(str(spot_ext.get('direccion', '')))}" if spot_ext.get("direccion") else ""
             nota_ext_html = bloque_nota_html(spot_ext.get("nota", ""))
             st.markdown(f"""
             <div style="background:#FFF5F5; border-left:4px solid #EF4444; border-radius:12px; padding:10px 14px; margin: 8px 0;">
-              <div style="font-weight:700; color:#991B1B;">{obtener_emoji_categoria(normalizar_categoria(spot_ext.get('categoria','')))} {spot_ext['nombre']}</div>
+              <div style="font-weight:700; color:#991B1B;">{obtener_emoji_categoria(normalizar_categoria(spot_ext.get('categoria','')))} {html.escape(str(spot_ext.get('nombre', '')))}</div>
               <div style="font-size:0.8rem; color:#7F1D1D;">Plan exterior · Día {num_dia_c}{dir_ext_txt}</div>
               {nota_ext_html}
             </div>
@@ -4480,23 +4681,34 @@ if seccion_principal == "🌧️ Clima":
             c_sust1, c_sust2 = st.columns([3.5, 1.5])
             with c_sust1:
                 opciones_cercanas = [f"{x['nombre']} (a {d:.1f} km) - {normalizar_categoria(x.get('categoria',''))}" for d, x in top_cercanos]
-                sel_sust = selectbox_sin_teclado("Sustituto a cubierto:", opciones_cercanas, key=f"sel_sust_{spot_ext['id']}", label_visibility="collapsed")
+                if opciones_cercanas:
+                    ids_opciones = [str(x.get("id")) for _, x in top_cercanos]
+                    sel_sust_id = st.selectbox("Sustituto a cubierto:", ids_opciones, format_func=lambda ident: next((f"{x['nombre']} (a {d:.1f} km) - {normalizar_categoria(x.get('categoria',''))}" for d, x in top_cercanos if str(x.get("id")) == ident), ident), key=f"sel_sust_{spot_ext['id']}", label_visibility="collapsed")
+                else:
+                    sel_sust_id = None
+                    st.info("No hay alternativas a cubierto disponibles.")
             with c_sust2:
-                if st.button("🔄 Cambiar", key=f"btn_swap_{spot_ext['id']}", use_container_width=True):
-                    nom_sust = sel_sust.split(" (a ")[0].strip()
-                    elegido = next(x for _, x in top_cercanos if x["nombre"] == nom_sust)
-                    
-                    idx_ext = next(i for i, x in enumerate(st.session_state.lugares) if x["id"] == spot_ext["id"])
-                    idx_ind = next(i for i, x in enumerate(st.session_state.lugares) if x["id"] == elegido["id"])
-                    
-                    hora_heredada = st.session_state.lugares[idx_ext].get("hora", "")
-                    st.session_state.lugares[idx_ext]["dia"] = 0
-                    st.session_state.lugares[idx_ind]["dia"] = num_dia_c
-                    if hora_heredada and not st.session_state.lugares[idx_ind].get("hora"):
-                        st.session_state.lugares[idx_ind]["hora"] = hora_heredada
-                    guardar_itinerario_disco(st.session_state.lugares)
-                    st.toast(f"¡'{elegido['nombre']}' ahora está en el Día {num_dia_c}!", icon="✨")
-                    st.rerun()
+                if st.button("🔄 Cambiar", key=f"btn_swap_{spot_ext['id']}", use_container_width=True, disabled=not bool(top_cercanos)):
+                    elegido = next((x for _, x in top_cercanos if str(x.get("id")) == str(sel_sust_id)), None)
+                    idx_ext = next((i for i, x in enumerate(st.session_state.lugares) if str(x.get("id")) == str(spot_ext["id"])), None)
+                    idx_ind = next((i for i, x in enumerate(st.session_state.lugares) if elegido and str(x.get("id")) == str(elegido["id"])), None)
+                    if elegido is None or idx_ext is None or idx_ind is None:
+                        st.error("No se pudo localizar una de las paradas. Actualiza la página.")
+                    else:
+                        anterior_ext = dict(st.session_state.lugares[idx_ext])
+                        anterior_ind = dict(st.session_state.lugares[idx_ind])
+                        hora_heredada = st.session_state.lugares[idx_ext].get("hora", "")
+                        st.session_state.lugares[idx_ext]["dia"] = 0
+                        st.session_state.lugares[idx_ind]["dia"] = num_dia_c
+                        if hora_heredada and not st.session_state.lugares[idx_ind].get("hora"):
+                            st.session_state.lugares[idx_ind]["hora"] = hora_heredada
+                        if guardar_itinerario_disco(st.session_state.lugares):
+                            st.toast(f"¡'{elegido['nombre']}' ahora está en el Día {num_dia_c}!", icon="✨")
+                            st.rerun()
+                        else:
+                            st.session_state.lugares[idx_ext] = anterior_ext
+                            st.session_state.lugares[idx_ind] = anterior_ind
+                            st.error("No se pudo guardar el cambio. Se han restaurado los datos anteriores.")
 
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -4542,7 +4754,7 @@ if seccion_principal == "💸Divisas":
         st.markdown("#### 🧾 Calculadora de Cuenta, Tax & Tips")
 
         subtotal_bill = st.number_input("Subtotal de la cuenta ($ USD):", min_value=0.0, value=65.0, step=5.0)
-        es_ropa_exenta = st.checkbox("👕 Prenda de ropa/calzado < $110 (Exenta de Tax en NYC)")
+        es_ropa_exenta = st.checkbox("👕 Todo el subtotal son prendas/calzado elegibles de menos de $110 por artículo (sin Tax)")
 
         col_t1, col_t2 = st.columns(2)
         with col_t1:
@@ -4651,11 +4863,15 @@ if seccion_principal == "✈️Info":
                 vta_h = st.text_input("Hora Regreso:", value=v_vta.get("hora", "20:45"))
                 vta_a = st.text_input("Aeropuerto Regreso:", value=v_vta.get("aeropuerto", "JFK / Nueva York"))
                 if st.form_submit_button("💾 Guardar Vuelos"):
+                    config_anterior = copy.deepcopy(st.session_state.config_viaje)
                     st.session_state.config_viaje["vuelo_ida"] = {"vuelo": ida_v, "fecha": ida_f, "hora": ida_h, "aeropuerto": ida_a}
                     st.session_state.config_viaje["vuelo_vuelta"] = {"vuelo": vta_v, "fecha": vta_f, "hora": vta_h, "aeropuerto": vta_a}
-                    guardar_config_viaje(st.session_state.config_viaje)
-                    st.toast("Datos de vuelos actualizados.", icon="✈️")
-                    st.rerun()
+                    if guardar_config_viaje(st.session_state.config_viaje):
+                        st.toast("Datos de vuelos actualizados.", icon="✈️")
+                        st.rerun()
+                    else:
+                        st.session_state.config_viaje = config_anterior
+                        st.error("No se pudieron guardar los vuelos. Se han restaurado los datos anteriores.")
 
     with c_vl2:
         st.markdown('<div class="ny-card-header">🏨 Hotel</div>', unsafe_allow_html=True)
@@ -4670,8 +4886,8 @@ if seccion_principal == "✈️Info":
 
         st.markdown(f"""
         <div class="ny-card" style="border-left: 5px solid #15803D; margin-bottom:10px;">
-          <div style="font-weight:900; font-size:1.05rem; color:#0F172A; margin-bottom:4px;">🏨 {hotel_nom_act}</div>
-          <div style="font-size:0.88rem; color:#0F172A; margin-bottom:4px;">📍 {hotel_dir_act}</div>
+          <div style="font-weight:900; font-size:1.05rem; color:#0F172A; margin-bottom:4px;">🏨 {html.escape(str(hotel_nom_act))}</div>
+          <div style="font-size:0.88rem; color:#0F172A; margin-bottom:4px;">📍 {html.escape(str(hotel_dir_act))}</div>
           <div style="font-size:0.78rem; color:#334155;">Coordenadas: {hotel_lat_act:.6f}, {hotel_lon_act:.6f}</div>
         </div>
         """, unsafe_allow_html=True)
@@ -4690,10 +4906,17 @@ if seccion_principal == "✈️Info":
                 h_lt = st.number_input("Latitud:", value=float(hotel_lat_act), format="%.6f")
                 h_ln = st.number_input("Longitud:", value=float(hotel_lon_act), format="%.6f")
                 if st.form_submit_button("💾 Guardar Hotel"):
-                    st.session_state.config_viaje["hotel"] = {"nombre": h_n, "direccion": h_d, "lat": h_lt, "lon": h_ln}
-                    guardar_config_viaje(st.session_state.config_viaje)
-                    st.toast("Hotel base actualizado.", icon="🏨")
-                    st.rerun()
+                    if not (-90 <= float(h_lt) <= 90 and -180 <= float(h_ln) <= 180):
+                        st.error("Las coordenadas del hotel no son válidas.")
+                    else:
+                        config_anterior = copy.deepcopy(st.session_state.config_viaje)
+                        st.session_state.config_viaje["hotel"] = {"nombre": h_n.strip(), "direccion": h_d.strip(), "lat": h_lt, "lon": h_ln}
+                        if guardar_config_viaje(st.session_state.config_viaje):
+                            st.toast("Hotel base actualizado.", icon="🏨")
+                            st.rerun()
+                        else:
+                            st.session_state.config_viaje = config_anterior
+                            st.error("No se pudo guardar el hotel. Se han restaurado los datos anteriores.")
 
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -4750,8 +4973,8 @@ if seccion_principal == "🗒️Listas":
                     partes_url = urllib.parse.urlparse(url_limpia)
                     if not nombre_limpio:
                         st.error("El nombre de la lista no puede estar vacío.")
-                    elif partes_url.scheme not in ("http", "https") or not partes_url.netloc:
-                        st.error("Introduce una URL completa que empiece por https:// o http://.")
+                    elif not _validar_url_google_maps(url_limpia):
+                        st.error("Introduce un enlace válido de un dominio oficial de Google Maps.")
                     else:
                         listas_actualizadas = list(st.session_state.config_viaje.get("listas_gmaps", []))
                         if idx_lst < len(listas_actualizadas):
@@ -4774,8 +4997,8 @@ if seccion_principal == "🗒️Listas":
                 partes_url = urllib.parse.urlparse(url_nueva)
                 if not n_nombre_l.strip():
                     st.error("Introduce un nombre para la lista.")
-                elif partes_url.scheme not in ("http", "https") or not partes_url.netloc:
-                    st.error("Introduce una URL completa que empiece por https:// o http://.")
+                elif not _validar_url_google_maps(url_nueva):
+                    st.error("Introduce un enlace válido de un dominio oficial de Google Maps.")
                 else:
                     listas_actualizadas = list(st.session_state.config_viaje.get("listas_gmaps", []))
                     listas_actualizadas.append({"nombre": n_nombre_l.strip(), "url": url_nueva})
