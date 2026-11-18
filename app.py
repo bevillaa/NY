@@ -4088,7 +4088,7 @@ if seccion_principal == "☑️Checklist":
     with st.container(border=True):
         st.markdown("**➕ Añadir algo pendiente**")
         nuevo_pendiente = st.text_input(
-            "¿Qué te falta?",
+            "¿Qué falta?",
             placeholder="Ej: Comprar entradas para el mirador, visitar Central Park...",
             key="checklist_nuevo_texto"
         )
@@ -4096,7 +4096,7 @@ if seccion_principal == "☑️Checklist":
         with col_tipo:
             tipo_pendiente = st.selectbox(
                 "Tipo",
-                ["Hacer", "Ver / Visitar", "Comprar", "Revisar", "Reservar", "Otro"],
+                ["Hacer", "Comprar", "Revisar", "Reservar", "Otro"],
                 key="checklist_nuevo_tipo"
             )
         with col_detalle:
@@ -4185,10 +4185,9 @@ if seccion_principal == "☑️Checklist":
                     flex-direction: row !important;
                     flex-wrap: nowrap !important;
                     align-items: center !important;
+                    justify-content: flex-start !important;
                     gap: 0.15rem !important;
                     width: 100% !important;
-                    align-items: center !important;
-                    gap: 0.15rem !important;
                 }
 
                 [class*="st-key-checklist_item_"] [data-testid="stHorizontalBlock"]:has(> [data-testid="column"]:nth-child(4)) > [data-testid="column"] {
@@ -4209,19 +4208,26 @@ if seccion_principal == "☑️Checklist":
 
                 [class*="st-key-checklist_item_"] [data-testid="stHorizontalBlock"]:has(> [data-testid="column"]:nth-child(4)) > [data-testid="column"]:nth-child(3),
                 [class*="st-key-checklist_item_"] [data-testid="stHorizontalBlock"]:has(> [data-testid="column"]:nth-child(4)) > [data-testid="column"]:nth-child(4) {
-                    flex: 0 0 1.15rem !important;
-                    width: 1.15rem !important;
+                    display: flex !important;
+                    flex: 0 0 20px !important;
+                    width: 20px !important;
+                    min-width: 20px !important;
+                    max-width: 20px !important;
+                    justify-content: flex-end !important;
+                    align-items: center !important;
                 }
 
-                [class*="st-key-checklist_item_"] [data-testid="stHorizontalBlock"]:has(> [data-testid="column"]:nth-child(4)) button {
-                    width: 0.9rem !important;
-                    min-width: 0.9rem !important;
-                    max-width: 0.9rem !important;
-                    height: 0.9rem !important;
-                    min-height: 0.9rem !important;
+                [class*="st-key-checklist_item_"] [data-testid="stHorizontalBlock"]:has(> [data-testid="column"]:nth-child(4)) > [data-testid="column"]:nth-child(3) button,
+                [class*="st-key-checklist_item_"] [data-testid="stHorizontalBlock"]:has(> [data-testid="column"]:nth-child(4)) > [data-testid="column"]:nth-child(4) button {
+                    width: 12px !important;
+                    min-width: 12px !important;
+                    max-width: 12px !important;
+                    height: 12px !important;
+                    min-height: 12px !important;
+                    max-height: 12px !important;
                     padding: 0 !important;
-                    margin: 0 auto !important;
-                    font-size: 0.45rem !important;
+                    margin: 0 0 0 auto !important;
+                    font-size: 12px !important;
                     line-height: 1 !important;
                 }
             }
