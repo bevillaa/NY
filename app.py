@@ -1581,15 +1581,19 @@ st.markdown("""
     background: #FFFFFF !important;
     box-shadow: none !important;
   }
-  [class*="st-key-it-visit-checkbox-wrap-"] [data-testid="stCheckbox"] label > div:first-of-type {
+  [class*="st-key-it-visit-checkbox-wrap-"] [data-testid="stCheckbox"] label > div:first-child,
+  [class*="st-key-it-visit-checkbox-wrap-"] [data-testid="stCheckbox"] [role="checkbox"] {
+    box-sizing: border-box !important;
     display: flex !important;
     width: 18px !important;
     min-width: 18px !important;
+    max-width: 18px !important;
     height: 18px !important;
     min-height: 18px !important;
+    max-height: 18px !important;
     align-items: center !important;
     justify-content: center !important;
-    margin: 0 !important;
+    margin: 0 auto !important;
     padding: 0 !important;
   }
   [class*="st-key-it-visit-checkbox-wrap-"] [data-testid="stCheckbox"] input[type="checkbox"] {
@@ -1609,7 +1613,7 @@ st.markdown("""
   }
   [class*="st-key-saved-controls-row-"] [data-testid="stHorizontalBlock"] {
     display: grid !important;
-    grid-template-columns: 48px 58px !important;
+    grid-template-columns: 78px 96px !important;
     align-items: center !important;
     justify-content: start !important;
     column-gap: 4px !important;
@@ -1630,12 +1634,12 @@ st.markdown("""
   [class*="st-key-saved-controls-row-"] [data-testid="column"]:first-child [data-baseweb="input"],
   [class*="st-key-saved-controls-row-"] [data-testid="column"]:first-child [data-baseweb="base-input"] {
     box-sizing: border-box !important;
-    width: 48px !important;
-    min-width: 48px !important;
-    max-width: 48px !important;
-    height: 23px !important;
-    min-height: 23px !important;
-    max-height: 23px !important;
+    width: 78px !important;
+    min-width: 78px !important;
+    max-width: 78px !important;
+    height: 32px !important;
+    min-height: 32px !important;
+    max-height: 32px !important;
     margin: 0 !important;
     padding: 0 !important;
   }
@@ -1643,10 +1647,10 @@ st.markdown("""
     box-sizing: border-box !important;
     width: 100% !important;
     min-width: 0 !important;
-    height: 21px !important;
-    min-height: 21px !important;
-    padding: 0 2px !important;
-    font-size: 0.63rem !important;
+    height: 30px !important;
+    min-height: 30px !important;
+    padding: 0 4px !important;
+    font-size: 0.76rem !important;
     line-height: 1.05 !important;
     text-align: center !important;
   }
@@ -1655,73 +1659,23 @@ st.markdown("""
   [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(2) [data-baseweb="select"],
   [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(2) [data-baseweb="select"] > div {
     box-sizing: border-box !important;
-    width: 58px !important;
-    min-width: 58px !important;
-    max-width: 58px !important;
-    height: 23px !important;
-    min-height: 23px !important;
-    max-height: 23px !important;
+    width: 96px !important;
+    min-width: 96px !important;
+    max-width: 96px !important;
+    height: 32px !important;
+    min-height: 32px !important;
+    max-height: 32px !important;
     margin: 0 !important;
-    font-size: 0.63rem !important;
+    font-size: 0.76rem !important;
   }
   [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(2) [data-baseweb="select"] * {
-    font-size: 0.63rem !important;
+    font-size: 0.76rem !important;
     line-height: 1.05 !important;
   }
 
-  /* En móvil se conserva la misma estructura de columnas; solo se compactan
-     hora y acciones. Estas reglas prevalecen sobre el apilado general móvil. */
+  /* En móvil se mantiene la misma cuadrícula y el mismo tamaño de acciones.
+     Solo se ajusta la tipografía; no se reducen las columnas ni los controles. */
   @media (max-width: 768px) {
-    [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] {
-      display: grid !important;
-      grid-template-columns: 58px minmax(0, 1fr) 26px 26px 26px !important;
-      align-items: center !important;
-      column-gap: 2px !important;
-      row-gap: 0 !important;
-      width: 100% !important;
-    }
-    [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"] {
-      flex: none !important;
-      min-width: 0 !important;
-      margin: 0 !important;
-      padding: 0 !important;
-    }
-    [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:first-child {
-      width: 58px !important;
-      max-width: 58px !important;
-    }
-    [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(2) {
-      width: 100% !important;
-      max-width: none !important;
-      min-width: 0 !important;
-    }
-    [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(n+3) {
-      width: 26px !important;
-      min-width: 26px !important;
-      max-width: 26px !important;
-      height: 26px !important;
-      min-height: 26px !important;
-      max-height: 26px !important;
-    }
-    [class*="st-key-it-edit-button-wrap-"],
-    [class*="st-key-it-map-button-wrap-"],
-    [class*="st-key-it-visit-checkbox-wrap-"],
-    [class*="st-key-it-edit-button-wrap-"] button,
-    [class*="st-key-it-map-button-wrap-"] a,
-    [class*="st-key-it-visit-checkbox-wrap-"] [data-testid="stCheckbox"],
-    [class*="st-key-it-visit-checkbox-wrap-"] [data-testid="stCheckbox"] > label {
-      width: 26px !important;
-      min-width: 26px !important;
-      max-width: 26px !important;
-      height: 26px !important;
-      min-height: 26px !important;
-      max-height: 26px !important;
-    }
-    [class*="st-key-it-heading-row-"] [data-testid="column"]:first-child input {
-      font-size: 0.68rem !important;
-      padding-left: 2px !important;
-      padding-right: 2px !important;
-    }
     [class*="st-key-it-heading-row-"] .place-list-title {
       font-size: calc(1.25rem - 2pt) !important;
     }
@@ -1730,57 +1684,8 @@ st.markdown("""
       font-size: 0.68rem !important;
       line-height: 1.25 !important;
     }
-
-    [class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"] {
-      display: grid !important;
-      grid-template-columns: minmax(0, 1fr) 30px 30px !important;
-      align-items: center !important;
-      column-gap: 2px !important;
-      row-gap: 0 !important;
-      width: 100% !important;
-    }
-    [class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"] {
-      flex: none !important;
-      min-width: 0 !important;
-      margin: 0 !important;
-      padding: 0 !important;
-    }
-    [class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:first-child {
-      width: 100% !important;
-      max-width: none !important;
-    }
-    [class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(n+2) {
-      width: 30px !important;
-      min-width: 30px !important;
-      max-width: 30px !important;
-    }
   }
 
-  @media (max-width: 380px) {
-    [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] {
-      grid-template-columns: 52px minmax(0, 1fr) 25px 25px 25px !important;
-      column-gap: 1px !important;
-    }
-    [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:first-child {
-      width: 52px !important;
-      max-width: 52px !important;
-    }
-    [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(n+3),
-    [class*="st-key-it-edit-button-wrap-"],
-    [class*="st-key-it-map-button-wrap-"],
-    [class*="st-key-it-visit-checkbox-wrap-"],
-    [class*="st-key-it-edit-button-wrap-"] button,
-    [class*="st-key-it-map-button-wrap-"] a,
-    [class*="st-key-it-visit-checkbox-wrap-"] [data-testid="stCheckbox"],
-    [class*="st-key-it-visit-checkbox-wrap-"] [data-testid="stCheckbox"] > label {
-      width: 25px !important;
-      min-width: 25px !important;
-      max-width: 25px !important;
-      height: 25px !important;
-      min-height: 25px !important;
-      max-height: 25px !important;
-    }
-  }
 </style>
 """, unsafe_allow_html=True)
 
