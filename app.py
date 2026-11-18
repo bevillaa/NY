@@ -1493,7 +1493,7 @@ st.markdown("""
     border: 0 !important;
     background: transparent !important;
     line-height: 0 !important;
-    transform: translateY(-4px) !important;
+    transform: translateY(-3px) !important;
   }
 
   [class*="st-key-it-visit-checkbox-wrap-"] [data-testid="stCheckbox"] label > div:first-of-type {
@@ -1561,9 +1561,10 @@ st.markdown("""
     margin: 0 !important;
   }
 
+  /* Altura real de los controles Hora/Día: reducir el control completo,
+     no solo el texto. Se dimensiona una única capa visual por widget. */
   [class*="st-key-saved-controls-row-"] [data-testid="stColumn"] [data-baseweb="input"],
-  [class*="st-key-saved-controls-row-"] [data-testid="stColumn"] [data-baseweb="select"],
-  [class*="st-key-saved-controls-row-"] [data-testid="stColumn"] [data-baseweb="select"] > div {
+  [class*="st-key-saved-controls-row-"] [data-testid="stColumn"] [data-baseweb="select"] {
     box-sizing: border-box !important;
     width: 100% !important;
     min-width: 0 !important;
@@ -1572,9 +1573,11 @@ st.markdown("""
     min-height: 17px !important;
     max-height: 17px !important;
     margin: 0 !important;
+    padding: 0 !important;
+    overflow: hidden !important;
   }
 
-  [class*="st-key-saved-controls-row-"] [data-testid="stColumn"] input,
+  [class*="st-key-saved-controls-row-"] [data-testid="stColumn"] [data-baseweb="input"] input,
   [class*="st-key-saved-controls-row-"] [data-testid="stColumn"] [data-baseweb="select"] [role="combobox"] {
     box-sizing: border-box !important;
     display: block !important;
@@ -1587,16 +1590,16 @@ st.markdown("""
     padding: 0 4px !important;
     font-size: 0.7rem !important;
     font-weight: 600 !important;
-    line-height: 1 !important;
+    line-height: 15px !important;
     text-align: center !important;
     border: 0 !important;
     box-shadow: none !important;
   }
 
-  [class*="st-key-saved-controls-row-"] [data-baseweb="input"] > div,
-  [class*="st-key-saved-controls-row-"] [data-baseweb="select"] > div,
-  [class*="st-key-saved-controls-row-"] [data-baseweb="select"] > div:focus-within,
-  [class*="st-key-saved-controls-row-"] [data-baseweb="input"] > div:focus-within {
+  /* El borde pertenece a la superficie externa de cada widget; no se crea
+     un segundo borde en una capa interior, evitando botones duplicados. */
+  [class*="st-key-saved-controls-row-"] [data-baseweb="input"],
+  [class*="st-key-saved-controls-row-"] [data-baseweb="select"] {
     border: 1px solid #94A3B8 !important;
     border-radius: 7px !important;
     box-shadow: none !important;
