@@ -455,93 +455,6 @@ st.markdown("""
     }
   }
 
-  /* Botón pequeño de edición ✏️ junto al nombre */
-  .edit-mini-btn {
-    display: flex !important;
-    justify-content: flex-end !important;
-  }
-  .edit-mini-btn button {
-    min-height: 30px !important;
-    height: 30px !important;
-    width: 30px !important;
-    min-width: 30px !important;
-    max-width: 30px !important;
-    padding: 0 !important;
-    font-size: 1.18rem !important;
-    line-height: 1.1 !important;
-    font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif !important;
-    border-radius: 7px !important;
-    border: 1px solid #CBD5E1 !important;
-    background: #F8FAFC !important;
-    color: #334155 !important;
-    display: inline-flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    margin: 0 !important;
-  }
-  .edit-mini-btn button:hover {
-    background: #E2E8F0 !important;
-    border-color: #64748B !important;
-  }
-
-  /* Input de hora compacto y cuadrado (web y móvil) */
-  [data-testid="column"]:has(.compact-hora) [data-testid="stTextInput"] {
-    max-width: 88px !important;
-    width: 100% !important;
-    margin: 0 !important;
-  }
-  [data-testid="column"]:has(.compact-hora) [data-baseweb="input"],
-  [data-testid="column"]:has(.compact-hora) [data-baseweb="base-input"] {
-    height: 30px !important;
-    min-height: 30px !important;
-    max-height: 30px !important;
-    border-radius: 8px !important;
-    border: 1px dashed #94A3B8 !important;
-    background: #F8FAFC !important;
-    padding: 0 !important;
-  }
-  [data-testid="column"]:has(.compact-hora) input {
-    height: 28px !important;
-    min-height: 28px !important;
-    max-height: 28px !important;
-    padding: 0 4px !important;
-    font-size: 0.77rem !important;
-    font-weight: 700 !important;
-    color: #1E293B !important;
-    text-align: center !important;
-    background: transparent !important;
-    border: none !important;
-  }
-  [data-testid="column"]:has(.compact-hora) [data-baseweb="input"]:focus-within {
-    background: #FFFFFF !important;
-    border: 1.5px solid #2563EB !important;
-  }
-
-  /* Controles compactos: el marcador identifica la columna del widget. */
-  [data-testid="column"]:has(.compact-dia) [data-baseweb="select"] > div {
-    min-height: 30px !important;
-    height: 30px !important;
-    max-height: 30px !important;
-    border-radius: 8px !important;
-    padding-top: 0 !important;
-    padding-bottom: 0 !important;
-    font-size: 0.78rem !important;
-  }
-  [data-testid="column"]:has(.compact-dia) [data-baseweb="select"] span,
-  [data-testid="column"]:has(.compact-dia) [data-baseweb="select"] div {
-    font-size: 0.78rem !important;
-    line-height: 1.1 !important;
-  }
-  [data-testid="column"]:has(.compact-maps) [data-testid="stLinkButton"] > a,
-  [data-testid="column"]:has(.compact-maps) .stButton > button {
-    min-height: 30px !important;
-    height: 30px !important;
-    max-height: 30px !important;
-    font-size: 0.77rem !important;
-    padding: 0 0.45rem !important;
-    border-radius: 8px !important;
-  }
-
   iframe {
     border-radius: 16px !important;
     border: 1.5px solid #CBD5E1 !important;
@@ -626,105 +539,6 @@ st.markdown("""
       max-width: 100% !important;
       margin: 0 !important;
       padding: 0 !important;
-    }
-    /* Filas de nombre dentro de contenedores con identidad CSS propia. */
-    .edit-mini-btn { display: flex !important; justify-content: flex-end !important; width: 100% !important; }
-    .edit-mini-btn button,
-    [data-testid="column"]:has(.edit-mini-btn) .stButton > button {
-      display: inline-flex !important;
-      align-items: center !important;
-      justify-content: center !important;
-    }
-/* Marcadores HTML sin altura; solo sirven para identificar cada columna. */
-    .mobile-control-marker { display: block !important; width: 0 !important; height: 0 !important; margin: 0 !important; padding: 0 !important; line-height: 0 !important; overflow: hidden !important; }
-    [data-testid="stElementContainer"]:has(.mobile-control-marker) {
-      height: 0 !important;
-      min-height: 0 !important;
-      margin: 0 !important;
-      padding: 0 !important;
-      overflow: hidden !important;
-    }
-    /* Anchos compactos de los widgets de hora, día y mapa. */
-    [data-testid="column"]:has(.compact-hora) [data-testid="stTextInput"],
-    [data-testid="column"]:has(.compact-hora) [data-baseweb="input"],
-    [data-testid="column"]:has(.compact-hora) [data-baseweb="base-input"],
-    [data-testid="column"]:has(.compact-maps) [data-testid="stLinkButton"] {
-      width: 100% !important;
-      max-width: 100% !important;
-      min-width: 0 !important;
-      margin: 0 !important;
-      transform: none !important;
-    }
-    [data-testid="column"]:has(.compact-dia) [data-testid="stSelectbox"],
-    [data-testid="column"]:has(.compact-dia) [data-baseweb="select"] {
-      width: max-content !important;
-      min-width: 96px !important;
-      max-width: 100% !important;
-      margin: 0 !important;
-      transform: none !important;
-    }
-    [data-testid="column"]:has(.compact-hora) [data-baseweb="input"],
-    [data-testid="column"]:has(.compact-hora) [data-baseweb="base-input"],
-    [data-testid="column"]:has(.compact-dia) [data-baseweb="select"] > div,
-    [data-testid="column"]:has(.compact-maps) [data-testid="stLinkButton"] > a {
-      min-height: 34px !important;
-      height: 34px !important;
-      max-height: 34px !important;
-      border-radius: 8px !important;
-    }
-    [data-testid="column"]:has(.compact-hora) input {
-      min-width: 0 !important;
-      width: 100% !important;
-      height: 32px !important;
-      min-height: 32px !important;
-      padding: 0 4px !important;
-      font-size: 0.78rem !important;
-      letter-spacing: 0 !important;
-      text-align: center !important;
-      font-variant-numeric: tabular-nums !important;
-    }
-    [data-testid="column"]:has(.compact-dia) [data-baseweb="select"] span,
-    [data-testid="column"]:has(.compact-dia) [data-baseweb="select"] div {
-      font-size: 0.72rem !important;
-      line-height: 1.1 !important;
-    }
-    [data-testid="column"]:has(.compact-dia) [data-baseweb="select"] > div {
-      padding-left: 6px !important;
-      padding-right: 18px !important;
-      width: max-content !important;
-      min-width: 96px !important;
-      max-width: 100% !important;
-    }
-    [data-testid="column"]:has(.compact-dia) [data-baseweb="select"] input { caret-color: transparent !important; }
-    [data-testid="column"]:has(.compact-maps) [data-testid="stLinkButton"] > a {
-      display: flex !important;
-      align-items: center !important;
-      justify-content: center !important;
-      width: 40px !important;
-      min-width: 40px !important;
-      max-width: 40px !important;
-      padding: 0 !important;
-      font-size: 1rem !important;
-      line-height: 1 !important;
-      white-space: nowrap !important;
-      overflow: visible !important;
-      text-overflow: clip !important;
-      font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif !important;
-    }
-    /* Botón lápiz: suficiente área táctil y glifo siempre visible. */
-    .edit-mini-btn button,
-    [data-testid="column"]:has(.edit-mini-btn) .stButton > button {
-      width: 34px !important;
-      min-width: 34px !important;
-      max-width: 34px !important;
-      height: 30px !important;
-      min-height: 30px !important;
-      max-height: 34px !important;
-      padding: 0 !important;
-      font-size: 1.05rem !important;
-      line-height: 1.1 !important;
-      overflow: visible !important;
-      font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif !important;
     }
     /* Acciones de seguimiento de vuelos y listas Google: dos botones alineados. */
     [class*="st-key-flight-links-"] [data-testid="stHorizontalBlock"],
@@ -965,24 +779,6 @@ st.markdown("""
       min-height: 2rem !important;
       padding-bottom: env(safe-area-inset-bottom) !important;
     }
-  }
-/* El lápiz del itinerario conserva todo su contorno y no recorta la punta. */
-  [class*="st-key-it-edit-btn-"] [data-testid="stButton"] > button {
-    width: 44px !important;
-    min-width: 44px !important;
-    max-width: 44px !important;
-    height: 41px !important;
-    min-height: 41px !important;
-    max-height: 41px !important;
-    padding: 0 2px !important;
-    overflow: visible !important;
-    text-overflow: clip !important;
-    line-height: 1.25 !important;
-    font-size: 1.24rem !important;
-  }
-  [class*="st-key-it-edit-btn-"] [data-testid="stButton"] {
-    overflow: visible !important;
-    min-width: 44px !important;
   }
   /* Corrección adicional: Streamlit puede reservar espacio aunque su toolbar esté oculta. */
   [data-testid="stHeader"],
@@ -1314,119 +1110,95 @@ st.markdown("""
     .place-full-width-info .place-note { width: 100% !important; max-width: 100% !important; }
   }
   /* ================================================================
-     CONTROLES DE LUGARES — REGLAS ÚNICAS PARA WEB Y MÓVIL
-     Ruta: hora | información | editar | mapa | visitado
-     Guardados: información | editar | mapa; hora y día debajo
+     CONTROLES DE LUGARES — DISTRIBUCIÓN ÚNICA WEB / MÓVIL
+     Streamlit implementa st.columns con FLEX; mantenemos flex y fijamos
+     solo las bases de las columnas para evitar conflictos con sus anchos.
      ================================================================ */
 
-  /* Ruta y Guardados comparten la misma caja de acciones: 30 × 30 px. */
+  /* RUTA: hora | información flexible | editar | mapa | visitado. */
   [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] {
-    display: grid !important;
-    grid-template-columns: 68px minmax(0, 1fr) 30px 30px 30px !important;
+    display: flex !important;
+    flex-flow: row nowrap !important;
     align-items: center !important;
-    column-gap: 1px !important;
-    row-gap: 0 !important;
+    justify-content: flex-start !important;
+    gap: 1px !important;
     width: 100% !important;
     min-width: 0 !important;
     max-width: 100% !important;
     overflow: visible !important;
   }
-  [class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"] {
-    display: grid !important;
-    grid-template-columns: minmax(0, 1fr) 30px 30px !important;
-    align-items: center !important;
-    column-gap: 1px !important;
-    row-gap: 0 !important;
-    width: 100% !important;
-    min-width: 0 !important;
-    max-width: 100% !important;
-    overflow: visible !important;
-  }
-  [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"],
-  [class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"] {
+  [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"] {
     box-sizing: border-box !important;
     display: flex !important;
-    flex: none !important;
+    align-items: center !important;
+    justify-content: center !important;
+    flex-shrink: 0 !important;
     min-width: 0 !important;
-    max-width: 100% !important;
     margin: 0 !important;
     padding: 0 !important;
-    align-items: center !important;
     overflow: visible !important;
   }
-
-  /* Ruta: 4 px exactos entre hora e información; 1 px entre acciones. */
   [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(1) {
-    grid-column: 1 !important;
-    width: 68px !important;
-    min-width: 68px !important;
-    max-width: 68px !important;
+    flex: 0 0 74px !important;
+    width: 74px !important;
+    min-width: 74px !important;
+    max-width: 74px !important;
   }
   [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(2) {
-    grid-column: 2 !important;
     display: block !important;
-    width: 100% !important;
+    flex: 1 1 0% !important;
+    width: 0 !important;
     min-width: 0 !important;
     max-width: none !important;
-    justify-self: stretch !important;
     padding-left: 3px !important;
+    overflow: hidden !important;
   }
-  [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(n+3),
-  [class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(n+2) {
+  [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(n+3) {
+    flex: 0 0 30px !important;
     width: 30px !important;
     min-width: 30px !important;
     max-width: 30px !important;
     height: 30px !important;
     min-height: 30px !important;
     max-height: 30px !important;
-    justify-content: center !important;
-    justify-self: center !important;
-  }
-  [class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:first-child {
-    display: block !important;
-    width: 100% !important;
-    min-width: 0 !important;
-    max-width: none !important;
   }
 
-  /* El campo de hora ocupa toda su columna sin reducirse en móvil. */
-  [class*="st-key-it-heading-row-"] [data-testid="column"]:first-child [data-testid="stTextInput"],
-  [class*="st-key-it-heading-row-"] [data-testid="column"]:first-child [data-baseweb="input"],
-  [class*="st-key-it-heading-row-"] [data-testid="column"]:first-child [data-baseweb="base-input"] {
+  /* Hora en Ruta: caja real de 74 × 34, no solo ancho del input interior. */
+  [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(1) [data-testid="stTextInput"],
+  [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(1) [data-baseweb="input"],
+  [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(1) [data-baseweb="base-input"] {
     box-sizing: border-box !important;
     width: 100% !important;
     min-width: 0 !important;
     max-width: 100% !important;
+    height: 34px !important;
+    min-height: 34px !important;
+    max-height: 34px !important;
     margin: 0 !important;
+    padding: 0 !important;
   }
-  [class*="st-key-it-heading-row-"] [data-testid="column"]:first-child [data-baseweb="input"],
-  [class*="st-key-it-heading-row-"] [data-testid="column"]:first-child [data-baseweb="base-input"] {
-    height: 30px !important;
-    min-height: 30px !important;
-    max-height: 30px !important;
-    padding: 0 2px !important;
-  }
-  [class*="st-key-it-heading-row-"] [data-testid="column"]:first-child input {
+  [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(1) input {
     box-sizing: border-box !important;
     width: 100% !important;
     min-width: 0 !important;
-    height: 28px !important;
-    min-height: 28px !important;
-    padding: 0 2px !important;
-    font-size: 0.72rem !important;
+    height: 32px !important;
+    min-height: 32px !important;
+    padding: 0 3px !important;
+    font-size: 0.78rem !important;
+    line-height: 1 !important;
     text-align: center !important;
     font-variant-numeric: tabular-nums !important;
   }
 
-  /* La información central puede encogerse y envolver el texto. */
+  /* Información: ocupa todo el ancho restante y puede partir textos largos. */
   [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stMarkdown"],
   [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stMarkdown"] > div,
   [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stElementContainer"],
   [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2) .place-list-title,
   [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2) .place-list-address,
   [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2) .place-note {
-    display: block !important;
     box-sizing: border-box !important;
+    display: block !important;
     width: 100% !important;
     min-width: 0 !important;
     max-width: 100% !important;
@@ -1444,7 +1216,47 @@ st.markdown("""
     transform: none !important;
   }
 
-  /* Botones editar/mapa y casilla visitado: misma caja y mismo centro. */
+  /* Guardados: información flexible seguida de dos acciones de 30 px. */
+  [class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"] {
+    display: flex !important;
+    flex-flow: row nowrap !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    gap: 1px !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    overflow: visible !important;
+  }
+  [class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"] {
+    box-sizing: border-box !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    flex-shrink: 0 !important;
+    min-width: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: visible !important;
+  }
+  [class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:first-child {
+    display: block !important;
+    flex: 1 1 0% !important;
+    width: 0 !important;
+    min-width: 0 !important;
+    max-width: none !important;
+  }
+  [class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(n+2) {
+    flex: 0 0 30px !important;
+    width: 30px !important;
+    min-width: 30px !important;
+    max-width: 30px !important;
+    height: 30px !important;
+    min-height: 30px !important;
+    max-height: 30px !important;
+  }
+
+  /* Las tres acciones usan el mismo contenedor y la misma caja física. */
   [class*="st-key-it-edit-button-wrap-"],
   [class*="st-key-it-map-button-wrap-"],
   [class*="st-key-it-visit-checkbox-wrap-"],
@@ -1452,7 +1264,7 @@ st.markdown("""
   [class*="st-key-saved-map-button-wrap-"] {
     box-sizing: border-box !important;
     display: flex !important;
-    flex: none !important;
+    flex: 0 0 30px !important;
     width: 30px !important;
     min-width: 30px !important;
     max-width: 30px !important;
@@ -1476,8 +1288,9 @@ st.markdown("""
   [class*="st-key-it-map-button-wrap-"] [data-testid="stLinkButton"],
   [class*="st-key-saved-map-button-wrap-"] [data-testid="stLinkButton"],
   [class*="st-key-it-visit-checkbox-wrap-"] [data-testid="stCheckbox"] {
+    box-sizing: border-box !important;
     display: flex !important;
-    flex: none !important;
+    flex: 0 0 30px !important;
     width: 30px !important;
     min-width: 30px !important;
     max-width: 30px !important;
@@ -1488,16 +1301,15 @@ st.markdown("""
     justify-content: center !important;
     margin: 0 !important;
     padding: 0 !important;
+    overflow: visible !important;
   }
   [class*="st-key-it-edit-button-wrap-"] button,
   [class*="st-key-saved-edit-button-wrap-"] button,
   [class*="st-key-it-map-button-wrap-"] a,
   [class*="st-key-saved-map-button-wrap-"] a {
-    appearance: none !important;
-    -webkit-appearance: none !important;
     box-sizing: border-box !important;
     display: inline-flex !important;
-    flex: none !important;
+    flex: 0 0 30px !important;
     width: 30px !important;
     min-width: 30px !important;
     max-width: 30px !important;
@@ -1508,29 +1320,25 @@ st.markdown("""
     justify-content: center !important;
     margin: 0 !important;
     padding: 0 !important;
-    border: 1px solid #CBD5E1 !important;
-    border-radius: 9px !important;
-    background-color: #FFFFFF !important;
-    background-repeat: no-repeat !important;
-    background-position: center !important;
-    background-size: 19px 19px !important;
-    box-shadow: none !important;
-    outline: none !important;
-    color: transparent !important;
-    -webkit-text-fill-color: transparent !important;
+    border-radius: 8px !important;
     font-size: 0 !important;
     line-height: 0 !important;
-    text-decoration: none !important;
     overflow: hidden !important;
     transform: none !important;
   }
   [class*="st-key-it-edit-button-wrap-"] button,
   [class*="st-key-saved-edit-button-wrap-"] button {
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23334155' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m16 4 4 4'/%3E%3Cpath d='M4 20l4-.9L19 8a2.1 2.1 0 0 0-3-3L5 16z'/%3E%3C/svg%3E") !important;
+    background-repeat: no-repeat !important;
+    background-position: center !important;
+    background-size: 18px 18px !important;
   }
   [class*="st-key-it-map-button-wrap-"] a,
   [class*="st-key-saved-map-button-wrap-"] a {
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23334155' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m3 6 6-3 6 3 6-3v15l-6 3-6-3-6 3z'/%3E%3Cpath d='M9 3v15M15 6v15'/%3E%3C/svg%3E") !important;
+    background-repeat: no-repeat !important;
+    background-position: center !important;
+    background-size: 18px 18px !important;
   }
   [class*="st-key-it-edit-button-wrap-"] button > *,
   [class*="st-key-saved-edit-button-wrap-"] button > *,
@@ -1538,24 +1346,10 @@ st.markdown("""
   [class*="st-key-saved-map-button-wrap-"] a > * {
     display: none !important;
   }
-  [class*="st-key-it-edit-button-wrap-"] button:hover,
-  [class*="st-key-saved-edit-button-wrap-"] button:hover,
-  [class*="st-key-it-map-button-wrap-"] a:hover,
-  [class*="st-key-saved-map-button-wrap-"] a:hover,
-  [class*="st-key-it-edit-button-wrap-"] button:focus,
-  [class*="st-key-saved-edit-button-wrap-"] button:focus,
-  [class*="st-key-it-map-button-wrap-"] a:focus,
-  [class*="st-key-saved-map-button-wrap-"] a:focus {
-    border-color: #CBD5E1 !important;
-    background-color: #F8FAFC !important;
-    outline: none !important;
-    box-shadow: none !important;
-  }
-
-  [class*="st-key-it-visit-checkbox-wrap-"] [data-testid="stCheckbox"],
   [class*="st-key-it-visit-checkbox-wrap-"] [data-testid="stCheckbox"] > label {
     box-sizing: border-box !important;
     display: flex !important;
+    flex: 0 0 30px !important;
     width: 30px !important;
     min-width: 30px !important;
     max-width: 30px !important;
@@ -1564,15 +1358,12 @@ st.markdown("""
     max-height: 30px !important;
     align-items: center !important;
     justify-content: center !important;
+    gap: 0 !important;
     margin: 0 !important;
     padding: 0 !important;
-  }
-  [class*="st-key-it-visit-checkbox-wrap-"] [data-testid="stCheckbox"] > label {
-    gap: 0 !important;
     border: 1px solid #CBD5E1 !important;
-    border-radius: 9px !important;
+    border-radius: 8px !important;
     background: #FFFFFF !important;
-    box-shadow: none !important;
   }
   [class*="st-key-it-visit-checkbox-wrap-"] [data-testid="stCheckbox"] label > div:first-child {
     box-sizing: border-box !important;
@@ -1597,28 +1388,29 @@ st.markdown("""
     display: none !important;
   }
 
-  /* Guardados: controles legibles, sin reducirlos en el breakpoint móvil. */
+  /* Guardados: hora y día con tamaño fijo y legible en ambas versiones. */
   [class*="st-key-saved-controls-row-"] {
     width: 100% !important;
     margin-top: 3px !important;
     overflow: visible !important;
   }
   [class*="st-key-saved-controls-row-"] [data-testid="stHorizontalBlock"] {
-    display: grid !important;
-    grid-template-columns: 88px 112px !important;
+    display: flex !important;
+    flex-flow: row nowrap !important;
     align-items: center !important;
-    justify-content: start !important;
-    column-gap: 4px !important;
+    justify-content: flex-start !important;
+    gap: 4px !important;
     width: max-content !important;
     max-width: 100% !important;
     min-width: 0 !important;
   }
   [class*="st-key-saved-controls-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"] {
+    box-sizing: border-box !important;
     display: block !important;
-    flex: none !important;
+    flex: 0 0 auto !important;
     width: auto !important;
     min-width: 0 !important;
-    max-width: 100% !important;
+    max-width: none !important;
     margin: 0 !important;
     padding: 0 !important;
   }
@@ -1627,12 +1419,13 @@ st.markdown("""
   [class*="st-key-saved-controls-row-"] [data-testid="column"]:first-child [data-baseweb="input"],
   [class*="st-key-saved-controls-row-"] [data-testid="column"]:first-child [data-baseweb="base-input"] {
     box-sizing: border-box !important;
-    width: 88px !important;
-    min-width: 88px !important;
-    max-width: 88px !important;
-    height: 34px !important;
-    min-height: 34px !important;
-    max-height: 34px !important;
+    flex: 0 0 90px !important;
+    width: 90px !important;
+    min-width: 90px !important;
+    max-width: 90px !important;
+    height: 36px !important;
+    min-height: 36px !important;
+    max-height: 36px !important;
     margin: 0 !important;
     padding: 0 !important;
   }
@@ -1640,11 +1433,11 @@ st.markdown("""
     box-sizing: border-box !important;
     width: 100% !important;
     min-width: 0 !important;
-    height: 32px !important;
-    min-height: 32px !important;
-    padding: 0 4px !important;
-    font-size: 0.82rem !important;
-    line-height: 1.05 !important;
+    height: 34px !important;
+    min-height: 34px !important;
+    padding: 0 5px !important;
+    font-size: 0.86rem !important;
+    line-height: 1 !important;
     text-align: center !important;
   }
   [class*="st-key-saved-controls-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(2),
@@ -1652,57 +1445,19 @@ st.markdown("""
   [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(2) [data-baseweb="select"],
   [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(2) [data-baseweb="select"] > div {
     box-sizing: border-box !important;
-    width: 112px !important;
-    min-width: 112px !important;
-    max-width: 112px !important;
-    height: 34px !important;
-    min-height: 34px !important;
-    max-height: 34px !important;
+    flex: 0 0 116px !important;
+    width: 116px !important;
+    min-width: 116px !important;
+    max-width: 116px !important;
+    height: 36px !important;
+    min-height: 36px !important;
+    max-height: 36px !important;
     margin: 0 !important;
-    font-size: 0.82rem !important;
+    font-size: 0.84rem !important;
   }
   [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(2) [data-baseweb="select"] * {
-    font-size: 0.82rem !important;
+    font-size: 0.84rem !important;
     line-height: 1.05 !important;
-  }
-
-  /* En móvil se conservan exactamente las mismas columnas y separaciones. */
-  @media (max-width: 768px) {
-    [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] {
-      grid-template-columns: 68px minmax(0, 1fr) 30px 30px 30px !important;
-      column-gap: 1px !important;
-      flex-wrap: nowrap !important;
-    }
-    [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(1) {
-      width: 68px !important;
-      min-width: 68px !important;
-      max-width: 68px !important;
-    }
-    [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(2) {
-      padding-left: 3px !important;
-    }
-    [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(n+3),
-    [class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(n+2) {
-      width: 30px !important;
-      min-width: 30px !important;
-      max-width: 30px !important;
-      height: 30px !important;
-      min-height: 30px !important;
-      max-height: 30px !important;
-    }
-    [class*="st-key-it-heading-row-"] .place-list-title {
-      font-size: calc(1.25rem - 2pt) !important;
-    }
-    [class*="st-key-it-heading-row-"] .place-list-address,
-    [class*="st-key-it-heading-row-"] .place-note {
-      font-size: 0.68rem !important;
-      line-height: 1.25 !important;
-    }
-    [class*="st-key-saved-controls-row-"] [data-testid="stHorizontalBlock"] {
-      grid-template-columns: 88px 112px !important;
-      column-gap: 4px !important;
-      width: max-content !important;
-    }
   }
 
 </style>
