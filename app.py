@@ -4177,7 +4177,14 @@ if seccion_principal == "☑️Checklist":
             pid = str(pendiente.get("id", indice))
             hecho_actual = bool(pendiente.get("hecho", False))
             with st.container(border=True):
-                col_check, col_texto, col_borrar = st.columns([0.65, 5.8, 0.7], vertical_alignment="center")
+                # Casilla y nombre quedan alineados en la misma fila.
+                # Editar y eliminar ocupan dos columnas estrechas al extremo derecho,
+                # reservando casi todo el ancho disponible para el nombre.
+                col_check, col_texto, col_editar, col_borrar = st.columns(
+                    [0.55, 8.0, 0.55, 0.55],
+                    gap="small",
+                    vertical_alignment="center"
+                )
                 with col_check:
                     marcado = st.checkbox(
                         "Completado",
@@ -4196,14 +4203,69 @@ if seccion_principal == "☑️Checklist":
                     tipo_pnd = html.escape(str(pendiente.get("tipo", "Otro")))
                     nota_pnd = str(pendiente.get("nota", "") or "").strip()
                     st.markdown(
-                        f"<div style='font-weight:750; {estilo_pnd}'>{nombre_pnd}</div>"
-                        f"<div style='font-size:0.76rem; color:#64748B; margin-top:2px;'>"
+                        f"<div style='font-weight:750; line-height:1.25; {estilo_pnd}'>{nombre_pnd}</div>"
+                        f"<div style='font-size:0.76rem; color:#64748B; margin-top:3px;'>"
                         f"{tipo_pnd}{' · ' + html.escape(nota_pnd) if nota_pnd else ''}</div>",
                         unsafe_allow_html=True
                     )
+                with col_editar:
+                    if st.button("✏️", key=f"editar_pendiente_{pid}", help="Editar tarea", use_container_width=True):
+                        st.session_state["_checklist_edicion_id"] = pid
+                        st.rerun()
                 with col_borrar:
-                    if st.button("🗑️", key=f"borrar_pendiente_{pid}", help="Eliminar de la checklist"):
+                    if st.button("🗑️", key=f"borrar_pendiente_{pid}", help="Eliminar de la checklist", use_container_width=True):
                         pendientes.pop(indice)
                         st.session_state.config_viaje["checklist_pendientes"] = pendientes
                         if guardar_config_viaje(st.session_state.config_viaje):
+                            if st.session_state.get("_checklist_edicion_id") == pid:
+                                st.session_state.pop("_checklist_edicion_id", None)
                             st.rerun()
+
+                if st.session_state.get("_checklist_edicion_id") == pid:
+                    with st.form(f"form_editar_pendiente_{pid}"):
+                        st.markdown("**Editar tarea pendiente**")
+                        texto_editado = st.text_input(
+                            "Nombre de la tarea",
+                            value=str(pendiente.get("texto", "")),
+                            key=f"texto_editar_pendiente_{pid}"
+                        )
+                        opciones_tipo = ["Hacer", "Ver / Visitar", "Comprar", "Revisar", "Reservar", "Otro"]
+                        tipo_actual = pendiente.get("tipo", "Otro")
+                        if tipo_actual not in opciones_tipo:
+                            opciones_tipo.append(tipo_actual)
+                        tipo_editado = st.selectbox(
+                            "Categoría", opciones_tipo,
+                            index=opciones_tipo.index(tipo_actual),
+                            key=f"tipo_editar_pendiente_{pid}"
+                        )
+                        nota_editada = st.text_input(
+                            "Nota (opcional)",
+                            value=str(pendiente.get("nota", "") or ""),
+                            key=f"nota_editar_pendiente_{pid}"
+                        )
+                        col_guardar_ed, col_cancelar_ed = st.columns(2)
+                        with col_guardar_ed:
+                            guardar_edicion = st.form_submit_button("💾 Guardar cambios", use_container_width=True)
+                        with col_cancelar_ed:
+                            cancelar_edicion = st.form_submit_button("Cancelar", use_container_width=True)
+
+                    if guardar_edicion:
+                        if not texto_editado.strip():
+                            st.warning("El nombre de la tarea no puede estar vacío.")
+                        else:
+                            tarea_anterior = dict(pendientes[indice])
+                            pendientes[indice]["texto"] = texto_editado.strip()
+                            pendientes[indice]["tipo"] = tipo_editado
+                            pendientes[indice]["nota"] = nota_editada.strip()
+                            st.session_state.config_viaje["checklist_pendientes"] = pendientes
+                            if guardar_config_viaje(st.session_state.config_viaje):
+                                st.session_state.pop("_checklist_edicion_id", None)
+                                st.success("Tarea actualizada.")
+                                st.rerun()
+                            else:
+                                pendientes[indice] = tarea_anterior
+                                st.session_state.config_viaje["checklist_pendientes"] = pendientes
+                                st.error("No se han podido guardar los cambios.")
+                    elif cancelar_edicion:
+                        st.session_state.pop("_checklist_edicion_id", None)
+                        st.rerun()
