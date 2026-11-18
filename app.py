@@ -1481,12 +1481,12 @@ st.markdown("""
     box-sizing: border-box !important;
     display: inline-flex !important;
     flex: none !important;
-    width: 24px !important;
-    min-width: 24px !important;
-    max-width: 24px !important;
-    height: 24px !important;
-    min-height: 24px !important;
-    max-height: 24px !important;
+    width: 23px !important;
+    min-width: 23px !important;
+    max-width: 23px !important;
+    height: 23px !important;
+    min-height: 23px !important;
+    max-height: 23px !important;
     align-items: center !important;
     justify-content: center !important;
     gap: 0 !important;
