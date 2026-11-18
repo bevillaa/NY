@@ -1400,7 +1400,7 @@ st.markdown("""
     display: none !important;
   }
 
-  /* Checkbox: área de alineación de 32px y casilla visible de 18x18px. */
+  /* Checkbox: misma caja visible de 32px que los botones de editar y mapa. */
   [class*="st-key-it-visit-checkbox-wrap-"] [data-testid="stCheckbox"] > label {
     box-sizing: border-box !important;
     display: flex !important;
@@ -1419,44 +1419,33 @@ st.markdown("""
     border: 0 !important;
     background: transparent !important;
     line-height: 0 !important;
-    transform: translateY(-5px) !important;
+    transform: none !important;
   }
 
-  [class*="st-key-it-visit-checkbox-wrap-"] [data-testid="stCheckbox"] label > div:first-of-type {
+  [class*="st-key-it-visit-checkbox-wrap-"] [data-testid="stCheckbox"] label > div:first-of-type,
+  [class*="st-key-it-visit-checkbox-wrap-"] [data-testid="stCheckbox"] input[type="checkbox"] {
     box-sizing: border-box !important;
     display: flex !important;
     flex: none !important;
-    width: 18px !important;
-    min-width: 18px !important;
-    max-width: 18px !important;
-    height: 18px !important;
-    min-height: 18px !important;
-    max-height: 18px !important;
+    width: 32px !important;
+    min-width: 32px !important;
+    max-width: 32px !important;
+    height: 32px !important;
+    min-height: 32px !important;
+    max-height: 32px !important;
     align-items: center !important;
     justify-content: center !important;
     margin: 0 !important;
     padding: 0 !important;
     align-self: center !important;
     position: static !important;
-    top: auto !important;
-  }
-
-  [class*="st-key-it-visit-checkbox-wrap-"] [data-testid="stCheckbox"] input[type="checkbox"] {
-    box-sizing: border-box !important;
-    width: 18px !important;
-    min-width: 18px !important;
-    max-width: 18px !important;
-    height: 18px !important;
-    min-height: 18px !important;
-    max-height: 18px !important;
-    margin: 0 !important;
   }
 
   [class*="st-key-it-visit-checkbox-wrap-"] [data-testid="stCheckbox"] label p {
     display: none !important;
   }
 
-  /* GUARDADOS: hora y día en dos columnas idénticas y controles de 44px. */
+  /* GUARDADOS: Hora y Día ocupan dos columnas exactamente iguales. */
   [class*="st-key-saved-controls-row-"] {
     display: block !important;
     width: 100% !important;
@@ -1467,7 +1456,7 @@ st.markdown("""
 
   [class*="st-key-saved-controls-row-"] [data-testid="stHorizontalBlock"] {
     display: grid !important;
-    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) !important;
     grid-auto-flow: row !important;
     align-items: center !important;
     justify-content: stretch !important;
@@ -1513,6 +1502,7 @@ st.markdown("""
     max-height: 44px !important;
     margin: 0 !important;
     padding: 0 !important;
+    border-width: 1px !important;
   }
 
   [class*="st-key-saved-controls-row-"] [data-testid="stColumn"] input,
@@ -1524,21 +1514,11 @@ st.markdown("""
     height: 44px !important;
     min-height: 44px !important;
     max-height: 44px !important;
-    line-height: 44px !important;
-  }
-
-  [class*="st-key-saved-controls-row-"] [data-testid="stColumn"] input {
-    display: block !important;
-    margin: 0 !important;
     padding: 0 7px !important;
     font-size: 0.98rem !important;
+    font-weight: 600 !important;
     line-height: 1 !important;
     text-align: center !important;
-  }
-
-  [class*="st-key-saved-controls-row-"] [data-testid="stColumn"]:nth-child(2) [data-baseweb="select"] * {
-    font-size: 0.95rem !important;
-    line-height: 1.15 !important;
   }
 
 </style>
