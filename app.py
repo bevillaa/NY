@@ -946,13 +946,14 @@ st.markdown("""
     color: white !important;
   }
   [data-testid="stButton"] > button[kind="primary"] * { color: white !important; }
-  input, textarea, [data-baseweb="select"] > div, [data-baseweb="input"] > div {
+  input:not([type="checkbox"]):not([type="radio"]), textarea,
+  [data-baseweb="select"] > div, [data-baseweb="input"] > div {
     background: #FFFEFC !important;
     border-color: #DFDED6 !important;
     border-radius: 9px !important;
   }
-  input:focus, textarea:focus, [data-baseweb="select"] > div:focus-within,
-  [data-baseweb="input"] > div:focus-within {
+  input:not([type="checkbox"]):not([type="radio"]):focus, textarea:focus,
+  [data-baseweb="select"] > div:focus-within, [data-baseweb="input"] > div:focus-within {
     border-color: #9AA68F !important;
     box-shadow: 0 0 0 1px #9AA68F !important;
   }
@@ -1115,18 +1116,15 @@ st.markdown("""
     .place-full-width-info .place-note { width: 100% !important; max-width: 100% !important; }
   }
   /* ================================================================
-     CONTROLES DE RUTA Y GUARDADOS — BLOQUE ÚNICO DE DIMENSIONES
-     Estas reglas son la única fuente de tamaño/alineación de estos controles.
+     CONTROLES DE RUTA Y GUARDADOS — REGLAS ÚNICAS DE DIMENSIONES
+     Este bloque queda al final del CSS para prevalecer sobre los estilos
+     generales y responsive. No modificar tamaños desde reglas genéricas.
      ================================================================ */
 
-  /* RUTA: hora | información flexible | editar | mapa | visitado.
-     Grid: 60px hora · 1fr texto · 32px lápiz · 32px mapa · 32px checkbox
-     Los tres iconos van separados entre sí 1 px y el bloque de texto tiene
-     4 px de separación respecto al campo de hora.                        */
+  /* RUTA: hora | información | editar | mapa | visitado */
   [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] {
     display: grid !important;
-    grid-template-columns: 60px minmax(0, 1fr) repeat(3, 32px) !important;
-    grid-template-rows: auto !important;
+    grid-template-columns: 60px minmax(0, 1fr) 32px 32px 32px !important;
     grid-auto-flow: row !important;
     align-items: start !important;
     justify-content: stretch !important;
@@ -1137,58 +1135,28 @@ st.markdown("""
     max-width: 100% !important;
     overflow: visible !important;
   }
+
   [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"] {
     box-sizing: border-box !important;
     display: flex !important;
     flex: none !important;
-    width: auto !important;
     min-width: 0 !important;
     max-width: none !important;
     margin: 0 !important;
     padding: 0 !important;
-    align-items: flex-start !important;
-    justify-content: center !important;
-    align-self: start !important;
     overflow: visible !important;
   }
-  /* Col 1: campo de hora — 60px ancho, sin altura fija para no clampear el input */
+
+  /* Hora: columna y widget con la misma anchura efectiva. */
   [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(1) {
     width: 60px !important;
     min-width: 60px !important;
     max-width: 60px !important;
-    min-height: 0 !important;
-    max-height: none !important;
     height: auto !important;
     align-items: flex-start !important;
-    margin-right: 3px !important; /* gap(1px) + 3px = 4px separación hacia el texto */
+    margin-right: 3px !important;
   }
-  /* Col 2: bloque de texto — crece para ocupar toda la línea */
-  [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2) {
-    display: block !important;
-    width: auto !important;
-    min-width: 0 !important;
-    max-width: none !important;
-    height: auto !important;
-    min-height: 0 !important;
-    max-height: none !important;
-    overflow: visible !important;
-    padding-left: 0 !important;
-  }
-  /* Cols 3-5: lápiz, mapa y checkbox — 32px cada uno, alineados arriba */
-  [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(3),
-  [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(4),
-  [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(5) {
-    width: 32px !important;
-    min-width: 32px !important;
-    max-width: 32px !important;
-    height: 32px !important;
-    min-height: 32px !important;
-    max-height: 32px !important;
-    align-items: center !important;
-    align-self: start !important;
-    margin-top: 2px !important; /* alinear visualmente con la primera línea del texto */
-  }
-  /* Campo de hora: ancho completo de su columna, altura cómoda */
+
   [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(1) [data-testid="stTextInput"],
   [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(1) [data-testid="stTextInput"] > div,
   [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(1) [data-testid="stTextInput"] > div > div,
@@ -1205,21 +1173,36 @@ st.markdown("""
     margin: 0 !important;
     padding: 0 !important;
   }
+
   [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(1) input {
     box-sizing: border-box !important;
+    display: block !important;
     width: 100% !important;
     min-width: 0 !important;
     max-width: 100% !important;
     height: 36px !important;
     min-height: 36px !important;
     max-height: 36px !important;
-    padding: 0 4px !important;
     margin: 0 !important;
+    padding: 0 4px !important;
     font-size: 0.88rem !important;
     line-height: 36px !important;
     text-align: center !important;
     font-variant-numeric: tabular-nums !important;
   }
+
+  /* Información: ocupa solo el espacio que queda entre hora y acciones. */
+  [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2) {
+    display: block !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
+    overflow: visible !important;
+    padding: 0 !important;
+  }
+
   [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stMarkdown"],
   [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stMarkdown"] > div,
   [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(2) [data-testid="stElementContainer"],
@@ -1234,10 +1217,12 @@ st.markdown("""
     white-space: normal !important;
     overflow-wrap: anywhere !important;
   }
+
   [class*="st-key-it-heading-row-"] .place-list-title {
     font-size: calc(1.25rem - 2pt) !important;
     line-height: 1.18 !important;
   }
+
   [class*="st-key-it-heading-row-"] .place-list-address,
   [class*="st-key-it-heading-row-"] .place-note {
     position: static !important;
@@ -1245,11 +1230,31 @@ st.markdown("""
     transform: none !important;
   }
 
-  /* GUARDADOS: información flexible | editar | mapa.
-     Los iconos de acción alineados entre sí con 1 px de separación. */
+  /* Acciones de Ruta: tres columnas idénticas de 32px. */
+  [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(3),
+  [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(4),
+  [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(5) {
+    box-sizing: border-box !important;
+    display: flex !important;
+    flex: none !important;
+    width: 32px !important;
+    min-width: 32px !important;
+    max-width: 32px !important;
+    height: 32px !important;
+    min-height: 32px !important;
+    max-height: 32px !important;
+    align-items: center !important;
+    justify-content: center !important;
+    align-self: start !important;
+    margin: 2px 0 0 !important;
+    padding: 0 !important;
+    overflow: visible !important;
+  }
+
+  /* GUARDADOS: información flexible + editar + mapa. */
   [class*="st-key-saved-heading-row-"]:not([class*="st-key-saved-heading-row-list-"]) [data-testid="stHorizontalBlock"] {
     display: grid !important;
-    grid-template-columns: minmax(0, 1fr) repeat(2, 32px) !important;
+    grid-template-columns: minmax(0, 1fr) 32px 32px !important;
     grid-auto-flow: row !important;
     align-items: start !important;
     justify-content: stretch !important;
@@ -1260,27 +1265,27 @@ st.markdown("""
     max-width: 100% !important;
     overflow: visible !important;
   }
+
   [class*="st-key-saved-heading-row-"]:not([class*="st-key-saved-heading-row-list-"]) [data-testid="stHorizontalBlock"] > [data-testid="column"] {
     box-sizing: border-box !important;
     display: flex !important;
     flex: none !important;
-    width: auto !important;
     min-width: 0 !important;
     max-width: none !important;
     margin: 0 !important;
     padding: 0 !important;
-    align-items: center !important;
-    justify-content: center !important;
-    align-self: start !important;
     overflow: visible !important;
   }
+
   [class*="st-key-saved-heading-row-"]:not([class*="st-key-saved-heading-row-list-"]) [data-testid="column"]:first-child {
     display: block !important;
+    width: 100% !important;
     min-width: 0 !important;
+    max-width: 100% !important;
     height: auto !important;
     min-height: 0 !important;
-    max-height: none !important;
   }
+
   [class*="st-key-saved-heading-row-"]:not([class*="st-key-saved-heading-row-list-"]) [data-testid="column"]:nth-child(2),
   [class*="st-key-saved-heading-row-"]:not([class*="st-key-saved-heading-row-list-"]) [data-testid="column"]:nth-child(3) {
     width: 32px !important;
@@ -1289,12 +1294,12 @@ st.markdown("""
     height: 32px !important;
     min-height: 32px !important;
     max-height: 32px !important;
-    margin-top: 2px !important;
+    align-items: center !important;
+    justify-content: center !important;
+    margin: 2px 0 0 !important;
   }
 
-  /* Caja de acción común: columnas de 32px, controles de 30px.
-     Lápiz, mapa y checkbox comparten el mismo tamaño y alineación;
-     entre ellos hay 1 px de separación (column-gap del grid padre). */
+  /* Envoltorios de acción: 32px; botones visibles: 30px. */
   [class*="st-key-it-edit-button-wrap-"],
   [class*="st-key-it-map-button-wrap-"],
   [class*="st-key-it-visit-checkbox-wrap-"],
@@ -1311,12 +1316,12 @@ st.markdown("""
     max-height: 32px !important;
     align-items: center !important;
     justify-content: center !important;
-    align-self: start !important;
     margin: 0 !important;
     padding: 0 !important;
     transform: none !important;
     overflow: visible !important;
   }
+
   [class*="st-key-it-edit-button-wrap-"] [data-testid="stElementContainer"],
   [class*="st-key-saved-edit-button-wrap-"]:not([class*="st-key-saved-edit-button-wrap-list-"]) [data-testid="stElementContainer"],
   [class*="st-key-it-map-button-wrap-"] [data-testid="stElementContainer"],
@@ -1338,11 +1343,11 @@ st.markdown("""
     max-height: 32px !important;
     align-items: center !important;
     justify-content: center !important;
-    align-self: center !important;
     margin: 0 !important;
     padding: 0 !important;
     overflow: visible !important;
   }
+
   [class*="st-key-it-edit-button-wrap-"] button,
   [class*="st-key-saved-edit-button-wrap-"]:not([class*="st-key-saved-edit-button-wrap-list-"]) button,
   [class*="st-key-it-map-button-wrap-"] a,
@@ -1358,7 +1363,6 @@ st.markdown("""
     max-height: 30px !important;
     align-items: center !important;
     justify-content: center !important;
-    align-self: center !important;
     margin: 0 !important;
     padding: 0 !important;
     border-radius: 7px !important;
@@ -1367,6 +1371,7 @@ st.markdown("""
     overflow: hidden !important;
     transform: none !important;
   }
+
   [class*="st-key-it-edit-button-wrap-"] button,
   [class*="st-key-saved-edit-button-wrap-"]:not([class*="st-key-saved-edit-button-wrap-list-"]) button {
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23334155' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m16 4 4 4'/%3E%3Cpath d='M4 20l4-.9L19 8a2.1 2.1 0 0 0-3-3L5 16z'/%3E%3C/svg%3E") !important;
@@ -1374,6 +1379,7 @@ st.markdown("""
     background-position: center !important;
     background-size: 19px 19px !important;
   }
+
   [class*="st-key-it-map-button-wrap-"] a,
   [class*="st-key-saved-map-button-wrap-"] a {
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23334155' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m3 6 6-3 6 3 6-3v15l-6 3-6-3-6 3z'/%3E%3Cpath d='M9 3v15M15 6v15'/%3E%3C/svg%3E") !important;
@@ -1381,6 +1387,7 @@ st.markdown("""
     background-position: center !important;
     background-size: 19px 19px !important;
   }
+
   [class*="st-key-it-edit-button-wrap-"] button > *,
   [class*="st-key-saved-edit-button-wrap-"]:not([class*="st-key-saved-edit-button-wrap-list-"]) button > *,
   [class*="st-key-it-map-button-wrap-"] a > *,
@@ -1388,9 +1395,7 @@ st.markdown("""
     display: none !important;
   }
 
-  /* El checkbox nativo usa una caja visual de 30x30, igual que mapa y lápiz.
-     El label completo ocupa 32x32 para centrarlo en la misma columna.
-     Se elimina cualquier margen extra que lo desalineara. */
+  /* Checkbox: caja exterior 32px y control visible 30px, igual que los iconos. */
   [class*="st-key-it-visit-checkbox-wrap-"] [data-testid="stCheckbox"] > label {
     box-sizing: border-box !important;
     display: flex !important;
@@ -1403,39 +1408,45 @@ st.markdown("""
     max-height: 32px !important;
     align-items: center !important;
     justify-content: center !important;
-    align-self: center !important;
     gap: 0 !important;
     margin: 0 !important;
     padding: 0 !important;
     border: 0 !important;
     background: transparent !important;
   }
+
   [class*="st-key-it-visit-checkbox-wrap-"] [data-testid="stCheckbox"] label > div:first-child {
     box-sizing: border-box !important;
     display: flex !important;
     flex: none !important;
-    width: 22px !important;
-    min-width: 22px !important;
-    max-width: 22px !important;
-    height: 22px !important;
-    min-height: 22px !important;
-    max-height: 22px !important;
+    width: 30px !important;
+    min-width: 30px !important;
+    max-width: 30px !important;
+    height: 30px !important;
+    min-height: 30px !important;
+    max-height: 30px !important;
     align-items: center !important;
     justify-content: center !important;
     margin: 0 !important;
     padding: 0 !important;
   }
+
   [class*="st-key-it-visit-checkbox-wrap-"] [data-testid="stCheckbox"] input[type="checkbox"] {
-    width: 22px !important;
-    height: 22px !important;
+    box-sizing: border-box !important;
+    width: 30px !important;
+    min-width: 30px !important;
+    max-width: 30px !important;
+    height: 30px !important;
+    min-height: 30px !important;
+    max-height: 30px !important;
     margin: 0 !important;
   }
+
   [class*="st-key-it-visit-checkbox-wrap-"] [data-testid="stCheckbox"] label p {
     display: none !important;
   }
 
-  /* GUARDADOS: hora y día en tamaño táctil real. Los campos ocupan el ancho
-     de sus columnas; las reglas generales de móvil no pueden reducirlos. */
+  /* GUARDADOS: hora y día con anchos y alturas definidos en un solo sitio. */
   [class*="st-key-saved-controls-row-"] {
     display: block !important;
     width: 100% !important;
@@ -1443,6 +1454,7 @@ st.markdown("""
     margin-top: 6px !important;
     overflow: visible !important;
   }
+
   [class*="st-key-saved-controls-row-"] [data-testid="stHorizontalBlock"] {
     display: grid !important;
     grid-template-columns: 100px 180px !important;
@@ -1452,51 +1464,28 @@ st.markdown("""
     column-gap: 8px !important;
     row-gap: 0 !important;
     width: 100% !important;
-    max-width: 300px !important;
+    max-width: 288px !important;
     min-width: 0 !important;
     overflow: visible !important;
   }
+
   [class*="st-key-saved-controls-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"] {
     box-sizing: border-box !important;
     display: block !important;
     flex: none !important;
     width: 100% !important;
     min-width: 0 !important;
-    max-width: none !important;
+    max-width: 100% !important;
     margin: 0 !important;
     padding: 0 !important;
     overflow: visible !important;
   }
+
   [class*="st-key-saved-controls-row-"] [data-testid="column"]:first-child [data-testid="stTextInput"],
   [class*="st-key-saved-controls-row-"] [data-testid="column"]:first-child [data-testid="stTextInput"] > div,
   [class*="st-key-saved-controls-row-"] [data-testid="column"]:first-child [data-testid="stTextInput"] > div > div,
   [class*="st-key-saved-controls-row-"] [data-testid="column"]:first-child [data-baseweb="input"],
-  [class*="st-key-saved-controls-row-"] [data-testid="column"]:first-child [data-baseweb="base-input"] {
-    box-sizing: border-box !important;
-    display: block !important;
-    width: 100% !important;
-    min-width: 0 !important;
-    max-width: 100% !important;
-    height: 44px !important;
-    min-height: 44px !important;
-    max-height: 44px !important;
-    margin: 0 !important;
-    padding: 0 !important;
-  }
-  [class*="st-key-saved-controls-row-"] [data-testid="column"]:first-child input {
-    box-sizing: border-box !important;
-    width: 100% !important;
-    min-width: 0 !important;
-    max-width: 100% !important;
-    height: 44px !important;
-    min-height: 44px !important;
-    max-height: 44px !important;
-    margin: 0 !important;
-    padding: 0 7px !important;
-    font-size: 0.98rem !important;
-    line-height: 1 !important;
-    text-align: center !important;
-  }
+  [class*="st-key-saved-controls-row-"] [data-testid="column"]:first-child [data-baseweb="base-input"],
   [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(2) [data-testid="stSelectbox"],
   [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(2) [data-testid="stSelectbox"] > div,
   [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(2) [data-baseweb="select"],
@@ -1511,24 +1500,33 @@ st.markdown("""
     max-height: 44px !important;
     margin: 0 !important;
     padding: 0 !important;
-    font-size: 0.98rem !important;
   }
-  [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(2) [data-baseweb="select"] * {
-    font-size: 0.95rem !important;
-    line-height: 1.15 !important;
-  }
-  [class*="st-key-saved-controls-row-"] [data-testid="column"]:first-child [data-testid="stTextInput"] > div > div {
+
+  [class*="st-key-saved-controls-row-"] [data-testid="column"]:first-child input {
+    box-sizing: border-box !important;
+    display: block !important;
     width: 100% !important;
     min-width: 0 !important;
     max-width: 100% !important;
     height: 44px !important;
     min-height: 44px !important;
     max-height: 44px !important;
+    margin: 0 !important;
+    padding: 0 7px !important;
+    font-size: 0.98rem !important;
+    line-height: 1 !important;
+    text-align: center !important;
   }
+
+  [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(2) [data-baseweb="select"] * {
+    font-size: 0.95rem !important;
+    line-height: 1.15 !important;
+  }
+
   @media (max-width: 380px) {
     [class*="st-key-saved-controls-row-"] [data-testid="stHorizontalBlock"] {
       grid-template-columns: 92px 160px !important;
-      max-width: 100% !important;
+      max-width: 260px !important;
     }
   }
 
