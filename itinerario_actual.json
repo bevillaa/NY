@@ -1725,7 +1725,7 @@
     "direccion": "92 Ludlow St, New York, NY 10002, United States",
     "nota": "",
     "categoria": "🎄 Christmas markets",
-    "tipo": "Interior",
+    "tipo": "Exterior",
     "lista_origen": "Life Out",
     "visitado": false
   },
@@ -1767,6 +1767,20 @@
     "direccion": "Herald Square, New York, NY 10001, United States",
     "nota": "",
     "categoria": "🎄 Christmas markets",
+    "tipo": "Interior",
+    "lista_origen": "Markets",
+    "visitado": false
+  },
+  {
+    "id": 134,
+    "nombre": "Washington Square Park",
+    "lat": 40.7308838,
+    "lon": -73.997332,
+    "dia": 0,
+    "hora": "",
+    "direccion": "New York, NY 10012, United States",
+    "nota": "",
+    "categoria": "☀️ Spots",
     "tipo": "Exterior",
     "lista_origen": "Markets",
     "visitado": false
