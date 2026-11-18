@@ -4108,7 +4108,7 @@ if seccion_principal == "☑️Checklist":
     with st.container(border=True):
         if not st.session_state["checklist_formulario_abierto"]:
             st.button(
-                "＋",
+                "＋ Añadir",
                 key="btn_abrir_formulario_checklist",
                 help="Añadir un pendiente",
                 on_click=lambda: st.session_state.__setitem__("checklist_formulario_abierto", True)
@@ -4117,14 +4117,14 @@ if seccion_principal == "☑️Checklist":
             with st.expander("Añadir detalle", expanded=True):
                 nuevo_pendiente = st.text_input(
                     "¿Qué te falta?",
-                    placeholder="Ej: Comprar entradas para el mirador, visitar Central Park...",
+                    placeholder="Ej: Comprar entradas, sacar visa...",
                     key="checklist_nuevo_texto"
                 )
                 col_tipo, col_detalle = st.columns([1, 2])
                 with col_tipo:
                     tipo_pendiente = st.selectbox(
                         "Tipo",
-                        ["Hacer", "Ver / Visitar", "Comprar", "Revisar", "Reservar", "Otro"],
+                        ["Hacer", "Comprar", "Reservar", "Otro"],
                         key="checklist_nuevo_tipo"
                     )
                 with col_detalle:
