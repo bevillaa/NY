@@ -1250,8 +1250,8 @@ st.markdown("""
     max-height: 32px !important;
     align-items: center !important;
     justify-content: center !important;
-    align-self: start !important;
-    margin: 2px 0 0 !important;
+    align-self: center !important;
+    margin: 0 !important;
     padding: 0 !important;
     overflow: visible !important;
   }
@@ -1304,7 +1304,7 @@ st.markdown("""
     margin: 2px 0 0 !important;
   }
 
-  /* Envoltorios de acción: 32px; botones visibles: 30px. */
+  /* Ruta: envoltorios y controles visibles con idéntica caja de 32px. */
   [class*="st-key-it-edit-button-wrap-"],
   [class*="st-key-it-map-button-wrap-"],
   [class*="st-key-it-visit-checkbox-wrap-"],
@@ -1360,12 +1360,12 @@ st.markdown("""
     box-sizing: border-box !important;
     display: inline-flex !important;
     flex: none !important;
-    width: 30px !important;
-    min-width: 30px !important;
-    max-width: 30px !important;
-    height: 30px !important;
-    min-height: 30px !important;
-    max-height: 30px !important;
+    width: 32px !important;
+    min-width: 32px !important;
+    max-width: 32px !important;
+    height: 32px !important;
+    min-height: 32px !important;
+    max-height: 32px !important;
     align-items: center !important;
     justify-content: center !important;
     margin: 0 !important;
@@ -1400,7 +1400,7 @@ st.markdown("""
     display: none !important;
   }
 
-  /* Checkbox: caja exterior 32px y control visible 30px, igual que los iconos. */
+  /* Checkbox: caja y control visible de 32px, igual que lápiz y mapa. */
   [class*="st-key-it-visit-checkbox-wrap-"] [data-testid="stCheckbox"] > label {
     box-sizing: border-box !important;
     display: flex !important;
@@ -1425,12 +1425,12 @@ st.markdown("""
     box-sizing: border-box !important;
     display: flex !important;
     flex: none !important;
-    width: 30px !important;
-    min-width: 30px !important;
-    max-width: 30px !important;
-    height: 30px !important;
-    min-height: 30px !important;
-    max-height: 30px !important;
+    width: 32px !important;
+    min-width: 32px !important;
+    max-width: 32px !important;
+    height: 32px !important;
+    min-height: 32px !important;
+    max-height: 32px !important;
     align-items: center !important;
     justify-content: center !important;
     margin: 0 !important;
@@ -1442,12 +1442,12 @@ st.markdown("""
 
   [class*="st-key-it-visit-checkbox-wrap-"] [data-testid="stCheckbox"] input[type="checkbox"] {
     box-sizing: border-box !important;
-    width: 30px !important;
-    min-width: 30px !important;
-    max-width: 30px !important;
-    height: 30px !important;
-    min-height: 30px !important;
-    max-height: 30px !important;
+    width: 32px !important;
+    min-width: 32px !important;
+    max-width: 32px !important;
+    height: 32px !important;
+    min-height: 32px !important;
+    max-height: 32px !important;
     margin: 0 !important;
   }
 
@@ -1490,6 +1490,8 @@ st.markdown("""
     overflow: visible !important;
   }
 
+  [class*="st-key-saved-controls-row-"] [data-testid="stColumn"]:first-child [data-testid="stElementContainer"],
+  [class*="st-key-saved-controls-row-"] [data-testid="stColumn"]:nth-child(2) [data-testid="stElementContainer"],
   [class*="st-key-saved-controls-row-"] [data-testid="stColumn"]:first-child [data-testid="stTextInput"],
   [class*="st-key-saved-controls-row-"] [data-testid="stColumn"]:nth-child(2) [data-testid="stSelectbox"],
   [class*="st-key-saved-controls-row-"] [data-testid="stColumn"]:first-child [data-testid="stTextInput"] > div,
@@ -1512,6 +1514,15 @@ st.markdown("""
     max-height: 44px !important;
     margin: 0 !important;
     padding: 0 !important;
+  }
+
+  [class*="st-key-saved-controls-row-"] [data-testid="stColumn"]:first-child [data-baseweb="input"] > input,
+  [class*="st-key-saved-controls-row-"] [data-testid="stColumn"]:nth-child(2) [data-baseweb="select"] [role="combobox"] {
+    box-sizing: border-box !important;
+    height: 44px !important;
+    min-height: 44px !important;
+    max-height: 44px !important;
+    line-height: 44px !important;
   }
 
   [class*="st-key-saved-controls-row-"] [data-testid="stColumn"]:first-child input {
