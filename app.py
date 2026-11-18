@@ -1133,7 +1133,7 @@ st.markdown("""
     grid-auto-flow: row !important;
     align-items: center !important;
     justify-content: stretch !important;
-    column-gap: 3px !important;
+    column-gap: 1px !important;
     row-gap: 0 !important;
     width: 100% !important;
     min-width: 0 !important;
@@ -1497,7 +1497,7 @@ st.markdown("""
     line-height: 0 !important;
     overflow: hidden !important;portant;
     line-height: 0 !important;
-    transform: translateY(-7px) !important;
+    transform: translateY(-4px) !important;
   }
 
   [class*="st-key-it-visit-checkbox-wrap-"] [data-testid="stCheckbox"] label > div:first-of-type {
