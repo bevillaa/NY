@@ -1259,7 +1259,7 @@ st.markdown("""
   /* GUARDADOS: información flexible + editar + mapa. */
   [class*="st-key-saved-heading-row-"]:not([class*="st-key-saved-heading-row-list-"]) [data-testid="stHorizontalBlock"] {
     display: grid !important;
-    grid-template-columns: minmax(0, 1fr) 32px 32px !important;
+    grid-template-columns: minmax(0, 1fr) 40px 40px !important;
     grid-auto-flow: row !important;
     align-items: start !important;
     justify-content: stretch !important;
@@ -1293,15 +1293,15 @@ st.markdown("""
 
   [class*="st-key-saved-heading-row-"]:not([class*="st-key-saved-heading-row-list-"]) [data-testid="stColumn"]:nth-child(2),
   [class*="st-key-saved-heading-row-"]:not([class*="st-key-saved-heading-row-list-"]) [data-testid="stColumn"]:nth-child(3) {
-    width: 32px !important;
-    min-width: 32px !important;
-    max-width: 32px !important;
-    height: 32px !important;
-    min-height: 32px !important;
-    max-height: 32px !important;
+    width: 40px !important;
+    min-width: 40px !important;
+    max-width: 40px !important;
+    height: 40px !important;
+    min-height: 40px !important;
+    max-height: 40px !important;
     align-items: center !important;
     justify-content: center !important;
-    margin: 2px 0 0 !important;
+    margin: 0 !important;
   }
 
   /* Ruta: envoltorios y controles visibles con idéntica caja de 40px. */
@@ -1526,9 +1526,9 @@ st.markdown("""
     width: 100% !important;
     min-width: 0 !important;
     max-width: 100% !important;
-    height: 44px !important;
-    min-height: 44px !important;
-    max-height: 44px !important;
+    height: 34px !important;
+    min-height: 34px !important;
+    max-height: 34px !important;
     margin: 0 !important;
   }
 
@@ -1539,26 +1539,24 @@ st.markdown("""
     width: 100% !important;
     min-width: 0 !important;
     max-width: 100% !important;
-    height: 44px !important;
-    min-height: 44px !important;
-    max-height: 44px !important;
+    height: 34px !important;
+    min-height: 34px !important;
+    max-height: 34px !important;
     padding: 0 7px !important;
     font-size: 0.98rem !important;
     font-weight: 600 !important;
     line-height: 1 !important;
     text-align: center !important;
-    border: 1px solid #94A3B8 !important;
+    border: 0 !important;
     box-shadow: none !important;
   }
 
   [class*="st-key-saved-controls-row-"] [data-baseweb="input"] > div,
   [class*="st-key-saved-controls-row-"] [data-baseweb="select"] > div,
-  [class*="st-key-saved-controls-row-"] input:focus,
   [class*="st-key-saved-controls-row-"] [data-baseweb="select"] > div:focus-within,
   [class*="st-key-saved-controls-row-"] [data-baseweb="input"] > div:focus-within {
-    border-width: 1px !important;
-    border-style: solid !important;
-    border-color: #94A3B8 !important;
+    border: 1px solid #94A3B8 !important;
+    border-radius: 7px !important;
     box-shadow: none !important;
     outline: none !important;
   }
