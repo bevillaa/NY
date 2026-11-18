@@ -1259,7 +1259,7 @@ st.markdown("""
   /* GUARDADOS: información flexible + editar + mapa. */
   [class*="st-key-saved-heading-row-"]:not([class*="st-key-saved-heading-row-list-"]) [data-testid="stHorizontalBlock"] {
     display: grid !important;
-    grid-template-columns: minmax(0, 1fr) 40px 40px !important;
+    grid-template-columns: minmax(0, 1fr) 24px 24px !important;
     grid-auto-flow: row !important;
     align-items: start !important;
     justify-content: stretch !important;
@@ -1304,18 +1304,18 @@ st.markdown("""
     margin: 0 !important;
   }
 
-  /* Acciones de Guardados conservan sus dimensiones originales de 40px. */
+  /* Acciones de Guardados: mismo tamaño que los controles de Ruta (24x24px). */
   [class*="st-key-saved-edit-button-wrap-"]:not([class*="st-key-saved-edit-button-wrap-list-"]),
   [class*="st-key-saved-map-button-wrap-"] {
     box-sizing: border-box !important;
     display: flex !important;
     flex: none !important;
-    width: 40px !important;
-    min-width: 40px !important;
-    max-width: 40px !important;
-    height: 40px !important;
-    min-height: 40px !important;
-    max-height: 40px !important;
+    width: 24px !important;
+    min-width: 24px !important;
+    max-width: 24px !important;
+    height: 24px !important;
+    min-height: 24px !important;
+    max-height: 24px !important;
     align-items: center !important;
     justify-content: center !important;
     margin: 0 !important;
@@ -1330,12 +1330,12 @@ st.markdown("""
     box-sizing: border-box !important;
     display: flex !important;
     flex: none !important;
-    width: 40px !important;
-    min-width: 40px !important;
-    max-width: 40px !important;
-    height: 40px !important;
-    min-height: 40px !important;
-    max-height: 40px !important;
+    width: 24px !important;
+    min-width: 24px !important;
+    max-width: 24px !important;
+    height: 24px !important;
+    min-height: 24px !important;
+    max-height: 24px !important;
     align-items: center !important;
     justify-content: center !important;
     margin: 0 !important;
@@ -1348,12 +1348,12 @@ st.markdown("""
     box-sizing: border-box !important;
     display: inline-flex !important;
     flex: none !important;
-    width: 40px !important;
-    min-width: 40px !important;
-    max-width: 40px !important;
-    height: 40px !important;
-    min-height: 40px !important;
-    max-height: 40px !important;
+    width: 24px !important;
+    min-width: 24px !important;
+    max-width: 24px !important;
+    height: 24px !important;
+    min-height: 24px !important;
+    max-height: 24px !important;
     align-items: center !important;
     justify-content: center !important;
     margin: 0 !important;
@@ -1368,14 +1368,14 @@ st.markdown("""
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23334155' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m16 4 4 4'/%3E%3Cpath d='M4 20l4-.9L19 8a2.1 2.1 0 0 0-3-3L5 16z'/%3E%3C/svg%3E") !important;
     background-repeat: no-repeat !important;
     background-position: center !important;
-    background-size: 19px 19px !important;
+    background-size: 16px 16px !important;
   }
 
   [class*="st-key-saved-map-button-wrap-"] a {
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23334155' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m3 6 6-3 6 3 6-3v15l-6 3-6-3-6 3z'/%3E%3Cpath d='M9 3v15M15 6v15'/%3E%3C/svg%3E") !important;
     background-repeat: no-repeat !important;
     background-position: center !important;
-    background-size: 19px 19px !important;
+    background-size: 16px 16px !important;
   }
 
   [class*="st-key-saved-edit-button-wrap-"]:not([class*="st-key-saved-edit-button-wrap-list-"]) button > *,
