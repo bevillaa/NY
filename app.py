@@ -1492,7 +1492,7 @@ st.markdown("""
     gap: 0 !important;
     margin: 0 !important;
     padding: 0 !important;
-    border-radius: 6px !important;
+    border-radius: 4px !important;
     font-size: 0 !important;
     line-height: 0 !important;
     overflow: hidden !important;portant;
