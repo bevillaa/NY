@@ -1139,10 +1139,10 @@ st.markdown("""
     overflow: visible !important;
   }
   [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(1) {
-    flex: 0 0 clamp(42px, 4.5vw, 54px) !important;
-    width: clamp(42px, 4.5vw, 54px) !important;
-    min-width: clamp(42px, 4.5vw, 54px) !important;
-    max-width: clamp(42px, 4.5vw, 54px) !important;
+    flex: 0 0 46px !important;
+    width: 46px !important;
+    min-width: 46px !important;
+    max-width: 46px !important;
   }
   [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(2) {
     display: block !important;
@@ -1154,27 +1154,26 @@ st.markdown("""
     overflow: hidden !important;
   }
   [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(n+3) {
-    flex: 0 0 clamp(24px, 2.2vw, 26px) !important;
-    width: clamp(24px, 2.2vw, 26px) !important;
-    min-width: clamp(24px, 2.2vw, 26px) !important;
-    max-width: clamp(24px, 2.2vw, 26px) !important;
-    height: 26px !important;
-    min-height: 26px !important;
-    max-height: 26px !important;
+    flex: 0 0 30px !important;
+    width: 30px !important;
+    min-width: 30px !important;
+    max-width: 30px !important;
+    height: 30px !important;
+    min-height: 30px !important;
+    max-height: 30px !important;
   }
 
-  /* Hora en Ruta: ancho compacto real, incluido el contenedor del widget. */
+  /* Hora en Ruta: caja real de 74 × 34, no solo ancho del input interior. */
   [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(1) [data-testid="stTextInput"],
   [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(1) [data-baseweb="input"],
-  [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(1) [data-baseweb="base-input"],
-  [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(1) [data-testid="stTextInput"] > div > div {
+  [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(1) [data-baseweb="base-input"] {
     box-sizing: border-box !important;
     width: 100% !important;
     min-width: 0 !important;
     max-width: 100% !important;
-    height: 30px !important;
-    min-height: 30px !important;
-    max-height: 30px !important;
+    height: 34px !important;
+    min-height: 34px !important;
+    max-height: 34px !important;
     margin: 0 !important;
     padding: 0 !important;
   }
@@ -1182,10 +1181,10 @@ st.markdown("""
     box-sizing: border-box !important;
     width: 100% !important;
     min-width: 0 !important;
-    height: 26px !important;
-    min-height: 26px !important;
-    padding: 0 2px !important;
-    font-size: 0.70rem !important;
+    height: 32px !important;
+    min-height: 32px !important;
+    padding: 0 3px !important;
+    font-size: 0.78rem !important;
     line-height: 1 !important;
     text-align: center !important;
     font-variant-numeric: tabular-nums !important;
@@ -1217,7 +1216,7 @@ st.markdown("""
     transform: none !important;
   }
 
-  /* Guardados: información flexible seguida de dos acciones compactas. */
+  /* Guardados: información flexible seguida de dos acciones de 30 px. */
   [class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"] {
     display: flex !important;
     flex-flow: row nowrap !important;
@@ -1248,16 +1247,16 @@ st.markdown("""
     max-width: none !important;
   }
   [class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(n+2) {
-    flex: 0 0 clamp(24px, 2.2vw, 26px) !important;
-    width: clamp(24px, 2.2vw, 26px) !important;
-    min-width: clamp(24px, 2.2vw, 26px) !important;
-    max-width: clamp(24px, 2.2vw, 26px) !important;
-    height: 26px !important;
-    min-height: 26px !important;
-    max-height: 26px !important;
+    flex: 0 0 30px !important;
+    width: 30px !important;
+    min-width: 30px !important;
+    max-width: 30px !important;
+    height: 30px !important;
+    min-height: 30px !important;
+    max-height: 30px !important;
   }
 
-  /* Las acciones usan el mismo contenedor y la misma caja física compacta. */
+  /* Las tres acciones usan el mismo contenedor y la misma caja física. */
   [class*="st-key-it-edit-button-wrap-"],
   [class*="st-key-it-map-button-wrap-"],
   [class*="st-key-it-visit-checkbox-wrap-"],
@@ -1265,13 +1264,13 @@ st.markdown("""
   [class*="st-key-saved-map-button-wrap-"] {
     box-sizing: border-box !important;
     display: flex !important;
-    flex: 0 0 clamp(24px, 2.2vw, 26px) !important;
-    width: clamp(24px, 2.2vw, 26px) !important;
-    min-width: clamp(24px, 2.2vw, 26px) !important;
-    max-width: clamp(24px, 2.2vw, 26px) !important;
-    height: 26px !important;
-    min-height: 26px !important;
-    max-height: 26px !important;
+    flex: 0 0 30px !important;
+    width: 30px !important;
+    min-width: 30px !important;
+    max-width: 30px !important;
+    height: 30px !important;
+    min-height: 30px !important;
+    max-height: 30px !important;
     align-items: center !important;
     justify-content: center !important;
     margin: 0 !important;
@@ -1291,13 +1290,13 @@ st.markdown("""
   [class*="st-key-it-visit-checkbox-wrap-"] [data-testid="stCheckbox"] {
     box-sizing: border-box !important;
     display: flex !important;
-    flex: 0 0 clamp(24px, 2.2vw, 26px) !important;
-    width: clamp(24px, 2.2vw, 26px) !important;
-    min-width: clamp(24px, 2.2vw, 26px) !important;
-    max-width: clamp(24px, 2.2vw, 26px) !important;
-    height: 26px !important;
-    min-height: 26px !important;
-    max-height: 26px !important;
+    flex: 0 0 30px !important;
+    width: 30px !important;
+    min-width: 30px !important;
+    max-width: 30px !important;
+    height: 30px !important;
+    min-height: 30px !important;
+    max-height: 30px !important;
     align-items: center !important;
     justify-content: center !important;
     margin: 0 !important;
@@ -1310,13 +1309,13 @@ st.markdown("""
   [class*="st-key-saved-map-button-wrap-"] a {
     box-sizing: border-box !important;
     display: inline-flex !important;
-    flex: 0 0 clamp(24px, 2.2vw, 26px) !important;
-    width: clamp(24px, 2.2vw, 26px) !important;
-    min-width: clamp(24px, 2.2vw, 26px) !important;
-    max-width: clamp(24px, 2.2vw, 26px) !important;
-    height: 26px !important;
-    min-height: 26px !important;
-    max-height: 26px !important;
+    flex: 0 0 30px !important;
+    width: 30px !important;
+    min-width: 30px !important;
+    max-width: 30px !important;
+    height: 30px !important;
+    min-height: 30px !important;
+    max-height: 30px !important;
     align-items: center !important;
     justify-content: center !important;
     margin: 0 !important;
@@ -1332,14 +1331,14 @@ st.markdown("""
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23334155' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m16 4 4 4'/%3E%3Cpath d='M4 20l4-.9L19 8a2.1 2.1 0 0 0-3-3L5 16z'/%3E%3C/svg%3E") !important;
     background-repeat: no-repeat !important;
     background-position: center !important;
-    background-size: 16px 16px !important;
+    background-size: 18px 18px !important;
   }
   [class*="st-key-it-map-button-wrap-"] a,
   [class*="st-key-saved-map-button-wrap-"] a {
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23334155' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m3 6 6-3 6 3 6-3v15l-6 3-6-3-6 3z'/%3E%3Cpath d='M9 3v15M15 6v15'/%3E%3C/svg%3E") !important;
     background-repeat: no-repeat !important;
     background-position: center !important;
-    background-size: 16px 16px !important;
+    background-size: 18px 18px !important;
   }
   [class*="st-key-it-edit-button-wrap-"] button > *,
   [class*="st-key-saved-edit-button-wrap-"] button > *,
@@ -1350,13 +1349,13 @@ st.markdown("""
   [class*="st-key-it-visit-checkbox-wrap-"] [data-testid="stCheckbox"] > label {
     box-sizing: border-box !important;
     display: flex !important;
-    flex: 0 0 clamp(24px, 2.2vw, 26px) !important;
-    width: clamp(24px, 2.2vw, 26px) !important;
-    min-width: clamp(24px, 2.2vw, 26px) !important;
-    max-width: clamp(24px, 2.2vw, 26px) !important;
-    height: 26px !important;
-    min-height: 26px !important;
-    max-height: 26px !important;
+    flex: 0 0 30px !important;
+    width: 30px !important;
+    min-width: 30px !important;
+    max-width: 30px !important;
+    height: 30px !important;
+    min-height: 30px !important;
+    max-height: 30px !important;
     align-items: center !important;
     justify-content: center !important;
     gap: 0 !important;
@@ -1369,20 +1368,20 @@ st.markdown("""
   [class*="st-key-it-visit-checkbox-wrap-"] [data-testid="stCheckbox"] label > div:first-child {
     box-sizing: border-box !important;
     display: flex !important;
-    width: 16px !important;
-    min-width: 16px !important;
-    max-width: 16px !important;
-    height: 16px !important;
-    min-height: 16px !important;
-    max-height: 16px !important;
+    width: 18px !important;
+    min-width: 18px !important;
+    max-width: 18px !important;
+    height: 18px !important;
+    min-height: 18px !important;
+    max-height: 18px !important;
     align-items: center !important;
     justify-content: center !important;
     margin: 0 !important;
     padding: 0 !important;
   }
   [class*="st-key-it-visit-checkbox-wrap-"] [data-testid="stCheckbox"] input[type="checkbox"] {
-    width: 14px !important;
-    height: 14px !important;
+    width: 16px !important;
+    height: 16px !important;
     margin: 0 !important;
   }
   [class*="st-key-it-visit-checkbox-wrap-"] [data-testid="stCheckbox"] label p {
@@ -1400,7 +1399,7 @@ st.markdown("""
     flex-flow: row nowrap !important;
     align-items: center !important;
     justify-content: flex-start !important;
-    gap: 1px !important;
+    gap: 4px !important;
     width: max-content !important;
     max-width: 100% !important;
     min-width: 0 !important;
@@ -1418,13 +1417,12 @@ st.markdown("""
   [class*="st-key-saved-controls-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:first-child,
   [class*="st-key-saved-controls-row-"] [data-testid="column"]:first-child [data-testid="stTextInput"],
   [class*="st-key-saved-controls-row-"] [data-testid="column"]:first-child [data-baseweb="input"],
-  [class*="st-key-saved-controls-row-"] [data-testid="column"]:first-child [data-baseweb="base-input"],
-  [class*="st-key-saved-controls-row-"] [data-testid="column"]:first-child [data-testid="stTextInput"] > div > div {
+  [class*="st-key-saved-controls-row-"] [data-testid="column"]:first-child [data-baseweb="base-input"] {
     box-sizing: border-box !important;
-    flex: 0 0 66px !important;
-    width: 66px !important;
-    min-width: 66px !important;
-    max-width: 66px !important;
+    flex: 0 0 64px !important;
+    width: 64px !important;
+    min-width: 64px !important;
+    max-width: 64px !important;
     height: 30px !important;
     min-height: 30px !important;
     max-height: 30px !important;
@@ -1437,21 +1435,20 @@ st.markdown("""
     min-width: 0 !important;
     height: 28px !important;
     min-height: 28px !important;
-    padding: 0 2px !important;
-    font-size: 0.70rem !important;
+    padding: 0 3px !important;
+    font-size: 0.72rem !important;
     line-height: 1 !important;
     text-align: center !important;
   }
   [class*="st-key-saved-controls-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(2),
   [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(2) [data-testid="stSelectbox"],
   [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(2) [data-baseweb="select"],
-  [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(2) [data-baseweb="select"] > div,
-  [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(2) [data-testid="stSelectbox"] > div > div {
+  [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(2) [data-baseweb="select"] > div {
     box-sizing: border-box !important;
-    flex: 0 0 108px !important;
-    width: 108px !important;
-    min-width: 108px !important;
-    max-width: 108px !important;
+    flex: 0 0 100px !important;
+    width: 100px !important;
+    min-width: 100px !important;
+    max-width: 100px !important;
     height: 30px !important;
     min-height: 30px !important;
     max-height: 30px !important;
@@ -1459,7 +1456,7 @@ st.markdown("""
     font-size: 0.84rem !important;
   }
   [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(2) [data-baseweb="select"] * {
-    font-size: 0.70rem !important;
+    font-size: 0.72rem !important;
     line-height: 1 !important;
   }
 
@@ -3523,19 +3520,12 @@ if seccion_principal == "💸Divisas":
     with col_tax:
         st.markdown("#### 🧾 Calculadora de Cuenta, Tax & Tips")
 
-        subtotal_bill = st.number_input(
-            "Subtotal de la cuenta ($ USD):",
-            min_value=0.0,
-            value=65.0,
-            step=5.0,
-            key="calc_subtotal_bill"
-        )
-        modo_tax = st.radio(
-            "Impuesto:",
-            ["Con tax", "Sin tax"],
-            index=0,
-            horizontal=True,
-            key="calc_modo_tax"
+        subtotal_bill = st.number_input("Subtotal de la cuenta ($ USD):", min_value=0.0, value=65.0, step=5.0)
+        aplicar_tax = st.toggle(
+            "Aplicar NYC Tax (8,875%)",
+            value=True,
+            key="calc_aplicar_tax",
+            help="Desactívalo para calcular la cuenta sin impuesto."
         )
 
         col_t1, col_t2 = st.columns(2)
@@ -3551,7 +3541,6 @@ if seccion_principal == "💸Divisas":
         with col_t2:
             base_calc = st.radio("Calcular propina sobre:", ["Subtotal sin tax", "Total con tax"])
 
-        aplicar_tax = modo_tax == "Con tax"
         tax_rate = 0.08875 if aplicar_tax else 0.0
         tax_total = subtotal_bill * tax_rate
         base_tip = subtotal_bill if "Subtotal" in base_calc else (subtotal_bill + tax_total)
