@@ -1728,5 +1728,47 @@
     "tipo": "Exterior",
     "lista_origen": "Life Out",
     "visitado": false
+  },
+  {
+    "id": 131,
+    "nombre": "Brooklyn Borough Hall",
+    "lat": 40.692844199999996,
+    "lon": -73.990303,
+    "dia": 0,
+    "hora": "",
+    "direccion": "209 Joralemon St, Brooklyn, NY 11201, United States",
+    "nota": "",
+    "categoria": "📍 Otros",
+    "tipo": "Exterior",
+    "lista_origen": "Markets",
+    "visitado": false
+  },
+  {
+    "id": 132,
+    "nombre": "Grand Bazaar NYC",
+    "lat": 40.7803915,
+    "lon": -73.9770625,
+    "dia": 0,
+    "hora": "",
+    "direccion": "100 W 77th St, New York, NY 10024, United States",
+    "nota": "",
+    "categoria": "📍 Otros",
+    "tipo": "Exterior",
+    "lista_origen": "Markets",
+    "visitado": false
+  },
+  {
+    "id": 133,
+    "nombre": "Macy’s Holiday Square by Urbanspace",
+    "lat": 40.750247,
+    "lon": -73.98770999999999,
+    "dia": 0,
+    "hora": "",
+    "direccion": "Herald Square, New York, NY 10001, United States",
+    "nota": "",
+    "categoria": "🛍️ Compras",
+    "tipo": "Interior",
+    "lista_origen": "Markets",
+    "visitado": false
   }
 ]
