@@ -1483,7 +1483,7 @@ st.markdown("""
     border: 0 !important;
     background: transparent !important;
     line-height: 0 !important;
-    transform: translateY(-3px) !important;
+    transform: translateY(-4px) !important;
   }
 
   [class*="st-key-it-visit-checkbox-wrap-"] [data-testid="stCheckbox"] label > div:first-of-type {
