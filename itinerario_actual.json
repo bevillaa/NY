@@ -500,19 +500,6 @@
     "nota": ""
   },
   {
-    "id": 41,
-    "nombre": "Buvette",
-    "lat": 40.7335,
-    "lon": -74.0038,
-    "dia": 0,
-    "direccion": "42 Grove St, New York, NY 10014",
-    "categoria": "☀️ Spots",
-    "tipo": "Interior",
-    "visitado": false,
-    "hora": "",
-    "nota": ""
-  },
-  {
     "id": 42,
     "nombre": "Casa Piada",
     "lat": 40.7358245,
