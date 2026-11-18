@@ -4179,10 +4179,10 @@ st.markdown(
             line-height: 1 !important;
         }
     }
-    </style>
-    """,
-    unsafe_allow_html=True
-)
+            </style>
+            """,
+            unsafe_allow_html=True
+        )
 
     st.progress(progreso / 100 if total_pendientes else 0, text=f"{progreso}% completado")
 
