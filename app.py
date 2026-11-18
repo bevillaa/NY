@@ -1457,8 +1457,7 @@ st.markdown("""
     overflow: hidden !important;
   }
 
-  [
-  "] button {
+  [class*="st-key-it-edit-button-wrap-"] button {
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23334155' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m16 4 4 4'/%3E%3Cpath d='M4 20l4-.9L19 8a2.1 2.1 0 0 0-3-3L5 16z'/%3E%3C/svg%3E") !important;
     background-repeat: no-repeat !important;
     background-position: center !important;
@@ -1479,9 +1478,7 @@ st.markdown("""
 
   [class*="st-key-it-visit-checkbox-wrap-"] [data-testid="stCheckbox"] > label {
     box-sizing: border-box !important;
-    box-sizing: border-box !important;
-    display: inline-flex !important;
-    flex: none !important;
+    display: flex !important;
     width: 24px !important;
     min-width: 24px !important;
     max-width: 24px !important;
@@ -1490,12 +1487,11 @@ st.markdown("""
     max-height: 24px !important;
     align-items: center !important;
     justify-content: center !important;
+    gap: 0 !important;
     margin: 0 !important;
     padding: 0 !important;
-    border-radius: 6px !important;
-    font-size: 0 !important;
-    line-height: 0 !important;
-    overflow: hidden !important;portant;
+    border: 0 !important;
+    background: transparent !important;
     line-height: 0 !important;
     transform: translateY(-4px) !important;
   }
