@@ -4180,6 +4180,62 @@ if seccion_principal == "☑️Checklist":
         st.markdown(
             """
             <style>
+            /* Acciones de checklist con el mismo lenguaje visual que Guardados. */
+            [class*="st-key-checklist-edit-button-wrap-"],
+            [class*="st-key-checklist-delete-button-wrap-"] {
+                box-sizing: border-box !important;
+                display: flex !important;
+                flex: none !important;
+                width: 24px !important;
+                min-width: 24px !important;
+                max-width: 24px !important;
+                height: 24px !important;
+                min-height: 24px !important;
+                max-height: 24px !important;
+                align-items: center !important;
+                justify-content: center !important;
+                margin: 0 !important;
+                padding: 0 !important;
+                overflow: visible !important;
+            }
+            [class*="st-key-checklist-edit-button-wrap-"] [data-testid="stButton"],
+            [class*="st-key-checklist-delete-button-wrap-"] [data-testid="stButton"],
+            [class*="st-key-checklist-edit-button-wrap-"] button,
+            [class*="st-key-checklist-delete-button-wrap-"] button {
+                box-sizing: border-box !important;
+                display: inline-flex !important;
+                flex: none !important;
+                width: 24px !important;
+                min-width: 24px !important;
+                max-width: 24px !important;
+                height: 24px !important;
+                min-height: 24px !important;
+                max-height: 24px !important;
+                align-items: center !important;
+                justify-content: center !important;
+                margin: 0 !important;
+                padding: 0 !important;
+                border: 1px solid #CBD5E1 !important;
+                border-radius: 7px !important;
+                background-color: #FFFFFF !important;
+                background-repeat: no-repeat !important;
+                background-position: center !important;
+                background-size: 16px 16px !important;
+                font-size: 0 !important;
+                line-height: 0 !important;
+                overflow: hidden !important;
+            }
+            [class*="st-key-checklist-edit-button-wrap-"] button {
+                background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23334155' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m16 4 4 4'/%3E%3Cpath d='M4 20l4-.9L19 8a2.1 2.1 0 0 0-3-3L5 16z'/%3E%3C/svg%3E") !important;
+            }
+            [class*="st-key-checklist-delete-button-wrap-"] button {
+                background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23334155' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3 6h18'/%3E%3Cpath d='M8 6V4h8v2'/%3E%3Cpath d='m19 6-1 14H6L5 6'/%3E%3Cpath d='M10 11v5M14 11v5'/%3E%3C/svg%3E") !important;
+            }
+            [class*="st-key-checklist-edit-button-wrap-"] button > *,
+            [class*="st-key-checklist-delete-button-wrap-"] button > * {
+                display: none !important;
+            }
+
             @media (max-width: 640px) {
                 [class*="st-key-checklist_item_"] [data-testid="stHorizontalBlock"] {
                     display: grid !important;
@@ -4243,12 +4299,12 @@ if seccion_principal == "☑️Checklist":
                     display: inline-flex !important;
                     align-items: center !important;
                     justify-content: center !important;
-                    width: 20px !important;
-                    min-width: 20px !important;
-                    max-width: 20px !important;
-                    height: 20px !important;
-                    min-height: 20px !important;
-                    max-height: 20px !important;
+                    width: 24px !important;
+                    min-width: 24px !important;
+                    max-width: 24px !important;
+                    height: 24px !important;
+                    min-height: 24px !important;
+                    max-height: 24px !important;
                     padding: 0 !important;
                     margin: 0 0 0 auto !important;
                     font-size: 12px !important;
@@ -4318,28 +4374,30 @@ if seccion_principal == "☑️Checklist":
 
                 # Lápiz pequeño a la derecha.
                 with col_editar:
-                    if st.button(
-                        "✏️",
-                        key=f"editar_pendiente_{pid}",
-                        help="Editar tarea"
-                    ):
-                        st.session_state["_checklist_edicion_id"] = pid
-                        st.rerun()
-
-                # Papelera pequeña al extremo derecho.
-                with col_borrar:
-                    if st.button(
-                        "🗑️",
-                        key=f"borrar_pendiente_{pid}",
-                        help="Eliminar de la checklist"
-                    ):
-                        pendientes.pop(indice)
-                        st.session_state.config_viaje["checklist_pendientes"] = pendientes
-
-                        if guardar_config_viaje(st.session_state.config_viaje):
-                            if st.session_state.get("_checklist_edicion_id") == pid:
-                                st.session_state.pop("_checklist_edicion_id", None)
+                    with st.container(key=f"checklist-edit-button-wrap-{pid}"):
+                        if st.button(
+                            " ",
+                            key=f"editar_pendiente_{pid}",
+                            help="Editar tarea"
+                        ):
+                            st.session_state["_checklist_edicion_id"] = pid
                             st.rerun()
+
+                # Papelera al extremo derecho, con el mismo estilo que Guardados.
+                with col_borrar:
+                    with st.container(key=f"checklist-delete-button-wrap-{pid}"):
+                        if st.button(
+                            " ",
+                            key=f"borrar_pendiente_{pid}",
+                            help="Eliminar de la checklist"
+                        ):
+                            pendientes.pop(indice)
+                            st.session_state.config_viaje["checklist_pendientes"] = pendientes
+
+                            if guardar_config_viaje(st.session_state.config_viaje):
+                                if st.session_state.get("_checklist_edicion_id") == pid:
+                                    st.session_state.pop("_checklist_edicion_id", None)
+                                st.rerun()
 
                 # Formulario para editar la tarea.
                 if st.session_state.get("_checklist_edicion_id") == pid:
