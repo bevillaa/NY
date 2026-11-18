@@ -577,7 +577,7 @@ st.markdown("""
     .ny-card-header {   line-height: 1.3 !important; }
     .place-sheet {   min-width: 0 !important; }
     /* Regla segura por defecto: filas de formulario y filtros se apilan. */
-    [data-testid="stHorizontalBlock"]:not([class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"]):not([class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"]):not([class*="st-key-saved-controls-row-"] [data-testid="stHorizontalBlock"]):not([class*="st-key-guardados-header-row"] [data-testid="stHorizontalBlock"]) {
+    [data-testid="stHorizontalBlock"]:not([class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"]):not([class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"]):not([class*="st-key-saved-controls-row-"] [data-testid="stHorizontalBlock"]):not([class*="st-key-guardados-header-row"] [data-testid="stHorizontalBlock"]):not([class*="st-key-checklist_item_"] [data-testid="stHorizontalBlock"]) {
       display: flex !important;
       flex-wrap: wrap !important;
       align-items: flex-start !important;
@@ -585,7 +585,7 @@ st.markdown("""
       width: 100% !important;
       min-width: 0 !important;
     }
-    [data-testid="stHorizontalBlock"]:not([class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"]):not([class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"]):not([class*="st-key-saved-controls-row-"] [data-testid="stHorizontalBlock"]):not([class*="st-key-guardados-header-row"] [data-testid="stHorizontalBlock"]) > [data-testid="stColumn"] {
+    [data-testid="stHorizontalBlock"]:not([class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"]):not([class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"]):not([class*="st-key-saved-controls-row-"] [data-testid="stHorizontalBlock"]):not([class*="st-key-guardados-header-row"] [data-testid="stHorizontalBlock"]):not([class*="st-key-checklist_item_"] [data-testid="stHorizontalBlock"]) > [data-testid="stColumn"] {
       flex: 1 1 100% !important;
       width: 100% !important;
       min-width: 0 !important;
