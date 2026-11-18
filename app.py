@@ -1400,7 +1400,7 @@ st.markdown("""
     display: none !important;
   }
 
-  /* Checkbox: caja y control visible de 32px, igual que lápiz y mapa. */
+  /* Checkbox: área de alineación de 32px y casilla visible de 18x18px. */
   [class*="st-key-it-visit-checkbox-wrap-"] [data-testid="stCheckbox"] > label {
     box-sizing: border-box !important;
     display: flex !important;
@@ -1426,12 +1426,12 @@ st.markdown("""
     box-sizing: border-box !important;
     display: flex !important;
     flex: none !important;
-    width: 32px !important;
-    min-width: 32px !important;
-    max-width: 32px !important;
-    height: 32px !important;
-    min-height: 32px !important;
-    max-height: 32px !important;
+    width: 18px !important;
+    min-width: 18px !important;
+    max-width: 18px !important;
+    height: 18px !important;
+    min-height: 18px !important;
+    max-height: 18px !important;
     align-items: center !important;
     justify-content: center !important;
     margin: 0 !important;
@@ -1443,12 +1443,12 @@ st.markdown("""
 
   [class*="st-key-it-visit-checkbox-wrap-"] [data-testid="stCheckbox"] input[type="checkbox"] {
     box-sizing: border-box !important;
-    width: 32px !important;
-    min-width: 32px !important;
-    max-width: 32px !important;
-    height: 32px !important;
-    min-height: 32px !important;
-    max-height: 32px !important;
+    width: 18px !important;
+    min-width: 18px !important;
+    max-width: 18px !important;
+    height: 18px !important;
+    min-height: 18px !important;
+    max-height: 18px !important;
     margin: 0 !important;
   }
 
@@ -1456,7 +1456,7 @@ st.markdown("""
     display: none !important;
   }
 
-  /* GUARDADOS: hora y día con anchos y alturas definidos en un solo sitio. */
+  /* GUARDADOS: hora y día en dos columnas idénticas y controles de 44px. */
   [class*="st-key-saved-controls-row-"] {
     display: block !important;
     width: 100% !important;
@@ -1467,15 +1467,15 @@ st.markdown("""
 
   [class*="st-key-saved-controls-row-"] [data-testid="stHorizontalBlock"] {
     display: grid !important;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
     grid-auto-flow: row !important;
     align-items: center !important;
-    justify-content: start !important;
+    justify-content: stretch !important;
     column-gap: 8px !important;
     row-gap: 0 !important;
     width: 100% !important;
-    max-width: 288px !important;
     min-width: 0 !important;
+    max-width: 100% !important;
     overflow: visible !important;
   }
 
@@ -1491,26 +1491,23 @@ st.markdown("""
     overflow: visible !important;
   }
 
-  [class*="st-key-saved-controls-row-"] [data-testid="stColumn"]:first-child [data-testid="stElementContainer"],
-  [class*="st-key-saved-controls-row-"] [data-testid="stColumn"]:nth-child(2) [data-testid="stElementContainer"],
-  [class*="st-key-saved-controls-row-"] [data-testid="stColumn"]:first-child [data-testid="stTextInput"],
-  [class*="st-key-saved-controls-row-"] [data-testid="stColumn"]:nth-child(2) [data-testid="stSelectbox"],
-  [class*="st-key-saved-controls-row-"] [data-testid="stColumn"]:nth-child(2) [data-baseweb="select"],
-  [class*="st-key-saved-controls-row-"] [data-testid="stColumn"]:first-child [data-testid="stTextInput"] > div,
-  [class*="st-key-saved-controls-row-"] [data-testid="stColumn"]:first-child [data-testid="stTextInput"] > div > div,
-  [class*="st-key-saved-controls-row-"] [data-testid="stColumn"]:first-child [data-baseweb="input"],
-  [class*="st-key-saved-controls-row-"] [data-testid="stColumn"]:first-child [data-baseweb="base-input"],
-  [class*="st-key-saved-controls-row-"] [data-testid="stColumn"]:nth-child(2) [data-testid="stSelectbox"] > div,
-  [class*="st-key-saved-controls-row-"] [data-testid="stColumn"]:nth-child(2) [data-baseweb="select"],
-  [class*="st-key-saved-controls-row-"] [data-testid="stColumn"]:nth-child(2) [data-baseweb="select"] > div,
-  [class*="st-key-saved-controls-row-"] [data-testid="stColumn"]:nth-child(2) [data-baseweb="select"] > div > div,
-  [class*="st-key-saved-controls-row-"] [data-testid="stColumn"]:nth-child(2) [data-baseweb="select"] [role="combobox"] {
+  [class*="st-key-saved-controls-row-"] [data-testid="stColumn"] [data-testid="stElementContainer"],
+  [class*="st-key-saved-controls-row-"] [data-testid="stColumn"] [data-testid="stTextInput"],
+  [class*="st-key-saved-controls-row-"] [data-testid="stColumn"] [data-testid="stSelectbox"],
+  [class*="st-key-saved-controls-row-"] [data-testid="stColumn"] [data-baseweb="input"],
+  [class*="st-key-saved-controls-row-"] [data-testid="stColumn"] [data-baseweb="base-input"],
+  [class*="st-key-saved-controls-row-"] [data-testid="stColumn"] [data-baseweb="select"],
+  [class*="st-key-saved-controls-row-"] [data-testid="stColumn"] [data-baseweb="select"] > div,
+  [class*="st-key-saved-controls-row-"] [data-testid="stColumn"] [data-baseweb="select"] > div > div,
+  [class*="st-key-saved-controls-row-"] [data-testid="stColumn"] [data-baseweb="select"] [role="combobox"],
+  [class*="st-key-saved-controls-row-"] [data-testid="stColumn"] [data-testid="stTextInput"] > div,
+  [class*="st-key-saved-controls-row-"] [data-testid="stColumn"] [data-testid="stTextInput"] > div > div {
     box-sizing: border-box !important;
+    display: flex !important;
+    align-items: center !important;
     width: 100% !important;
     min-width: 0 !important;
     max-width: 100% !important;
-    display: flex !important;
-    align-items: center !important;
     height: 44px !important;
     min-height: 44px !important;
     max-height: 44px !important;
@@ -1518,24 +1515,20 @@ st.markdown("""
     padding: 0 !important;
   }
 
-  [class*="st-key-saved-controls-row-"] [data-testid="stColumn"]:first-child [data-baseweb="input"] > input,
-  [class*="st-key-saved-controls-row-"] [data-testid="stColumn"]:nth-child(2) [data-baseweb="select"] [role="combobox"] {
+  [class*="st-key-saved-controls-row-"] [data-testid="stColumn"] input,
+  [class*="st-key-saved-controls-row-"] [data-testid="stColumn"] [data-baseweb="select"] [role="combobox"] {
     box-sizing: border-box !important;
-    height: 44px !important;
-    min-height: 44px !important;
-    max-height: 44px !important;
-    line-height: 44px !important;
-  }
-
-  [class*="st-key-saved-controls-row-"] [data-testid="stColumn"]:first-child input {
-    box-sizing: border-box !important;
-    display: block !important;
     width: 100% !important;
     min-width: 0 !important;
     max-width: 100% !important;
     height: 44px !important;
     min-height: 44px !important;
     max-height: 44px !important;
+    line-height: 44px !important;
+  }
+
+  [class*="st-key-saved-controls-row-"] [data-testid="stColumn"] input {
+    display: block !important;
     margin: 0 !important;
     padding: 0 7px !important;
     font-size: 0.98rem !important;
@@ -1546,13 +1539,6 @@ st.markdown("""
   [class*="st-key-saved-controls-row-"] [data-testid="stColumn"]:nth-child(2) [data-baseweb="select"] * {
     font-size: 0.95rem !important;
     line-height: 1.15 !important;
-  }
-
-  @media (max-width: 380px) {
-    [class*="st-key-saved-controls-row-"] [data-testid="stHorizontalBlock"] {
-      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) !important;
-      max-width: 260px !important;
-    }
   }
 
 </style>
