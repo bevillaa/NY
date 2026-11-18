@@ -4088,7 +4088,7 @@ if seccion_principal == "☑️Checklist":
     with st.container(border=True):
         st.markdown("**➕ Añadir algo pendiente**")
         nuevo_pendiente = st.text_input(
-            "¿Qué falta?",
+            "¿Qué te falta?",
             placeholder="Ej: Comprar entradas para el mirador, visitar Central Park...",
             key="checklist_nuevo_texto"
         )
@@ -4096,7 +4096,7 @@ if seccion_principal == "☑️Checklist":
         with col_tipo:
             tipo_pendiente = st.selectbox(
                 "Tipo",
-                ["Hacer", "Comprar", "Revisar", "Reservar", "Otro"],
+                ["Hacer", "Ver / Visitar", "Comprar", "Revisar", "Reservar", "Otro"],
                 key="checklist_nuevo_tipo"
             )
         with col_detalle:
@@ -4175,56 +4175,80 @@ if seccion_principal == "☑️Checklist":
             st.info("No hay elementos en esta categoría.")
     
     else:
-        # En móvil, mantener casilla, título y acciones en una sola fila.
+        # En móvil, replicar la distribución de Guardados: una sola fila
+        # con texto flexible y las dos acciones fijas a la derecha.
         st.markdown(
             """
             <style>
             @media (max-width: 640px) {
-                [class*="st-key-checklist_item_"] [data-testid="stHorizontalBlock"]:has(> [data-testid="column"]:nth-child(4)) {
-                    display: flex !important;
-                    flex-direction: row !important;
-                    flex-wrap: nowrap !important;
+                [class*="st-key-checklist_item_"] [data-testid="stHorizontalBlock"] {
+                    display: grid !important;
+                    grid-template-columns: 22px minmax(0, 1fr) 24px 24px !important;
+                    grid-auto-flow: row !important;
                     align-items: center !important;
-                    justify-content: flex-start !important;
-                    gap: 0.15rem !important;
+                    justify-content: stretch !important;
+                    column-gap: 4px !important;
+                    row-gap: 0 !important;
                     width: 100% !important;
-                }
-
-                [class*="st-key-checklist_item_"] [data-testid="stHorizontalBlock"]:has(> [data-testid="column"]:nth-child(4)) > [data-testid="column"] {
                     min-width: 0 !important;
-                    flex-shrink: 1 !important;
+                    max-width: 100% !important;
+                    overflow: visible !important;
                 }
 
-                [class*="st-key-checklist_item_"] [data-testid="stHorizontalBlock"]:has(> [data-testid="column"]:nth-child(4)) > [data-testid="column"]:nth-child(1) {
-                    flex: 0 0 1.65rem !important;
-                    width: 1.65rem !important;
-                }
-
-                [class*="st-key-checklist_item_"] [data-testid="stHorizontalBlock"]:has(> [data-testid="column"]:nth-child(4)) > [data-testid="column"]:nth-child(2) {
-                    flex: 1 1 auto !important;
+                [class*="st-key-checklist_item_"] [data-testid="stHorizontalBlock"] > [data-testid="stColumn"] {
+                    box-sizing: border-box !important;
+                    display: flex !important;
+                    flex: none !important;
                     width: auto !important;
                     min-width: 0 !important;
+                    max-width: none !important;
+                    margin: 0 !important;
+                    padding: 0 !important;
+                    overflow: visible !important;
                 }
 
-                [class*="st-key-checklist_item_"] [data-testid="stHorizontalBlock"]:has(> [data-testid="column"]:nth-child(4)) > [data-testid="column"]:nth-child(3),
-                [class*="st-key-checklist_item_"] [data-testid="stHorizontalBlock"]:has(> [data-testid="column"]:nth-child(4)) > [data-testid="column"]:nth-child(4) {
-                    display: flex !important;
-                    flex: 0 0 20px !important;
+                [class*="st-key-checklist_item_"] [data-testid="stHorizontalBlock"] > [data-testid="stColumn"]:nth-child(1) {
+                    grid-column: 1 !important;
+                    width: 22px !important;
+                    min-width: 22px !important;
+                    max-width: 22px !important;
+                }
+
+                [class*="st-key-checklist_item_"] [data-testid="stHorizontalBlock"] > [data-testid="stColumn"]:nth-child(2) {
+                    grid-column: 2 !important;
+                    width: 100% !important;
+                    min-width: 0 !important;
+                    max-width: 100% !important;
+                }
+
+                [class*="st-key-checklist_item_"] [data-testid="stHorizontalBlock"] > [data-testid="stColumn"]:nth-child(3) {
+                    grid-column: 3 !important;
+                    width: 24px !important;
+                    min-width: 24px !important;
+                    max-width: 24px !important;
+                    justify-content: flex-end !important;
+                }
+
+                [class*="st-key-checklist_item_"] [data-testid="stHorizontalBlock"] > [data-testid="stColumn"]:nth-child(4) {
+                    grid-column: 4 !important;
+                    width: 24px !important;
+                    min-width: 24px !important;
+                    max-width: 24px !important;
+                    justify-content: flex-end !important;
+                }
+
+                [class*="st-key-checklist_item_"] [data-testid="stHorizontalBlock"] > [data-testid="stColumn"]:nth-child(3) button,
+                [class*="st-key-checklist_item_"] [data-testid="stHorizontalBlock"] > [data-testid="stColumn"]:nth-child(4) button {
+                    box-sizing: border-box !important;
+                    display: inline-flex !important;
+                    align-items: center !important;
+                    justify-content: center !important;
                     width: 20px !important;
                     min-width: 20px !important;
                     max-width: 20px !important;
-                    justify-content: flex-end !important;
-                    align-items: center !important;
-                }
-
-                [class*="st-key-checklist_item_"] [data-testid="stHorizontalBlock"]:has(> [data-testid="column"]:nth-child(4)) > [data-testid="column"]:nth-child(3) button,
-                [class*="st-key-checklist_item_"] [data-testid="stHorizontalBlock"]:has(> [data-testid="column"]:nth-child(4)) > [data-testid="column"]:nth-child(4) button {
-                    width: 12px !important;
-                    min-width: 12px !important;
-                    max-width: 12px !important;
-                    height: 12px !important;
-                    min-height: 12px !important;
-                    max-height: 12px !important;
+                    height: 20px !important;
+                    min-height: 20px !important;
+                    max-height: 20px !important;
                     padding: 0 !important;
                     margin: 0 0 0 auto !important;
                     font-size: 12px !important;
