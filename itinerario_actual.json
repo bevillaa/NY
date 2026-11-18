@@ -54,19 +54,6 @@
     "lista_origen": "NY"
   },
   {
-    "id": 5,
-    "nombre": "Macy's Herald Square",
-    "lat": 40.7505,
-    "lon": -73.9883,
-    "dia": 0,
-    "direccion": "151 W 34th St, New York, NY 10001",
-    "categoria": "🛍️ Compras",
-    "tipo": "Interior",
-    "visitado": false,
-    "hora": "",
-    "nota": "Centro comercial"
-  },
-  {
     "id": 6,
     "nombre": "Empire State Building",
     "lat": 40.7488,
