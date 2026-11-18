@@ -697,7 +697,7 @@ st.markdown("""
     .place-list-address {
       font-size: 0.72rem !important;
       line-height: 1.28 !important;
-      margin-top: 3px !important;
+      margin-top: 2px !important;
     }
     .place-note {
       font-size: 0.70rem !important;
@@ -1133,7 +1133,7 @@ st.markdown("""
     grid-auto-flow: row !important;
     align-items: center !important;
     justify-content: stretch !important;
-    column-gap: 3px !important;
+    column-gap: 1px !important;
     row-gap: 0 !important;
     width: 100% !important;
     min-width: 0 !important;
