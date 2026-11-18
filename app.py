@@ -1695,7 +1695,7 @@ def bloque_nota_html(nota: str) -> str:
 CATEGORIAS_CANONICAS = [
     "🍽️ Gastronomía",
     "🍪 Dulces",
-    "🍸 Copas",
+    "🍸 Rooftop",
     "🎷 Ocio",
     "🛍️ Compras",
     "🎄 Christmas markets",
@@ -1709,7 +1709,7 @@ MAPA_MIGRACION_CAT = {
     "🍕 Gastronomía": "🍽️ Gastronomía",
     "🍕 Gastronomía & Restaurantes": "🍽️ Gastronomía",
     "🍪 Cafeterías & Dulces": "🍪 Dulces",
-    "🍸 Copas": "🍸 Copas",
+    "🍸 Rooftop": "🍸 Rooftop",
     "🎷 Jazz, Música & Ocio": "🎷 Ocio",
     "🛍️ Compras & Outlets": "🛍️ Compras",
     "🏛️ Museos & Monumentos": "🏛️ Cultura",
@@ -1747,7 +1747,7 @@ def clasificar_lugar(nombre: str, direccion: str = "", lista_origen: str = "") -
         if any(k in orig for k in ['ocio', 'jazz', 'música', 'musica', 'teatro', 'show', 'deporte']):
             return "🎷 Ocio", "Interior"
         if any(k in orig for k in ['copas', 'rooftop', 'bar', 'cocktail', 'pub']):
-            return "🍸 Copas", "Interior"
+            return "🍸 Rooftop", "Interior"
         if any(k in orig for k in ['dulce', 'sweet', 'cafeter', 'coffee', 'bakery', 'postre', 'helad', 'cookie']):
             return "🍪 Dulces", "Interior"
         if any(k in orig for k in ['compra', 'tienda', 'outlet', 'shop', 'shopping']):
@@ -1774,7 +1774,7 @@ def clasificar_lugar(nombre: str, direccion: str = "", lista_origen: str = "") -
 
     # 5. Copas
     if any(k in texto_busqueda for k in ['rooftop', 'westlight', 'harriet', 'magic hour', '230 fifth', 'bar 54', 'hudson vu', 'buvette', 'dante', 'speakeasy', 'cocktail', 'wine bar', 'tavern', 'brewery', 'pub', 'lounge', 'biergarten', 'taproom', 'saloon', 'copas']) or ('bar' in nom.split() and 'shake' not in nom and 'salad' not in nom and 'sushi' not in nom) or 'm social' in nom:
-        return "🍸 Copas", "Interior"
+        return "🍸 Rooftop", "Interior"
 
     # 6. Dulces
     if any(k in texto_busqueda for k in ['bakery', 'cookie', 'cookies', 'levain', 'granny', 'caffè panna', 'caffe panna', 'krispy kreme', 'sweets', 'sweet', 'pastry', 'pâtisserie', 'donut', 'doughnut', 'helado', 'ice cream', 'gelato', 'louis vuitton nyc', 'café', 'cafe', 'coffee', 'starbucks', 'magnolia', 'chocolate', 'chocolat', 'cupcake', 'cheesecake', 'crepe', 'waffle', 'boba', 'matcha', 'tea room', 'dulce']):
