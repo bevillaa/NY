@@ -1714,5 +1714,19 @@
     "tipo": "Interior",
     "lista_origen": "Food",
     "visitado": false
+  },
+  {
+    "id": 130,
+    "nombre": "Chantelle NYC",
+    "lat": 40.718322799999996,
+    "lon": -73.98895209999999,
+    "dia": 0,
+    "hora": "",
+    "direccion": "92 Ludlow St, New York, NY 10002, United States",
+    "nota": "",
+    "categoria": "📍 Otros",
+    "tipo": "Exterior",
+    "lista_origen": "Life Out",
+    "visitado": false
   }
 ]
