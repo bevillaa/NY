@@ -1689,9 +1689,11 @@ def bloque_nota_html(nota: str) -> str:
     return f'<div class="place-note">📝 {contenido}</div>' if contenido else ""
 
 
+
 # =============================================================================
 # 3. MOTOR INTELIGENTE DE CATEGORÍAS
 # =============================================================================
+
 CATEGORIAS_CANONICAS = [
     "🍽️ Gastronomía",
     "🍪 Dulces",
@@ -1721,6 +1723,23 @@ MAPA_MIGRACION_CAT = {
     "Otros": "📍 Otros"
 }
 
+
+# NUEVO: DICCIONARIO DE CLASIFICACIÓN DIRECTA DE LISTAS GOOGLE MAPS
+# None significa que se utilizará la clasificación habitual por palabras clave.
+
+CLASIFICACION_LISTAS_GMAPS = {
+    "tiendas & outlets": ("🛍️ Compras", "Interior"),
+    "ny sweets": ("🍪 Dulces", "Interior"),
+    "food": ("🍽️ Gastronomía", "Interior"),
+    "rooftop": ("🍸 Copas", "Interior"),
+    "spots": ("☀️ Spots", "Exterior"),
+    "ny": None,
+    "life out": ("🎷 Ocio", "Interior"),
+    "markets": ("🎄 Christmas markets", "Exterior"),
+    "places": None,
+}
+
+
 def normalizar_categoria(cat: str) -> str:
     if not cat:
         return "☀️ Spots"
@@ -1733,35 +1752,29 @@ def normalizar_categoria(cat: str) -> str:
             return c
     return "☀️ Spots"
 
+
 def clasificar_lugar(nombre: str, direccion: str = "", lista_origen: str = "") -> tuple[str, str]:
     nom = (nombre or "").strip().lower()
     dir_txt = (direccion or "").strip().lower()
     texto_busqueda = f"{nom} {dir_txt}"
     orig = (lista_origen or "").strip().lower()
 
-    # 0. PRIORIDAD MÁXIMA: Clasificación directa por el nombre de la lista de Google Maps
+    # 0. PRIORIDAD MÁXIMA: CLASIFICACIÓN DIRECTA POR LISTA DE GOOGLE MAPS
+
     if orig and orig not in ("google maps", "lista", "sin lista"):
-        if 'hotel' in orig or 'alojamiento' in orig:
-            return "🏨 Hotel", "Interior"
-        if any(k in orig for k in ['christmas', 'holiday', 'navidad', 'mercadillo', 'winter village']):
-            tipo_nav = "Interior" if 'santaland' in texto_busqueda else "Exterior"
-            return "🎄 Christmas markets", tipo_nav
-        if any(k in orig for k in ['mirador', 'observator']):
-            return "🏙️ Miradores", "Interior"
-        if any(k in orig for k in ['ocio', 'jazz', 'música', 'musica', 'teatro', 'show', 'deporte']):
-            return "🎷 Ocio", "Interior"
-        if any(k in orig for k in ['copas', 'rooftop', 'bar', 'cocktail', 'pub']):
-            return "🍸 Copas", "Interior"
-        if any(k in orig for k in ['dulce', 'sweet', 'cafeter', 'coffee', 'bakery', 'postre', 'helad', 'cookie']):
-            return "🍪 Dulces", "Interior"
-        if any(k in orig for k in ['compra', 'tienda', 'outlet', 'shop', 'shopping']):
-            return "🛍️ Compras", "Interior"
-        if any(k in orig for k in ['gastronom', 'food', 'restaurante', 'comer', 'cenar', 'comida']):
-            return "🍽️ Gastronomía", "Interior"
-        if any(k in orig for k in ['cultura', 'museo', 'monumento', 'historia']):
-            return "🏛️ Cultura", "Interior"
-        if any(k in orig for k in ['spot', 'parque', 'puente', 'paseo', 'barrio']):
-            return "☀️ Spots", "Exterior"
+
+        # Comprobar si el nombre de la lista existe en nuestro diccionario
+        clasificacion_lista = CLASIFICACION_LISTAS_GMAPS.get(orig)
+
+        # Si la lista tiene una categoría asignada, devolverla directamente
+        if clasificacion_lista is not None:
+            categoria, tipo = clasificacion_lista
+
+            # Excepción: Santaland siempre es interior
+            if orig == "markets" and "santaland" in texto_busqueda:
+                tipo = "Interior"
+
+            return categoria, tipo
 
     # 1. Hotel
     if ('hotel' in nom or 'inn' in nom or 'alojamiento' in nom or 'hostel' in nom) and any(k in texto_busqueda for k in ['riu', 'marriott', 'hilton', 'hyatt', 'sheraton', 'base', 'courtyard', 'westin', 'intercontinental']):
@@ -1808,6 +1821,7 @@ def clasificar_lugar(nombre: str, direccion: str = "", lista_origen: str = "") -
 
     # 11. Otros (fallback cuando no encaja en ninguna categoría anterior ni en el nombre de lista)
     return "📍 Otros", "Exterior"
+
 
 def selectbox_sin_teclado(*args, **kwargs):
     """Selectbox sin búsqueda de texto: el móvil solo muestra las opciones.
