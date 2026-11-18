@@ -524,7 +524,7 @@ st.markdown("""
     .ny-card-header {   line-height: 1.3 !important; }
     .place-sheet {   min-width: 0 !important; }
     /* Regla segura por defecto: filas de formulario y filtros se apilan. */
-    :where([data-testid="stHorizontalBlock"]:not([class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"]):not([class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"]):not([class*="st-key-saved-controls-row-"] [data-testid="stHorizontalBlock"])) {
+    [data-testid="stHorizontalBlock"]:not([class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"]):not([class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"]):not([class*="st-key-saved-controls-row-"] [data-testid="stHorizontalBlock"]) {
       display: flex !important;
       flex-wrap: wrap !important;
       align-items: flex-start !important;
@@ -532,7 +532,7 @@ st.markdown("""
       width: 100% !important;
       min-width: 0 !important;
     }
-    :where([data-testid="stHorizontalBlock"]:not([class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"]):not([class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"]):not([class*="st-key-saved-controls-row-"] [data-testid="stHorizontalBlock"])) > [data-testid="column"] {
+    [data-testid="stHorizontalBlock"]:not([class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"]):not([class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"]):not([class*="st-key-saved-controls-row-"] [data-testid="stHorizontalBlock"]) > [data-testid="column"] {
       flex: 1 1 100% !important;
       width: 100% !important;
       min-width: 0 !important;
@@ -1125,9 +1125,9 @@ st.markdown("""
      4 px de separación respecto al campo de hora.                        */
   [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] {
     display: grid !important;
-    grid-template-columns: 60px minmax(0, 1fr) 32px 32px 32px !important;
+    grid-template-columns: 60px minmax(0, 1fr) repeat(3, 32px) !important;
     grid-template-rows: auto !important;
-    grid-auto-flow: column !important;
+    grid-auto-flow: row !important;
     align-items: start !important;
     justify-content: stretch !important;
     column-gap: 1px !important;
@@ -1249,8 +1249,8 @@ st.markdown("""
      Los iconos de acción alineados entre sí con 1 px de separación. */
   [class*="st-key-saved-heading-row-"]:not([class*="st-key-saved-heading-row-list-"]) [data-testid="stHorizontalBlock"] {
     display: grid !important;
-    grid-template-columns: minmax(0, 1fr) 32px 32px !important;
-    grid-auto-flow: column !important;
+    grid-template-columns: minmax(0, 1fr) repeat(2, 32px) !important;
+    grid-auto-flow: row !important;
     align-items: start !important;
     justify-content: stretch !important;
     column-gap: 1px !important;
@@ -1445,8 +1445,8 @@ st.markdown("""
   }
   [class*="st-key-saved-controls-row-"] [data-testid="stHorizontalBlock"] {
     display: grid !important;
-    grid-template-columns: minmax(100px, 0.8fr) minmax(180px, 1.4fr) !important;
-    grid-auto-flow: column !important;
+    grid-template-columns: 100px 180px !important;
+    grid-auto-flow: row !important;
     align-items: center !important;
     justify-content: start !important;
     column-gap: 8px !important;
@@ -1527,7 +1527,7 @@ st.markdown("""
   }
   @media (max-width: 380px) {
     [class*="st-key-saved-controls-row-"] [data-testid="stHorizontalBlock"] {
-      grid-template-columns: minmax(92px, 0.8fr) minmax(160px, 1.4fr) !important;
+      grid-template-columns: 92px 160px !important;
       max-width: 100% !important;
     }
   }
