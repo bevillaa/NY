@@ -1460,6 +1460,136 @@ st.markdown("""
     line-height: 1.05 !important;
   }
 
+
+  /* Ajustes finales solicitados: controles compactos en Ruta y Guardados. */
+  [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] {
+    gap: 1px !important;
+  }
+  [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(1) {
+    flex: 0 0 56px !important;
+    width: 56px !important;
+    min-width: 56px !important;
+    max-width: 56px !important;
+  }
+  [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(1) [data-testid="stTextInput"],
+  [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(1) [data-baseweb="input"],
+  [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(1) [data-baseweb="base-input"] {
+    width: 56px !important;
+    min-width: 56px !important;
+    max-width: 56px !important;
+    height: 30px !important;
+    min-height: 30px !important;
+    max-height: 30px !important;
+  }
+  [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(1) input {
+    height: 28px !important;
+    min-height: 28px !important;
+    padding: 0 2px !important;
+    font-size: 0.72rem !important;
+  }
+  [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(n+3) {
+    flex: 0 0 30px !important;
+    width: 30px !important;
+    min-width: 30px !important;
+    max-width: 30px !important;
+  }
+  [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"],
+  [class*="st-key-saved-heading-row-"] [data-testid="stHorizontalBlock"] {
+    column-gap: 1px !important;
+    gap: 1px !important;
+  }
+  [class*="st-key-saved-controls-row-"] [data-testid="stHorizontalBlock"] {
+    gap: 4px !important;
+  }
+  [class*="st-key-saved-controls-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:first-child,
+  [class*="st-key-saved-controls-row-"] [data-testid="column"]:first-child [data-testid="stTextInput"],
+  [class*="st-key-saved-controls-row-"] [data-testid="column"]:first-child [data-baseweb="input"],
+  [class*="st-key-saved-controls-row-"] [data-testid="column"]:first-child [data-baseweb="base-input"] {
+    flex: 0 0 68px !important;
+    width: 68px !important;
+    min-width: 68px !important;
+    max-width: 68px !important;
+    height: 30px !important;
+    min-height: 30px !important;
+    max-height: 30px !important;
+  }
+  [class*="st-key-saved-controls-row-"] [data-testid="column"]:first-child input {
+    height: 28px !important;
+    min-height: 28px !important;
+    padding: 0 3px !important;
+    font-size: 0.72rem !important;
+  }
+  [class*="st-key-saved-controls-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(2),
+  [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(2) [data-testid="stSelectbox"],
+  [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(2) [data-baseweb="select"],
+  [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(2) [data-baseweb="select"] > div {
+    flex: 0 0 98px !important;
+    width: 98px !important;
+    min-width: 98px !important;
+    max-width: 98px !important;
+    height: 30px !important;
+    min-height: 30px !important;
+    max-height: 30px !important;
+    font-size: 0.72rem !important;
+  }
+  [class*="st-key-saved-controls-row-"] [data-testid="column"]:nth-child(2) [data-baseweb="select"] * {
+    font-size: 0.72rem !important;
+    line-height: 1 !important;
+  }
+  @media (max-width: 768px) {
+    [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] {
+      flex-flow: row nowrap !important;
+      gap: 1px !important;
+    }
+    [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(1) {
+      flex: 0 0 50px !important;
+      width: 50px !important;
+      min-width: 50px !important;
+      max-width: 50px !important;
+    }
+    [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(1) [data-testid="stTextInput"],
+    [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(1) [data-baseweb="input"],
+    [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(1) [data-baseweb="base-input"] {
+      width: 50px !important;
+      min-width: 50px !important;
+      max-width: 50px !important;
+      height: 28px !important;
+      min-height: 28px !important;
+      max-height: 28px !important;
+    }
+    [class*="st-key-it-heading-row-"] [data-testid="column"]:nth-child(1) input {
+      height: 26px !important;
+      min-height: 26px !important;
+      font-size: 0.68rem !important;
+      padding: 0 1px !important;
+    }
+    [class*="st-key-it-heading-row-"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(n+3) {
+      flex: 0 0 28px !important;
+      width: 28px !important;
+      min-width: 28px !important;
+      max-width: 28px !important;
+    }
+    [class*="st-key-it-edit-button-wrap-"],
+    [class*="st-key-it-map-button-wrap-"],
+    [class*="st-key-it-visit-checkbox-wrap-"] {
+      flex-basis: 28px !important;
+      width: 28px !important;
+      min-width: 28px !important;
+      max-width: 28px !important;
+      height: 28px !important;
+    }
+    [class*="st-key-it-edit-button-wrap-"] button,
+    [class*="st-key-it-map-button-wrap-"] a {
+      flex-basis: 28px !important;
+      width: 28px !important;
+      min-width: 28px !important;
+      max-width: 28px !important;
+      height: 28px !important;
+      min-height: 28px !important;
+      max-height: 28px !important;
+    }
+  }
+
 </style>
 """, unsafe_allow_html=True)
 
@@ -3520,8 +3650,19 @@ if seccion_principal == "💸Divisas":
     with col_tax:
         st.markdown("#### 🧾 Calculadora de Cuenta, Tax & Tips")
 
-        subtotal_bill = st.number_input("Subtotal de la cuenta ($ USD):", min_value=0.0, value=65.0, step=5.0)
-        es_ropa_exenta = st.checkbox("👕 Todo el subtotal son prendas/calzado elegibles de menos de $110 por artículo (sin Tax)")
+        subtotal_bill = st.number_input(
+            "Subtotal de la cuenta ($ USD):",
+            min_value=0.0,
+            value=65.0,
+            step=5.0,
+            key="calc_subtotal_bill"
+        )
+        aplicar_tax = st.toggle(
+            "Aplicar NYC Tax (8,875%)",
+            value=True,
+            key="calc_aplicar_tax",
+            help="Desactívalo para calcular el total sin impuesto."
+        )
 
         col_t1, col_t2 = st.columns(2)
         with col_t1:
@@ -3536,7 +3677,7 @@ if seccion_principal == "💸Divisas":
         with col_t2:
             base_calc = st.radio("Calcular propina sobre:", ["Subtotal sin tax", "Total con tax"])
 
-        tax_rate = 0.0 if es_ropa_exenta else 0.08875
+        tax_rate = 0.08875 if aplicar_tax else 0.0
         tax_total = subtotal_bill * tax_rate
         base_tip = subtotal_bill if "Subtotal" in base_calc else (subtotal_bill + tax_total)
         tip_total = base_tip * (pct_propina / 100.0)
@@ -3550,8 +3691,8 @@ if seccion_principal == "💸Divisas":
             <b>${subtotal_bill:.2f}</b>
           </div>
           <div style="display:flex; justify-content:space-between; margin-bottom:6px; font-size:0.88rem;">
-            <span style="color:#0F172A;">NYC  Tax ({'Exenta' if es_ropa_exenta else '8.875%'}):</span>
-            <b>{'Exenta ($0.00)' if es_ropa_exenta else f'${tax_total:.2f}'}</b>
+            <span style="color:#0F172A;">NYC Tax ({'8.875%' if aplicar_tax else 'Desactivado'}):</span>
+            <b>{f'${tax_total:.2f}' if aplicar_tax else 'Sin tax ($0.00)'}</b>
           </div>
           <div style="display:flex; justify-content:space-between; margin-bottom:10px; font-size:0.88rem;">
             <span style="color:#0F172A;">Propina ({pct_propina:.1f}%):</span>
