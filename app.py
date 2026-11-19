@@ -4128,10 +4128,11 @@ if seccion_principal == "☑️Checklist":
         }
         [data-testid="stForm"] [data-testid="stHorizontalBlock"] > [data-testid="stColumn"] {
           display: block !important;
-          flex: 1 1 0% !important;
-          width: 50% !important;
+          box-sizing: border-box !important;
+          flex: 0 0 calc(50% - 4px) !important;
+          width: calc(50% - 4px) !important;
           min-width: 0 !important;
-          max-width: 50% !important;
+          max-width: calc(50% - 4px) !important;
           padding: 0 !important;
         }
         [data-testid="stForm"] [data-testid="stFormSubmitButton"],
@@ -4144,7 +4145,6 @@ if seccion_principal == "☑️Checklist":
         }
         [data-testid="stForm"] [data-testid="stFormSubmitButton"] > button {
           min-height: 42px !important;
-          min-width: 32px !important;
           height: auto !important;
           justify-content: center !important;
           align-items: center !important;
@@ -4541,7 +4541,7 @@ if seccion_principal == "☑️Checklist":
                             key=f"nota_editar_pendiente_{pid}"
                         )
 
-                        col_guardar_ed, col_cancelar_ed, col_espacio = st.columns([2, 1, 1], gap="small")
+                        col_guardar_ed, col_cancelar_ed = st.columns([1, 1], gap="small")
 
                         with col_guardar_ed:
                             guardar_edicion = st.form_submit_button(
