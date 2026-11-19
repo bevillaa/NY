@@ -4422,8 +4422,8 @@ if seccion_principal == "☑️Checklist":
                 /* Mismo tamaño y dimensiones para Guardar y Cancelar en la edición de Checklist */
             [class*="st-key-checklist_edit_form_wrap_"] [data-testid="stHorizontalBlock"] {
                 display: grid !important;
-                grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) !important;
-                gap: 8px !important;
+                grid-template-columns: minmax(0, 1fr) minmax(0, 2fr) !important;
+                gap: 2px !important;
                 align-items: stretch !important;
                 width: 100% !important;
             }
