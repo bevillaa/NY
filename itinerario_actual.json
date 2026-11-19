@@ -1771,5 +1771,19 @@
     "tipo": "Interior",
     "lista_origen": "Food",
     "visitado": false
+  },
+  {
+    "id": 136,
+    "nombre": "Motek 57",
+    "lat": 40.7640765,
+    "lon": -73.97710959999999,
+    "dia": 0,
+    "hora": "",
+    "direccion": "60 W 57th St, New York, NY 10019, United States",
+    "nota": "",
+    "categoria": "🍽️ Gastronomía",
+    "tipo": "Interior",
+    "lista_origen": "Food",
+    "visitado": false
   }
 ]
