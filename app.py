@@ -1543,7 +1543,7 @@ st.markdown("""
     border-radius: 5px !important;
     font-size: 0 !important;
     line-height: 0 !important;
-    overflow: hidden !important;portant;
+    overflow: hidden !important;
     line-height: 0 !important;
     transform: translateY(-4px) !important;
   }
