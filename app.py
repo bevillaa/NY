@@ -4143,7 +4143,8 @@ if seccion_principal == "☑️Checklist":
           max-width: 100% !important;
         }
         [data-testid="stForm"] [data-testid="stFormSubmitButton"] > button {
-          min-height: 52px !important;
+          min-height: 42px !important;
+          min-width: 32px !important;
           height: auto !important;
           justify-content: center !important;
           align-items: center !important;
