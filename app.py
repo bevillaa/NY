@@ -4115,10 +4115,9 @@ if seccion_principal == "☑️Checklist":
         font-size: 24px !important;
       }
 
-      /* FORMULARIO: se selecciona el bloque real del formulario, no una
-         supuesta clase st-key del formulario que Streamlit no aplica aquí. */
+      /* FORMULARIO GENERAL: solo para formularios que NO sean el editor de checklist. */
       @media (max-width: 900px) {
-        [data-testid="stForm"] [data-testid="stHorizontalBlock"] {
+        [data-testid="stForm"]:not([class*="st-key-checklist_edit_form_wrap_"] [data-testid="stForm"]) [data-testid="stHorizontalBlock"] {
           display: flex !important;
           flex-direction: row !important;
           flex-wrap: nowrap !important;
@@ -4126,7 +4125,7 @@ if seccion_principal == "☑️Checklist":
           gap: 8px !important;
           width: 100% !important;
         }
-        [data-testid="stForm"] [data-testid="stHorizontalBlock"] > [data-testid="stColumn"] {
+        [data-testid="stForm"]:not([class*="st-key-checklist_edit_form_wrap_"] [data-testid="stForm"]) [data-testid="stHorizontalBlock"] > [data-testid="stColumn"] {
           display: block !important;
           flex: 1 1 0% !important;
           width: 50% !important;
@@ -4134,15 +4133,15 @@ if seccion_principal == "☑️Checklist":
           max-width: 50% !important;
           padding: 0 !important;
         }
-        [data-testid="stForm"] [data-testid="stFormSubmitButton"],
-        [data-testid="stForm"] [data-testid="stFormSubmitButton"] > button {
+        [data-testid="stForm"]:not([class*="st-key-checklist_edit_form_wrap_"] [data-testid="stForm"]) [data-testid="stFormSubmitButton"],
+        [data-testid="stForm"]:not([class*="st-key-checklist_edit_form_wrap_"] [data-testid="stForm"]) [data-testid="stFormSubmitButton"] > button {
           box-sizing: border-box !important;
           display: flex !important;
           width: 100% !important;
           min-width: 0 !important;
           max-width: 100% !important;
         }
-        [data-testid="stForm"] [data-testid="stFormSubmitButton"] > button {
+        [data-testid="stForm"]:not([class*="st-key-checklist_edit_form_wrap_"] [data-testid="stForm"]) [data-testid="stFormSubmitButton"] > button {
           min-height: 42px !important;
           min-width: 32px !important;
           height: auto !important;
@@ -4185,8 +4184,6 @@ if seccion_principal == "☑️Checklist":
     # El formulario permanece oculto hasta que se pulse el botón +.
     if "checklist_formulario_abierto" not in st.session_state:
         st.session_state["checklist_formulario_abierto"] = False
-
-
 
     with st.container():
         if st.session_state["checklist_formulario_abierto"]:
@@ -4282,7 +4279,7 @@ if seccion_principal == "☑️Checklist":
             st.success("¡Todo hecho! No tienes tareas pendientes.")
         else:
             st.info("No hay elementos en esta categoría.")
-    
+
     else:
         # En móvil, replicar la distribución de Guardados: una sola fila
         # con texto flexible y las dos acciones fijas a la derecha.
@@ -4346,7 +4343,7 @@ if seccion_principal == "☑️Checklist":
             }
 
             @media (max-width: 640px) {
-                [class*="st-key-checklist_item_"] [data-testid="stHorizontalBlock"] {
+                [class*="st-key-checklist_item_"] > [data-testid="stVerticalBlock"] > [data-testid="stHorizontalBlock"] {
                     display: grid !important;
                     grid-template-columns: 22px minmax(0, 1fr) 24px 24px !important;
                     grid-auto-flow: row !important;
@@ -4360,7 +4357,7 @@ if seccion_principal == "☑️Checklist":
                     overflow: visible !important;
                 }
 
-                [class*="st-key-checklist_item_"] [data-testid="stHorizontalBlock"] > [data-testid="stColumn"] {
+                [class*="st-key-checklist_item_"] > [data-testid="stVerticalBlock"] > [data-testid="stHorizontalBlock"] > [data-testid="stColumn"] {
                     box-sizing: border-box !important;
                     display: flex !important;
                     flex: none !important;
@@ -4372,21 +4369,21 @@ if seccion_principal == "☑️Checklist":
                     overflow: visible !important;
                 }
 
-                [class*="st-key-checklist_item_"] [data-testid="stHorizontalBlock"] > [data-testid="stColumn"]:nth-child(1) {
+                [class*="st-key-checklist_item_"] > [data-testid="stVerticalBlock"] > [data-testid="stHorizontalBlock"] > [data-testid="stColumn"]:nth-child(1) {
                     grid-column: 1 !important;
                     width: 22px !important;
                     min-width: 22px !important;
                     max-width: 22px !important;
                 }
 
-                [class*="st-key-checklist_item_"] [data-testid="stHorizontalBlock"] > [data-testid="stColumn"]:nth-child(2) {
+                [class*="st-key-checklist_item_"] > [data-testid="stVerticalBlock"] > [data-testid="stHorizontalBlock"] > [data-testid="stColumn"]:nth-child(2) {
                     grid-column: 2 !important;
                     width: 100% !important;
                     min-width: 0 !important;
                     max-width: 100% !important;
                 }
 
-                [class*="st-key-checklist_item_"] [data-testid="stHorizontalBlock"] > [data-testid="stColumn"]:nth-child(3) {
+                [class*="st-key-checklist_item_"] > [data-testid="stVerticalBlock"] > [data-testid="stHorizontalBlock"] > [data-testid="stColumn"]:nth-child(3) {
                     grid-column: 3 !important;
                     width: 24px !important;
                     min-width: 24px !important;
@@ -4394,7 +4391,7 @@ if seccion_principal == "☑️Checklist":
                     justify-content: flex-end !important;
                 }
 
-                [class*="st-key-checklist_item_"] [data-testid="stHorizontalBlock"] > [data-testid="stColumn"]:nth-child(4) {
+                [class*="st-key-checklist_item_"] > [data-testid="stVerticalBlock"] > [data-testid="stHorizontalBlock"] > [data-testid="stColumn"]:nth-child(4) {
                     grid-column: 4 !important;
                     width: 24px !important;
                     min-width: 24px !important;
@@ -4402,8 +4399,8 @@ if seccion_principal == "☑️Checklist":
                     justify-content: flex-end !important;
                 }
 
-                [class*="st-key-checklist_item_"] [data-testid="stHorizontalBlock"] > [data-testid="stColumn"]:nth-child(3) button,
-                [class*="st-key-checklist_item_"] [data-testid="stHorizontalBlock"] > [data-testid="stColumn"]:nth-child(4) button {
+                [class*="st-key-checklist_item_"] > [data-testid="stVerticalBlock"] > [data-testid="stHorizontalBlock"] > [data-testid="stColumn"]:nth-child(3) button,
+                [class*="st-key-checklist_item_"] > [data-testid="stVerticalBlock"] > [data-testid="stHorizontalBlock"] > [data-testid="stColumn"]:nth-child(4) button {
                     box-sizing: border-box !important;
                     display: inline-flex !important;
                     align-items: center !important;
@@ -4419,20 +4416,24 @@ if seccion_principal == "☑️Checklist":
                     font-size: 12px !important;
                     line-height: 1 !important;
                 }
-                /* Mismo tamaño y dimensiones para Guardar y Cancelar en la edición de Checklist */
+            }
+
+            /* Fila de botones Guardar y Cancelar en la edición de Checklist:
+               dos columnas iguales, sin anchos fijos que se salgan o solapen. */
             [class*="st-key-checklist_edit_form_wrap_"] [data-testid="stHorizontalBlock"] {
                 display: grid !important;
-                grid-template-columns: minmax(0, 1fr) minmax(0, 2fr) !important;
+                grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) !important;
                 gap: 8px !important;
                 align-items: stretch !important;
                 width: 100% !important;
+                min-width: 0 !important;
             }
 
-            [class*="st-key-checklist_edit_form_wrap_"] [data-testid="stHorizontalBlock"] > [data-testid="stColumn"]:first-child [data-testid="stFormSubmitButton"],
-            [class*="st-key-checklist_edit_form_wrap_"] [data-testid="stHorizontalBlock"] > [data-testid="stColumn"]:first-child [data-testid="stFormSubmitButton"] > button {
-                width: 150px !important;
-                min-width: 150px !important;
-                max-width: 150px !important;
+            [class*="st-key-checklist_edit_form_wrap_"] [data-testid="stHorizontalBlock"] > [data-testid="stColumn"] {
+                display: flex !important;
+                width: 100% !important;
+                min-width: 0 !important;
+                max-width: 100% !important;
                 padding: 0 !important;
                 margin: 0 !important;
             }
@@ -4445,17 +4446,16 @@ if seccion_principal == "☑️Checklist":
                 width: 100% !important;
                 min-width: 0 !important;
                 max-width: 100% !important;
-                height: 48px !important;
-                min-height: 48px !important;
-                max-height: 48px !important;
-                padding: 0 14px !important;
+                height: 44px !important;
+                min-height: 44px !important;
+                max-height: 44px !important;
+                padding: 0 12px !important;
                 margin: 0 !important;
-                font-size: 0.95rem !important;
+                font-size: 0.92rem !important;
                 line-height: 1 !important;
                 font-weight: 700 !important;
                 white-space: nowrap !important;
                 box-sizing: border-box !important;
-            }
             }
             </style>
             """,
