@@ -4423,16 +4423,16 @@ if seccion_principal == "☑️Checklist":
             [class*="st-key-checklist_edit_form_wrap_"] [data-testid="stHorizontalBlock"] {
                 display: grid !important;
                 grid-template-columns: minmax(0, 1fr) minmax(0, 2fr) !important;
-                gap: 2px !important;
+                gap: 8px !important;
                 align-items: stretch !important;
                 width: 100% !important;
             }
 
-            [class*="st-key-checklist_edit_form_wrap_"] [data-testid="stHorizontalBlock"] > [data-testid="stColumn"] {
-                display: flex !important;
-                width: 100% !important;
-                min-width: 0 !important;
-                max-width: 100% !important;
+            [class*="st-key-checklist_edit_form_wrap_"] [data-testid="stHorizontalBlock"] > [data-testid="stColumn"]:first-child [data-testid="stFormSubmitButton"],
+            [class*="st-key-checklist_edit_form_wrap_"] [data-testid="stHorizontalBlock"] > [data-testid="stColumn"]:first-child [data-testid="stFormSubmitButton"] > button {
+                width: 180px !important;
+                min-width: 180px !important;
+                max-width: 180px !important;
                 padding: 0 !important;
                 margin: 0 !important;
             }
