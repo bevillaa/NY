@@ -4078,7 +4078,16 @@ def _anadir_pendiente_checklist():
 
 if seccion_principal == "☑️Checklist":
     st.markdown("---")
-    st.markdown('<div class="ny-card-header">☑️ Checklist de pendientes</div>', unsafe_allow_html=True)
+    col_checklist_titulo, col_checklist_anadir = st.columns([1, 0.12], vertical_alignment="center")
+    with col_checklist_titulo:
+        st.markdown('<div class="ny-card-header">☑️ Checklist de pendientes</div>', unsafe_allow_html=True)
+    with col_checklist_anadir:
+        st.button(
+            "＋",
+            key="btn_abrir_formulario_checklist",
+            help="Añadir un pendiente",
+            on_click=lambda: st.session_state.__setitem__("checklist_formulario_abierto", True)
+        )
     st.caption("Un sitio para apuntar todo lo que falta.")
 
     pendientes = st.session_state.config_viaje.setdefault("checklist_pendientes", [])
@@ -4102,18 +4111,30 @@ if seccion_principal == "☑️Checklist":
         font-size: 1.15rem !important;
         line-height: 1 !important;
       }
+      [class*="st-key-form_editar_pendiente_"] [data-testid="stHorizontalBlock"] {
+        display: grid !important;
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+        gap: 8px !important;
+        width: 100% !important;
+      }
+      [class*="st-key-form_editar_pendiente_"] [data-testid="stColumn"] {
+        width: 100% !important;
+        min-width: 0 !important;
+        flex: none !important;
+        padding: 0 !important;
+      }
+      [class*="st-key-form_editar_pendiente_"] [data-testid="stFormSubmitButton"],
+      [class*="st-key-form_editar_pendiente_"] [data-testid="stFormSubmitButton"] button {
+        width: 100% !important;
+        min-width: 0 !important;
+        min-height: 36px !important;
+        height: 36px !important;
+      }
     </style>
     """, unsafe_allow_html=True)
 
-    with st.container(border=True):
-        if not st.session_state["checklist_formulario_abierto"]:
-            st.button(
-                "＋",
-                key="btn_abrir_formulario_checklist",
-                help="Añadir un pendiente",
-                on_click=lambda: st.session_state.__setitem__("checklist_formulario_abierto", True)
-            )
-        else:
+    with st.container():
+        if st.session_state["checklist_formulario_abierto"]:
             with st.expander("Añadir detalle", expanded=True):
                 nuevo_pendiente = st.text_input(
                     "¿Qué te falta?",
