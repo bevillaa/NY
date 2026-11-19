@@ -4541,7 +4541,7 @@ if seccion_principal == "☑️Checklist":
                             key=f"nota_editar_pendiente_{pid}"
                         )
 
-                        col_guardar_ed, col_cancelar_ed = st.columns([1, 1], gap="small")
+                        col_guardar_ed, col_cancelar_ed, col_espacio = st.columns([2, 1, 1], gap="small")
 
                         with col_guardar_ed:
                             guardar_edicion = st.form_submit_button(
