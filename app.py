@@ -4281,12 +4281,10 @@ if seccion_principal == "☑️Checklist":
             st.info("No hay elementos en esta categoría.")
 
     else:
-        # En móvil, replicar la distribución de Guardados: una sola fila
-        # con texto flexible y las dos acciones fijas a la derecha.
         st.markdown(
             """
             <style>
-            /* Acciones de checklist con el mismo lenguaje visual que Guardados. */
+            /* Lápiz y papelera siempre a la derecha en la fila principal de cada tarea */
             [class*="st-key-checklist-edit-button-wrap-"],
             [class*="st-key-checklist-delete-button-wrap-"] {
                 box-sizing: border-box !important;
@@ -4300,7 +4298,7 @@ if seccion_principal == "☑️Checklist":
                 max-height: 24px !important;
                 align-items: center !important;
                 justify-content: center !important;
-                margin: 0 !important;
+                margin: 0 0 0 auto !important;
                 padding: 0 !important;
                 overflow: visible !important;
             }
@@ -4343,7 +4341,7 @@ if seccion_principal == "☑️Checklist":
             }
 
             @media (max-width: 640px) {
-                [class*="st-key-checklist_item_"] > [data-testid="stVerticalBlock"] > [data-testid="stHorizontalBlock"] {
+                [class*="st-key-checklist_item_"] [data-testid="stHorizontalBlock"]:not([class*="st-key-checklist_edit_form_wrap_"] *) {
                     display: grid !important;
                     grid-template-columns: 22px minmax(0, 1fr) 24px 24px !important;
                     grid-auto-flow: row !important;
@@ -4357,7 +4355,7 @@ if seccion_principal == "☑️Checklist":
                     overflow: visible !important;
                 }
 
-                [class*="st-key-checklist_item_"] > [data-testid="stVerticalBlock"] > [data-testid="stHorizontalBlock"] > [data-testid="stColumn"] {
+                [class*="st-key-checklist_item_"] [data-testid="stHorizontalBlock"]:not([class*="st-key-checklist_edit_form_wrap_"] *) > [data-testid="stColumn"] {
                     box-sizing: border-box !important;
                     display: flex !important;
                     flex: none !important;
@@ -4369,29 +4367,30 @@ if seccion_principal == "☑️Checklist":
                     overflow: visible !important;
                 }
 
-                [class*="st-key-checklist_item_"] > [data-testid="stVerticalBlock"] > [data-testid="stHorizontalBlock"] > [data-testid="stColumn"]:nth-child(1) {
+                [class*="st-key-checklist_item_"] [data-testid="stHorizontalBlock"]:not([class*="st-key-checklist_edit_form_wrap_"] *) > [data-testid="stColumn"]:nth-child(1) {
                     grid-column: 1 !important;
                     width: 22px !important;
                     min-width: 22px !important;
                     max-width: 22px !important;
                 }
 
-                [class*="st-key-checklist_item_"] > [data-testid="stVerticalBlock"] > [data-testid="stHorizontalBlock"] > [data-testid="stColumn"]:nth-child(2) {
+                [class*="st-key-checklist_item_"] [data-testid="stHorizontalBlock"]:not([class*="st-key-checklist_edit_form_wrap_"] *) > [data-testid="stColumn"]:nth-child(2) {
                     grid-column: 2 !important;
                     width: 100% !important;
                     min-width: 0 !important;
                     max-width: 100% !important;
                 }
 
-                [class*="st-key-checklist_item_"] > [data-testid="stVerticalBlock"] > [data-testid="stHorizontalBlock"] > [data-testid="stColumn"]:nth-child(3) {
+                [class*="st-key-checklist_item_"] [data-testid="stHorizontalBlock"]:not([class*="st-key-checklist_edit_form_wrap_"] *) > [data-testid="stColumn"]:nth-child(3) {
                     grid-column: 3 !important;
                     width: 24px !important;
                     min-width: 24px !important;
                     max-width: 24px !important;
                     justify-content: flex-end !important;
+                    margin-left: auto !important;
                 }
 
-                [class*="st-key-checklist_item_"] > [data-testid="stVerticalBlock"] > [data-testid="stHorizontalBlock"] > [data-testid="stColumn"]:nth-child(4) {
+                [class*="st-key-checklist_item_"] [data-testid="stHorizontalBlock"]:not([class*="st-key-checklist_edit_form_wrap_"] *) > [data-testid="stColumn"]:nth-child(4) {
                     grid-column: 4 !important;
                     width: 24px !important;
                     min-width: 24px !important;
@@ -4399,8 +4398,8 @@ if seccion_principal == "☑️Checklist":
                     justify-content: flex-end !important;
                 }
 
-                [class*="st-key-checklist_item_"] > [data-testid="stVerticalBlock"] > [data-testid="stHorizontalBlock"] > [data-testid="stColumn"]:nth-child(3) button,
-                [class*="st-key-checklist_item_"] > [data-testid="stVerticalBlock"] > [data-testid="stHorizontalBlock"] > [data-testid="stColumn"]:nth-child(4) button {
+                [class*="st-key-checklist_item_"] [data-testid="stHorizontalBlock"]:not([class*="st-key-checklist_edit_form_wrap_"] *) > [data-testid="stColumn"]:nth-child(3) button,
+                [class*="st-key-checklist_item_"] [data-testid="stHorizontalBlock"]:not([class*="st-key-checklist_edit_form_wrap_"] *) > [data-testid="stColumn"]:nth-child(4) button {
                     box-sizing: border-box !important;
                     display: inline-flex !important;
                     align-items: center !important;
