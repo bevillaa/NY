@@ -4150,7 +4150,7 @@ if seccion_principal == "☑️Checklist":
           align-items: center !important;
           white-space: normal !important;
           overflow-wrap: anywhere !important;
-          padding: 8px 10px !important;
+          padding: 8px 5px !important;
         }
       }
     </style>
