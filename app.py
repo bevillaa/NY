@@ -4078,6 +4078,69 @@ def _anadir_pendiente_checklist():
 
 if seccion_principal == "☑️Checklist":
     st.markdown("---")
+    st.markdown("""
+    <style>
+      /* La cabecera no debe apilar sus columnas en móvil. */
+      @media (max-width: 768px) {
+        .st-key-checklist_header_row [data-testid="stHorizontalBlock"] {
+          display: flex !important;
+          flex-flow: row nowrap !important;
+          align-items: center !important;
+          gap: 6px !important;
+        }
+        .st-key-checklist_header_row [data-testid="column"]:first-child,
+        .st-key-checklist_header_row [data-testid="stColumn"]:first-child {
+          flex: 1 1 auto !important;
+          width: calc(100% - 52px) !important;
+          min-width: 0 !important;
+        }
+        .st-key-checklist_header_row [data-testid="column"]:last-child,
+        .st-key-checklist_header_row [data-testid="stColumn"]:last-child {
+          flex: 0 0 46px !important;
+          width: 46px !important;
+          min-width: 46px !important;
+        }
+      }
+      .st-key-checklist_header_row [data-testid="stButton"] button {
+        width: 42px !important;
+        min-width: 42px !important;
+        height: 42px !important;
+        padding: 0 !important;
+        font-size: 24px !important;
+      }
+
+      /* En el formulario de edición, Guardar y Cancelar conservan dos mitades iguales. */
+      @media (max-width: 768px) {
+        [class*="st-key-form_editar_pendiente_"] [data-testid="stHorizontalBlock"] {
+          display: flex !important;
+          flex-flow: row nowrap !important;
+          gap: 8px !important;
+          width: 100% !important;
+        }
+        [class*="st-key-form_editar_pendiente_"] [data-testid="column"],
+        [class*="st-key-form_editar_pendiente_"] [data-testid="stColumn"] {
+          flex: 1 1 50% !important;
+          width: 50% !important;
+          min-width: 0 !important;
+          max-width: 50% !important;
+        }
+        [class*="st-key-form_editar_pendiente_"] [data-testid="stFormSubmitButton"],
+        [class*="st-key-form_editar_pendiente_"] [data-testid="stFormSubmitButton"] button {
+          box-sizing: border-box !important;
+          display: flex !important;
+          width: 100% !important;
+          min-width: 0 !important;
+          max-width: 100% !important;
+          justify-content: center !important;
+          align-items: center !important;
+          white-space: normal !important;
+          overflow: visible !important;
+          padding: 8px 4px !important;
+        }
+      }
+    </style>
+    """, unsafe_allow_html=True)
+
     # Fila de cabecera: se fuerza a permanecer horizontal también en móvil.
     with st.container(key="checklist_header_row"):
         col_checklist_titulo, col_checklist_anadir = st.columns(
@@ -4108,74 +4171,7 @@ if seccion_principal == "☑️Checklist":
     if "checklist_formulario_abierto" not in st.session_state:
         st.session_state["checklist_formulario_abierto"] = False
 
-    st.markdown("""
-    <style>
-      /* Cabecera en una sola fila en pantallas estrechas. */
-      [class*="st-key-checklist_header_row"] [data-testid="stHorizontalBlock"] {
-        display: flex !important;
-        flex-direction: row !important;
-        flex-wrap: nowrap !important;
-        align-items: center !important;
-        gap: 8px !important;
-      }
-      [class*="st-key-checklist_header_row"] [data-testid="stColumn"]:first-child {
-        flex: 1 1 0% !important;
-        width: auto !important;
-        min-width: 0 !important;
-      }
-      [class*="st-key-checklist_header_row"] [data-testid="stColumn"]:last-child {
-        flex: 0 0 48px !important;
-        width: 48px !important;
-        min-width: 48px !important;
-      }
-      [class*="st-key-btn_abrir_formulario_checklist"] button {
-        width: 42px !important;
-        min-width: 42px !important;
-        max-width: 42px !important;
-        height: 40px !important;
-        min-height: 40px !important;
-        padding: 0 !important;
-        font-size: 1.25rem !important;
-        line-height: 1 !important;
-      }
 
-      /* Los dos botones del formulario ocupan media fila cada uno. */
-      [class*="st-key-form_editar_pendiente_"] [data-testid="stHorizontalBlock"] {
-        display: flex !important;
-        flex-direction: row !important;
-        flex-wrap: nowrap !important;
-        align-items: stretch !important;
-        gap: 8px !important;
-        width: 100% !important;
-      }
-      [class*="st-key-form_editar_pendiente_"] [data-testid="stHorizontalBlock"] > [data-testid="stColumn"] {
-        display: block !important;
-        flex: 1 1 0% !important;
-        width: 50% !important;
-        min-width: 0 !important;
-        padding: 0 !important;
-      }
-      [class*="st-key-form_editar_pendiente_"] [data-testid="stFormSubmitButton"] {
-        width: 100% !important;
-        min-width: 0 !important;
-      }
-      [class*="st-key-form_editar_pendiente_"] [data-testid="stFormSubmitButton"] button {
-        display: flex !important;
-        align-items: center !important;
-        justify-content: center !important;
-        box-sizing: border-box !important;
-        width: 100% !important;
-        min-width: 0 !important;
-        max-width: 100% !important;
-        min-height: 42px !important;
-        height: auto !important;
-        padding: 8px 6px !important;
-        white-space: normal !important;
-        overflow: visible !important;
-        font-size: 0.95rem !important;
-      }
-    </style>
-    """, unsafe_allow_html=True)
 
     with st.container():
         if st.session_state["checklist_formulario_abierto"]:
@@ -4530,7 +4526,7 @@ if seccion_principal == "☑️Checklist":
                             key=f"nota_editar_pendiente_{pid}"
                         )
 
-                        col_guardar_ed, col_cancelar_ed = st.columns(2)
+                        col_guardar_ed, col_cancelar_ed = st.columns([1, 1], gap="small")
 
                         with col_guardar_ed:
                             guardar_edicion = st.form_submit_button(
