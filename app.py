@@ -4080,62 +4080,76 @@ if seccion_principal == "☑️Checklist":
     st.markdown("---")
     st.markdown("""
     <style>
-      /* La cabecera no debe apilar sus columnas en móvil. */
-      @media (max-width: 768px) {
-        .st-key-checklist_header_row [data-testid="stHorizontalBlock"] {
+      /* CABECERA: anula explícitamente el apilado móvil de Streamlit. */
+      @media (max-width: 900px) {
+        [class*="st-key-checklist_header_row"] [data-testid="stHorizontalBlock"] {
           display: flex !important;
-          flex-flow: row nowrap !important;
+          flex-direction: row !important;
+          flex-wrap: nowrap !important;
           align-items: center !important;
-          gap: 6px !important;
+          width: 100% !important;
+          gap: 8px !important;
         }
-        .st-key-checklist_header_row [data-testid="column"]:first-child,
-        .st-key-checklist_header_row [data-testid="stColumn"]:first-child {
+        [class*="st-key-checklist_header_row"] [data-testid="stHorizontalBlock"] > [data-testid="stColumn"]:first-child {
           flex: 1 1 auto !important;
-          width: calc(100% - 52px) !important;
+          width: auto !important;
           min-width: 0 !important;
         }
-        .st-key-checklist_header_row [data-testid="column"]:last-child,
-        .st-key-checklist_header_row [data-testid="stColumn"]:last-child {
-          flex: 0 0 46px !important;
-          width: 46px !important;
-          min-width: 46px !important;
+        [class*="st-key-checklist_header_row"] [data-testid="stHorizontalBlock"] > [data-testid="stColumn"]:last-child {
+          flex: 0 0 48px !important;
+          width: 48px !important;
+          min-width: 48px !important;
+          max-width: 48px !important;
         }
       }
-      .st-key-checklist_header_row [data-testid="stButton"] button {
+      [class*="st-key-checklist_header_row"] [data-testid="stButton"] button {
+        box-sizing: border-box !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
         width: 42px !important;
         min-width: 42px !important;
+        max-width: 42px !important;
         height: 42px !important;
         padding: 0 !important;
         font-size: 24px !important;
       }
 
-      /* En el formulario de edición, Guardar y Cancelar conservan dos mitades iguales. */
-      @media (max-width: 768px) {
-        [class*="st-key-form_editar_pendiente_"] [data-testid="stHorizontalBlock"] {
+      /* FORMULARIO: se selecciona el bloque real del formulario, no una
+         supuesta clase st-key del formulario que Streamlit no aplica aquí. */
+      @media (max-width: 900px) {
+        [data-testid="stForm"] [data-testid="stHorizontalBlock"] {
           display: flex !important;
-          flex-flow: row nowrap !important;
+          flex-direction: row !important;
+          flex-wrap: nowrap !important;
+          align-items: stretch !important;
           gap: 8px !important;
           width: 100% !important;
         }
-        [class*="st-key-form_editar_pendiente_"] [data-testid="column"],
-        [class*="st-key-form_editar_pendiente_"] [data-testid="stColumn"] {
-          flex: 1 1 50% !important;
+        [data-testid="stForm"] [data-testid="stHorizontalBlock"] > [data-testid="stColumn"] {
+          display: block !important;
+          flex: 1 1 0% !important;
           width: 50% !important;
           min-width: 0 !important;
           max-width: 50% !important;
+          padding: 0 !important;
         }
-        [class*="st-key-form_editar_pendiente_"] [data-testid="stFormSubmitButton"],
-        [class*="st-key-form_editar_pendiente_"] [data-testid="stFormSubmitButton"] button {
+        [data-testid="stForm"] [data-testid="stFormSubmitButton"],
+        [data-testid="stForm"] [data-testid="stFormSubmitButton"] > button {
           box-sizing: border-box !important;
           display: flex !important;
           width: 100% !important;
           min-width: 0 !important;
           max-width: 100% !important;
+        }
+        [data-testid="stForm"] [data-testid="stFormSubmitButton"] > button {
+          min-height: 42px !important;
+          height: auto !important;
           justify-content: center !important;
           align-items: center !important;
           white-space: normal !important;
-          overflow: visible !important;
-          padding: 8px 4px !important;
+          overflow-wrap: anywhere !important;
+          padding: 8px 5px !important;
         }
       }
     </style>
@@ -4144,7 +4158,7 @@ if seccion_principal == "☑️Checklist":
     # Fila de cabecera: se fuerza a permanecer horizontal también en móvil.
     with st.container(key="checklist_header_row"):
         col_checklist_titulo, col_checklist_anadir = st.columns(
-            [1, 0.16], vertical_alignment="center"
+            [1, 0.16], vertical_alignment="center", gap="small"
         )
         with col_checklist_titulo:
             st.markdown(
