@@ -4445,13 +4445,14 @@ if seccion_principal == "☑️Checklist":
                 width: 100% !important;
                 min-width: 0 !important;
                 max-width: 100% !important;
-                height: 38px !important;
-                min-height: 38px !important;
-                max-height: 38px !important;
-                padding: 0 10px !important;
+                height: 48px !important;
+                min-height: 48px !important;
+                max-height: 48px !important;
+                padding: 0 14px !important;
                 margin: 0 !important;
-                font-size: 0.84rem !important;
+                font-size: 0.95rem !important;
                 line-height: 1 !important;
+                font-weight: 700 !important;
                 white-space: nowrap !important;
                 box-sizing: border-box !important;
             }
