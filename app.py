@@ -4418,9 +4418,8 @@ if seccion_principal == "☑️Checklist":
                 }
             }
 
-            /* Fila de botones Guardar y Cancelar en la edición de Checklist:
-               dos columnas iguales, sin anchos fijos que se salgan o solapen. */
-            [class*="st-key-checklist_edit_form_wrap_"] [data-testid="stHorizontalBlock"] {
+            /* Solo los botones Guardar y Cancelar dentro del formulario de edición */
+            [class*="st-key-checklist_edit_form_wrap_"] [data-testid="stForm"] [data-testid="stHorizontalBlock"] {
                 display: grid !important;
                 grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) !important;
                 gap: 8px !important;
@@ -4429,7 +4428,7 @@ if seccion_principal == "☑️Checklist":
                 min-width: 0 !important;
             }
 
-            [class*="st-key-checklist_edit_form_wrap_"] [data-testid="stHorizontalBlock"] > [data-testid="stColumn"] {
+            [class*="st-key-checklist_edit_form_wrap_"] [data-testid="stForm"] [data-testid="stHorizontalBlock"] > [data-testid="stColumn"] {
                 display: flex !important;
                 width: 100% !important;
                 min-width: 0 !important;
@@ -4438,8 +4437,8 @@ if seccion_principal == "☑️Checklist":
                 margin: 0 !important;
             }
 
-            [class*="st-key-checklist_edit_form_wrap_"] [data-testid="stFormSubmitButton"],
-            [class*="st-key-checklist_edit_form_wrap_"] [data-testid="stFormSubmitButton"] > button {
+            [class*="st-key-checklist_edit_form_wrap_"] [data-testid="stForm"] [data-testid="stFormSubmitButton"],
+            [class*="st-key-checklist_edit_form_wrap_"] [data-testid="stForm"] [data-testid="stFormSubmitButton"] > button {
                 display: inline-flex !important;
                 align-items: center !important;
                 justify-content: center !important;
