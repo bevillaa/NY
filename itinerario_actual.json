@@ -1757,5 +1757,19 @@
     "categoria": "📍 Otros",
     "tipo": "Interior",
     "visitado": false
+  },
+  {
+    "id": 135,
+    "nombre": "Nonnas of the World Community",
+    "lat": 40.6420052,
+    "lon": -74.07729259999999,
+    "dia": 0,
+    "hora": "",
+    "direccion": "27 Hyatt St, Staten Island, NY 10301, United States",
+    "nota": "",
+    "categoria": "🍽️ Gastronomía",
+    "tipo": "Interior",
+    "lista_origen": "Food",
+    "visitado": false
   }
 ]
