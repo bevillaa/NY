@@ -4419,6 +4419,42 @@ if seccion_principal == "☑️Checklist":
                     font-size: 12px !important;
                     line-height: 1 !important;
                 }
+                /* Mismo tamaño y dimensiones para Guardar y Cancelar en la edición de Checklist */
+            [class*="st-key-checklist_edit_form_wrap_"] [data-testid="stHorizontalBlock"] {
+                display: grid !important;
+                grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) !important;
+                gap: 8px !important;
+                align-items: stretch !important;
+                width: 100% !important;
+            }
+
+            [class*="st-key-checklist_edit_form_wrap_"] [data-testid="stHorizontalBlock"] > [data-testid="stColumn"] {
+                display: flex !important;
+                width: 100% !important;
+                min-width: 0 !important;
+                max-width: 100% !important;
+                padding: 0 !important;
+                margin: 0 !important;
+            }
+
+            [class*="st-key-checklist_edit_form_wrap_"] [data-testid="stFormSubmitButton"],
+            [class*="st-key-checklist_edit_form_wrap_"] [data-testid="stFormSubmitButton"] > button {
+                display: inline-flex !important;
+                align-items: center !important;
+                justify-content: center !important;
+                width: 100% !important;
+                min-width: 0 !important;
+                max-width: 100% !important;
+                height: 38px !important;
+                min-height: 38px !important;
+                max-height: 38px !important;
+                padding: 0 10px !important;
+                margin: 0 !important;
+                font-size: 0.84rem !important;
+                line-height: 1 !important;
+                white-space: nowrap !important;
+                box-sizing: border-box !important;
+            }
             }
             </style>
             """,
@@ -4510,50 +4546,51 @@ if seccion_principal == "☑️Checklist":
 
                 # Formulario para editar la tarea.
                 if st.session_state.get("_checklist_edicion_id") == pid:
-                    with st.form(f"form_editar_pendiente_{pid}"):
-                        st.markdown("**Editar tarea pendiente**")
+                    with st.container(key=f"checklist_edit_form_wrap_{pid}"):
+                        with st.form(f"form_editar_pendiente_{pid}"):
+                            st.markdown("**Editar tarea pendiente**")
 
-                        texto_editado = st.text_input(
-                            "Nombre de la tarea",
-                            value=str(pendiente.get("texto", "")),
-                            key=f"texto_editar_pendiente_{pid}"
-                        )
-
-                        opciones_tipo = [
-                            "Hacer", "Ver / Visitar", "Comprar",
-                            "Revisar", "Reservar", "Otro"
-                        ]
-
-                        tipo_actual = pendiente.get("tipo", "Otro")
-                        if tipo_actual not in opciones_tipo:
-                            opciones_tipo.append(tipo_actual)
-
-                        tipo_editado = st.selectbox(
-                            "Categoría",
-                            opciones_tipo,
-                            index=opciones_tipo.index(tipo_actual),
-                            key=f"tipo_editar_pendiente_{pid}"
-                        )
-
-                        nota_editada = st.text_input(
-                            "Nota (opcional)",
-                            value=str(pendiente.get("nota", "") or ""),
-                            key=f"nota_editar_pendiente_{pid}"
-                        )
-
-                        col_guardar_ed, col_cancelar_ed = st.columns([1, 1], gap="small")
-
-                        with col_guardar_ed:
-                            guardar_edicion = st.form_submit_button(
-                                "💾 Guardar cambios",
-                                use_container_width=True
+                            texto_editado = st.text_input(
+                                "Nombre de la tarea",
+                                value=str(pendiente.get("texto", "")),
+                                key=f"texto_editar_pendiente_{pid}"
                             )
 
-                        with col_cancelar_ed:
-                            cancelar_edicion = st.form_submit_button(
-                                "Cancelar",
-                                use_container_width=True
+                            opciones_tipo = [
+                                "Hacer", "Ver / Visitar", "Comprar",
+                                "Revisar", "Reservar", "Otro"
+                            ]
+
+                            tipo_actual = pendiente.get("tipo", "Otro")
+                            if tipo_actual not in opciones_tipo:
+                                opciones_tipo.append(tipo_actual)
+
+                            tipo_editado = st.selectbox(
+                                "Categoría",
+                                opciones_tipo,
+                                index=opciones_tipo.index(tipo_actual),
+                                key=f"tipo_editar_pendiente_{pid}"
                             )
+
+                            nota_editada = st.text_input(
+                                "Nota (opcional)",
+                                value=str(pendiente.get("nota", "") or ""),
+                                key=f"nota_editar_pendiente_{pid}"
+                            )
+
+                            col_guardar_ed, col_cancelar_ed = st.columns([1, 1], gap="small")
+
+                            with col_guardar_ed:
+                                guardar_edicion = st.form_submit_button(
+                                    "💾 Guardar",
+                                    use_container_width=True
+                                )
+
+                            with col_cancelar_ed:
+                                cancelar_edicion = st.form_submit_button(
+                                    "Cancelar",
+                                    use_container_width=True
+                                )
 
                     if guardar_edicion:
                         if not texto_editado.strip():
