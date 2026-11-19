@@ -4430,9 +4430,9 @@ if seccion_principal == "☑️Checklist":
 
             [class*="st-key-checklist_edit_form_wrap_"] [data-testid="stHorizontalBlock"] > [data-testid="stColumn"]:first-child [data-testid="stFormSubmitButton"],
             [class*="st-key-checklist_edit_form_wrap_"] [data-testid="stHorizontalBlock"] > [data-testid="stColumn"]:first-child [data-testid="stFormSubmitButton"] > button {
-                width: 180px !important;
-                min-width: 180px !important;
-                max-width: 180px !important;
+                width: 150px !important;
+                min-width: 150px !important;
+                max-width: 150px !important;
                 padding: 0 !important;
                 margin: 0 !important;
             }
