@@ -4078,16 +4078,25 @@ def _anadir_pendiente_checklist():
 
 if seccion_principal == "☑️Checklist":
     st.markdown("---")
-    col_checklist_titulo, col_checklist_anadir = st.columns([1, 0.12], vertical_alignment="center")
-    with col_checklist_titulo:
-        st.markdown('<div class="ny-card-header">☑️ Checklist de pendientes</div>', unsafe_allow_html=True)
-    with col_checklist_anadir:
-        st.button(
-            "＋",
-            key="btn_abrir_formulario_checklist",
-            help="Añadir un pendiente",
-            on_click=lambda: st.session_state.__setitem__("checklist_formulario_abierto", True)
+    # Fila de cabecera: se fuerza a permanecer horizontal también en móvil.
+    with st.container(key="checklist_header_row"):
+        col_checklist_titulo, col_checklist_anadir = st.columns(
+            [1, 0.16], vertical_alignment="center"
         )
+        with col_checklist_titulo:
+            st.markdown(
+                '<div class="ny-card-header">☑️ Checklist de pendientes</div>',
+                unsafe_allow_html=True
+            )
+        with col_checklist_anadir:
+            st.button(
+                "＋",
+                key="btn_abrir_formulario_checklist",
+                help="Añadir un pendiente",
+                on_click=lambda: st.session_state.__setitem__(
+                    "checklist_formulario_abierto", True
+                )
+            )
     st.caption("Un sitio para apuntar todo lo que falta.")
 
     pendientes = st.session_state.config_viaje.setdefault("checklist_pendientes", [])
@@ -4101,34 +4110,69 @@ if seccion_principal == "☑️Checklist":
 
     st.markdown("""
     <style>
+      /* Cabecera en una sola fila en pantallas estrechas. */
+      [class*="st-key-checklist_header_row"] [data-testid="stHorizontalBlock"] {
+        display: flex !important;
+        flex-direction: row !important;
+        flex-wrap: nowrap !important;
+        align-items: center !important;
+        gap: 8px !important;
+      }
+      [class*="st-key-checklist_header_row"] [data-testid="stColumn"]:first-child {
+        flex: 1 1 0% !important;
+        width: auto !important;
+        min-width: 0 !important;
+      }
+      [class*="st-key-checklist_header_row"] [data-testid="stColumn"]:last-child {
+        flex: 0 0 48px !important;
+        width: 48px !important;
+        min-width: 48px !important;
+      }
       [class*="st-key-btn_abrir_formulario_checklist"] button {
         width: 42px !important;
         min-width: 42px !important;
         max-width: 42px !important;
-        height: 36px !important;
-        min-height: 36px !important;
+        height: 40px !important;
+        min-height: 40px !important;
         padding: 0 !important;
-        font-size: 1.15rem !important;
+        font-size: 1.25rem !important;
         line-height: 1 !important;
       }
+
+      /* Los dos botones del formulario ocupan media fila cada uno. */
       [class*="st-key-form_editar_pendiente_"] [data-testid="stHorizontalBlock"] {
-        display: grid !important;
-        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+        display: flex !important;
+        flex-direction: row !important;
+        flex-wrap: nowrap !important;
+        align-items: stretch !important;
         gap: 8px !important;
         width: 100% !important;
       }
-      [class*="st-key-form_editar_pendiente_"] [data-testid="stColumn"] {
-        width: 100% !important;
+      [class*="st-key-form_editar_pendiente_"] [data-testid="stHorizontalBlock"] > [data-testid="stColumn"] {
+        display: block !important;
+        flex: 1 1 0% !important;
+        width: 50% !important;
         min-width: 0 !important;
-        flex: none !important;
         padding: 0 !important;
       }
-      [class*="st-key-form_editar_pendiente_"] [data-testid="stFormSubmitButton"],
-      [class*="st-key-form_editar_pendiente_"] [data-testid="stFormSubmitButton"] button {
+      [class*="st-key-form_editar_pendiente_"] [data-testid="stFormSubmitButton"] {
         width: 100% !important;
         min-width: 0 !important;
-        min-height: 36px !important;
-        height: 36px !important;
+      }
+      [class*="st-key-form_editar_pendiente_"] [data-testid="stFormSubmitButton"] button {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        box-sizing: border-box !important;
+        width: 100% !important;
+        min-width: 0 !important;
+        max-width: 100% !important;
+        min-height: 42px !important;
+        height: auto !important;
+        padding: 8px 6px !important;
+        white-space: normal !important;
+        overflow: visible !important;
+        font-size: 0.95rem !important;
       }
     </style>
     """, unsafe_allow_html=True)
