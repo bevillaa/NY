@@ -4128,11 +4128,10 @@ if seccion_principal == "☑️Checklist":
         }
         [data-testid="stForm"] [data-testid="stHorizontalBlock"] > [data-testid="stColumn"] {
           display: block !important;
-          box-sizing: border-box !important;
-          flex: 0 0 calc(50% - 4px) !important;
-          width: calc(50% - 4px) !important;
+          flex: 1 1 0% !important;
+          width: 50% !important;
           min-width: 0 !important;
-          max-width: calc(50% - 4px) !important;
+          max-width: 50% !important;
           padding: 0 !important;
         }
         [data-testid="stForm"] [data-testid="stFormSubmitButton"],
@@ -4145,6 +4144,7 @@ if seccion_principal == "☑️Checklist":
         }
         [data-testid="stForm"] [data-testid="stFormSubmitButton"] > button {
           min-height: 42px !important;
+          min-width: 32px !important;
           height: auto !important;
           justify-content: center !important;
           align-items: center !important;
