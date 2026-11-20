@@ -1911,5 +1911,33 @@
     "tipo": "Interior",
     "lista_origen": "Tiendas & Outlets",
     "visitado": false
+  },
+  {
+    "id": 146,
+    "nombre": "Dunkin'",
+    "lat": 40.7540474,
+    "lon": -73.9912353,
+    "dia": 0,
+    "hora": "",
+    "direccion": "265 W 37th St, New York, NY 10018, United States",
+    "nota": "",
+    "categoria": "🍪 Dulces",
+    "tipo": "Interior",
+    "lista_origen": "NY Sweets",
+    "visitado": false
+  },
+  {
+    "id": 147,
+    "nombre": "89 Broadway",
+    "lat": 40.7078931,
+    "lon": -74.0117901,
+    "dia": 0,
+    "hora": "",
+    "direccion": "New York, NY 10006, United States",
+    "nota": "",
+    "categoria": "🎷 Ocio",
+    "tipo": "Interior",
+    "lista_origen": "NY",
+    "visitado": false
   }
 ]
