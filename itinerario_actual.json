@@ -1802,14 +1802,14 @@
   },
   {
     "id": 138,
-    "nombre": "89 Broadway",
+    "nombre": "Trinity Chauchina NYC",
     "lat": 40.7078931,
     "lon": -74.0117901,
     "dia": 0,
     "hora": "",
     "direccion": "New York, NY 10006, United States",
     "nota": "",
-    "categoria": "🎷 Ocio",
+    "categoria": "🏛️ Cultura",
     "tipo": "Interior",
     "lista_origen": "NY",
     "visitado": false
