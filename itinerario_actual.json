@@ -1925,19 +1925,5 @@
     "tipo": "Interior",
     "lista_origen": "NY Sweets",
     "visitado": false
-  },
-  {
-    "id": 147,
-    "nombre": "89 Broadway",
-    "lat": 40.7078931,
-    "lon": -74.0117901,
-    "dia": 0,
-    "hora": "",
-    "direccion": "New York, NY 10006, United States",
-    "nota": "",
-    "categoria": "🎷 Ocio",
-    "tipo": "Interior",
-    "lista_origen": "NY",
-    "visitado": false
   }
 ]
