@@ -4093,12 +4093,13 @@ if seccion_principal == "☑️Checklist":
           flex: 1 1 auto !important;
           width: auto !important;
           min-width: 0 !important;
+          gap: 10px !important;
         }
         [class*="st-key-checklist_header_row"] [data-testid="stHorizontalBlock"] > [data-testid="stColumn"]:last-child {
           flex: 0 0 48px !important;
-          width: 88px !important;
-          min-width: 88px !important;
-          max-width: 88px !important;
+          width: 48px !important;
+          min-width: 48px !important;
+          max-width: 48px !important;
         }
       }
       [class*="st-key-checklist_header_row"] [data-testid="stButton"] button {
