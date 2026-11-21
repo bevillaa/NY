@@ -3148,9 +3148,8 @@ SECCIONES_PRINCIPALES = [
     "🗽Ruta",
     "📌Guardados",
     "💸Divisas",
-    "✈️Info",
-    "🗒️Listas",
     "☑️Checklist",
+    "✈️Info",
 ]
 seccion_principal = st.radio(
     "Sección del viaje",
@@ -4167,7 +4166,7 @@ if seccion_principal == "☑️Checklist":
             )
         with col_checklist_anadir:
             st.button(
-                "＋",
+                "> ➕ Añadir",
                 key="btn_abrir_formulario_checklist",
                 help="Añadir un pendiente",
                 on_click=lambda: st.session_state.__setitem__(
