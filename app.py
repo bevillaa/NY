@@ -4087,13 +4087,13 @@ if seccion_principal == "☑️Checklist":
           flex-wrap: nowrap !important;
           align-items: center !important;
           width: 100% !important;
-          gap: 10px !important;
+          gap: 8px !important;
         }
         [class*="st-key-checklist_header_row"] [data-testid="stHorizontalBlock"] > [data-testid="stColumn"]:first-child {
           flex: 1 1 auto !important;
           width: auto !important;
           min-width: 0 !important;
-          gap: 10px !important;
+          gap: 8px !important;
         }
         [class*="st-key-checklist_header_row"] [data-testid="stHorizontalBlock"] > [data-testid="stColumn"]:last-child {
           flex: 0 0 48px !important;
@@ -4113,6 +4113,7 @@ if seccion_principal == "☑️Checklist":
         height: 42px !important;
         padding: 0 !important;
         font-size: 24px !important;
+        gap: 8px !important;
       }
 
       /* FORMULARIO GENERAL: solo para formularios que NO sean el editor de checklist. */
