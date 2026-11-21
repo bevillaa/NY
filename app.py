@@ -4100,6 +4100,7 @@ if seccion_principal == "☑️Checklist":
           width: 48px !important;
           min-width: 48px !important;
           max-width: 48px !important;
+          gap: 8px !important;
         }
       }
       [class*="st-key-checklist_header_row"] [data-testid="stButton"] button {
