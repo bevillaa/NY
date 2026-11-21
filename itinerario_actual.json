@@ -1925,5 +1925,33 @@
     "tipo": "Interior",
     "lista_origen": "NY Sweets",
     "visitado": false
+  },
+  {
+    "id": 147,
+    "nombre": "Magnolia Bakery",
+    "lat": 40.7592883,
+    "lon": -73.9806133,
+    "dia": 0,
+    "hora": "",
+    "direccion": "1240 6th Ave, New York, NY 10020, United States",
+    "nota": "",
+    "categoria": "🍪 Dulces",
+    "tipo": "Interior",
+    "lista_origen": "NY Sweets",
+    "visitado": false
+  },
+  {
+    "id": 148,
+    "nombre": "Last Crumb",
+    "lat": 40.7187281,
+    "lon": -73.9578817,
+    "dia": 0,
+    "hora": "",
+    "direccion": "144 N 8th St, Brooklyn, NY 11249, United States",
+    "nota": "",
+    "categoria": "🍪 Dulces",
+    "tipo": "Interior",
+    "lista_origen": "NY Sweets",
+    "visitado": false
   }
 ]
