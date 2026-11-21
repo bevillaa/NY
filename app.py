@@ -4110,7 +4110,7 @@ if seccion_principal == "☑️Checklist":
         width: 82px !important;
         min-width: 82px !important;
         max-width: 82px !important;
-        height: 82px !important;
+        height: 42px !important;
         padding: 0 !important;
         font-size: 24px !important;
       }
