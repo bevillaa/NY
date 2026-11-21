@@ -4157,7 +4157,7 @@ if seccion_principal == "☑️Checklist":
     # Fila de cabecera: se fuerza a permanecer horizontal también en móvil.
     with st.container(key="checklist_header_row"):
         col_checklist_titulo, col_checklist_anadir = st.columns(
-            [1, 0.16], vertical_alignment="center", gap="small"
+            [1, 0.86], vertical_alignment="center", gap="small"
         )
         with col_checklist_titulo:
             st.markdown(
@@ -4166,7 +4166,7 @@ if seccion_principal == "☑️Checklist":
             )
         with col_checklist_anadir:
             st.button(
-                "> ➕ Añadir",
+                "➕ Añadir",
                 key="btn_abrir_formulario_checklist",
                 help="Añadir un pendiente",
                 on_click=lambda: st.session_state.__setitem__(
