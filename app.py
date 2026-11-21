@@ -4087,7 +4087,7 @@ if seccion_principal == "☑️Checklist":
           flex-wrap: nowrap !important;
           align-items: center !important;
           width: 100% !important;
-          gap: 8px !important;
+          gap: 10px !important;
         }
         [class*="st-key-checklist_header_row"] [data-testid="stHorizontalBlock"] > [data-testid="stColumn"]:first-child {
           flex: 1 1 auto !important;
@@ -4096,9 +4096,9 @@ if seccion_principal == "☑️Checklist":
         }
         [class*="st-key-checklist_header_row"] [data-testid="stHorizontalBlock"] > [data-testid="stColumn"]:last-child {
           flex: 0 0 48px !important;
-          width: 48px !important;
-          min-width: 48px !important;
-          max-width: 48px !important;
+          width: 88px !important;
+          min-width: 88px !important;
+          max-width: 88px !important;
         }
       }
       [class*="st-key-checklist_header_row"] [data-testid="stButton"] button {
@@ -4106,10 +4106,10 @@ if seccion_principal == "☑️Checklist":
         display: flex !important;
         align-items: center !important;
         justify-content: center !important;
-        width: 42px !important;
-        min-width: 42px !important;
-        max-width: 42px !important;
-        height: 42px !important;
+        width: 82px !important;
+        min-width: 82px !important;
+        max-width: 82px !important;
+        height: 82px !important;
         padding: 0 !important;
         font-size: 24px !important;
       }
