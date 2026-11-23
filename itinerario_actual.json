@@ -1981,18 +1981,5 @@
     "tipo": "Exterior",
     "lista_origen": "Spots",
     "visitado": false
-  },
-  {
-    "id": 152,
-    "nombre": "2nd Ave Deli",
-    "lat": 40.769538499999996,
-    "lon": -73.9543817,
-    "dia": 0,
-    "hora": "",
-    "direccion": "1442 1st Ave, New York, NY 10021, USA",
-    "nota": "",
-    "categoria": "🍽️ Gastronomía",
-    "tipo": "Interior",
-    "visitado": false
   }
 ]
