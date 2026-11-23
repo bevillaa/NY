@@ -1953,5 +1953,47 @@
     "tipo": "Interior",
     "lista_origen": "NY Sweets",
     "visitado": false
+  },
+  {
+    "id": 149,
+    "nombre": "The Cookie Odyssey",
+    "lat": 40.7698007,
+    "lon": -73.9572783,
+    "dia": 0,
+    "hora": "",
+    "direccion": "1414 2nd Ave, New York, NY 10021, United States",
+    "nota": "",
+    "categoria": "🍪 Dulces",
+    "tipo": "Interior",
+    "lista_origen": "NY Sweets",
+    "visitado": false
+  },
+  {
+    "id": 150,
+    "nombre": "United States",
+    "lat": 40.7412849,
+    "lon": -73.9901094,
+    "dia": 0,
+    "hora": "",
+    "direccion": "New York, 5th Ave, SALSWEE邮政编码: 10010",
+    "nota": "",
+    "categoria": "🍪 Dulces",
+    "tipo": "Interior",
+    "lista_origen": "NY Sweets",
+    "visitado": false
+  },
+  {
+    "id": 151,
+    "nombre": "North 5th Street Pier and Park",
+    "lat": 40.720233799999995,
+    "lon": -73.96413439999999,
+    "dia": 0,
+    "hora": "",
+    "direccion": "105 River St, Brooklyn, NY 11211, United States",
+    "nota": "",
+    "categoria": "☀️ Spots",
+    "tipo": "Exterior",
+    "lista_origen": "Spots",
+    "visitado": false
   }
 ]
