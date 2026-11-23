@@ -2655,23 +2655,94 @@ def geocodificar_direccion_o_nombre(texto: str) -> tuple:
         pass
     return None, None, ""
 
+def _es_titulo_generico_maps(texto: str) -> bool:
+    limpio = re.sub(r"\s+", " ", str(texto or "").strip()).casefold()
+    return limpio in (
+        "",
+        "google maps",
+        "maps",
+        "lugar google maps",
+        "antes de ir a google maps",
+        "before you continue to google maps",
+    )
+
+def _parsear_datos_url_gmaps(url: str) -> tuple:
+    """Extrae nombre, dirección/consulta y coordenadas explícitas desde una URL de Maps."""
+    nombre = ""
+    direccion = ""
+    lat, lon = None, None
+
+    try:
+        parsed = urllib.parse.urlparse(url)
+        qs = urllib.parse.parse_qs(parsed.query)
+
+        # 1. Coordenadas exactas del pin (!3dlat!4dlon) o de la vista (@lat,lon)
+        m_3d4d = re.search(r"!3d(-?\d+(?:\.\d+)?)!4d(-?\d+(?:\.\d+)?)", url)
+        if m_3d4d:
+            lat, lon = float(m_3d4d.group(1)), float(m_3d4d.group(2))
+        else:
+            m_at = re.search(r"@(-?\d+(?:\.\d+)?),(-?\d+(?:\.\d+)?)", url)
+            if m_at:
+                lat, lon = float(m_at.group(1)), float(m_at.group(2))
+
+        # 2. Ruta /maps/place/<nombre>/<direccion>/...
+        m_place = re.search(r"/maps/place/([^/]+)(?:/([^/@?]+))?", parsed.path)
+        if m_place:
+            nombre = urllib.parse.unquote_plus(m_place.group(1)).replace("+", " ").strip()
+            if m_place.group(2) and not m_place.group(2).startswith(("data=", "@")):
+                cand_dir = urllib.parse.unquote_plus(m_place.group(2)).replace("+", " ").strip()
+                if cand_dir:
+                    direccion = cand_dir
+
+        # 3. Parámetros ?q= o ?query=
+        if not nombre:
+            for clave_q in ("q", "query"):
+                vals = qs.get(clave_q)
+                if vals and vals[0].strip():
+                    q_txt = urllib.parse.unquote_plus(vals[0]).strip()
+                    if not re.fullmatch(r"-?\d+(?:\.\d+)?\s*,\s*-?\d+(?:\.\d+)?", q_txt):
+                        partes = q_txt.split(",", 1)
+                        nombre = partes[0].strip()
+                        if len(partes) > 1 and not direccion:
+                            direccion = partes[1].strip()
+                    break
+    except Exception:
+        pass
+
+    return nombre, direccion, lat, lon
+
 def agregar_sitio_a_lugares(nombre: str, direccion: str = "", lat: float = None, lon: float = None,
                             categoria: str = None, tipo: str = None, dia_dest: int = 0, hora: str = "", nota: str = "") -> tuple:
     nom = (nombre or "").strip()
-    if not nom:
-        return False, "El nombre del lugar no puede estar vacío."
+    if not nom or _es_titulo_generico_maps(nom):
+        return False, "El nombre del lugar no es válido. Indica el nombre real del sitio."
+
+    if lat is None or lon is None or (lat == 0 and lon == 0):
+        api_key = _google_maps_api_key()
+        consulta = f"{nom} {direccion}".strip()
+        if api_key and consulta:
+            try:
+                sugerencias = _sugerencias_google_places(consulta, api_key)
+                if sugerencias:
+                    nom_p, dir_p, lat_p, lon_p = _detalles_google_place(sugerencias[0]["id"], api_key)
+                    if lat_p is not None and lon_p is not None:
+                        lat, lon = lat_p, lon_p
+                        if not direccion and dir_p:
+                            direccion = dir_p
+            except Exception:
+                pass
 
     if lat is None or lon is None or (lat == 0 and lon == 0):
         geo_lat, geo_lon, geo_dir = geocodificar_direccion_o_nombre(f"{nom} {direccion}")
         if geo_lat is None or geo_lon is None:
-            # Permite guardar nombres sin una ubicación concreta.
-            # Se usa el centro de referencia de Nueva York para que el registro
-            # siga siendo compatible con el mapa; no se inventa una dirección.
-            lat, lon = 40.7580, -73.9855
-        else:
-            lat, lon = geo_lat, geo_lon
-            if not direccion and geo_dir:
-                direccion = geo_dir
+            return (
+                False,
+                f"No se pudo encontrar la ubicación exacta de '{nom}'. "
+                "Añade la dirección o activa 'Introducir coordenadas manuales' para no alterar la ruta."
+            )
+        lat, lon = geo_lat, geo_lon
+        if not direccion and geo_dir:
+            direccion = geo_dir
 
     if not categoria or categoria == "⚡ Detección Automática":
         cat_auto, tipo_auto = clasificar_lugar(nom, direccion)
@@ -2722,7 +2793,7 @@ def agregar_sitio_a_lugares(nombre: str, direccion: str = "", lat: float = None,
     return True, f"¡'{nom}' añadido con éxito como {nuevo['categoria']}!"
 
 def importar_sitio_desde_gmaps(url_o_texto: str, dia_dest: int = 0, hora: str = "", nota: str = "") -> tuple:
-    raw = url_o_texto.strip()
+    raw = (url_o_texto or "").strip()
     if not raw:
         return False, "Introduce un enlace de Google Maps válido."
 
@@ -2760,38 +2831,101 @@ def importar_sitio_desde_gmaps(url_o_texto: str, dia_dest: int = 0, hora: str = 
                 st.session_state.nuevos_lugares_ids = list(dict.fromkeys(ids_imp + prev_nuevos))
                 return True, f"¡Se importaron {nuevos} lugares desde la lista de Google Maps!"
 
-    nombre_extraido = ""
-    lat_ext, lon_ext = None, None
-    dir_ext = ""
+    if not (raw.startswith("http://") or raw.startswith("https://")):
+        return False, "Pega un enlace completo de Google Maps o usa la pestaña 'A Mano'."
 
-    if raw.startswith("http://") or raw.startswith("https://"):
-        if not _validar_url_google_maps(raw):
-            return False, "El enlace debe pertenecer a un dominio oficial de Google Maps."
-        headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/120.0.0.0 Safari/537.36'}
+    if not _validar_url_google_maps(raw):
+        return False, "El enlace debe pertenecer a un dominio oficial de Google Maps."
+
+    nombre_extraido, dir_ext, lat_ext, lon_ext = _parsear_datos_url_gmaps(raw)
+
+    headers = {
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
+        "Accept-Language": "es-ES,es;q=0.9,en;q=0.8",
+        "Cookie": "CONSENT=YES+cb.20230531-07-p0.es+FX+999; SOCS=CAESHAgBEhJnd3NfMjAyMzA4MTAtMF9SQzIaAmVzIAEaBgiA_LyaBg",
+    }
+    try:
+        with _abrir_url_google_maps(raw, headers=headers, timeout=8) as r:
+            url_final = r.geturl()
+            pagina_html = r.read().decode("utf-8", errors="ignore")
+
+        nom_f, dir_f, lat_f, lon_f = _parsear_datos_url_gmaps(url_final)
+        if nom_f and not _es_titulo_generico_maps(nom_f):
+            nombre_extraido = nom_f
+        if dir_f and not dir_ext:
+            dir_ext = dir_f
+        if lat_f is not None and lon_f is not None:
+            lat_ext, lon_ext = lat_f, lon_f
+
+        if _es_titulo_generico_maps(nombre_extraido):
+            for pat_tit in (
+                r'<meta[^>]+property=["\']og:title["\'][^>]+content=["\']([^"\']+)["\']',
+                r'<meta[^>]+content=["\']([^"\']+)["\'][^>]+property=["\']og:title["\']',
+                r"<title>([^<]+)</title>",
+            ):
+                m_tit = re.search(pat_tit, pagina_html, flags=re.IGNORECASE)
+                if m_tit:
+                    cand = re.sub(
+                        r"\s*[-·]\s*Google\s*Maps\s*$",
+                        "",
+                        html.unescape(m_tit.group(1)),
+                        flags=re.IGNORECASE,
+                    ).strip()
+                    if not _es_titulo_generico_maps(cand):
+                        partes_cand = cand.split("·", 1)
+                        nombre_extraido = partes_cand[0].strip()
+                        if len(partes_cand) > 1 and not dir_ext:
+                            dir_ext = partes_cand[1].strip()
+                        break
+
+        if not dir_ext:
+            m_desc = re.search(
+                r'<meta[^>]+(?:property=["\']og:description["\']|name=["\']description["\'])[^>]+content=["\']([^"\']+)["\']',
+                pagina_html,
+                flags=re.IGNORECASE,
+            )
+            if m_desc:
+                desc_txt = html.unescape(m_desc.group(1)).strip()
+                if desc_txt and "google maps" not in desc_txt.casefold() and "★" not in desc_txt[:5]:
+                    dir_ext = desc_txt
+    except Exception:
+        pass
+
+    # Refinar con Google Places API si está configurada para obtener nombre oficial, dirección y coords exactas
+    api_key = _google_maps_api_key()
+    consulta_busqueda = f"{nombre_extraido} {dir_ext}".strip()
+    if api_key and not _es_titulo_generico_maps(consulta_busqueda):
         try:
-            with _abrir_url_google_maps(raw, headers=headers, timeout=6) as r:
-                url_final = r.geturl()
-                html = r.read().decode('utf-8', errors='ignore')
-
-                m_coords = re.search(r"@(-?\d+\.\d+),(-?\d+\.\d+)", url_final)
-                if m_coords:
-                    lat_ext = float(m_coords.group(1))
-                    lon_ext = float(m_coords.group(2))
-
-                m_nom = re.search(r"/place/([^/@?]+)", url_final)
-                if m_nom:
-                    nombre_extraido = urllib.parse.unquote_plus(m_nom.group(1)).replace("+", " ")
-                elif "<title>" in html:
-                    m_tit = re.search(r"<title>([^<]+)</title>", html)
-                    if m_tit:
-                        nombre_extraido = m_tit.group(1).replace("- Google Maps", "").replace("· Google Maps", "").strip()
+            sugerencias = _sugerencias_google_places(consulta_busqueda, api_key)
+            if sugerencias:
+                nom_p, dir_p, lat_p, lon_p = _detalles_google_place(sugerencias[0]["id"], api_key)
+                if nom_p:
+                    nombre_extraido = nom_p
+                if dir_p:
+                    dir_ext = dir_p
+                if lat_p is not None and lon_p is not None:
+                    lat_ext, lon_ext = lat_p, lon_p
         except Exception:
             pass
 
-    if not nombre_extraido:
-        nombre_extraido = raw.split("/")[-1].replace("+", " ")
-        if len(nombre_extraido) < 3 or nombre_extraido.startswith("http"):
-            nombre_extraido = "Lugar Google Maps"
+    if _es_titulo_generico_maps(nombre_extraido):
+        return (
+            False,
+            "No se pudo extraer el nombre real del sitio desde este enlace de Google Maps. "
+            "Búscalo por nombre en el buscador superior o añádelo desde la pestaña 'A Mano'."
+        )
+
+    if lat_ext is None or lon_ext is None:
+        geo_lat, geo_lon, geo_dir = geocodificar_direccion_o_nombre(f"{nombre_extraido} {dir_ext}".strip())
+        if geo_lat is None or geo_lon is None:
+            return (
+                False,
+                f"Se detectó '{nombre_extraido}', pero no se encontraron coordenadas precisas. "
+                "Añádelo desde 'A Mano' con su dirección exacta para no alterar la ruta."
+            )
+        lat_ext, lon_ext = geo_lat, geo_lon
+        if not dir_ext and geo_dir:
+            dir_ext = geo_dir
 
     return agregar_sitio_a_lugares(nombre_extraido, dir_ext, lat_ext, lon_ext, None, None, dia_dest, hora, nota)
 
@@ -3148,8 +3282,9 @@ SECCIONES_PRINCIPALES = [
     "🗽Ruta",
     "📌Guardados",
     "💸Divisas",
-    "☑️Checklist",
     "✈️Info",
+    "🗒️Listas",
+    "☑️Checklist",
 ]
 seccion_principal = st.radio(
     "Sección del viaje",
@@ -4093,14 +4228,12 @@ if seccion_principal == "☑️Checklist":
           flex: 1 1 auto !important;
           width: auto !important;
           min-width: 0 !important;
-          gap: 8px !important;
         }
         [class*="st-key-checklist_header_row"] [data-testid="stHorizontalBlock"] > [data-testid="stColumn"]:last-child {
           flex: 0 0 48px !important;
           width: 48px !important;
           min-width: 48px !important;
           max-width: 48px !important;
-          gap: 8px !important;
         }
       }
       [class*="st-key-checklist_header_row"] [data-testid="stButton"] button {
@@ -4108,13 +4241,12 @@ if seccion_principal == "☑️Checklist":
         display: flex !important;
         align-items: center !important;
         justify-content: center !important;
-        width: 82px !important;
-        min-width: 82px !important;
-        max-width: 82px !important;
+        width: 42px !important;
+        min-width: 42px !important;
+        max-width: 42px !important;
         height: 42px !important;
         padding: 0 !important;
         font-size: 24px !important;
-        gap: 8px !important;
       }
 
       /* FORMULARIO GENERAL: solo para formularios que NO sean el editor de checklist. */
@@ -4160,7 +4292,7 @@ if seccion_principal == "☑️Checklist":
     # Fila de cabecera: se fuerza a permanecer horizontal también en móvil.
     with st.container(key="checklist_header_row"):
         col_checklist_titulo, col_checklist_anadir = st.columns(
-            [1, 0.86], vertical_alignment="center", gap="small"
+            [1, 0.16], vertical_alignment="center", gap="small"
         )
         with col_checklist_titulo:
             st.markdown(
@@ -4169,7 +4301,7 @@ if seccion_principal == "☑️Checklist":
             )
         with col_checklist_anadir:
             st.button(
-                "➕ Añadir",
+                "＋",
                 key="btn_abrir_formulario_checklist",
                 help="Añadir un pendiente",
                 on_click=lambda: st.session_state.__setitem__(
