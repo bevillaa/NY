@@ -1955,19 +1955,6 @@
     "visitado": false
   },
   {
-    "id": 149,
-    "nombre": "Google Maps",
-    "lat": 40.758,
-    "lon": -73.9855,
-    "dia": 0,
-    "hora": "",
-    "direccion": "",
-    "nota": "",
-    "categoria": "📍 Otros",
-    "tipo": "Exterior",
-    "visitado": false
-  },
-  {
     "id": 150,
     "nombre": "United States",
     "lat": 40.7412849,
