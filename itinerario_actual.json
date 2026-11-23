@@ -1981,5 +1981,18 @@
     "tipo": "Exterior",
     "lista_origen": "Spots",
     "visitado": false
+  },
+  {
+    "id": 152,
+    "nombre": "Tacombi",
+    "lat": 40.768037,
+    "lon": -73.9611912,
+    "dia": 0,
+    "hora": "",
+    "direccion": "202 E 70th St, New York, NY 10021, Estados Unidos",
+    "nota": "Tacos",
+    "categoria": "🍽️ Gastronomía",
+    "tipo": "Interior",
+    "visitado": false
   }
 ]
