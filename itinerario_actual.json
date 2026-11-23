@@ -1980,5 +1980,18 @@
     "tipo": "Interior",
     "lista_origen": "NY Sweets",
     "visitado": false
+  },
+  {
+    "id": 151,
+    "nombre": "Odissey",
+    "lat": 40.758,
+    "lon": -73.9855,
+    "dia": 0,
+    "hora": "",
+    "direccion": "https://maps.app.goo.gl/1uuMsYuSaEruCKBH7?g_st=ic",
+    "nota": "",
+    "categoria": "🍪 Dulces",
+    "tipo": "Exterior",
+    "visitado": false
   }
 ]
