@@ -1994,5 +1994,18 @@
     "categoria": "🍽️ Gastronomía",
     "tipo": "Interior",
     "visitado": false
+  },
+  {
+    "id": 153,
+    "nombre": "Mirador",
+    "lat": 40.7490522,
+    "lon": -73.9703668,
+    "dia": 0,
+    "hora": "",
+    "direccion": "399-321 E 42nd St, New York, NY 10017, Estados Unidos",
+    "nota": "",
+    "categoria": "☀️ Spots",
+    "tipo": "Exterior",
+    "visitado": false
   }
 ]
